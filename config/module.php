@@ -8,41 +8,28 @@
  */
 
 /**
- * Shop module meta
- *
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 return array(
     'meta'  => array(
         'title'         => __('Shop'),
         'description'   => __('Shop module for pi.'),
-        'version'       => '0.0.1',
+        'version'       => '0.0.2',
         'license'       => 'New BSD',
         'demo'          => 'http://demo.pialog.org'
     ),
     // Author information
     'author'    => array(
-        // Author full name, required
         'dev'       => 'Hossein Azizabadi',
-        // Email address, optional
         'email'     => 'azizabadi@faragostaresh.com',
-        'architect' => 'Hossein Azizabadi',
+        'architect' => '@voltan',
         'design'    => '@voltan'
     ),
-
     // Resource
     'resource' => array(
-        // Database meta
-        'database'  => array(
-            // SQL schema/data file
-            'sqlfile'   => 'sql/mysql.sql',
-        ),
-        // Permission specs
-        //'permission'    => 'permission.php',
-        //'config'        => 'config.php',
-        //'user'          => 'user.php',
-        //'page'          => 'page.php',
-        //'route'         => 'route.php',
-        //'navigation'    => 'nav.php',
+        'database'      => 'database.php',
+        'permission'    => 'permission.php',
+        'page'          => 'page.php',
+        'navigation'    => 'navigation.php',
     ),
 );
