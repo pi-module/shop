@@ -19,6 +19,8 @@ use Module\Shop\Form\ProductForm;
 use Module\Shop\Form\ProductFilter;
 use Module\Shop\Form\RelatedForm;
 use Module\Shop\Form\RelatedFilter;
+use Module\Shop\Form\PropertyForm;
+use Module\Shop\Form\PropertyFilter;
 use Zend\Json\Json;
 
 class ProductController extends ActionController
@@ -79,8 +81,17 @@ class ProductController extends ActionController
             $product = $this->getModel('product')->find($id)->toArray();
             $product['category'] = Json::decode($product['category']);
         }
+        // Set property
+        $where = array('module' => $module, 'category' => 'property');
+        $order = array('order ASC');
+        $select = Pi::model('config')->select()->where($where)->order($order);
+        $rowset = Pi::model('config')->selectWith($select);
+        $configs = array();
+        foreach ($rowset as $row) {
+            $property[$row->name] = $row->toArray();
+        }
         // Set form
-        $form = new ProductForm('product');
+        $form = new ProductForm('product', $property);
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
         	$data = $this->request->getPost();
@@ -252,6 +263,63 @@ class ProductController extends ActionController
      */
     public function attachAction()
     {
-    	$this->view()->setTemplate('empty');
+    	$this->view()->setTemplate('product_attach');
     }	
+
+    /**
+     * attribute Action
+     */
+    public function attributeAction()
+    {
+        $this->view()->setTemplate('product_attribute');
+    }
+
+    /**
+     * property Action
+     */
+    public function propertyAction()
+    {
+        $module = $this->params('module');
+        $where = array('module' => $module, 'category' => 'property');
+        $order = array('order ASC');
+        $select = Pi::model('config')->select()->where($where)->order($order);
+        $rowset = Pi::model('config')->selectWith($select);
+        $configs = array();
+        foreach ($rowset as $row) {
+            $configs[] = $row;
+            $items[$row->id] = $row->toArray();
+        }
+        // Set form
+        $form = new PropertyForm('property', $items);
+        $form->setAttribute('enctype', 'multipart/form-data');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                unset($values['submit']);
+                foreach ($configs as $row) {
+                    $row->value = $values[$row->name];
+                    $row->save();
+                }
+                $message = __('Property data saved successfully.');
+            } else {
+                $message = __('Invalid data, please check and re-submit.');
+            }   
+        } else {
+            $message = __('you can update property');
+        }
+        // Set view
+        $this->view()->setTemplate('product_property');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('message', $message);
+    }
+
+    /**
+     * extra Action
+     */
+    public function extraAction()
+    {
+        $this->view()->setTemplate('product_extra');
+    }
 }

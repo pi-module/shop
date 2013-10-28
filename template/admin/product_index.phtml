@@ -1,5 +1,11 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="shop">
+	<ul class="nav nav-tabs">
+		<li class="active"><a title="<?php _e('List'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'index')); ?>"><?php _e('List'); ?></a></li>
+		<li><a title="<?php _e('Attributes'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'attribute')); ?>"><?php _e('Attributes'); ?></a></li>
+    	<li><a title="<?php _e('Property'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'property')); ?>"><?php _e('Property'); ?></a></li>
+    	<li><a title="<?php _e('Extra'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'extra')); ?>"><?php _e('Extra'); ?></a></li>
+    </ul>
 	<p>
 	   <a class="btn" title="<?php _e('Add product'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'update')); ?>"><i class="icon-folder-open"></i> <?php _e('Add product'); ?></a>
 	</p>
