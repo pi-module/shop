@@ -6,6 +6,7 @@ CREATE TABLE `{product}` (
   `related` varchar(255) NOT NULL,
   `summary` text,
   `description` text,
+  `seo_title` varchar(255) NOT NULL,
   `seo_keywords` varchar(255) NOT NULL,
   `seo_description` varchar(255) NOT NULL,
   `status` tinyint(1) unsigned NOT NULL,
@@ -15,7 +16,7 @@ CREATE TABLE `{product}` (
   `hits` int(10) unsigned NOT NULL,
   `image` varchar(255) NOT NULL,
   `path` varchar(16) NOT NULL,
-  `comments` int(10) unsigned NOT NULL,
+  `comment` int(10) unsigned NOT NULL,
   `point` int(10) NOT NULL,
   `count` int(10) unsigned NOT NULL,
   `favorite` int(10) unsigned NOT NULL,
@@ -48,9 +49,13 @@ CREATE TABLE `{category}` (
   `path` varchar(16) NOT NULL,
   `description` text,
   `description_footer` text,
+  `seo_title` varchar(255) NOT NULL,
   `seo_keywords` varchar(255) NOT NULL,
   `seo_description` varchar(255) NOT NULL,
+  `time_create` int(10) unsigned NOT NULL,
+  `time_update` int(10) unsigned NOT NULL,
   `setting` text,
+  `status` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 );
 
