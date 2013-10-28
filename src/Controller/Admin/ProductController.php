@@ -17,6 +17,8 @@ use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Module\Shop\Form\ProductForm;
 use Module\Shop\Form\ProductFilter;
+use Module\Shop\Form\RelatedForm;
+use Module\Shop\Form\RelatedFilter;
 use Zend\Json\Json;
 
 class ProductController extends ActionController
@@ -121,7 +123,7 @@ class ProductController extends ActionController
                 }
                 $row->assign($values);
                 $row->save();
-                // Topic
+                // Category
                 Pi::api('shop', 'category')->setLink($row->id, $row->category, $row->time_create, $row->time_update, $row->price, $row->stock, $row->status);
                 // Check it save or not
                 if ($row->id) {
@@ -146,5 +148,110 @@ class ProductController extends ActionController
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Add a product'));
         $this->view()->assign('message', $message);
+    }	
+
+    /**
+     * related Action
+     */
+    public function relatedAction()
+    {
+    	// Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        $related_list = array();
+        $product_list = array();
+        // Find Product
+        if ($id) {
+        	$product = $this->getModel('product')->find($id)->toArray();
+        } else {
+        	return $this->redirect()->toRoute('', array('action' => 'index'));
+        }
+        // Get related list
+    	$related_list = Pi::api('shop', 'related')->getListAll($product['id']);
+    	// Set form
+        $form = new RelatedForm('related');
+        $form->setAttribute('enctype', 'multipart/form-data');
+        if ($this->request->isPost()) {
+        	$data = $this->request->getPost();
+            $form->setInputFilter(new RelatedFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+            	$values = $form->getData();
+            	$product_list = Pi::api('shop', 'related')->findList($product['id'], $values);
+            } else {
+                $message = __('Invalid data, please check and re-submit.');
+            }	
+        }
+        // Set view
+    	$this->view()->setTemplate('product_related');
+    	$this->view()->assign('title', __('Add Related'));
+    	$this->view()->assign('form', $form);
+    	$this->view()->assign('product', $product);
+    	$this->view()->assign('related_list', $related_list);
+    	$this->view()->assign('product_list', $product_list);
+    }
+
+    public function relatedAjaxAction()
+    {
+        // Get id and related
+        $product_id = $this->params('product_id');
+        $product_related = $this->params('product_related');
+        $related = $this->params('related');
+        $row = array();
+        // Set return
+        $return = array();
+        $return['message'] = __('Please select product');
+        $return['ajaxstatus'] = 0;
+        $return['id'] = 0;
+        $return['storystatus'] = 0;
+        // set story
+        $product = $this->getModel('product')->find($product_id);
+        // Check product
+        if ($product && in_array($related, array(0, 1))) {
+        	// add / remove related
+        	if ($related == 1) {
+        		// check related
+        		$where = array('product_id' => $product['id'], 'product_related' => $product_related);
+    			$select = $this->getModel('related')->select()->where($where)->limit(1);
+        		$rowset = $this->getModel('related')->selectWith($select);
+        		if ($rowset) {
+        			$row = $rowset->toArray();
+        		}
+        		// Add related
+        		if (empty($row)) {
+        			// save
+        			$row = $this->getModel('related')->createRow();
+                	$row->product_id = $product['id'];
+                	$row->product_related = $product_related;
+                	$row->save();
+                	// set return
+                	$return['message'] = __('OK Add');
+                	$return['ajaxstatus'] = 1;
+                	$return['id'] = $product['id'];
+                	$return['relatedstatus'] = 1;
+        		} else {
+                	// set return
+                	$return['message'] = __('Error Add , It added before');
+                	$return['ajaxstatus'] = 0;
+                	$return['id'] = $product['id'];
+                	$return['relatedstatus'] = 0;
+        		}
+        	} elseif ($related == 0) {
+        		$this->getModel('related')->delete(array('product_id' => $product['id'], 'product_related' => $product_related));
+                $return['message'] = __('OK Remove');
+                $return['ajaxstatus'] = 1;
+                $return['id'] = $product['id'];
+                $return['relatedstatus'] = 1;
+        	}
+        }
+        return $return;
+    }
+
+    /**
+     * attach Action
+     */
+    public function attachAction()
+    {
+    	$this->view()->setTemplate('empty');
     }	
 }

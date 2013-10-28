@@ -121,7 +121,6 @@ class ProductForm  extends BaseForm
             'type' => 'Module\Shop\Form\Element\Category',
             'options' => array(
                 'label' => __('Category'),
-                'module' => $this->module,
                 'category' => '',
             ),
         ));

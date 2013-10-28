@@ -10,19 +10,19 @@
 			<th><?php _e('Title'); ?></th>
 			<th><?php _e('Action'); ?></th>
 		</tr>
-		<?php foreach($list as $product) { ?>
+		<?php foreach($list as $category) { ?>
 		<?php
-		if($product['status'] == 1) {
+		if($category['status'] == 1) {
 			$labelIdClass = 'label-success';	
 		} else {
 			$labelIdClass = 'label-warning';	
 		}	
 		?>
 		<tr>
-			<td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($product['id']); ?></span></td>
-			<td><?php echo $this->escape($product['title']); ?></td>
+			<td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($category['id']); ?></span></td>
+			<td><?php echo $this->escape($category['title']); ?></td>
 			<td>
-				<a class="btn" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'update', 'id' => $product['id'])); ?>"><i class="icon-edit"></i> <?php _e('Edit'); ?></a>
+				<a class="btn" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'update', 'id' => $category['id'])); ?>"><i class="icon-edit"></i> <?php _e('Edit'); ?></a>
 			</td>
 		</tr>
 		<?php } ?>

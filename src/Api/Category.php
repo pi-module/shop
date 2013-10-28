@@ -18,6 +18,7 @@ use Zend\Json\Json;
 
 /*
  * Pi::api('shop', 'category')->setLink($product, $category, $create, $update, $price, $stock, $status);
+ * Pi::api('shop', 'category')->findFromCategory($category);
  */
 
 class Category extends AbstractApi
@@ -45,8 +46,18 @@ class Category extends AbstractApi
             $row->assign($values);
             $row->save();
         }
-    }  
+    }
 
-
-
+    public function findFromCategory($category)
+    {
+        $list = array();
+        $where = array('category' => $category);
+        $select = Pi::model('link', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('link', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $row = $row->toArray();
+            $list[] = $row['product'];
+        }
+        return array_unique($list);
+    }   
 }
