@@ -7,12 +7,8 @@
     $this->js($this->assetModule('script/system-msg.js', 'system'));
 ?>
 <div class="shop" id="product-list" >
-	<ul class="nav nav-tabs">
-		<li class="active"><a title="<?php _e('List'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'index')); ?>"><?php _e('List'); ?></a></li>
-		<li><a title="<?php _e('Attributes'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'attribute')); ?>"><?php _e('Attributes'); ?></a></li>
-    	<li><a title="<?php _e('Property'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'property')); ?>"><?php _e('Property'); ?></a></li>
-    	<li><a title="<?php _e('Extra'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'extra')); ?>"><?php _e('Extra'); ?></a></li>
-    </ul>
+	<?php $navList = 1; ?>
+	<?php include $this->template('admin/product_nav'); ?>
 	<h3><?php echo $product['title']; ?></h3>
 	<p><?php _e('You can manage product related here, remove related productes or find new product by search system and add them to related'); ?></p>
 	<?php if(!empty($related_list)) { ?>

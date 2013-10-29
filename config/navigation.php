@@ -36,17 +36,6 @@ return array(
             'action'        => 'index',
         ),
 
-        'extra' => array(
-            'label'         => _t('Extra'),
-            'permission'    => array(
-                'resource'  => 'extra',
-            ),
-            'route'         => 'admin',
-            'module'        => 'shop',
-            'controller'    => 'extra',
-            'action'        => 'index',
-        ),
-
         'attach' => array(
             'label'         => _t('Attach'),
             'permission'    => array(
@@ -55,17 +44,6 @@ return array(
             'route'         => 'admin',
             'module'        => 'shop',
             'controller'    => 'attach',
-            'action'        => 'index',
-        ),
-
-        'spotlight' => array(
-            'label'         => _t('Spotlight'),
-            'permission'    => array(
-                'resource'  => 'spotlight',
-            ),
-            'route'         => 'admin',
-            'module'        => 'shop',
-            'controller'    => 'spotlight',
             'action'        => 'index',
         ),
 

@@ -24,20 +24,8 @@ return array(
                 //'admin',
             ),
         ),
-        'extra'       => array(
-            'title'         => __('Extra'),
-            'access'        => array(
-                //'admin',
-            ),
-        ),
         'attach'         => array(
             'title'         => __('Attach'),
-            'access'        => array(
-                //'admin',
-            ),
-        ),
-        'spotlight'       => array(
-            'title'         => __('Spotlight'),
             'access'        => array(
                 //'admin',
             ),

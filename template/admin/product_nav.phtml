@@ -1,0 +1,7 @@
+<ul class="nav nav-tabs">
+	<li<?php if ($navList) { ?> class="active"<?php } ?>><a title="<?php _e('List'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'index')); ?>"><?php _e('List'); ?></a></li>
+	<li<?php if ($navAttribute) { ?> class="active"<?php } ?>><a title="<?php _e('Attributes'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'attribute')); ?>"><?php _e('Attributes'); ?></a></li>
+	<li<?php if ($navProperty) { ?> class="active"<?php } ?>><a title="<?php _e('Property'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'property')); ?>"><?php _e('Property'); ?></a></li>
+	<li<?php if ($navExtra) { ?> class="active"<?php } ?>><a title="<?php _e('Extra'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'extra')); ?>"><?php _e('Extra'); ?></a></li>
+	<li<?php if ($navSpotlight) { ?> class="active"<?php } ?>><a title="<?php _e('Spotlight'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'spotlight')); ?>"><?php _e('Spotlight'); ?></a></li>
+</ul>

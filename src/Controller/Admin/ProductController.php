@@ -22,7 +22,10 @@ use Module\Shop\Form\RelatedFilter;
 use Module\Shop\Form\PropertyForm;
 use Module\Shop\Form\PropertyFilter;
 use Module\Shop\Form\ExtraForm;
-use Module\Shop\Form\ExtraFilter;
+//use Module\Shop\Form\ExtraFilter;
+use Module\Shop\Form\SpotlightForm;
+use Module\Shop\Form\SpotlightFilter;
+
 use Zend\Json\Json;
 
 class ProductController extends ActionController
@@ -51,7 +54,16 @@ class ProductController extends ActionController
     /**
      * Extra Columns
      */
-    protected $extraColumns = array('id', 'title', 'image', 'type', 'order', 'status', 'search');
+    protected $extraColumns = array(
+        'id', 'title', 'image', 'type', 'order', 'status', 'search'
+    );
+
+    /**
+     * Spotlight Columns
+     */
+    protected $spotlightColumns = array(
+        'id', 'product', 'category', 'time_publish', 'time_expire', 'status'
+    );
 
     /**
      * index Action
@@ -489,5 +501,125 @@ class ProductController extends ActionController
         } else {
             $this->jump(array('action' => 'extra'), __('Please select field'));
         }
+    }
+
+    public function spotlightAction()
+    {
+        // Get product and category
+        $where = array('time_expire > ?' => time());
+        $columns = array('product', 'category');
+        $select = $this->getModel('spotlight')->select()->where($where)->columns($columns);
+        $idSet = $this->getModel('spotlight')->selectWith($select)->toArray();
+        if (empty($idSet)) {
+            return $this->redirect()->toRoute('', array('action' => 'spotlightUpdate'));
+        }
+        // Set topics and stores
+        foreach ($idSet as $spotlight) {
+            $categoryArr[] = $spotlight['category'];
+            $productArr[] = $spotlight['product'];
+        }
+        // Get topics
+        $where = array('id' => array_unique($topicArr));
+        $columns = array('id', 'title', 'slug');
+        $select = $this->getModel('category')->select()->where($where)->columns($columns);
+        $categorySet = $this->getModel('category')->selectWith($select);
+        // Make category list
+        foreach ($categorySet as $row) {
+            $categoryList[$row->id] = $row->toArray();
+        }
+        $categoryList[-1] = array('id' => -1, 'title' => __('Home Page'), 'slug' => '');
+        $categoryList[0] = array('id' => 0, 'title' => __('All Category'), 'slug' => '');
+        // Get products
+        $where = array('id' => array_unique($productArr));
+        $columns = array('id', 'title', 'slug');
+        $select = $this->getModel('product')->select()->where($where)->columns($columns);
+        $productSet = $this->getModel('product')->selectWith($select);
+        // Make product list
+        foreach ($productSet as $row) {
+            $productList[$row->id] = $row->toArray();
+        }
+        // Get spotlights
+        $where = array('time_expire > ?' => time());
+        $order = array('id DESC', 'time_publish DESC');
+        $select = $this->getModel('spotlight')->select()->where($where)->order($order);
+        $spotlightSet = $this->getModel('spotlight')->selectWith($select);
+        // Make spotlight list
+        foreach ($spotlightSet as $row) {
+            $spotlightList[$row->id] = $row->toArray();
+            $spotlightList[$row->id]['productTitle'] = $productList[$row->product]['title'];
+            $spotlightList[$row->id]['productSlug'] = $productList[$row->product]['slug'];
+            $spotlightList[$row->id]['categoryTitle'] = $categoryList[$row->category]['title'];
+            $spotlightList[$row->id]['categorySlug'] = $categoryList[$row->category]['slug'];
+            $spotlightList[$row->id]['time_publish'] = _date($spotlightList[$row->id]['time_publish']);
+            $spotlightList[$row->id]['time_expire'] = _date($spotlightList[$row->id]['time_expire']);
+        }
+        // Set view
+        $this->view()->setTemplate('product_spotlight');
+        $this->view()->assign('spotlights', $spotlightList);
+    }
+
+    public function spotlightUpdateAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        $form = new SpotlightForm('spotlight');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new SpotlightFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                foreach (array_keys($values) as $key) {
+                    if (!in_array($key, $this->spotlightColumns)) {
+                        unset($values[$key]);
+                    }
+                }
+                // Set time
+                $values['time_publish'] = strtotime($values['time_publish']);
+                $values['time_expire'] = strtotime($values['time_expire']);
+                // Save values
+                if (!empty($values['id'])) {
+                    $row = $this->getModel('spotlight')->find($values['id']);
+                } else {
+                    $row = $this->getModel('spotlight')->createRow();
+                }
+                $row->assign($values);
+                $row->save();
+                // Check it save or not
+                if ($row->id) {
+                    $message = __('Spotlight data saved successfully.');
+                    $this->jump(array('action' => 'spotlight'), $message);
+                } else {
+                    $message = __('Spotlight data not saved.');
+                }
+            } else {
+                $message = __('Invalid data, please check and re-submit.');
+            }
+        } else {
+            if ($id) {
+                $values = $this->getModel('spotlight')->find($id)->toArray();
+                $form->setData($values);
+                $message = 'You can edit this spotlight';
+            } else {
+                $message = 'You can add new spotlight';
+            }
+        }
+        $this->view()->setTemplate('product_spotlight_update');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('title', __('Add a Spotlight'));
+        $this->view()->assign('message', $message);
+    }
+
+    public function spotlightDeleteAction()
+    {
+        // Get information
+        $this->view()->setTemplate(false);
+        $id = $this->params('id');
+        $row = $this->getModel('spotlight')->find($id);
+        if ($row) {
+            $row->delete();
+            $this->jump(array('action' => 'spotlight'), __('Selected spotlight delete'));
+        }
+        $this->jump(array('action' => 'spotlight'), __('Please select spotlight'));
     }
 }
