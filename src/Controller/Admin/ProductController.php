@@ -21,14 +21,16 @@ use Module\Shop\Form\RelatedForm;
 use Module\Shop\Form\RelatedFilter;
 use Module\Shop\Form\PropertyForm;
 use Module\Shop\Form\PropertyFilter;
+use Module\Shop\Form\ExtraForm;
+use Module\Shop\Form\ExtraFilter;
 use Zend\Json\Json;
 
 class ProductController extends ActionController
 {
     /**
-     * Image Prefix
+     * Product Image Prefix
      */
-    protected $ImagePrefix = 'product_';
+    protected $ImageProductPrefix = 'product_';
 
     /**
      * Product Columns
@@ -40,6 +42,16 @@ class ProductController extends ActionController
     	'price_discount', 'property_1', 'property_2', 'property_3', 'property_4', 'property_5', 'property_6',
     	'property_7', 'property_8', 'property_9', 'property_10', 
     );
+
+    /**
+     * Extra Image Prefix
+     */
+    protected $ImageExtraPrefix = 'extra_';
+
+    /**
+     * Extra Columns
+     */
+    protected $extraColumns = array('id', 'title', 'image', 'type', 'order', 'status', 'search');
 
     /**
      * index Action
@@ -90,8 +102,10 @@ class ProductController extends ActionController
         foreach ($rowset as $row) {
             $property[$row->name] = $row->toArray();
         }
+        // Get extra field
+        $fields = Pi::api('shop', 'extra')->Get();
         // Set form
-        $form = new ProductForm('product', $property);
+        $form = new ProductForm('product', $property, $fields['extra']);
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
         	$data = $this->request->getPost();
@@ -100,11 +114,22 @@ class ProductController extends ActionController
             $slug = ($data['slug']) ? $data['slug'] : $data['title'];
             $data['slug'] = Pi::api('shop', 'text')->slug($slug);
             // Form filter
-            $form->setInputFilter(new ProductFilter);
+            $form->setInputFilter(new ProductFilter($fields['extra']));
             $form->setData($data);
             if ($form->isValid()) {
             	$values = $form->getData();
-            	//
+                // Set extra data array
+                if (!empty($fields['field'])) {
+                    foreach ($fields['field'] as $field) {
+                        $extra[$field]['field'] = $field;
+                        $extra[$field]['data'] = $values[$field];
+                    }
+                }
+                // Tag
+                if (!empty($values['tag'])) {
+                    $tag = explode(' ', $values['tag']);
+                }
+            	// Set just product fields
             	foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->productColumns)) {
                         unset($values[$key]);
@@ -136,6 +161,18 @@ class ProductController extends ActionController
                 $row->save();
                 // Category
                 Pi::api('shop', 'category')->setLink($row->id, $row->category, $row->time_create, $row->time_update, $row->price, $row->stock, $row->status);
+                // Tag
+                if (isset($tag) && is_array($tag) && Pi::service('module')->isActive('tag')) {
+                    if (empty($values['id'])) {
+                        Pi::service('tag')->add($module, $row->id, '', $tag);
+                    } else {
+                        Pi::service('tag')->update($module, $row->id, '', $tag);
+                    }
+                }
+                // Extra
+                if (!empty($extra)) {
+                    Pi::api('shop', 'extra')->Set($extra, $row->id);
+                }
                 // Check it save or not
                 if ($row->id) {
                     $message = __('Product data saved successfully.');
@@ -148,6 +185,16 @@ class ProductController extends ActionController
             }	
         } else {
             if ($id) {
+                // Get Extra
+                $product = Pi::api('shop', 'extra')->Form($product);
+                // Get tag list
+                if (Pi::service('module')->isActive('tag')) {
+                    $tag = Pi::service('tag')->get($module, $product['id'], '');
+                    if (is_array($tag)) {
+                        $product['tag'] = implode(' ', $tag);
+                    }
+                }
+                // Set data 
                 $form->setData($product);
                 $message = 'You can edit this product';
             } else {
@@ -221,32 +268,40 @@ class ProductController extends ActionController
         if ($product && in_array($related, array(0, 1))) {
         	// add / remove related
         	if ($related == 1) {
-        		// check related
-        		$where = array('product_id' => $product['id'], 'product_related' => $product_related);
-    			$select = $this->getModel('related')->select()->where($where)->limit(1);
-        		$rowset = $this->getModel('related')->selectWith($select);
-        		if ($rowset) {
-        			$row = $rowset->toArray();
-        		}
-        		// Add related
-        		if (empty($row)) {
-        			// save
-        			$row = $this->getModel('related')->createRow();
-                	$row->product_id = $product['id'];
-                	$row->product_related = $product_related;
-                	$row->save();
-                	// set return
-                	$return['message'] = __('OK Add');
-                	$return['ajaxstatus'] = 1;
-                	$return['id'] = $product['id'];
-                	$return['relatedstatus'] = 1;
-        		} else {
-                	// set return
-                	$return['message'] = __('Error Add , It added before');
-                	$return['ajaxstatus'] = 0;
-                	$return['id'] = $product['id'];
-                	$return['relatedstatus'] = 0;
-        		}
+                if ($product['id'] != $product_related) {
+                    // check related
+                    $where = array('product_id' => $product['id'], 'product_related' => $product_related);
+                    $select = $this->getModel('related')->select()->where($where)->limit(1);
+                    $rowset = $this->getModel('related')->selectWith($select);
+                    if ($rowset) {
+                        $row = $rowset->toArray();
+                    }
+                    // Add related
+                    if (empty($row)) {
+                        // save
+                        $row = $this->getModel('related')->createRow();
+                        $row->product_id = $product['id'];
+                        $row->product_related = $product_related;
+                        $row->save();
+                        // set return
+                        $return['message'] = __('OK Add');
+                        $return['ajaxstatus'] = 1;
+                        $return['id'] = $product['id'];
+                        $return['relatedstatus'] = 1;
+                    } else {
+                        // set return
+                        $return['message'] = __('Error Add , It added before');
+                        $return['ajaxstatus'] = 0;
+                        $return['id'] = $product['id'];
+                        $return['relatedstatus'] = 0;
+                    }
+                } else {
+                    // set return
+                    $return['message'] = __('Error , Product and related is same');
+                    $return['ajaxstatus'] = 0;
+                    $return['id'] = $product['id'];
+                    $return['relatedstatus'] = 0;
+                }
         	} elseif ($related == 0) {
         		$this->getModel('related')->delete(array('product_id' => $product['id'], 'product_related' => $product_related));
                 $return['message'] = __('OK Remove');
@@ -320,6 +375,119 @@ class ProductController extends ActionController
      */
     public function extraAction()
     {
+        // Get info
+        $select = $this->getModel('field')->select()->order(array('order ASC'));
+        $rowset = $this->getModel('field')->selectWith($select);
+        // Make list
+        foreach ($rowset as $row) {
+            $field[$row->id] = $row->toArray();
+            //$field[$row->id]['imageurl'] = Pi::url('upload/' . $this->config('file_path') . '/extra/' . $field[$row->id]['image']);
+        }
+        // Go to update page if empty
+        if (empty($field)) {
+            return $this->redirect()->toRoute('', array('action' => 'extraUpdate'));
+        }
+        // Set view
         $this->view()->setTemplate('product_extra');
+        $this->view()->assign('fields', $field);
+    }
+
+    /**
+     * extra Action
+     */
+    public function extraUpdateAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        // Get extra
+        if ($id) {
+            $extra = $this->getModel('field')->find($id)->toArray();
+        }
+        // Set form
+        $form = new ExtraForm('extra', $options);
+        $form->setAttribute('enctype', 'multipart/form-data');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $file = $this->request->getFiles();
+            $form->setInputFilter(new ExtraFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                foreach (array_keys($values) as $key) {
+                    if (!in_array($key, $this->extraColumns)) {
+                        unset($values[$key]);
+                    }
+                }
+                // Set order
+                $select = $this->getModel('field')->select()->columns(array('order'))->order(array('order DESC'))->limit(1);
+                $values['order'] = $this->getModel('field')->selectWith($select)->current()->order + 1;
+                // Save values
+                if (!empty($values['id'])) {
+                    $row = $this->getModel('field')->find($values['id']);
+                } else {
+                    $row = $this->getModel('field')->createRow();
+                }
+                $row->assign($values);
+                $row->save();
+                // Check it save or not
+                if ($row->id) {
+                    $message = __('Extra field data saved successfully.');
+                    $url = array('action' => 'extra');
+                    $this->jump($url, $message);
+                } else {
+                    $message = __('Extra field data not saved.');
+                }
+            } else {
+                $message = __('Invalid data, please check and re-submit.');
+            }
+        } else {
+            if ($id) {
+                $form->setData($values);
+                $message = 'You can edit this extra field';
+            } else {
+                $message = 'You can add new extra field';
+            }
+        }
+        // Set view
+        $this->view()->setTemplate('product_extra_update');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('title', __('Add Extra'));
+        $this->view()->assign('message', $message);
+    }
+
+    public function extraSortAction()
+    {
+        $order = 1;
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            foreach ($data['mod'] as $id) {
+                if ($id > 0) {
+                    $row = $this->getModel('field')->find($id);
+                    $row->order = $order;
+                    $row->save();
+                    $order++;
+                }
+            }
+        }
+        // Set view
+        $this->view()->setTemplate(false);
+    }
+
+    public function extraDeleteAction()
+    {
+        // Get information
+        $this->view()->setTemplate(false);
+        $id = $this->params('id');
+        $row = $this->getModel('field')->find($id);
+        if ($row) {
+            // Remove all data
+            $this->getModel('field_data')->delete(array('field' => $row->id));
+            // Remove field
+            $row->delete();
+            $this->jump(array('action' => 'extra'), __('Selected field delete'));
+        } else {
+            $this->jump(array('action' => 'extra'), __('Please select field'));
+        }
     }
 }

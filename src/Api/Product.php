@@ -19,6 +19,7 @@ use Zend\Json\Json;
 /*
  * Pi::api('shop', 'product')->getListFromId($id);
  * Pi::api('shop', 'product')->searchRelated($title, $type);
+ * Pi::api('shop', 'product')->ExtraCount($id);
  */
 
 class Product extends AbstractApi
@@ -63,4 +64,17 @@ class Product extends AbstractApi
         }
         return $list;
     }	
+
+    /**
+     * Set number of used extra fields for selected story
+     */
+    public function ExtraCount($id)
+    {
+        // Get attach count
+        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $select = Pi::model('field_data', $this->getModule())->select()->columns($columns);
+        $count = Pi::model('field_data', $this->getModule())->selectWith($select)->current()->count;
+        // Set attach count
+        Pi::model('product', $this->getModule())->update(array('extra' => $count), array('id' => $id));
+    }
 }	

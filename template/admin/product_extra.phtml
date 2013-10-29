@@ -1,9 +1,54 @@
-<?php $this->css($this->assetModule('css/admin.css')); ?>
-<div class="shop">
+<?php 
+	$this->css($this->assetModule('css/admin.css'));
+	$this->css($this->assetModule('script/system-ui.css', 'system')); 
+	$this->jQuery('ui/jquery-ui.custom.min.js');
+?>
+<div class="shop" id="tree-template"> 
 	<ul class="nav nav-tabs">
 		<li><a title="<?php _e('List'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'index')); ?>"><?php _e('List'); ?></a></li>
 		<li><a title="<?php _e('Attributes'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'attribute')); ?>"><?php _e('Attributes'); ?></a></li>
     	<li><a title="<?php _e('Property'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'property')); ?>"><?php _e('Property'); ?></a></li>
     	<li class="active"><a title="<?php _e('Extra'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'extra')); ?>"><?php _e('Extra'); ?></a></li>
     </ul> 
+    <p>
+	   <a class="btn" title="<?php _e('Add Extra'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'extraUpdate')); ?>"><i class="icon-random"></i> <?php _e('Add Extra'); ?></a>
+	</p>
+	<h3><?php _e('List of extra fields'); ?></h3>
+	<div id="extra-sort">
+		<div class="extra-field">
+			<?php foreach($fields as $field) { ?>
+			<div id="mod_<?php echo $this->escape($field['id']); ?>">
+				<div class="tree-item">
+					<div class="tree-item-header" style="cursor:move;">
+						<div class="pad2">
+	                        <?php if($field['image']) { ?>
+	                        <div class="pull-left span1">
+	                            <img height="20" width="20" src="<?php echo $this->escape($field['imageurl']); ?>" alt="<?php echo $this->escape($field['title']); ?>" />
+	                        </div>
+	                        <?php } ?>
+						    <div class="pull-left span4"><strong><?php _e('Title'); ?></strong> <?php echo $this->escape($field['title']); ?></div>
+						    <div class="pull-left span2"><strong><?php _e('Type'); ?></strong> <?php echo $this->escape($field['type']); ?></div>
+						    <div class="pull-right btn-group span2">
+								<a class="btn btn-link" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'extraUpdate', 'id' => $field['id'])); ?>"><i class="icon-edit"></i> <?php _e('Edit'); ?></a>
+								<a class="btn btn-link" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'extraDelete', 'id' => $field['id'])); ?>"><i class="icon-trash"></i> <?php _e('Delete'); ?></a>
+							</div>
+							<div class="pull-right span1"><span class="label <?php if($field['status']) { echo'label-success'; } else { echo 'label-important';} ?>"><?php _e('Status'); ?></span></div>
+							<div class="pull-right span1"><span class="label <?php if($field['search']) { echo'label-success'; } else { echo 'label-important';} ?>"><?php _e('Search'); ?></span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php } ?>
+		</div>
+	</div>
 </div>
+<script type="text/javascript" >
+$(document).ready(function() {
+   $('#extra-sort .extra-field').sortable({
+       update: function(event, ui) {
+           var list = $(this).sortable('serialize');
+           $.post("<?php echo $this->url('', array('action' => 'extraSort')); ?>", list);
+       }
+   });
+});
+</script>

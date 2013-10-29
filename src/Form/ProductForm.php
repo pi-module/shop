@@ -19,9 +19,10 @@ use Pi\Form\Form as BaseForm;
 class ProductForm  extends BaseForm
 {
 
-    public function __construct($name = null, $property)
+    public function __construct($name = null, $property, $field)
     {
         $this->property = $property;
+        $this->field = $field;
         parent::__construct($name);
     }
 
@@ -412,6 +413,28 @@ class ProductForm  extends BaseForm
                     'type' => 'hidden',
                 ),
             ));
+        }
+        // extra_field
+        $this->add(array(
+            'name' => 'extra_field',
+            'type' => 'fieldset',
+            'options' => array(
+                'label' => __('Extra fields'),
+            ),
+        ));
+        // Set extra field
+        if (!empty($this->field)) {
+            foreach ($this->field as $field) {
+                $this->add(array(
+                    'name' => $field['id'],
+                    'options' => array(
+                        'label' => $field['title'],
+                    ),
+                    'attributes' => array(
+                        'type' => 'text',
+                    )
+                ));
+            }
         }
         // Save
         $this->add(array(
