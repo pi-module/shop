@@ -19,7 +19,8 @@ use Zend\Json\Json;
 /*
  * Pi::api('shop', 'product')->getListFromId($id);
  * Pi::api('shop', 'product')->searchRelated($title, $type);
- * Pi::api('shop', 'product')->ExtraCount($id);
+ * Pi::api('shop', 'product')->extraCount($id);
+ * Pi::api('shop', 'product')->attachCount($id);
  */
 
 class Product extends AbstractApi
@@ -66,7 +67,7 @@ class Product extends AbstractApi
     }	
 
     /**
-     * Set number of used extra fields for selected story
+     * Set number of used extra fields for selected product
      */
     public function ExtraCount($id)
     {
@@ -76,5 +77,19 @@ class Product extends AbstractApi
         $count = Pi::model('field_data', $this->getModule())->selectWith($select)->current()->count;
         // Set attach count
         Pi::model('product', $this->getModule())->update(array('extra' => $count), array('id' => $id));
+    }
+
+    /**
+     * Set number of attach files for selected product
+     */
+    public function AttachCount($id)
+    {
+        // Get attach count
+        $where = array('product' => $id);
+        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $select = Pi::model('attach', $this->getModule())->select()->columns($columns)->where($where);
+        $count = Pi::model('attach', $this->getModule())->selectWith($select)->current()->count;
+        // Set attach count
+        Pi::model('product', $this->getModule())->update(array('attach' => $count), array('id' => $id));
     }
 }	

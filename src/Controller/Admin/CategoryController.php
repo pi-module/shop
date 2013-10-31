@@ -143,6 +143,8 @@ class CategoryController extends ActionController
                     } else {
                         $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
                     }
+                } elseif (!isset($values['image'])) {
+                    $values['image'] = '';  
                 }
             	// Set just category fields
             	foreach (array_keys($values) as $key) {

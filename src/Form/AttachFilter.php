@@ -17,7 +17,7 @@
  * @version         $Id$
  */
 
-namespace Module\News\Form;
+namespace Module\Shop\Form;
 
 use Pi;
 use Zend\InputFilter\InputFilter;

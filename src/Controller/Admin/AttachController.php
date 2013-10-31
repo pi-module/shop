@@ -15,6 +15,7 @@ namespace Module\Shop\Controller\Admin;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+use Pi\Paginator\Paginator;
 use Pi\File\Transfer\Upload;
 use Module\Shop\Form\AttachForm;
 use Module\Shop\Form\AttachFilter;
@@ -30,7 +31,7 @@ class AttachController extends ActionController
     public function indexAction()
     {
         // Get page
-        $page = $this->params('p', 1);
+        $page = $this->params('page', 1);
         $product = $this->params('product');
         $module = $this->params('module');
         // Set info
@@ -58,22 +59,20 @@ class AttachController extends ActionController
             $this->jump(array('controller' => 'product', 'action' => 'index'), __('No file attached'));
         }
         // Set paginator
-        $select = $this->getModel('attach')->select()->columns(array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)')))->where($where);
+        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $select = $this->getModel('attach')->select()->columns($columns)->where($where);
         $count = $this->getModel('attach')->selectWith($select)->current()->count;
-        $paginator = \Pi\Paginator\Paginator::factory(intval($count));
+        $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
         $paginator->setUrlOptions(array(
-            // Use router to build URL for each page
-            'pageParam' => 'p',
-            'totalParam' => 't',
-            'router' => $this->getEvent()->getRouter(),
-            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params' => array(
-                'module' => $this->getModule(),
-                'controller' => 'attach',
-                'action' => 'index',
-            ),
+            'router'    => $this->getEvent()->getRouter(),
+            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params'    => array_filter(array(
+                'module'        => $this->getModule(),
+                'controller'    => 'attach',
+                'action'        => 'index',
+            )),
         ));
         // Set view
         $this->view()->setTemplate('attach_index');
@@ -124,7 +123,7 @@ class AttachController extends ActionController
         $file['view'] = $this->fileView($file['type'], $file['path'], $file['file']);
         $product = $this->getModel('product')->find($file['product'])->toArray();
         // Set form
-        $form = new AttachForm('attach', $module, array($product['id'] => $product['title']));
+        $form = new AttachForm('attach', $product['id']);
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -164,8 +163,16 @@ class AttachController extends ActionController
         Pi::service('log')->active(false);
         // Set return
         $return = array(
-            'status' => 1, 'message' => '', 'id' => '', 'title' => '', 'time_create' => '',
-            'type' => '', 'status' => '', 'hits' => '', 'size' => '', 'preview' => '',
+            'status' => 1, 
+            'message' => '', 
+            'id' => '', 
+            'title' => '', 
+            'time_create' => '',
+            'type' => '', 
+            'status' => '', 
+            'hits' => '', 
+            'size' => '', 
+            'preview' => '',
         );
         // Get id
         $id = $this->params('id');
@@ -184,8 +191,12 @@ class AttachController extends ActionController
                 );
             } else {
                 // start upload
-                $path = date('Y') . '/' . date('m');
-                $uploader = new Upload(array('destination' => $this->config('file_path') . '/file/' . $path, 'rename' => $this->FilePrefix . '%random%'));
+                $path = sprintf('%s/%s', date('Y'), date('m'));
+                $destination = Pi::path(sprintf('upload/%s/file/%s', $this->config('file_path'), $path));
+                // Upload
+                $uploader = new Upload;
+                $uploader->setDestination($destination);
+                $uploader->setRename($this->FilePrefix . '%random%');
                 $uploader->setExtension($this->config('file_extension'));
                 $uploader->setSize($this->config('file_size'));
                 if ($uploader->isValid()) {
@@ -193,10 +204,11 @@ class AttachController extends ActionController
                     // Set info
                     $file = $uploader->getUploaded('file');
                     $type = $this->fileType($file);
+                    $title = $this->fileTitle($file);
                     $this->filePath($type, $path, $file);
                     // Set save array
                     $values['file'] = $file;
-                    $values['title'] = '';
+                    $values['title'] = $title;
                     $values['path'] = $path;
                     $values['product'] = $product['id'];
                     $values['time_create'] = time();
@@ -216,7 +228,7 @@ class AttachController extends ActionController
                     $return['size'] = $row->size;
                     $return['preview'] = $this->filePreview($row->type, $row->path, $row->file);
                     // Set product Attach count
-                    Pi::service('api')->news(array('Story', 'AttachCount'), $row->story);
+                    Pi::api('shop', 'product')->attachCount($id);
                 } else {
                     // Upload error
                     $messages = $uploader->getMessages();
@@ -240,16 +252,25 @@ class AttachController extends ActionController
             $row->delete();
             $ajaxstatus = 1;
             $message = __('Your attached file remove successfully');
+            $id = $row->id;
+            Pi::api('shop', 'product')->attachCount($row->product);
         } else {
             $ajaxstatus = 0;
             $message = __('Please select file');
+            $id = 0;
         }
 
         return array(
             'status' => $ajaxstatus,
             'message' => $message,
+            'id' => $id,
         );
     }
+
+    protected function fileTitle($file)
+    {
+        return pathinfo($file, PATHINFO_FILENAME);
+    }    
 
     protected function fileType($file)
     {
@@ -300,16 +321,22 @@ class AttachController extends ActionController
 
     protected function filePath($type, $path, $file)
     {
-        $oldPath = Pi::path('upload/' . $this->config('file_path') . '/file/' . $path . '/' . $file);
+        $oldPath = Pi::path(sprintf('upload/%s/file/%s/%s', $this->config('file_path'), $path, $file));
         switch ($type) {
             // Move and resize images
             case 'image':
-                $newPach = Pi::path('upload/' . $this->config('image_path') . '/original/' . $path . '/' . $file);
+                $newPach = Pi::path(sprintf('upload/%s/original/%s/%s', $this->config('image_path'), $path, $file));
+                // Copy image to new path
                 Pi::service('file')->copy($oldPath, $newPach);
                 Pi::service('file')->remove($oldPath);
-                Pi::service('api')->news(array('Resize', 'start'), $file, $this->config('image_path') . '/original/' . $path, $this->config('image_path') . '/large/' . $path, $this->config('image_largew'), $this->config('image_largeh'));
-                Pi::service('api')->news(array('Resize', 'start'), $file, $this->config('image_path') . '/original/' . $path, $this->config('image_path') . '/medium/' . $path, $this->config('image_mediumw'), $this->config('image_mediumh'));
-                Pi::service('api')->news(array('Resize', 'start'), $file, $this->config('image_path') . '/original/' . $path, $this->config('image_path') . '/thumb/' . $path, $this->config('image_thumbw'), $this->config('image_thumbh'));
+                // Set image path
+                $largeImage = Pi::path(sprintf('upload/%s/large/%s/%s', $this->config('image_path'), $path, $file));
+                $mediumImage = Pi::path(sprintf('upload/%s/medium/%s/%s', $this->config('image_path'), $path, $file));
+                $thumbImage = Pi::path(sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $path, $file));
+                // Resize
+                Pi::service('image')->resize($newPach, array($this->config('image_largew'), $this->config('image_largeh')), $largeImage);
+                Pi::service('image')->resize($newPach, array($this->config('image_mediumw'), $this->config('image_mediumh')), $mediumImage);
+                Pi::service('image')->resize($newPach, array($this->config('image_thumbw'), $this->config('image_thumbh')), $thumbImage);
                 break;
 
             // Move video, audio, pdf, doc
@@ -317,7 +344,7 @@ class AttachController extends ActionController
             case 'audio':
             case 'pdf':
             case 'doc':
-                $newPach = Pi::path('upload/' . $this->config('file_path') . '/' . $type . '/' . $path . '/' . $file);
+                $newPach = Pi::path(sprintf('upload/%s/%s/%s/%s', $this->config('file_path'), $type, $path, $file));
                 Pi::service('file')->copy($oldPath, $newPach);
                 Pi::service('file')->remove($oldPath);
                 break;
@@ -327,9 +354,10 @@ class AttachController extends ActionController
     protected function filePreview($type, $path, $file)
     {
         if ($type == 'image') {
-            $preview = Pi::url('upload/' . $this->config('image_path') . '/thumb/' . $path . '/' . $file);
+            $image = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $path, $file);
+            $preview = Pi::url($image);
         } else {
-            $image = 'image/' . $type . '.png';
+            $image = sprintf('image/%s.png', $type);
             $preview = Pi::service('asset')->getModuleAsset($image, $this->getModule());
         }
         return $preview;
@@ -338,25 +366,27 @@ class AttachController extends ActionController
     protected function fileView($type, $path, $file)
     {
         if ($type == 'image') {
-            $view = Pi::url('upload/' . $this->config('image_path') . '/thumb/' . $path . '/' . $file);
+            $file = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $path, $file);
+            $view = Pi::url($file);
         } else {
-            $view = Pi::url('upload/' . $this->config('file_path') . '/' . $type . '/' . $path . '/' . $file);
+            $file = sprintf('upload/%s/%s/%s/%s',  $this->config('file_path'), $type, $path, $file);
+            $view = Pi::url($file);
         }
         return $view;
     }
 
     protected function removeFile($file, $type, $path)
     {
-        if ($type == 'image') {
-            $file = array(
-                Pi::path('upload/' . $this->config('image_path') . '/original/' . $path . '/' . $file),
-                Pi::path('upload/' . $this->config('image_path') . '/large/' . $path . '/' . $file),
-                Pi::path('upload/' . $this->config('image_path') . '/medium/' . $path . '/' . $file),
-                Pi::path('upload/' . $this->config('image_path') . '/thumb/' . $path . '/' . $file),
+        /* if ($type == 'image') {
+            $remove = array(
+                Pi::path(sprintf('upload/%s/original/%s/%s', $this->config('image_path'), $path, $file)),
+                Pi::path(sprintf('upload/%s/large/%s/%s', $this->config('image_path'), $path, $file)),
+                Pi::path(sprintf('upload/%s/medium/%s/%s', $this->config('image_path'), $path, $file)),
+                Pi::path(sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $path, $file)),
             );
         } else {
-            $file = Pi::path('upload/' . $this->config('file_path') . '/' . $type . '/' . $path . '/' . $file);
+            $remove = Pi::path(sprintf('upload/%s/%s/%s/%s', $this->config('file_path'), $type, $path, $file));
         }
-        Pi::service('file')->remove($file);
+        Pi::service('file')->remove($remove); */
     }
 }

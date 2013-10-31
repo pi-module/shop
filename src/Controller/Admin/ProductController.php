@@ -216,7 +216,9 @@ class ProductController extends ActionController
                     } else {
                         $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
                     }
-                }    
+                } elseif (!isset($values['image'])) {
+                    $values['image'] = '';  
+                }
             	// Set just product fields
             	foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->productColumns)) {
@@ -435,14 +437,6 @@ class ProductController extends ActionController
     }
 
     /**
-     * attach Action
-     */
-    public function attachAction()
-    {
-    	$this->view()->setTemplate('product_attach');
-    }	
-
-    /**
      * attribute Action
      */
     public function attributeAction()
@@ -556,7 +550,9 @@ class ProductController extends ActionController
                     } else {
                         $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
                     }
-                }    
+                } elseif (!isset($values['image'])) {
+                    $values['image'] = '';  
+                }
                 // Set just product fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->extraColumns)) {

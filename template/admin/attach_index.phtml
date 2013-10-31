@@ -22,13 +22,13 @@
 			<td width="80"><div class="preview-img"><img src="<?php echo $this->escape($file['preview']); ?>" alt="<?php echo $this->escape($file['title']); ?>" /></div></td>
 			<td>
 				<p><strong><?php _e('Title'); ?></strong> <?php echo $this->escape($file['title']); ?></p>
-				<p><strong><?php _e('Story'); ?></strong> <?php echo $this->escape($file['storytitle']); ?></p>
+				<p><strong><?php _e('Product'); ?></strong> <?php echo $this->escape($file['productTitle']); ?></p>
 			</td>
-			<td><?php echo $this->escape($file['create']); ?></td>
+			<td><?php echo $this->escape($file['time_create']); ?></td>
 			<td>
 					<a class="btn" rel="external" title="<?php _e('Get'); ?>" href="<?php echo $file['link']; ?>"><i class="icon-download-alt"></i> <?php _e('Get'); ?></a>
 					<a class="btn" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'edit', 'id' => $file['id'])); ?>"><i class="icon-edit"></i> <?php _e('Edit'); ?></a>
-					<a class="btn" title="<?php _e('Edit from story'); ?>" href="<?php echo $this->url('', array('action' => 'add', 'id' => $file['story'])); ?>"><i class="icon-edit"></i> <?php _e('Edit from story'); ?></a>
+					<a class="btn" title="<?php _e('Edit from product'); ?>" href="<?php echo $this->url('', array('action' => 'add', 'id' => $file['product'])); ?>"><i class="icon-edit"></i> <?php _e('Edit from product'); ?></a>
 			</td>
 		</tr>
 		<?php } ?>

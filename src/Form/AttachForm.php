@@ -17,7 +17,7 @@
  * @version         $Id$
  */
 
-namespace Module\News\Form;
+namespace Module\Shop\Form;
 
 use Pi;
 use Pi\Form\Form as BaseForm;
@@ -25,10 +25,9 @@ use Pi\Form\Form as BaseForm;
 class AttachForm extends BaseForm
 {
 
-    public function __construct($name = null, $module, $story)
+    public function __construct($name = null, $product)
     {
-        $this->module = $module;
-        $this->story = $story;
+        $this->product = $product;
         parent::__construct($name);
     }
 
@@ -63,11 +62,10 @@ class AttachForm extends BaseForm
         // story
         $this->add(array(
             'name' => 'story',
-            'type' => 'Module\News\Form\Element\Story',
+            'type' => 'Module\Shop\Form\Element\Product',
             'options' => array(
-                'label' => __('Story'),
-                'module' => $this->module,
-                'story' => $this->story,
+                'label' => __('Product'),
+                'story' => $this->product,
             ),
             'attributes' => array(
                 'size' => 1,

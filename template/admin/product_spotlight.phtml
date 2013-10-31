@@ -1,5 +1,7 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
-<div class="news">
+<div class="shop">
+	<?php $navSpotlight = 1; ?>
+	<?php include $this->template('admin/product_nav'); ?>
 	<p>
 	   <a class="btn" title="<?php _e('Add Spotlight'); ?>" href="<?php echo $this->url('', array('action' => 'spotlightUpdate')); ?>"><i class="icon-user"></i> <?php _e('Add Spotlight'); ?></a>
 	</p>
