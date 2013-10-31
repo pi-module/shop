@@ -1,4 +1,11 @@
-<?php $this->css($this->assetModule('css/admin.css')); ?>
+<?php
+    $this->css(array(
+        $this->assetModule('css/admin.css'),
+        $this->assetModule('script/system-ui.css', 'system'),
+    ));
+    $this->jQuery();
+    $this->js($this->assetModule('script/system-msg.js', 'system'));
+?>
 <div class="shop">
 	<?php $navList = 1; ?>
 	<?php include $this->template('admin/product_nav'); ?>
@@ -6,7 +13,7 @@
 	   <a class="btn" title="<?php _e('Add product'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'update')); ?>"><i class="icon-folder-open"></i> <?php _e('Add product'); ?></a>
 	</p>
 	<h3><?php _e('List of product'); ?></h3>
-	<table class="table table-striped table-bordered table-condensed">
+	<table id="product-list" class="table table-striped table-bordered table-condensed">
 		<tr>
 			<th><?php _e('ID'); ?></th>
 			<th><?php _e('Title'); ?></th>
@@ -22,7 +29,14 @@
 		?>
 		<tr>
 			<td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($product['id']); ?></span></td>
-			<td><?php echo $this->escape($product['title']); ?></td>
+			<td>
+				<?php if($product['recommended'] == 1) { ?>
+				<button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '0')); ?>" ><i class="icon-heart"></i></button>
+				<?php } else { ?>
+				<button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '1')); ?>" ><i class="icon-heart-empty"></i></button>	
+				<?php } ?>
+				<?php echo $this->escape($product['title']); ?>
+			</td>
 			<td>
 				<a class="btn" title="<?php _e('Attach'); ?>" href="<?php echo $this->url('', array('action' => 'attach', 'id' => $product['id'])); ?>"><i class="icon-edit"></i> <?php _e('Attach'); ?></a>
 				<a class="btn" title="<?php _e('Related'); ?>" href="<?php echo $this->url('', array('action' => 'related', 'id' => $product['id'])); ?>"><i class="icon-edit"></i> <?php _e('Related'); ?></a>
@@ -31,5 +45,31 @@
 		</tr>
 		<?php } ?>
 	</table>
-	<?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?>
+	<div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
+	<p>
+		<span class="label label-success"><?php _e('Published'); ?></span>
+		<span class="label label-warning"><?php _e('Pending review'); ?></span>
+		<span class="label label-important"><?php _e('Trash'); ?></span>
+	</p>
 </div>
+<script type="text/javascript" >
+(function($){
+    $("#product-list").on("click","button",function(){
+       systemMessage.wait("<?php _e('Recommended in process'); ?>");
+       $.getJSON($(this).attr("data-link")).done(function(result){
+          if(result.ajaxstatus==1){
+          	 if(result.recommended==1){
+	          	 var buttonClass = 'icon-heart';
+          	 }
+          	 if(result.recommended==0){
+	          	 var buttonClass = 'icon-heart-empty';
+          	 }
+          	 $('#button-' + result.id + ' i').attr('class', buttonClass);
+             systemMessage.succ(result.message);
+          }else{
+             systemMessage.fail(result.message);
+          }
+       });
+    });
+})(jQuery)
+</script>

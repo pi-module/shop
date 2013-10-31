@@ -99,7 +99,7 @@ class ProductController extends ActionController
             $productId[] = $id['product'];
         }
         // Set info
-        $columnProduct = array('id', 'title', 'slug', 'status', 'time_create');
+        $columnProduct = array('id', 'title', 'slug', 'status', 'time_create', 'recommended');
         $whereProduct = array('id' => $productId);
         // Get list of product
         $select = $this->getModel('product')->select()->columns($columnProduct)->where($whereProduct)->order($order);
@@ -151,20 +151,13 @@ class ProductController extends ActionController
             $product = $this->getModel('product')->find($id)->toArray();
             $product['category'] = Json::decode($product['category']);
             if ($product['image']) {
-                $product['thumbUrl'] = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $product['path'], $product['image']);
-                $option['thumbUrl'] = Pi::url($product['thumbUrl']);
+                $thumbUrl = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $product['path'], $product['image']);
+                $option['thumbUrl'] = Pi::url($thumbUrl);
                 $option['removeUrl'] = $this->url('', array('action' => 'remove', 'id' => $product['id']));
             }
         }
-        // Set property
-        $where = array('module' => $module, 'category' => 'property');
-        $order = array('order ASC');
-        $select = Pi::model('config')->select()->where($where)->order($order);
-        $rowset = Pi::model('config')->selectWith($select);
-        $configs = array();
-        foreach ($rowset as $row) {
-            $option['property'][$row->name] = $row->toArray();
-        }
+        // Get property
+        $option['property'] = Pi::api('shop', 'property')->Get();
         // Get extra field
         $fields = Pi::api('shop', 'extra')->Get();
         $option['field'] = $fields['extra'];
@@ -302,6 +295,39 @@ class ProductController extends ActionController
         $this->view()->assign('title', __('Add product'));
         $this->view()->assign('message', $message);
     }	
+
+    public function recommendAction()
+    {
+        // Get id and recommended
+        $id = $this->params('id');
+        $recommended = $this->params('recommended');
+        $return = array();
+        // set product
+        $product = $this->getModel('product')->find($id);
+        // Check
+        if ($product && in_array($recommended, array(0, 1))) {
+            // Accept
+            $product->recommended = $recommended;
+            // Save
+            if ($product->save()) {
+                $return['message'] = sprintf(__('%s set recommended successfully'), $product->title);
+                $return['ajaxstatus'] = 1;
+                $return['id'] = $product->id;
+                $return['recommended'] = $product->recommended;
+            } else {
+                $return['message'] = sprintf(__('Error in set recommended for %s product'), $product->title);
+                $return['ajaxstatus'] = 0;
+                $return['id'] = 0;
+                $return['recommended'] = $product->recommended;
+            }
+        } else {
+            $return['message'] = __('Please select product');
+            $return['ajaxstatus'] = 0;
+            $return['id'] = 0;
+            $return['recommended'] = 0;
+        }
+        return $return;
+    }
 
     /**
      * related Action

@@ -24,8 +24,8 @@ class ProductForm  extends BaseForm
     {
         $this->property = $option['property'];
         $this->field = $option['field'];
-        $this->thumbUrl = $option['thumbUrl'];
-        $this->removeUrl = empty($option['removeUrl']) ? '' : $option['removeUrl'];
+        $this->thumbUrl = (isset($option['thumbUrl'])) ? $option['thumbUrl'] : '';
+        $this->removeUrl = (isset($option['removeUrl'])) ? $option['removeUrl'] : '';
         parent::__construct($name);
     }
 
@@ -283,13 +283,13 @@ class ProductForm  extends BaseForm
             ),
         ));
         // property_1
-        if (!empty($this->property['hidden_property_1_option']['value'])) {
+        if (!empty($this->property['property_1_option']['value'])) {
             $this->add(array(
                 'name' => 'property_1',
                 'type' => 'select',
                 'options' => array(
-                    'label' => $this->property['hidden_property_1_title']['value'],
-                    'value_options' => $this->makeArray($this->property['hidden_property_1_option']['value']),
+                    'label' => $this->property['property_1_title']['value'],
+                    'value_options' => $this->makeArray($this->property['property_1_option']['value']),
                 ),
             ));
         } else {
@@ -301,13 +301,13 @@ class ProductForm  extends BaseForm
             ));
         }
         // property_2
-        if (!empty($this->property['hidden_property_2_option']['value'])) {
+        if (!empty($this->property['property_2_option']['value'])) {
             $this->add(array(
                 'name' => 'property_2',
                 'type' => 'select',
                 'options' => array(
-                    'label' => $this->property['hidden_property_2_title']['value'],
-                    'value_options' => $this->makeArray($this->property['hidden_property_2_option']['value']),
+                    'label' => $this->property['property_2_title']['value'],
+                    'value_options' => $this->makeArray($this->property['property_2_option']['value']),
                 ),
             ));
         } else {
@@ -319,13 +319,13 @@ class ProductForm  extends BaseForm
             ));
         }
         // property_3
-        if (!empty($this->property['hidden_property_3_option']['value'])) {
+        if (!empty($this->property['property_3_option']['value'])) {
             $this->add(array(
                 'name' => 'property_3',
                 'type' => 'select',
                 'options' => array(
-                    'label' => $this->property['hidden_property_3_title']['value'],
-                    'value_options' => $this->makeArray($this->property['hidden_property_3_option']['value']),
+                    'label' => $this->property['property_3_title']['value'],
+                    'value_options' => $this->makeArray($this->property['property_3_option']['value']),
                 ),
             ));
         } else {
@@ -337,13 +337,13 @@ class ProductForm  extends BaseForm
             ));
         }
         // property_4
-        if (!empty($this->property['hidden_property_4_option']['value'])) {
+        if (!empty($this->property['property_4_option']['value'])) {
             $this->add(array(
                 'name' => 'property_4',
                 'type' => 'select',
                 'options' => array(
-                    'label' => $this->property['hidden_property_4_title']['value'],
-                    'value_options' => $this->makeArray($this->property['hidden_property_4_option']['value']),
+                    'label' => $this->property['property_4_title']['value'],
+                    'value_options' => $this->makeArray($this->property['property_4_option']['value']),
                 ),
             ));
         } else {
@@ -355,13 +355,13 @@ class ProductForm  extends BaseForm
             ));
         }
         // property_5
-        if (!empty($this->property['hidden_property_5_option']['value'])) {
+        if (!empty($this->property['property_5_option']['value'])) {
             $this->add(array(
                 'name' => 'property_5',
                 'type' => 'select',
                 'options' => array(
-                    'label' => $this->property['hidden_property_5_title']['value'],
-                    'value_options' => $this->makeArray($this->property['hidden_property_5_option']['value']),
+                    'label' => $this->property['property_5_title']['value'],
+                    'value_options' => $this->makeArray($this->property['property_5_option']['value']),
                 ),
             ));
         } else {
@@ -373,13 +373,13 @@ class ProductForm  extends BaseForm
             ));
         }
         // property_6
-        if (!empty($this->property['hidden_property_6_option']['value'])) {
+        if (!empty($this->property['property_6_option']['value'])) {
             $this->add(array(
                 'name' => 'property_6',
                 'type' => 'select',
                 'options' => array(
-                    'label' => $this->property['hidden_property_6_title']['value'],
-                    'value_options' => $this->makeArray($this->property['hidden_property_6_option']['value']),
+                    'label' => $this->property['property_6_title']['value'],
+                    'value_options' => $this->makeArray($this->property['property_6_option']['value']),
                 ),
             ));
         } else {
@@ -391,13 +391,13 @@ class ProductForm  extends BaseForm
             ));
         }
         // property_7
-        if (!empty($this->property['hidden_property_7_option']['value'])) {
+        if (!empty($this->property['property_7_option']['value'])) {
             $this->add(array(
                 'name' => 'property_7',
                 'type' => 'select',
                 'options' => array(
-                    'label' => $this->property['hidden_property_7_title']['value'],
-                    'value_options' => $this->makeArray($this->property['hidden_property_7_option']['value']),
+                    'label' => $this->property['property_7_title']['value'],
+                    'value_options' => $this->makeArray($this->property['property_7_option']['value']),
                 ),
             ));
         } else {
@@ -409,13 +409,13 @@ class ProductForm  extends BaseForm
             ));
         }
         // property_8
-        if (!empty($this->property['hidden_property_8_option']['value'])) {
+        if (!empty($this->property['property_8_option']['value'])) {
             $this->add(array(
                 'name' => 'property_8',
                 'type' => 'select',
                 'options' => array(
-                    'label' => $this->property['hidden_property_8_title']['value'],
-                    'value_options' => $this->makeArray($this->property['hidden_property_8_option']['value']),
+                    'label' => $this->property['property_8_title']['value'],
+                    'value_options' => $this->makeArray($this->property['property_8_option']['value']),
                 ),
             ));
         } else {
@@ -427,13 +427,13 @@ class ProductForm  extends BaseForm
             ));
         }
         // property_9
-        if (!empty($this->property['hidden_property_9_option']['value'])) {
+        if (!empty($this->property['property_9_option']['value'])) {
             $this->add(array(
                 'name' => 'property_9',
                 'type' => 'select',
                 'options' => array(
-                    'label' => $this->property['hidden_property_9_title']['value'],
-                    'value_options' => $this->makeArray($this->property['hidden_property_9_option']['value']),
+                    'label' => $this->property['property_9_title']['value'],
+                    'value_options' => $this->makeArray($this->property['property_9_option']['value']),
                 ),
             ));
         } else {
@@ -445,13 +445,13 @@ class ProductForm  extends BaseForm
             ));
         }
         // property_10
-        if (!empty($this->property['hidden_property_10_option']['value'])) {
+        if (!empty($this->property['property_10_option']['value'])) {
             $this->add(array(
                 'name' => 'property_10',
                 'type' => 'select',
                 'options' => array(
-                    'label' => $this->property['hidden_property_10_title']['value'],
-                    'value_options' => $this->makeArray($this->property['hidden_property_10_option']['value']),
+                    'label' => $this->property['property_10_title']['value'],
+                    'value_options' => $this->makeArray($this->property['property_10_option']['value']),
                 ),
             ));
         } else {

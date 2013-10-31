@@ -201,7 +201,7 @@ return array(
             'value' => 1
         ),
         // Hidden property
-        'hidden_property_1_title' => array(
+        'property_1_title' => array(
             'category' => 'property',
             'title' => __('Property 1 title'),
             'description' => '',
@@ -210,7 +210,7 @@ return array(
             'value' => __('Property 1'),
             'visible' => 0,
         ),
-        'hidden_property_1_option' => array(
+        'property_1_option' => array(
             'category' => 'property',
             'title' => __('Property 1 options'),
             'description' => '',
@@ -219,7 +219,7 @@ return array(
             'value' => '',
             'visible' => 0,
         ),
-        'hidden_property_2_title' => array(
+        'property_2_title' => array(
             'category' => 'property',
             'title' => __('Property 2 title'),
             'description' => '',
@@ -228,7 +228,7 @@ return array(
             'value' => __('Property 2'),
             'visible' => 0,
         ),
-        'hidden_property_2_option' => array(
+        'property_2_option' => array(
             'category' => 'property',
             'title' => __('Property 2 options'),
             'description' => '',
@@ -237,7 +237,7 @@ return array(
             'value' => '',
             'visible' => 0,
         ),
-        'hidden_property_3_title' => array(
+        'property_3_title' => array(
             'category' => 'property',
             'title' => __('Property 3 title'),
             'description' => '',
@@ -246,7 +246,7 @@ return array(
             'value' => __('Property 3'),
             'visible' => 0,
         ),
-        'hidden_property_3_option' => array(
+        'property_3_option' => array(
             'category' => 'property',
             'title' => __('Property 3 options'),
             'description' => '',
@@ -255,7 +255,7 @@ return array(
             'value' => '',
             'visible' => 0,
         ),
-        'hidden_property_4_title' => array(
+        'property_4_title' => array(
             'category' => 'property',
             'title' => __('Property 4 title'),
             'description' => '',
@@ -264,7 +264,7 @@ return array(
             'value' => __('Property 4'),
             'visible' => 0,
         ),
-        'hidden_property_4_option' => array(
+        'property_4_option' => array(
             'category' => 'property',
             'title' => __('Property 4 options'),
             'description' => '',
@@ -273,7 +273,7 @@ return array(
             'value' => '',
             'visible' => 0,
         ),
-        'hidden_property_5_title' => array(
+        'property_5_title' => array(
             'category' => 'property',
             'title' => __('Property 5 title'),
             'description' => '',
@@ -282,7 +282,7 @@ return array(
             'value' => __('Property 5'),
             'visible' => 0,
         ),
-        'hidden_property_5_option' => array(
+        'property_5_option' => array(
             'category' => 'property',
             'title' => __('Property 5 options'),
             'description' => '',
@@ -291,7 +291,7 @@ return array(
             'value' => '',
             'visible' => 0,
         ),
-        'hidden_property_6_title' => array(
+        'property_6_title' => array(
             'category' => 'property',
             'title' => __('Property 6 title'),
             'description' => '',
@@ -300,7 +300,7 @@ return array(
             'value' => __('Property 6'),
             'visible' => 0,
         ),
-        'hidden_property_6_option' => array(
+        'property_6_option' => array(
             'category' => 'property',
             'title' => __('Property 6 options'),
             'description' => '',
@@ -309,7 +309,7 @@ return array(
             'value' => '',
             'visible' => 0,
         ),
-        'hidden_property_7_title' => array(
+        'property_7_title' => array(
             'category' => 'property',
             'title' => __('Property 7 title'),
             'description' => '',
@@ -318,7 +318,7 @@ return array(
             'value' => __('Property 7'),
             'visible' => 0,
         ),
-        'hidden_property_7_option' => array(
+        'property_7_option' => array(
             'category' => 'property',
             'title' => __('Property 7 options'),
             'description' => '',
@@ -327,7 +327,7 @@ return array(
             'value' => '',
             'visible' => 0,
         ),
-        'hidden_property_8_title' => array(
+        'property_8_title' => array(
             'category' => 'property',
             'title' => __('Property 8 title'),
             'description' => '',
@@ -336,7 +336,7 @@ return array(
             'value' => __('Property 8'),
             'visible' => 0,
         ),
-        'hidden_property_8_option' => array(
+        'property_8_option' => array(
             'category' => 'property',
             'title' => __('Property 8 options'),
             'description' => '',
@@ -345,7 +345,7 @@ return array(
             'value' => '',
             'visible' => 0,
         ),
-        'hidden_property_9_title' => array(
+        'property_9_title' => array(
             'category' => 'property',
             'title' => __('Property 9 title'),
             'description' => '',
@@ -354,7 +354,7 @@ return array(
             'value' => __('Property 9'),
             'visible' => 0,
         ),
-        'hidden_property_9_option' => array(
+        'property_9_option' => array(
             'category' => 'property',
             'title' => __('Property 9 options'),
             'description' => '',
@@ -363,7 +363,7 @@ return array(
             'value' => '',
             'visible' => 0,
         ),
-        'hidden_property_10_title' => array(
+        'property_10_title' => array(
             'category' => 'property',
             'title' => __('Property 10 title'),
             'description' => '',
@@ -372,7 +372,7 @@ return array(
             'value' => __('Property 10'),
             'visible' => 0,
         ),
-        'hidden_property_10_option' => array(
+        'property_10_option' => array(
             'category' => 'property',
             'title' => __('Property 10 options'),
             'description' => '',
