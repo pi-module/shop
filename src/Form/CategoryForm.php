@@ -18,10 +18,13 @@ use Pi\Form\Form as BaseForm;
 
 class CategoryForm  extends BaseForm
 {
-
-    public function __construct($name = null)
+    protected $thumbUrl = '';
+    
+    public function __construct($name = null, $option = array())
     {
-        $this->category = array(0 => ' ');
+        $this->category = array(0 => 'Root');
+        $this->thumbUrl = $option['thumbUrl'];
+        $this->removeUrl = empty($option['removeUrl']) ? '' : $option['removeUrl'];
         parent::__construct($name);
     }
 
@@ -48,11 +51,11 @@ class CategoryForm  extends BaseForm
             'type' => 'Module\Shop\Form\Element\Category',
             'options' => array(
                 'label' => __('Parent Category'),
+                'category' => $this->category,
             ),
             'attributes' => array(
                 'size' => 1,
                 'multiple' => 0,
-                'category' => $this->category,
             ),
         ));
         // title
@@ -121,6 +124,51 @@ class CategoryForm  extends BaseForm
                 ),
             ),
         ));
+        // Image
+        if ($this->thumbUrl) {
+            $this->add(array(
+                'name' => 'imageview',
+                'options' => array(
+                    'label' => __('Image'),
+                ),
+                'attributes' => array(
+                    'type' => 'image',
+                    'src' => $this->thumbUrl,
+                    'height' => '200',
+                    'disabled' => true,
+                    'description' => '',
+                )
+            ));
+            $this->add(array(
+                'name' => 'remove',
+                'options' => array(
+                    'label' => __('Remove image'),
+                ),
+                'attributes' => array(
+                    'type' => 'button',
+                    'class' => 'btn btn-danger btn-small',
+                    'data-toggle' => 'button',
+                    'data-link' => $this->removeUrl,
+                )
+            ));
+            $this->add(array(
+                'name' => 'image',
+                'attributes' => array(
+                    'type' => 'hidden',
+                ),
+             ));
+        } else {
+            $this->add(array(
+                'name' => 'image',
+                'options' => array(
+                    'label' => __('Image'),
+                ),
+                'attributes' => array(
+                    'type' => 'file',
+                    'description' => '',
+                )
+            ));
+        }
         // extra
         $this->add(array(
             'name' => 'extra_seo',

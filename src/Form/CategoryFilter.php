@@ -81,6 +81,11 @@ class CategoryFilter extends InputFilter
             'name' => 'status',
             'required' => true,
         ));
+        // image
+        $this->add(array(
+            'name' => 'image',
+            'required' => false,
+        ));
         // seo_title
         $this->add(array(
             'name' => 'seo_title',

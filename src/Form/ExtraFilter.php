@@ -50,5 +50,10 @@ class ExtraFilter extends InputFilter
             'name' => 'search',
             'required' => false,
         ));
+        // image
+        $this->add(array(
+            'name' => 'image',
+            'required' => false,
+        ));
     }
 }

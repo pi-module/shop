@@ -18,6 +18,18 @@ return array(
             'name' => 'admin'
         ),
         array(
+            'title' => __('Image'),
+            'name' => 'image'
+        ),
+        array(
+            'title' => __('Social'),
+            'name' => 'social'
+        ),
+        array(
+            'title' => __('File'),
+            'name' => 'file'
+        ),
+        array(
             'title' => __('Property'),
             'name' => 'property'
         ),
@@ -31,6 +43,162 @@ return array(
             'edit' => 'text',
             'filter' => 'number_int',
             'value' => 10
+        ),
+        // Image
+        'image_size' => array(
+            'category' => 'image',
+            'title' => __('Image Size'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 1000000
+        ),
+        'image_path' => array(
+            'category' => 'image',
+            'title' => __('Image path'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'shop/image'
+        ),
+        'image_extension' => array(
+            'category' => 'image',
+            'title' => __('Image Extension'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'jpg,jpeg,png,gif'
+        ),
+        'image_largeh' => array(
+            'category' => 'image',
+            'title' => __('Large Image height'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 800
+        ),
+        'image_largew' => array(
+            'category' => 'image',
+            'title' => __('Large Image width'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 800
+        ),
+        'image_mediumh' => array(
+            'category' => 'image',
+            'title' => __('Medium Image height'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 500
+        ),
+        'image_mediumw' => array(
+            'category' => 'image',
+            'title' => __('Medium Image width'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 500
+        ),
+        'image_thumbh' => array(
+            'category' => 'image',
+            'title' => __('Thumb Image height'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 250
+        ),
+        'image_thumbw' => array(
+            'category' => 'image',
+            'title' => __('Thumb Image width'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 250
+        ),
+        'image_lightbox' => array(
+            'category' => 'image',
+            'title' => __('Use lightbox'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'image_float' => array(
+            'title' => __('Image float'),
+            'description' => ' ',
+            'edit' => array(
+                'type' => 'select',
+                'options' => array(
+                    'options' => array(
+                        'left' => __('Left'),
+                        'right' => __('Right'),
+                    ),
+                ),
+            ),
+            'filter' => 'string',
+            'value' => 'left',
+            'category' => 'image',
+        ),
+        // Social
+        'social_gplus' => array(
+            'category' => 'social',
+            'title' => __('Show Google Plus'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'social_facebook' => array(
+            'category' => 'social',
+            'title' => __('Show facebook'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'social_twitter' => array(
+            'category' => 'social',
+            'title' => __('Show Twitter'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        // File
+        'file_size' => array(
+            'category' => 'file',
+            'title' => __('File Size'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 1000000
+        ),
+        'file_path' => array(
+            'category' => 'file',
+            'title' => __('File path'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'shop'
+        ),
+        'file_extension' => array(
+            'category' => 'file',
+            'title' => __('File Extension'),
+            'description' => '',
+            'edit' => 'textarea',
+            'filter' => 'string',
+            'value' => 'jpg,jpeg,png,gif,avi,flv,mp3,mp4,pdf,docs,xdocs,zip,rar'
+        ),
+        // favorite
+        'favorite_bar' => array(
+            'category' => 'favorite',
+            'title' => __('Use favorite system'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
         ),
         // Hidden property
         'hidden_property_1_title' => array(

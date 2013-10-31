@@ -89,6 +89,16 @@ class ExtraForm extends BaseForm
                 'description' => '',
             )
         ));
+            $this->add(array(
+                'name' => 'image',
+                'options' => array(
+                    'label' => __('Image'),
+                ),
+                'attributes' => array(
+                    'type' => 'file',
+                    'description' => '',
+                )
+            ));
         // Save
         $this->add(array(
             'name' => 'submit',

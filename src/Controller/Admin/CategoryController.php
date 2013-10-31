@@ -15,6 +15,8 @@ namespace Module\Shop\Controller\Admin;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+use Pi\Paginator\Paginator;
+use Pi\File\Transfer\Upload;
 use Module\Shop\Form\CategoryForm;
 use Module\Shop\Form\CategoryFilter;
 
@@ -23,7 +25,7 @@ class CategoryController extends ActionController
     /**
      * Image Prefix
      */
-    protected $ImagePrefix = 'category_';
+    protected $ImageCategoryPrefix = 'category_';
 
     /**
      * Category Columns
@@ -39,13 +41,15 @@ class CategoryController extends ActionController
 	public function indexAction()
     {
         // Get page
-        $page = $this->params('p', 1);
+        $page = $this->params('page', 1);
         $module = $this->params('module');
-        $list = array();
         // Get info
+        $list = array();
         $columns = array('id', 'title', 'slug', 'status');
         $order = array('id DESC', 'time_create DESC');
-        $select = $this->getModel('category')->select()->columns($columns)->order($order);
+        $offset = (int)($page - 1) * $this->config('admin_perpage');
+        $limit = intval($this->config('admin_perpage'));
+        $select = $this->getModel('category')->select()->columns($columns)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('category')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
@@ -55,9 +59,26 @@ class CategoryController extends ActionController
         if (empty($list)) {
             return $this->redirect()->toRoute('', array('action' => 'update'));
         }
+        // Set paginator
+        $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $select = $this->getModel('category')->select()->columns($count);
+        $count = $this->getModel('category')->selectWith($select)->current()->count;
+        $paginator = Paginator::factory(intval($count));
+        $paginator->setItemCountPerPage($this->config('admin_perpage'));
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setUrlOptions(array(
+            'router'    => $this->getEvent()->getRouter(),
+            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params'    => array_filter(array(
+                'module'        => $this->getModule(),
+                'controller'    => 'category',
+                'action'        => 'index',
+            )),
+        ));
         // Set view
         $this->view()->setTemplate('category_index');
         $this->view()->assign('list', $list);
+        $this->view()->assign('paginator', $paginator);
     }
 
     /**
@@ -68,12 +89,18 @@ class CategoryController extends ActionController
         // Get id
         $id = $this->params('id');
         $module = $this->params('module');
+        $option = array();
         // Find category
         if ($id) {
             $category = $this->getModel('category')->find($id)->toArray();
+            if ($category['image']) {
+                $category['thumbUrl'] = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $category['path'], $category['image']);
+                $option['thumbUrl'] = Pi::url($category['thumbUrl']);
+                $option['removeUrl'] = $this->url('', array('action' => 'remove', 'id' => $category['id']));
+            }
         }
         // Set form
-        $form = new CategoryForm('category');
+        $form = new CategoryForm('category', $option);
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
         	$data = $this->request->getPost();
@@ -86,7 +113,38 @@ class CategoryController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
             	$values = $form->getData();
-            	//
+                // upload image
+                if (!empty($file['image']['name'])) {
+                    // Set upload path
+                    $values['path'] = sprintf('%s/%s', date('Y'), date('m'));
+                    $originalPath = Pi::path(sprintf('upload/%s/original/%s', $this->config('image_path'), $values['path']));
+                    $largePath = Pi::path(sprintf('upload/%s/large/%s', $this->config('image_path'), $values['path']));
+                    $mediumPath = Pi::path(sprintf('upload/%s/medium/%s', $this->config('image_path'), $values['path']));
+                    $thumbPath = Pi::path(sprintf('upload/%s/thumb/%s', $this->config('image_path'), $values['path']));
+                    // Upload
+                    $uploader = new Upload;
+                    $uploader->setDestination($originalPath);
+                    $uploader->setRename($this->ImageCategoryPrefix . '%random%');
+                    $uploader->setExtension($this->config('image_extension'));
+                    $uploader->setSize($this->config('image_size'));
+                    if ($uploader->isValid()) {
+                        $uploader->receive();
+                        // Get image name
+                        $values['image'] = $uploader->getUploaded('image');
+                        // Set image path
+                        $originalImage = sprintf('%s/%s', $originalPath, $values['image']);
+                        $largeImage = sprintf('%s/%s', $largePath, $values['image']);
+                        $mediumImage = sprintf('%s/%s', $mediumPath, $values['image']);
+                        $thumbImage = sprintf('%s/%s', $thumbPath, $values['image']);
+                        // Resize
+                        Pi::service('image')->resize($originalImage, array($this->config('image_largew'), $this->config('image_largeh')), $largeImage);
+                        Pi::service('image')->resize($originalImage, array($this->config('image_mediumw'), $this->config('image_mediumh')), $mediumImage);
+                        Pi::service('image')->resize($originalImage, array($this->config('image_thumbw'), $this->config('image_thumbh')), $thumbImage);
+                    } else {
+                        $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
+                    }
+                }
+            	// Set just category fields
             	foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->categoryColumns)) {
                         unset($values[$key]);
@@ -144,6 +202,43 @@ class CategoryController extends ActionController
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Add a category'));
         $this->view()->assign('message', $message);
+    }
+
+    public function removeAction()
+    {
+        // Get id and status
+        $id = $this->params('id');
+        // set category
+        $category = $this->getModel('category')->find($id);
+        // Check
+        if ($category && !empty($id)) {
+            // remove file
+            $files = array(
+                Pi::path(sprintf('upload/%s/original/%s/%s', $this->config('image_path'), $category->path, $category->image)),
+                Pi::path(sprintf('upload/%s/large/%s/%s', $this->config('image_path'), $category->path, $category->image)),
+                Pi::path(sprintf('upload/%s/medium/%s/%s', $this->config('image_path'), $category->path, $category->image)),
+                Pi::path(sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $category->path, $category->image)),
+            );
+            Pi::service('file')->remove($files);
+            // clear DB
+            $category->image = '';
+            $category->path = '';
+            // Save
+            if ($category->save()) {
+                $message = sprintf(__('Image of %s removed'), $category->title);
+                $status = 1;
+            } else {
+                $message = __('Image not remove');
+                $status = 0;
+            }
+        } else {
+            $message = __('Please select category');
+            $status = 0;
+        }
+        return array(
+            'status' => $status,
+            'message' => $message,
+        );
     }
 
     /**

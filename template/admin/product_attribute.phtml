@@ -2,4 +2,10 @@
 <div class="shop">
 	<?php $navAttribute = 1; ?>
 	<?php include $this->template('admin/product_nav'); ?>
+	<h2><?php echo $this->escape($title); ?></h2>
+	<div class="alert alert-error">
+		<button data-dismiss="alert" class="close" type="button">×</button>
+		<?php echo $this->escape($message); ?>
+	</div>
+	<script>$(".alert").alert();</script>
 </div>

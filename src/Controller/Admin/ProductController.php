@@ -15,6 +15,8 @@ namespace Module\Shop\Controller\Admin;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+use Pi\Paginator\Paginator;
+use Pi\File\Transfer\Upload;
 use Module\Shop\Form\ProductForm;
 use Module\Shop\Form\ProductFilter;
 use Module\Shop\Form\RelatedForm;
@@ -22,7 +24,7 @@ use Module\Shop\Form\RelatedFilter;
 use Module\Shop\Form\PropertyForm;
 use Module\Shop\Form\PropertyFilter;
 use Module\Shop\Form\ExtraForm;
-//use Module\Shop\Form\ExtraFilter;
+use Module\Shop\Form\ExtraFilter;
 use Module\Shop\Form\SpotlightForm;
 use Module\Shop\Form\SpotlightFilter;
 
@@ -36,6 +38,11 @@ class ProductController extends ActionController
     protected $ImageProductPrefix = 'product_';
 
     /**
+     * Extra Image Prefix
+     */
+    protected $ImageExtraPrefix = 'extra_';
+
+    /**
      * Product Columns
      */
     protected $productColumns = array(
@@ -45,11 +52,6 @@ class ProductController extends ActionController
     	'price_discount', 'property_1', 'property_2', 'property_3', 'property_4', 'property_5', 'property_6',
     	'property_7', 'property_8', 'property_9', 'property_10', 
     );
-
-    /**
-     * Extra Image Prefix
-     */
-    protected $ImageExtraPrefix = 'extra_';
 
     /**
      * Extra Columns
@@ -71,25 +73,68 @@ class ProductController extends ActionController
 	public function indexAction()
     {
         // Get page
-        $page = $this->params('p', 1);
+        $page = $this->params('page', 1);
         $module = $this->params('module');
+        $status = $this->params('status');
+        $category = $this->params('category');
+        // Set info
+        $offset = (int)($page - 1) * $this->config('admin_perpage');
+        $order = array('time_create DESC', 'id DESC');
+        $limit = intval($this->config('admin_perpage'));
         $list = array();
-        // Get info
-        $columns = array('id', 'title', 'slug', 'status');
-        $order = array('id DESC', 'time_create DESC');
-        $select = $this->getModel('product')->select()->columns($columns)->order($order);
+        // Set where
+        $whereLink = array();
+        if (!empty($status)) {
+            $whereLink['status'] = $status;
+        }
+        if (!empty($category)) {
+            $whereLink['category'] = $category;
+        }
+        $columnsLink = array('product' => new \Zend\Db\Sql\Predicate\Expression('DISTINCT product'));
+        // Get info from link table
+        $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order)->offset($offset)->limit($limit);
+        $rowset = $this->getModel('link')->selectWith($select)->toArray();
+        // Make list
+        foreach ($rowset as $id) {
+            $productId[] = $id['product'];
+        }
+        // Set info
+        $columnProduct = array('id', 'title', 'slug', 'status', 'time_create');
+        $whereProduct = array('id' => $productId);
+        // Get list of product
+        $select = $this->getModel('product')->select()->columns($columnProduct)->where($whereProduct)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $list[$row->id] = $row->toArray();
+            $product[$row->id] = $row->toArray();
+            $product[$row->id]['time_create'] = _date($product[$row->id]['time_create']);
         }
         // Go to update page if empty
-        if (empty($list)) {
+        if (empty($product) && empty($status)) {
             return $this->redirect()->toRoute('', array('action' => 'update'));
         }
+        // Set paginator
+        $countLink = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
+        $select = $this->getModel('link')->select()->where($whereLink)->columns($countLink);
+        $count = $this->getModel('link')->selectWith($select)->current()->count;
+        $paginator = Paginator::factory(intval($count));
+        $paginator->setItemCountPerPage($this->config('admin_perpage'));
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setUrlOptions(array(
+            'router'    => $this->getEvent()->getRouter(),
+            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params'    => array_filter(array(
+                'module'        => $this->getModule(),
+                'controller'    => 'product',
+                'action'        => 'index',
+                'category'      => $category,
+                'status'        => $status,
+            )),
+        ));
         // Set view
         $this->view()->setTemplate('product_index');
-        $this->view()->assign('list', $list);
+        $this->view()->assign('list', $product);
+        $this->view()->assign('paginator', $paginator);
     }
 
     /**
@@ -100,10 +145,16 @@ class ProductController extends ActionController
         // Get id
         $id = $this->params('id');
         $module = $this->params('module');
+        $option = array();
         // Find Product
         if ($id) {
             $product = $this->getModel('product')->find($id)->toArray();
             $product['category'] = Json::decode($product['category']);
+            if ($product['image']) {
+                $product['thumbUrl'] = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $product['path'], $product['image']);
+                $option['thumbUrl'] = Pi::url($product['thumbUrl']);
+                $option['removeUrl'] = $this->url('', array('action' => 'remove', 'id' => $product['id']));
+            }
         }
         // Set property
         $where = array('module' => $module, 'category' => 'property');
@@ -112,12 +163,13 @@ class ProductController extends ActionController
         $rowset = Pi::model('config')->selectWith($select);
         $configs = array();
         foreach ($rowset as $row) {
-            $property[$row->name] = $row->toArray();
+            $option['property'][$row->name] = $row->toArray();
         }
         // Get extra field
         $fields = Pi::api('shop', 'extra')->Get();
+        $option['field'] = $fields['extra'];
         // Set form
-        $form = new ProductForm('product', $property, $fields['extra']);
+        $form = new ProductForm('product', $option);
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
         	$data = $this->request->getPost();
@@ -141,6 +193,37 @@ class ProductController extends ActionController
                 if (!empty($values['tag'])) {
                     $tag = explode(' ', $values['tag']);
                 }
+                // upload image
+                if (!empty($file['image']['name'])) {
+                    // Set upload path
+                    $values['path'] = sprintf('%s/%s', date('Y'), date('m'));
+                    $originalPath = Pi::path(sprintf('upload/%s/original/%s', $this->config('image_path'), $values['path']));
+                    $largePath = Pi::path(sprintf('upload/%s/large/%s', $this->config('image_path'), $values['path']));
+                    $mediumPath = Pi::path(sprintf('upload/%s/medium/%s', $this->config('image_path'), $values['path']));
+                    $thumbPath = Pi::path(sprintf('upload/%s/thumb/%s', $this->config('image_path'), $values['path']));
+                    // Upload
+                    $uploader = new Upload;
+                    $uploader->setDestination($originalPath);
+                    $uploader->setRename($this->ImageProductPrefix . '%random%');
+                    $uploader->setExtension($this->config('image_extension'));
+                    $uploader->setSize($this->config('image_size'));
+                    if ($uploader->isValid()) {
+                        $uploader->receive();
+                        // Get image name
+                        $values['image'] = $uploader->getUploaded('image');
+                        // Set image path
+                        $originalImage = sprintf('%s/%s', $originalPath, $values['image']);
+                        $largeImage = sprintf('%s/%s', $largePath, $values['image']);
+                        $mediumImage = sprintf('%s/%s', $mediumPath, $values['image']);
+                        $thumbImage = sprintf('%s/%s', $thumbPath, $values['image']);
+                        // Resize
+                        Pi::service('image')->resize($originalImage, array($this->config('image_largew'), $this->config('image_largeh')), $largeImage);
+                        Pi::service('image')->resize($originalImage, array($this->config('image_mediumw'), $this->config('image_mediumh')), $mediumImage);
+                        Pi::service('image')->resize($originalImage, array($this->config('image_thumbw'), $this->config('image_thumbh')), $thumbImage);
+                    } else {
+                        $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
+                    }
+                }    
             	// Set just product fields
             	foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->productColumns)) {
@@ -216,7 +299,7 @@ class ProductController extends ActionController
         // Set view
         $this->view()->setTemplate('product_update');
         $this->view()->assign('form', $form);
-        $this->view()->assign('title', __('Add a product'));
+        $this->view()->assign('title', __('Add product'));
         $this->view()->assign('message', $message);
     }	
 
@@ -338,7 +421,10 @@ class ProductController extends ActionController
      */
     public function attributeAction()
     {
+        // 
         $this->view()->setTemplate('product_attribute');
+        $this->view()->assign('title', __('Add Attribute'));
+        $this->view()->assign('message', __('This option ready on next version'));
     }
 
     /**
@@ -379,6 +465,7 @@ class ProductController extends ActionController
         // Set view
         $this->view()->setTemplate('product_property');
         $this->view()->assign('form', $form);
+        $this->view()->assign('title', __('Add Property'));
         $this->view()->assign('message', $message);
     }
 
@@ -393,7 +480,7 @@ class ProductController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $field[$row->id] = $row->toArray();
-            //$field[$row->id]['imageurl'] = Pi::url('upload/' . $this->config('file_path') . '/extra/' . $field[$row->id]['image']);
+            $field[$row->id]['imageUrl'] = Pi::url(sprintf('upload/%s/icon/%s', $this->config('file_path'), $field[$row->id]['image']));
         }
         // Go to update page if empty
         if (empty($field)) {
@@ -426,6 +513,25 @@ class ProductController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+                // upload image
+                if (!empty($file['image']['name'])) {
+                    // Set upload path
+                    $path = Pi::path(sprintf('upload/%s/icon', $this->config('file_path')));
+                    // Upload
+                    $uploader = new Upload;
+                    $uploader->setDestination($path);
+                    $uploader->setRename($this->ImageExtraPrefix . '%random%');
+                    $uploader->setExtension($this->config('image_extension'));
+                    $uploader->setSize($this->config('image_size'));
+                    if ($uploader->isValid()) {
+                        $uploader->receive();
+                        // Get image name
+                        $values['image'] = $uploader->getUploaded('image');
+                    } else {
+                        $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
+                    }
+                }    
+                // Set just product fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->extraColumns)) {
                         unset($values[$key]);
@@ -455,7 +561,7 @@ class ProductController extends ActionController
             }
         } else {
             if ($id) {
-                $form->setData($values);
+                $form->setData($extra);
                 $message = 'You can edit this extra field';
             } else {
                 $message = 'You can add new extra field';
@@ -606,7 +712,7 @@ class ProductController extends ActionController
         }
         $this->view()->setTemplate('product_spotlight_update');
         $this->view()->assign('form', $form);
-        $this->view()->assign('title', __('Add a Spotlight'));
+        $this->view()->assign('title', __('Add Spotlight'));
         $this->view()->assign('message', $message);
     }
 
@@ -621,5 +727,42 @@ class ProductController extends ActionController
             $this->jump(array('action' => 'spotlight'), __('Selected spotlight delete'));
         }
         $this->jump(array('action' => 'spotlight'), __('Please select spotlight'));
+    }
+
+    public function removeAction()
+    {
+        // Get id and status
+        $id = $this->params('id');
+        // set product
+        $product = $this->getModel('product')->find($id);
+        // Check
+        if ($product && !empty($id)) {
+            // remove file
+            $files = array(
+                Pi::path(sprintf('upload/%s/original/%s/%s', $this->config('image_path'), $product->path, $product->image)),
+                Pi::path(sprintf('upload/%s/large/%s/%s', $this->config('image_path'), $product->path, $product->image)),
+                Pi::path(sprintf('upload/%s/medium/%s/%s', $this->config('image_path'), $product->path, $product->image)),
+                Pi::path(sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $product->path, $product->image)),
+            );
+            Pi::service('file')->remove($files);
+            // clear DB
+            $product->image = '';
+            $product->path = '';
+            // Save
+            if ($product->save()) {
+                $message = sprintf(__('Image of %s removed'), $product->title);
+                $status = 1;
+            } else {
+                $message = __('Image not remove');
+                $status = 0;
+            }
+        } else {
+            $message = __('Please select product');
+            $status = 0;
+        }
+        return array(
+            'status' => $status,
+            'message' => $message,
+        );
     }
 }

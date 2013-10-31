@@ -18,11 +18,14 @@ use Pi\Form\Form as BaseForm;
 
 class ProductForm  extends BaseForm
 {
+    protected $thumbUrl = '';
 
-    public function __construct($name = null, $property, $field)
+    public function __construct($name = null, $option = array())
     {
-        $this->property = $property;
-        $this->field = $field;
+        $this->property = $option['property'];
+        $this->field = $option['field'];
+        $this->thumbUrl = $option['thumbUrl'];
+        $this->removeUrl = empty($option['removeUrl']) ? '' : $option['removeUrl'];
         parent::__construct($name);
     }
 
@@ -126,6 +129,51 @@ class ProductForm  extends BaseForm
                 'category' => '',
             ),
         ));
+        // Image
+        if ($this->thumbUrl) {
+            $this->add(array(
+                'name' => 'imageview',
+                'options' => array(
+                    'label' => __('Image'),
+                ),
+                'attributes' => array(
+                    'type' => 'image',
+                    'src' => $this->thumbUrl,
+                    'height' => '200',
+                    'disabled' => true,
+                    'description' => '',
+                )
+            ));
+            $this->add(array(
+                'name' => 'remove',
+                'options' => array(
+                    'label' => __('Remove image'),
+                ),
+                'attributes' => array(
+                    'type' => 'button',
+                    'class' => 'btn btn-danger btn-small',
+                    'data-toggle' => 'button',
+                    'data-link' => $this->removeUrl,
+                )
+            ));
+            $this->add(array(
+                'name' => 'image',
+                'attributes' => array(
+                    'type' => 'hidden',
+                ),
+             ));
+        } else {
+            $this->add(array(
+                'name' => 'image',
+                'options' => array(
+                    'label' => __('Image'),
+                ),
+                'attributes' => array(
+                    'type' => 'file',
+                    'description' => '',
+                )
+            ));
+        }
         // extra_product
         $this->add(array(
             'name' => 'extra_product',
