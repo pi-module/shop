@@ -14,7 +14,7 @@ return array(
     'meta'  => array(
         'title'         => __('Shop'),
         'description'   => __('Shop module for pi.'),
-        'version'       => '0.0.4',
+        'version'       => '0.0.5',
         'license'       => 'New BSD',
         'demo'          => 'http://demo.pialog.org'
     ),
@@ -32,5 +32,6 @@ return array(
         'permission'    => 'permission.php',
         'page'          => 'page.php',
         'navigation'    => 'navigation.php',
+        'route'         => 'route.php',
     ),
 );
