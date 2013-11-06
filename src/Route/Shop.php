@@ -44,6 +44,18 @@ class Shop extends Standard
 
         $parts = array_filter(explode($this->structureDelimiter, $path));
 
+        echo '<pre>';
+        print_r($parts);
+        echo '</pre>';
+
+        // Set controller
+        $controllerList = array('category', 'checkout', 'index', 'product', 'search', 'tag', 'user');
+        if (isset($parts[0]) && in_array($parts[0], $controllerList)) {
+            $matches['controller'] = urldecode($parts[0]);
+        } elseif (isset($parts[0]) && $parts[0] == 'page') {
+            $matches['page'] = intval($parts[1]);
+            $matches['controller'] = 'index';
+        }
 
         if (null !== $matches) {
             $matches = array_merge($this->defaults, $matches);
@@ -51,7 +63,47 @@ class Shop extends Standard
             $path = $this->defaults['module'] . $this->structureDelimiter . $path;
             $matches = parent::parse($path);
         }
+        
+        // Make Match
+        if (isset($matches['controller'])) {
+            switch ($matches['controller']) {
+                case 'category':
+                
+                    break;
 
+                case 'checkout':
+                
+                    break; 
+
+                case 'index':
+                
+                    break;
+
+                case 'product':
+                    if (!empty($parts[1])) {
+                        if ($parts[1] == 'print') {
+                            $matches['action'] = 'print';
+                            $matches['slug'] = urldecode($parts[2]);
+                        } else {
+                            $matches['slug'] = urldecode($parts[1]);
+                        }
+                    }
+                    break; 
+
+                case 'search':
+                
+                    break;
+
+                case 'tag':
+                
+                    break;    
+
+                case 'user':
+                
+                    break;
+            }    
+        }
+            
         echo '<pre>';
         print_r($matches);
         echo '</pre>';

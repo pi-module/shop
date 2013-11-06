@@ -18,6 +18,10 @@ return array(
             'name' => 'admin'
         ),
         array(
+            'title' => __('View'),
+            'name' => 'view'
+        ),
+        array(
             'title' => __('Image'),
             'name' => 'image'
         ),
@@ -43,6 +47,15 @@ return array(
             'edit' => 'text',
             'filter' => 'number_int',
             'value' => 10
+        ),
+        // View
+        'view_perpage' => array(
+            'category' => 'view',
+            'title' => __('Perpage'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 20
         ),
         // Image
         'image_size' => array(

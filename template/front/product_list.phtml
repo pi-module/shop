@@ -1,7 +1,10 @@
-<?php 
+<div class="shop">
+	<div class="productList clearfix">
+		<?php foreach($products as $product) { ?>
+		<?php include $this->template('front/product_box'); ?>
+		<?php } ?>
+	</div>
+	<div class="clearfix"></div>
+	<div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
+</div>
 
-echo '<pre>';
-print_r($test);
-echo '</pre>';
-
-?> 

@@ -22,4 +22,9 @@ class ProductController extends ActionController
     {
     	$this->view()->setTemplate('empty');
     }
+
+    public function printAction()
+    {
+    	$this->view()->setTemplate('empty');
+    }
 }
