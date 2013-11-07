@@ -23,33 +23,61 @@ class IndexController extends ActionController
 	public function indexAction()
     {
         // Get info from url
-        $page = $this->params('page', 1);
         $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
         // Set product info
         $where = array('status' => 1);
-        $offset = (int)($page - 1) * $this->config('view_perpage');
-        $limit = intval($this->config('view_perpage'));
-        $order = array('time_create DESC', 'id DESC');
         // Get product List
-        $product = $this->productList($where, $offset, $limit, $order);
+        $product = $this->productList($where);
         // Set paginator info
         $template = array(
             'controller' => 'index',
             'action' => 'index',
             );
         // Get paginator
-        $paginator = $this->productPaginator($template, $where, $page, $this->config('view_perpage'));
+        $paginator = $this->productPaginator($template, $where);
         // Set view
     	$this->view()->setTemplate('product_list');
         $this->view()->assign('products', $product);
         $this->view()->assign('paginator', $paginator);
+        $this->view()->assign('config', $config);
     }
 
-    public function productList($where, $offset, $limit, $order)
+    public function productList($where)
     {
+        // Set info
         $id = array();
         $product = array();
+        $page = $this->params('page', 1);
         $module = $this->params('module');
+        $sort = $this->params('sort');
+        $stock = $this->params('stock');
+        $offset = (int)($page - 1) * $this->config('view_perpage');
+        $limit = intval($this->config('view_perpage'));
+        // Set order
+        switch ($sort) {
+            case 'stock':
+                $order = array('stock DESC', 'id DESC');
+                break;
+
+            case 'price':
+                $order = array('price DESC', 'id DESC');
+                break; 
+                
+            case 'update':
+                $order = array('time_update DESC', 'id DESC');
+                break; 
+
+            case 'create':
+            default:
+                $order = array('time_create DESC', 'id DESC');
+                break;
+        }
+        // Set show just have stock
+        if (isset($stock) && $stock == 1) {
+            $where['stock'] = 1;
+        }
         // Get category list
         $categoryList = Pi::api('shop', 'category')->categoryList();
         // Set info
@@ -71,8 +99,8 @@ class IndexController extends ActionController
             $product[$row->id] = $row->toArray();
             $product[$row->id]['summary'] = Pi::service('markup')->render($product[$row->id]['summary'], 'text', 'html');
             $product[$row->id]['description'] = Pi::service('markup')->render($product[$row->id]['description'], 'text', 'html');
-            $product[$row->id]['time_create'] = _date($product[$row->id]['time_create']);
-            $product[$row->id]['time_update'] = _date($product[$row->id]['time_update']);
+            $product[$row->id]['time_create_view'] = _date($product[$row->id]['time_create']);
+            $product[$row->id]['time_update_view'] = _date($product[$row->id]['time_update']);
             // Set product url
             $product[$row->id]['link'] = $this->url('', array(
                     'module'        => $module,
@@ -102,16 +130,20 @@ class IndexController extends ActionController
         return $product;
     }
     
-    public function productPaginator($template, $where, $page, $perpage)
+    public function productPaginator($template, $where)
     {
+        $template['module'] = $this->params('module');
+        $template['sort'] = $this->params('sort');
+        $template['stock'] = $this->params('stock');
+        $template['page'] = $this->params('page', 1);
         // get count     
         $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
         $select = $this->getModel('link')->select()->where($where)->columns($columns);
         $count = $this->getModel('link')->selectWith($select)->current()->count;
         // paginator
         $paginator = Paginator::factory(intval($count));
-        $paginator->setItemCountPerPage($perpage);
-        $paginator->setCurrentPageNumber($page);
+        $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
+        $paginator->setCurrentPageNumber($template['page']);
         $paginator->setUrlOptions(array(
             'router'    => $this->getEvent()->getRouter(),
             'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
@@ -119,8 +151,11 @@ class IndexController extends ActionController
                 'module'        => $this->getModule(),
                 'controller'    => $template['controller'],
                 'action'        => $template['action'],
+                'sort'          => $template['sort'],
+                'stock'         => $template['stock'],
             )),
         ));
+        //print_r($template);
         return $paginator;
     }
 }

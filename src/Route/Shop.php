@@ -27,6 +27,14 @@ class Shop extends Standard
         'action'        => 'index'
     );
 
+    protected $sortList = array(
+        'create', 'update', 'price', 'stock'
+    );
+
+    protected $controllerList = array(
+        'category', 'checkout', 'index', 'product', 'search', 'tag', 'user'
+    );
+
     /**
      * {@inheritDoc}
      */
@@ -37,11 +45,7 @@ class Shop extends Standard
      */
     protected function parse($path)
     {
-        //$path = 'shop/product/dasdasd-sadad-asdasd-sdsd/page/2/sort/price/order/desc/stock/1';
-
-
-        $matches = null;
-
+        $matches = array();
         $parts = array_filter(explode($this->structureDelimiter, $path));
 
         echo '<pre>';
@@ -49,26 +53,44 @@ class Shop extends Standard
         echo '</pre>';
 
         // Set controller
-        $controllerList = array('category', 'checkout', 'index', 'product', 'search', 'tag', 'user');
-        if (isset($parts[0]) && in_array($parts[0], $controllerList)) {
+        $matches = array_merge($this->defaults, $matches);
+        if (isset($parts[0]) && in_array($parts[0], $this->controllerList)) {
             $matches['controller'] = urldecode($parts[0]);
-        } elseif (isset($parts[0]) && $parts[0] == 'page') {
-            $matches['page'] = intval($parts[1]);
-            $matches['controller'] = 'index';
         }
 
-        if (null !== $matches) {
-            $matches = array_merge($this->defaults, $matches);
-        } else {
-            $path = $this->defaults['module'] . $this->structureDelimiter . $path;
-            $matches = parent::parse($path);
-        }
-        
         // Make Match
         if (isset($matches['controller'])) {
             switch ($matches['controller']) {
                 case 'category':
-                
+                    if (!empty($parts[1])) {
+                        $matches['action'] = urldecode($parts[1]);
+                        $matches['slug'] = urldecode($parts[1]);
+                        // Set page
+                        if (isset($parts[2]) && $parts[2] == 'page') {
+                            $matches['page'] = intval($parts[3]);
+                            // Set sort and stock
+                            if (isset($parts[4]) && $parts[4] == 'sort' 
+                                && isset($parts[6]) && $parts[6] == 'stock') {
+                                $matches['sort'] = urldecode($parts[5]);
+                                $matches['stock'] = urldecode($parts[7]);
+                            } elseif (isset($parts[4]) && $parts[4] == 'sort') {
+                                $matches['sort'] = urldecode($parts[5]);
+                            } elseif (isset($parts[4]) && $parts[4] == 'stock') {
+                                $matches['stock'] = urldecode($parts[5]);
+                            } 
+                        } else {
+                            // Set sort and stock
+                            if (isset($parts[2]) && $parts[2] == 'sort' 
+                                && isset($parts[4]) && $parts[4] == 'stock') {
+                                $matches['sort'] = urldecode($parts[3]);
+                                $matches['stock'] = urldecode($parts[5]);
+                            } elseif (isset($parts[2]) && $parts[2] == 'sort') {
+                                $matches['sort'] = urldecode($parts[3]);
+                            } elseif (isset($parts[2]) && $parts[2] == 'stock') {
+                                $matches['stock'] = urldecode($parts[3]);
+                            } 
+                        }
+                    }
                     break;
 
                 case 'checkout':
@@ -76,7 +98,32 @@ class Shop extends Standard
                     break; 
 
                 case 'index':
-                
+                    // Set page
+                    if (isset($parts[0]) && $parts[0] == 'page') {
+                        $matches['page'] = intval($parts[1]);
+                        // Set sort and stock
+                        if (isset($parts[2]) && $parts[2] == 'sort' 
+                            && isset($parts[4]) && $parts[4] == 'stock') {
+                            $matches['sort'] = urldecode($parts[3]);
+                            $matches['stock'] = urldecode($parts[5]);
+                        } elseif (isset($parts[2]) && $parts[2] == 'sort') {
+                            $matches['sort'] = urldecode($parts[3]);
+                        } elseif (isset($parts[2]) && $parts[2] == 'stock') {
+                            $matches['stock'] = urldecode($parts[3]);
+                        }
+                    } else {
+                        // Set sort and stock
+                        if (isset($parts[0]) && $parts[0] == 'sort' 
+                            && isset($parts[2]) && $parts[2] == 'stock') {
+                            $matches['sort'] = urldecode($parts[1]);
+                            $matches['stock'] = urldecode($parts[3]);
+                        } elseif (isset($parts[0]) && $parts[0] == 'sort') {
+                            $matches['sort'] = urldecode($parts[1]);
+                        } elseif (isset($parts[0]) && $parts[0] == 'stock') {
+                            $matches['stock'] = urldecode($parts[1]);
+                        }
+                    }
+                     
                     break;
 
                 case 'product':
@@ -102,6 +149,18 @@ class Shop extends Standard
                 
                     break;
             }    
+        } 
+
+        // Check sort
+        if (isset($matches['sort']) 
+            && !in_array($matches['sort'], $this->sortList)) {
+            unset($matches['sort']);
+        }
+
+        // Check stock
+        if (isset($matches['stock']) 
+            && !in_array($matches['stock'], array(0,1))) {
+            unset($matches['stock']);
         }
             
         echo '<pre>';
@@ -135,7 +194,8 @@ class Shop extends Standard
 
         // Set controller
         if (!empty($mergedParams['controller']) 
-                && $mergedParams['controller'] != 'index') 
+                && $mergedParams['controller'] != 'index'
+                && in_array($mergedParams['controller'], $this->controllerList)) 
         {
             $url['controller'] = $mergedParams['controller'];
         }
@@ -154,27 +214,34 @@ class Shop extends Standard
 
         // Set page
         if (!empty($mergedParams['page'])) {
-            $url['page'] = sprintf('page%s%s', $this->paramDelimiter, $mergedParams['page']);
+            $url['page'] = sprintf('page%s%s', 
+                                   $this->paramDelimiter, 
+                                   $mergedParams['page']);
         }
 
         // Set step
         if (!empty($mergedParams['step'])) {
-            $url['step'] = sprintf('step%s%s', $this->paramDelimiter, $mergedParams['step']);
+            $url['step'] = sprintf('step%s%s', 
+                                   $this->paramDelimiter, 
+                                   $mergedParams['step']);
         }
         
         // Set sort
-        if (!empty($mergedParams['sort'])) {
-            $url['sort'] = sprintf('sort%s%s', $this->paramDelimiter, $mergedParams['sort']);
-        }
-
-        // Set order
-        if (!empty($mergedParams['order'])) {
-            $url['order'] = sprintf('order%s%s', $this->paramDelimiter, $mergedParams['order']);
+        if (!empty($mergedParams['sort']) 
+            && in_array($mergedParams['sort'], $this->sortList)) 
+        {
+            $url['sort'] = sprintf('sort%s%s', 
+                                   $this->paramDelimiter, 
+                                   $mergedParams['sort']);
         }
 
         // Set stock
-        if (!empty($mergedParams['stock'])) {
-            $url['stock'] = sprintf('stock%s%s', $this->paramDelimiter, $mergedParams['stock']);
+        if (!empty($mergedParams['stock']) 
+            && in_array($mergedParams['stock'], array(0,1)))
+        {
+            $url['stock'] = sprintf('stock%s%s',                                    
+                $this->paramDelimiter,                                   
+                $mergedParams['stock']);
         }
 
         // Make url

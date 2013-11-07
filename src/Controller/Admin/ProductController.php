@@ -46,7 +46,7 @@ class ProductController extends ActionController
      */
     protected $productColumns = array(
     	'id', 'title', 'slug', 'category', 'related', 'summary', 'description', 'seo_title', 'seo_keywords',
-    	'seo_description', 'status', 'time_create', 'time_update', 'uid', 'display', 'sales', 'image', 'path', 'comment',
+    	'seo_description', 'status', 'time_create', 'time_update', 'uid', 'hits', 'sales', 'image', 'path', 'comment',
     	'point', 'count', 'favorite', 'attach', 'extra', 'recommended', 'stock', 'stock_alert', 'price', 
     	'price_discount', 'property_1', 'property_2', 'property_3', 'property_4', 'property_5', 'property_6',
     	'property_7', 'property_8', 'property_9', 'property_10', 

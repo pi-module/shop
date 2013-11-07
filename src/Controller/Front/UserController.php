@@ -15,8 +15,9 @@ namespace Module\Shop\Controller\Front;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+use Zend\Json\Json;
 
-class UserController extends ActionController
+class UserController extends IndexController
 {
 	public function indexAction()
     {

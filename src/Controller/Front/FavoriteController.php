@@ -15,8 +15,9 @@ namespace Module\Shop\Controller\Front;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+use Zend\Json\Json;
 
-class FavoriteController extends ActionController
+class FavoriteController extends IndexController
 {
 	public function indexAction()
     {

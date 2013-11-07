@@ -40,7 +40,7 @@ class Category extends AbstractApi
             $values['time_create'] = $create;
             $values['time_update'] = $update;
             $values['price'] = $price;
-            $values['stock'] = $stock;
+            $values['stock'] = ($stock > 0) ? 1 : 0;
             $values['status'] = $status;
             // Save
             $row = Pi::model('link', $this->getModule())->createRow();
