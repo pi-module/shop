@@ -128,7 +128,7 @@ class Shop extends Standard
 
                 case 'product':
                     if (!empty($parts[1])) {
-                        if ($parts[1] == 'print') {
+                        if ($parts[1] == 'result') {
                             $matches['action'] = 'print';
                             $matches['slug'] = urldecode($parts[2]);
                         } else {
@@ -138,7 +138,36 @@ class Shop extends Standard
                     break; 
 
                 case 'search':
-                
+                    if (!empty($parts[1])) {
+                        if ($parts[1] == 'result') {
+                            $matches['action'] = 'result';
+                            // Set page
+                            if (isset($parts[2]) && $parts[2] == 'page') {
+                                $matches['page'] = intval($parts[3]);
+                                // Set sort and stock
+                                if (isset($parts[4]) && $parts[4] == 'sort' 
+                                    && isset($parts[6]) && $parts[6] == 'stock') {
+                                    $matches['sort'] = urldecode($parts[5]);
+                                    $matches['stock'] = urldecode($parts[7]);
+                                } elseif (isset($parts[4]) && $parts[4] == 'sort') {
+                                    $matches['sort'] = urldecode($parts[5]);
+                                } elseif (isset($parts[4]) && $parts[4] == 'stock') {
+                                    $matches['stock'] = urldecode($parts[5]);
+                                } 
+                            } else {
+                                // Set sort and stock
+                                if (isset($parts[2]) && $parts[2] == 'sort' 
+                                    && isset($parts[4]) && $parts[4] == 'stock') {
+                                    $matches['sort'] = urldecode($parts[3]);
+                                    $matches['stock'] = urldecode($parts[5]);
+                                } elseif (isset($parts[2]) && $parts[2] == 'sort') {
+                                    $matches['sort'] = urldecode($parts[3]);
+                                } elseif (isset($parts[2]) && $parts[2] == 'stock') {
+                                    $matches['stock'] = urldecode($parts[3]);
+                                } 
+                            }
+                        }
+                    }
                     break;
 
                 case 'tag':

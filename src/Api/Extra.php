@@ -35,7 +35,7 @@ class Extra extends AbstractApi
             'field' => '',
         );
         $whereField = array('status' => 1);
-        $columnField = array('id', 'title');
+        $columnField = array('id', 'title', 'search');
         $orderField = array('order DESC', 'id DESC');
         $select = Pi::model('field', $this->getModule())->select()->where($whereField)->columns($columnField)->order($orderField);
         $rowset = Pi::model('field', $this->getModule())->selectWith($select);
