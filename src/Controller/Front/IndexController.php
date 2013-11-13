@@ -59,8 +59,6 @@ class IndexController extends ActionController
         if (isset($stock) && $stock == 1) {
             $where['stock'] = 1;
         }
-        // Get category list
-        $categoryList = Pi::api('shop', 'category')->categoryList();
         // Set info
         $columns = array('product' => new \Zend\Db\Sql\Expression('DISTINCT product'));
         // Get info from link table
@@ -79,35 +77,6 @@ class IndexController extends ActionController
         // return product
         return $product;
     }
-    
-    public function productPaginator($template, $where)
-    {
-        $template['module'] = $this->params('module');
-        $template['sort'] = $this->params('sort');
-        $template['stock'] = $this->params('stock');
-        $template['page'] = $this->params('page', 1);
-        // get count     
-        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
-        $select = $this->getModel('link')->select()->where($where)->columns($columns);
-        $count = $this->getModel('link')->selectWith($select)->current()->count;
-        // paginator
-        $paginator = Paginator::factory(intval($count));
-        $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
-        $paginator->setCurrentPageNumber($template['page']);
-        $paginator->setUrlOptions(array(
-            'router'    => $this->getEvent()->getRouter(),
-            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params'    => array_filter(array(
-                'module'        => $this->getModule(),
-                'controller'    => $template['controller'],
-                'action'        => $template['action'],
-                'sort'          => $template['sort'],
-                'stock'         => $template['stock'],
-            )),
-        ));
-        //print_r($template);
-        return $paginator;
-    }
 
     public function searchList($where)
     {
@@ -124,14 +93,27 @@ class IndexController extends ActionController
         if (isset($stock) && $stock == 1) {
             $where['stock'] > 0;
         }
-        // Get category list
-        $categoryList = Pi::api('shop', 'category')->categoryList();
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('product')->selectWith($select);
         $product = $this->canonizeProduct($rowset);
         // return product
         return $product;   
+    }
+
+    public function productPaginator($template, $where)
+    {
+        $template['module'] = $this->params('module');
+        $template['sort'] = $this->params('sort');
+        $template['stock'] = $this->params('stock');
+        $template['page'] = $this->params('page', 1);
+        // get count     
+        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
+        $select = $this->getModel('link')->select()->where($where)->columns($columns);
+        $template['count'] = $this->getModel('link')->selectWith($select)->current()->count;
+        // paginator
+        $paginator = $this->canonizePaginator($template);
+        return $paginator;
     }
 
     public function searchPaginator($template, $where)
@@ -141,30 +123,20 @@ class IndexController extends ActionController
         $template['stock'] = $this->params('stock');
         $template['page'] = $this->params('page', 1);
         // get count     
-        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
-        $select = $this->getModel('link')->select()->where($where)->columns($columns);
-        $count = $this->getModel('link')->selectWith($select)->current()->count;
+        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $select = $this->getModel('product')->select()->where($where)->columns($columns);
+        $template['count'] = $this->getModel('product')->selectWith($select)->current()->count;
         // paginator
-        $paginator = Paginator::factory(intval($count));
-        $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
-        $paginator->setCurrentPageNumber($template['page']);
-        $paginator->setUrlOptions(array(
-            'router'    => $this->getEvent()->getRouter(),
-            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params'    => array_filter(array(
-                'module'        => $this->getModule(),
-                'controller'    => $template['controller'],
-                'action'        => $template['action'],
-                'sort'          => $template['sort'],
-                'stock'         => $template['stock'],
-            )),
-        ));
-        //print_r($template);
+        $paginator = $this->canonizePaginator($template);
         return $paginator;
     }
 
     public function canonizeProduct($rowset)
     {
+        $module = $this->params('module');
+        // Get category list
+        $categoryList = Pi::api('shop', 'category')->categoryList();
+        // Set product
         $product = array();
         // Make list
         foreach ($rowset as $row) {
@@ -200,6 +172,26 @@ class IndexController extends ActionController
         }
         // return product
         return $product; 
+    }
+
+    public function canonizePaginator($template)
+    {
+        // paginator
+        $paginator = Paginator::factory(intval($template['count']));
+        $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
+        $paginator->setCurrentPageNumber(intval($template['page']));
+        $paginator->setUrlOptions(array(
+            'router'    => $this->getEvent()->getRouter(),
+            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params'    => array_filter(array(
+                'module'        => $this->getModule(),
+                'controller'    => $template['controller'],
+                'action'        => $template['action'],
+                'sort'          => $template['sort'],
+                'stock'         => $template['stock'],
+            )),
+        ));
+        return $paginator;
     }
 
     public function setOrder($sort = 'create')

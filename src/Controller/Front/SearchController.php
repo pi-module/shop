@@ -41,8 +41,7 @@ class SearchController extends IndexController
             	$message = __('Your search successfully. Go to result page');
             	$url = array('action' => 'result');
                 $this->jump($url, $message);
-            }	
-
+            }
     	} else {
     		unset($_SESSION['shop']['search']);
     	}
@@ -60,50 +59,91 @@ class SearchController extends IndexController
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Set product info from search
-        if (isset($search['title']) && !empty($search['title'])) {
-        	$where = array('status' => 1, 'title LIKE ?' => '%' . $search['title'] . '%');
-        } else {
-        	$where = array('status' => 1);
+        $where = array('status' => 1);
+        // Set title
+        if (isset($search['title']) 
+            && !empty($search['title']))
+        {
+            $where['title LIKE ?'] = '%' . $search['title'] . '%';
         }
         // Set property_1
-        if (isset($search['property_1']) && !empty($search['property_1'])) {
+        if (isset($search['property_1']) 
+            && !empty($search['property_1']))
+        {
         	$where['property_1'] = $search['property_1'];
         }
         // Set property_2
-        if (isset($search['property_2']) && !empty($search['property_2'])) {
+        if (isset($search['property_2']) 
+            && !empty($search['property_2']))
+        {
         	$where['property_2'] = $search['property_2'];
         }
         // Set property_3
-        if (isset($search['property_3']) && !empty($search['property_3'])) {
+        if (isset($search['property_3']) 
+            && !empty($search['property_3']))
+        {
         	$where['property_3'] = $search['property_3'];
         }
         // Set property_4
-        if (isset($search['property_4']) && !empty($search['property_4'])) {
+        if (isset($search['property_4']) 
+            && !empty($search['property_4']))
+        {
         	$where['property_4'] = $search['property_4'];
         }
         // Set property_5
-        if (isset($search['property_5']) && !empty($search['property_5'])) {
+        if (isset($search['property_5']) 
+            && !empty($search['property_5']))
+        {
         	$where['property_5'] = $search['property_5'];
         }
         // Set property_6
-        if (isset($search['property_6']) && !empty($search['property_6'])) {
+        if (isset($search['property_6']) 
+            && !empty($search['property_6']))
+        {
         	$where['property_6'] = $search['property_6'];
         }
         // Set property_7
-        if (isset($search['property_7']) && !empty($search['property_7'])) {
+        if (isset($search['property_7']) 
+            && !empty($search['property_7']))
+        {
         	$where['property_7'] = $search['property_7'];
         }
         // Set property_8
-        if (isset($search['property_8']) && !empty($search['property_8'])) {
+        if (isset($search['property_8']) 
+            && !empty($search['property_8']))
+        {
         	$where['property_8'] = $search['property_8'];
         }
         // Set property_9
-        if (isset($search['property_9']) && !empty($search['property_9'])) {
+        if (isset($search['property_9']) 
+            && !empty($search['property_9']))
+        {
         	$where['property_9'] = $search['property_9'];
         }
         // Set property_10
-        if (isset($search['property_10']) && !empty($search['property_10'])) {
-        	$where['property_10'] = $search['property_10'];
+        if (isset($search['property_10']) 
+            && !empty($search['property_10']))
+        {
+            $where['property_10'] = $search['property_10'];
+        }
+        // Set price_from
+        if (isset($search['price_from']) 
+            && !empty($search['price_from']))
+        {
+            $where['price >= ?'] = $search['price_from'];
+        }
+        // Set price_to
+        if (isset($search['price_to']) 
+            && !empty($search['price_to']))
+        {
+            $where['price <= ?'] = $search['price_from'];
+        }
+        if (isset($search['category']) 
+            && !empty($search['category']) 
+            && is_array($search['category']))
+        {
+            $productId = Pi::api('shop', 'category')->findFromCategory($search['category']);
+            $where['id'] = $productId;
         }
         // Get product List
         $product = $this->searchList($where);
