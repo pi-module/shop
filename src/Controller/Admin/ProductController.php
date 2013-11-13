@@ -190,9 +190,6 @@ class ProductController extends ActionController
                     // Set upload path
                     $values['path'] = sprintf('%s/%s', date('Y'), date('m'));
                     $originalPath = Pi::path(sprintf('upload/%s/original/%s', $this->config('image_path'), $values['path']));
-                    $largePath = Pi::path(sprintf('upload/%s/large/%s', $this->config('image_path'), $values['path']));
-                    $mediumPath = Pi::path(sprintf('upload/%s/medium/%s', $this->config('image_path'), $values['path']));
-                    $thumbPath = Pi::path(sprintf('upload/%s/thumb/%s', $this->config('image_path'), $values['path']));
                     // Upload
                     $uploader = new Upload;
                     $uploader->setDestination($originalPath);
@@ -203,15 +200,8 @@ class ProductController extends ActionController
                         $uploader->receive();
                         // Get image name
                         $values['image'] = $uploader->getUploaded('image');
-                        // Set image path
-                        $originalImage = sprintf('%s/%s', $originalPath, $values['image']);
-                        $largeImage = sprintf('%s/%s', $largePath, $values['image']);
-                        $mediumImage = sprintf('%s/%s', $mediumPath, $values['image']);
-                        $thumbImage = sprintf('%s/%s', $thumbPath, $values['image']);
-                        // Resize
-                        Pi::service('image')->resize($originalImage, array($this->config('image_largew'), $this->config('image_largeh')), $largeImage);
-                        Pi::service('image')->resize($originalImage, array($this->config('image_mediumw'), $this->config('image_mediumh')), $mediumImage);
-                        Pi::service('image')->resize($originalImage, array($this->config('image_thumbw'), $this->config('image_thumbh')), $thumbImage);
+                        // process image
+                        Pi::api('shop', 'image')->process($values['image'], $values['path']);
                     } else {
                         $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
                     }

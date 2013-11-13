@@ -1,6 +1,9 @@
-<div class="product">
+<?php
+    $this->css($this->assetModule('css/front.css'));
+?>
+<div class="productBox">
 	<?php if($product['image']){ ?>
     <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['link']); ?>"><img class="img-polaroid" src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
 	<?php } ?>
-	<h3><a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['link']); ?>"><?php echo $this->escape($product['title']); ?></a></h3>
+	<h4><a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['link']); ?>"><?php echo $this->escape($product['title']); ?></a></h4>
 </div> 

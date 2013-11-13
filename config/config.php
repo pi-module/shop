@@ -138,20 +138,38 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
-        'image_float' => array(
-            'title' => __('Image float'),
-            'description' => ' ',
+        'image_watermark' => array(
+            'category' => 'image',
+            'title' => __('Add Watermark'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'image_watermark_source' => array(
+            'category' => 'image',
+            'title' => __('Watermark Image'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => ''
+        ),
+        'image_watermark_position' => array(
+            'title' => __('Watermark Positio'),
+            'description' => '',
             'edit' => array(
                 'type' => 'select',
                 'options' => array(
                     'options' => array(
-                        'left' => __('Left'),
-                        'right' => __('Right'),
+                        'top-left' => __('Top Left'),
+                        'top-right' => __('Top Right'),
+                        'bottom-left' => __('Bottom Left'),
+                        'bottom-right' => __('Bottom Right'),
                     ),
                 ),
             ),
-            'filter' => 'string',
-            'value' => 'left',
+            'filter' => 'text',
+            'value' => 'bottom-right',
             'category' => 'image',
         ),
         // Social
