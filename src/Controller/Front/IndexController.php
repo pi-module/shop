@@ -48,32 +48,13 @@ class IndexController extends ActionController
     {
         // Set info
         $id = array();
-        $product = array();
         $page = $this->params('page', 1);
         $module = $this->params('module');
-        $sort = $this->params('sort');
+        $sort = $this->params('sort', 'create');
         $stock = $this->params('stock');
         $offset = (int)($page - 1) * $this->config('view_perpage');
         $limit = intval($this->config('view_perpage'));
-        // Set order
-        switch ($sort) {
-            case 'stock':
-                $order = array('stock DESC', 'id DESC');
-                break;
-
-            case 'price':
-                $order = array('price DESC', 'id DESC');
-                break; 
-                
-            case 'update':
-                $order = array('time_update DESC', 'id DESC');
-                break; 
-
-            case 'create':
-            default:
-                $order = array('time_create DESC', 'id DESC');
-                break;
-        }
+        $order = $this->setOrder($sort);
         // Set show just have stock
         if (isset($stock) && $stock == 1) {
             $where['stock'] = 1;
@@ -94,6 +75,97 @@ class IndexController extends ActionController
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
+        $product = $this->canonizeProduct($rowset);
+        // return product
+        return $product;
+    }
+    
+    public function productPaginator($template, $where)
+    {
+        $template['module'] = $this->params('module');
+        $template['sort'] = $this->params('sort');
+        $template['stock'] = $this->params('stock');
+        $template['page'] = $this->params('page', 1);
+        // get count     
+        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
+        $select = $this->getModel('link')->select()->where($where)->columns($columns);
+        $count = $this->getModel('link')->selectWith($select)->current()->count;
+        // paginator
+        $paginator = Paginator::factory(intval($count));
+        $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
+        $paginator->setCurrentPageNumber($template['page']);
+        $paginator->setUrlOptions(array(
+            'router'    => $this->getEvent()->getRouter(),
+            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params'    => array_filter(array(
+                'module'        => $this->getModule(),
+                'controller'    => $template['controller'],
+                'action'        => $template['action'],
+                'sort'          => $template['sort'],
+                'stock'         => $template['stock'],
+            )),
+        ));
+        //print_r($template);
+        return $paginator;
+    }
+
+    public function searchList($where)
+    {
+        // Set info
+        $id = array();
+        $page = $this->params('page', 1);
+        $module = $this->params('module');
+        $sort = $this->params('sort', 'create');
+        $stock = $this->params('stock');
+        $offset = (int)($page - 1) * $this->config('view_perpage');
+        $limit = intval($this->config('view_perpage'));
+        $order = $this->setOrder($sort);
+        // Set show just have stock
+        if (isset($stock) && $stock == 1) {
+            $where['stock'] > 0;
+        }
+        // Get category list
+        $categoryList = Pi::api('shop', 'category')->categoryList();
+        // Get list of product
+        $select = $this->getModel('product')->select()->where($where)->order($order)->offset($offset)->limit($limit);
+        $rowset = $this->getModel('product')->selectWith($select);
+        $product = $this->canonizeProduct($rowset);
+        // return product
+        return $product;   
+    }
+
+    public function searchPaginator($template, $where)
+    {
+        $template['module'] = $this->params('module');
+        $template['sort'] = $this->params('sort');
+        $template['stock'] = $this->params('stock');
+        $template['page'] = $this->params('page', 1);
+        // get count     
+        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
+        $select = $this->getModel('link')->select()->where($where)->columns($columns);
+        $count = $this->getModel('link')->selectWith($select)->current()->count;
+        // paginator
+        $paginator = Paginator::factory(intval($count));
+        $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
+        $paginator->setCurrentPageNumber($template['page']);
+        $paginator->setUrlOptions(array(
+            'router'    => $this->getEvent()->getRouter(),
+            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params'    => array_filter(array(
+                'module'        => $this->getModule(),
+                'controller'    => $template['controller'],
+                'action'        => $template['action'],
+                'sort'          => $template['sort'],
+                'stock'         => $template['stock'],
+            )),
+        ));
+        //print_r($template);
+        return $paginator;
+    }
+
+    public function canonizeProduct($rowset)
+    {
+        $product = array();
         // Make list
         foreach ($rowset as $row) {
             $product[$row->id] = $row->toArray();
@@ -127,35 +199,30 @@ class IndexController extends ActionController
             }
         }
         // return product
-        return $product;
+        return $product; 
     }
-    
-    public function productPaginator($template, $where)
+
+    public function setOrder($sort = 'create')
     {
-        $template['module'] = $this->params('module');
-        $template['sort'] = $this->params('sort');
-        $template['stock'] = $this->params('stock');
-        $template['page'] = $this->params('page', 1);
-        // get count     
-        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
-        $select = $this->getModel('link')->select()->where($where)->columns($columns);
-        $count = $this->getModel('link')->selectWith($select)->current()->count;
-        // paginator
-        $paginator = Paginator::factory(intval($count));
-        $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
-        $paginator->setCurrentPageNumber($template['page']);
-        $paginator->setUrlOptions(array(
-            'router'    => $this->getEvent()->getRouter(),
-            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params'    => array_filter(array(
-                'module'        => $this->getModule(),
-                'controller'    => $template['controller'],
-                'action'        => $template['action'],
-                'sort'          => $template['sort'],
-                'stock'         => $template['stock'],
-            )),
-        ));
-        //print_r($template);
-        return $paginator;
+        // Set order
+        switch ($sort) {
+            case 'stock':
+                $order = array('stock DESC', 'id DESC');
+                break;
+
+            case 'price':
+                $order = array('price DESC', 'id DESC');
+                break; 
+                
+            case 'update':
+                $order = array('time_update DESC', 'id DESC');
+                break; 
+
+            case 'create':
+            default:
+                $order = array('time_create DESC', 'id DESC');
+                break;
+        } 
+        return $order;
     }
 }

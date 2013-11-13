@@ -105,10 +105,19 @@ class SearchController extends IndexController
         if (isset($search['property_10']) && !empty($search['property_10'])) {
         	$where['property_10'] = $search['property_10'];
         }
-
-
-
-        $this->view()->setTemplate('empty');
-        $this->view()->assign('test', $_SESSION['shop']['search']);
+        // Get product List
+        $product = $this->searchList($where);
+        // Set paginator info
+        $template = array(
+            'controller' => 'search',
+            'action' => 'result',
+            );
+        // Get paginator
+        $paginator = $this->searchPaginator($template, $where);
+        // Set view
+        $this->view()->setTemplate('product_list');
+        $this->view()->assign('products', $product);
+        $this->view()->assign('paginator', $paginator);
+        $this->view()->assign('config', $config);
     }	
 }
