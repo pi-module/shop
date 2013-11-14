@@ -1,0 +1,16 @@
+<?php if (isset($category) && !empty($category)) { ?>
+<div class="well well-small">
+	<ul>
+		<?php foreach($category as $cat) { ?>
+		<li class="span4">
+			<a title="<?php echo $this->escape($cat['title']); ?>" href="<?php 
+			    echo $this->url('', array(
+                    'module'        => $module,
+                    'controller'    => 'category',
+                    'slug'          => $this->escape($cat['slug']),
+                )); ?>"><i class="icon-folder-open"></i> <?php echo $this->escape($cat['title']); ?></a>
+		</li>
+		<?php } ?>
+	</ul>
+</div>
+<?php } ?>

@@ -38,9 +38,12 @@ class IndexController extends ActionController
             );
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
+        // category list
+        $category = Pi::api('shop', 'category')->categoryList(0);
         // Set view
     	$this->view()->setTemplate('product_list');
         $this->view()->assign('products', $product);
+        $this->view()->assign('category', $category);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
     }
