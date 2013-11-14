@@ -64,7 +64,23 @@ class SearchController extends IndexController
         if (isset($search['title']) 
             && !empty($search['title']))
         {
-            $where['title LIKE ?'] = '%' . $search['title'] . '%';
+            switch ($search['type']) {
+                case 1:
+                    $where['title LIKE ?'] = '%' . $search['title'] . '%';
+                    break;
+
+                case 2:
+                    $where['title LIKE ?'] = $search['title'] . '%';
+                    break;
+                
+                case 3:
+                    $where['title LIKE ?'] = '%' . $search['title'];
+                    break;
+                
+                case 4:
+                    $where['title LIKE ?'] = $search['title'];
+                    break;          
+            }
         }
         // Set property_1
         if (isset($search['property_1']) 

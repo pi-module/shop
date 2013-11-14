@@ -21,6 +21,7 @@ use Zend\Json\Json;
  * Pi::api('shop', 'product')->searchRelated($title, $type);
  * Pi::api('shop', 'product')->extraCount($id);
  * Pi::api('shop', 'product')->attachCount($id);
+ * Pi::api('shop', 'product')->viewPrice($price);
  */
 
 class Product extends AbstractApi
@@ -91,5 +92,19 @@ class Product extends AbstractApi
         $count = Pi::model('attach', $this->getModule())->selectWith($select)->current()->count;
         // Set attach count
         Pi::model('product', $this->getModule())->update(array('attach' => $count), array('id' => $id));
+    }
+
+    /**
+     * Set product view price
+     */
+    public function viewPrice($price)
+    {
+        if ($price > 0) {
+            $viewPrice = _currency($price);
+        } else {
+            $viewPrice = '';
+        }
+        return $viewPrice;
+
     }
 }	

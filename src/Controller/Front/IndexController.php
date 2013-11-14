@@ -16,6 +16,7 @@ namespace Module\Shop\Controller\Front;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
+use Zend\Db\Sql\Predicate\Expression;
 use Zend\Json\Json;
 
 class IndexController extends ActionController
@@ -60,9 +61,10 @@ class IndexController extends ActionController
             $where['stock'] = 1;
         }
         // Set info
-        $columns = array('product' => new \Zend\Db\Sql\Expression('DISTINCT product'));
+        $columns = array('product' => new Expression('DISTINCT product'));
         // Get info from link table
-        $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order)->offset($offset)->limit($limit);
+        $select = $this->getModel('link')->select()->where($where)->columns($columns)
+        ->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('link')->selectWith($select)->toArray();
         // Make list
         foreach ($rowset as $id) {
@@ -94,7 +96,8 @@ class IndexController extends ActionController
             $where['stock'] > 0;
         }
         // Get list of product
-        $select = $this->getModel('product')->select()->where($where)->order($order)->offset($offset)->limit($limit);
+        $select = $this->getModel('product')->select()->where($where)
+        ->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('product')->selectWith($select);
         $product = $this->canonizeProduct($rowset);
         // return product
@@ -108,7 +111,7 @@ class IndexController extends ActionController
         $template['stock'] = $this->params('stock');
         $template['page'] = $this->params('page', 1);
         // get count     
-        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
+        $columns = array('count' => new Expression('count(DISTINCT `product`)'));
         $select = $this->getModel('link')->select()->where($where)->columns($columns);
         $template['count'] = $this->getModel('link')->selectWith($select)->current()->count;
         // paginator
@@ -123,7 +126,7 @@ class IndexController extends ActionController
         $template['stock'] = $this->params('stock');
         $template['page'] = $this->params('page', 1);
         // get count     
-        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $columns = array('count' => new Expression('count(*)'));
         $select = $this->getModel('product')->select()->where($where)->columns($columns);
         $template['count'] = $this->getModel('product')->selectWith($select)->current()->count;
         // paginator
@@ -141,16 +144,23 @@ class IndexController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $product[$row->id] = $row->toArray();
-            $product[$row->id]['summary'] = Pi::service('markup')->render($product[$row->id]['summary'], 'text', 'html');
-            $product[$row->id]['description'] = Pi::service('markup')->render($product[$row->id]['description'], 'text', 'html');
+            // Set summary text
+            $product[$row->id]['summary'] = Pi::service('markup')->render(
+                $product[$row->id]['summary'], 'text', 'html');
+            // Set description text
+            $product[$row->id]['description'] = Pi::service('markup')->render(
+                $product[$row->id]['description'], 'text', 'html');
+            // Set times
             $product[$row->id]['time_create_view'] = _date($product[$row->id]['time_create']);
             $product[$row->id]['time_update_view'] = _date($product[$row->id]['time_update']);
             // Set product url
-            $product[$row->id]['link'] = $this->url('', array(
+            $product[$row->id]['productUrl'] = $this->url('', array(
                     'module'        => $module,
                     'controller'    => 'product',
                     'slug'          => $product[$row->id]['slug'],
                 ));
+            // Set cart url
+            $product[$row->id]['cartUrl'] = '#';
             // Set category information
             $productCategory = Json::decode($product[$row->id]['category']);
             foreach ($productCategory as $category) {
@@ -162,12 +172,41 @@ class IndexController extends ActionController
                     'slug'          => $categoryList[$category]['slug'],
                 ));
             }
+            // Set price
+            $product[$row->id]['price_view'] = Pi::api('shop', 'product')->viewPrice(
+                $product[$row->id]['price']);
+            $product[$row->id]['price_discount_view'] = Pi::api('shop', 'product')->viewPrice(
+                $product[$row->id]['price_discount']);
             // Set image url
             if ($product[$row->id]['image']) {
-                $product[$row->id]['originalUrl'] = Pi::url(sprintf('upload/%s/original/%s/%s', $this->config('image_path'), $product[$row->id]['path'], $product[$row->id]['image']));
-                $product[$row->id]['largeUrl'] = Pi::url(sprintf('upload/%s/large/%s/%s', $this->config('image_path'), $product[$row->id]['path'], $product[$row->id]['image']));
-                $product[$row->id]['mediumUrl'] = Pi::url(sprintf('upload/%s/medium/%s/%s', $this->config('image_path'), $product[$row->id]['path'], $product[$row->id]['image']));
-                $product[$row->id]['thumbUrl'] = Pi::url(sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $product[$row->id]['path'], $product[$row->id]['image']));
+                // Set image original url
+                $product[$row->id]['originalUrl'] = Pi::url(
+                    sprintf('upload/%s/original/%s/%s', 
+                        $this->config('image_path'), 
+                        $product[$row->id]['path'], 
+                        $product[$row->id]['image']
+                        ));
+                // Set image large url
+                $product[$row->id]['largeUrl'] = Pi::url(
+                    sprintf('upload/%s/large/%s/%s', 
+                        $this->config('image_path'), 
+                        $product[$row->id]['path'], 
+                        $product[$row->id]['image']
+                        ));
+                // Set image medium url
+                $product[$row->id]['mediumUrl'] = Pi::url(
+                    sprintf('upload/%s/medium/%s/%s', 
+                        $this->config('image_path'), 
+                        $product[$row->id]['path'], 
+                        $product[$row->id]['image']
+                        ));
+                // Set image thumb url
+                $product[$row->id]['thumbUrl'] = Pi::url(
+                    sprintf('upload/%s/thumb/%s/%s', 
+                        $this->config('image_path'), 
+                        $product[$row->id]['path'], 
+                        $product[$row->id]['image']
+                        ));
             }
         }
         // return product

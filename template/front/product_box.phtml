@@ -1,9 +1,17 @@
 <?php
     $this->css($this->assetModule('css/front.css'));
 ?>
-<div class="productBox">
-	<?php if($product['image']){ ?>
-    <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['link']); ?>"><img class="img-polaroid" src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
-	<?php } ?>
-	<h4><a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['link']); ?>"><?php echo $this->escape($product['title']); ?></a></h4>
-</div> 
+<li class="span4 productBox">
+	<div class="thumbnail">
+		<?php if($product['image']){ ?>
+    	<a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
+		<?php } ?>
+        <div class="caption">
+            <h4><a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a></h4>
+            <div class="clearFix">
+            	<div class="pull-left"><?php if($product['price_view']) { echo $this->escape($product['price_view']); } ?></div>
+            	<div class="pull-right"><a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['cartUrl']); ?>" class="btn"><i class="icon-shopping-cart"></i> <?php _e('Add To cart'); ?></a></div>
+            </div>
+        </div>
+	</div>
+</li>

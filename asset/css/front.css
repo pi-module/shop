@@ -1,5 +1,8 @@
 .productBox {
-	float: left;
-	width: 33.33%;
 	text-align: center;
 } 
+
+.caption {
+	background-color: #E5E5E5;
+	margin-top: 5px;
+}

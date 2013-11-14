@@ -35,7 +35,21 @@ class SearchForm  extends BaseForm
 
     public function init()
     {
-    	// title
+    	// type
+        $this->add(array(
+            'name' => 'type',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Title search type'),
+                'value_options' => array(
+                    1 => __('Included'),
+                    2 => __('Start with'),
+                    3 => __('End with'),
+                    4 => __('According'),
+                ),
+            ),
+        ));
+        // title
         $this->add(array(
             'name' => 'title',
             'options' => array(

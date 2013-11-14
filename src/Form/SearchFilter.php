@@ -20,9 +20,9 @@ class SearchFilter extends InputFilter
 {
     public function __construct($extra = null)
     {
-        // id
+        // type
         $this->add(array(
-            'name' => 'id',
+            'name' => 'type',
             'required' => false,
         ));
         // title
