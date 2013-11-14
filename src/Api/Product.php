@@ -22,6 +22,7 @@ use Zend\Json\Json;
  * Pi::api('shop', 'product')->extraCount($id);
  * Pi::api('shop', 'product')->attachCount($id);
  * Pi::api('shop', 'product')->viewPrice($price);
+ * Pi::api('shop', 'product')->canonizeProduct($product, $categoryList);
  */
 
 class Product extends AbstractApi
@@ -62,7 +63,7 @@ class Product extends AbstractApi
     	$select = Pi::model('product', $this->getModule())->select()->where($where);
     	$rowset = Pi::model('product', $this->getModule())->selectWith($select);
     	foreach ($rowset as $row) {
-            $list[$row->id] = $row->toArray();
+            $list[$row->id] = $this->canonizeProduct($row);
         }
         return $list;
     }	
@@ -106,5 +107,76 @@ class Product extends AbstractApi
         }
         return $viewPrice;
 
+    }
+
+    public function canonizeProduct($product, $categoryList = array())
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Get category list
+        $categoryList = (empty($categoryList)) ? Pi::api('shop', 'category')->categoryList() : $categoryList;
+        // boject to array
+        $product = $product->toArray();
+        // Set summary text
+        $product['summary'] = Pi::service('markup')->render($product['summary'], 'text', 'html');
+        // Set description text
+        $product['description'] = Pi::service('markup')->render($product['description'], 'text', 'html');
+        // Set times
+        $product['time_create_view'] = _date($product['time_create']);
+        $product['time_update_view'] = _date($product['time_update']);
+        // Set product url
+        $product['productUrl'] = Pi::service('url')->assemble('shop', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'product',
+            'slug'          => $product['slug'],
+        ));
+        // Set cart url
+        $product['cartUrl'] = '#';
+        // Set category information
+        $productCategory = Json::decode($product['category']);
+        foreach ($productCategory as $category) {
+            $product['categories'][$category]['title'] = $categoryList[$category]['title'];
+            $product['categories'][$category]['url'] = Pi::service('url')->assemble('shop', array(
+                'module'        => $this->getModule(),
+                'controller'    => 'category',
+                'slug'          => $categoryList[$category]['slug'],
+            ));
+        }
+        // Set price
+        $product['price_view'] = $this->viewPrice($product['price']);
+        $product['price_discount_view'] = $this->viewPrice($product['price_discount']);
+        // Set image url
+        if ($product['image']) {
+            // Set image original url
+            $product['originalUrl'] = Pi::url(
+                sprintf('upload/%s/original/%s/%s', 
+                    $config['image_path'], 
+                    $product['path'], 
+                    $product['image']
+                ));
+            // Set image large url
+            $product['largeUrl'] = Pi::url(
+                sprintf('upload/%s/large/%s/%s', 
+                    $config['image_path'], 
+                    $product['path'], 
+                    $product['image']
+                ));
+            // Set image medium url
+            $product['mediumUrl'] = Pi::url(
+                sprintf('upload/%s/medium/%s/%s', 
+                    $config['image_path'], 
+                    $product['path'], 
+                    $product['image']
+                ));
+            // Set image thumb url
+            $product['thumbUrl'] = Pi::url(
+                sprintf('upload/%s/thumb/%s/%s', 
+                    $config['image_path'], 
+                    $product['path'], 
+                    $product['image']
+                ));
+        }
+        // return product
+        return $product; 
     }
 }	

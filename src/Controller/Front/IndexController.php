@@ -75,10 +75,14 @@ class IndexController extends ActionController
         }
         // Set info
         $where = array('status' => 1, 'id' => $productId);
+        // Get category list
+        $categoryList = Pi::api('shop', 'category')->categoryList();
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
-        $product = $this->canonizeProduct($rowset);
+        foreach ($rowset as $row) {
+            $product[$row->id] = Pi::api('shop', 'product')->canonizeProduct($row, $categoryList);
+        }
         // return product
         return $product;
     }
@@ -98,13 +102,23 @@ class IndexController extends ActionController
         if (isset($stock) && $stock == 1) {
             $where['stock'] > 0;
         }
+        // Get category list
+        $categoryList = Pi::api('shop', 'category')->categoryList();
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)
         ->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('product')->selectWith($select);
-        $product = $this->canonizeProduct($rowset);
+        foreach ($rowset as $row) {
+            $product[$row->id] = Pi::api('shop', 'product')->canonizeProduct($row, $categoryList);
+        }
         // return product
         return $product;   
+    }
+
+    public function relatedList($product)
+    {
+        $related = Pi::api('shop', 'related')->getListAll($product);
+        return $related;
     }
 
     public function productPaginator($template, $where)
@@ -135,85 +149,6 @@ class IndexController extends ActionController
         // paginator
         $paginator = $this->canonizePaginator($template);
         return $paginator;
-    }
-
-    public function canonizeProduct($rowset)
-    {
-        $module = $this->params('module');
-        // Get category list
-        $categoryList = Pi::api('shop', 'category')->categoryList();
-        // Set product
-        $product = array();
-        // Make list
-        foreach ($rowset as $row) {
-            $product[$row->id] = $row->toArray();
-            // Set summary text
-            $product[$row->id]['summary'] = Pi::service('markup')->render(
-                $product[$row->id]['summary'], 'text', 'html');
-            // Set description text
-            $product[$row->id]['description'] = Pi::service('markup')->render(
-                $product[$row->id]['description'], 'text', 'html');
-            // Set times
-            $product[$row->id]['time_create_view'] = _date($product[$row->id]['time_create']);
-            $product[$row->id]['time_update_view'] = _date($product[$row->id]['time_update']);
-            // Set product url
-            $product[$row->id]['productUrl'] = $this->url('', array(
-                    'module'        => $module,
-                    'controller'    => 'product',
-                    'slug'          => $product[$row->id]['slug'],
-                ));
-            // Set cart url
-            $product[$row->id]['cartUrl'] = '#';
-            // Set category information
-            $productCategory = Json::decode($product[$row->id]['category']);
-            foreach ($productCategory as $category) {
-                $product[$row->id]['categories'][$category]['title'] = $categoryList[$category]['title'];
-                $product[$row->id]['categories'][$category]['slug'] = $categoryList[$category]['slug'];
-                $product[$row->id]['categories'][$category]['url'] = $this->url('', array(
-                    'module'        => $module,
-                    'controller'    => 'category',
-                    'slug'          => $categoryList[$category]['slug'],
-                ));
-            }
-            // Set price
-            $product[$row->id]['price_view'] = Pi::api('shop', 'product')->viewPrice(
-                $product[$row->id]['price']);
-            $product[$row->id]['price_discount_view'] = Pi::api('shop', 'product')->viewPrice(
-                $product[$row->id]['price_discount']);
-            // Set image url
-            if ($product[$row->id]['image']) {
-                // Set image original url
-                $product[$row->id]['originalUrl'] = Pi::url(
-                    sprintf('upload/%s/original/%s/%s', 
-                        $this->config('image_path'), 
-                        $product[$row->id]['path'], 
-                        $product[$row->id]['image']
-                        ));
-                // Set image large url
-                $product[$row->id]['largeUrl'] = Pi::url(
-                    sprintf('upload/%s/large/%s/%s', 
-                        $this->config('image_path'), 
-                        $product[$row->id]['path'], 
-                        $product[$row->id]['image']
-                        ));
-                // Set image medium url
-                $product[$row->id]['mediumUrl'] = Pi::url(
-                    sprintf('upload/%s/medium/%s/%s', 
-                        $this->config('image_path'), 
-                        $product[$row->id]['path'], 
-                        $product[$row->id]['image']
-                        ));
-                // Set image thumb url
-                $product[$row->id]['thumbUrl'] = Pi::url(
-                    sprintf('upload/%s/thumb/%s/%s', 
-                        $this->config('image_path'), 
-                        $product[$row->id]['path'], 
-                        $product[$row->id]['image']
-                        ));
-            }
-        }
-        // return product
-        return $product; 
     }
 
     public function canonizePaginator($template)
