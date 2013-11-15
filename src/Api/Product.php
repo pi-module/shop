@@ -210,8 +210,8 @@ class Product extends AbstractApi
         // Set cart url
         $product['cartUrl'] = '#';
         // Set category information
-        $productCategory = Json::decode($product['category']);
-        foreach ($productCategory as $category) {
+        $product['category'] = Json::decode($product['category']);
+        foreach ($product['category'] as $category) {
             $product['categories'][$category]['title'] = $categoryList[$category]['title'];
             $product['categories'][$category]['url'] = Pi::service('url')->assemble('shop', array(
                 'module'        => $this->getModule(),

@@ -98,9 +98,4 @@ class Image extends AbstractApi
             );
         }
 	}
-
-	public function remove()
-	{
-		
-	}
 }	

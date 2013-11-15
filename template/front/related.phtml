@@ -1,12 +1,12 @@
 <?php if (isset($related) && !empty($related)) { ?>
-<div class="productList clearfix">
+<div class="productRelated productList clearfix">
 	<div class="row-fluid">
 		<div class="page-header">
 			<h4><?php _e('Related Products'); ?></h4>
 	    </div>
         <ul class="thumbnails">
 		<?php foreach($related as $product) { ?>
-		<?php include $this->template('front/product_box'); ?>
+		<?php include $this->template('front/box'); ?>
 		<?php } ?>
 		</ul>
    </div>

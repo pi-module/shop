@@ -1,3 +1,4 @@
+<?php if (isset($attach) && !empty($attach)) { ?>
 <?php 
 	$this->jQuery();
 	$this->js($this->assetModule('js/lightbox.js'));
@@ -14,7 +15,7 @@
 	});");
 	$this->css($this->assetModule('css/lightbox.css'));
 ?>
-<div class="attach">
+<div class="productAttach">
 <?php if(!empty($attach['video'])) { ?>
 	<div class="attach-video">
 		<h4><?php _e('Attached video'); ?></h4>
@@ -118,3 +119,4 @@
 	</div>
 <?php } ?>
 </div>
+<?php } ?>

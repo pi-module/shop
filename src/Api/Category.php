@@ -65,20 +65,28 @@ class Category extends AbstractApi
     public function categoryList($parent = null)
     {
         $return = array();
-        $where = array('status' => 1);
-        $order = array('time_create DESC', 'id DESC');
-        if (!is_null($parent)) {
-            $where['parent'] = $parent;
-        }
-        $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
-        $rowset = Pi::model('category', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
-            $return[$row->id] = $row->toArray();
-            $return[$row->id]['url'] = Pi::service('url')->assemble('shop', array(
-                'module'        => $this->getModule(),
-                'controller'    => 'category',
-                'slug'          => $return[$row->id]['slug'],
-            ));
+        if (isset($_SESSION['shop']['category']) 
+            && !empty($_SESSION['shop']['category'])) 
+        {
+            $return = $_SESSION['shop']['category'];
+        } else {
+        
+            $where = array('status' => 1);
+            $order = array('time_create DESC', 'id DESC');
+            if (!is_null($parent)) {
+                $where['parent'] = $parent;
+            }
+            $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
+            $rowset = Pi::model('category', $this->getModule())->selectWith($select);
+            foreach ($rowset as $row) {
+                $return[$row->id] = $row->toArray();
+                $return[$row->id]['url'] = Pi::service('url')->assemble('shop', array(
+                    'module'        => $this->getModule(),
+                    'controller'    => 'category',
+                    'slug'          => $return[$row->id]['slug'],
+                ));
+            }
+            $_SESSION['shop']['category'] = $return;
         }
         return $return;
     }  

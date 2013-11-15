@@ -1,0 +1,24 @@
+<?php if(isset($productItem['price']) && $config['view_price']) { ?>
+<div class="productPrice well clearFix">
+    <?php if($productItem['stock'] > 0) { ?>
+        <div class="pull-left">
+        <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+            <strong class="text-error">
+             <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+            </strong>
+        <?php } ?>
+            <strong class="text-success">
+            <?php echo $this->escape($productItem['price_view']); ?>
+            </strong>
+            <span><a title="<?php echo $this->escape($productItem['title']); ?>" href="<?php echo $this->escape($productItem['cartUrl']); ?>" class="btn"><i class="icon-shopping-cart"></i> <?php _e('Add To cart'); ?></a></span>
+        </div>
+        <div class="pull-right">
+            <span class="label label-info">
+            <?php echo $this->escape($productItem['stock']); ?> <?php _e('in stock'); ?>
+            </span>
+        </div>
+    <?php } else { ?>
+        <div class="text-error"><strong><?php _e('Finished'); ?></strong></div>
+    <?php } ?>
+</div>
+<?php } ?>

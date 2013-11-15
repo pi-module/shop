@@ -3,15 +3,6 @@
 ?>
 <div class="shop">
 	<?php include $this->template('front/category'); ?>
-	<div class="productList clearfix">
-		<div class="row-fluid">
-            <ul class="thumbnails">
-			<?php foreach($products as $product) { ?>
-			<?php include $this->template('front/product_box'); ?>
-			<?php } ?>
-			</ul>
-    	</div>
-	</div>
-	<div class="clearfix"></div>
+	<?php include $this->template('front/list'); ?>
 	<div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
 </div>

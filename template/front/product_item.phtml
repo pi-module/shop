@@ -23,32 +23,7 @@
 				<a href="<?php echo $productItem['largeUrl']; ?>" title="<?php echo $this->escape($productItem['title']); ?>"><img class="img-polaroid" src="<?php echo $productItem['mediumUrl']; ?>" alt="<?php echo $this->escape($productItem['title']); ?>" /></a>
 			</div>
 			<div class="span8">
-                <div class="productPrice well clearFix">
-                	<?php if($productItem['price'] && $productItem['stock'] > 0) { ?>
-                	<div class="pull-left">
-                		<?php 
-                		if(
-                			$productItem['price_discount'] && 
-                		    ($productItem['price_discount'] > $productItem['price'])
-                		) { ?>
-                		<strong class="text-error">
-                			<del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
-                		</strong>
-                		<?php } ?>
-                		<strong class="text-success">
-                			<?php echo $this->escape($productItem['price_view']); ?>
-                		</strong>
-                		<span><a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['cartUrl']); ?>" class="btn"><i class="icon-shopping-cart"></i> <?php _e('Add To cart'); ?></a></span>
-                	</div>
-            	    <div class="pull-right">
-            	    	<span class="label label-info">
-            	    		<?php echo $this->escape($productItem['stock']); ?> <?php _e('in stock'); ?>
-            	    	</span>
-            	    </div>
-                	<?php } else { ?>
-                	<div class="text-error"><strong><?php _e('Finished'); ?></strong></div>
-                	<?php } ?>
-                </div>
+                <?php include $this->template('front/price'); ?>
 				<?php include $this->template('front/property'); ?>
 				<?php include $this->template('front/extra'); ?>
 				<div class="productSocial">
@@ -74,10 +49,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="productAttach">
-		<?php include $this->template('front/attach'); ?>
-	</div>
-	<div class="productRelated">
-		<?php include $this->template('front/related'); ?>
-	</div>
+	<?php include $this->template('front/attach'); ?>
+	<?php include $this->template('front/related'); ?>
+	<?php include $this->template('front/list'); ?>
 </div>

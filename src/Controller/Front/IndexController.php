@@ -30,7 +30,7 @@ class IndexController extends ActionController
         // Set product info
         $where = array('status' => 1);
         // Get product List
-        $product = $this->productList($where);
+        $productList = $this->productList($where);
         // Set paginator info
         $template = array(
             'controller' => 'index',
@@ -42,7 +42,8 @@ class IndexController extends ActionController
         $category = Pi::api('shop', 'category')->categoryList(0);
         // Set view
     	$this->view()->setTemplate('product_list');
-        $this->view()->assign('products', $product);
+        $this->view()->assign('productList', $productList);
+        $this->view()->assign('productTitle', __('New products'));
         $this->view()->assign('categories', $category);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);

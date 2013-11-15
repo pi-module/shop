@@ -57,6 +57,54 @@ return array(
             'filter' => 'number_int',
             'value' => 20
         ),
+        'view_related' => array(
+            'category' => 'view',
+            'title' => __('Show related products'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_extra' => array(
+            'category' => 'view',
+            'title' => __('Show extra fields'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_property' => array(
+            'category' => 'view',
+            'title' => __('Show product property'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_attach' => array(
+            'category' => 'view',
+            'title' => __('Show product attacehed files'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_incategory' => array(
+            'category' => 'view',
+            'title' => __('Show product attacehed files'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_price' => array(
+            'category' => 'view',
+            'title' => __('Show product price'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
         // Image
         'image_size' => array(
             'category' => 'image',
@@ -221,15 +269,6 @@ return array(
             'edit' => 'textarea',
             'filter' => 'string',
             'value' => 'jpg,jpeg,png,gif,avi,flv,mp3,mp4,pdf,docs,xdocs,zip,rar'
-        ),
-        // favorite
-        'favorite_bar' => array(
-            'category' => 'favorite',
-            'title' => __('Use favorite system'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
         ),
         // Hidden property
         'property_1_title' => array(
