@@ -1,14 +1,12 @@
-<?php if (isset($category) && !empty($category)) { ?>
-<div class="well well-small">
+<?php if (isset($categories) && !empty($categories)) { ?>
+<div class="well well-small clearfix">
+	<div class="page-header">
+		<strong><?php _e('Categories'); ?> : </strong>
+	</div>
 	<ul>
-		<?php foreach($category as $cat) { ?>
+		<?php foreach($categories as $category) { ?>
 		<li class="span4">
-			<a title="<?php echo $this->escape($cat['title']); ?>" href="<?php 
-			    echo $this->url('', array(
-                    'module'        => $module,
-                    'controller'    => 'category',
-                    'slug'          => $this->escape($cat['slug']),
-                )); ?>"><i class="icon-folder-open"></i> <?php echo $this->escape($cat['title']); ?></a>
+			<a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="icon-folder-open"></i> <?php echo $this->escape($category['title']); ?></a>
 		</li>
 		<?php } ?>
 	</ul>

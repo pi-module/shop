@@ -30,7 +30,6 @@ class ProductController extends IndexController
         $categoryList = Pi::api('shop', 'category')->categoryList();
         // Find product
         $product = $this->getModel('product')->find($slug, 'slug');
-        //$product = $this->canonizeProduct($product, $categoryList);
         $product = Pi::api('shop', 'product')->canonizeProduct($product, $categoryList);
         // Check product
         if (!$product || $product['status'] != 1) {
@@ -38,15 +37,29 @@ class ProductController extends IndexController
         }
         // Update Hits
         $this->getModel('product')->update(array('hits' => $product['hits'] + 1), array('id' => $product['id']));
+        // Set extra
+        if ($product['extra']) {
+            $extra = Pi::api('shop', 'extra')->Product($product['id']);
+            $this->view()->assign('extra', $extra);
+        }
         // Set related
-        $related = $this->relatedList($product['id']);
+        if ($product['related']) {
+            $related = Pi::api('shop', 'related')->getListAll($product['id']);
+            $this->view()->assign('related', $related);
+        }
+        // Get list of attached files
+        if ($product['attach']) {
+            $attach = Pi::api('shop', 'product')->AttachList($product['id']);
+            $this->view()->assign('attach', $attach);
+        }
         // Set view
         $this->view()->headTitle($product['seo_title']);
         $this->view()->headDescription($product['seo_description'], 'set');
         $this->view()->headKeywords($product['seo_keywords'], 'set');
         $this->view()->setTemplate('product_item');
-        $this->view()->assign('product', $product);
-        $this->view()->assign('related', $related);
+        $this->view()->assign('productItem', $product);
+        $this->view()->assign('categories', $product['categories']);
+        $this->view()->assign('tags', array('test 1', 'test 2'));
         $this->view()->assign('config', $config);
     }
 

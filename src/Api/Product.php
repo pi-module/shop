@@ -21,6 +21,8 @@ use Zend\Json\Json;
  * Pi::api('shop', 'product')->searchRelated($title, $type);
  * Pi::api('shop', 'product')->extraCount($id);
  * Pi::api('shop', 'product')->attachCount($id);
+ * Pi::api('shop', 'product')->relatedCount($id);
+ * Pi::api('shop', 'product')->AttachList($id);
  * Pi::api('shop', 'product')->viewPrice($price);
  * Pi::api('shop', 'product')->canonizeProduct($product, $categoryList);
  */
@@ -71,7 +73,7 @@ class Product extends AbstractApi
     /**
      * Set number of used extra fields for selected product
      */
-    public function ExtraCount($id)
+    public function extraCount($id)
     {
         // Get attach count
         $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
@@ -84,7 +86,7 @@ class Product extends AbstractApi
     /**
      * Set number of attach files for selected product
      */
-    public function AttachCount($id)
+    public function attachCount($id)
     {
         // Get attach count
         $where = array('product' => $id);
@@ -93,6 +95,81 @@ class Product extends AbstractApi
         $count = Pi::model('attach', $this->getModule())->selectWith($select)->current()->count;
         // Set attach count
         Pi::model('product', $this->getModule())->update(array('attach' => $count), array('id' => $id));
+    }
+
+    /**
+     * Set number of attach files for selected product
+     */
+    public function relatedCount($id)
+    {
+        // Get attach count
+        $where = array('product_id' => $id);
+        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $select = Pi::model('related', $this->getModule())->select()->columns($columns)->where($where);
+        $count = Pi::model('related', $this->getModule())->selectWith($select)->current()->count;
+        // Set attach count
+        Pi::model('product', $this->getModule())->update(array('related' => $count), array('id' => $id));
+    }
+
+    /**
+     * Get list of attach files
+     */
+    public function AttachList($id)
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // Set info
+        $file = array();
+        $where = array('product' => $id, 'status' => 1);
+        $order = array('time_create DESC', 'id DESC');
+        // Get all attach files
+        $select = Pi::model('attach', $this->getModule())->select()->where($where)->order($order);
+        $rowset = Pi::model('attach', $this->getModule())->selectWith($select);
+        // Make list
+        foreach ($rowset as $row) {
+            $file[$row->type][$row->id] = $row->toArray();
+            $file[$row->type][$row->id]['time_create_view'] = _date($file[$row->type][$row->id]['time_create']);
+            if ($file[$row->type][$row->id]['type'] == 'image') {
+                // Set image original url
+                $file[$row->type][$row->id]['originalUrl'] = Pi::url(
+                    sprintf('upload/%s/original/%s/%s', 
+                        $config['image_path'], 
+                        $file[$row->type][$row->id]['path'], 
+                        $file[$row->type][$row->id]['file']
+                    ));
+                // Set image large url
+                $file[$row->type][$row->id]['largeUrl'] = Pi::url(
+                    sprintf('upload/%s/large/%s/%s', 
+                        $config['image_path'], 
+                        $file[$row->type][$row->id]['path'], 
+                        $file[$row->type][$row->id]['file']
+                    ));
+                // Set image medium url
+                $file[$row->type][$row->id]['mediumUrl'] = Pi::url(
+                    sprintf('upload/%s/medium/%s/%s', 
+                        $config['image_path'], 
+                        $file[$row->type][$row->id]['path'], 
+                        $file[$row->type][$row->id]['file']
+                    ));
+                // Set image thumb url
+                $file[$row->type][$row->id]['thumbUrl'] = Pi::url(
+                    sprintf('upload/%s/thumb/%s/%s', 
+                        $config['image_path'], 
+                        $file[$row->type][$row->id]['path'], 
+                        $file[$row->type][$row->id]['file']
+                    ));
+            } else {
+                $file[$row->type][$row->id]['fileUrl'] = Pi::url(
+                    sprintf('upload/%s/%s/%s/%s', 
+                        $config['file_path'], 
+                        $file[$row->type][$row->id]['type'], 
+                        $file[$row->type][$row->id]['path'], 
+                        $file[$row->type][$row->id]['file']
+                    ));
+            }
+        }
+        // return
+        return $file;
     }
 
     /**

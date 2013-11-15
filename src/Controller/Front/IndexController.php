@@ -43,7 +43,7 @@ class IndexController extends ActionController
         // Set view
     	$this->view()->setTemplate('product_list');
         $this->view()->assign('products', $product);
-        $this->view()->assign('category', $category);
+        $this->view()->assign('categories', $category);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
     }
@@ -113,12 +113,6 @@ class IndexController extends ActionController
         }
         // return product
         return $product;   
-    }
-
-    public function relatedList($product)
-    {
-        $related = Pi::api('shop', 'related')->getListAll($product);
-        return $related;
     }
 
     public function productPaginator($template, $where)

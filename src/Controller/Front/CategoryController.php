@@ -49,7 +49,7 @@ class CategoryController extends IndexController
         // Set view
         $this->view()->setTemplate('product_list');
         $this->view()->assign('products', $product);
-        $this->view()->assign('category', $category);
+        $this->view()->assign('categories', $category);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
     }

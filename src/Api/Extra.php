@@ -18,7 +18,7 @@ use Pi\Application\AbstractApi;
 
 /*
  * Pi::api('shop', 'extra')->Get();
- * Pi::api('shop', 'extra')->Set($extra, $story);
+ * Pi::api('shop', 'extra')->Set($extra, $product);
  * Pi::api('shop', 'extra')->Form($values);
  * Pi::api('shop', 'extra')->Product($id);
  */
@@ -70,7 +70,7 @@ class Extra extends AbstractApi
                 $row->save();
             }
         }
-        // Set Story Extra Count
+        // Set Product Extra Count
         Pi::api('shop', 'product')->ExtraCount($product);
     }
 
@@ -90,15 +90,15 @@ class Extra extends AbstractApi
     }
 
     /*
-      * Get all extra field data for selected story
+      * Get all extra field data for selected Product
       */
     public function Product($id)
     {
         // Get data list
-        $whereData = array('story' => $id);
+        $whereData = array('product' => $id);
         $columnData = array('field', 'data');
-        $select = Pi::model('data', $this->getModule())->select()->where($whereData)->columns($columnData);
-        $rowset = Pi::model('data', $this->getModule())->selectWith($select);
+        $select = Pi::model('field_data', $this->getModule())->select()->where($whereData)->columns($columnData);
+        $rowset = Pi::model('field_data', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $data[$row->field] = $row->toArray();
         }
@@ -114,7 +114,7 @@ class Extra extends AbstractApi
                 $field[$row->id] = $row->toArray();
                 $field[$row->id]['data'] = $data[$field[$row->id]['id']]['data'];
                 if ($field[$row->id]['image']) {
-                    $field[$row->id]['imageurl'] = Pi::url('upload/' . $this->getModule() . '/extra/' . $field[$row->id]['image']);
+                    $field[$row->id]['imageUrl'] = Pi::url('upload/' . $this->getModule() . '/extra/' . $field[$row->id]['image']);
                 }
             }
         }

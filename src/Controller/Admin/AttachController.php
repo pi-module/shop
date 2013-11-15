@@ -329,14 +329,8 @@ class AttachController extends ActionController
                 // Copy image to new path
                 Pi::service('file')->copy($oldPath, $newPach);
                 Pi::service('file')->remove($oldPath);
-                // Set image path
-                $largeImage = Pi::path(sprintf('upload/%s/large/%s/%s', $this->config('image_path'), $path, $file));
-                $mediumImage = Pi::path(sprintf('upload/%s/medium/%s/%s', $this->config('image_path'), $path, $file));
-                $thumbImage = Pi::path(sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $path, $file));
-                // Resize
-                Pi::service('image')->resize($newPach, array($this->config('image_largew'), $this->config('image_largeh')), $largeImage);
-                Pi::service('image')->resize($newPach, array($this->config('image_mediumw'), $this->config('image_mediumh')), $mediumImage);
-                Pi::service('image')->resize($newPach, array($this->config('image_thumbw'), $this->config('image_thumbh')), $thumbImage);
+                // process image
+                Pi::api('shop', 'image')->process($file, $path);
                 break;
 
             // Move video, audio, pdf, doc

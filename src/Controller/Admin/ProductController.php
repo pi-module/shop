@@ -106,7 +106,13 @@ class ProductController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $product[$row->id] = $row->toArray();
-            $product[$row->id]['time_create'] = _date($product[$row->id]['time_create']);
+            $product[$row->id]['time_create_view'] = _date($product[$row->id]['time_create']);
+            $product[$row->id]['time_update_view'] = _date($product[$row->id]['time_update']);
+            $product[$row->id]['productUrl'] = $this->url('shop', array(
+                'module'        => $module,
+                'controller'    => 'product',
+                'slug'          => $product[$row->id]['slug'],
+            ));
         }
         // Go to update page if empty
         if (empty($product) && empty($status)) {
@@ -421,6 +427,8 @@ class ProductController extends ActionController
                 $return['id'] = $product['id'];
                 $return['relatedstatus'] = 1;
         	}
+            // update related count
+            Pi::api('shop', 'product')->relatedCount($product['id']);
         }
         return $return;
     }
