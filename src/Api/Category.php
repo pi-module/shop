@@ -66,7 +66,8 @@ class Category extends AbstractApi
     {
         $return = array();
         if (isset($_SESSION['shop']['category']) 
-            && !empty($_SESSION['shop']['category'])) 
+            && !empty($_SESSION['shop']['category'])
+            && $_SESSION['shop']['parent'] == $parent) 
         {
             $return = $_SESSION['shop']['category'];
         } else {
@@ -87,6 +88,7 @@ class Category extends AbstractApi
                 ));
             }
             $_SESSION['shop']['category'] = $return;
+            $_SESSION['shop']['parent'] == $parent;
         }
         return $return;
     }  
