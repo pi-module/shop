@@ -48,10 +48,6 @@ class Shop extends Standard
         $matches = array();
         $parts = array_filter(explode($this->structureDelimiter, $path));
 
-        echo '<pre>';
-        print_r($parts);
-        echo '</pre>';
-
         // Set controller
         $matches = array_merge($this->defaults, $matches);
         if (isset($parts[0]) && in_array($parts[0], $this->controllerList)) {
@@ -191,10 +187,6 @@ class Shop extends Standard
             && !in_array($matches['stock'], array(0,1))) {
             unset($matches['stock']);
         }
-            
-        echo '<pre>';
-        print_r($matches);
-        echo '</pre>';
 
         return $matches;
     }

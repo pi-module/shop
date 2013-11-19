@@ -11,7 +11,7 @@
                 <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
             </h4>
             <?php if(isset($product['price']) && $config['view_price']) { ?>
-            <div class="productPrice clearFix">
+            <div class="productPrice clearfix">
                 <div class="pull-left productPrice">
                 <?php if($product['stock'] > 0) { ?>
                     <div class="text-success">
