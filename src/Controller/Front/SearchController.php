@@ -162,7 +162,7 @@ class SearchController extends IndexController
             $where['id'] = $productId;
         }
         // Get product List
-        $product = $this->searchList($where);
+        $productList = $this->searchList($where);
         // Set paginator info
         $template = array(
             'controller' => 'search',
@@ -172,7 +172,8 @@ class SearchController extends IndexController
         $paginator = $this->searchPaginator($template, $where);
         // Set view
         $this->view()->setTemplate('product_list');
-        $this->view()->assign('products', $product);
+        $this->view()->assign('productList', $productList);
+        $this->view()->assign('productTitle', __('Search result'));
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
     }	

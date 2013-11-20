@@ -22,6 +22,7 @@ class SearchForm  extends BaseForm
     {
         $this->property = $option['property'];
         $this->field = $option['field'];
+        $this->config = Pi::service('registry')->config->read('shop', 'search');
         parent::__construct($name);
     }
 
@@ -35,20 +36,30 @@ class SearchForm  extends BaseForm
 
     public function init()
     {
-    	// type
-        $this->add(array(
-            'name' => 'type',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Title search type'),
-                'value_options' => array(
-                    1 => __('Included'),
-                    2 => __('Start with'),
-                    3 => __('End with'),
-                    4 => __('According'),
+        // type
+        if ($this->config['search_type']) {
+            $this->add(array(
+                'name' => 'type',
+                'type' => 'select',
+                'options' => array(
+                    'label' => __('Title search type'),
+                    'value_options' => array(
+                        1 => __('Included'),
+                        2 => __('Start with'),
+                        3 => __('End with'),
+                        4 => __('According'),
+                    ),
                 ),
-            ),
-        ));
+            ));
+        } else {
+            $this->add(array(
+                'name' => 'type',
+                'attributes' => array(
+                    'type' => 'hidden',
+                    'value' => 1,
+                ),
+            ));
+        }
         // title
         $this->add(array(
             'name' => 'title',
@@ -61,41 +72,68 @@ class SearchForm  extends BaseForm
                 'class' => 'span6',
             )
         ));
-        // price_from
-        $this->add(array(
-            'name' => 'price_from',
-            'options' => array(
-                'label' => __('Price from'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'span6',
-            )
-        ));
-        // price_to
-        $this->add(array(
-            'name' => 'price_to',
-            'options' => array(
-                'label' => __('Price to'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'span6',
-            )
-        ));
+        // price
+        if ($this->config['search_price']) {
+            // price_from
+            $this->add(array(
+                'name' => 'price_from',
+                'options' => array(
+                    'label' => __('Price from'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span6',
+                )
+            ));
+            // price_to
+            $this->add(array(
+                'name' => 'price_to',
+                'options' => array(
+                    'label' => __('Price to'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span6',
+                )
+            ));
+        } else {
+            $this->add(array(
+                'name' => 'price_from',
+                'attributes' => array(
+                    'type' => 'hidden',
+                ),
+            ));
+            $this->add(array(
+                'name' => 'price_to',
+                'attributes' => array(
+                    'type' => 'hidden',
+                ),
+            ));
+        }
         // category
-        $this->add(array(
-            'name' => 'category',
-            'type' => 'Module\Shop\Form\Element\Category',
-            'options' => array(
-                'label' => __('Category'),
-                'category' => '',
-            ),
-        ));
+        if ($this->config['search_category']) {
+            $this->add(array(
+                'name' => 'category',
+                'type' => 'Module\Shop\Form\Element\Category',
+                'options' => array(
+                    'label' => __('Category'),
+                    'category' => '',
+                ),
+            ));
+        } else {
+            $this->add(array(
+                'name' => 'category',
+                'attributes' => array(
+                    'type' => 'hidden',
+                ),
+            ));
+        }
         // property_1
-        if (!empty($this->property['property_1_option']['value'])) {
+        if (!empty($this->property['property_1_option']['value']) 
+            && $this->config['search_property_1']) 
+        {
             $this->add(array(
                 'name' => 'property_1',
                 'type' => 'select',
@@ -113,7 +151,9 @@ class SearchForm  extends BaseForm
             ));
         }
         // property_2
-        if (!empty($this->property['property_2_option']['value'])) {
+        if (!empty($this->property['property_2_option']['value']) 
+            && $this->config['search_property_2']) 
+        {
             $this->add(array(
                 'name' => 'property_2',
                 'type' => 'select',
@@ -131,7 +171,9 @@ class SearchForm  extends BaseForm
             ));
         }
         // property_3
-        if (!empty($this->property['property_3_option']['value'])) {
+        if (!empty($this->property['property_3_option']['value']) 
+            && $this->config['search_property_3']) 
+        {
             $this->add(array(
                 'name' => 'property_3',
                 'type' => 'select',
@@ -149,7 +191,9 @@ class SearchForm  extends BaseForm
             ));
         }
         // property_4
-        if (!empty($this->property['property_4_option']['value'])) {
+        if (!empty($this->property['property_4_option']['value']) 
+            && $this->config['search_property_4']) 
+        {
             $this->add(array(
                 'name' => 'property_4',
                 'type' => 'select',
@@ -167,7 +211,9 @@ class SearchForm  extends BaseForm
             ));
         }
         // property_5
-        if (!empty($this->property['property_5_option']['value'])) {
+        if (!empty($this->property['property_5_option']['value']) 
+            && $this->config['search_property_5']) 
+        {
             $this->add(array(
                 'name' => 'property_5',
                 'type' => 'select',
@@ -185,7 +231,9 @@ class SearchForm  extends BaseForm
             ));
         }
         // property_6
-        if (!empty($this->property['property_6_option']['value'])) {
+        if (!empty($this->property['property_6_option']['value']) 
+            && $this->config['search_property_6']) 
+        {
             $this->add(array(
                 'name' => 'property_6',
                 'type' => 'select',
@@ -203,7 +251,9 @@ class SearchForm  extends BaseForm
             ));
         }
         // property_7
-        if (!empty($this->property['property_7_option']['value'])) {
+        if (!empty($this->property['property_7_option']['value']) 
+            && $this->config['search_property_7']) 
+        {
             $this->add(array(
                 'name' => 'property_7',
                 'type' => 'select',
@@ -221,7 +271,9 @@ class SearchForm  extends BaseForm
             ));
         }
         // property_8
-        if (!empty($this->property['property_8_option']['value'])) {
+        if (!empty($this->property['property_8_option']['value']) 
+            && $this->config['search_property_8']) 
+        {
             $this->add(array(
                 'name' => 'property_8',
                 'type' => 'select',
@@ -239,7 +291,9 @@ class SearchForm  extends BaseForm
             ));
         }
         // property_9
-        if (!empty($this->property['property_9_option']['value'])) {
+        if (!empty($this->property['property_9_option']['value']) 
+            && $this->config['search_property_9']) 
+        {
             $this->add(array(
                 'name' => 'property_9',
                 'type' => 'select',
@@ -257,7 +311,9 @@ class SearchForm  extends BaseForm
             ));
         }
         // property_10
-        if (!empty($this->property['property_10_option']['value'])) {
+        if (!empty($this->property['property_10_option']['value']) 
+            && $this->config['search_property_10']) 
+        {
             $this->add(array(
                 'name' => 'property_10',
                 'type' => 'select',

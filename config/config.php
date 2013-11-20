@@ -34,6 +34,10 @@ return array(
             'name' => 'file'
         ),
         array(
+            'title' => __('Search'),
+            'name' => 'search'
+        ),
+        array(
             'title' => __('Property'),
             'name' => 'property'
         ),
@@ -269,6 +273,111 @@ return array(
             'edit' => 'textarea',
             'filter' => 'string',
             'value' => 'jpg,jpeg,png,gif,avi,flv,mp3,mp4,pdf,docs,xdocs,zip,rar'
+        ),
+        // Search 
+        'search_type' => array(
+            'category' => 'search',
+            'title' => __('Show search type'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_price' => array(
+            'category' => 'search',
+            'title' => __('Show search price'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_category' => array(
+            'category' => 'search',
+            'title' => __('Show search category'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_property_1' => array(
+            'category' => 'search',
+            'title' => __('Show search property 1'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_property_2' => array(
+            'category' => 'search',
+            'title' => __('Show search property 2'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_property_3' => array(
+            'category' => 'search',
+            'title' => __('Show search property 3'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_property_4' => array(
+            'category' => 'search',
+            'title' => __('Show search property 4'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_property_5' => array(
+            'category' => 'search',
+            'title' => __('Show search property 5'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_property_6' => array(
+            'category' => 'search',
+            'title' => __('Show search property 6'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_property_7' => array(
+            'category' => 'search',
+            'title' => __('Show search property 7'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_property_8' => array(
+            'category' => 'search',
+            'title' => __('Show search property 8'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_property_9' => array(
+            'category' => 'search',
+            'title' => __('Show search property 9'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'search_property_10' => array(
+            'category' => 'search',
+            'title' => __('Show search property 10'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
         ),
         // Hidden property
         'property_1_title' => array(
