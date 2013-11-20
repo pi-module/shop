@@ -59,6 +59,8 @@ class ProductController extends IndexController
             $this->view()->assign('productList', $productList);
             $this->view()->assign('productTitle', __('New products'));
         }
+        // Set tag
+        $tag = Pi::service('tag')->get($module, $product['id'], '');
         // Set view
         $this->view()->headTitle($product['seo_title']);
         $this->view()->headDescription($product['seo_description'], 'set');
@@ -67,6 +69,7 @@ class ProductController extends IndexController
         $this->view()->assign('productItem', $product);
         $this->view()->assign('categories', $product['categories']);
         $this->view()->assign('config', $config);
+        $this->view()->assign('tag', $tag);
     }
 
     public function printAction()

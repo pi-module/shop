@@ -156,6 +156,13 @@ class ProductFilter extends InputFilter
                 ),
             ),
         ));
+        // tag
+        if (Pi::service('module')->isActive('tag')) {
+            $this->add(array(
+                'name' => 'tag',
+                'required' => false,
+            ));
+        }
         // property_1
         $this->add(array(
             'name' => 'property_1',

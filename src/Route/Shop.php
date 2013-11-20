@@ -167,7 +167,39 @@ class Shop extends Standard
                     break;
 
                 case 'tag':
-                
+                    if (!empty($parts[1])) {
+                        if ($parts[1] == 'term') {
+                            $matches['action'] = 'term';
+                            $matches['slug'] = urldecode($parts[2]);
+                            // Set page
+                            if (isset($parts[3]) && $parts[3] == 'page') {
+                                $matches['page'] = intval($parts[4]);
+                                // Set sort and stock
+                                if (isset($parts[5]) && $parts[5] == 'sort' 
+                                    && isset($parts[7]) && $parts[7] == 'stock') {
+                                    $matches['sort'] = urldecode($parts[6]);
+                                    $matches['stock'] = urldecode($parts[8]);
+                                } elseif (isset($parts[5]) && $parts[5] == 'sort') {
+                                    $matches['sort'] = urldecode($parts[6]);
+                                } elseif (isset($parts[5]) && $parts[5] == 'stock') {
+                                    $matches['stock'] = urldecode($parts[6]);
+                                } 
+                            } else {
+                                // Set sort and stock
+                                if (isset($parts[3]) && $parts[3] == 'sort' 
+                                    && isset($parts[5]) && $parts[5] == 'stock') {
+                                    $matches['sort'] = urldecode($parts[4]);
+                                    $matches['stock'] = urldecode($parts[6]);
+                                } elseif (isset($parts[3]) && $parts[3] == 'sort') {
+                                    $matches['sort'] = urldecode($parts[4]);
+                                } elseif (isset($parts[3]) && $parts[3] == 'stock') {
+                                    $matches['stock'] = urldecode($parts[4]);
+                                } 
+                            }
+                        } elseif ($parts[1] == 'list') {
+                            $matches['action'] = 'list';
+                        }
+                    }
                     break;    
 
                 case 'user':

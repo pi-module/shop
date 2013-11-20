@@ -1,0 +1,22 @@
+<?php
+    $this->css($this->assetModule('css/front.css'));
+?>
+<div class="shop">
+<?php if (isset($tagList) && !empty($tagList)) { ?>
+<div class="tagList clearfix">
+	<div class="page-header">
+		<h4><?php _e('Tag list'); ?></h4>
+	</div>
+	<div class="row-fluid">
+		<?php foreach($tagList as $tag) { ?>
+		<div class="well well-small span3">
+			<a title="<?php echo $this->escape($tag['term']); ?>" href="<?php echo $this->escape($tag['url']); ?>">
+				<i class="icon-tag"></i> <?php echo $this->escape($tag['term']); ?> ( <?php echo $this->escape($tag['count']); ?> )
+			</a>
+		</div>
+		<?php } ?>
+   </div>
+</div>
+<div class="clearfix"></div>
+<?php } ?>
+</div>

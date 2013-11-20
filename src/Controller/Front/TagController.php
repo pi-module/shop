@@ -19,8 +19,65 @@ use Zend\Json\Json;
 
 class TagController extends IndexController
 {
-	public function indexAction()
+	public function termAction()
     {
-    	$this->view()->setTemplate('empty');
+        // Get info from url
+        $module = $this->params('module');
+        $slug = $this->params('slug');
+        $action = $this->params('action');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Check slug
+        if (!isset($slug) || empty($slug)) {
+            $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+            $this->jump($url, __('The tag not found.'));
+        }
+        // Get id from tag module
+        $tags = Pi::service('tag')->getList($module, $slug);
+        // Check slug
+        if (empty($tags)) {
+        	$url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+            $this->jump($url, __('The tag not found.'));
+        }
+        // Set info
+        $where = array('status' => 1, 'product' => $tags);
+        // Get product List
+        $productList = $this->productList($where);
+        // Set paginator info
+        $template = array(
+            'controller' => 'tag',
+            'action' => 'term',
+            );
+        // Get paginator
+        $paginator = $this->productPaginator($template, $where);
+        // Set view
+        $this->view()->setTemplate('product_list');
+        $this->view()->assign('productList', $productList);
+        $this->view()->assign('productTitle', sprintf(__('All products by %s tag'), $slug));
+        $this->view()->assign('paginator', $paginator);
+        $this->view()->assign('config', $config);
+    }
+
+    public function listAction()
+    {
+        // Get info from url
+        $module = $this->params('module');
+    	$where = array('module' => $module);
+        $order = array('count DESC', 'id DESC');
+    	$select = Pi::model('stats', 'tag')->select()->where($where)->order($order);
+    	$rowset = Pi::model('stats', 'tag')->selectWith($select);
+    	foreach ($rowset as $row) {
+            $tag = Pi::model('tag', 'tag')->find($row->tag);
+            $tagList[$row->id] = $row->toArray();
+            $tagList[$row->id]['term'] = $tag['term'];
+            $tagList[$row->id]['url'] = $this->url('', array(
+            	'controller' => 'tag', 
+            	'action' => 'term', 
+            	'slug' => urldecode($tag['term'])
+            	));
+        }
+        // Set view
+        $this->view()->setTemplate('tag_list');
+        $this->view()->assign('tagList', $tagList);
     }
 }

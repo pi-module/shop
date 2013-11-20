@@ -1,7 +1,22 @@
-<?php if (isset($tag) && !empty($tag)) { ?>
-<div class="well well-small">
+<?php
+if (isset($tag) && !empty($tag)) { 
+	if (is_array($tag)) { 
+?>
+<div class="well well-small clearfix">
 	<div class="page-header">
 		<strong><?php _e('Tags'); ?> : </strong>
 	</div>
+	<ul>
+		<?php foreach($tag as $term) { ?>
+		<li class="span4">
+			<a title="<?php echo $this->escape($term); ?>" href="<?php echo $this->url('', array('controller' => 'tag', 'action' => 'term', 'slug' => urldecode($term))); ?>"><i class="icon-tag"></i> <?php echo $this->escape($term); ?></a>
+		</li>
+		<?php } ?>
+	</ul>
 </div>
-<?php } ?>
+<?php } else { ?>
+
+<?php 
+	} 
+} 
+?>

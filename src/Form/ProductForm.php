@@ -274,6 +274,20 @@ class ProductForm  extends BaseForm
                 'class' => 'span6',
             )
         ));
+        // tag
+        if (Pi::service('module')->isActive('tag')) {
+            $this->add(array(
+                'name' => 'tag',
+                'options' => array(
+                    'label' => __('Tags'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span6',
+                )
+            ));
+        }
         // extra_property
         $this->add(array(
             'name' => 'extra_property',
