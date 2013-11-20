@@ -59,6 +59,16 @@ class ProductController extends IndexController
             $this->view()->assign('productList', $productList);
             $this->view()->assign('productTitle', __('New products'));
         }
+        if ($config['view_review_official'] && $config['view_review_user']) {
+            $review = array();
+            if ($config['view_review_official']) {
+                $review['official'] = Pi::api('shop', 'review')->official($product['id']);
+            }
+            if ($config['view_review_user']) {
+                $review['list'] = Pi::api('shop', 'review')->listReview($product['id'], 1);
+            }
+            $this->view()->assign('review', $review);
+        }
         // Set tag
         $tag = Pi::service('tag')->get($module, $product['id'], '');
         // Set view
@@ -74,6 +84,11 @@ class ProductController extends IndexController
 
     public function printAction()
     {
-    	$this->view()->setTemplate('empty');
+        $this->view()->setTemplate('empty');
+    }
+
+    public function reviewAction()
+    {
+        $this->view()->setTemplate('empty');
     }
 }

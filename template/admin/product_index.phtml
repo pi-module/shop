@@ -41,6 +41,7 @@
 				<a class="btn" title="<?php _e('View'); ?>" href="<?php echo $product['productUrl']; ?>"><i class="icon-edit"></i> <?php _e('View'); ?></a>
 				<a class="btn" title="<?php _e('Attach'); ?>" href="<?php echo $this->url('', array('controller' => 'attach', 'action' => 'add', 'id' => $product['id'])); ?>"><i class="icon-edit"></i> <?php _e('Attach'); ?></a>
 				<a class="btn" title="<?php _e('Related'); ?>" href="<?php echo $this->url('', array('action' => 'related', 'id' => $product['id'])); ?>"><i class="icon-edit"></i> <?php _e('Related'); ?></a>
+				<a class="btn" title="<?php _e('Review'); ?>" href="<?php echo $this->url('', array('action' => 'review', 'id' => $product['id'])); ?>"><i class="icon-edit"></i> <?php _e('Review'); ?></a>
 				<a class="btn" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'update', 'id' => $product['id'])); ?>"><i class="icon-edit"></i> <?php _e('Edit'); ?></a>
 			</td>
 		</tr>

@@ -124,8 +124,11 @@ class Shop extends Standard
 
                 case 'product':
                     if (!empty($parts[1])) {
-                        if ($parts[1] == 'result') {
+                        if ($parts[1] == 'print') {
                             $matches['action'] = 'print';
+                            $matches['slug'] = urldecode($parts[2]);
+                        } elseif($parts[1] == 'review') {   
+                            $matches['action'] = 'review';
                             $matches['slug'] = urldecode($parts[2]);
                         } else {
                             $matches['slug'] = urldecode($parts[1]);

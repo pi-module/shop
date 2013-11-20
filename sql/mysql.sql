@@ -23,6 +23,7 @@ CREATE TABLE `{product}` (
   `attach` tinyint(3) unsigned NOT NULL,
   `extra` tinyint(3) unsigned NOT NULL,
   `related` tinyint(3) unsigned NOT NULL,
+  `review` tinyint(3) unsigned NOT NULL,
   `recommended` tinyint(1) unsigned NOT NULL,
   `stock` int(10) unsigned NOT NULL,
   `stock_alert` int(10) unsigned NOT NULL,
@@ -119,6 +120,18 @@ CREATE TABLE `{spotlight}` (
   `time_publish` int(10) unsigned NOT NULL,
   `time_expire` int(10) unsigned NOT NULL,
   `status` tinyint(1) unsigned NOT NULL default '1',
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `{review}` (
+  `id` int(10) unsigned NOT NULL  auto_increment,
+  `user` int(10) unsigned NOT NULL,
+  `product` int(10) unsigned NOT NULL,
+  `title` varchar (255) NOT NULL,
+  `description` text,
+  `time_create` int(10) unsigned NOT NULL,
+  `official` tinyint(1) unsigned NOT NULL,
+  `status` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 );
 

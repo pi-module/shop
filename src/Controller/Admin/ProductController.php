@@ -27,6 +27,8 @@ use Module\Shop\Form\ExtraForm;
 use Module\Shop\Form\ExtraFilter;
 use Module\Shop\Form\SpotlightForm;
 use Module\Shop\Form\SpotlightFilter;
+use Module\Shop\Form\ReviewForm;
+use Module\Shop\Form\ReviewFilter;
 use Zend\Json\Json;
 
 class ProductController extends ActionController
@@ -49,7 +51,7 @@ class ProductController extends ActionController
     	'seo_description', 'status', 'time_create', 'time_update', 'uid', 'hits', 'sales', 'image', 'path', 'comment',
     	'point', 'count', 'favorite', 'attach', 'extra', 'recommended', 'stock', 'stock_alert', 'price', 
     	'price_discount', 'property_1', 'property_2', 'property_3', 'property_4', 'property_5', 'property_6',
-    	'property_7', 'property_8', 'property_9', 'property_10', 
+    	'property_7', 'property_8', 'property_9', 'property_10', 'review',
     );
 
     /**
@@ -64,6 +66,13 @@ class ProductController extends ActionController
      */
     protected $spotlightColumns = array(
         'id', 'product', 'category', 'time_publish', 'time_expire', 'status'
+    );
+
+    /**
+     * review Columns
+     */
+    protected $reviewColumns = array(
+        'id', 'user', 'product', 'title', 'description', 'time_create', 'official', 'status'
     );
 
     /**
@@ -783,5 +792,95 @@ class ProductController extends ActionController
             'status' => $status,
             'message' => $message,
         );
+    }
+
+    public function reviewAction()
+    {
+        // Get id and status
+        $id = $this->params('id');
+        // find product
+        $product = $this->getModel('product')->find($id)->toArray();
+        // find official review
+        $reviewOfficial = Pi::api('shop', 'review')->official($product['id']);
+        // find list review
+        $reviewList = Pi::api('shop', 'review')->listReview($product['id']);
+        // Set view
+        $this->view()->setTemplate('product_review');
+        $this->view()->assign('reviewOfficial', $reviewOfficial);
+        $this->view()->assign('reviewList', $reviewList);
+        $this->view()->assign('product', $product);
+        $this->view()->assign('test', $reviewOfficial);
+    }
+
+    public function reviewUpdateAction()
+    {
+        // Get id and product
+        $id = $this->params('id');
+        $product = $this->params('product');
+        // Check product and official
+        if ($product) {
+            $product = $this->getModel('product')->find($product)->toArray();
+            $hasOfficial = Pi::api('shop', 'review')->hasOfficial($product['id']);
+        } else {
+            $message = __('Select product for manage review.');
+            $url = array('action' => 'index');
+            $this->jump($url, $message);
+        }
+        // Check review
+        if ($id) {
+            $review = $this->getModel('review')->find($id)->toArray();
+        }
+        // Form
+        $form = new ReviewForm('review');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new ReviewFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Set just category fields
+                foreach (array_keys($values) as $key) {
+                    if (!in_array($key, $this->reviewColumns)) {
+                        unset($values[$key]);
+                    }
+                }
+                // Save values
+                if (!empty($values['id'])) {
+                    $row = $this->getModel('review')->find($values['id']);
+                } else {
+                    $row = $this->getModel('review')->createRow();
+                    $values['time_create'] = time();
+                    $values['user'] = Pi::service('user')->getId();
+                    $values['product'] = $product['id'];
+                    $values['official'] = $hasOfficial ? 0 : 1;
+                }
+                $row->assign($values);
+                $row->save();
+                // Update review count
+                Pi::api('shop', 'product')->reviewCount($product['id']);
+                // Check it save or not
+                if ($row->id) {
+                    $message = __('Review data saved successfully.');
+                    $url = array('action' => 'review', 'id' => $product['id']);
+                    $this->jump($url, $message);
+                } else {
+                    $message = __('Review data not saved.');
+                }
+            } else {
+                $message = __('Invalid data, please check and re-submit.');
+            }   
+        } else {
+            if (isset($review) && is_array($review)) {
+                $form->setData($review);
+                $message = 'You can edit this review';
+            } else {
+                $message = 'You can add new review';
+            }
+        }
+        // Set view
+        $this->view()->setTemplate('product_review_update');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('title', __('Review'));
+        $this->view()->assign('message', $message);
     }
 }

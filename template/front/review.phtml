@@ -1,0 +1,55 @@
+<?php if (isset($review) && !empty($review)) { ?>
+<div class="productReview">
+<?php if (isset($review['official']) && !empty($review['official'])) { ?>
+	<div class="page-header">
+		<h3><?php _e('Official review'); ?></h3>
+	</div>
+	<div class="productReviewOfficial">
+		<div class="productReviewOfficialTitle">
+			<h4><?php echo $this->escape($review['official']['title']); ?></h4>
+		</div>
+		<div class="productReviewOfficialdescription"><?php echo $review['official']['description']; ?></div>
+	</div>
+<?php } ?>
+<?php if (isset($review['list']) && !empty($review['list'])) { ?>
+<?php
+	$this->jQuery();
+	$this->bootstrap(array(
+    	'js/bootstrap.min.js',
+    	'css/font-awesome.min.css'
+	));
+?>
+	<div class="page-header">
+		<h3><?php _e('User review'); ?></h3>
+	</div>
+	<div class="productReviewUser">
+		<div class="accordion" id="accordion2">
+		<?php foreach($review['list'] as $review) { ?>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#review-<?php echo $this->escape($review['id']); ?>"><?php echo $this->escape($review['title']); ?></a>
+				</div>
+				<div id="review-<?php echo $this->escape($review['id']); ?>" class="accordion-body collapse in">
+					<div class="accordion-inner">
+						<strong><?php _e('By'); ?></strong> : <?php echo $this->escape($review['userinfo']['name']); ?>
+        				<br />
+        				<strong><?php _e('On'); ?></strong> : <?php echo $this->escape($review['time_create_view']); ?>
+        				<br />
+						<?php echo $this->escape($review['description']); ?>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		</div>
+	</div>
+<?php } ?>
+<?php if ($config['view_review_submit']) { ?>
+	<div class="productReviewAdd">
+		<a class="btn" title="<?php _e('Add review'); ?>" href="<?php echo $this->url('', array(
+			'action' => 'review',
+			'slug' => $this->escape($productItem['slug']),
+			)); ?>"><?php _e('Add review'); ?></a>
+	</div>
+<?php } ?>
+</div>
+<?php } ?>

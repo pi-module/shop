@@ -109,6 +109,30 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
+        'view_review_official' => array(
+            'category' => 'view',
+            'title' => __('Show official review'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_review_user' => array(
+            'category' => 'view',
+            'title' => __('Show user review'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_review_submit' => array(
+            'category' => 'view',
+            'title' => __('Show submit review'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
         // Image
         'image_size' => array(
             'category' => 'image',
