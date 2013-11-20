@@ -48,7 +48,7 @@ class ReviewFilter extends InputFilter
         // status
         $this->add(array(
             'name' => 'status',
-            'required' => true,
+            'required' => false,
         ));
     }
 }    	

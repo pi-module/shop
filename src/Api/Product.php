@@ -17,6 +17,7 @@ use Pi\Application\AbstractApi;
 use Zend\Json\Json;
 
 /*
+ * Pi::api('shop', 'product')->getProduct($parameter, $type);
  * Pi::api('shop', 'product')->getListFromId($id);
  * Pi::api('shop', 'product')->searchRelated($title, $type);
  * Pi::api('shop', 'product')->extraCount($id);
@@ -30,6 +31,16 @@ use Zend\Json\Json;
 
 class Product extends AbstractApi
 {
+    public function getProduct($parameter, $type = 'id')
+    {
+        // Get category list
+        $categoryList = Pi::api('shop', 'category')->categoryList();
+        // Get product
+        $product = Pi::model('product', $this->getModule())->find($parameter, $type);
+        $product = $this->canonizeProduct($product, $categoryList);
+        return $product;
+    }
+
     public function searchRelated($title, $type)
     {
     	$list = array();
@@ -118,7 +129,7 @@ class Product extends AbstractApi
     public function reviewCount($id)
     {
         // Get attach count
-        $where = array('product' => $id);
+        $where = array('product' => $id, 'status' => 1);
         $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
         $select = Pi::model('review', $this->getModule())->select()->columns($columns)->where($where);
         $count = Pi::model('review', $this->getModule())->selectWith($select)->current()->count;

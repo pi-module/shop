@@ -4,4 +4,5 @@
 	<li<?php if (isset($navProperty) && $navProperty) { ?> class="active"<?php } ?>><a title="<?php _e('Property'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'property')); ?>"><?php _e('Property'); ?></a></li>
 	<li<?php if (isset($navExtra) && $navExtra) { ?> class="active"<?php } ?>><a title="<?php _e('Extra'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'extra')); ?>"><?php _e('Extra'); ?></a></li>
 	<li<?php if (isset($navSpotlight) && $navSpotlight) { ?> class="active"<?php } ?>><a title="<?php _e('Spotlight'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'spotlight')); ?>"><?php _e('Spotlight'); ?></a></li>
+	<li<?php if (isset($navReview) && $navReview) { ?> class="active"<?php } ?>><a title="<?php _e('Review'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'reviewPending')); ?>"><?php _e('Review'); ?></a></li>
 </ul>

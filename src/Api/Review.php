@@ -19,6 +19,7 @@ use Pi\Application\AbstractApi;
  * Pi::api('shop', 'review')->official($id);
  * Pi::api('shop', 'review')->hasOfficial($id);
  * Pi::api('shop', 'review')->listReview($id, $status);
+ * Pi::api('shop', 'review')->pendingReview();
  */
 
 class Review extends AbstractApi
@@ -52,7 +53,8 @@ class Review extends AbstractApi
 
 	public function listReview($id, $status = null)
 	{
-    	if (empty($status)) {
+    	$list = array();
+        if (empty($status)) {
     		$where = array('product' => $id, 'official' => 0);
     	} else {
     		$where = array('product' => $id, 'official' => 0, 'status' => $status);
@@ -62,7 +64,7 @@ class Review extends AbstractApi
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
-    		$row['description'] = Pi::service('markup')->render($row['description'], 'text', 'html');
+    		$list[$row->id]['description'] = Pi::service('markup')->render($row['description'], 'text', 'html');
     		$list[$row->id]['time_create_view'] = _date($row->time_create);
     		$list[$row->id]['userinfo'] = Pi::api('user', 'user')->get(
     			$row->user,
@@ -71,4 +73,24 @@ class Review extends AbstractApi
         }
     	return $list;
 	}
+
+    public function pendingReview()
+    {
+        $list = array();
+        $where = array('status' => 2);
+        $select = Pi::model('review', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('review', $this->getModule())->selectWith($select);
+        // Make list
+        foreach ($rowset as $row) {
+            $list[$row->id] = $row->toArray();
+            $list[$row->id]['description'] = Pi::service('markup')->render($row['description'], 'text', 'html');
+            $list[$row->id]['time_create_view'] = _date($row->time_create);
+            $list[$row->id]['userinfo'] = Pi::api('user', 'user')->get(
+                $row->user,
+                array('name', 'gender'),
+                true);
+            $list[$row->id]['productinfo'] = Pi::api('shop', 'product')->getProduct($row->product);
+        }
+        return $list;
+    }
 }

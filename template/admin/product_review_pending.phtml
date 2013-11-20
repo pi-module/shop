@@ -1,0 +1,46 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="shop">
+	<?php $navReview = 1; ?>
+	<?php include $this->template('admin/product_nav'); ?>
+	<h3><?php _e('All pending review'); ?></h3>
+	<?php if(!empty($reviewList)) { ?>
+	<div class="review-list">
+		<div class="page-header">
+			<strong><?php _e('All Reviews'); ?> : </strong>
+		</div>
+		<?php foreach($reviewList as $review) { ?>
+		<div class="media well">
+        	<div class="media-body">
+        		<h4 class="media-heading"><?php echo $this->escape($review['title']); ?></h4>
+        		<div class="pull-left">
+                    <strong><?php _e('Product'); ?></strong> : <a title="<?php echo $this->escape($review['productinfo']['title']); ?>" href="<?php echo $this->escape($review['productinfo']['productUrl']); ?>"><?php echo $this->escape($review['productinfo']['title']); ?></a>
+                    <br />
+        			<strong><?php _e('By'); ?></strong> : <?php echo $this->escape($review['userinfo']['name']); ?>
+        			<br />
+        			<strong><?php _e('On'); ?></strong> : <?php echo $this->escape($review['time_create_view']); ?>
+        		</div>
+        		<div class="pull-right">
+        			<?php if($review['status'] == 1) { ?>
+        			<span class="label label-success"><?php _e('Active'); ?></span>
+                    <?php } else { ?>
+        			<span class="label label-important"><?php _e('Inactive'); ?></span>
+                    <?php } ?>
+        			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#info-view-<?php echo $this->escape($review['id']); ?>"><i class="icon-eye-open icon-white"></i> <?php _e('Preview'); ?></button>
+        			<a class="btn" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'reviewUpdate', 'product' => $review['productinfo']['id'], 'id' => $review['id'])); ?>"><?php _e('Edit'); ?></a>
+        		</div>
+        		<div id="info-view-<?php echo $this->escape($review['id']); ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        			<div class="modal-header">
+            			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        				<h3 id="myModalLabel"><?php _e('Title'); ?> : <?php echo $this->escape($review['title']); ?></h3>
+        			</div>
+        			<div class="modal-body"><?php echo $this->escape($review['description']); ?></div>
+        			<div class="modal-footer">
+            			<button class="btn" data-dismiss="modal" aria-hidden="true"><?php _e('Close'); ?></button>
+        			</div>
+    			</div>
+        	</div>
+    	</div>
+		<?php } ?>
+	</div>
+	<?php } ?>
+</div>

@@ -21,6 +21,7 @@ class ReviewForm  extends BaseForm
     
     public function __construct($name = null, $option = array())
     {
+        $this->option = $option;
         parent::__construct($name);
     }
 
@@ -68,19 +69,30 @@ class ReviewForm  extends BaseForm
             )
         ));
         // status
-        $this->add(array(
-            'name' => 'status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Status'),
-                'value_options' => array(
-                    1 => __('Published'),
-                    2 => __('Pending review'),
-                    3 => __('Draft'),
-                    4 => __('Private'),
+        if (isset($this->option['side']) 
+            && $this->option['side'] == 'front') 
+        {
+            $this->add(array(
+                'name' => 'status',
+                'attributes' => array(
+                    'type' => 'hidden',
                 ),
-            ),
-        ));
+            ));  
+        } else {
+            $this->add(array(
+                'name' => 'status',
+                'type' => 'select',
+                'options' => array(
+                    'label' => __('Status'),
+                    'value_options' => array(
+                        1 => __('Published'),
+                        2 => __('Pending review'),
+                        3 => __('Draft'),
+                        4 => __('Private'),
+                    ),
+                ),
+            )); 
+        }
         // Save
         $this->add(array(
             'name' => 'submit',

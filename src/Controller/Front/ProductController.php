@@ -15,11 +15,20 @@ namespace Module\Shop\Controller\Front;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+use Module\Shop\Form\ReviewForm;
+use Module\Shop\Form\ReviewFilter;
 use Zend\Json\Json;
 
 class ProductController extends IndexController
 {
-	public function indexAction()
+    /**
+     * review Columns
+     */
+    protected $reviewColumns = array(
+        'id', 'user', 'product', 'title', 'description', 'time_create', 'official', 'status'
+    );
+
+    public function indexAction()
     {
         // Get info from url
         $slug = $this->params('slug');
@@ -89,6 +98,68 @@ class ProductController extends IndexController
 
     public function reviewAction()
     {
-        $this->view()->setTemplate('empty');
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
+        // Get info from url
+        $slug = $this->params('slug');
+        $module = $this->params('module');
+        // Find product
+        $product = $this->getModel('product')->find($slug, 'slug');
+        $product = Pi::api('shop', 'product')->canonizeProduct($product, $categoryList);
+        // Check product
+        if (!$product || $product['status'] != 1) {
+            $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The product not found.'));
+        }
+        // Form
+        $option = array('side' => 'front');
+        $form = new ReviewForm('review', $option);
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new ReviewFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Set just category fields
+                foreach (array_keys($values) as $key) {
+                    if (!in_array($key, $this->reviewColumns)) {
+                        unset($values[$key]);
+                    }
+                }
+                // Set values
+                $values['status'] = 2;
+                $values['time_create'] = time();
+                $values['user'] = Pi::service('user')->getId();
+                $values['product'] = $product['id'];
+                $values['official'] = 0;
+                // Save values
+                $row = $this->getModel('review')->createRow();
+                $row->assign($values);
+                $row->save();
+                // Update review count
+                Pi::api('shop', 'product')->reviewCount($product['id']);
+                // Check it save or not
+                if ($row->id) {
+                    $message = __('Review data saved successfully. And it show after admin review');
+                    $url = array('', 
+                        'module' => $module, 
+                        'controller' => 'product',
+                        'action' => 'index', 
+                        'slug' => $product['slug']
+                    );
+                    $this->jump($url, $message);
+                } else {
+                    $message = __('Review data not saved.');
+                }
+            } else {
+                $message = __('Invalid data, please check and re-submit.');
+            }   
+        } else {
+            $message = 'You can add new review';
+        }
+        // Set view
+        $this->view()->setTemplate('product_review');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('title', __('Review'));
+        $this->view()->assign('message', $message);
     }
 }

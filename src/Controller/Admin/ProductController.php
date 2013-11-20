@@ -809,7 +809,15 @@ class ProductController extends ActionController
         $this->view()->assign('reviewOfficial', $reviewOfficial);
         $this->view()->assign('reviewList', $reviewList);
         $this->view()->assign('product', $product);
-        $this->view()->assign('test', $reviewOfficial);
+    }
+
+    public function reviewPendingAction()
+    {
+        // find list review
+        $reviewList = Pi::api('shop', 'review')->pendingReview();
+        // Set view
+        $this->view()->setTemplate('product_review_pending');
+        $this->view()->assign('reviewList', $reviewList);
     }
 
     public function reviewUpdateAction()

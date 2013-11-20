@@ -1,7 +1,7 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="shop">
-	<?php $navList = 1; ?>
-	<?php include $this->template('admin/product_nav'); ?>
+    <?php $navReview = 1; ?>
+    <?php include $this->template('admin/product_nav'); ?>
 	<h3><?php echo sprintf(__('Reviews from %s'), $product['title']); ?></h3>
 	<div class="review-official">
 	<?php if(empty($reviewOfficial)) { ?>
@@ -10,7 +10,7 @@
 		<div class="page-header">
 			<strong><?php _e('Official Review'); ?> : </strong>
 		</div>
-		<div class="media">
+		<div class="media well">
         	<div class="media-body">
         		<h4 class="media-heading"><?php echo $this->escape($reviewOfficial['title']); ?></h4>
         		<div class="pull-left">
@@ -48,7 +48,7 @@
 			<strong><?php _e('All Reviews'); ?> : </strong>
 		</div>
 		<?php foreach($reviewList as $review) { ?>
-		<div class="media">
+		<div class="media well">
         	<div class="media-body">
         		<h4 class="media-heading"><?php echo $this->escape($review['title']); ?></h4>
         		<div class="pull-left">
