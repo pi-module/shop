@@ -90,7 +90,25 @@ class Shop extends Standard
                     break;
 
                 case 'checkout':
-                
+                    if (!empty($parts[1])) {
+                        if ($parts[1] == 'add') {
+                            $matches['action'] = 'add';
+                            $matches['slug'] = urldecode($parts[2]);
+                        } elseif ($parts[1] == 'empty') {
+                            $matches['action'] = 'empty';
+                        } elseif ($parts[1] == 'cart') {    
+                            $matches['action'] = 'cart';
+                        } elseif ($parts[1] == 'ajax') {
+                            $matches['action'] = 'ajax';
+                            if (isset($parts[2]) &&  in_array($parts[2], array('remove', 'number'))) {
+                                $matches['process'] = urldecode($parts[2]);
+                                $matches['product'] = intval($parts[3]);
+                                if (isset($parts[4]) && in_array($parts[4], array(1, -1))) {
+                                    $matches['number'] = $parts[4];
+                                }
+                            }
+                        }   
+                    }
                     break; 
 
                 case 'index':
@@ -266,6 +284,17 @@ class Shop extends Standard
         // Set slug
         if (!empty($mergedParams['slug'])) {
             $url['slug'] = $mergedParams['slug'];
+        }
+
+        // Set if controller is checkou
+        if ($mergedParams['controller'] == 'checkout') {
+            if ($mergedParams['action'] == 'ajax') {
+                $url['process'] = $mergedParams['process'];
+                $url['product'] = $mergedParams['product'];
+                if (!empty($mergedParams['number'])) {
+                    $url['number'] = $mergedParams['number'];
+                }
+            }
         }
 
         // Set page

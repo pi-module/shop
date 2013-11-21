@@ -212,6 +212,15 @@ class Product extends AbstractApi
 
     }
 
+    public function marketable($product)
+    {
+        if ($product['price'] > 0 && $product['stock'] > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     public function canonizeProduct($product, $categoryList = array())
     {
         // Get config
@@ -234,7 +243,12 @@ class Product extends AbstractApi
             'slug'          => $product['slug'],
         ));
         // Set cart url
-        $product['cartUrl'] = '#';
+        $product['cartUrl'] = Pi::service('url')->assemble('shop', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'checkout',
+            'action'        => 'add',
+            'slug'          => $product['slug'],
+        ));
         // Set category information
         $product['category'] = Json::decode($product['category']);
         foreach ($product['category'] as $category) {
@@ -248,6 +262,8 @@ class Product extends AbstractApi
         // Set price
         $product['price_view'] = $this->viewPrice($product['price']);
         $product['price_discount_view'] = $this->viewPrice($product['price_discount']);
+        // Set marketable
+        $product['marketable'] = $this->marketable($product);
         // Set image url
         if ($product['image']) {
             // Set image original url
