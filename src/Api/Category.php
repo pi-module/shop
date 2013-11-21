@@ -66,18 +66,12 @@ class Category extends AbstractApi
     {
         $return = array();
         if (isset($_SESSION['shop']['category']) 
-            && !empty($_SESSION['shop']['category'])
-            && isset($_SESSION['shop']['parent'])
-            && $_SESSION['shop']['parent'] == $parent) 
+            && !empty($_SESSION['shop']['category'])) 
         {
             $return = $_SESSION['shop']['category'];
         } else {
-        
             $where = array('status' => 1);
             $order = array('time_create DESC', 'id DESC');
-            if (!is_null($parent)) {
-                $where['parent'] = $parent;
-            }
             $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
             $rowset = Pi::model('category', $this->getModule())->selectWith($select);
             foreach ($rowset as $row) {
@@ -89,7 +83,16 @@ class Category extends AbstractApi
                 ));
             }
             $_SESSION['shop']['category'] = $return;
-            $_SESSION['shop']['parent'] = $parent;
+        }
+        // Check parent
+        if (!is_null($parent)) {
+            foreach ($return as $category) {
+                if ($category['parent'] == $parent) {
+                    $return[$category['id']] = $category;
+                } else {
+                    unset($return[$category['id']]);
+                }
+            }
         }
         return $return;
     }  

@@ -43,6 +43,7 @@
 				<a class="btn" title="<?php _e('Related'); ?>" href="<?php echo $this->url('', array('action' => 'related', 'id' => $product['id'])); ?>"><i class="icon-edit"></i> <?php _e('Related'); ?></a>
 				<a class="btn" title="<?php _e('Review'); ?>" href="<?php echo $this->url('', array('action' => 'review', 'id' => $product['id'])); ?>"><i class="icon-edit"></i> <?php _e('Review'); ?></a>
 				<a class="btn" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'update', 'id' => $product['id'])); ?>"><i class="icon-edit"></i> <?php _e('Edit'); ?></a>
+				<a class="btn btn-danger" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $product['id'])); ?>"><i class="icon-edit"></i> <?php _e('Delete'); ?></a>
 			</td>
 		</tr>
 		<?php } ?>

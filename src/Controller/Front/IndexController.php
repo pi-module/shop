@@ -40,6 +40,12 @@ class IndexController extends ActionController
         $paginator = $this->productPaginator($template, $where);
         // category list
         $category = Pi::api('shop', 'category')->categoryList(0);
+        // Get spotlight
+        if ($config['view_spotlight']) {
+            $spotlightList = Pi::api('shop', 'spotlight')->load();
+            $this->view()->assign('spotlightList', $spotlightList);
+            $this->view()->assign('spotlightTitle', __('Top products'));
+        }
         // Set view
     	$this->view()->setTemplate('product_list');
         $this->view()->assign('productList', $productList);

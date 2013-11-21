@@ -300,7 +300,33 @@ class ProductController extends ActionController
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Add product'));
         $this->view()->assign('message', $message);
-    }	
+    }
+
+    public function deleteAction()
+    {
+        $this->view()->setTemplate(false);
+        $id = $this->params('id');
+        $row = $this->getModel('product')->find($id);
+        if ($row) {
+            // Link
+            $this->getModel('link')->delete(array('product' => $row->id));
+            // Related
+            $this->getModel('related')->delete(array('product_id' => $row->id));
+            // Attach
+            $this->getModel('attach')->delete(array('product' => $row->id));
+            // Extra Field Data
+            $this->getModel('field_data')->delete(array('product' => $row->id));
+            // Spotlight
+            $this->getModel('spotlight')->delete(array('product' => $row->id));
+            // Review
+            $this->getModel('review')->delete(array('product' => $row->id));
+            // Remove page
+            $row->delete();
+            $this->jump(array('action' => 'index'), __('This product deleted'));
+        } else {
+            $this->jump(array('action' => 'index'), __('Please select product'));
+        }
+    }
 
     public function recommendAction()
     {
@@ -447,7 +473,6 @@ class ProductController extends ActionController
      */
     public function attributeAction()
     {
-        // 
         $this->view()->setTemplate('product_attribute');
         $this->view()->assign('title', __('Add Attribute'));
         $this->view()->assign('message', __('This option ready on next version'));

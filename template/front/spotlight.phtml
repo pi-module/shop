@@ -1,0 +1,17 @@
+<?php if (isset($spotlightList) && !empty($spotlightList)) { ?>
+<div class="productList clearfix">
+	<div class="row-fluid">
+		<?php if (isset($spotlightTitle) && !empty($spotlightTitle)) { ?>
+		<div class="page-header">
+			<h4><?php echo $spotlightTitle; ?></h4>
+	    </div>
+	    <?php } ?>
+        <ul class="thumbnails">
+		<?php foreach($spotlightList as $product) { ?>
+		<?php include $this->template('front/box'); ?>
+		<?php } ?>
+		</ul>
+   </div>
+</div>
+<div class="clearfix"></div>
+<?php } ?>

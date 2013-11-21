@@ -133,6 +133,22 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
+        'view_spotlight' => array(
+            'category' => 'view',
+            'title' => __('Show spotlight'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_spotlight_number' => array(
+            'category' => 'view',
+            'title' => __('Number of products on spotlight'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
         // Image
         'image_size' => array(
             'category' => 'image',
