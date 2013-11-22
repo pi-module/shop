@@ -21,9 +21,21 @@ class CheckoutController extends IndexController
 {
 	public function indexAction()
     {
-    	$module = $this->params('module');
-    	$url = array('', 'module' => $module, 'controller' => 'index');
-    	$this->jump($url, __('Please select action.'));
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
+        // Set cart
+        $cart = $_SESSION['shop']['cart'];
+        // Check cart
+        if (empty($cart['invoice'])) {
+            $module = $this->params('module');
+            $url = array('', 'module' => $module, 'controller' => 'index');
+            $this->jump($url, __('Your cart is empty'));
+        }
+
+
+
+        // Set view
+        $this->view()->setTemplate('checkout_information');
     }
 
     public function emptyAction()
