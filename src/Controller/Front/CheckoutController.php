@@ -36,6 +36,11 @@ class CheckoutController extends IndexController
     	$this->jump($url, __('Your cart are empty'));
     }
 
+    public function cartAjaxAction()
+    {
+        return $_SESSION['shop']['cart']['invoice'];
+    }
+
     public function ajaxAction()
     {
         // Set cart
@@ -66,11 +71,14 @@ class CheckoutController extends IndexController
         	    	$oldNumber = $this->params('number');
         	    	$newNumber = $number + $oldNumber;
         	    	if ($newNumber > 0) {
+                        $newTotal = $newNumber * $cart['product'][$product]['price'];
         	    		$cart['product'][$product]['number'] = $newNumber;
-        	    		$return['actionNumber'] = $newNumber;
+                        $cart['product'][$product]['total'] = $newTotal;
         	    		$return['message'] = __('Update number');
+                        $return['actionNumber'] = $newNumber;
                         $return['ajaxStatus'] = 1;
                         $return['actionStatus'] = 1;
+                        $return['actionTotal'] = $newTotal;
         	    	} else {
         	    		$return['message'] = __('You can not set product number to 0');
                         $return['ajaxStatus'] = 1;
@@ -92,6 +100,8 @@ class CheckoutController extends IndexController
         // Get info from url
         $slug = $this->params('slug');
         $module = $this->params('module');
+        // Set view
+        $this->view()->setTemplate(false);
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get category list
@@ -104,15 +114,11 @@ class CheckoutController extends IndexController
         	$url = array('', 'module' => $module, 'controller' => 'index');
             $this->jump($url, __('The product was not marketable.'));
         } else {
-            // Update cart session
-            $cart = $_SESSION['shop']['cart'];
-            $product['number'] = 1;
+
             // Set total price
-            $product = $this->totalPriceProduct($product);
-            $cart['product'][$product['id']] = $product;
-            $_SESSION['shop']['cart'] = $cart;
-            // Set view
-            $this->view()->setTemplate(false);
+            $this->setProduct($product);
+
+            
             // Set Invoice
             $this->setInvoice();
             // Go to cart
@@ -140,12 +146,17 @@ class CheckoutController extends IndexController
     	$invoice = array();
     	$cart = $_SESSION['shop']['cart'];
     	foreach ($cart['product'] as $product) {
-    		$invoice['product'][$product['id']] = array(
-    			'id' => $product['id'],
-    			'number' => $product['number'],
-    			'price' => $product['price'],
-    			'discount' => 0,
-    		);
+    		// Set product item
+            $item = array();
+            $item['id'] = $product['id'];
+            $item['number'] = $product['number'];
+            $item['price'] = $product['price'];
+            $item['price_view'] = Pi::api('shop', 'product')->viewPrice($item['price']);
+            $item['discount'] = 0;
+            $item['total'] = ($product['number'] * $product['price']);
+            $item['total_view'] = Pi::api('shop', 'product')->viewPrice($item['total']);
+            $invoice['product'][$product['id']] = $item;
+            // Set total
     		$invoice['total']['price'] = $invoice['total']['price'] + ($product['price'] * $product['number']);
     		$invoice['total']['number'] = $invoice['total']['number'] + $product['number'];
     		$invoice['total']['discount'] = $invoice['total']['discount'] + 0;
@@ -160,10 +171,28 @@ class CheckoutController extends IndexController
     	$_SESSION['shop']['cart'] = $cart;
     }
 
-    protected function totalPriceProduct($product)
+    protected function setProduct($product)
     {
-    	$product['total'] = intval(($product['price'] * $product['number']));
-    	$product['total_view'] = Pi::api('shop', 'product')->viewPrice($product['total']);
-    	return $product;
+        $cart = $_SESSION['shop']['cart'];
+        // Set number
+        if (isset($cart['product'][$product['id']]) 
+            && !empty($cart['product'][$product['id']])) 
+        {
+            if (isset($cart['product'][$product['id']]['number']) 
+                && !empty($cart['product'][$product['id']]['number'])) 
+            {
+                $product['number'] = $cart['product'][$product['id']]['number'] + 1;
+            } else {
+                $product['number'] = 1;
+            }
+        } else {
+            $product['number'] = 1;
+        }
+        // Set total price
+        $product['total'] = intval(($product['price'] * $product['number']));
+        $product['total_view'] = Pi::api('shop', 'product')->viewPrice($product['total']);
+        // Set session
+        $cart['product'][$product['id']] = $product;
+        $_SESSION['shop']['cart'] = $cart;
     }
 }

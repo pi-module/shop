@@ -11,6 +11,9 @@
 			<strong><?php _e('Official Review'); ?> : </strong>
 		</div>
 		<div class="media well">
+            <span class="pull-left">
+                <?php echo Pi::avatar()->get($this->escape($reviewOfficial['userinfo']['id']), 'medium'); ?>
+            </span>
         	<div class="media-body">
         		<h4 class="media-heading"><?php echo $this->escape($reviewOfficial['title']); ?></h4>
         		<div class="pull-left">
@@ -49,6 +52,9 @@
 		</div>
 		<?php foreach($reviewList as $review) { ?>
 		<div class="media well">
+            <span class="pull-left">
+                <?php echo Pi::avatar()->get($this->escape($review['userinfo']['id']), 'medium'); ?>
+            </span>
         	<div class="media-body">
         		<h4 class="media-heading"><?php echo $this->escape($review['title']); ?></h4>
         		<div class="pull-left">

@@ -10,7 +10,10 @@
 		</div>
 		<?php foreach($reviewList as $review) { ?>
 		<div class="media well">
-        	<div class="media-body">
+            <span class="pull-left">
+                <?php echo Pi::avatar()->get($this->escape($review['userinfo']['id']), 'medium'); ?>
+            </span>
+            <div class="media-body">
         		<h4 class="media-heading"><?php echo $this->escape($review['title']); ?></h4>
         		<div class="pull-left">
                     <strong><?php _e('Product'); ?></strong> : <a title="<?php echo $this->escape($review['productinfo']['title']); ?>" href="<?php echo $this->escape($review['productinfo']['productUrl']); ?>"><?php echo $this->escape($review['productinfo']['title']); ?></a>

@@ -96,8 +96,10 @@ class Shop extends Standard
                             $matches['slug'] = urldecode($parts[2]);
                         } elseif ($parts[1] == 'empty') {
                             $matches['action'] = 'empty';
-                        } elseif ($parts[1] == 'cart') {    
+                        } elseif ($parts[1] == 'cart') {
                             $matches['action'] = 'cart';
+                        } elseif ($parts[1] == 'cartAjax') {    
+                            $matches['action'] = 'cartAjax';
                         } elseif ($parts[1] == 'ajax') {
                             $matches['action'] = 'ajax';
                             if (isset($parts[2]) &&  in_array($parts[2], array('remove', 'number'))) {
