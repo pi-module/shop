@@ -140,6 +140,7 @@ class OrderForm  extends BaseForm
             'type' => 'submit',
             'attributes' => array(
                 'value' => __('Next'),
+                'class' => 'btn btn-primary',
             )
         ));
     }

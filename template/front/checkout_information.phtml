@@ -1,12 +1,65 @@
 <?php
     $this->css(array(
         $this->assetModule('css/front.css'),
+        $this->assetModule('css/jquery.steps.css'),
         $this->assetModule('script/system-ui.css', 'system'),
     ));
-    $this->jQuery();
+    $this->jQuery('extension/modernizr.js');
     $this->backbone();
+    $this->js(array(
+    	$this->assetModule('js/jquery.cookie.js'),
+    	$this->assetModule('js/jquery.steps.min.js'),
+    ));
 ?>
-<div class="shop">
-	<?php include $this->templateComponent('form'); ?>
+<div id="shop-cart-level" class="shop">
+    <div class="content">
+        <div id="wizard">
+            <h2>First Step</h2>
+            <div class="section">
+            	<div id="section-1"></div>
+            </div>
 
+            <h2>Second Step</h2>
+            <div class="section">
+            	<div id="section-2"></div>
+            </div>
+
+            <h2>Third Step</h2>
+            <div class="section">
+            	<div id="section-3"></div>
+            </div>
+
+            <h2>Forth Step</h2>
+            <div class="section">
+            	<div id="section-4"></div>
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+(function($){
+    var page = {
+        init: function() {
+	        $("#wizard").steps({
+                headerTag: "h2",
+                bodyTag: ".section",
+                transitionEffect: "slideLeft",
+                stepsOrientation: "vertical",
+                onStepChanging: function (event, currentIndex, newIndex)
+                {
+                	if (currentIndex == 0) {
+                		alert(currentIndex);
+                		return true;
+                	}	
+                },
+                onStepChanged: function (event, currentIndex, priorIndex) {
+        	        if (currentIndex == 1) {
+        		        $('#section-2').html('sdf sdfsd fsdf');
+        	        }
+                },
+            });
+        },
+    }
+    page.init();
+})(jQuery)
+</script>

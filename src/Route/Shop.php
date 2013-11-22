@@ -91,17 +91,22 @@ class Shop extends Standard
 
                 case 'checkout':
                     if (!empty($parts[1])) {
-                        if ($parts[1] == 'add') {
+                        if ($parts[1] == 'level') {
+                            $matches['action'] = 'index';
+                            $matches['level'] = urldecode($parts[2]);
+                        } elseif ($parts[1] == 'add') {    
                             $matches['action'] = 'add';
                             $matches['slug'] = urldecode($parts[2]);
                         } elseif ($parts[1] == 'empty') {
                             $matches['action'] = 'empty';
                         } elseif ($parts[1] == 'cart') {
                             $matches['action'] = 'cart';
+                        } elseif ($parts[1] == 'levelAjax') {
+                            $matches['action'] = 'levelAjax';
                         } elseif ($parts[1] == 'cartAjax') {    
                             $matches['action'] = 'cartAjax';
-                        } elseif ($parts[1] == 'ajax') {
-                            $matches['action'] = 'ajax';
+                        } elseif ($parts[1] == 'basketAjax') {
+                            $matches['action'] = 'basketAjax';
                             if (isset($parts[2]) &&  in_array($parts[2], array('remove', 'number'))) {
                                 $matches['process'] = urldecode($parts[2]);
                                 $matches['product'] = intval($parts[3]);
@@ -290,7 +295,11 @@ class Shop extends Standard
 
         // Set if controller is checkou
         if ($mergedParams['controller'] == 'checkout') {
-            if ($mergedParams['action'] == 'ajax') {
+            if ($mergedParams['action'] == 'index') {
+                $url['level'] = sprintf('level%s%s', 
+                                   $this->paramDelimiter, 
+                                   $mergedParams['level']);
+            } elseif ($mergedParams['action'] == 'basketAjax') {    
                 $url['process'] = $mergedParams['process'];
                 $url['product'] = $mergedParams['product'];
                 if (!empty($mergedParams['number'])) {

@@ -25,41 +25,50 @@ class CheckoutController extends IndexController
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
-        // Set cart
-        $cart = $_SESSION['shop']['cart'];
-        // Check cart
-        if (empty($cart['invoice'])) {
-            $module = $this->params('module');
-            $url = array('', 'module' => $module, 'controller' => 'index');
-            $this->jump($url, __('Your cart is empty'));
-        }
-        // Set order form
-        $form = new OrderForm('review');
-
-
-
+        
 
         // Set view
         $this->view()->setTemplate('checkout_information');
-        $this->view()->assign('form', $form);
     }
 
-    public function emptyAction()
+    public function levelAjaxAction()
     {
-    	if (isset($_SESSION['shop']['cart'])) {
-    		unset($_SESSION['shop']['cart']);
-    	}
-    	$module = $this->params('module');
-    	$url = array('', 'module' => $module, 'controller' => 'index');
-    	$this->jump($url, __('Your cart are empty'));
+        $return = array();
+        // Set cart
+        $cart = $_SESSION['shop']['cart'];
+        if (empty($cart['invoice'])) {
+            return false;
+        }
+        // Set 
+        if (!isset($cart['checkout'])) {
+            $cart['checkout'] = array();
+        }
+        // Get level
+        $level = $this->params('level', 'info');
+        // Set level action
+        switch ($level) {
+            case 'saveInfo':
+
+                break;
+            
+            case 'info':
+            default:
+                // Set order form
+                $form = new OrderForm('review');
+                $form->setAttribute('action', $this->url('', array('action' => 'index', 'level' => 'saveInfo')));
+                // Set return
+                $return['type'] = 'form';
+                $return['content'] = $form;
+                break;
+        }
+        // Set session
+        $cart['checkout']['level'] = $level;
+        $_SESSION['shop']['cart'] = $cart;
+        // return
+        return $return;
     }
 
-    public function cartAjaxAction()
-    {
-        return $_SESSION['shop']['cart']['invoice'];
-    }
-
-    public function ajaxAction()
+    public function basketAjaxAction()
     {
         // Set cart
         $cart = $_SESSION['shop']['cart'];
@@ -113,6 +122,11 @@ class CheckoutController extends IndexController
         return $return;
     }
 
+    public function cartAjaxAction()
+    {
+        return $_SESSION['shop']['cart']['invoice'];
+    }
+
     public function addAction()
     {
         // Get info from url
@@ -157,6 +171,16 @@ class CheckoutController extends IndexController
     	}
     	$this->view()->setTemplate('checkout_cart');
     	$this->view()->assign('cart', $cart);
+    }
+
+    public function emptyAction()
+    {
+        if (isset($_SESSION['shop']['cart'])) {
+            unset($_SESSION['shop']['cart']);
+        }
+        $module = $this->params('module');
+        $url = array('', 'module' => $module, 'controller' => 'index');
+        $this->jump($url, __('Your cart are empty'));
     }
 
     protected function setInvoice()
