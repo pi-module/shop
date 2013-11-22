@@ -15,6 +15,8 @@ namespace Module\Shop\Controller\Front;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+use Module\Shop\Form\OrderForm;
+use Module\Shop\Form\OrderFilter;
 use Zend\Json\Json;
 
 class CheckoutController extends IndexController
@@ -31,11 +33,15 @@ class CheckoutController extends IndexController
             $url = array('', 'module' => $module, 'controller' => 'index');
             $this->jump($url, __('Your cart is empty'));
         }
+        // Set order form
+        $form = new OrderForm('review');
+
 
 
 
         // Set view
         $this->view()->setTemplate('checkout_information');
+        $this->view()->assign('form', $form);
     }
 
     public function emptyAction()
