@@ -16,7 +16,9 @@ return array(
         'description'   => __('Shop module for pi.'),
         'version'       => '0.0.5',
         'license'       => 'New BSD',
-        'demo'          => 'http://demo.pialog.org'
+        'logo'          => 'image/logo.png',
+        'readme'        => 'docs/readme.txt',
+        'demo'          => 'http://pialog',
     ),
     // Author information
     'author'    => array(

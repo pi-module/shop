@@ -1,17 +1,21 @@
 <?php
     $this->css(array(
         $this->assetModule('css/front.css'),
-        $this->assetModule('css/jquery.steps.css'),
-        $this->assetModule('script/system-ui.css', 'system'),
+        //$this->assetModule('css/jquery.steps.css'),
+        //$this->assetModule('script/system-ui.css', 'system'),
     ));
-    $this->jQuery('extension/modernizr.js');
-    $this->backbone();
-    $this->js(array(
-    	$this->assetModule('js/jquery.cookie.js'),
-    	$this->assetModule('js/jquery.steps.min.js'),
-    ));
+    //$this->jQuery('extension/modernizr.js');
+    //$this->backbone();
+    //$this->js(array(
+    	//$this->assetModule('js/jquery.cookie.js'),
+    	//$this->assetModule('js/jquery.steps.min.js'),
+    //));
 ?>
-<div id="shop-cart-level" class="shop">
+<div class="shop">
+    <h2><?php echo $this->escape($title); ?></h2>
+    <?php include $this->templateComponent('form'); ?>
+</div>
+<!-- <div id="shop-cart-level" class="shop">
     <div class="content">
         <div id="wizard">
             <h2>First Step</h2>
@@ -62,4 +66,4 @@
     }
     page.init();
 })(jQuery)
-</script>
+</script> -->

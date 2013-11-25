@@ -25,17 +25,75 @@ class CheckoutController extends IndexController
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
-        
+        // Set order form
+        $form = new OrderForm('order');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new OrderFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Check and save order information on db
+                /* Not yet */
 
+
+                // Set invoice description
+                $description = array();
+                foreach ($$_SESSION['shop']['cart']['product'] as $product) {
+                    $item = array();
+                    $item['id'] = $product['id'];
+                    $item['title'] = $product['title'];
+                    $item['price'] = $product['price'];
+                    $item['description'] = $product['summary'];
+                    $item['url'] = $product['productUrl'];
+                    $item['number'] = $product['number'];
+                    $item['total'] = $product['total'];
+                    $description[$product['id']] = $item;
+                }
+                // Set order array
+                $order = array();
+                $order['module'] = $this->getModule();
+                $order['part'] = 'product';
+                $order['id'] = '1';
+                $order['amount'] = $_SESSION['shop']['cart']['invoice']['total']['total_price'];
+                $order['adapter'] = 'Mellat';
+                $order['description'] = json_encode($description);
+                // Payment module
+                $result = Pi::api('payment', 'invoice')->createInvoice(
+                    $order['module'], 
+                    $order['part'], 
+                    $order['id'], 
+                    $order['amount'], 
+                    $order['adapter'], 
+                    $order['description']
+                );
+                // Check it save or not
+                if ($result['status']) {
+                    // unset cart
+                    unset($_SESSION['shop']['cart']);
+                    // Go to payment
+                    $this->jump($result['invoice_url'], $result['message']);
+                } else {
+                    $message = __('Review data not saved. uid = ' . Pi::user()->getId());
+                }
+            } else {
+                $message = __('Invalid data, please check and re-submit.');
+            }   
+        } else {
+            $message = 'You can add new review';
+        }
         // Set view
         $this->view()->setTemplate('checkout_information');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('title', __('Checkout'));
+        $this->view()->assign('message', $message);
     }
 
     public function levelAjaxAction()
     {
         $return = array();
         // Set cart
-        $cart = $_SESSION['shop']['cart'];
+        /* $cart = $_SESSION['shop']['cart'];
         if (empty($cart['invoice'])) {
             return false;
         }
@@ -64,7 +122,7 @@ class CheckoutController extends IndexController
         // Set session
         $cart['checkout']['level'] = $level;
         $_SESSION['shop']['cart'] = $cart;
-        // return
+        // return */
         return $return;
     }
 
@@ -146,11 +204,8 @@ class CheckoutController extends IndexController
         	$url = array('', 'module' => $module, 'controller' => 'index');
             $this->jump($url, __('The product was not marketable.'));
         } else {
-
             // Set total price
             $this->setProduct($product);
-
-            
             // Set Invoice
             $this->setInvoice();
             // Go to cart
@@ -163,7 +218,6 @@ class CheckoutController extends IndexController
     {
     	// Set Invoice
         $this->setInvoice();
-    	//unset($_SESSION['shop']['cart']);
     	$cart = $_SESSION['shop']['cart'];
     	if (empty($cart['product'])) {
         	$url = array('', 'module' => $module, 'controller' => 'index');
@@ -186,6 +240,10 @@ class CheckoutController extends IndexController
     protected function setInvoice()
     {
     	$invoice = array();
+        $invoice['total']['price'] = 0;
+        $invoice['total']['number'] = 0;
+        $invoice['total']['discount'] = 0;
+        // 
     	$cart = $_SESSION['shop']['cart'];
     	foreach ($cart['product'] as $product) {
     		// Set product item
