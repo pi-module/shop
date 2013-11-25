@@ -43,7 +43,7 @@ CREATE TABLE `{product}` (
 );
 
 CREATE TABLE `{category}` (
-  `id` int (10) unsigned NOT NULL  auto_increment,
+  `id` int (10) unsigned NOT NULL auto_increment,
   `parent` int(5) unsigned NOT NULL default '0',
   `title` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `{category}` (
 );
 
 CREATE TABLE `{link}` (
-  `id` int (10) unsigned NOT NULL  auto_increment,
+  `id` int (10) unsigned NOT NULL auto_increment,
   `product` int(10) unsigned NOT NULL,
   `category` int(10) unsigned NOT NULL,
   `time_create` int(10) unsigned NOT NULL,
@@ -74,14 +74,14 @@ CREATE TABLE `{link}` (
 );
 
 CREATE TABLE `{related}` (
-  `id` int (10) unsigned NOT NULL  auto_increment,
+  `id` int (10) unsigned NOT NULL auto_increment,
   `product_id` int(10) unsigned NOT NULL,
   `product_related` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `{attach}` (
-  `id` int (10) unsigned NOT NULL  auto_increment,
+  `id` int (10) unsigned NOT NULL auto_increment,
   `title` varchar (255) NOT NULL,
   `file` varchar (255) NOT NULL,
   `path` varchar(16) NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE `{attach}` (
 );
 
 CREATE TABLE `{field}` (
-  `id` int (10) unsigned NOT NULL  auto_increment,
+  `id` int (10) unsigned NOT NULL auto_increment,
   `title` varchar (255) NOT NULL,
   `image` varchar (255) NOT NULL,
   `type` enum('text','link','currency','date','number') NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE `{field}` (
 );
 
 CREATE TABLE `{field_data}` (
-  `id` int (10) unsigned NOT NULL  auto_increment,
+  `id` int (10) unsigned NOT NULL auto_increment,
   `field` int(10) unsigned NOT NULL,
   `product` int(10) unsigned NOT NULL,
   `data` varchar(255) NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE `{field_data}` (
 );
 
 CREATE TABLE `{spotlight}` (
-  `id` int(10) unsigned NOT NULL  auto_increment,
+  `id` int(10) unsigned NOT NULL auto_increment,
   `product` int(10) unsigned NOT NULL,
   `category` int(10) unsigned NOT NULL,
   `time_publish` int(10) unsigned NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE `{spotlight}` (
 );
 
 CREATE TABLE `{review}` (
-  `id` int(10) unsigned NOT NULL  auto_increment,
+  `id` int(10) unsigned NOT NULL auto_increment,
   `user` int(10) unsigned NOT NULL,
   `product` int(10) unsigned NOT NULL,
   `title` varchar (255) NOT NULL,
@@ -136,41 +136,45 @@ CREATE TABLE `{review}` (
 );
 
 CREATE TABLE `{order}` (
-  `id` int(10) unsigned NOT NULL  auto_increment,
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `user` int(10) unsigned NOT NULL,
+  `first_name` varchar (255) NOT NULL,
+  `last_name` varchar (255) NOT NULL,
+  `email` varchar (64) NOT NULL,
+  `phone` varchar (16) NOT NULL,
+  `mobile` varchar (16) NOT NULL,
+  `company` varchar (255) NOT NULL,
+  `address` text,
+  `country` varchar (64) NOT NULL,
+  `city` varchar (64) NOT NULL,
+  `zip_code` varchar (16) NOT NULL,
+  `ip` char(15) NOT NULL,
+  `status` tinyint(1) unsigned NOT NULL,
+  `time_create` int(10) unsigned NOT NULL,
+  `time_payment` int(10) unsigned NOT NULL,
+  `time_cancel` int(10) unsigned NOT NULL,
+  `user_note` text,
+  `admin_note` text,
+  `number` int(10) unsigned NOT NULL,
+  `product_price` double(16,2) NOT NULL,
+  `discount_price` double(16,2) NOT NULL,
+  `shipping_price` decimal(16,2) NOT NULL,
+  `packing_price` decimal(16,2) NOT NULL,
+  `total_price` double(16,2) NOT NULL,
+  `packing` tinyint(1) unsigned NOT NULL,
+  `delivery` int(10) unsigned NOT NULL,
+  `payment` int(10) unsigned NOT NULL,
+  `payment_adapter` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `{order_basket}` (
-  `id` int(10) unsigned NOT NULL  auto_increment,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `{packing}` (
-  `id` int(10) unsigned NOT NULL  auto_increment,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `{location}` (
-  `id` int(10) unsigned NOT NULL  auto_increment,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `{delivery}` (
-  `id` int(10) unsigned NOT NULL  auto_increment,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `{payment}` (
-  `id` int(10) unsigned NOT NULL  auto_increment,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `{location_delivery}` (
-  `id` int(10) unsigned NOT NULL  auto_increment,
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `{delivery_payment}` (
-  `id` int(10) unsigned NOT NULL  auto_increment,
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `order` int(10) unsigned NOT NULL,
+  `product` int(10) unsigned NOT NULL,
+  `product_price` double(16,2) NOT NULL,
+  `discount_price` double(16,2) NOT NULL,
+  `total_price` double(16,2) NOT NULL,
+  `number` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 );

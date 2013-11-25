@@ -21,7 +21,19 @@ use Zend\Json\Json;
 
 class CheckoutController extends IndexController
 {
-	public function indexAction()
+
+    /**
+     * order Columns
+     */
+    protected $orderColumns = array(
+        'id', 'user', 'first_name', 'last_name', 'email', 'phone', 'mobile', 
+        'company', 'address', 'country', 'city', 'zip_code', 'ip', 'status', 
+        'time_create', 'time_payment', 'time_cancel', 'user_note', 'admin_note', 
+        'number', 'product_price', 'discount_price', 'shipping_price', 'packing_price', 'total_price', 
+        'packing', 'delivery', 'payment', 'payment_adapter'
+    );	
+
+    public function indexAction()
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
@@ -33,18 +45,48 @@ class CheckoutController extends IndexController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                // Check and save order information on db
-                /* Not yet */
-
-
+                // Set just order fields
+                foreach (array_keys($values) as $key) {
+                    if (!in_array($key, $this->orderColumns)) {
+                        unset($values[$key]);
+                    }
+                }
+                // Set cart
+                $cart = $_SESSION['shop']['cart'];
+                // Set values
+                $values['user'] = Pi::user()->getId();
+                $values['ip'] = Pi::user()->getIp();
+                $values['status'] = 2;
+                $values['time_create'] = time();
+                $values['number'] = $cart['invoice']['total']['number'];
+                $values['product_price'] = $cart['invoice']['total']['price'];
+                $values['discount_price'] = $cart['invoice']['total']['discount'];
+                $values['shipping_price'] = 0;
+                $values['packing_price'] = 0;
+                $values['total_price'] = $cart['invoice']['total']['total_price'];
+                $values['payment_adapter'] = 'Mellat';
+                // Save values to order
+                $row = $this->getModel('order')->createRow();
+                $row->assign($values);
+                $row->save();
+                // Save order basket
+                foreach ($cart['invoice']['product'] as $product) {
+                    $basket = $this->getModel('order_basket')->createRow();
+                    $basket->order = $row->id;
+                    $basket->product = $product['id'];
+                    $basket->product_price = $product['price'];
+                    $basket->discount_price = $product['discount'];
+                    $basket->total_price = $product['total'];
+                    $basket->number = $product['number'];
+                    $basket->save();
+                }
                 // Set invoice description
                 $description = array();
-                foreach ($$_SESSION['shop']['cart']['product'] as $product) {
+                foreach ($cart['product'] as $product) {
                     $item = array();
                     $item['id'] = $product['id'];
                     $item['title'] = $product['title'];
                     $item['price'] = $product['price'];
-                    $item['description'] = $product['summary'];
                     $item['url'] = $product['productUrl'];
                     $item['number'] = $product['number'];
                     $item['total'] = $product['total'];
@@ -54,9 +96,9 @@ class CheckoutController extends IndexController
                 $order = array();
                 $order['module'] = $this->getModule();
                 $order['part'] = 'product';
-                $order['id'] = '1';
-                $order['amount'] = $_SESSION['shop']['cart']['invoice']['total']['total_price'];
-                $order['adapter'] = 'Mellat';
+                $order['id'] = $row->id;
+                $order['amount'] = $row->total_price;
+                $order['adapter'] = $row->payment_adapter;
                 $order['description'] = json_encode($description);
                 // Payment module
                 $result = Pi::api('payment', 'invoice')->createInvoice(
@@ -70,7 +112,7 @@ class CheckoutController extends IndexController
                 // Check it save or not
                 if ($result['status']) {
                     // unset cart
-                    unset($_SESSION['shop']['cart']);
+                    $this->setEmpty();
                     // Go to payment
                     $this->jump($result['invoice_url'], $result['message']);
                 } else {
@@ -92,37 +134,6 @@ class CheckoutController extends IndexController
     public function levelAjaxAction()
     {
         $return = array();
-        // Set cart
-        /* $cart = $_SESSION['shop']['cart'];
-        if (empty($cart['invoice'])) {
-            return false;
-        }
-        // Set 
-        if (!isset($cart['checkout'])) {
-            $cart['checkout'] = array();
-        }
-        // Get level
-        $level = $this->params('level', 'info');
-        // Set level action
-        switch ($level) {
-            case 'saveInfo':
-
-                break;
-            
-            case 'info':
-            default:
-                // Set order form
-                $form = new OrderForm('review');
-                $form->setAttribute('action', $this->url('', array('action' => 'index', 'level' => 'saveInfo')));
-                // Set return
-                $return['type'] = 'form';
-                $return['content'] = $form;
-                break;
-        }
-        // Set session
-        $cart['checkout']['level'] = $level;
-        $_SESSION['shop']['cart'] = $cart;
-        // return */
         return $return;
     }
 
@@ -229,16 +240,21 @@ class CheckoutController extends IndexController
 
     public function emptyAction()
     {
-        if (isset($_SESSION['shop']['cart'])) {
-            unset($_SESSION['shop']['cart']);
-        }
+        $this->setEmpty();
         $module = $this->params('module');
         $url = array('', 'module' => $module, 'controller' => 'index');
         $this->jump($url, __('Your cart are empty'));
     }
 
-    protected function setInvoice()
+    protected function setEmpty()
     {
+        if (isset($_SESSION['shop']['cart'])) {
+            unset($_SESSION['shop']['cart']);
+        }
+    }
+
+    protected function setInvoice()
+    {    
     	$invoice = array();
         $invoice['total']['price'] = 0;
         $invoice['total']['number'] = 0;

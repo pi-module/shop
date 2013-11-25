@@ -120,8 +120,30 @@ class OrderForm  extends BaseForm
                 'description' => '',
             )
         ));
-
-
+        // country
+        $this->add(array(
+            'name' => 'country',
+            'options' => array(
+                'label' => __('Country'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+                'class' => 'span6',
+            )
+        ));
+        // city
+        $this->add(array(
+            'name' => 'city',
+            'options' => array(
+                'label' => __('City'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+                'class' => 'span6',
+            )
+        ));
         // zip_code
         $this->add(array(
             'name' => 'zip_code',
