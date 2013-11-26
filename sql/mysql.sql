@@ -29,16 +29,6 @@ CREATE TABLE `{product}` (
   `stock_alert` int(10) unsigned NOT NULL,
   `price` decimal(16,2) NOT NULL,
   `price_discount` decimal(16,2) NOT NULL,
-  `property_1` varchar(255) NOT NULL,
-  `property_2` varchar(255) NOT NULL,
-  `property_3` varchar(255) NOT NULL,
-  `property_4` varchar(255) NOT NULL,
-  `property_5` varchar(255) NOT NULL,
-  `property_6` varchar(255) NOT NULL,
-  `property_7` varchar(255) NOT NULL,
-  `property_8` varchar(255) NOT NULL,
-  `property_9` varchar(255) NOT NULL,
-  `property_10` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -98,10 +88,11 @@ CREATE TABLE `{field}` (
   `id` int (10) unsigned NOT NULL auto_increment,
   `title` varchar (255) NOT NULL,
   `image` varchar (255) NOT NULL,
-  `type` enum('text','link','currency','date','number') NOT NULL,
+  `type` enum('text','link','currency','date','number','select','video','audio','file') NOT NULL,
   `order` int(10) unsigned NOT NULL,
   `status` tinyint(1) unsigned NOT NULL default '1',
   `search` tinyint(1) unsigned NOT NULL default '1',
+  `value` text,
   PRIMARY KEY (`id`)
 );
 

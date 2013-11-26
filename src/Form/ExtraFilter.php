@@ -35,6 +35,16 @@ class ExtraFilter extends InputFilter
                 ),
             ),
         ));
+        // value
+        $this->add(array(
+            'name' => 'value',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // status
         $this->add(array(
             'name' => 'status',

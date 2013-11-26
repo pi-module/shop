@@ -20,7 +20,6 @@ class OrderForm  extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
-        $this->property = $option;
         parent::__construct($name);
     }
 

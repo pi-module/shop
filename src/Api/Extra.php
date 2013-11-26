@@ -21,6 +21,8 @@ use Pi\Application\AbstractApi;
  * Pi::api('shop', 'extra')->Set($extra, $product);
  * Pi::api('shop', 'extra')->Form($values);
  * Pi::api('shop', 'extra')->Product($id);
+ * Pi::api('shop', 'extra')->SearchForm($form);
+ * Pi::api('shop', 'extra')->findFromExtra($search);
  */
 
 class Extra extends AbstractApi
@@ -35,9 +37,8 @@ class Extra extends AbstractApi
             'field' => '',
         );
         $whereField = array('status' => 1);
-        $columnField = array('id', 'title', 'search');
         $orderField = array('order DESC', 'id DESC');
-        $select = Pi::model('field', $this->getModule())->select()->where($whereField)->columns($columnField)->order($orderField);
+        $select = Pi::model('field', $this->getModule())->select()->where($whereField)->order($orderField);
         $rowset = Pi::model('field', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $return['extra'][$row->id] = $row->toArray();
@@ -120,5 +121,53 @@ class Extra extends AbstractApi
         }
         // return
         return $field;
+    }
+
+    /*
+      * Set extra filds from search form
+      */
+    public function SearchForm($form)
+    {
+        $extra = array();
+        // unset other field
+        unset($form['type']);
+        unset($form['title']);
+        unset($form['price_from']);
+        unset($form['price_to']);
+        unset($form['category']);
+        // Make list
+        foreach ($form as $key => $value) {
+            if (is_numeric($key) && !empty($value)) {
+                $item = array();
+                $item['field'] = $key;
+                $item['data'] = $value;
+                $extra[$key] = $item;
+            }
+        }
+        return $extra;
+    }
+
+    /*
+      * Set extra filds from search form
+      */
+    public function findFromExtra($search)
+    {
+        $id = array();
+        $column = array('product');
+        foreach ($search as $extra) {
+            $where = array(
+                'field' => $extra['field'], 
+                'data' => $extra['data'],
+            );
+            $select = Pi::model('field_data', $this->getModule())->select()->where($where)->columns($column);
+            $rowset = Pi::model('field_data', $this->getModule())->selectWith($select);
+            foreach ($rowset as $row) {
+                if (isset($row->product) && !empty($row->product)) {
+                    $id[] = $row->product;
+                }
+            }
+        }
+        $id = array_unique($id);
+        return $id;
     }
 }

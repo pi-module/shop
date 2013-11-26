@@ -20,7 +20,6 @@ class SearchForm  extends BaseForm
 {
 	public function __construct($name = null, $option = array())
     {
-        $this->property = $option['property'];
         $this->field = $option['field'];
         $this->config = Pi::service('registry')->config->read('shop', 'search');
         parent::__construct($name);
@@ -130,224 +129,31 @@ class SearchForm  extends BaseForm
                 ),
             ));
         }
-        // property_1
-        if (!empty($this->property['property_1_option']['value']) 
-            && $this->config['search_property_1']) 
-        {
-            $this->add(array(
-                'name' => 'property_1',
-                'type' => 'select',
-                'options' => array(
-                    'label' => $this->property['property_1_title']['value'],
-                    'value_options' => $this->makeArray($this->property['property_1_option']['value']),
-                ),
-            ));
-        } else {
-            $this->add(array(
-                'name' => 'property_1',
-                'attributes' => array(
-                    'type' => 'hidden',
-                ),
-            ));
-        }
-        // property_2
-        if (!empty($this->property['property_2_option']['value']) 
-            && $this->config['search_property_2']) 
-        {
-            $this->add(array(
-                'name' => 'property_2',
-                'type' => 'select',
-                'options' => array(
-                    'label' => $this->property['property_2_title']['value'],
-                    'value_options' => $this->makeArray($this->property['property_2_option']['value']),
-                ),
-            ));
-        } else {
-            $this->add(array(
-                'name' => 'property_2',
-                'attributes' => array(
-                    'type' => 'hidden',
-                ),
-            ));
-        }
-        // property_3
-        if (!empty($this->property['property_3_option']['value']) 
-            && $this->config['search_property_3']) 
-        {
-            $this->add(array(
-                'name' => 'property_3',
-                'type' => 'select',
-                'options' => array(
-                    'label' => $this->property['property_3_title']['value'],
-                    'value_options' => $this->makeArray($this->property['property_3_option']['value']),
-                ),
-            ));
-        } else {
-            $this->add(array(
-                'name' => 'property_3',
-                'attributes' => array(
-                    'type' => 'hidden',
-                ),
-            ));
-        }
-        // property_4
-        if (!empty($this->property['property_4_option']['value']) 
-            && $this->config['search_property_4']) 
-        {
-            $this->add(array(
-                'name' => 'property_4',
-                'type' => 'select',
-                'options' => array(
-                    'label' => $this->property['property_4_title']['value'],
-                    'value_options' => $this->makeArray($this->property['property_4_option']['value']),
-                ),
-            ));
-        } else {
-            $this->add(array(
-                'name' => 'property_4',
-                'attributes' => array(
-                    'type' => 'hidden',
-                ),
-            ));
-        }
-        // property_5
-        if (!empty($this->property['property_5_option']['value']) 
-            && $this->config['search_property_5']) 
-        {
-            $this->add(array(
-                'name' => 'property_5',
-                'type' => 'select',
-                'options' => array(
-                    'label' => $this->property['property_5_title']['value'],
-                    'value_options' => $this->makeArray($this->property['property_5_option']['value']),
-                ),
-            ));
-        } else {
-            $this->add(array(
-                'name' => 'property_5',
-                'attributes' => array(
-                    'type' => 'hidden',
-                ),
-            ));
-        }
-        // property_6
-        if (!empty($this->property['property_6_option']['value']) 
-            && $this->config['search_property_6']) 
-        {
-            $this->add(array(
-                'name' => 'property_6',
-                'type' => 'select',
-                'options' => array(
-                    'label' => $this->property['property_6_title']['value'],
-                    'value_options' => $this->makeArray($this->property['property_6_option']['value']),
-                ),
-            ));
-        } else {
-            $this->add(array(
-                'name' => 'property_6',
-                'attributes' => array(
-                    'type' => 'hidden',
-                ),
-            ));
-        }
-        // property_7
-        if (!empty($this->property['property_7_option']['value']) 
-            && $this->config['search_property_7']) 
-        {
-            $this->add(array(
-                'name' => 'property_7',
-                'type' => 'select',
-                'options' => array(
-                    'label' => $this->property['property_7_title']['value'],
-                    'value_options' => $this->makeArray($this->property['property_7_option']['value']),
-                ),
-            ));
-        } else {
-            $this->add(array(
-                'name' => 'property_7',
-                'attributes' => array(
-                    'type' => 'hidden',
-                ),
-            ));
-        }
-        // property_8
-        if (!empty($this->property['property_8_option']['value']) 
-            && $this->config['search_property_8']) 
-        {
-            $this->add(array(
-                'name' => 'property_8',
-                'type' => 'select',
-                'options' => array(
-                    'label' => $this->property['property_8_title']['value'],
-                    'value_options' => $this->makeArray($this->property['property_8_option']['value']),
-                ),
-            ));
-        } else {
-            $this->add(array(
-                'name' => 'property_8',
-                'attributes' => array(
-                    'type' => 'hidden',
-                ),
-            ));
-        }
-        // property_9
-        if (!empty($this->property['property_9_option']['value']) 
-            && $this->config['search_property_9']) 
-        {
-            $this->add(array(
-                'name' => 'property_9',
-                'type' => 'select',
-                'options' => array(
-                    'label' => $this->property['property_9_title']['value'],
-                    'value_options' => $this->makeArray($this->property['property_9_option']['value']),
-                ),
-            ));
-        } else {
-            $this->add(array(
-                'name' => 'property_9',
-                'attributes' => array(
-                    'type' => 'hidden',
-                ),
-            ));
-        }
-        // property_10
-        if (!empty($this->property['property_10_option']['value']) 
-            && $this->config['search_property_10']) 
-        {
-            $this->add(array(
-                'name' => 'property_10',
-                'type' => 'select',
-                'options' => array(
-                    'label' => $this->property['property_10_title']['value'],
-                    'value_options' => $this->makeArray($this->property['property_10_option']['value']),
-                ),
-            ));
-        } else {
-            $this->add(array(
-                'name' => 'property_10',
-                'attributes' => array(
-                    'type' => 'hidden',
-                ),
-            ));
-        }
         // Set extra field
-        /* if (!empty($this->field)) {
+        if (!empty($this->field)) {
             foreach ($this->field as $field) {
-            	if ($field['search']) {
-            		$this->add(array(
-                    	'name' => $field['id'],
-                    	'options' => array(
-                        	'label' => $field['title'],
-                    	),
-                    	'attributes' => array(
-                        	'type' => 'text',
-                        	'class' => 'span6',
-                    	)
-                	));
-            	}
-                
+                if ($field['type'] == 'select') {
+                    $this->add(array(
+                        'name' => $field['id'],
+                        'type' => 'select',
+                        'options' => array(
+                            'label' => sprintf('%s (%s)', $field['title'], $field['type']),
+                            'value_options' => $this->makeArray($field['value']),
+                        ),
+                    ));
+                } else {
+                    $this->add(array(
+                        'name' => $field['id'],
+                        'options' => array(
+                            'label' => sprintf('%s (%s)', $field['title'], $field['type']),
+                        ),
+                        'attributes' => array(
+                            'type' => 'text',
+                        )
+                    ));
+                }
             }
-        } */
+        }
         // Save
         $this->add(array(
             'name' => 'submit',

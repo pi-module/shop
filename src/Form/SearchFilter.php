@@ -60,114 +60,14 @@ class SearchFilter extends InputFilter
             'name' => 'category',
             'required' => false,
         ));
-        // property_1
-        $this->add(array(
-            'name' => 'property_1',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // property_2
-        $this->add(array(
-            'name' => 'property_2',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // property_3
-        $this->add(array(
-            'name' => 'property_3',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // property_4
-        $this->add(array(
-            'name' => 'property_4',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // property_5
-        $this->add(array(
-            'name' => 'property_5',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // property_6
-        $this->add(array(
-            'name' => 'property_6',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // property_7
-        $this->add(array(
-            'name' => 'property_7',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // property_8
-        $this->add(array(
-            'name' => 'property_8',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // property_9
-        $this->add(array(
-            'name' => 'property_9',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // property_10
-        $this->add(array(
-            'name' => 'property_10',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
         // Set extra field
-        /* if (!empty($extra)) {
+        if (!empty($extra)) {
             foreach ($extra as $field) {
                 $this->add(array(
                     'name' => $field['id'],
                     'required' => false,
                 ));
             }
-        } */
+        }
     }
 }    	

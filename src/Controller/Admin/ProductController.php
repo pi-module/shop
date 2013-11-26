@@ -21,8 +21,6 @@ use Module\Shop\Form\ProductForm;
 use Module\Shop\Form\ProductFilter;
 use Module\Shop\Form\RelatedForm;
 use Module\Shop\Form\RelatedFilter;
-use Module\Shop\Form\PropertyForm;
-use Module\Shop\Form\PropertyFilter;
 use Module\Shop\Form\ExtraForm;
 use Module\Shop\Form\ExtraFilter;
 use Module\Shop\Form\SpotlightForm;
@@ -47,18 +45,18 @@ class ProductController extends ActionController
      * Product Columns
      */
     protected $productColumns = array(
-    	'id', 'title', 'slug', 'category', 'related', 'summary', 'description', 'seo_title', 'seo_keywords',
-    	'seo_description', 'status', 'time_create', 'time_update', 'uid', 'hits', 'sales', 'image', 'path', 'comment',
-    	'point', 'count', 'favorite', 'attach', 'extra', 'recommended', 'stock', 'stock_alert', 'price', 
-    	'price_discount', 'property_1', 'property_2', 'property_3', 'property_4', 'property_5', 'property_6',
-    	'property_7', 'property_8', 'property_9', 'property_10', 'review',
+    	'id', 'title', 'slug', 'category', 'summary', 'description', 'seo_title', 
+        'seo_keywords', 'seo_description', 'status', 'time_create', 'time_update', 
+        'uid', 'hits', 'sales', 'image', 'path', 'comment', 'point', 'count', 
+        'favorite', 'attach', 'extra', 'related', 'review', 'recommended', 
+        'stock', 'stock_alert', 'price', 'price_discount',
     );
 
     /**
      * Extra Columns
      */
     protected $extraColumns = array(
-        'id', 'title', 'image', 'type', 'order', 'status', 'search'
+        'id', 'title', 'image', 'type', 'order', 'status', 'search', 'value'
     );
 
     /**
@@ -170,8 +168,6 @@ class ProductController extends ActionController
                 $option['removeUrl'] = $this->url('', array('action' => 'remove', 'id' => $product['id']));
             }
         }
-        // Get property
-        $option['property'] = Pi::api('shop', 'property')->Get();
         // Get extra field
         $fields = Pi::api('shop', 'extra')->Get();
         $option['field'] = $fields['extra'];
@@ -476,48 +472,6 @@ class ProductController extends ActionController
         $this->view()->setTemplate('product_attribute');
         $this->view()->assign('title', __('Add Attribute'));
         $this->view()->assign('message', __('This option ready on next version'));
-    }
-
-    /**
-     * property Action
-     */
-    public function propertyAction()
-    {
-        $module = $this->params('module');
-        $where = array('module' => $module, 'category' => 'property');
-        $order = array('order ASC');
-        $select = Pi::model('config')->select()->where($where)->order($order);
-        $rowset = Pi::model('config')->selectWith($select);
-        $configs = array();
-        foreach ($rowset as $row) {
-            $configs[] = $row;
-            $items[$row->id] = $row->toArray();
-        }
-        // Set form
-        $form = new PropertyForm('property', $items);
-        $form->setAttribute('enctype', 'multipart/form-data');
-        if ($this->request->isPost()) {
-            $data = $this->request->getPost();
-            $form->setData($data);
-            if ($form->isValid()) {
-                $values = $form->getData();
-                unset($values['submit']);
-                foreach ($configs as $row) {
-                    $row->value = $values[$row->name];
-                    $row->save();
-                }
-                $message = __('Property data saved successfully.');
-            } else {
-                $message = __('Invalid data, please check and re-submit.');
-            }   
-        } else {
-            $message = __('you can update property');
-        }
-        // Set view
-        $this->view()->setTemplate('product_property');
-        $this->view()->assign('form', $form);
-        $this->view()->assign('title', __('Add Property'));
-        $this->view()->assign('message', $message);
     }
 
     /**

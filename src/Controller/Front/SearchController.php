@@ -25,8 +25,6 @@ class SearchController extends IndexController
 	public function indexAction()
     {
     	$option = array();
-    	// Get property
-        $option['property'] = Pi::api('shop', 'property')->Get();
         // Get extra field
         $fields = Pi::api('shop', 'extra')->Get();
         $option['field'] = $fields['extra'];
@@ -52,7 +50,12 @@ class SearchController extends IndexController
 
     public function resultAction()
     {
+        // Get search
         $search = $_SESSION['shop']['search'];
+
+                echo '<pre>';
+                print_r($_SESSION['shop']['search']);
+                echo '</pre>';
 
         // Get info from url
         $module = $this->params('module');
@@ -82,66 +85,6 @@ class SearchController extends IndexController
                     break;          
             }
         }
-        // Set property_1
-        if (isset($search['property_1']) 
-            && !empty($search['property_1']))
-        {
-        	$where['property_1'] = $search['property_1'];
-        }
-        // Set property_2
-        if (isset($search['property_2']) 
-            && !empty($search['property_2']))
-        {
-        	$where['property_2'] = $search['property_2'];
-        }
-        // Set property_3
-        if (isset($search['property_3']) 
-            && !empty($search['property_3']))
-        {
-        	$where['property_3'] = $search['property_3'];
-        }
-        // Set property_4
-        if (isset($search['property_4']) 
-            && !empty($search['property_4']))
-        {
-        	$where['property_4'] = $search['property_4'];
-        }
-        // Set property_5
-        if (isset($search['property_5']) 
-            && !empty($search['property_5']))
-        {
-        	$where['property_5'] = $search['property_5'];
-        }
-        // Set property_6
-        if (isset($search['property_6']) 
-            && !empty($search['property_6']))
-        {
-        	$where['property_6'] = $search['property_6'];
-        }
-        // Set property_7
-        if (isset($search['property_7']) 
-            && !empty($search['property_7']))
-        {
-        	$where['property_7'] = $search['property_7'];
-        }
-        // Set property_8
-        if (isset($search['property_8']) 
-            && !empty($search['property_8']))
-        {
-        	$where['property_8'] = $search['property_8'];
-        }
-        // Set property_9
-        if (isset($search['property_9']) 
-            && !empty($search['property_9']))
-        {
-        	$where['property_9'] = $search['property_9'];
-        }
-        // Set property_10
-        if (isset($search['property_10']) 
-            && !empty($search['property_10']))
-        {
-            $where['property_10'] = $search['property_10'];
-        }
         // Set price_from
         if (isset($search['price_from']) 
             && !empty($search['price_from']))
@@ -154,12 +97,27 @@ class SearchController extends IndexController
         {
             $where['price <= ?'] = $search['price_from'];
         }
+        // Set category
         if (isset($search['category']) 
             && !empty($search['category']) 
             && is_array($search['category']))
         {
-            $productId = Pi::api('shop', 'category')->findFromCategory($search['category']);
+            $categoryId = Pi::api('shop', 'category')->findFromCategory($search['category']);
+        }
+        // Set extra
+        $extraSearch = Pi::api('shop', 'extra')->SearchForm($search);
+        if (!empty($extraSearch)) {
+            $extraId = Pi::api('shop', 'extra')->findFromExtra($extraSearch);
+        }
+        // Set where id
+        if (!empty($categoryId) && !empty($extraId)) {
+            $productId = array_merge($categoryId, $extraId);
+            $productId = array_unique($productId);
             $where['id'] = $productId;
+        } elseif (!empty($categoryId) && empty($extraId)) {
+            $where['id'] = $categoryId;
+        } elseif (empty($categoryId) && !empty($extraId)) {
+            $where['id'] = $extraId;
         }
         // Get product List
         $productList = $this->searchList($where);
