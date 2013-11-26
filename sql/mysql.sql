@@ -161,6 +161,7 @@ CREATE TABLE `{order}` (
   `shipping_price` decimal(16,2) NOT NULL,
   `packing_price` decimal(16,2) NOT NULL,
   `total_price` double(16,2) NOT NULL,
+  `paid_price` double(16,2) NOT NULL,
   `packing` tinyint(1) unsigned NOT NULL,
   `delivery` int(10) unsigned NOT NULL,
   `payment` int(10) unsigned NOT NULL,
@@ -175,6 +176,25 @@ CREATE TABLE `{order_basket}` (
   `product_price` double(16,2) NOT NULL,
   `discount_price` double(16,2) NOT NULL,
   `total_price` double(16,2) NOT NULL,
+  `number` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `{user}` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `user` int(10) unsigned NOT NULL,
+  `first_name` varchar (255) NOT NULL,
+  `last_name` varchar (255) NOT NULL,
+  `email` varchar (64) NOT NULL,
+  `phone` varchar (16) NOT NULL,
+  `mobile` varchar (16) NOT NULL,
+  `company` varchar (255) NOT NULL,
+  `address` text,
+  `country` varchar (64) NOT NULL,
+  `city` varchar (64) NOT NULL,
+  `zip_code` varchar (16) NOT NULL,
+  `admin_note` text,
+  `user_note` text,
   `number` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 );

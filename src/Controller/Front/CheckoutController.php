@@ -30,7 +30,7 @@ class CheckoutController extends IndexController
         'company', 'address', 'country', 'city', 'zip_code', 'ip', 'status', 
         'time_create', 'time_payment', 'time_cancel', 'user_note', 'admin_note', 
         'number', 'product_price', 'discount_price', 'shipping_price', 'packing_price', 'total_price', 
-        'packing', 'delivery', 'payment', 'payment_adapter'
+        'paid_price', 'packing', 'delivery', 'payment', 'payment_adapter'
     );	
 
     public function indexAction()
@@ -69,6 +69,8 @@ class CheckoutController extends IndexController
                 $row = $this->getModel('order')->createRow();
                 $row->assign($values);
                 $row->save();
+                // Set user info
+                Pi::api('shop', 'user')->setUserInfo($values);
                 // Save order basket
                 foreach ($cart['invoice']['product'] as $product) {
                     $basket = $this->getModel('order_basket')->createRow();
@@ -95,7 +97,7 @@ class CheckoutController extends IndexController
                 // Set order array
                 $order = array();
                 $order['module'] = $this->getModule();
-                $order['part'] = 'product';
+                $order['part'] = 'order';
                 $order['id'] = $row->id;
                 $order['amount'] = $row->total_price;
                 $order['adapter'] = $row->payment_adapter;
@@ -116,13 +118,15 @@ class CheckoutController extends IndexController
                     // Go to payment
                     $this->jump($result['invoice_url'], $result['message']);
                 } else {
-                    $message = __('Review data not saved. uid = ' . Pi::user()->getId());
+                    $message = __('Checkout data not saved.');
                 }
             } else {
                 $message = __('Invalid data, please check and re-submit.');
             }   
         } else {
-            $message = 'You can add new review';
+            $message = '';
+            $user = Pi::api('shop', 'user')->getUserInfo();
+            $form->setData($user);
         }
         // Set view
         $this->view()->setTemplate('checkout_information');
@@ -244,6 +248,42 @@ class CheckoutController extends IndexController
         $module = $this->params('module');
         $url = array('', 'module' => $module, 'controller' => 'index');
         $this->jump($url, __('Your cart are empty'));
+    }
+
+    public function orderAction()
+    {
+        // Get info from url
+        $id = $this->params('id');
+        $module = $this->params('module');
+        // Find order
+        $order = $this->getModel('order')->find($id)->toArray();
+        if (!$order['id']) {
+            $url = array('', 'module' => $module, 'controller' => 'index');
+            $this->jump($url, __('Order not set.'));
+        }
+
+
+        // Set view
+        $this->view()->setTemplate('checkout_order');
+        $this->view()->assign('order', $order);
+    }
+
+    public function finishAction()
+    {
+        // Get info from url
+        $id = $this->params('id');
+        $module = $this->params('module');
+        // Find order
+        $order = $this->getModel('order')->find($id)->toArray();
+        if (!$order['id']) {
+            $url = array('', 'module' => $module, 'controller' => 'index');
+            $this->jump($url, __('Order not set.'));
+        }
+
+
+        // Set view
+        $this->view()->setTemplate('checkout_finish');
+        $this->view()->assign('order', $order);
     }
 
     protected function setEmpty()

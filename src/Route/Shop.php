@@ -101,6 +101,9 @@ class Shop extends Standard
                             $matches['action'] = 'empty';
                         } elseif ($parts[1] == 'cart') {
                             $matches['action'] = 'cart';
+                        } elseif ($parts[1] == 'finish') {    
+                            $matches['action'] = 'finish';
+                            $matches['id'] = intval($parts[2]);
                         } elseif ($parts[1] == 'levelAjax') {
                             $matches['action'] = 'levelAjax';
                         } elseif ($parts[1] == 'cartAjax') {    
@@ -299,13 +302,18 @@ class Shop extends Standard
                 $url['level'] = sprintf('level%s%s', 
                                    $this->paramDelimiter, 
                                    $mergedParams['level']);
+
             } elseif ($mergedParams['action'] == 'basketAjax') {    
                 $url['process'] = $mergedParams['process'];
                 $url['product'] = $mergedParams['product'];
                 if (!empty($mergedParams['number'])) {
                     $url['number'] = $mergedParams['number'];
                 }
-            }
+            } elseif ($mergedParams['action'] == 'finish' 
+                || $mergedParams['action'] == 'order') 
+            {
+                $url['id'] = $mergedParams['id'];
+            }   
         }
 
         // Set page
