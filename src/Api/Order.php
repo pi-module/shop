@@ -38,4 +38,54 @@ class Order extends AbstractApi
             'id'            => $row->id,
         ));
     }
+
+    public function findOrder($id)
+    {
+        $row = Pi::model('order', $this->getModule())->find($id);
+        if (is_object($row)) {
+            $order = $row->toArray();
+        } else {
+            $order = array();
+        }
+        return $order;
+    }
+
+    public function setOrderInfo($values)
+    {
+        if ($values['id']) {
+            $row = Pi::model('order', $this->getModule())->find($values['id']);
+        } else {
+            $row = Pi::model('order', $this->getModule())->createRow();
+        }
+        // Set info
+        /* $row->user = $uid;
+        $row->first_name = $values['first_name'];
+        $row->last_name = $values['last_name'];
+        $row->email = $values['email'];
+        $row->phone = $values['phone'];
+        $row->mobile = $values['mobile'];
+        $row->company = $values['company'];
+        $row->address = $values['address'];
+        $row->country = $values['country'];
+        $row->city = $values['city'];
+        $row->zip_code = $values['zip_code'];
+        $row->number = $values['number']; */
+        $row->save();
+    }
+
+    public function getOrderInfo($id)
+    {
+        $user = $this->findOrder($id);
+        /* $values['first_name'] = ($user['first_name']) ? $user['first_name'] : '';
+        $values['last_name'] = ($user['last_name']) ? $user['last_name'] : '';
+        $values['email'] = ($user['email']) ? $user['email'] : '';
+        $values['phone'] = ($user['phone']) ? $user['phone'] : '';
+        $values['mobile'] = ($user['mobile']) ? $user['mobile'] : '';
+        $values['company'] = ($user['company']) ? $user['company'] : '';
+        $values['address'] = ($user['address']) ? $user['address'] : '';
+        $values['country'] = ($user['country']) ? $user['country'] : '';
+        $values['city'] = ($user['city']) ? $user['city'] : '';
+        $values['zip_code'] = ($user['zip_code']) ? $user['zip_code'] : ''; */
+        return $values;
+    }
 }
