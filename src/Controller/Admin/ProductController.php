@@ -23,8 +23,8 @@ use Module\Shop\Form\RelatedForm;
 use Module\Shop\Form\RelatedFilter;
 use Module\Shop\Form\ExtraForm;
 use Module\Shop\Form\ExtraFilter;
-use Module\Shop\Form\SpotlightForm;
-use Module\Shop\Form\SpotlightFilter;
+use Module\Shop\Form\SpecialForm;
+use Module\Shop\Form\SpecialFilter;
 use Module\Shop\Form\ReviewForm;
 use Module\Shop\Form\ReviewFilter;
 use Zend\Json\Json;
@@ -60,17 +60,17 @@ class ProductController extends ActionController
     );
 
     /**
-     * Spotlight Columns
+     * Special Columns
      */
-    protected $spotlightColumns = array(
-        'id', 'product', 'category', 'time_publish', 'time_expire', 'status'
+    protected $specialColumns = array(
+        'id', 'product', 'price', 'time_publish', 'time_expire', 'status'
     );
 
     /**
      * review Columns
      */
     protected $reviewColumns = array(
-        'id', 'user', 'product', 'title', 'description', 'time_create', 'official', 'status'
+        'id', 'uid', 'product', 'title', 'description', 'time_create', 'official', 'status'
     );
 
     /**
@@ -154,6 +154,14 @@ class ProductController extends ActionController
      */
     public function updateAction()
     {
+        // check category
+        $categoryCount = Pi::api('shop', 'category')->categoryCount();
+        if (!$categoryCount) {
+            return $this->redirect()->toRoute('', array(
+                'controller' => 'category',
+                'action' => 'update'
+            ));
+        }
         // Get id
         $id = $this->params('id');
         $module = $this->params('module');
@@ -239,6 +247,7 @@ class ProductController extends ActionController
                 // Set time
                 if (empty($values['id'])) {
                     $values['time_create'] = time();
+                    $values['uid'] = Pi::user()->getId();
                 }
                 $values['time_update'] = time();
                 // Save values
@@ -312,8 +321,8 @@ class ProductController extends ActionController
             $this->getModel('attach')->delete(array('product' => $row->id));
             // Extra Field Data
             $this->getModel('field_data')->delete(array('product' => $row->id));
-            // Spotlight
-            $this->getModel('spotlight')->delete(array('product' => $row->id));
+            // Special
+            $this->getModel('special')->delete(array('product' => $row->id));
             // Review
             $this->getModel('review')->delete(array('product' => $row->id));
             // Remove page
@@ -616,32 +625,20 @@ class ProductController extends ActionController
         }
     }
 
-    public function spotlightAction()
+    public function specialAction()
     {
         // Get product and category
         $where = array('time_expire > ?' => time());
-        $columns = array('product', 'category');
-        $select = $this->getModel('spotlight')->select()->where($where)->columns($columns);
-        $idSet = $this->getModel('spotlight')->selectWith($select)->toArray();
+        $columns = array('product');
+        $select = $this->getModel('special')->select()->where($where)->columns($columns);
+        $idSet = $this->getModel('special')->selectWith($select)->toArray();
         if (empty($idSet)) {
-            return $this->redirect()->toRoute('', array('action' => 'spotlightUpdate'));
+            return $this->redirect()->toRoute('', array('action' => 'specialUpdate'));
         }
         // Set topics and stores
-        foreach ($idSet as $spotlight) {
-            $categoryArr[] = $spotlight['category'];
-            $productArr[] = $spotlight['product'];
+        foreach ($idSet as $special) {
+            $productArr[] = $special['product'];
         }
-        // Get topics
-        $where = array('id' => array_unique($topicArr));
-        $columns = array('id', 'title', 'slug');
-        $select = $this->getModel('category')->select()->where($where)->columns($columns);
-        $categorySet = $this->getModel('category')->selectWith($select);
-        // Make category list
-        foreach ($categorySet as $row) {
-            $categoryList[$row->id] = $row->toArray();
-        }
-        $categoryList[-1] = array('id' => -1, 'title' => __('Home Page'), 'slug' => '');
-        $categoryList[0] = array('id' => 0, 'title' => __('All Category'), 'slug' => '');
         // Get products
         $where = array('id' => array_unique($productArr));
         $columns = array('id', 'title', 'slug');
@@ -651,39 +648,37 @@ class ProductController extends ActionController
         foreach ($productSet as $row) {
             $productList[$row->id] = $row->toArray();
         }
-        // Get spotlights
+        // Get special
         $where = array('time_expire > ?' => time());
         $order = array('id DESC', 'time_publish DESC');
-        $select = $this->getModel('spotlight')->select()->where($where)->order($order);
-        $spotlightSet = $this->getModel('spotlight')->selectWith($select);
-        // Make spotlight list
-        foreach ($spotlightSet as $row) {
-            $spotlightList[$row->id] = $row->toArray();
-            $spotlightList[$row->id]['productTitle'] = $productList[$row->product]['title'];
-            $spotlightList[$row->id]['productSlug'] = $productList[$row->product]['slug'];
-            $spotlightList[$row->id]['categoryTitle'] = $categoryList[$row->category]['title'];
-            $spotlightList[$row->id]['categorySlug'] = $categoryList[$row->category]['slug'];
-            $spotlightList[$row->id]['time_publish'] = _date($spotlightList[$row->id]['time_publish']);
-            $spotlightList[$row->id]['time_expire'] = _date($spotlightList[$row->id]['time_expire']);
+        $select = $this->getModel('special')->select()->where($where)->order($order);
+        $specialSet = $this->getModel('special')->selectWith($select);
+        // Make special list
+        foreach ($specialSet as $row) {
+            $specialList[$row->id] = $row->toArray();
+            $specialList[$row->id]['productTitle'] = $productList[$row->product]['title'];
+            $specialList[$row->id]['productSlug'] = $productList[$row->product]['slug'];
+            $specialList[$row->id]['time_publish'] = _date($specialList[$row->id]['time_publish']);
+            $specialList[$row->id]['time_expire'] = _date($specialList[$row->id]['time_expire']);
         }
         // Set view
-        $this->view()->setTemplate('product_spotlight');
-        $this->view()->assign('spotlights', $spotlightList);
+        $this->view()->setTemplate('product_special');
+        $this->view()->assign('specials', $specialList);
     }
 
-    public function spotlightUpdateAction()
+    public function specialUpdateAction()
     {
         // Get id
         $id = $this->params('id');
-        $form = new SpotlightForm('spotlight');
+        $form = new SpecialForm('special');
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form->setInputFilter(new SpotlightFilter);
+            $form->setInputFilter(new SpecialFilter);
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
                 foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->spotlightColumns)) {
+                    if (!in_array($key, $this->specialColumns)) {
                         unset($values[$key]);
                     }
                 }
@@ -692,48 +687,48 @@ class ProductController extends ActionController
                 $values['time_expire'] = strtotime($values['time_expire']);
                 // Save values
                 if (!empty($values['id'])) {
-                    $row = $this->getModel('spotlight')->find($values['id']);
+                    $row = $this->getModel('special')->find($values['id']);
                 } else {
-                    $row = $this->getModel('spotlight')->createRow();
+                    $row = $this->getModel('special')->createRow();
                 }
                 $row->assign($values);
                 $row->save();
                 // Check it save or not
                 if ($row->id) {
-                    $message = __('Spotlight data saved successfully.');
-                    $this->jump(array('action' => 'spotlight'), $message);
+                    $message = __('Special data saved successfully.');
+                    $this->jump(array('action' => 'special'), $message);
                 } else {
-                    $message = __('Spotlight data not saved.');
+                    $message = __('Special data not saved.');
                 }
             } else {
                 $message = __('Invalid data, please check and re-submit.');
             }
         } else {
             if ($id) {
-                $values = $this->getModel('spotlight')->find($id)->toArray();
+                $values = $this->getModel('special')->find($id)->toArray();
                 $form->setData($values);
-                $message = 'You can edit this spotlight';
+                $message = 'You can edit this special';
             } else {
-                $message = 'You can add new spotlight';
+                $message = 'You can add new special';
             }
         }
-        $this->view()->setTemplate('product_spotlight_update');
+        $this->view()->setTemplate('product_special_update');
         $this->view()->assign('form', $form);
-        $this->view()->assign('title', __('Add Spotlight'));
+        $this->view()->assign('title', __('Add Special'));
         $this->view()->assign('message', $message);
     }
 
-    public function spotlightDeleteAction()
+    public function specialDeleteAction()
     {
         // Get information
         $this->view()->setTemplate(false);
         $id = $this->params('id');
-        $row = $this->getModel('spotlight')->find($id);
+        $row = $this->getModel('special')->find($id);
         if ($row) {
             $row->delete();
-            $this->jump(array('action' => 'spotlight'), __('Selected spotlight delete'));
+            $this->jump(array('action' => 'special'), __('Selected special delete'));
         }
-        $this->jump(array('action' => 'spotlight'), __('Please select spotlight'));
+        $this->jump(array('action' => 'special'), __('Please select special'));
     }
 
     public function removeAction()
@@ -837,7 +832,7 @@ class ProductController extends ActionController
                 } else {
                     $row = $this->getModel('review')->createRow();
                     $values['time_create'] = time();
-                    $values['user'] = Pi::service('user')->getId();
+                    $values['uid'] = Pi::user()->getId();
                     $values['product'] = $product['id'];
                     $values['official'] = $hasOfficial ? 0 : 1;
                 }

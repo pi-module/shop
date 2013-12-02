@@ -47,7 +47,7 @@ class User extends AbstractApi
         	$number = 0;
         }
         // Set info
-        $row->user = $uid;
+        $row->uid = $uid;
         $row->first_name = $values['first_name'];
         $row->last_name = $values['last_name'];
         $row->email = $values['email'];

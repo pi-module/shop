@@ -46,11 +46,11 @@ class CategoryController extends IndexController
         $paginator = $this->productPaginator($template, $where);
         // category list
         $category = Pi::api('shop', 'category')->categoryList($category['id']);
-        // Get spotlight
-        if ($config['view_spotlight']) {
-            $spotlightList = Pi::api('shop', 'spotlight')->load($category['id']);
-            $this->view()->assign('spotlightList', $spotlightList);
-            $this->view()->assign('spotlightTitle', __('Top products'));
+        // Get special
+        if ($config['view_special']) {
+            $specialList = Pi::api('shop', 'special')->getAll();
+            $this->view()->assign('specialList', $specialList);
+            $this->view()->assign('specialTitle', __('Special products'));
         }
         // Set view
         $this->view()->setTemplate('product_list');

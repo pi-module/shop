@@ -25,7 +25,7 @@ class ProductController extends IndexController
      * review Columns
      */
     protected $reviewColumns = array(
-        'id', 'user', 'product', 'title', 'description', 'time_create', 'official', 'status'
+        'id', 'uid', 'product', 'title', 'description', 'time_create', 'official', 'status'
     );
 
     public function indexAction()
@@ -128,7 +128,7 @@ class ProductController extends IndexController
                 // Set values
                 $values['status'] = 2;
                 $values['time_create'] = time();
-                $values['user'] = Pi::service('user')->getId();
+                $values['uid'] = Pi::user()->getId();
                 $values['product'] = $product['id'];
                 $values['official'] = 0;
                 // Save values

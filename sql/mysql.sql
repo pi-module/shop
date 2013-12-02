@@ -104,10 +104,10 @@ CREATE TABLE `{field_data}` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `{spotlight}` (
+CREATE TABLE `{special}` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `product` int(10) unsigned NOT NULL,
-  `category` int(10) unsigned NOT NULL,
+  `price` decimal(16,2) NOT NULL,
   `time_publish` int(10) unsigned NOT NULL,
   `time_expire` int(10) unsigned NOT NULL,
   `status` tinyint(1) unsigned NOT NULL default '1',
@@ -116,7 +116,7 @@ CREATE TABLE `{spotlight}` (
 
 CREATE TABLE `{review}` (
   `id` int(10) unsigned NOT NULL auto_increment,
-  `user` int(10) unsigned NOT NULL,
+  `uid` int(10) unsigned NOT NULL,
   `product` int(10) unsigned NOT NULL,
   `title` varchar (255) NOT NULL,
   `description` text,
@@ -128,7 +128,7 @@ CREATE TABLE `{review}` (
 
 CREATE TABLE `{order}` (
   `id` int(10) unsigned NOT NULL auto_increment,
-  `user` int(10) unsigned NOT NULL,
+  `uid` int(10) unsigned NOT NULL,
   `first_name` varchar (255) NOT NULL,
   `last_name` varchar (255) NOT NULL,
   `email` varchar (64) NOT NULL,
@@ -140,10 +140,13 @@ CREATE TABLE `{order}` (
   `city` varchar (64) NOT NULL,
   `zip_code` varchar (16) NOT NULL,
   `ip` char(15) NOT NULL,
-  `status` tinyint(1) unsigned NOT NULL,
+  `status_order` tinyint(1) unsigned NOT NULL,
+  `status_payment` tinyint(1) unsigned NOT NULL,
+  `status_delivery` tinyint(1) unsigned NOT NULL,
   `time_create` int(10) unsigned NOT NULL,
   `time_payment` int(10) unsigned NOT NULL,
-  `time_cancel` int(10) unsigned NOT NULL,
+  `time_delivery` int(10) unsigned NOT NULL,
+  `time_finish` int(10) unsigned NOT NULL,
   `user_note` text,
   `admin_note` text,
   `number` int(10) unsigned NOT NULL,
@@ -155,7 +158,7 @@ CREATE TABLE `{order}` (
   `paid_price` double(16,2) NOT NULL,
   `packing` tinyint(1) unsigned NOT NULL,
   `delivery` int(10) unsigned NOT NULL,
-  `payment` int(10) unsigned NOT NULL,
+  `payment_method` int(10) unsigned NOT NULL,
   `payment_adapter` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 );
@@ -173,7 +176,7 @@ CREATE TABLE `{order_basket}` (
 
 CREATE TABLE `{user}` (
   `id` int(10) unsigned NOT NULL auto_increment,
-  `user` int(10) unsigned NOT NULL,
+  `uid` int(10) unsigned NOT NULL,
   `first_name` varchar (255) NOT NULL,
   `last_name` varchar (255) NOT NULL,
   `email` varchar (64) NOT NULL,

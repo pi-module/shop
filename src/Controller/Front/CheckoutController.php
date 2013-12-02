@@ -26,11 +26,11 @@ class CheckoutController extends IndexController
      * order Columns
      */
     protected $orderColumns = array(
-        'id', 'user', 'first_name', 'last_name', 'email', 'phone', 'mobile', 
-        'company', 'address', 'country', 'city', 'zip_code', 'ip', 'status', 
-        'time_create', 'time_payment', 'time_cancel', 'user_note', 'admin_note', 
-        'number', 'product_price', 'discount_price', 'shipping_price', 'packing_price', 'total_price', 
-        'paid_price', 'packing', 'delivery', 'payment', 'payment_adapter'
+        'id', 'uid', 'first_name', 'last_name', 'email', 'phone', 'mobile', 'company', 'address', 
+        'country', 'city', 'zip_code', 'ip', 'status_order', 'status_payment', 'status_delivery', 
+        'time_create', 'time_payment', 'time_delivery', 'time_finish', 'user_note', 'admin_note', 
+        'number', 'product_price', 'discount_price', 'shipping_price', 'packing_price', 
+        'total_price', 'paid_price', 'packing', 'delivery', 'payment_method', 'payment_adapter',
     );	
 
     public function indexAction()
@@ -54,9 +54,11 @@ class CheckoutController extends IndexController
                 // Set cart
                 $cart = $_SESSION['shop']['cart'];
                 // Set values
-                $values['user'] = Pi::user()->getId();
+                $values['uid'] = Pi::user()->getId();
                 $values['ip'] = Pi::user()->getIp();
-                $values['status'] = 2;
+                $values['status_order'] = 1;
+                $values['status_payment'] = 1;
+                $values['status_delivery'] = 1;
                 $values['time_create'] = time();
                 $values['number'] = $cart['invoice']['total']['number'];
                 $values['product_price'] = $cart['invoice']['total']['price'];
@@ -89,7 +91,6 @@ class CheckoutController extends IndexController
                     $item['id'] = $product['id'];
                     $item['title'] = $product['title'];
                     $item['price'] = $product['price'];
-                    $item['url'] = $product['productUrl'];
                     $item['number'] = $product['number'];
                     $item['total'] = $product['total'];
                     $description[$product['id']] = $item;

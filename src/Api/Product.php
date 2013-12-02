@@ -206,7 +206,7 @@ class Product extends AbstractApi
         if ($price > 0) {
             $viewPrice = _currency($price);
         } else {
-            $viewPrice = '';
+            $viewPrice = 0;
         }
         return $viewPrice;
 

@@ -1,0 +1,107 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="shop">
+    <?php include $this->templateComponent('form'); ?>
+	<table class="table table-striped table-bordered table-condensed">
+		<tr>
+			<th><?php _e('ID'); ?></th>
+			<th><?php _e('Customer'); ?></th>
+			<th><?php _e('Status'); ?> ( <?php _e('Order'); ?> / <?php _e('Payment'); ?> / <?php _e('Delivery'); ?> )</th>
+			<th><?php _e('Total price'); ?></th>
+			<th><?php _e('Action'); ?></th>
+		</tr>
+		<?php foreach($list as $order) { ?>
+		<tr>
+			<td><?php echo $this->escape($order['id']); ?></td>
+			<td>
+				<?php echo $this->escape($order['first_name']); ?> 
+				<?php echo $this->escape($order['last_name']); ?> 
+				<span class="label label-info">
+					<?php echo $this->escape($order['user']['identity']); ?> 
+					( <?php echo $this->escape($order['user']['name']); ?> ) 
+				</span>
+			</td>
+			<td>
+				<span class="label <?php echo $this->escape($order['labelOrderClass']); ?> "><?php echo $this->escape($order['labelOrderTitle']); ?></span>
+				<span class="label <?php echo $this->escape($order['labelPaymentClass']); ?> "><?php echo $this->escape($order['labelPaymentTitle']); ?></span>
+				<span class="label <?php echo $this->escape($order['labelDeliveryClass']); ?> "><?php echo $this->escape($order['labelDeliveryTitle']); ?></span>
+			</td>
+			<td><?php echo $this->escape($order['total_price']); ?></td>
+			<td>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#info-view-<?php echo $this->escape($order['id']); ?>"><i class="icon-eye-open icon-white"></i> <?php _e('Details'); ?></button>
+				<div id="info-view-<?php echo $this->escape($order['id']); ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        			<div class="modal-header">
+            			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        				<h3 id="myModalLabel"><?php echo sprintf('Order %s', $this->escape($order['id'])); ?></h3>
+        			</div>
+        			<div class="modal-body">
+        				<h4><?php _e('Customer'); ?></h4>
+        				<ul class="clearfix unstyled">
+        					<li class="span3"><strong><?php _e('Order Name'); ?></strong> : <?php echo $this->escape($order['first_name']); ?> <?php echo $this->escape($order['last_name']); ?></li>
+        					<li class="span3"><strong><?php _e('User Name'); ?></strong> : <?php echo $this->escape($order['user']['identity']); ?> ( <?php echo $this->escape($order['user']['name']); ?> ) 
+								<span class="label label-info">
+									<?php echo $this->escape($order['user']['id']); ?> 
+								</span></li>
+        					<li class="span3"><strong><?php _e('Order Email'); ?></strong> : <?php echo $this->escape($order['email']); ?></li>
+        					<li class="span3"><strong><?php _e('Email'); ?></strong> : <?php echo $this->escape($order['user']['email']); ?></li>
+        					<li class="span3"><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($order['phone']); ?></li>
+        					<li class="span3"><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($order['mobile']); ?></li>
+        					<li class="span3"><strong><?php _e('Company'); ?></strong> : <?php echo $this->escape($order['company']); ?></li>
+        					<li class="span3"><strong><?php _e('Country'); ?></strong> : <?php echo $this->escape($order['country']); ?></li>
+        					<li class="span3"><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($order['city']); ?></li>
+        					<li class="span3"><strong><?php _e('Zip ode'); ?></strong> : <?php echo $this->escape($order['zip_code']); ?></li>
+        					<li class="span6"><strong><?php _e('Address'); ?></strong> : <?php echo $this->escape($order['address']); ?></li>
+        				</ul>
+        				<h4><?php _e('Order'); ?></h4>
+        				<ul class="clearfix unstyled">
+        					<li class="span4"><strong><?php _e('Status'); ?></strong> : <span class="label <?php echo $this->escape($order['labelOrderClass']); ?> "><?php echo $this->escape($order['labelOrderTitle']); ?></span></li>
+        					<li class="span4"><strong><?php _e('Time create'); ?></strong> : <?php echo $this->escape($order['time_create_view']); ?></li>
+        					<li class="span4"><strong><?php _e('Time finish'); ?></strong> : <?php echo $this->escape($order['time_finish_view']); ?></li>
+        				</ul>
+        				<h4><?php _e('Payment'); ?></h4>
+        				<ul class="clearfix unstyled">
+        					<li class="span2"><strong><?php _e('Status'); ?></strong> : <span class="label <?php echo $this->escape($order['labelPaymentClass']); ?> "><?php echo $this->escape($order['labelPaymentTitle']); ?></span></li>
+        					<li class="span4"><strong><?php _e('Time'); ?></strong> : <?php echo $this->escape($order['time_payment_view']); ?></li>
+        					<li class="span2"><strong><?php _e('Method'); ?></strong> : <?php echo $this->escape($order['payment_method']); ?></li>
+        					<li class="span4"><strong><?php _e('Adapter'); ?></strong> : <?php echo $this->escape($order['payment_adapter']); ?></li>
+        				</ul>
+        				<h4><?php _e('Delivery'); ?></h4>
+        				<ul class="clearfix unstyled">
+        					<li class="span4"><strong><?php _e('Status'); ?></strong> : <span class="label <?php echo $this->escape($order['labelDeliveryClass']); ?> "><?php echo $this->escape($order['labelDeliveryTitle']); ?></span></li>
+        					<li class="span4"><strong><?php _e('Time'); ?></strong> : <?php echo $this->escape($order['time_delivery_view']); ?></li>
+         					<li class="span3"><strong><?php _e('Method'); ?></strong> : </li>
+         					<li class="span3"><strong><?php _e('Packing'); ?></strong> : </li>
+        				</ul>
+        				<h4><?php _e('Price'); ?></h4>
+        				<ul class="clearfix unstyled">
+        					<li class="span3"><strong><?php _e('Price'); ?></strong> : <?php echo $this->escape($order['product_price_view']); ?></li>
+        					<li class="span3"><strong><?php _e('Discount'); ?></strong> : <?php echo $this->escape($order['discount_price_view']); ?></li>
+         					<li class="span3"><strong><?php _e('Shipping'); ?></strong> : <?php echo $this->escape($order['shipping_price_view']); ?></li>
+         					<li class="span3"><strong><?php _e('Packing'); ?></strong> : <?php echo $this->escape($order['packing_price_view']); ?></li>
+         					<li class="span3"><strong><?php _e('Total'); ?></strong> : <?php echo $this->escape($order['total_price_view']); ?></li>
+         					<li class="span3"><strong><?php _e('Paid'); ?></strong> : <?php echo $this->escape($order['paid_price_view']); ?></li>
+        				</ul>
+        			</div>
+        			<div class="modal-footer clearfix">
+        				<div class="pull-left">
+        					<a class="btn btn-inverse" title="<?php _e('Update Order'); ?>" href="<?php echo $this->escape($order['url_update_order']); ?>" target="_blank"><?php _e('Update Order'); ?></a>
+        					<a class="btn btn-inverse" title="<?php _e('Update Payment'); ?>" href="<?php echo $this->escape($order['url_update_payment']); ?>" target="_blank"><?php _e('Update Payment'); ?></a>
+        					<a class="btn btn-inverse" title="<?php _e('Update Delivery'); ?>" href="<?php echo $this->escape($order['url_update_delivery']); ?>" target="_blank"><?php _e('Update Delivery'); ?></a>
+        				</div>
+        				<div class="clearfix"></div>
+        				<br />
+        				<div class="pull-right">
+        					<button class="btn" data-dismiss="modal" aria-hidden="true"><?php _e('Close'); ?></button>
+        				</div>
+        				<div class="pull-left">
+        					<a class="btn" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><?php _e('View'); ?></a>
+        					<a class="btn" title="<?php _e('Edit'); ?>" href="<?php echo $this->escape($order['url_edit']); ?>" target="_blank"><?php _e('Edit'); ?></a>
+        					<a class="btn" title="<?php _e('Print'); ?>" href="<?php echo $this->escape($order['url_print']); ?>" target="_blank"><?php _e('Print'); ?></a>
+        				</div>
+        			</div>
+    			</div>
+			</td>
+		</tr>
+		<?php } ?>
+	</table>
+	<div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
+</div>

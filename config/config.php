@@ -121,17 +121,17 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
-        'view_spotlight' => array(
+        'view_special' => array(
             'category' => 'view',
-            'title' => __('Show spotlight'),
+            'title' => __('Show special'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
         ),
-        'view_spotlight_number' => array(
+        'view_special_number' => array(
             'category' => 'view',
-            'title' => __('Number of products on spotlight'),
+            'title' => __('Number of products on special'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -224,7 +224,7 @@ return array(
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
-            'value' => 1
+            'value' => 0
         ),
         'image_watermark_source' => array(
             'category' => 'image',

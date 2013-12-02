@@ -33,10 +33,7 @@ class Review extends AbstractApi
     		$row = $row->toArray();
     		$row['description'] = Pi::service('markup')->render($row['description'], 'text', 'html');
     		$row['time_create_view'] = _date($row['time_create']);
-    		$row['userinfo'] = Pi::api('user', 'user')->get(
-    			$row['user'],
-                array('name', 'gender'),
-                true);
+            $row['userinfo'] = Pi::user()->get($row['uid'], array('id', 'identity', 'name', 'email'));
     	}
     	return $row;
 	}
@@ -66,10 +63,7 @@ class Review extends AbstractApi
             $list[$row->id] = $row->toArray();
     		$list[$row->id]['description'] = Pi::service('markup')->render($row['description'], 'text', 'html');
     		$list[$row->id]['time_create_view'] = _date($row->time_create);
-    		$list[$row->id]['userinfo'] = Pi::api('user', 'user')->get(
-    			$row->user,
-                array('name', 'gender'),
-                true);
+            $list[$row->id]['userinfo'] = Pi::user()->get($row->uid, array('id', 'identity', 'name', 'email'));
         }
     	return $list;
 	}
@@ -85,10 +79,7 @@ class Review extends AbstractApi
             $list[$row->id] = $row->toArray();
             $list[$row->id]['description'] = Pi::service('markup')->render($row['description'], 'text', 'html');
             $list[$row->id]['time_create_view'] = _date($row->time_create);
-            $list[$row->id]['userinfo'] = Pi::api('user', 'user')->get(
-                $row->user,
-                array('name', 'gender'),
-                true);
+            $list[$row->id]['userinfo'] = Pi::user()->get($row->uid, array('id', 'identity', 'name', 'email'));
             $list[$row->id]['productinfo'] = Pi::api('shop', 'product')->getProduct($row->product);
         }
         return $list;
