@@ -19,6 +19,9 @@ use Zend\Json\Json;
 /*
  * Pi::api('shop', 'order')->updatePayment();
  * Pi::api('shop', 'order')->canonizeOrder($order);
+ * Pi::api('shop', 'order')->orderStatus($status_order);
+ * Pi::api('shop', 'order')->paymentStatus($status_payment);
+ * Pi::api('shop', 'order')->deliveryStatus($status_delivery);
  */
 
 class Order extends AbstractApi
@@ -29,7 +32,7 @@ class Order extends AbstractApi
         $row->paid_price = $amount;
         $row->time_payment = time();
         $row->payment_adapter = $adapter;
-        $row->status_payment = 1;
+        $row->status_payment = 2;
         $row->save();
         // Set back url
         return Pi::service('url')->assemble('shop', array(
@@ -88,6 +91,92 @@ class Order extends AbstractApi
         $values['city'] = ($user['city']) ? $user['city'] : '';
         $values['zip_code'] = ($user['zip_code']) ? $user['zip_code'] : ''; */
         return $values;
+    }
+
+    public function orderStatus($status_order)
+    {
+        $return = array();
+        switch ($status_order) {
+            case '1':
+                $return['orderClass'] = 'btn-warning';
+                $return['orderTitle'] = __('Not processed');
+                break;
+
+            case '2':
+                $return['orderClass'] = 'btn-success';
+                $return['orderTitle'] = __('Orders validated');
+                break;
+
+            case '3':
+                $return['orderClass'] = 'btn-danger';
+                $return['orderTitle'] = __('Orders pending');
+                break;
+
+            case '4':
+                $return['orderClass'] = 'btn-danger';
+                $return['orderTitle'] = __('Orders failed');
+                break;
+
+            case '5':
+                $return['orderClass'] = 'btn-danger';
+                $return['orderTitle'] = __('Orders cancelled');
+                break;
+
+            case '6':
+                $return['orderClass'] = 'btn-danger';
+                $return['orderTitle'] = __('Fraudulent orders');
+                break;
+        }
+        return $return;
+    }
+
+    public function paymentStatus($status_payment)
+    {
+        $return = array();
+        switch ($status_payment) {
+            case '1':
+                $return['paymentClass'] = 'btn-warning';
+                $return['paymentTitle'] = __('UnPaid');
+                break;
+
+            case '2':
+                $return['paymentClass'] = 'btn-success';
+                $return['paymentTitle'] = __('Paid');
+                break;
+        }
+        return $return;
+    }
+
+    public function deliveryStatus($status_delivery)
+    {
+        $return = array();
+        switch ($status_delivery) {
+            case '1':
+                $return['deliveryClass'] = 'btn-warning';
+                $return['deliveryTitle'] = __('Not processed');
+                break;
+
+            case '2':
+                $return['deliveryClass'] = 'btn-info';
+                $return['deliveryTitle'] = __('Packed');
+                break;
+
+            case '3':
+                $return['deliveryClass'] = 'btn-info';
+                $return['deliveryTitle'] = __('Posted');
+                break;
+
+            case '4':
+                $return['deliveryClass'] = 'btn-success';
+                $return['deliveryTitle'] = __('Delivered');
+                break;
+
+            case '5':
+                $return['deliveryClass'] = 'btn-danger';
+                $return['deliveryTitle'] = __('Back eaten');
+                break; 
+        }
+        return $return;
     }
 
     public function canonizeOrder($order)
@@ -155,76 +244,17 @@ class Order extends AbstractApi
             'id'            => $order['id'],
         ));
         // Status order
-        switch ($order['status_order']) {
-            case '1':
-                $order['labelOrderClass'] = 'label-warning';
-                $order['labelOrderTitle'] = __('Not processed');
-                break;
-
-            case '2':
-                $order['labelOrderClass'] = 'label-success';
-                $order['labelOrderTitle'] = __('Orders validated');
-                break;
-
-            case '3':
-                $order['labelOrderClass'] = 'label-important';
-                $order['labelOrderTitle'] = __('Orders pending');
-                break;
-
-            case '4':
-                $order['labelOrderClass'] = 'label-important';
-                $order['labelOrderTitle'] = __('Orders failed');
-                break;
-
-            case '5':
-                $order['labelOrderClass'] = 'label-important';
-                $order['labelOrderTitle'] = __('Orders cancelled');
-                break;
-
-            case '6':
-                $order['labelOrderClass'] = 'label-important';
-                $order['labelOrderTitle'] = __('Fraudulent orders');
-                break;
-        }
+        $status_order = $this->orderStatus($order['status_order']);
+        $order['orderClass'] = $status_order['orderClass'];
+        $order['orderTitle'] = $status_order['orderTitle'];
         // Status payment
-        switch ($order['status_payment']) {
-            case '1':
-                $order['labelPaymentClass'] = 'label-warning';
-                $order['labelPaymentTitle'] = __('UnPaid');
-                break;
-
-            case '2':
-                $order['labelPaymentClass'] = 'label-success';
-                $order['labelPaymentTitle'] = __('Paid');
-                break;
-        }
+        $status_payment = $this->paymentStatus($order['status_payment']);
+        $order['paymentClass'] = $status_payment['paymentClass'];
+        $order['paymentTitle'] = $status_payment['paymentTitle'];
         // Status delivery
-        switch ($order['status_delivery']) {
-            case '1':
-                $order['labelDeliveryClass'] = 'label-warning';
-                $order['labelDeliveryTitle'] = __('Not processed');
-                break;
-
-            case '2':
-                $order['labelDeliveryClass'] = 'label-info';
-                $order['labelDeliveryTitle'] = __('Packed');
-                break;
-
-            case '3':
-                $order['labelDeliveryClass'] = 'label-info';
-                $order['labelDeliveryTitle'] = __('Posted');
-                break;
-
-            case '4':
-                $order['labelDeliveryClass'] = 'label-success';
-                $order['labelDeliveryTitle'] = __('Delivered');
-                break;
-
-            case '5':
-                $order['labelDeliveryClass'] = 'label-important';
-                $order['labelDeliveryTitle'] = __('Back eaten');
-                break; 
-        }
+        $status_delivery = $this->deliveryStatus($order['status_delivery']);
+        $order['deliveryClass'] = $status_delivery['deliveryClass'];
+        $order['deliveryTitle'] = $status_delivery['deliveryTitle'];
         // return order
         return $order; 
     }

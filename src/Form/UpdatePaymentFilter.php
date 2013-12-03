@@ -16,23 +16,13 @@ namespace Module\Shop\Form;
 use Pi;
 use Zend\InputFilter\InputFilter;
 
-class OrderSettingFilter extends InputFilter
+class UpdatePaymentFilter extends InputFilter
 {
     public function __construct()
     {
-    	// status_order
-        $this->add(array(
-            'name' => 'status_order',
-            'required' => true,
-        ));
         // status_payment
         $this->add(array(
             'name' => 'status_payment',
-            'required' => true,
-        ));
-        // status_delivery
-        $this->add(array(
-            'name' => 'status_delivery',
             'required' => true,
         ));
     }

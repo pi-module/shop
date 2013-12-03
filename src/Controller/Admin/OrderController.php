@@ -18,6 +18,12 @@ use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Module\Shop\Form\OrderSettingForm;
 use Module\Shop\Form\OrderSettingFilter;
+use Module\Shop\Form\UpdateDeliveryForm;
+use Module\Shop\Form\UpdateDeliveryFilter;
+use Module\Shop\Form\UpdateOrderForm;
+use Module\Shop\Form\UpdateOrderFilter;
+use Module\Shop\Form\UpdatePaymentForm;
+use Module\Shop\Form\UpdatePaymentFilter;
 
 class OrderController extends ActionController
 {
@@ -114,7 +120,117 @@ class OrderController extends ActionController
             );
         } 
         return $this->jump($url, $message);  
-        //$this->view()->setTemplate(false);
+    }
+
+    public function updateOrderAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        $return = array();
+        // Get order
+        $order = $this->getModel('order')->find($id);
+        // Set form
+        $form = new UpdateOrderForm('updateOrder');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new UpdateOrderFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                $order->status_order = $values['status_order'];
+                $order->save();
+                // Set return
+                $return['status'] = 1;
+                $return['data'] = Pi::api('shop', 'order')->orderStatus($order->status_order);
+            } else {
+                $return['status'] = 0;
+                $return['data'] = '';
+            }
+            return $return; 
+        } else {
+            $values['status_order'] = $order->status_order;
+            $form->setData($values);
+            $form->setAttribute('action', $this->url('', array('action' => 'updateOrder', 'id' => $order->id)));
+        }    
+        // Set view
+        $this->view()->setTemplate('system:component/form-popup');
+        $this->view()->assign('title', __('Update order'));
+        $this->view()->assign('form', $form);
+    }
+
+    public function updatePaymentAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        $return = array();
+        // Get order
+        $order = $this->getModel('order')->find($id);
+        // Set form
+        $form = new UpdatePaymentForm('updateOrder');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new UpdatePaymentFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                $order->status_payment = $values['status_payment'];
+                $order->save();
+                // Set return
+                $return['status'] = 1;
+                $return['data'] = Pi::api('shop', 'order')->paymentStatus($order->status_payment);
+            } else {
+                $return['status'] = 0;
+                $return['data'] = '';
+            }
+            return $return; 
+        } else {
+            $values['status_payment'] = $order->status_payment;
+            $form->setData($values);
+            $form->setAttribute('action', $this->url('', array('action' => 'updatePayment', 'id' => $order->id)));
+        }    
+        // Set view
+        $this->view()->setTemplate('system:component/form-popup');
+        $this->view()->assign('title', __('Update payment'));
+        $this->view()->assign('form', $form);
+    }
+
+    public function updateDeliveryAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        $return = array();
+        // Get order
+        $order = $this->getModel('order')->find($id);
+        // Set form
+        $form = new UpdateDeliveryForm('updateOrder');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new UpdateDeliveryFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                $order->status_delivery = $values['status_delivery'];
+                $order->save();
+                // Set return
+                $return['status'] = 1;
+                $return['data'] = Pi::api('shop', 'order')->deliveryStatus($order->status_delivery);
+            } else {
+                $return['status'] = 0;
+                $return['data'] = '';
+            }
+            return $return; 
+        } else {
+            $values['status_delivery'] = $order->status_delivery;
+            $form->setData($values);
+            $form->setAttribute('action', $this->url('', array('action' => 'updateDelivery', 'id' => $order->id)));
+        }    
+        // Set view
+        $this->view()->setTemplate('system:component/form-popup');
+        $this->view()->assign('title', __('Update delivery'));
+        $this->view()->assign('form', $form);
     }
 
     public function viewAction()
@@ -128,21 +244,6 @@ class OrderController extends ActionController
     }
 
     public function printAction()
-    {
-        $this->view()->setTemplate('empty');
-    }
-
-    public function updateOrderAction()
-    {
-        $this->view()->setTemplate('empty');
-    }
-
-    public function updatePaymentAction()
-    {
-        $this->view()->setTemplate('empty');
-    }
-
-    public function updateDeliveryAction()
     {
         $this->view()->setTemplate('empty');
     }
