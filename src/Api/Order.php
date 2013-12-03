@@ -22,6 +22,7 @@ use Zend\Json\Json;
  * Pi::api('shop', 'order')->orderStatus($status_order);
  * Pi::api('shop', 'order')->paymentStatus($status_payment);
  * Pi::api('shop', 'order')->deliveryStatus($status_delivery);
+ * Pi::api('shop', 'order')->listProduct($sid);
  */
 
 class Order extends AbstractApi
@@ -257,5 +258,18 @@ class Order extends AbstractApi
         $order['deliveryTitle'] = $status_delivery['deliveryTitle'];
         // return order
         return $order; 
+    }
+
+    public function listProduct($order)
+    {
+        $list = array();
+        $where = array('order' => $order);
+        $select = Pi::model('order_basket', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('order_basket', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $list[$row->id] = $row->toArray();
+            $list[$row->id]['details'] = Pi::api('shop', 'product')->getProductLight($row->product);
+        }
+        return $list;
     }
 }

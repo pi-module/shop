@@ -18,7 +18,9 @@ use Zend\Json\Json;
 
 /*
  * Pi::api('shop', 'product')->getProduct($parameter, $type);
+ * Pi::api('shop', 'product')->getProductLight($parameter, $type);
  * Pi::api('shop', 'product')->getListFromId($id);
+ * Pi::api('shop', 'product')->getListFromIdLight($id);
  * Pi::api('shop', 'product')->searchRelated($title, $type);
  * Pi::api('shop', 'product')->extraCount($id);
  * Pi::api('shop', 'product')->attachCount($id);
@@ -27,6 +29,7 @@ use Zend\Json\Json;
  * Pi::api('shop', 'product')->AttachList($id);
  * Pi::api('shop', 'product')->viewPrice($price);
  * Pi::api('shop', 'product')->canonizeProduct($product, $categoryList);
+ * Pi::api('shop', 'product')->canonizeProductLight($product);
  */
 
 class Product extends AbstractApi
@@ -38,6 +41,14 @@ class Product extends AbstractApi
         // Get product
         $product = Pi::model('product', $this->getModule())->find($parameter, $type);
         $product = $this->canonizeProduct($product, $categoryList);
+        return $product;
+    }
+
+    public function getProductLight($parameter, $type = 'id')
+    {
+        // Get product
+        $product = Pi::model('product', $this->getModule())->find($parameter, $type);
+        $product = $this->canonizeProductLight($product);
         return $product;
     }
 
@@ -72,12 +83,24 @@ class Product extends AbstractApi
 
     public function getListFromId($id)
     {
-    	$list = array();
-    	$where = array('id' => $id, 'status' => 1);
-    	$select = Pi::model('product', $this->getModule())->select()->where($where);
-    	$rowset = Pi::model('product', $this->getModule())->selectWith($select);
-    	foreach ($rowset as $row) {
+        $list = array();
+        $where = array('id' => $id, 'status' => 1);
+        $select = Pi::model('product', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('product', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
             $list[$row->id] = $this->canonizeProduct($row);
+        }
+        return $list;
+    }
+
+    public function getListFromIdLight($id)
+    {
+        $list = array();
+        $where = array('id' => $id, 'status' => 1);
+        $select = Pi::model('product', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('product', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $list[$row->id] = $this->canonizeProductLight($row);
         }
         return $list;
     }	
@@ -295,6 +318,70 @@ class Product extends AbstractApi
                     $product['image']
                 ));
         }
+        // return product
+        return $product; 
+    }
+
+    public function canonizeProductLight($product)
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // boject to array
+        $product = $product->toArray();
+        // Set times
+        $product['time_create_view'] = _date($product['time_create']);
+        $product['time_update_view'] = _date($product['time_update']);
+        // Set product url
+        $product['productUrl'] = Pi::service('url')->assemble('shop', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'product',
+            'slug'          => $product['slug'],
+        ));
+        // Set cart url
+        $product['cartUrl'] = Pi::service('url')->assemble('shop', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'checkout',
+            'action'        => 'add',
+            'slug'          => $product['slug'],
+        ));
+        // Set price
+        $product['price_view'] = $this->viewPrice($product['price']);
+        $product['price_discount_view'] = $this->viewPrice($product['price_discount']);
+        // Set marketable
+        $product['marketable'] = $this->marketable($product);
+        // Set image url
+        if ($product['image']) {
+            // Set image thumb url
+            $product['thumbUrl'] = Pi::url(
+                sprintf('upload/%s/thumb/%s/%s', 
+                    $config['image_path'], 
+                    $product['path'], 
+                    $product['image']
+                ));
+        }
+        // unset
+        unset($product['category']);
+        unset($product['summary']);
+        unset($product['description']);
+        unset($product['seo_title']);
+        unset($product['seo_keywords']);
+        unset($product['seo_description']);
+        unset($product['comment']);
+        unset($product['point']);
+        unset($product['count']);
+        unset($product['favorite']);
+        unset($product['attach']);
+        unset($product['extra']);
+        unset($product['related']);
+        unset($product['review']);
+        unset($product['recommended']);
+        unset($product['stock']);
+        unset($product['stock_alert']);
+        unset($product['price_discount']);
+        unset($product['price_discount_view']);
+        unset($product['uid']);
+        unset($product['hits']);
+        unset($product['sales']);
         // return product
         return $product; 
     }

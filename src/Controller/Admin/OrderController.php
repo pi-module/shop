@@ -235,7 +235,16 @@ class OrderController extends ActionController
 
     public function viewAction()
     {
-        $this->view()->setTemplate('empty');
+        // Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        // Get order
+        $order = $this->getModel('order')->find($id);
+        $order = Pi::api('shop', 'order')->canonizeOrder($order);
+        $order['product'] = Pi::api('shop', 'order')->listProduct($order['id']);
+        // Set view
+        $this->view()->setTemplate('order_view');
+        $this->view()->assign('order', $order);
     }
 
     public function editAction()

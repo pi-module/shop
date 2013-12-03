@@ -38,7 +38,8 @@
 			</td>
 			<td><?php echo $this->escape($order['total_price']); ?></td>
 			<td>
-				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#info-view-<?php echo $this->escape($order['id']); ?>"><i class="icon-eye-open icon-white"></i> <?php _e('Details'); ?></button>
+				<a class="btn" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><?php _e('View'); ?></a>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#info-view-<?php echo $this->escape($order['id']); ?>"><i class="icon-eye-open icon-white"></i> <?php _e('Details'); ?></button>
 				<div id="info-view-<?php echo $this->escape($order['id']); ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         			<div class="modal-header">
             			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
