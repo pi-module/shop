@@ -21,5 +21,15 @@ class CheckoutController extends ActionController
 	public function indexAction()
     {
     	$this->view()->setTemplate('empty');
+    }
+
+    public function locationAction()
+    {
+    	$this->view()->setTemplate('empty');
+    }
+
+    public function locationUpdateAction()
+    {
+    	$this->view()->setTemplate('empty');
     }	
 }

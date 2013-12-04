@@ -20,105 +20,180 @@ class OrderFilter extends InputFilter
 {
     public function __construct($extra = null)
     {
-        // first_name
-        $this->add(array(
-            'name' => 'first_name',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
+        $config = Pi::service('registry')->config->read('shop', 'order');
+        // name
+        if ($config['order_name']) {
+            // first_name
+            $this->add(array(
+                'name' => 'first_name',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
                 ),
-            ),
-        ));
-        // last_name
-        $this->add(array(
-            'name' => 'last_name',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
+            ));
+            // last_name
+            $this->add(array(
+                'name' => 'last_name',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
                 ),
-            ),
-        ));
+            ));
+        }
         // email
-        $this->add(array(
-            'name' => 'email',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
+        if ($config['order_email']) {
+            $this->add(array(
+                'name' => 'email',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
                 ),
-            ),
-        ));
+                'validators'    => array(
+                    array(
+                        'name'      => 'EmailAddress',
+                        'options'   => array(
+                            'useMxCheck'        => false,
+                            'useDeepMxCheck'    => false,
+                            'useDomainCheck'    => false,
+                        ),
+                    ),
+                    new \Module\System\Validator\UserEmail(array(
+                        'backlist'          => '',
+                        'checkDuplication'  => false,
+                    )),
+                ),
+            ));
+        }
         // phone
-        $this->add(array(
-            'name' => 'phone',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
+        if ($config['order_phone']) {
+            $this->add(array(
+                'name' => 'phone',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
                 ),
-            ),
-        ));
+            ));
+        }
         // mobile
-        $this->add(array(
-            'name' => 'mobile',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
+        if ($config['order_mobile']) {
+            $this->add(array(
+                'name' => 'mobile',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
                 ),
-            ),
-        ));
+            ));
+        }
         // company
-        $this->add(array(
-            'name' => 'company',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
+        if ($config['order_company']) {
+            $this->add(array(
+                'name' => 'company',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
                 ),
-            ),
-        ));
+            ));
+        }
         // address
-        $this->add(array(
-            'name' => 'address',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
+        if ($config['order_address']) {
+            $this->add(array(
+                'name' => 'address',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
                 ),
-            ),
-        ));
+            ));
+        }
         // country
-        $this->add(array(
-            'name' => 'country',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
+        if ($config['order_country']) {
+            $this->add(array(
+                'name' => 'country',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
                 ),
-            ),
-        ));
+            ));
+        }
         // city
-        $this->add(array(
-            'name' => 'city',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
+        if ($config['order_city']) {
+            $this->add(array(
+                'name' => 'city',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
                 ),
-            ),
-        ));
+            ));
+        }
         // zip_code
-        $this->add(array(
-            'name' => 'zip_code',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
+        if ($config['order_zip']) {
+            $this->add(array(
+                'name' => 'zip_code',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
                 ),
-            ),
+            ));
+        }
+        // location
+        if ($config['order_location']) {
+            $this->add(array(
+                'name' => 'location',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+        }
+        // delivery
+        if ($config['order_delivery']) {
+            $this->add(array(
+                'name' => 'delivery',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+        }
+        // packing
+        if ($config['order_packing']) {
+            $this->add(array(
+                'name' => 'packing',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+        }
+        // payment_adapter
+        $this->add(array(
+            'name' => 'payment_adapter',
+            'required' => true,
         ));
     }
 }    	

@@ -158,6 +158,7 @@ CREATE TABLE `{order}` (
   `paid_price` double(16,2) NOT NULL,
   `packing` tinyint(1) unsigned NOT NULL,
   `delivery` int(10) unsigned NOT NULL,
+  `location` int(10) unsigned NOT NULL,
   `payment_method` enum('online','offline') NOT NULL,
   `payment_adapter` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
@@ -190,5 +191,31 @@ CREATE TABLE `{user}` (
   `admin_note` text,
   `user_note` text,
   `number` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `{location}` (
+  `id` int (10) unsigned NOT NULL auto_increment,
+  `parent` int(5) unsigned NOT NULL default '0',
+  `title` varchar (255) NOT NULL,
+  `status` tinyint(1) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `{delivery}` (
+  `id` int (10) unsigned NOT NULL auto_increment,
+  `title` varchar (255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `path` varchar(16) NOT NULL,
+  `status` tinyint(1) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `{location_delivery}` (
+  `id` int (10) unsigned NOT NULL auto_increment,
+  `location` int(5) unsigned NOT NULL,
+  `delivery` int(5) unsigned NOT NULL,
+  `price` decimal(16,2) NOT NULL,
+  `delivery_time` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 );

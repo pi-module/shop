@@ -1,69 +1,72 @@
 <?php
     $this->css(array(
         $this->assetModule('css/front.css'),
-        //$this->assetModule('css/jquery.steps.css'),
-        //$this->assetModule('script/system-ui.css', 'system'),
+        $this->assetModule('script/system-ui.css', 'system'),
     ));
-    //$this->jQuery('extension/modernizr.js');
-    //$this->backbone();
-    //$this->js(array(
-    	//$this->assetModule('js/jquery.cookie.js'),
-    	//$this->assetModule('js/jquery.steps.min.js'),
-    //));
+    $this->jQuery();
+    $this->bootstrap('js/bootstrap.min.js');
+    $this->backbone();
 ?>
-<div class="shop">
-    <h2><?php echo $this->escape($title); ?></h2>
-    <?php include $this->templateComponent('form'); ?>
-</div>
-<!-- <div id="shop-cart-level" class="shop">
-    <div class="content">
-        <div id="wizard">
-            <h2>First Step</h2>
-            <div class="section">
-            	<div id="section-1"></div>
-            </div>
-
-            <h2>Second Step</h2>
-            <div class="section">
-            	<div id="section-2"></div>
-            </div>
-
-            <h2>Third Step</h2>
-            <div class="section">
-            	<div id="section-3"></div>
-            </div>
-
-            <h2>Forth Step</h2>
-            <div class="section">
-            	<div id="section-4"></div>
+<div id="js-order" class="shop">
+    <h3><?php echo $this->escape($title); ?></h3>
+    <div class="row">
+        <div class="span8"><?php include $this->templateComponent('form'); ?></div>
+        <div class="span4">
+            <div data-spy="affix" class="span3 infoCart well well well-small">
+                <h3><?php _e('Invoice'); ?></h3>
+                <p><strong><?php _e('Total Price'); ?></strong> : <span id="cart-total-price"><?php echo $this->escape($cart['invoice']['total']['price_view']); ?></span></p>
+                <p><strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php echo $this->escape($cart['invoice']['total']['discount_view']); ?></span></p>
+                <p><strong><?php _e('Total Number'); ?></strong> : <span id="cart-total-number"><?php echo $this->escape($cart['invoice']['total']['number']); ?></span></p>
+                <p><strong><?php _e('Total Shipping'); ?></strong> : <span id="cart-total-shipping"><?php echo $this->escape($cart['invoice']['total']['shipping_view']); ?></span></p>
+                <p><strong><?php _e('Final Price'); ?></strong> : <span  id="cart-total-total" class="label label-success"><?php echo $this->escape($cart['invoice']['total']['total_price_view']); ?></span></p>
             </div>
         </div>
     </div>
 </div>
 <script>
-(function($){
+(function($) {
     var page = {
+        el: $('#js-order'),
+        $: function(selector) {
+            return this.el.find(selector);
+        },
         init: function() {
-	        $("#wizard").steps({
-                headerTag: "h2",
-                bodyTag: ".section",
-                transitionEffect: "slideLeft",
-                stepsOrientation: "vertical",
-                onStepChanging: function (event, currentIndex, newIndex)
-                {
-                	if (currentIndex == 0) {
-                		alert(currentIndex);
-                		return true;
-                	}	
-                },
-                onStepChanged: function (event, currentIndex, priorIndex) {
-        	        if (currentIndex == 1) {
-        		        $('#section-2').html('sdf sdfsd fsdf');
-        	        }
-                },
+            _.bindAll(this);
+            this.$('.select-location').on("change",this.locationAction);
+            this.$('.select-delivery').on("change",this.deliveryAction);
+        },
+        locationAction: function(e) {
+            var url = "<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'location', 'id' => '')); ?>";
+            $.getJSON(url + $('.select-location').val()).done(function(result) {
+                if (result.status == 1) {
+                    var htmlOptins = '';
+                    $.each(result.data, function( index, value ) {
+                        if (value.status==1) {
+                            htmlOptins = htmlOptins 
+                            + "<option value='" + value.delivery + "'>" 
+                                + value.title + " - "
+                                + " <?php _e('Price : '); ?> " + value.price + " - "
+                                + " <?php _e('Time : '); ?> " + value.delivery_time  + " <?php _e('Days'); ?> "
+                            + "</option>";
+                        } else {
+                            htmlOptins = htmlOptins 
+                            + "<option value='" + value.delivery + "'>" + value.title + "</option>";
+                        }
+                    });
+                    $('.select-delivery').html(htmlOptins);
+                }
+            });
+        },
+        deliveryAction: function(e) {
+            var url = "<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'delivery', 'id' => '')); ?>";
+            $.getJSON(url + $('.select-delivery').val()).done(function(result) {
+                if (result.status == 1) {
+                    $('#cart-total-shipping').html(result.data.shipping);
+                    $('#cart-total-total').html(result.data.total);
+                }
             });
         },
     }
     page.init();
 })(jQuery)
-</script> -->
+</script>

@@ -37,6 +37,10 @@ return array(
             'title' => __('Search'),
             'name' => 'search'
         ),
+        array(
+            'title' => __('Order'),
+            'name' => 'order'
+        ),
     ),
     'item' => array(
     	// Admin
@@ -322,6 +326,103 @@ return array(
         'search_category' => array(
             'category' => 'search',
             'title' => __('Show search category'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        // Order
+        'order_name' => array(
+            'category' => 'order',
+            'title' => __('Show name'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'order_email' => array(
+            'category' => 'order',
+            'title' => __('Show email'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'order_phone' => array(
+            'category' => 'order',
+            'title' => __('Show phone'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'order_mobile' => array(
+            'category' => 'order',
+            'title' => __('Show mobile'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'order_company' => array(
+            'category' => 'order',
+            'title' => __('Show company'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'order_address' => array(
+            'category' => 'order',
+            'title' => __('Show address'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'order_country' => array(
+            'category' => 'order',
+            'title' => __('Show country'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'order_city' => array(
+            'category' => 'order',
+            'title' => __('Show city'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'order_zip' => array(
+            'category' => 'order',
+            'title' => __('Show Zip code'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'order_packing' => array(
+            'category' => 'order',
+            'title' => __('Show packing'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'order_location' => array(
+            'category' => 'order',
+            'title' => __('Show location'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'order_delivery' => array(
+            'category' => 'order',
+            'title' => __('Show delivery'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',

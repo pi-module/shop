@@ -103,6 +103,8 @@ class Shop extends Standard
                             $matches['action'] = 'cart';
                         } elseif ($parts[1] == 'levelAjax') {
                             $matches['action'] = 'levelAjax';
+                            $matches['process'] = urldecode($parts[2]);
+                            $matches['id'] = intval($parts[3]);
                         } elseif ($parts[1] == 'cartAjax') {    
                             $matches['action'] = 'cartAjax';
                         } elseif ($parts[1] == 'basketAjax') {
@@ -311,7 +313,10 @@ class Shop extends Standard
                 if (!empty($mergedParams['number'])) {
                     $url['number'] = $mergedParams['number'];
                 }
-            }  
+            } elseif ($mergedParams['action'] == 'levelAjax') {
+                $url['process'] = $mergedParams['process'];
+                $url['id'] = $mergedParams['id'];
+            }
         }
 
         // Set if controller is user

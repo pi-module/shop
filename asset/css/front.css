@@ -11,3 +11,7 @@
 .productInformation {
 	margin-bottom: 20px;
 }
+
+#cart-list {
+	min-height: 250px;
+}

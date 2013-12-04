@@ -20,6 +20,7 @@ class OrderForm  extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
+        $this->config = Pi::service('registry')->config->read('shop', 'order');
         parent::__construct($name);
     }
 
@@ -33,127 +34,196 @@ class OrderForm  extends BaseForm
 
     public function init()
     {
-    	// first_name
-        $this->add(array(
-            'name' => 'first_name',
-            'options' => array(
-                'label' => __('First Name'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'span6',
-            )
-        ));
-        // last_name
-        $this->add(array(
-            'name' => 'last_name',
-            'options' => array(
-                'label' => __('Last name'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'span6',
-            )
-        ));
+        // name
+        if ($this->config['order_name']) {
+            // first_name
+            $this->add(array(
+                'name' => 'first_name',
+                'options' => array(
+                    'label' => __('First Name'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span12',
+                )
+            ));
+            // last_name
+            $this->add(array(
+                'name' => 'last_name',
+                'options' => array(
+                    'label' => __('Last name'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span12',
+                )
+            ));
+        }
         // email
-        $this->add(array(
-            'name' => 'email',
-            'options' => array(
-                'label' => __('Email'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'span6',
-            )
-        ));
+        if ($this->config['order_email']) {
+            $this->add(array(
+                'name' => 'email',
+                'options' => array(
+                    'label' => __('Email'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span12',
+                )
+            ));
+        }
         // phone
-        $this->add(array(
-            'name' => 'phone',
-            'options' => array(
-                'label' => __('Phone'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'span6',
-            )
-        ));
+        if ($this->config['order_phone']) {
+            $this->add(array(
+                'name' => 'phone',
+                'options' => array(
+                    'label' => __('Phone'),
+                ),
+                    'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span12',
+                )
+            ));
+        }
         // mobile
-        $this->add(array(
-            'name' => 'mobile',
-            'options' => array(
-                'label' => __('Mobile'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'span6',
-            )
-        ));
+        if ($this->config['order_mobile']) {
+            $this->add(array(
+                'name' => 'mobile',
+                'options' => array(
+                    'label' => __('Mobile'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span12',
+                )
+            ));
+        }
         // company
-        $this->add(array(
-            'name' => 'company',
-            'options' => array(
-                'label' => __('Company'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'span6',
-            )
-        ));
+        if ($this->config['order_mobile']) {
+            $this->add(array(
+                'name' => 'company',
+                'options' => array(
+                    'label' => __('Company'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span12',
+                )
+            ));
+        }
         // address
-        $this->add(array(
-            'name' => 'address',
-            'options' => array(
-                'label' => __('Address'),
-            ),
-            'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '3',
-                'cols' => '40',
-                'class' => 'span6',
-                'description' => '',
-            )
-        ));
+        if ($this->config['order_mobile']) {
+            $this->add(array(
+                'name' => 'address',
+                'options' => array(
+                    'label' => __('Address'),
+                ),
+                'attributes' => array(
+                    'type' => 'textarea',
+                    'rows' => '3',
+                    'cols' => '40',
+                    'class' => 'span12',
+                    'description' => '',
+                )
+            ));
+        }
         // country
-        $this->add(array(
-            'name' => 'country',
-            'options' => array(
-                'label' => __('Country'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'span6',
-            )
-        ));
+        if ($this->config['order_mobile']) {
+            $this->add(array(
+                'name' => 'country',
+                'options' => array(
+                    'label' => __('Country'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span12',
+                )
+            ));
+        }
         // city
-        $this->add(array(
-            'name' => 'city',
-            'options' => array(
-                'label' => __('City'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'span6',
-            )
-        ));
+        if ($this->config['order_mobile']) {
+            $this->add(array(
+                'name' => 'city',
+                'options' => array(
+                    'label' => __('City'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span12',
+                )
+            ));
+        }
         // zip_code
+        if ($this->config['order_mobile']) {
+            $this->add(array(
+                'name' => 'zip_code',
+                'options' => array(
+                    'label' => __('Zip code'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                    'class' => 'span12',
+                )
+            ));
+        }
+        // location
+        if ($this->config['order_location']) {
+            $this->add(array(
+                'name' => 'location',
+                'type' => 'Module\Shop\Form\Element\Location',
+                'options' => array(
+                    'label' => __('Location'),
+                ),
+                'attributes' => array(
+                    'class' => 'select-location span12',
+                    'size'  => 5
+                )
+            ));
+        }
+        // delivery
+        if ($this->config['order_delivery']) {
+            $this->add(array(
+                'name' => 'delivery',
+                'type' => 'select',
+                'options' => array(
+                    'label' => __('Delivery'),
+                    'value_options' => array(),
+                ),
+                'attributes' => array(
+                    'class' => 'select-delivery span12',
+                    'size'  => 5
+                )
+            ));
+        }
+        // packing
+        if ($this->config['order_packing']) {
+            $this->add(array(
+                'name' => 'packing',
+                'type' => 'checkbox',
+                'options' => array(
+                    'label' => __('Packing'),
+                ),
+                'attributes' => array(
+                    'description' => '',
+                )
+            ));
+        }
+        // payment_adapter
         $this->add(array(
-            'name' => 'zip_code',
+            'name' => 'payment_adapter',
+            'type' => 'Module\Shop\Form\Element\Gateway',
             'options' => array(
-                'label' => __('Zip code'),
+                'label' => __('Adapter'),
             ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'class' => 'span6',
-            )
         ));
         // Save
         $this->add(array(
