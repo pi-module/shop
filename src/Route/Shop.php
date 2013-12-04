@@ -101,9 +101,6 @@ class Shop extends Standard
                             $matches['action'] = 'empty';
                         } elseif ($parts[1] == 'cart') {
                             $matches['action'] = 'cart';
-                        } elseif ($parts[1] == 'finish') {    
-                            $matches['action'] = 'finish';
-                            $matches['id'] = intval($parts[2]);
                         } elseif ($parts[1] == 'levelAjax') {
                             $matches['action'] = 'levelAjax';
                         } elseif ($parts[1] == 'cartAjax') {    
@@ -234,7 +231,12 @@ class Shop extends Standard
                     break;    
 
                 case 'user':
-                
+                    if (!empty($parts[1])) {
+                        if ($parts[1] == 'order') {
+                            $matches['action'] = 'order';
+                            $matches['id'] = intval($parts[2]);
+                        }  
+                    }
                     break;
             }    
         } 
@@ -309,9 +311,12 @@ class Shop extends Standard
                 if (!empty($mergedParams['number'])) {
                     $url['number'] = $mergedParams['number'];
                 }
-            } elseif ($mergedParams['action'] == 'finish' 
-                || $mergedParams['action'] == 'order') 
-            {
+            }  
+        }
+
+        // Set if controller is user
+        if ($mergedParams['controller'] == 'user') {
+            if ($mergedParams['action'] == 'order') {
                 $url['id'] = $mergedParams['id'];
             }   
         }

@@ -22,7 +22,8 @@ use Zend\Json\Json;
  * Pi::api('shop', 'order')->orderStatus($status_order);
  * Pi::api('shop', 'order')->paymentStatus($status_payment);
  * Pi::api('shop', 'order')->deliveryStatus($status_delivery);
- * Pi::api('shop', 'order')->listProduct($sid);
+ * Pi::api('shop', 'order')->listProduct($id);
+ * Pi::api('shop', 'order')->userOrder();
  */
 
 class Order extends AbstractApi
@@ -38,8 +39,8 @@ class Order extends AbstractApi
         // Set back url
         return Pi::service('url')->assemble('shop', array(
             'module'        => $this->getModule(),
-            'controller'    => 'checkout',
-            'action'        => 'finish',
+            'controller'    => 'user',
+            'action'        => 'order',
             'id'            => $row->id,
         ));
     }
@@ -53,45 +54,6 @@ class Order extends AbstractApi
         $order = array();
         }
         return $order;
-    }
-
-    public function setOrderInfo($values)
-    {
-        if ($values['id']) {
-            $row = Pi::model('order', $this->getModule())->find($values['id']);
-        } else {
-            $row = Pi::model('order', $this->getModule())->createRow();
-        }
-        // Set info
-        /* $row->user = $uid;
-        $row->first_name = $values['first_name'];
-        $row->last_name = $values['last_name'];
-        $row->email = $values['email'];
-        $row->phone = $values['phone'];
-        $row->mobile = $values['mobile'];
-        $row->company = $values['company'];
-        $row->address = $values['address'];
-        $row->country = $values['country'];
-        $row->city = $values['city'];
-        $row->zip_code = $values['zip_code'];
-        $row->number = $values['number']; */
-        $row->save();
-    }
-
-    public function getOrderInfo($id)
-    {
-        $user = $this->findOrder($id);
-        /* $values['first_name'] = ($user['first_name']) ? $user['first_name'] : '';
-        $values['last_name'] = ($user['last_name']) ? $user['last_name'] : '';
-        $values['email'] = ($user['email']) ? $user['email'] : '';
-        $values['phone'] = ($user['phone']) ? $user['phone'] : '';
-        $values['mobile'] = ($user['mobile']) ? $user['mobile'] : '';
-        $values['company'] = ($user['company']) ? $user['company'] : '';
-        $values['address'] = ($user['address']) ? $user['address'] : '';
-        $values['country'] = ($user['country']) ? $user['country'] : '';
-        $values['city'] = ($user['city']) ? $user['city'] : '';
-        $values['zip_code'] = ($user['zip_code']) ? $user['zip_code'] : ''; */
-        return $values;
     }
 
     public function orderStatus($status_order)
@@ -127,6 +89,11 @@ class Order extends AbstractApi
                 $return['orderClass'] = 'btn-danger';
                 $return['orderTitle'] = __('Fraudulent orders');
                 break;
+
+            case '7':
+                $return['orderClass'] = 'btn-inverse';
+                $return['orderTitle'] = __('Orders finished');
+                break;    
         }
         return $return;
     }
@@ -269,6 +236,21 @@ class Order extends AbstractApi
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
             $list[$row->id]['details'] = Pi::api('shop', 'product')->getProductLight($row->product);
+        }
+        return $list;
+    }
+
+    public function userOrder()
+    {
+        $uid = Pi::user()->getId();
+        $list = array();
+        // find orders
+        $where = array('uid' => $uid);
+        $select = Pi::model('order', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('order', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $list[$row->id] = $this->canonizeOrder($row);
+            $list[$row->id]['product'] = $this->listProduct($row->id);
         }
         return $list;
     }

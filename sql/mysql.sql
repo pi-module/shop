@@ -158,7 +158,7 @@ CREATE TABLE `{order}` (
   `paid_price` double(16,2) NOT NULL,
   `packing` tinyint(1) unsigned NOT NULL,
   `delivery` int(10) unsigned NOT NULL,
-  `payment_method` int(10) unsigned NOT NULL,
+  `payment_method` enum('online','offline') NOT NULL,
   `payment_adapter` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 );

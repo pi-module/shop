@@ -139,10 +139,16 @@ class OrderController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 $order->status_order = $values['status_order'];
+                if ($values['status_order'] == 7) {
+                    $order->time_finish = time();
+                } else {
+                    $order->time_finish = 0;
+                }
                 $order->save();
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('shop', 'order')->orderStatus($order->status_order);
+                $return['data']['time_finish_view'] = ($order->time_finish) ? _date($order->time_finish) : __('Not Finish');
             } else {
                 $return['status'] = 0;
                 $return['data'] = '';
@@ -175,11 +181,22 @@ class OrderController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+                $gateway = Pi::api('payment', 'gateway')->getGatewayInfo($values['payment_adapter']);
                 $order->status_payment = $values['status_payment'];
+                $order->payment_adapter = $values['payment_adapter'];
+                $order->payment_method = $gateway['type'];
+                if ($values['status_payment'] == 2) {
+                    $order->time_payment = time();
+                } else {
+                    $order->time_payment = 0;
+                }
                 $order->save();
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('shop', 'order')->paymentStatus($order->status_payment);
+                $return['data']['payment_adapter'] = $order->payment_adapter;
+                $return['data']['payment_method'] = $order->payment_method;
+                $return['data']['time_payment_view'] = ($order->time_payment) ? _date($order->time_payment) : __('Not Paid');
             } else {
                 $return['status'] = 0;
                 $return['data'] = '';
@@ -213,10 +230,16 @@ class OrderController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 $order->status_delivery = $values['status_delivery'];
+                if ($values['status_delivery'] != 1) {
+                    $order->time_delivery = time();
+                } else {
+                    $order->time_delivery = 0;
+                }
                 $order->save();
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('shop', 'order')->deliveryStatus($order->status_delivery);
+                $return['data']['time_delivery_view'] = ($order->time_delivery) ? _date($order->time_delivery) : __('Not Delivery');
             } else {
                 $return['status'] = 0;
                 $return['data'] = '';

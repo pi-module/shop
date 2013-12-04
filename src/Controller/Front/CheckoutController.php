@@ -144,6 +144,8 @@ class CheckoutController extends IndexController
 
     public function basketAjaxAction()
     {
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
         // Set cart
         $cart = $_SESSION['shop']['cart'];
         // Get info from url
@@ -203,6 +205,8 @@ class CheckoutController extends IndexController
 
     public function addAction()
     {
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
         // Get info from url
         $slug = $this->params('slug');
         $module = $this->params('module');
@@ -232,7 +236,9 @@ class CheckoutController extends IndexController
 
     public function cartAction()
     {
-    	// Set Invoice
+    	// Check user is login or not
+        Pi::service('authentication')->requireLogin();
+        // Set Invoice
         $this->setInvoice();
     	$cart = $_SESSION['shop']['cart'];
     	if (empty($cart['product'])) {
@@ -249,42 +255,6 @@ class CheckoutController extends IndexController
         $module = $this->params('module');
         $url = array('', 'module' => $module, 'controller' => 'index');
         $this->jump($url, __('Your cart are empty'));
-    }
-
-    public function orderAction()
-    {
-        // Get info from url
-        $id = $this->params('id');
-        $module = $this->params('module');
-        // Find order
-        $order = $this->getModel('order')->find($id)->toArray();
-        if (!$order['id']) {
-            $url = array('', 'module' => $module, 'controller' => 'index');
-            $this->jump($url, __('Order not set.'));
-        }
-
-
-        // Set view
-        $this->view()->setTemplate('checkout_order');
-        $this->view()->assign('order', $order);
-    }
-
-    public function finishAction()
-    {
-        // Get info from url
-        $id = $this->params('id');
-        $module = $this->params('module');
-        // Find order
-        $order = $this->getModel('order')->find($id)->toArray();
-        if (!$order['id']) {
-            $url = array('', 'module' => $module, 'controller' => 'index');
-            $this->jump($url, __('Order not set.'));
-        }
-
-
-        // Set view
-        $this->view()->setTemplate('checkout_finish');
-        $this->view()->assign('order', $order);
     }
 
     protected function setEmpty()

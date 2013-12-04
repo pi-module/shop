@@ -66,34 +66,21 @@ class Category extends AbstractApi
     public function categoryList($parent = null)
     {
         $return = array();
-        if (isset($_SESSION['shop']['category']) 
-            && !empty($_SESSION['shop']['category'])) 
-        {
-            $return = $_SESSION['shop']['category'];
-        } else {
+        if (is_null($parent)) {
             $where = array('status' => 1);
-            $order = array('time_create DESC', 'id DESC');
-            $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
-            $rowset = Pi::model('category', $this->getModule())->selectWith($select);
-            foreach ($rowset as $row) {
-                $return[$row->id] = $row->toArray();
-                $return[$row->id]['url'] = Pi::service('url')->assemble('shop', array(
-                    'module'        => $this->getModule(),
-                    'controller'    => 'category',
-                    'slug'          => $return[$row->id]['slug'],
-                ));
-            }
-            $_SESSION['shop']['category'] = $return;
+        } else {
+            $where = array('status' => 1, 'parent' => $parent);
         }
-        // Check parent
-        if (!is_null($parent)) {
-            foreach ($return as $category) {
-                if ($category['parent'] == $parent) {
-                    $return[$category['id']] = $category;
-                } else {
-                    unset($return[$category['id']]);
-                }
-            }
+        $order = array('time_create DESC', 'id DESC');
+        $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
+        $rowset = Pi::model('category', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $return[$row->id] = $row->toArray();
+            $return[$row->id]['url'] = Pi::service('url')->assemble('shop', array(
+                'module'        => $this->getModule(),
+                'controller'    => 'category',
+                'slug'          => $return[$row->id]['slug'],
+            ));
         }
         return $return;
     }  

@@ -30,6 +30,7 @@ class User extends AbstractApi
         $row = Pi::model('user', $this->getModule())->find($uid);
         if (is_object($row)) {
         	$user = $row->toArray();
+            $user['user'] = Pi::user()->get($user['uid'], array('id', 'identity', 'name', 'email'));
         } else {
         	$user = array();
         }

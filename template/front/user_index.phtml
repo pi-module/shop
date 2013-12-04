@@ -1,0 +1,54 @@
+<?php
+    $this->css($this->assetModule('css/front.css'));
+    $this->jQuery();
+	$this->bootstrap(array(
+    	'js/bootstrap.min.js',
+    	'css/font-awesome.min.css'
+	));
+?>
+<div class="shop">
+	<div class="well">
+		<h3><?php echo $this->escape($user['first_name']); ?> <?php echo $this->escape($user['last_name']); ?></h3>
+		<ul class="clearfix unstyled">
+			<li class="span5"><strong><?php _e('Order Name'); ?></strong> : <?php echo $this->escape($user['first_name']); ?> <?php echo $this->escape($user['last_name']); ?></li>
+			<li class="span5"><strong><?php _e('User Name'); ?></strong> : <?php echo $this->escape($user['user']['identity']); ?> ( <?php echo $this->escape($user['user']['name']); ?> ) <span class="label label-info"><?php echo $this->escape($user['user']['id']); ?></span></li>
+			<li class="span5"><strong><?php _e('Order Email'); ?></strong> : <?php echo $this->escape($user['email']); ?></li>
+			<li class="span5"><strong><?php _e('Email'); ?></strong> : <?php echo $this->escape($user['user']['email']); ?></li>
+			<li class="span5"><strong><?php _e('Phone'); ?></strong> : <?php echo $this->escape($user['phone']); ?></li>
+			<li class="span5"><strong><?php _e('Mobile'); ?></strong> : <?php echo $this->escape($user['mobile']); ?></li>
+			<li class="span5"><strong><?php _e('Company'); ?></strong> : <?php echo $this->escape($user['company']); ?></li>
+        	<li class="span5"><strong><?php _e('Country'); ?></strong> : <?php echo $this->escape($user['country']); ?></li>
+        	<li class="span5"><strong><?php _e('City'); ?></strong> : <?php echo $this->escape($user['city']); ?></li>
+        	<li class="span5"><strong><?php _e('Zip ode'); ?></strong> : <?php echo $this->escape($user['zip_code']); ?></li>
+        	<li class="span12"><strong><?php _e('Address'); ?></strong> : <?php echo $this->escape($user['address']); ?></li>
+		</ul>
+	</div>
+	
+	<div class="accordion" id="accordion2">
+	<?php foreach($orders as $order) { ?>
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#order-<?php echo $this->escape($order['id']['id']); ?>"><?php echo $this->escape($order['id']); ?></a>
+			</div>
+			<div id="order-<?php echo $this->escape($order['id']['id']); ?>" class="accordion-body collapse in">
+				<div class="accordion-inner">
+
+					<?php foreach($order['product'] as $product) { ?>
+					<div><?php echo $product['details']['title']; ?></div>
+
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+	</div>
+
+
+
+</div>
+
+<?php
+        echo '<pre>';
+        print_r($orders);
+        echo '</pre>';
+?> 

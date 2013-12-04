@@ -45,6 +45,15 @@ class UpdatePaymentForm  extends BaseForm
                 ),
             ),
         ));
+        // payment_adapter
+        $this->add(array(
+            'name' => 'payment_adapter',
+            'type' => 'Module\Shop\Form\Element\Gateway',
+            'options' => array(
+                'label' => __('Adapter'),
+                'payment_adapter' => '',
+            ),
+        ));
         // Save
         $this->add(array(
             'name' => 'submit',

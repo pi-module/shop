@@ -25,5 +25,10 @@ class UpdatePaymentFilter extends InputFilter
             'name' => 'status_payment',
             'required' => true,
         ));
+        // payment_adapter
+        $this->add(array(
+            'name' => 'payment_adapter',
+            'required' => true,
+        ));
     }
 }    	
