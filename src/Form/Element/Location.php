@@ -25,6 +25,11 @@ class Location extends Select
     public function getValueOptions()
     {
         if (empty($this->valueOptions)) {
+            if (isset($this->options['parent']) 
+                && $this->options['parent']) 
+            {
+                $list[0] = '';
+            }
             $select = Pi::model('location', 'shop')->select();
             $rowset = Pi::model('location', 'shop')->selectWith($select);
             foreach ($rowset as $row) {

@@ -204,6 +204,25 @@ class OrderForm  extends BaseForm
                 )
             ));
         }
+        // payment_adapter
+        if ($this->config['order_payment']) {
+            $this->add(array(
+                'name' => 'payment_adapter',
+                //'type' => 'Module\Shop\Form\Element\Gateway',
+                //'options' => array(
+                //    'label' => __('Adapter'),
+                //),
+                'type' => 'select',
+                'options' => array(
+                    'label' => __('Adapter'),
+                    'value_options' => array(),
+                ),
+                'attributes' => array(
+                    'class' => 'select-payment span12',
+                    'size'  => 5
+                )
+            ));
+        }
         // packing
         if ($this->config['order_packing']) {
             $this->add(array(
@@ -217,14 +236,6 @@ class OrderForm  extends BaseForm
                 )
             ));
         }
-        // payment_adapter
-        $this->add(array(
-            'name' => 'payment_adapter',
-            'type' => 'Module\Shop\Form\Element\Gateway',
-            'options' => array(
-                'label' => __('Adapter'),
-            ),
-        ));
         // Save
         $this->add(array(
             'name' => 'submit',

@@ -54,7 +54,7 @@ class CheckoutController extends IndexController
                 // Set cart
                 $cart = $_SESSION['shop']['cart'];
                 //
-                $gateway = Pi::api('payment', 'gateway')->getGatewayInfo($values['payment_adapter']);
+                $gateway = Pi::api('payment', 'gateway')->getGatewayInfo($cart['invoice']['total']['payment']);
                 // Set values
                 $values['uid'] = Pi::user()->getId();
                 $values['ip'] = Pi::user()->getIp();
@@ -70,6 +70,7 @@ class CheckoutController extends IndexController
                 $values['total_price'] = $cart['invoice']['total']['total_price'];
                 $values['delivery'] = $cart['invoice']['total']['delivery'];
                 $values['location'] = $cart['invoice']['total']['location'];
+                $values['payment_adapter'] = $gateway['path'];
                 $values['payment_method'] = $gateway['type'];
 
                 // Save values to order
@@ -158,10 +159,13 @@ class CheckoutController extends IndexController
         $return = array();
         $return['status'] = 0;
         $return['data'] = array();
+        $data = array();
         switch ($process) {
             case 'location':
                 if ($id) {
+                    // Set location
                     $_SESSION['shop']['cart']['invoice']['total']['location'] = $id;
+                    // Get location
                     $where = array('location' => $id);
                     $select = $this->getModel('location_delivery')->select()->where($where);
                     $rowset = $this->getModel('location_delivery')->selectWith($select);
@@ -173,6 +177,7 @@ class CheckoutController extends IndexController
                             $data[$row->id]['status'] = $delivery['status'];
                         }
                     }
+                    // Set return
                     $return['status'] = 1;
                     $return['data'] = $data;
                 }
@@ -180,20 +185,52 @@ class CheckoutController extends IndexController
 
             case 'delivery':
                 if ($id) {
+                    // Set delivery
                     $_SESSION['shop']['cart']['invoice']['total']['delivery'] = $id;
+                    // Get location_delivery
                     $location = $_SESSION['shop']['cart']['invoice']['total']['location'];
                     $where = array('location' => $location, 'delivery' => $id);
                     $select = $this->getModel('location_delivery')->select()->where($where)->limit(1);
                     $row = $this->getModel('location_delivery')->selectWith($select)->current();
+                    // Set shipping price
                     $_SESSION['shop']['cart']['invoice']['total']['shipping'] = $row->price;
+                    // Get delivery_payment
+                    $where = array('delivery' => $id);
+                    $select = $this->getModel('delivery_payment')->select()->where($where);
+                    $rowset = $this->getModel('delivery_payment')->selectWith($select);
+                    foreach ($rowset as $row) {
+                        $payment = Pi::api('payment', 'gateway')->getGatewayInfo($row->payment);
+                        if($payment['status']) {
+                            $data['payment'][$row->id]['title'] = $payment['title'];
+                            $data['payment'][$row->id]['path'] = $payment['path'];
+                            $data['payment'][$row->id]['status'] = $payment['status'];
+                        }
+                    }
                     // Set Invoice
                     $invoice = $this->setInvoice();
                     // Set return
                     $return['status'] = 1;
+                    $return['data'] = $data;
                     $return['data']['shipping'] = $invoice['total']['shipping'];
                     $return['data']['total'] = $invoice['total']['total_price'];
                 }
-                break;    
+                break; 
+
+            case 'payment':  
+                if ($id) {
+                    // Set delivery
+                    $_SESSION['shop']['cart']['invoice']['total']['payment'] = $id;
+                    // Set return
+                    $data = array(
+                        'location' => $_SESSION['shop']['cart']['invoice']['total']['location'],
+                        'delivery' => $_SESSION['shop']['cart']['invoice']['total']['delivery'],
+                        'payment' => $_SESSION['shop']['cart']['invoice']['total']['payment'],
+                    );
+                    // Set return
+                    $return['status'] = 1;
+                    $return['data'] = $data;
+                }
+                break;   
         }
         // return
         return $return;

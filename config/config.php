@@ -428,5 +428,13 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
+        'order_payment' => array(
+            'category' => 'order',
+            'title' => __('Show payment'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
     ),
 );

@@ -29,4 +29,24 @@ class Gateway extends Select
         }
         return $this->valueOptions;
     }
+
+    /**
+     * @return array
+     */
+    public function getAttributes()
+    {
+        $this->Attributes = array(
+            'size' => 5,
+            'multiple' => 1,
+        );
+        // check form size
+        if (isset($this->attributes['size'])) {
+            $this->Attributes['size'] = $this->attributes['size'];
+        }
+        // check form multiple
+        if (isset($this->attributes['multiple'])) {
+            $this->Attributes['multiple'] = $this->attributes['multiple'];
+        }
+        return $this->Attributes;
+    }
 }

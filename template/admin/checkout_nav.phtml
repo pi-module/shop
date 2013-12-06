@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs">
+	<li<?php if (isset($navIndex) && $navIndex) { ?> class="active"<?php } ?>><a title="<?php _e('Index'); ?>" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'index')); ?>"><?php _e('Index'); ?></a></li>
+	<li<?php if (isset($navLocation) && $navLocation) { ?> class="active"<?php } ?>><a title="<?php _e('Location'); ?>" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'location')); ?>"><?php _e('Location'); ?></a></li>
+	<li<?php if (isset($navDelivery) && $navDelivery) { ?> class="active"<?php } ?>><a title="<?php _e('Delivery'); ?>" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'delivery')); ?>"><?php _e('Delivery'); ?></a></li>
+</ul>

@@ -194,19 +194,24 @@ CREATE TABLE `{user}` (
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `{location}` (
+CREATE TABLE `{delivery}` (
   `id` int (10) unsigned NOT NULL auto_increment,
-  `parent` int(5) unsigned NOT NULL default '0',
   `title` varchar (255) NOT NULL,
   `status` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `{delivery}` (
+CREATE TABLE `{delivery_payment}` (
   `id` int (10) unsigned NOT NULL auto_increment,
+  `delivery` int(5) unsigned NOT NULL,
+  `payment` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `{location}` (
+  `id` int (10) unsigned NOT NULL auto_increment,
+  `parent` int(5) unsigned NOT NULL default '0',
   `title` varchar (255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `path` varchar(16) NOT NULL,
   `status` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 );

@@ -104,7 +104,11 @@ class Shop extends Standard
                         } elseif ($parts[1] == 'levelAjax') {
                             $matches['action'] = 'levelAjax';
                             $matches['process'] = urldecode($parts[2]);
-                            $matches['id'] = intval($parts[3]);
+                            if (is_numeric($parts[3])) {
+                                $matches['id'] = intval($parts[3]);
+                            } elseif ($parts[2] == 'payment') {
+                                $matches['id'] = urldecode($parts[3]);
+                            }
                         } elseif ($parts[1] == 'cartAjax') {    
                             $matches['action'] = 'cartAjax';
                         } elseif ($parts[1] == 'basketAjax') {
