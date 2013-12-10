@@ -22,16 +22,8 @@ return array(
             'permission'    => 'category',
         ),
         array(
-            'controller'    => 'extra',
-            'permission'    => 'extra',
-        ),
-        array(
             'controller'    => 'attach',
             'permission'    => 'attach',
-        ),
-        array(
-            'controller'    => 'spotlight',
-            'permission'    => 'spotlight',
         ),
         array(
             'controller'    => 'order',

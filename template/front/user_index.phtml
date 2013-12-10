@@ -1,10 +1,5 @@
 <?php
     $this->css($this->assetModule('css/front.css'));
-    $this->jQuery();
-	$this->bootstrap(array(
-    	'js/bootstrap.min.js',
-    	'css/font-awesome.min.css'
-	));
 ?>
 <div class="shop">
 	<div class="well">
@@ -23,32 +18,23 @@
         	<li class="span12"><strong><?php _e('Address'); ?></strong> : <?php echo $this->escape($user['address']); ?></li>
 		</ul>
 	</div>
-	
-	<div class="accordion" id="accordion2">
 	<?php foreach($orders as $order) { ?>
-		<div class="accordion-group">
-			<div class="accordion-heading">
-				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#order-<?php echo $this->escape($order['id']['id']); ?>"><?php echo $this->escape($order['id']); ?></a>
-			</div>
-			<div id="order-<?php echo $this->escape($order['id']['id']); ?>" class="accordion-body collapse in">
-				<div class="accordion-inner">
-
-					<?php foreach($order['product'] as $product) { ?>
-					<div><?php echo $product['details']['title']; ?></div>
-
-					<?php } ?>
+		<div class="well">
+			<div class="clearfix">
+				<div class="span3"><h5><a title="<?php _e('View order'); ?>" href="<?php echo $this->url('', array('action' => 'order', 'id' => $order['id'])); ?>"><?php echo $this->escape($order['code']); ?></a></h5></div>
+				<div class="span9">
+					<span class="<?php echo $this->escape($order['orderClass']); ?>"><?php echo $this->escape($order['orderTitle']); ?></span>
+					<span class="<?php echo $this->escape($order['paymentClass']); ?>"><?php echo $this->escape($order['paymentTitle']); ?></span>
+					<span class="<?php echo $this->escape($order['deliveryClass']); ?>"><?php echo $this->escape($order['deliveryTitle']); ?></span>
 				</div>
+			</div>
+			<div class="clearfix">
+			<?php foreach($order['product'] as $product) { ?>
+			    <div class="text-center"> 
+			    	<a title="<?php echo $product['details']['title']; ?>" href="<?php echo $product['details']['productUrl']; ?>"><img class="span1" src="<?php echo $product['details']['thumbUrl']; ?>" alt="<?php echo $product['details']['title']; ?>" /></a>
+			    </div>
+			<?php } ?>
 			</div>
 		</div>
 	<?php } ?>
-	</div>
-
-
-
 </div>
-
-<?php
-        echo '<pre>';
-        print_r($orders);
-        echo '</pre>';
-?> 

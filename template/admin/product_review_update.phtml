@@ -2,7 +2,7 @@
 <div class="shop">
 	<?php $navReview = 1; ?>
 	<?php include $this->template('admin/product_nav'); ?>
-	<h2><?php echo $this->escape($title); ?></h2>
+	<h3><?php echo $this->escape($title); ?></h3>
 	<?php if(isset($user) && !empty($user)) { ?>
 	<div class="review-user">
 		<?php echo sprintf(__('This review added by %s'), $user['name']); ?>

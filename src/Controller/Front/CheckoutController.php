@@ -26,7 +26,7 @@ class CheckoutController extends IndexController
      * order Columns
      */
     protected $orderColumns = array(
-        'id', 'uid', 'first_name', 'last_name', 'email', 'phone', 'mobile', 'company', 'address', 
+        'id', 'uid', 'code', 'first_name', 'last_name', 'email', 'phone', 'mobile', 'company', 'address', 
         'country', 'city', 'zip_code', 'ip', 'status_order', 'status_payment', 'status_delivery', 
         'time_create', 'time_payment', 'time_delivery', 'time_finish', 'user_note', 'admin_note', 
         'number', 'product_price', 'discount_price', 'shipping_price', 'packing_price', 
@@ -72,7 +72,7 @@ class CheckoutController extends IndexController
                 $values['location'] = $cart['invoice']['total']['location'];
                 $values['payment_adapter'] = $gateway['path'];
                 $values['payment_method'] = $gateway['type'];
-
+                $values['code'] = Pi::api('shop', 'order')->codeOrder();
                 // Save values to order
                 $row = $this->getModel('order')->createRow();
                 $row->assign($values);
@@ -108,7 +108,7 @@ class CheckoutController extends IndexController
                 $order['id'] = $row->id;
                 $order['amount'] = $row->total_price;
                 $order['adapter'] = $row->payment_adapter;
-                $order['description'] = json_encode($description);
+                $order['description'] = Json::encode($description);
                 // Payment module
                 $result = Pi::api('payment', 'invoice')->createInvoice(
                     $order['module'], 
@@ -164,7 +164,9 @@ class CheckoutController extends IndexController
             case 'location':
                 if ($id) {
                     // Set location
-                    $_SESSION['shop']['cart']['invoice']['total']['location'] = $id;
+                    $location = $this->getModel('location')->find($id)->toArray();
+                    $_SESSION['shop']['cart']['invoice']['total']['location'] = $location['id'];
+                    $_SESSION['shop']['cart']['invoice']['total']['location_title'] = $location['title'];
                     // Get location
                     $where = array('location' => $id);
                     $select = $this->getModel('location_delivery')->select()->where($where);
@@ -186,7 +188,9 @@ class CheckoutController extends IndexController
             case 'delivery':
                 if ($id) {
                     // Set delivery
-                    $_SESSION['shop']['cart']['invoice']['total']['delivery'] = $id;
+                    $delivery = $this->getModel('delivery')->find($id)->toArray();
+                    $_SESSION['shop']['cart']['invoice']['total']['delivery'] = $delivery['id'];
+                    $_SESSION['shop']['cart']['invoice']['total']['delivery_title'] = $delivery['title'];
                     // Get location_delivery
                     $location = $_SESSION['shop']['cart']['invoice']['total']['location'];
                     $where = array('location' => $location, 'delivery' => $id);
@@ -220,11 +224,12 @@ class CheckoutController extends IndexController
                 if ($id) {
                     // Set delivery
                     $_SESSION['shop']['cart']['invoice']['total']['payment'] = $id;
+                    $_SESSION['shop']['cart']['invoice']['total']['payment_title'] = $id;
                     // Set return
                     $data = array(
-                        'location' => $_SESSION['shop']['cart']['invoice']['total']['location'],
-                        'delivery' => $_SESSION['shop']['cart']['invoice']['total']['delivery'],
-                        'payment' => $_SESSION['shop']['cart']['invoice']['total']['payment'],
+                        'location' => $_SESSION['shop']['cart']['invoice']['total']['location_title'],
+                        'delivery' => $_SESSION['shop']['cart']['invoice']['total']['delivery_title'],
+                        'payment' => $_SESSION['shop']['cart']['invoice']['total']['payment_title'],
                     );
                     // Set return
                     $return['status'] = 1;
@@ -265,8 +270,8 @@ class CheckoutController extends IndexController
         	case 'number':
         	    $number = $cart['product'][$product]['number'];
         	    if ($number > 0) {
-        	    	$oldNumber = $this->params('number');
-        	    	$newNumber = $number + $oldNumber;
+        	    	$getNumber = $this->params('number');
+        	    	$newNumber = $number + $getNumber;
         	    	if ($newNumber > 0) {
                         $newTotal = $newNumber * $cart['product'][$product]['price'];
         	    		$cart['product'][$product]['number'] = $newNumber;
@@ -294,7 +299,21 @@ class CheckoutController extends IndexController
 
     public function cartAjaxAction()
     {
-        return $_SESSION['shop']['cart'];
+        // Set Invoice
+        $this->setInvoice();
+        // Set cart
+        $invoice = $_SESSION['shop']['cart']['invoice']['total'];
+        // Set data
+        $data = array();
+        $data['price'] = $invoice['price'];
+        $data['discount'] = $invoice['discount'];
+        $data['number'] = $invoice['number'];
+        $data['total'] = $invoice['total_price'];
+        // Set return
+        $return = array();
+        $return['status'] = 1;
+        $return['data'] = $data;
+        return $return;
     }
 
     public function addAction()
@@ -308,11 +327,9 @@ class CheckoutController extends IndexController
         $this->view()->setTemplate(false);
         // Get config
         $config = Pi::service('registry')->config->read($module);
-        // Get category list
-        $categoryList = Pi::api('shop', 'category')->categoryList();
         // Find product
         $product = $this->getModel('product')->find($slug, 'slug');
-        $product = Pi::api('shop', 'product')->canonizeProduct($product, $categoryList);
+        $product = Pi::api('shop', 'product')->canonizeProductLight($product);
         // Check product
         if (!$product['marketable']) {
         	$url = array('', 'module' => $module, 'controller' => 'index');
@@ -336,6 +353,7 @@ class CheckoutController extends IndexController
         $this->setInvoice();
     	$cart = $_SESSION['shop']['cart'];
     	if (empty($cart['product'])) {
+            $module = $this->params('module');
         	$url = array('', 'module' => $module, 'controller' => 'index');
             $this->jump($url, __('Your cart are empty.'));
     	}
@@ -345,7 +363,11 @@ class CheckoutController extends IndexController
 
     public function emptyAction()
     {
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
+        // Set empty
         $this->setEmpty();
+        // Back
         $module = $this->params('module');
         $url = array('', 'module' => $module, 'controller' => 'index');
         $this->jump($url, __('Your cart are empty'));
@@ -383,18 +405,25 @@ class CheckoutController extends IndexController
     		$invoice['total']['price'] = $invoice['total']['price'] + ($product['price'] * $product['number']);
     		$invoice['total']['number'] = $invoice['total']['number'] + $product['number'];
     		$invoice['total']['discount'] = $invoice['total']['discount'] + 0;
+            // Update cart product
+            $cart['product'][$item['id']]['total'] = $item['total'];
+            $cart['product'][$item['id']]['total_view'] = $item['total_view'];
     	}
         // Set price
         $invoice['total']['location'] = (isset($cart['invoice']['total']['location'])) ? $cart['invoice']['total']['location'] : 0;
         $invoice['total']['delivery'] = (isset($cart['invoice']['total']['delivery'])) ? $cart['invoice']['total']['delivery'] : 0;
         $invoice['total']['shipping'] = (isset($cart['invoice']['total']['shipping'])) ? intval($cart['invoice']['total']['shipping']) : 0;
-    	$invoice['total']['total_price'] = intval($invoice['total']['price'] - $invoice['total']['discount']) + $invoice['total']['shipping'];
+        $invoice['total']['location_title'] = (isset($cart['invoice']['total']['location_title'])) ? $cart['invoice']['total']['location_title'] : '';
+        $invoice['total']['delivery_title'] = (isset($cart['invoice']['total']['delivery_title'])) ? $cart['invoice']['total']['delivery_title'] : '';
+        $invoice['total']['payment_title'] = (isset($cart['invoice']['total']['payment_title'])) ? $cart['invoice']['total']['payment_title'] : '';
+        $invoice['total']['total_price'] = intval($invoice['total']['price'] - $invoice['total']['discount']) + $invoice['total']['shipping'];
         $invoice['total']['price_view'] = Pi::api('shop', 'product')->viewPrice($invoice['total']['price']);
     	$invoice['total']['discount_view'] = Pi::api('shop', 'product')->viewPrice($invoice['total']['discount']);
         $invoice['total']['shipping_view'] = Pi::api('shop', 'product')->viewPrice($invoice['total']['shipping']);
     	$invoice['total']['total_price_view'] = Pi::api('shop', 'product')->viewPrice($invoice['total']['total_price']);
     	// Set Seaaion
-    	$_SESSION['shop']['cart']['invoice'] = $invoice;
+    	$cart['invoice'] = $invoice;
+        $_SESSION['shop']['cart'] = $cart;
         // return invoice
         return $invoice;
     }

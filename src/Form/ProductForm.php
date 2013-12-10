@@ -139,6 +139,7 @@ class ProductForm  extends BaseForm
                     'height' => '200',
                     'disabled' => true,
                     'description' => '',
+                    'class' => 'image-view',
                 )
             ));
             $this->add(array(
@@ -148,7 +149,7 @@ class ProductForm  extends BaseForm
                 ),
                 'attributes' => array(
                     'type' => 'button',
-                    'class' => 'btn btn-danger btn-small',
+                    'class' => 'btn btn-danger btn-small image-remove',
                     'data-toggle' => 'button',
                     'data-link' => $this->removeUrl,
                 )
@@ -157,6 +158,7 @@ class ProductForm  extends BaseForm
                 'name' => 'image',
                 'attributes' => array(
                     'type' => 'hidden',
+                    'class' => 'image-hidden',
                 ),
              ));
         } else {

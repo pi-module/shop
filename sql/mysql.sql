@@ -129,6 +129,7 @@ CREATE TABLE `{review}` (
 CREATE TABLE `{order}` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `uid` int(10) unsigned NOT NULL,
+  `code` varchar (16) NOT NULL,
   `first_name` varchar (255) NOT NULL,
   `last_name` varchar (255) NOT NULL,
   `email` varchar (64) NOT NULL,

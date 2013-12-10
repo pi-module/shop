@@ -332,6 +332,14 @@ return array(
             'value' => 1
         ),
         // Order
+        'order_code_prefix' => array(
+            'category' => 'order',
+            'title' => __('Code Prefix'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'pi' 
+        ),
         'order_name' => array(
             'category' => 'order',
             'title' => __('Show name'),

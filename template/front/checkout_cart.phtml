@@ -82,6 +82,7 @@
                     }
                 });
             }
+            this.updateAction(tar);
         },
         numberAction: function(e) {
             var tar = $(e.target);
@@ -101,12 +102,14 @@
             this.updateAction(tar);
         },
         updateAction: function(e) {
-            $.getJSON("<?php echo $this->url('', array('action' => 'cartAjax')); ?>").done(function(result){
-                // Update total
-                $('#cart-total-price').html(result.total.price_view);
-                $('#cart-total-discount').html(result.total.discount_view);
-                $('#cart-total-number').html(result.total.number);
-                $('#cart-total-total').html(result.total.total_price_view);
+            var url = "<?php echo $this->url('', array('action' => 'cartAjax')); ?>";
+            $.getJSON(url).done(function(result){
+                if (result.status == 1) {
+                    $('#cart-total-price').html(result.data.price);
+                    $('#cart-total-discount').html(result.data.discount);
+                    $('#cart-total-number').html(result.data.number);
+                    $('#cart-total-total').html(result.data.total);
+                }
             });
         },
     }

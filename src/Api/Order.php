@@ -14,7 +14,7 @@ namespace Module\Shop\Api;
 
 use Pi;
 use Pi\Application\AbstractApi;
-use Zend\Json\Json;
+use Zend\Math\Rand;
 
 /*
  * Pi::api('shop', 'order')->updatePayment();
@@ -24,6 +24,7 @@ use Zend\Json\Json;
  * Pi::api('shop', 'order')->deliveryStatus($status_delivery);
  * Pi::api('shop', 'order')->listProduct($id);
  * Pi::api('shop', 'order')->userOrder();
+ * Pi::api('shop', 'order')->codeOrder();
  */
 
 class Order extends AbstractApi
@@ -253,5 +254,17 @@ class Order extends AbstractApi
             $list[$row->id]['product'] = $this->listProduct($row->id);
         }
         return $list;
+    }
+
+    public function codeOrder()
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        $prefix = $config['order_code_prefix'];
+        // Generate random code
+        $rand = Rand::getInteger(10000000, 99999999);
+        // Generate order code
+        $code = sprintf('%s-%s', $prefix, $rand);
+        return $code;
     }
 }
