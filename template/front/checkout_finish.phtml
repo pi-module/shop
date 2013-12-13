@@ -1,5 +1,13 @@
-<?php
-        echo '<pre>';
-        print_r($order);
-        echo '</pre>';
-?> 
+<?php     $this->css($this->assetModule('css/front.css')); ?>
+<div class="shop">
+    <div class="alert alert-success">
+        <h4><?php _e('Finish order payment'); ?></h4>
+        <p><?php echo sprintf(__('You pay your order at <strong>%s</strong> by <strong>%s</strong> gateway And your order id is <strong>%s</strong>'), $order['time_payment_view'], $order['payment_adapter'], $order['code']); ?></p>
+    </div>
+    <p>
+        <a class="btn" title="<?php _e('Order link'); ?>" href="<?php echo $order['order_link']; ?>"><?php _e('Order link'); ?></a>
+        <a class="btn" title="<?php _e('User panel'); ?>" href="<?php echo $order['user_link']; ?>"><?php _e('User panel'); ?></a>
+        <a class="btn" title="<?php _e('Shop index'); ?>" href="<?php echo $order['index_link']; ?>"><?php _e('Shop index'); ?></a>
+
+    </p>
+</div>

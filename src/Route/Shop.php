@@ -91,12 +91,14 @@ class Shop extends Standard
 
                 case 'checkout':
                     if (!empty($parts[1])) {
-                        if ($parts[1] == 'level') {
-                            $matches['action'] = 'index';
-                            $matches['level'] = urldecode($parts[2]);
-                        } elseif ($parts[1] == 'add') {    
+                        if ($parts[1] == 'information') {
+                            $matches['action'] = 'information';
+                        } elseif ($parts[1] == 'add') {
                             $matches['action'] = 'add';
                             $matches['slug'] = urldecode($parts[2]);
+                        } elseif ($parts[1] == 'finish') {    
+                            $matches['action'] = 'finish';
+                            $matches['id'] = intval($parts[2]);
                         } elseif ($parts[1] == 'empty') {
                             $matches['action'] = 'empty';
                         } elseif ($parts[1] == 'cart') {
@@ -306,12 +308,7 @@ class Shop extends Standard
 
         // Set if controller is checkou
         if ($mergedParams['controller'] == 'checkout') {
-            if ($mergedParams['action'] == 'index') {
-                $url['level'] = sprintf('level%s%s', 
-                                   $this->paramDelimiter, 
-                                   $mergedParams['level']);
-
-            } elseif ($mergedParams['action'] == 'basketAjax') {    
+            if ($mergedParams['action'] == 'basketAjax') {    
                 $url['process'] = $mergedParams['process'];
                 $url['product'] = $mergedParams['product'];
                 if (!empty($mergedParams['number'])) {

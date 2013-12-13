@@ -181,9 +181,9 @@ class OrderController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                $gateway = Pi::api('payment', 'gateway')->getGatewayInfo($values['payment_adapter']);
+                $gateway = Pi::api('payment', 'gateway')->getGatewayInfo($values['payment_adapter'][0]);
                 $order->status_payment = $values['status_payment'];
-                $order->payment_adapter = $values['payment_adapter'];
+                $order->payment_adapter = $gateway['path'];
                 $order->payment_method = $gateway['type'];
                 if ($values['status_payment'] == 2) {
                     $order->time_payment = time();

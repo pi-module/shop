@@ -19,7 +19,7 @@ use Module\Shop\Form\OrderForm;
 use Module\Shop\Form\OrderFilter;
 use Zend\Json\Json;
 
-class CheckoutController extends IndexController
+class CheckoutController extends ActionController
 {
 
     /**
@@ -33,7 +33,7 @@ class CheckoutController extends IndexController
         'total_price', 'paid_price', 'packing', 'delivery', 'location','payment_method', 'payment_adapter',
     );	
 
-    public function indexAction()
+    public function informationAction()
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
@@ -137,9 +137,6 @@ class CheckoutController extends IndexController
         }
         // Set cart
         $cart = $_SESSION['shop']['cart'];
-        echo '<pre>';
-        print_r($cart);
-        echo '</pre>';
         // Set view
         $this->view()->setTemplate('checkout_information');
         $this->view()->assign('form', $form);
@@ -371,6 +368,46 @@ class CheckoutController extends IndexController
         $module = $this->params('module');
         $url = array('', 'module' => $module, 'controller' => 'index');
         $this->jump($url, __('Your cart are empty'));
+    }
+
+    public function finishAction()
+    {
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
+        // Get info from url
+        $id = $this->params('id');
+        $module = $this->params('module');
+        // Find order
+        $order = $this->getModel('order')->find($id);
+        // Check order
+        if (!$order->id) {
+            $url = array('', 'module' => $module, 'controller' => 'index');
+            $this->jump($url, __('Order not set.'));
+        }
+        // Check user
+        if ($order->uid != Pi::user()->getId()) {
+            $url = array('', 'module' => $module, 'controller' => 'index');
+            $this->jump($url, __('It not your order.'));
+        }
+        // Check status payment
+        if ($order->status_payment != 2) {
+            $url = array('', 'module' => $module, 'controller' => 'index');
+            $this->jump($url, __('This order not pay'));
+        }
+        // Check time payment
+        $time = time() - 3600;
+        if ($time > $order->time_payment) {
+            $url = array('', 'module' => $module, 'controller' => 'index');
+            $this->jump($url, __('This is old order and you pay it before'));
+        }
+        // canonize Order
+        $order = Pi::api('shop', 'order')->canonizeOrder($order);
+        $order['order_link'] = $this->url('', array('module' => $module, 'controller' => 'user', 'action' => 'order', 'id' => $order['id']));
+        $order['user_link'] = $this->url('', array('module' => $module, 'controller' => 'user'));
+        $order['index_link'] = $this->url('', array('module' => $module, 'controller' => 'index'));
+        // Set view
+        $this->view()->setTemplate('checkout_finish');
+        $this->view()->assign('order', $order);
     }
 
     protected function setEmpty()

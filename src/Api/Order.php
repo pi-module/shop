@@ -40,8 +40,8 @@ class Order extends AbstractApi
         // Set back url
         return Pi::service('url')->assemble('shop', array(
             'module'        => $this->getModule(),
-            'controller'    => 'user',
-            'action'        => 'order',
+            'controller'    => 'checkout',
+            'action'        => 'finish',
             'id'            => $row->id,
         ));
     }
