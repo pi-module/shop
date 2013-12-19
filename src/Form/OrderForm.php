@@ -45,7 +45,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span12',
+                    
                 )
             ));
             // last_name
@@ -57,7 +57,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span12',
+                    
                 )
             ));
         }
@@ -71,7 +71,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span12',
+                    
                 )
             ));
         }
@@ -85,7 +85,7 @@ class OrderForm  extends BaseForm
                     'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span12',
+                    
                 )
             ));
         }
@@ -99,7 +99,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span12',
+                    
                 )
             ));
         }
@@ -113,7 +113,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span12',
+                    
                 )
             ));
         }
@@ -128,7 +128,7 @@ class OrderForm  extends BaseForm
                     'type' => 'textarea',
                     'rows' => '3',
                     'cols' => '40',
-                    'class' => 'span12',
+                    
                     'description' => '',
                 )
             ));
@@ -143,7 +143,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span12',
+                    
                 )
             ));
         }
@@ -157,7 +157,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span12',
+                    
                 )
             ));
         }
@@ -171,7 +171,7 @@ class OrderForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span12',
+                    
                 )
             ));
         }
@@ -184,7 +184,7 @@ class OrderForm  extends BaseForm
                     'label' => __('Location'),
                 ),
                 'attributes' => array(
-                    'class' => 'select-location span12',
+                    'class' => 'select-location',
                     'size'  => 5
                 )
             ));
@@ -199,7 +199,7 @@ class OrderForm  extends BaseForm
                     'value_options' => array(),
                 ),
                 'attributes' => array(
-                    'class' => 'select-delivery span12',
+                    'class' => 'select-delivery',
                     'size'  => 5
                 )
             ));
@@ -218,7 +218,7 @@ class OrderForm  extends BaseForm
                     'value_options' => array(),
                 ),
                 'attributes' => array(
-                    'class' => 'select-payment span12',
+                    'class' => 'select-payment col-md-12',
                     'size'  => 5
                 )
             ));

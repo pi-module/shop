@@ -3,7 +3,7 @@
 	<?php $navSpecial = 1; ?>
 	<?php include $this->template('admin/product_nav'); ?>
 	<p>
-	   <a class="btn" title="<?php _e('Add Special'); ?>" href="<?php echo $this->url('', array('action' => 'specialUpdate')); ?>"><i class="icon-user"></i> <?php _e('Add Special'); ?></a>
+	   <a class="btn btn-primary" title="<?php _e('Add Special'); ?>" href="<?php echo $this->url('', array('action' => 'specialUpdate')); ?>"><i class="fa fa-user"></i> <?php _e('Add Special'); ?></a>
 	</p>
 	<h3><?php _e('List of specials'); ?></h3>
 	<table class="table table-striped table-bordered table-condensed">
@@ -23,8 +23,8 @@
 			<td><?php echo $this->escape($special['time_publish']); ?></td>
 			<td><?php echo $this->escape($special['time_expire']); ?></td>
 			<td>
-				<a class="btn" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'specialUpdate', 'id' => $special['id'])); ?>"><i class="icon-edit"></i> <?php _e('Edit'); ?></a>
-				<a class="btn" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'specialDelete', 'id' => $special['id'])); ?>"><i class="icon-trash"></i> <?php _e('Delete'); ?></a>
+				<a class="btn btn-primary" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'specialUpdate', 'id' => $special['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
+				<a class="btn btn-primary" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'specialDelete', 'id' => $special['id'])); ?>"><i class="fa fa-trash"></i> <?php _e('Delete'); ?></a>
 			</td>
 		</tr>
 		<?php } ?>

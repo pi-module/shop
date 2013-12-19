@@ -5,8 +5,8 @@
 	</div>
 	<ul>
 		<?php foreach($categories as $category) { ?>
-		<li class="span4">
-			<a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="icon-folder-open"></i> <?php echo $this->escape($category['title']); ?></a>
+		<li class="col-md-4">
+			<a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="fa fa-folder-open"></i> <?php echo $this->escape($category['title']); ?></a>
 		</li>
 		<?php } ?>
 	</ul>

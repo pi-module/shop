@@ -62,7 +62,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // slug
@@ -74,7 +74,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // summary
@@ -87,7 +87,7 @@ class ProductForm  extends BaseForm
                 'type' => 'textarea',
                 'rows' => '5',
                 'cols' => '40',
-                'class' => 'span6',
+                
                 'description' => '',
             )
         ));
@@ -149,7 +149,7 @@ class ProductForm  extends BaseForm
                 ),
                 'attributes' => array(
                     'type' => 'button',
-                    'class' => 'btn btn-danger btn-small image-remove',
+                    'class' => 'btn btn-danger btn-sm image-remove',
                     'data-toggle' => 'button',
                     'data-link' => $this->removeUrl,
                 )
@@ -190,7 +190,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span3',
+                
             )
         ));
         // stock_alert
@@ -202,7 +202,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span3',
+                
             )
         ));
         // price
@@ -214,7 +214,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span3',
+                
             )
         ));
         // price_discount
@@ -226,7 +226,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span3',
+                
             )
         ));
         // extra_seo
@@ -246,7 +246,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // seo_keywords
@@ -258,7 +258,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // seo_description
@@ -270,7 +270,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // tag
@@ -283,7 +283,7 @@ class ProductForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span6',
+                    
                 )
             ));
         }

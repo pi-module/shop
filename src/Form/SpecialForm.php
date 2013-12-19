@@ -66,7 +66,7 @@ class SpecialForm extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span3',
+                
             )
         ));
         // time_publish

@@ -92,7 +92,7 @@ class ExtraForm extends BaseForm
                 'type' => 'textarea',
                 'rows' => '5',
                 'cols' => '40',
-                'class' => 'span6',
+                
                 'description' => '',
             )
         ));

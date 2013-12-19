@@ -10,9 +10,9 @@
 <div id="js-order" class="shop">
     <h3><?php echo $this->escape($title); ?></h3>
     <div class="row">
-        <div class="span8"><?php include $this->templateComponent('form'); ?></div>
-        <div class="span4">
-            <div data-spy="affix" class="span3 infoCart well well well-small">
+        <div class="col-md-8"><?php include $this->templateComponent('form'); ?></div>
+        <div class="col-md-4">
+            <div data-spy="affix" class="col-md-3 infoCart well well well-small">
                 <h3><?php _e('Invoice'); ?></h3>
                 <p><strong><?php _e('Total Price'); ?></strong> : <span id="cart-total-price"><?php echo $this->escape($cart['invoice']['total']['price_view']); ?></span></p>
                 <p><strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php echo $this->escape($cart['invoice']['total']['discount_view']); ?></span></p>

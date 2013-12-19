@@ -9,8 +9,8 @@
 ?>
 <div id="shop-cart-page" class="shop">
 	<div class="clearfix">
-		<div class="row-fluid">
-			<div id="cart-list" class="productCart span8">
+		<div class="row">
+			<div id="cart-list" class="productCart col-md-8">
 			<?php foreach($cart['product'] as $product) { ?>
 			    <div data-id="<?php echo $product['id']; ?>" id="cart-product-<?php echo $this->escape($product['id']); ?>" class="media">
 			    	<a class="pull-left" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>">
@@ -18,17 +18,17 @@
                 	</a>
                 	<div class="media-body">
                 		<h4 class="media-heading"><?php echo $this->escape($product['title']); ?></h4>
-                		<div class="span7">
-                			<button id="button-remove-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-danger btn-mini js-remove" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'basketAjax', 'process' => 'remove', 'product' => $product['id'])); ?>"><i class="icon-ok icon-white"></i> <?php _e('Remove'); ?></button>
+                		<div class="col-md-7">
+                			<button id="button-remove-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-danger btn-xs js-remove" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'basketAjax', 'process' => 'remove', 'product' => $product['id'])); ?>"><i class="fa fa-ok fa fa-white"></i> <?php _e('Remove'); ?></button>
                 		</div>
-                		<div class="span4">
+                		<div class="col-md-4">
                 			<p><strong><?php _e('Price'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['price_view']); ?></span></p>
                 			<p><strong><?php _e('Discount'); ?></strong> : <span class="cart-product-discount">0</span></p>
                 			<p>
                 				<strong><?php _e('Number'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-number"><?php echo $this->escape($product['number']); ?> </span>
                 				<span class="btn-group">
-                					<button id="button-numberplus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-mini js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'basketAjax', 'process' => 'number', 'product' => $product['id'], 'number' => 1)); ?>"><i class="icon-plus"></i></button>
-                					<button id="button-numberminus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-mini js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'basketAjax', 'process' => 'number', 'product' => $product['id'], 'number' => -1)); ?>"><i class="icon-minus"></i></button>
+                					<button id="button-numberplus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-xs js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'basketAjax', 'process' => 'number', 'product' => $product['id'], 'number' => 1)); ?>"><i class="fa fa-plus"></i></button>
+                					<button id="button-numberminus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-xs js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'basketAjax', 'process' => 'number', 'product' => $product['id'], 'number' => -1)); ?>"><i class="fa fa-minus"></i></button>
                 				</span>
                 			</p>
                 			<p><strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total"class="label label-success"><?php echo $this->escape($product['total_view']); ?></span></p>
@@ -37,8 +37,8 @@
 			    </div>
         	<?php } ?>
 			</div>
-			<div class="span4">
-                <div data-spy="affix" class="span3 infoCart well well well-small">
+			<div class="col-md-4">
+                <div data-spy="affix" class="col-md-3 infoCart well well well-small">
                     <h3><?php _e('Invoice'); ?></h3>
                     <p><strong><?php _e('Total Price'); ?></strong> : <span id="cart-total-price"><?php echo $this->escape($cart['invoice']['total']['price_view']); ?></span></p>
                     <p><strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php echo $this->escape($cart['invoice']['total']['discount_view']); ?></span></p>
@@ -50,9 +50,9 @@
 		</div>
 		<div class="form-actions">
 			<div class="pull-left">
-				<a class="btn" title="<?php _e('Back to Shoping'); ?>" href="<?php echo $this->url('', array('controller' => 'index')); ?>"><?php _e('Back to Shoping'); ?></a>
-				<a class="btn" title="<?php _e('Refresh cart'); ?>" href="<?php echo $this->url('', array('action' => 'cart')); ?>"><?php _e('Refresh cart'); ?></a>
-				<a class="btn" title="<?php _e('Empty cart'); ?>" href="<?php echo $this->url('', array('action' => 'empty')); ?>"><?php _e('Empty cart'); ?></a>
+				<a class="btn btn-primary" title="<?php _e('Back to Shoping'); ?>" href="<?php echo $this->url('', array('controller' => 'index')); ?>"><?php _e('Back to Shoping'); ?></a>
+				<a class="btn btn-primary" title="<?php _e('Refresh cart'); ?>" href="<?php echo $this->url('', array('action' => 'cart')); ?>"><?php _e('Refresh cart'); ?></a>
+				<a class="btn btn-primary" title="<?php _e('Empty cart'); ?>" href="<?php echo $this->url('', array('action' => 'empty')); ?>"><?php _e('Empty cart'); ?></a>
 			</div>
 			<div class="pull-right">
 				<a class="btn btn-primary" title="<?php _e('Next'); ?>" href="<?php echo $this->url('', array('action' => 'information')); ?>"><?php _e('Next'); ?></a>

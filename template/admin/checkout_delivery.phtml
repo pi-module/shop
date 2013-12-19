@@ -5,7 +5,7 @@
 	<?php $navDelivery = 1; ?>
 	<?php include $this->template('admin/checkout_nav'); ?>
 	<p>
-	   <a class="btn" title="<?php _e('Add Delivery methods'); ?>" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'deliveryUpdate')); ?>"><i class="icon-folder-open"></i> <?php _e('Add Delivery methods'); ?></a>
+	   <a class="btn btn-primary" title="<?php _e('Add Delivery methods'); ?>" href="<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'deliveryUpdate')); ?>"><i class="fa fa-folder-open"></i> <?php _e('Add Delivery methods'); ?></a>
 	</p>
 	<h3><?php _e('List of Delivery methods'); ?></h3>
 	<table class="table table-striped table-bordered table-condensed">
@@ -26,7 +26,7 @@
 			<td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($delivery['id']); ?></span></td>
 			<td><?php echo $this->escape($delivery['title']); ?></td>
 			<td>
-				<a class="btn" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'deliveryUpdate', 'id' => $delivery['id'])); ?>"><i class="icon-edit"></i> <?php _e('Edit'); ?></a>
+				<a class="btn btn-primary" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'deliveryUpdate', 'id' => $delivery['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
 			</td>
 		</tr>
 		<?php } ?>

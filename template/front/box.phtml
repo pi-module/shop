@@ -1,7 +1,7 @@
 <?php
     $this->css($this->assetModule('css/front.css'));
 ?>
-<li class="span4 productBox">
+<li class="col-md-4 productBox">
 	<div class="thumbnail">
 		<?php if($product['image']){ ?>
     	<a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
@@ -24,7 +24,7 @@
                 <?php } ?>
                 </div>
                 <div class="pull-right">
-                    <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['cartUrl']); ?>" class="btn"><i class="icon-shopping-cart"></i> <?php _e('Add To cart'); ?></a>
+                    <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['cartUrl']); ?>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> <?php _e('Add To cart'); ?></a>
                 </div>
             </div>
             <?php } ?>

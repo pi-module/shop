@@ -23,7 +23,7 @@
 		<tr id="product-<?php echo $list['id']; ?>">
 			<td><?php echo $this->escape($list['id']); ?></td>
 			<td><?php echo $this->escape($list['title']); ?></td>
-			<td><button id="button-<?php echo $list['id']; ?>" type="button" class="btn btn-danger" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'relatedAjax', 'product_id' => $product['id'], 'product_related' => $list['id'], 'related' => '0')); ?>"><i class="icon-ok icon-white"></i> <?php _e('Remove'); ?></button></td>
+			<td><button id="button-<?php echo $list['id']; ?>" type="button" class="btn btn-danger" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'relatedAjax', 'product_id' => $product['id'], 'product_related' => $list['id'], 'related' => '0')); ?>"><i class="fa fa-ok fa fa-white"></i> <?php _e('Remove'); ?></button></td>
 		</tr>
 		<?php } ?>
 	</table>
@@ -40,7 +40,7 @@
 		<tr id="product-<?php echo $list['id']; ?>">
 			<td><?php echo $this->escape($list['id']); ?></td>
 			<td><?php echo $this->escape($list['title']); ?></td>
-			<td><button id="button-<?php echo $list['id']; ?>" type="button" class="btn btn-success" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'relatedAjax', 'product_id' => $product['id'], 'product_related' => $list['id'], 'related' => '1')); ?>"><i class="icon-ok icon-white"></i> <?php _e('Add'); ?></button></td>
+			<td><button id="button-<?php echo $list['id']; ?>" type="button" class="btn btn-success" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'relatedAjax', 'product_id' => $product['id'], 'product_related' => $list['id'], 'related' => '1')); ?>"><i class="fa fa-ok fa fa-white"></i> <?php _e('Add'); ?></button></td>
 		</tr>
 		<?php } ?>
 	</table>

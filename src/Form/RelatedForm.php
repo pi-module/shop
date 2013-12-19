@@ -43,7 +43,7 @@ class RelatedForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // status

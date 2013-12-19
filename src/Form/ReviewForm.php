@@ -51,7 +51,7 @@ class ReviewForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // description
@@ -64,7 +64,7 @@ class ReviewForm  extends BaseForm
                 'type' => 'textarea',
                 'rows' => '5',
                 'cols' => '40',
-                'class' => 'span6',
+                
                 'description' => '',
             )
         ));

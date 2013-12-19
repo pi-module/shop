@@ -67,7 +67,7 @@ class CategoryForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // slug
@@ -79,7 +79,7 @@ class CategoryForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // description
@@ -92,7 +92,7 @@ class CategoryForm  extends BaseForm
                 'type' => 'textarea',
                 'rows' => '5',
                 'cols' => '40',
-                'class' => 'span6',
+                
                 'description' => '',
             )
         ));
@@ -106,7 +106,7 @@ class CategoryForm  extends BaseForm
                 'type' => 'textarea',
                 'rows' => '5',
                 'cols' => '40',
-                'class' => 'span6',
+                
                 'description' => '',
             )
         ));
@@ -146,7 +146,7 @@ class CategoryForm  extends BaseForm
                 ),
                 'attributes' => array(
                     'type' => 'button',
-                    'class' => 'btn btn-danger btn-small',
+                    'class' => 'btn btn-danger btn-sm',
                     'data-toggle' => 'button',
                     'data-link' => $this->removeUrl,
                 )
@@ -186,7 +186,7 @@ class CategoryForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // seo_keywords
@@ -198,7 +198,7 @@ class CategoryForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // seo_description
@@ -210,7 +210,7 @@ class CategoryForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // setting

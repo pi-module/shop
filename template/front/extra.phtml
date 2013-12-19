@@ -22,7 +22,7 @@
 			<strong><?php echo $field['title']; ?></strong>
 			<span><?php echo $this->numberFormat($field['data'], NumberFormatter::PATTERN_DECIMAL, NumberFormatter::TYPE_DEFAULT, "en_US"); ?></span>
 			<?php } elseif($field['type'] == 'video') { ?>
-			<div class="attach-audio-video span12">
+			<div class="attach-audio-video col-md-12">
 				<?php 
 					$this->jQuery();
 					$this->js($this->assetModule('player/jwplayer/jwplayer.js')); 
@@ -40,8 +40,8 @@
 				</script>
 			</div>
 			<?php } elseif($field['type'] == 'audio') { ?>
-			<div class="attach-audio-file span12">
-				<object class="span11" type="application/x-shockwave-flash" data="<?php echo $this->assetModule('player/audio/audio-player.swf'); ?>" id="audioplayer1" height="35" >
+			<div class="attach-audio-file col-md-12">
+				<object class="col-md-11" type="application/x-shockwave-flash" data="<?php echo $this->assetModule('player/audio/audio-player.swf'); ?>" id="audioplayer1" height="35" >
 					<param name="movie" value="<?php echo $this->assetModule('player/audio/audio-player.swf'); ?>">
 					<param name="FlashVars" value="playerID=audioplayer1&soundFile=<?php echo $field['data']; ?>">
 					<param name="quality" value="high">

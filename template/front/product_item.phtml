@@ -16,13 +16,13 @@
 	$this->css($this->assetModule('css/lightbox.css'));
 ?>
 <div class="shop">
-	<div class="productItem row-fluid">
-		<div class="productTitle span12"><h3><?php echo $this->escape($productItem['title']); ?></h3></div>
+	<div class="productItem row">
+		<div class="productTitle col-md-12"><h3><?php echo $this->escape($productItem['title']); ?></h3></div>
 		<div class="productInformation clearfix">
-			<div class="productImage gallery span4">
-				<a href="<?php echo $productItem['largeUrl']; ?>" title="<?php echo $this->escape($productItem['title']); ?>"><img class="img-polaroid" src="<?php echo $productItem['mediumUrl']; ?>" alt="<?php echo $this->escape($productItem['title']); ?>" /></a>
+			<div class="productImage gallery col-md-4">
+				<a href="<?php echo $productItem['largeUrl']; ?>" title="<?php echo $this->escape($productItem['title']); ?>"><img class="img-thumbnail" src="<?php echo $productItem['mediumUrl']; ?>" alt="<?php echo $this->escape($productItem['title']); ?>" /></a>
 			</div>
-			<div class="span8">
+			<div class="col-md-8">
                 <?php include $this->template('front/price'); ?>
 				<?php include $this->template('front/extra'); ?>
 				<div class="productSocial">

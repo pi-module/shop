@@ -68,7 +68,7 @@ class SearchForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'class' => 'span6',
+                
             )
         ));
         // price
@@ -82,7 +82,7 @@ class SearchForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span6',
+                    
                 )
             ));
             // price_to
@@ -94,7 +94,7 @@ class SearchForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    'class' => 'span6',
+                    
                 )
             ));
         } else {
