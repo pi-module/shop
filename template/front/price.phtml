@@ -1,9 +1,9 @@
 <?php if(isset($productItem['price']) && $config['view_price']) { ?>
-<div class="productPrice well clearFix">
+<div class="productPrice well clearfix">
     <?php if($productItem['stock'] > 0) { ?>
         <div class="pull-left">
         <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
-            <strong class="text-error">
+            <strong class="text-danger">
              <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
             </strong>
         <?php } ?>

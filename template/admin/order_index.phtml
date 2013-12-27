@@ -6,7 +6,7 @@
     $this->backbone();
 ?>
 <div id="js-order" class="shop">
-    <?php include $this->templateComponent('form'); ?>
+    <?php include $this->templateComponent('forms'); ?>
 	<table class="table table-striped table-bordered table-condensed">
 		<tr>
 			<th><?php _e('ID'); ?></th>
@@ -41,7 +41,7 @@
 			<td><?php echo $this->escape($order['total_price']); ?></td>
 			<td>
 				<a class="btn btn-primary" title="<?php _e('View'); ?>" href="<?php echo $this->escape($order['url_view']); ?>" target="_blank"><?php _e('View'); ?></a>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#info-view-<?php echo $this->escape($order['id']); ?>"><i class="fa fa-eye-open fa fa-white"></i> <?php _e('Details'); ?></button>
+                <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#info-view-<?php echo $this->escape($order['id']); ?>"><i class="fa fa-eye-open fa fa-white"></i> <?php _e('Details'); ?></button>
 				<div id="info-view-<?php echo $this->escape($order['id']); ?>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         			<div class="modal-header">
             			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -105,7 +105,7 @@
         					<a class="btn btn-primary" title="<?php _e('Print'); ?>" href="<?php echo $this->escape($order['url_print']); ?>" target="_blank"><?php _e('Print'); ?></a>
         				</div>
         			</div>
-    			</div>
+    			</div> -->
 			</td>
 		</tr>
 		<?php } ?>
@@ -116,7 +116,7 @@
 (function($) {
     var page = {
         el: $('#js-order'),
-        modal: $('<div class="modal hide fade">').appendTo(document.body),
+        modal: $('<div class="modal fade">').appendTo(document.body),
         $: function(selector) {
             return this.el.find(selector);
         },

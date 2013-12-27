@@ -11,6 +11,30 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 return array(
+    // Front section
+    'front' => array(
+        'public'    => array(
+            'title'         => _t('Global public resource'),
+            'access'        => array(
+                'guest',
+                'member',
+            ),
+        ),
+        'search' => array(
+            'title'         => _t('Search'),
+            'access'        => array(
+                'guest',
+                'member',
+            ),
+        ),
+        'user' => array(
+            'title'         => _t('User'),
+            'access'        => array(
+                'member',
+            ),
+        ),
+    ),
+    // Admin section
     'admin' => array(
         'product'        => array(
             'title'         => __('Product'),

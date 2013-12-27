@@ -12,6 +12,27 @@
  */
 return array(
     'front'   => array(
+        'search' => array(
+            'label'         => _t('Search'),
+            'permission'    => array(
+                'resource'  => 'search',
+            ),
+            'route'         => 'shop',
+            'module'        => 'shop',
+            'controller'    => 'search',
+            'action'        => 'index',
+        ),
+
+        'user' => array(
+            'label'         => _t('User'),
+            'permission'    => array(
+                'resource'  => 'user',
+            ),
+            'route'         => 'shop',
+            'module'        => 'shop',
+            'controller'    => 'user',
+            'action'        => 'index',
+        ),
     ),
     'admin' => array(
         'product' => array(

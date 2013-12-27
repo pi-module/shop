@@ -68,6 +68,7 @@ class ProductController extends IndexController
             $this->view()->assign('productList', $productList);
             $this->view()->assign('productTitle', __('New products'));
         }
+        // Get reviews
         if ($config['view_review_official'] && $config['view_review_user']) {
             $review = array();
             if ($config['view_review_official']) {

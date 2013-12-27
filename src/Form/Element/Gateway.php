@@ -38,6 +38,7 @@ class Gateway extends Select
         $this->Attributes = array(
             'size' => 5,
             'multiple' => 1,
+            'class' => 'form-control',
         );
         // check form size
         if (isset($this->attributes['size'])) {

@@ -37,6 +37,12 @@ class CheckoutController extends ActionController
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
+        // Set cart
+        $cart = $_SESSION['shop']['cart'];
+        if (empty($cart)) {
+            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
+            $this->jump($url, __('Your cart is empty.'));
+        }
         // Set order form
         $form = new OrderForm('order');
         if ($this->request->isPost()) {
@@ -51,8 +57,6 @@ class CheckoutController extends ActionController
                         unset($values[$key]);
                     }
                 }
-                // Set cart
-                $cart = $_SESSION['shop']['cart'];
                 //
                 $gateway = Pi::api('payment', 'gateway')->getGatewayInfo($cart['invoice']['total']['payment']);
                 // Set values

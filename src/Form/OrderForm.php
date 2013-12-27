@@ -104,7 +104,7 @@ class OrderForm  extends BaseForm
             ));
         }
         // company
-        if ($this->config['order_mobile']) {
+        if ($this->config['order_company']) {
             $this->add(array(
                 'name' => 'company',
                 'options' => array(
@@ -118,7 +118,7 @@ class OrderForm  extends BaseForm
             ));
         }
         // address
-        if ($this->config['order_mobile']) {
+        if ($this->config['order_address']) {
             $this->add(array(
                 'name' => 'address',
                 'options' => array(
@@ -134,7 +134,7 @@ class OrderForm  extends BaseForm
             ));
         }
         // country
-        if ($this->config['order_mobile']) {
+        if ($this->config['order_country']) {
             $this->add(array(
                 'name' => 'country',
                 'options' => array(
@@ -148,7 +148,7 @@ class OrderForm  extends BaseForm
             ));
         }
         // city
-        if ($this->config['order_mobile']) {
+        if ($this->config['order_city']) {
             $this->add(array(
                 'name' => 'city',
                 'options' => array(
@@ -162,7 +162,7 @@ class OrderForm  extends BaseForm
             ));
         }
         // zip_code
-        if ($this->config['order_mobile']) {
+        if ($this->config['order_zip']) {
             $this->add(array(
                 'name' => 'zip_code',
                 'options' => array(

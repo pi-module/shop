@@ -166,7 +166,7 @@ class CategoryController extends ActionController
                 $row->save();
                 // Check it save or not
                 if ($row->id) {
-                	// Set topic as page for dress up block 
+                	// Set category as page for dress up block 
                 	if(empty($values['id'])) {
 	                	$this->setPage($row->slug, $row->title);
                 	} else {	
@@ -246,7 +246,7 @@ class CategoryController extends ActionController
         $page = array(
             'section'       => 'front',
             'module'        => $this->getModule(),
-            'controller'    => 'topic',
+            'controller'    => 'category',
             'action'        => $name,
             'title'         => $title,
             'block'         => 1,
@@ -269,7 +269,7 @@ class CategoryController extends ActionController
         $where = array(
             'section'       => 'front',
             'module'        => $this->getModule(),
-            'controller'    => 'topic',
+            'controller'    => 'category',
             'action'        => $name,
         );
         $count = Pi::model('page')->delete($where);
@@ -287,7 +287,7 @@ class CategoryController extends ActionController
         $where = array(
             'section'       => 'front',
             'module'        => $this->getModule(),
-            'controller'    => 'topic',
+            'controller'    => 'category',
             'action'        => $old_action,
         );
         $count = Pi::model('page')->update(array('action' => $new_action, 'title' => $new_title), $where);

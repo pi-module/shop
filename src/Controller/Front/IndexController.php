@@ -53,8 +53,6 @@ class IndexController extends ActionController
         $this->view()->assign('categories', $category);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
-
-        Pi::api('shop', 'user')->findUser();
     }
 
     public function productList($where)

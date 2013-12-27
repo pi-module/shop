@@ -213,14 +213,6 @@ class CategoryForm  extends BaseForm
                 
             )
         ));
-        // setting
-        $this->add(array(
-            'name' => 'extra_setting',
-            'type' => 'fieldset',
-            'options' => array(
-                'label' => __('Setting'),
-            ),
-        ));
         // Save
         $this->add(array(
             'name' => 'submit',

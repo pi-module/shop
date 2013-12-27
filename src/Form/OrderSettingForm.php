@@ -47,6 +47,7 @@ class OrderSettingForm  extends BaseForm
                     4 => __('Orders failed'),
                     5 => __('Orders cancelled'),
                     6 => __('Fraudulent orders'),
+                    7 => __('Orders finished'),
                 ),
             ),
         ));

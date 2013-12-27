@@ -45,7 +45,7 @@ class CategoryController extends IndexController
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
         // category list
-        $category = Pi::api('shop', 'category')->categoryList($category['id']);
+        $categories = Pi::api('shop', 'category')->categoryList($category['id']);
         // Get special
         if ($config['view_special']) {
             $specialList = Pi::api('shop', 'special')->getAll();
@@ -53,10 +53,14 @@ class CategoryController extends IndexController
             $this->view()->assign('specialTitle', __('Special products'));
         }
         // Set view
+        $this->view()->headTitle($pcategory['seo_title']);
+        $this->view()->headDescription($category['seo_description'], 'set');
+        $this->view()->headKeywords($category['seo_keywords'], 'set');
         $this->view()->setTemplate('product_list');
         $this->view()->assign('productList', $productList);
         $this->view()->assign('productTitle', __('New products'));
-        $this->view()->assign('categories', $category);
+        $this->view()->assign('category', $category);
+        $this->view()->assign('categories', $categories);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
     }

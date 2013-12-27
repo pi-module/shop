@@ -34,4 +34,42 @@ return array(
             'permission'    => 'checkout',
         ),
     ),
+    // Front section
+    'front' => array(
+        array(
+            'controller'    => 'index',
+            'permission'    => 'index',
+            'block'         => 1,
+        ),
+        array(
+            'controller'    => 'category',
+            'permission'    => 'category',
+            'block'         => 1,
+        ),
+        array(
+            'controller'    => 'product',
+            'permission'    => 'product',
+            'block'         => 1,
+        ),
+        array(
+            'controller'    => 'tag',
+            'permission'    => 'tag',
+            'block'         => 1,
+        ),
+        array(
+            'controller'    => 'user',
+            'permission'    => 'user',
+            'block'         => 1,
+        ),
+        array(
+            'controller'    => 'search',
+            'permission'    => 'search',
+            'block'         => 1,
+        ),
+        array(
+            'controller'    => 'checkout',
+            'permission'    => 'checkout',
+            'block'         => 1,
+        ),
+    ),
 );
