@@ -14,7 +14,7 @@ return array(
     'meta'  => array(
         'title'         => __('Shop'),
         'description'   => __('Shop module for pi.'),
-        'version'       => '0.0.5',
+        'version'       => '0.0.6',
         'license'       => 'New BSD',
         'logo'          => 'image/logo.png',
         'readme'        => 'docs/readme.txt',
@@ -36,5 +36,6 @@ return array(
         'page'          => 'page.php',
         'navigation'    => 'navigation.php',
         'route'         => 'route.php',
+        'comment'       => 'comment.php',
     ),
 );
