@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs">
+<ul class="nav nav-pills well well-sm">
 	<li<?php if (isset($navList) && $navList) { ?> class="active"<?php } ?>><a title="<?php _e('List'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'index')); ?>"><?php _e('List'); ?></a></li>
 	<li<?php if (isset($navAttribute) && $navAttribute) { ?> class="active"<?php } ?>><a title="<?php _e('Attributes'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'attribute')); ?>"><?php _e('Attributes'); ?></a></li>
 	<li<?php if (isset($navExtra) && $navExtra) { ?> class="active"<?php } ?>><a title="<?php _e('Extra'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'extra')); ?>"><?php _e('Extra'); ?></a></li>
