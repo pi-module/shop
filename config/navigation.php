@@ -12,6 +12,18 @@
  */
 return array(
     'front'   => array(
+        'index' => array(
+            'label'         => _t('Index'),
+            'permission'    => array(
+                'resource'  => 'public',
+            ),
+            'route'         => 'shop',
+            'module'        => 'shop',
+            'controller'    => 'index',
+            'action'        => 'index',
+        ),
+
+
         'search' => array(
             'label'         => _t('Search'),
             'permission'    => array(
