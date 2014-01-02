@@ -49,16 +49,16 @@ class User extends AbstractApi
         }
         // Set info
         $row->uid = $uid;
-        $row->first_name = $values['first_name'];
-        $row->last_name = $values['last_name'];
-        $row->email = $values['email'];
-        $row->phone = $values['phone'];
-        $row->mobile = $values['mobile'];
-        $row->company = $values['company'];
-        $row->address = $values['address'];
-        $row->country = $values['country'];
-        $row->city = $values['city'];
-        $row->zip_code = $values['zip_code'];
+        $row->first_name = ($values['first_name']) ? $values['first_name'] : '';
+        $row->last_name = ($values['last_name']) ? $values['last_name'] : '';
+        $row->email = ($values['email']) ? $values['email'] : '';
+        $row->phone = ($values['phone']) ? $values['phone'] : '';
+        $row->mobile = ($values['mobile']) ? $values['mobile'] : '';
+        $row->company = ($values['company']) ? $values['company'] : '';
+        $row->address = ($values['address']) ? $values['address'] : '';
+        $row->country = ($values['country']) ? $values['country'] : '';
+        $row->city = ($values['city']) ? $values['city'] : '';
+        $row->zip_code = ($values['zip_code']) ? $values['zip_code'] : '';
         $row->number = $number + $values['number'];
         $row->save();
     }

@@ -184,7 +184,7 @@ class OrderForm  extends BaseForm
                     'label' => __('Location'),
                 ),
                 'attributes' => array(
-                    'class' => 'select-location',
+                    'class' => 'form-group select-location',
                     'size'  => 5
                 )
             ));
@@ -199,7 +199,7 @@ class OrderForm  extends BaseForm
                     'value_options' => array(),
                 ),
                 'attributes' => array(
-                    'class' => 'select-delivery',
+                    'class' => 'form-group select-delivery',
                     'size'  => 5
                 )
             ));
@@ -218,7 +218,7 @@ class OrderForm  extends BaseForm
                     'value_options' => array(),
                 ),
                 'attributes' => array(
-                    'class' => 'select-payment col-md-12',
+                    'class' => 'form-group select-payment col-md-12',
                     'size'  => 5
                 )
             ));
