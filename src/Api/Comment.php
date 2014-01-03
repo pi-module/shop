@@ -34,7 +34,7 @@ class Comment extends AbstractComment
         $items = (array) $item;
 
         // Set options
-        $products = Pi::api('shop', 'product')->getListFromIdLight($items);
+        $products = Pi::api('shop', 'product')->getListFromId($items);
 
         foreach ($items as $id) {
             $result[$id] = array(
