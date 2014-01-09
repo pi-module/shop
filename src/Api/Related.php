@@ -17,9 +17,9 @@ use Pi\Application\AbstractApi;
 use Zend\Json\Json;
 
 /*
- * Pi::api('shop', 'related')->getListId($product);
- * Pi::api('shop', 'related')->getListAll($product);
- * Pi::api('shop', 'related')->findList($values);
+ * Pi::api('related', 'shop')->getListId($product);
+ * Pi::api('related', 'shop')->getListAll($product);
+ * Pi::api('related', 'shop')->findList($values);
  */
 
 class Related extends AbstractApi
@@ -32,7 +32,7 @@ class Related extends AbstractApi
     	$id = $this->getListId($product);
     	$list = array();
     	if(!empty($id) && is_array($id)) {
-    		$list = Pi::api('shop', 'product')->getListFromId($id);
+    		$list = Pi::api('product', 'shop')->getListFromId($id);
     	}
     	return $list;
     }
@@ -60,7 +60,7 @@ class Related extends AbstractApi
     {
     	$list = array();
     	if(!empty($id) && is_array($id)) {
-    		$list = Pi::api('shop', 'product')->getListFromId($id);
+    		$list = Pi::api('product', 'shop')->getListFromId($id);
     	}
     	return $list;
     }	
@@ -72,11 +72,11 @@ class Related extends AbstractApi
     	$from_title = array();
     	// Find product ids from title 
     	if (!empty($values['title'])) {
-    		$from_title = Pi::api('shop', 'product')->searchRelated($values['title'], $values['type']);
+    		$from_title = Pi::api('product', 'shop')->searchRelated($values['title'], $values['type']);
     	}
     	// Find product ids from selected cats
     	if (is_array($values['category']) && !empty($values['category'])) {
-    		$from_category = Pi::api('shop', 'category')->findFromCategory($values['category']);
+    		$from_category = Pi::api('category', 'shop')->findFromCategory($values['category']);
     	}
         // Set array
         $id = array_merge($from_title, $from_category);

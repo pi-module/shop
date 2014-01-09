@@ -23,7 +23,7 @@ class UserController extends IndexController
         // User
     	$user = $this->getUser();
         // Order
-    	$order = Pi::api('shop', 'order')->userOrder();
+    	$order = Pi::api('order', 'shop')->userOrder();
         // Set view
         $this->view()->setTemplate('user_index');
         $this->view()->assign('user', $user);
@@ -50,8 +50,8 @@ class UserController extends IndexController
             $this->jump($url, __('It not your order.'));
         }
         // canonize Order
-        $order = Pi::api('shop', 'order')->canonizeOrder($order);
-        $order['product'] = Pi::api('shop', 'order')->listProduct($order['id']);
+        $order = Pi::api('order', 'shop')->canonizeOrder($order);
+        $order['product'] = Pi::api('order', 'shop')->listProduct($order['id']);
         // Set view
         $this->view()->setTemplate('user_order');
         $this->view()->assign('user', $user);
@@ -63,7 +63,7 @@ class UserController extends IndexController
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
         // find user
-        $user = Pi::api('shop', 'user')->findUser();
+        $user = Pi::api('user', 'shop')->findUser();
         if (empty($user)) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('You did not bought any products from us.'));

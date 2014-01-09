@@ -39,10 +39,10 @@ class IndexController extends ActionController
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
         // category list
-        $category = Pi::api('shop', 'category')->categoryList(0);
+        $category = Pi::api('category', 'shop')->categoryList(0);
         // Get special
         if ($config['view_special']) {
-            $specialList = Pi::api('shop', 'special')->getAll();
+            $specialList = Pi::api('special', 'shop')->getAll();
             $this->view()->assign('specialList', $specialList);
             $this->view()->assign('specialTitle', __('Special products'));
         }
@@ -83,12 +83,12 @@ class IndexController extends ActionController
         // Set info
         $where = array('status' => 1, 'id' => $productId);
         // Get category list
-        $categoryList = Pi::api('shop', 'category')->categoryList();
+        $categoryList = Pi::api('category', 'shop')->categoryList();
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
         foreach ($rowset as $row) {
-            $product[$row->id] = Pi::api('shop', 'product')->canonizeProduct($row, $categoryList);
+            $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
         }
         // return product
         return $product;
@@ -110,13 +110,13 @@ class IndexController extends ActionController
             $where['stock'] > 0;
         }
         // Get category list
-        $categoryList = Pi::api('shop', 'category')->categoryList();
+        $categoryList = Pi::api('category', 'shop')->categoryList();
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)
         ->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('product')->selectWith($select);
         foreach ($rowset as $row) {
-            $product[$row->id] = Pi::api('shop', 'product')->canonizeProduct($row, $categoryList);
+            $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
         }
         // return product
         return $product;   

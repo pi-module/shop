@@ -16,10 +16,10 @@ use Pi;
 use Pi\Application\AbstractApi;
 
 /*
- * Pi::api('shop', 'text')->keywords($keywords);
- * Pi::api('shop', 'text')->description($description);
- * Pi::api('shop', 'text')->title($title);
- * Pi::api('shop', 'text')->slug($slug);
+ * Pi::api('text', 'shop')->keywords($keywords);
+ * Pi::api('text', 'shop')->description($description);
+ * Pi::api('text', 'shop')->title($title);
+ * Pi::api('text', 'shop')->slug($slug);
  */
 
 class Text extends AbstractApi

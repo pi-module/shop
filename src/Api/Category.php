@@ -17,10 +17,10 @@ use Pi\Application\AbstractApi;
 use Zend\Json\Json;
 
 /*
- * Pi::api('shop', 'category')->setLink($product, $category, $create, $update, $price, $stock, $status);
- * Pi::api('shop', 'category')->findFromCategory($category);
- * Pi::api('shop', 'category')->categoryList($parent);
- * Pi::api('shop', 'category')->categoryCount();
+ * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status);
+ * Pi::api('category', 'shop')->findFromCategory($category);
+ * Pi::api('category', 'shop')->categoryList($parent);
+ * Pi::api('category', 'shop')->categoryCount();
  */
 
 class Category extends AbstractApi

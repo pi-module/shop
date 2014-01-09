@@ -17,14 +17,14 @@ use Pi\Application\AbstractApi;
 use Zend\Math\Rand;
 
 /*
- * Pi::api('shop', 'order')->updatePayment();
- * Pi::api('shop', 'order')->canonizeOrder($order);
- * Pi::api('shop', 'order')->orderStatus($status_order);
- * Pi::api('shop', 'order')->paymentStatus($status_payment);
- * Pi::api('shop', 'order')->deliveryStatus($status_delivery);
- * Pi::api('shop', 'order')->listProduct($id);
- * Pi::api('shop', 'order')->userOrder();
- * Pi::api('shop', 'order')->codeOrder();
+ * Pi::api('order', 'shop')->updatePayment();
+ * Pi::api('order', 'shop')->canonizeOrder($order);
+ * Pi::api('order', 'shop')->orderStatus($status_order);
+ * Pi::api('order', 'shop')->paymentStatus($status_payment);
+ * Pi::api('order', 'shop')->deliveryStatus($status_delivery);
+ * Pi::api('order', 'shop')->listProduct($id);
+ * Pi::api('order', 'shop')->userOrder();
+ * Pi::api('order', 'shop')->codeOrder();
  */
 
 class Order extends AbstractApi
@@ -163,17 +163,17 @@ class Order extends AbstractApi
         // Set time_finish_view
         $order['time_finish_view'] = ($order['time_finish']) ? _date($order['time_finish']) : __('Not Finish');
         // Set product_price_view
-        $order['product_price_view'] = Pi::api('shop', 'product')->viewPrice($order['product_price']);
+        $order['product_price_view'] = Pi::api('product', 'shop')->viewPrice($order['product_price']);
         // Set discount_price_view
-        $order['discount_price_view'] = Pi::api('shop', 'product')->viewPrice($order['discount_price']);
+        $order['discount_price_view'] = Pi::api('product', 'shop')->viewPrice($order['discount_price']);
         // Set shipping_price_view
-        $order['shipping_price_view'] = Pi::api('shop', 'product')->viewPrice($order['shipping_price']);
+        $order['shipping_price_view'] = Pi::api('product', 'shop')->viewPrice($order['shipping_price']);
         // Set packing_price_view
-        $order['packing_price_view'] = Pi::api('shop', 'product')->viewPrice($order['packing_price']);
+        $order['packing_price_view'] = Pi::api('product', 'shop')->viewPrice($order['packing_price']);
         // Set total_price_view
-        $order['total_price_view'] = Pi::api('shop', 'product')->viewPrice($order['total_price']);
+        $order['total_price_view'] = Pi::api('product', 'shop')->viewPrice($order['total_price']);
         // Set paid_price_view
-        $order['paid_price_view'] = Pi::api('shop', 'product')->viewPrice($order['paid_price']);
+        $order['paid_price_view'] = Pi::api('product', 'shop')->viewPrice($order['paid_price']);
         // Set user
         $order['user'] = Pi::user()->get($order['uid'], array('id', 'identity', 'name', 'email'));
         // Set url_update_order
@@ -236,7 +236,7 @@ class Order extends AbstractApi
         $rowset = Pi::model('order_basket', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
-            $list[$row->id]['details'] = Pi::api('shop', 'product')->getProductLight($row->product);
+            $list[$row->id]['details'] = Pi::api('product', 'shop')->getProductLight($row->product);
         }
         return $list;
     }

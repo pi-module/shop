@@ -17,9 +17,9 @@ use Pi\Application\AbstractApi;
 use Zend\Json\Json;
 
 /*
- * Pi::api('shop', 'user')->findUser();
- * Pi::api('shop', 'user')->setUserInfo($values);
- * Pi::api('shop', 'user')->getUserInfo();
+ * Pi::api('user', 'shop')->findUser();
+ * Pi::api('user', 'shop')->setUserInfo($values);
+ * Pi::api('user', 'shop')->getUserInfo();
  */
 
 class User extends AbstractApi
@@ -66,16 +66,16 @@ class User extends AbstractApi
     public function getUserInfo()
     {
     	$user = $this->findUser();
-        $values['first_name'] = ($user['first_name']) ? $user['first_name'] : '';
-        $values['last_name'] = ($user['last_name']) ? $user['last_name'] : '';
-        $values['email'] = ($user['email']) ? $user['email'] : '';
-        $values['phone'] = ($user['phone']) ? $user['phone'] : '';
-        $values['mobile'] = ($user['mobile']) ? $user['mobile'] : '';
-        $values['company'] = ($user['company']) ? $user['company'] : '';
-        $values['address'] = ($user['address']) ? $user['address'] : '';
-        $values['country'] = ($user['country']) ? $user['country'] : '';
-        $values['city'] = ($user['city']) ? $user['city'] : '';
-        $values['zip_code'] = ($user['zip_code']) ? $user['zip_code'] : '';
+        $values['first_name'] = (isset($user['first_name'])) ? $user['first_name'] : '';
+        $values['last_name'] = (isset($user['last_name'])) ? $user['last_name'] : '';
+        $values['email'] = (isset($user['email'])) ? $user['email'] : '';
+        $values['phone'] = (isset($user['phone'])) ? $user['phone'] : '';
+        $values['mobile'] = (isset($user['mobile'])) ? $user['mobile'] : '';
+        $values['company'] = (isset($user['company'])) ? $user['company'] : '';
+        $values['address'] = (isset($user['address'])) ? $user['address'] : '';
+        $values['country'] = (isset($user['country'])) ? $user['country'] : '';
+        $values['city'] = (isset($user['city'])) ? $user['city'] : '';
+        $values['zip_code'] = (isset($user['zip_code'])) ? $user['zip_code'] : '';
         return $values;
     }
 }	

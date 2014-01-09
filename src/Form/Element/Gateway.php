@@ -25,7 +25,7 @@ class Gateway extends Select
     public function getValueOptions()
     {
         if (empty($this->valueOptions)) {
-            $this->valueOptions = Pi::api('payment', 'gateway')->getActiveGatewayName();
+            $this->valueOptions = Pi::api('gateway', 'payment')->getActiveGatewayName();
         }
         return $this->valueOptions;
     }

@@ -228,7 +228,7 @@ class AttachController extends ActionController
                     $return['size'] = $row->size;
                     $return['preview'] = $this->filePreview($row->type, $row->path, $row->file);
                     // Set product Attach count
-                    Pi::api('shop', 'product')->attachCount($id);
+                    Pi::api('product', 'shop')->attachCount($id);
                 } else {
                     // Upload error
                     $messages = $uploader->getMessages();
@@ -253,7 +253,7 @@ class AttachController extends ActionController
             $ajaxstatus = 1;
             $message = __('Your attached file remove successfully');
             $id = $row->id;
-            Pi::api('shop', 'product')->attachCount($row->product);
+            Pi::api('product', 'shop')->attachCount($row->product);
         } else {
             $ajaxstatus = 0;
             $message = __('Please select file');
@@ -330,7 +330,7 @@ class AttachController extends ActionController
                 Pi::service('file')->copy($oldPath, $newPach);
                 Pi::service('file')->remove($oldPath);
                 // process image
-                Pi::api('shop', 'image')->process($file, $path);
+                Pi::api('image', 'shop')->process($file, $path);
                 break;
 
             // Move video, audio, pdf, doc

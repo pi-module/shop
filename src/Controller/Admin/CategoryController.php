@@ -107,7 +107,7 @@ class CategoryController extends ActionController
             $file = $this->request->getFiles();
             // Set slug
             $slug = ($data['slug']) ? $data['slug'] : $data['title'];
-            $data['slug'] = Pi::api('shop', 'text')->slug($slug);
+            $data['slug'] = Pi::api('text', 'shop')->slug($slug);
             // Form filter
             $form->setInputFilter(new CategoryFilter);
             $form->setData($data);
@@ -129,7 +129,7 @@ class CategoryController extends ActionController
                         // Get image name
                         $values['image'] = $uploader->getUploaded('image');
                         // process image
-                        Pi::api('shop', 'image')->process($values['image'], $values['path']);
+                        Pi::api('image', 'shop')->process($values['image'], $values['path']);
                     } else {
                         $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
                     }
@@ -144,13 +144,13 @@ class CategoryController extends ActionController
                 }
                 // Set seo_title
                 $title = ($values['seo_title']) ? $values['seo_title'] : $values['title'];
-                $values['seo_title'] = Pi::api('shop', 'text')->title($title);
+                $values['seo_title'] = Pi::api('text', 'shop')->title($title);
                 // Set seo_keywords
                 $keywords = ($values['seo_keywords']) ? $values['seo_keywords'] : $values['title'];
-                $values['seo_keywords'] = Pi::api('shop', 'text')->keywords($keywords);
+                $values['seo_keywords'] = Pi::api('text', 'shop')->keywords($keywords);
                 // Set seo_description
                 $description = ($values['seo_description']) ? $values['seo_description'] : $values['title'];
-                $values['seo_description'] = Pi::api('shop', 'text')->description($description);
+                $values['seo_description'] = Pi::api('text', 'shop')->description($description);
                 // Set time
                 if (empty($values['id'])) {
                     $values['time_create'] = time();

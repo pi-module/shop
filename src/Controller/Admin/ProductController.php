@@ -155,7 +155,7 @@ class ProductController extends ActionController
     public function updateAction()
     {
         // check category
-        $categoryCount = Pi::api('shop', 'category')->categoryCount();
+        $categoryCount = Pi::api('category', 'shop')->categoryCount();
         if (!$categoryCount) {
             return $this->redirect()->toRoute('', array(
                 'controller' => 'category',
@@ -177,7 +177,7 @@ class ProductController extends ActionController
             }
         }
         // Get extra field
-        $fields = Pi::api('shop', 'extra')->Get();
+        $fields = Pi::api('extra', 'shop')->Get();
         $option['field'] = $fields['extra'];
         // Set form
         $form = new ProductForm('product', $option);
@@ -187,7 +187,7 @@ class ProductController extends ActionController
             $file = $this->request->getFiles();
             // Set slug
             $slug = ($data['slug']) ? $data['slug'] : $data['title'];
-            $data['slug'] = Pi::api('shop', 'text')->slug($slug);
+            $data['slug'] = Pi::api('text', 'shop')->slug($slug);
             // Form filter
             $form->setInputFilter(new ProductFilter($fields['extra']));
             $form->setData($data);
@@ -220,7 +220,7 @@ class ProductController extends ActionController
                         // Get image name
                         $values['image'] = $uploader->getUploaded('image');
                         // process image
-                        Pi::api('shop', 'image')->process($values['image'], $values['path']);
+                        Pi::api('image', 'shop')->process($values['image'], $values['path']);
                     } else {
                         $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
                     }
@@ -237,13 +237,13 @@ class ProductController extends ActionController
                 $values['category'] = Json::encode(array_unique($values['category']));
                 // Set seo_title
                 $title = ($values['seo_title']) ? $values['seo_title'] : $values['title'];
-                $values['seo_title'] = Pi::api('shop', 'text')->title($title);
+                $values['seo_title'] = Pi::api('text', 'shop')->title($title);
                 // Set seo_keywords
                 $keywords = ($values['seo_keywords']) ? $values['seo_keywords'] : $values['title'];
-                $values['seo_keywords'] = Pi::api('shop', 'text')->keywords($keywords);
+                $values['seo_keywords'] = Pi::api('text', 'shop')->keywords($keywords);
                 // Set seo_description
                 $description = ($values['seo_description']) ? $values['seo_description'] : $values['title'];
-                $values['seo_description'] = Pi::api('shop', 'text')->description($description);
+                $values['seo_description'] = Pi::api('text', 'shop')->description($description);
                 // Set time
                 if (empty($values['id'])) {
                     $values['time_create'] = time();
@@ -259,7 +259,7 @@ class ProductController extends ActionController
                 $row->assign($values);
                 $row->save();
                 // Category
-                Pi::api('shop', 'category')->setLink($row->id, $row->category, $row->time_create, $row->time_update, $row->price, $row->stock, $row->status);
+                Pi::api('category', 'shop')->setLink($row->id, $row->category, $row->time_create, $row->time_update, $row->price, $row->stock, $row->status);
                 // Tag
                 if (isset($tag) && is_array($tag) && Pi::service('module')->isActive('tag')) {
                     if (empty($values['id'])) {
@@ -270,7 +270,7 @@ class ProductController extends ActionController
                 }
                 // Extra
                 if (!empty($extra)) {
-                    Pi::api('shop', 'extra')->Set($extra, $row->id);
+                    Pi::api('extra', 'shop')->Set($extra, $row->id);
                 }
                 // Check it save or not
                 if ($row->id) {
@@ -285,7 +285,7 @@ class ProductController extends ActionController
         } else {
             if ($id) {
                 // Get Extra
-                $product = Pi::api('shop', 'extra')->Form($product);
+                $product = Pi::api('extra', 'shop')->Form($product);
                 // Get tag list
                 if (Pi::service('module')->isActive('tag')) {
                     $tag = Pi::service('tag')->get($module, $product['id'], '');
@@ -383,7 +383,7 @@ class ProductController extends ActionController
         	return $this->redirect()->toRoute('', array('action' => 'index'));
         }
         // Get related list
-    	$related_list = Pi::api('shop', 'related')->getListAll($product['id']);
+    	$related_list = Pi::api('related', 'shop')->getListAll($product['id']);
     	// Set form
         $form = new RelatedForm('related');
         $form->setAttribute('enctype', 'multipart/form-data');
@@ -393,7 +393,7 @@ class ProductController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
             	$values = $form->getData();
-            	$product_list = Pi::api('shop', 'related')->findList($product['id'], $values);
+            	$product_list = Pi::api('related', 'shop')->findList($product['id'], $values);
             } else {
                 $message = __('Invalid data, please check and re-submit.');
             }	
@@ -468,7 +468,7 @@ class ProductController extends ActionController
                 $return['relatedstatus'] = 1;
         	}
             // update related count
-            Pi::api('shop', 'product')->relatedCount($product['id']);
+            Pi::api('product', 'shop')->relatedCount($product['id']);
         }
         return $return;
     }
@@ -775,9 +775,9 @@ class ProductController extends ActionController
         // find product
         $product = $this->getModel('product')->find($id)->toArray();
         // find official review
-        $reviewOfficial = Pi::api('shop', 'review')->official($product['id']);
+        $reviewOfficial = Pi::api('review', 'shop')->official($product['id']);
         // find list review
-        $reviewList = Pi::api('shop', 'review')->listReview($product['id']);
+        $reviewList = Pi::api('review', 'shop')->listReview($product['id']);
         // Set view
         $this->view()->setTemplate('product_review');
         $this->view()->assign('reviewOfficial', $reviewOfficial);
@@ -788,7 +788,7 @@ class ProductController extends ActionController
     public function reviewPendingAction()
     {
         // find list review
-        $reviewList = Pi::api('shop', 'review')->pendingReview();
+        $reviewList = Pi::api('review', 'shop')->pendingReview();
         // Set view
         $this->view()->setTemplate('product_review_pending');
         $this->view()->assign('reviewList', $reviewList);
@@ -802,7 +802,7 @@ class ProductController extends ActionController
         // Check product and official
         if ($product) {
             $product = $this->getModel('product')->find($product)->toArray();
-            $hasOfficial = Pi::api('shop', 'review')->hasOfficial($product['id']);
+            $hasOfficial = Pi::api('review', 'shop')->hasOfficial($product['id']);
         } else {
             $message = __('Select product for manage review.');
             $url = array('action' => 'index');
@@ -839,7 +839,7 @@ class ProductController extends ActionController
                 $row->assign($values);
                 $row->save();
                 // Update review count
-                Pi::api('shop', 'product')->reviewCount($product['id']);
+                Pi::api('product', 'shop')->reviewCount($product['id']);
                 // Check it save or not
                 if ($row->id) {
                     $message = __('Review data saved successfully.');

@@ -36,10 +36,10 @@ class ProductController extends IndexController
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get category list
-        $categoryList = Pi::api('shop', 'category')->categoryList();
+        $categoryList = Pi::api('category', 'shop')->categoryList();
         // Find product
         $product = $this->getModel('product')->find($slug, 'slug');
-        $product = Pi::api('shop', 'product')->canonizeProduct($product, $categoryList);
+        $product = Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
         // Check product
         if (!$product || $product['status'] != 1) {
             $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The product not found.'));
@@ -48,17 +48,17 @@ class ProductController extends IndexController
         $this->getModel('product')->update(array('hits' => $product['hits'] + 1), array('id' => $product['id']));
         // Get extra
         if ($product['extra'] && $config['view_extra']) {
-            $extra = Pi::api('shop', 'extra')->Product($product['id']);
+            $extra = Pi::api('extra', 'shop')->Product($product['id']);
             $this->view()->assign('extra', $extra);
         }
         // Get related
         if ($product['related'] && $config['view_related']) {
-            $related = Pi::api('shop', 'related')->getListAll($product['id']);
+            $related = Pi::api('related', 'shop')->getListAll($product['id']);
             $this->view()->assign('related', $related);
         }
         // Get attached files
         if ($product['attach'] && $config['view_attach']) {
-            $attach = Pi::api('shop', 'product')->AttachList($product['id']);
+            $attach = Pi::api('product', 'shop')->AttachList($product['id']);
             $this->view()->assign('attach', $attach);
         }
         // Get new products in category
@@ -72,10 +72,10 @@ class ProductController extends IndexController
         if ($config['view_review_official'] && $config['view_review_user']) {
             $review = array();
             if ($config['view_review_official']) {
-                $review['official'] = Pi::api('shop', 'review')->official($product['id']);
+                $review['official'] = Pi::api('review', 'shop')->official($product['id']);
             }
             if ($config['view_review_user']) {
-                $review['list'] = Pi::api('shop', 'review')->listReview($product['id'], 1);
+                $review['list'] = Pi::api('review', 'shop')->listReview($product['id'], 1);
             }
             $this->view()->assign('review', $review);
         }
@@ -106,7 +106,7 @@ class ProductController extends IndexController
         $module = $this->params('module');
         // Find product
         $product = $this->getModel('product')->find($slug, 'slug');
-        $product = Pi::api('shop', 'product')->canonizeProduct($product, $categoryList);
+        $product = Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
         // Check product
         if (!$product || $product['status'] != 1) {
             $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The product not found.'));
@@ -137,7 +137,7 @@ class ProductController extends IndexController
                 $row->assign($values);
                 $row->save();
                 // Update review count
-                Pi::api('shop', 'product')->reviewCount($product['id']);
+                Pi::api('product', 'shop')->reviewCount($product['id']);
                 // Check it save or not
                 if ($row->id) {
                     $message = __('Review data saved successfully. And it show after admin review');

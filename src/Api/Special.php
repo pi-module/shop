@@ -17,7 +17,7 @@ use Pi\Application\AbstractApi;
 use Zend\Json\Json;
 
 /*
- * Pi::api('shop', 'special')->getAll();
+ * Pi::api('special', 'shop')->getAll();
  */
 
 class Special extends AbstractApi
@@ -41,7 +41,7 @@ class Special extends AbstractApi
         }
         // Get list of products
         if (!empty($specialId)) {
-            $specialProduct = Pi::api('shop', 'product')->getListFromId($specialId);
+            $specialProduct = Pi::api('product', 'shop')->getListFromId($specialId);
             foreach ($specialList as $item) {
                 $special[$item['id']] = $item;
                 $special[$item['id']]['productInformation'] = $specialProduct[$item['product']];

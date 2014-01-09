@@ -17,12 +17,12 @@ use Pi;
 use Pi\Application\AbstractApi;
 
 /*
- * Pi::api('shop', 'extra')->Get();
- * Pi::api('shop', 'extra')->Set($extra, $product);
- * Pi::api('shop', 'extra')->Form($values);
- * Pi::api('shop', 'extra')->Product($id);
- * Pi::api('shop', 'extra')->SearchForm($form);
- * Pi::api('shop', 'extra')->findFromExtra($search);
+ * Pi::api('extra', 'shop')->Get();
+ * Pi::api('extra', 'shop')->Set($extra, $product);
+ * Pi::api('extra', 'shop')->Form($values);
+ * Pi::api('extra', 'shop')->Product($id);
+ * Pi::api('extra', 'shop')->SearchForm($form);
+ * Pi::api('extra', 'shop')->findFromExtra($search);
  */
 
 class Extra extends AbstractApi
@@ -72,7 +72,7 @@ class Extra extends AbstractApi
             }
         }
         // Set Product Extra Count
-        Pi::api('shop', 'product')->ExtraCount($product);
+        Pi::api('product', 'shop')->ExtraCount($product);
     }
 
     /*

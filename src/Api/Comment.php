@@ -34,7 +34,7 @@ class Comment extends AbstractComment
         $items = (array) $item;
 
         // Set options
-        $products = Pi::api('shop', 'product')->getListFromId($items);
+        $products = Pi::api('product', 'shop')->getListFromId($items);
 
         foreach ($items as $id) {
             $result[$id] = array(
@@ -70,7 +70,7 @@ class Comment extends AbstractComment
         if ('shop' == $params['module']
             && !empty($params['slug'])
         ) {
-            $product = Pi::api('shop', 'product')->getProductLight($params['slug'], 'slug');
+            $product = Pi::api('product', 'shop')->getProductLight($params['slug'], 'slug');
             $item = $product['id'];
         } else {
             $item = false;

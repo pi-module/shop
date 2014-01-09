@@ -17,19 +17,19 @@ use Pi\Application\AbstractApi;
 use Zend\Json\Json;
 
 /*
- * Pi::api('shop', 'product')->getProduct($parameter, $type);
- * Pi::api('shop', 'product')->getProductLight($parameter, $type);
- * Pi::api('shop', 'product')->getListFromId($id);
- * Pi::api('shop', 'product')->getListFromIdLight($id);
- * Pi::api('shop', 'product')->searchRelated($title, $type);
- * Pi::api('shop', 'product')->extraCount($id);
- * Pi::api('shop', 'product')->attachCount($id);
- * Pi::api('shop', 'product')->relatedCount($id);
- * Pi::api('shop', 'product')->reviewCount($id);
- * Pi::api('shop', 'product')->AttachList($id);
- * Pi::api('shop', 'product')->viewPrice($price);
- * Pi::api('shop', 'product')->canonizeProduct($product, $categoryList);
- * Pi::api('shop', 'product')->canonizeProductLight($product);
+ * Pi::api('product', 'shop')->getProduct($parameter, $type);
+ * Pi::api('product', 'shop')->getProductLight($parameter, $type);
+ * Pi::api('product', 'shop')->getListFromId($id);
+ * Pi::api('product', 'shop')->getListFromIdLight($id);
+ * Pi::api('product', 'shop')->searchRelated($title, $type);
+ * Pi::api('product', 'shop')->extraCount($id);
+ * Pi::api('product', 'shop')->attachCount($id);
+ * Pi::api('product', 'shop')->relatedCount($id);
+ * Pi::api('product', 'shop')->reviewCount($id);
+ * Pi::api('product', 'shop')->AttachList($id);
+ * Pi::api('product', 'shop')->viewPrice($price);
+ * Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
+ * Pi::api('product', 'shop')->canonizeProductLight($product);
  */
 
 class Product extends AbstractApi
@@ -37,7 +37,7 @@ class Product extends AbstractApi
     public function getProduct($parameter, $type = 'id')
     {
         // Get category list
-        $categoryList = Pi::api('shop', 'category')->categoryList();
+        $categoryList = Pi::api('category', 'shop')->categoryList();
         // Get product
         $product = Pi::model('product', $this->getModule())->find($parameter, $type);
         $product = $this->canonizeProduct($product, $categoryList);
@@ -249,7 +249,7 @@ class Product extends AbstractApi
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Get category list
-        $categoryList = (empty($categoryList)) ? Pi::api('shop', 'category')->categoryList() : $categoryList;
+        $categoryList = (empty($categoryList)) ? Pi::api('category', 'shop')->categoryList() : $categoryList;
         // boject to array
         $product = $product->toArray();
         // Set summary text

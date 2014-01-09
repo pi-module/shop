@@ -16,10 +16,10 @@ use Pi;
 use Pi\Application\AbstractApi;
 
 /*
- * Pi::api('shop', 'review')->official($id);
- * Pi::api('shop', 'review')->hasOfficial($id);
- * Pi::api('shop', 'review')->listReview($id, $status);
- * Pi::api('shop', 'review')->pendingReview();
+ * Pi::api('review', 'shop')->official($id);
+ * Pi::api('review', 'shop')->hasOfficial($id);
+ * Pi::api('review', 'shop')->listReview($id, $status);
+ * Pi::api('review', 'shop')->pendingReview();
  */
 
 class Review extends AbstractApi
@@ -80,7 +80,7 @@ class Review extends AbstractApi
             $list[$row->id]['description'] = Pi::service('markup')->render($row['description'], 'text', 'html');
             $list[$row->id]['time_create_view'] = _date($row->time_create);
             $list[$row->id]['userinfo'] = Pi::user()->get($row->uid, array('id', 'identity', 'name', 'email'));
-            $list[$row->id]['productinfo'] = Pi::api('shop', 'product')->getProduct($row->product);
+            $list[$row->id]['productinfo'] = Pi::api('product', 'shop')->getProduct($row->product);
         }
         return $list;
     }

@@ -26,7 +26,7 @@ class SearchController extends IndexController
     {
     	$option = array();
         // Get extra field
-        $fields = Pi::api('shop', 'extra')->Get();
+        $fields = Pi::api('extra', 'shop')->Get();
         $option['field'] = $fields['extra'];
         // Set form
     	$form = new SearchForm('search', $option);
@@ -102,12 +102,12 @@ class SearchController extends IndexController
             && !empty($search['category']) 
             && is_array($search['category']))
         {
-            $categoryId = Pi::api('shop', 'category')->findFromCategory($search['category']);
+            $categoryId = Pi::api('category', 'shop')->findFromCategory($search['category']);
         }
         // Set extra
-        $extraSearch = Pi::api('shop', 'extra')->SearchForm($search);
+        $extraSearch = Pi::api('extra', 'shop')->SearchForm($search);
         if (!empty($extraSearch)) {
-            $extraId = Pi::api('shop', 'extra')->findFromExtra($extraSearch);
+            $extraId = Pi::api('extra', 'shop')->findFromExtra($extraSearch);
         }
         // Set where id
         if (!empty($categoryId) && !empty($extraId)) {

@@ -58,7 +58,7 @@ class CheckoutController extends ActionController
                     }
                 }
                 //
-                $gateway = Pi::api('payment', 'gateway')->getGatewayInfo($cart['invoice']['total']['payment']);
+                $gateway = Pi::api('gateway', 'payment')->getGatewayInfo($cart['invoice']['total']['payment']);
                 // Set values
                 $values['uid'] = Pi::user()->getId();
                 $values['ip'] = Pi::user()->getIp();
@@ -76,13 +76,13 @@ class CheckoutController extends ActionController
                 $values['location'] = $cart['invoice']['total']['location'];
                 $values['payment_adapter'] = $gateway['path'];
                 $values['payment_method'] = $gateway['type'];
-                $values['code'] = Pi::api('shop', 'order')->codeOrder();
+                $values['code'] = Pi::api('order', 'shop')->codeOrder();
                 // Save values to order
                 $row = $this->getModel('order')->createRow();
                 $row->assign($values);
                 $row->save();
                 // Set user info
-                Pi::api('shop', 'user')->setUserInfo($values);
+                Pi::api('user', 'shop')->setUserInfo($values);
                 // Save order basket
                 foreach ($cart['invoice']['product'] as $product) {
                     $basket = $this->getModel('order_basket')->createRow();
@@ -114,7 +114,7 @@ class CheckoutController extends ActionController
                 $order['adapter'] = $row->payment_adapter;
                 $order['description'] = Json::encode($description);
                 // Payment module
-                $result = Pi::api('payment', 'invoice')->createInvoice(
+                $result = Pi::api('invoice', 'payment')->createInvoice(
                     $order['module'], 
                     $order['part'], 
                     $order['id'], 
@@ -136,7 +136,7 @@ class CheckoutController extends ActionController
             }   
         } else {
             $message = '';
-            $user = Pi::api('shop', 'user')->getUserInfo();
+            $user = Pi::api('user', 'shop')->getUserInfo();
             $form->setData($user);
         }
         // Set cart
@@ -204,7 +204,7 @@ class CheckoutController extends ActionController
                     $select = $this->getModel('delivery_payment')->select()->where($where);
                     $rowset = $this->getModel('delivery_payment')->selectWith($select);
                     foreach ($rowset as $row) {
-                        $payment = Pi::api('payment', 'gateway')->getGatewayInfo($row->payment);
+                        $payment = Pi::api('gateway', 'payment')->getGatewayInfo($row->payment);
                         if($payment['status']) {
                             $data['payment'][$row->id]['title'] = $payment['title'];
                             $data['payment'][$row->id]['path'] = $payment['path'];
@@ -330,7 +330,7 @@ class CheckoutController extends ActionController
         $config = Pi::service('registry')->config->read($module);
         // Find product
         $product = $this->getModel('product')->find($slug, 'slug');
-        $product = Pi::api('shop', 'product')->canonizeProductLight($product);
+        $product = Pi::api('product', 'shop')->canonizeProductLight($product);
         // Check product
         if (!$product['marketable']) {
         	$url = array('', 'module' => $module, 'controller' => 'index');
@@ -405,7 +405,7 @@ class CheckoutController extends ActionController
             $this->jump($url, __('This is old order and you pay it before'));
         }
         // canonize Order
-        $order = Pi::api('shop', 'order')->canonizeOrder($order);
+        $order = Pi::api('order', 'shop')->canonizeOrder($order);
         $order['order_link'] = $this->url('', array('module' => $module, 'controller' => 'user', 'action' => 'order', 'id' => $order['id']));
         $order['user_link'] = $this->url('', array('module' => $module, 'controller' => 'user'));
         $order['index_link'] = $this->url('', array('module' => $module, 'controller' => 'index'));
@@ -437,10 +437,10 @@ class CheckoutController extends ActionController
             $item['id'] = $product['id'];
             $item['number'] = $product['number'];
             $item['price'] = $product['price'];
-            $item['price_view'] = Pi::api('shop', 'product')->viewPrice($item['price']);
+            $item['price_view'] = Pi::api('product', 'shop')->viewPrice($item['price']);
             $item['discount'] = 0;
             $item['total'] = ($product['number'] * $product['price']);
-            $item['total_view'] = Pi::api('shop', 'product')->viewPrice($item['total']);
+            $item['total_view'] = Pi::api('product', 'shop')->viewPrice($item['total']);
             $invoice['product'][$product['id']] = $item;
             // Set total
     		$invoice['total']['price'] = $invoice['total']['price'] + ($product['price'] * $product['number']);
@@ -458,10 +458,10 @@ class CheckoutController extends ActionController
         $invoice['total']['delivery_title'] = (isset($cart['invoice']['total']['delivery_title'])) ? $cart['invoice']['total']['delivery_title'] : '';
         $invoice['total']['payment_title'] = (isset($cart['invoice']['total']['payment_title'])) ? $cart['invoice']['total']['payment_title'] : '';
         $invoice['total']['total_price'] = intval($invoice['total']['price'] - $invoice['total']['discount']) + $invoice['total']['shipping'];
-        $invoice['total']['price_view'] = Pi::api('shop', 'product')->viewPrice($invoice['total']['price']);
-    	$invoice['total']['discount_view'] = Pi::api('shop', 'product')->viewPrice($invoice['total']['discount']);
-        $invoice['total']['shipping_view'] = Pi::api('shop', 'product')->viewPrice($invoice['total']['shipping']);
-    	$invoice['total']['total_price_view'] = Pi::api('shop', 'product')->viewPrice($invoice['total']['total_price']);
+        $invoice['total']['price_view'] = Pi::api('product', 'shop')->viewPrice($invoice['total']['price']);
+    	$invoice['total']['discount_view'] = Pi::api('product', 'shop')->viewPrice($invoice['total']['discount']);
+        $invoice['total']['shipping_view'] = Pi::api('product', 'shop')->viewPrice($invoice['total']['shipping']);
+    	$invoice['total']['total_price_view'] = Pi::api('product', 'shop')->viewPrice($invoice['total']['total_price']);
     	// Set Seaaion
     	$cart['invoice'] = $invoice;
         $_SESSION['shop']['cart'] = $cart;
@@ -488,7 +488,7 @@ class CheckoutController extends ActionController
         }
         // Set total price
         $product['total'] = intval(($product['price'] * $product['number']));
-        $product['total_view'] = Pi::api('shop', 'product')->viewPrice($product['total']);
+        $product['total_view'] = Pi::api('product', 'shop')->viewPrice($product['total']);
         // Set session
         $cart['product'][$product['id']] = $product;
         $_SESSION['shop']['cart'] = $cart;
