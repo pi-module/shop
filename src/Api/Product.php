@@ -246,6 +246,10 @@ class Product extends AbstractApi
 
     public function canonizeProduct($product, $categoryList = array())
     {
+        // Check
+        if (empty($product)) {
+            return '';
+        }
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Get category list
@@ -324,6 +328,10 @@ class Product extends AbstractApi
 
     public function canonizeProductLight($product)
     {
+        // Check
+        if (empty($product)) {
+            return '';
+        }
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // boject to array
