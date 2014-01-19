@@ -130,37 +130,30 @@ class ProductForm  extends BaseForm
         if ($this->thumbUrl) {
             $this->add(array(
                 'name' => 'imageview',
+                'type' => 'Module\Shop\Form\Element\Image',
                 'options' => array(
-                    'label' => __('Image'),
+                    //'label' => __('Image'),
                 ),
                 'attributes' => array(
-                    'type' => 'image',
                     'src' => $this->thumbUrl,
-                    'height' => '200',
-                    'disabled' => true,
-                    'description' => '',
-                    'class' => 'image-view',
-                )
+                ),
             ));
             $this->add(array(
                 'name' => 'remove',
+                'type' => 'Module\Shop\Form\Element\Remove',
                 'options' => array(
                     'label' => __('Remove image'),
                 ),
                 'attributes' => array(
-                    'type' => 'button',
-                    'class' => 'btn btn-danger btn-sm image-remove',
-                    'data-toggle' => 'button',
-                    'data-link' => $this->removeUrl,
-                )
+                    'link' => $this->removeUrl,
+                ),
             ));
             $this->add(array(
                 'name' => 'image',
                 'attributes' => array(
                     'type' => 'hidden',
-                    'class' => 'image-hidden',
                 ),
-             ));
+            ));
         } else {
             $this->add(array(
                 'name' => 'image',
