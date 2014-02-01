@@ -17,9 +17,10 @@
         <div class="controls" id="js-carousel" style="overflow:hidden;">
             <div class="upload-carousel-btn">
                 <div class="upload-carousel-add">
-                    <i class="fa fa-plus fileinput-button">
+                    <div class="fileinput-button">
                         <input type="file" name="file" multiple style="width: 100%;">
-                    </i>
+                        <i class="fa fa-plus"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,36 +37,40 @@
         <button type="button" class="info-attach btn btn-info btn-xs" data-toggle="modal" data-target="#info-attach-<%= data.id %>"><i class="fa fa-eye-open fa fa-white"></i> <?php _e('Preview'); ?></button>
         <button type="button" class="remove-attach btn btn-danger btn-xs" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'delete')); ?>id/<%= data.id %>"><i class="fa fa-trash fa fa-white"></i> <?php _e('Delete'); ?></button>
     </div>
-    <div id="info-attach-<%= data.id %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel"><?php _e('Title'); ?> : <%= data.title %></h3>
-        </div>
-        <div class="modal-body">
-            <div class="pull-right upload-carousel-item-img"><img class="img-thumbnail" src="<%= data.preview %>" alt="<%= data.title %>" /></div>
-            <div class="mr10">
-                <strong><?php _e('Create'); ?> </strong>
-                <span> <%= data.create %> </span>
+    <div id="info-attach-<%= data.id %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"><?php _e('Title'); ?> : <%= data.title %></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="pull-right upload-carousel-item-img"><img class="img-thumbnail" src="<%= data.preview %>" alt="<%= data.title %>" /></div>
+                    <div class="mr10">
+                        <strong><?php _e('Create'); ?> </strong>
+                        <span> <%= data.time_create %> </span>
+                    </div>
+                    <div class="mr10">
+                        <strong><?php _e('Type'); ?> </strong>
+                        <span> <%= data.type %> </span>
+                    </div>
+                    <div class="mr10">
+                        <strong><?php _e('Status'); ?> </strong>
+                        <span> <%= data.status %> </span>
+                    </div>
+                    <div class="mr10">
+                        <strong><?php _e('Hits'); ?> </strong>
+                        <span> <%= data.hits %> </span>
+                    </div>
+                    <div class="mr10">
+                        <strong><?php _e('Size'); ?> </strong>
+                        <span> <%= data.size %> </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close'); ?></button>
+                </div>
             </div>
-            <div class="mr10">
-                <strong><?php _e('Type'); ?> </strong>
-                <span> <%= data.type %> </span>
-            </div>
-            <div class="mr10">
-                <strong><?php _e('Status'); ?> </strong>
-                <span> <%= data.status %> </span>
-            </div>
-            <div class="mr10">
-                <strong><?php _e('Hits'); ?> </strong>
-                <span> <%= data.hits %> </span>
-            </div>
-            <div class="mr10">
-                <strong><?php _e('Size'); ?> </strong>
-                <span> <%= data.size %> </span>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><?php _e('Close'); ?></button>
         </div>
     </div>
 </script>
@@ -80,7 +85,7 @@ var page={
                 content.push({
                     "id":el.find("[name=id]").val(),
                     "title":el.find("[name=title]").val(),
-                    "create":el.find("[name=create]").val(),
+                    "time_create":el.find("[name=time_create]").val(),
                     "type":el.find("[name=type]").val(),
                     "size":el.find("[name=size]").val(),
                     "status":el.find("[name=status]").val(),
@@ -142,7 +147,7 @@ var carouselListView = Backbone.View.extend({
                         carouselCollection.add({
                             id: resp.id,
                             title: resp.title,
-                            create: resp.create,
+                            time_create: resp.time_create,
                             type: resp.type,
                             status: resp.status,
                             hits: resp.hits,
@@ -163,7 +168,7 @@ var carouselListView = Backbone.View.extend({
                         carouselCollection.add({
                             id: resp.id,
                             title: resp.title,
-                            create: resp.create,
+                            time_create: resp.time_create,
                             type: resp.type,
                             status: resp.status,
                             hits: resp.hits,
