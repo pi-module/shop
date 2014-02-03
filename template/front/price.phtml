@@ -1,4 +1,4 @@
-<?php if(isset($productItem['price']) && $config['view_price']) { ?>
+<?php if(isset($productItem['price']) && $config['view_price'] && $config['order_method'] != 'inactive') { ?>
 <div class="productPrice well clearfix">
     <?php if($productItem['stock'] > 0) { ?>
         <div class="pull-left">
@@ -7,18 +7,21 @@
              <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
             </strong>
         <?php } ?>
-            <strong class="text-success">
-            <?php echo $this->escape($productItem['price_view']); ?>
+            <?php if(!empty($productItem['price_sign'])) { ?>
+            <span class="productPriceSing"><?php echo $this->escape($productItem['price_sign']); ?></span>
+            <?php } ?>
+            <strong class="productPriceView text-success">
+            <?php echo $this->escape($productItem['price_view']); ?>  
             </strong>
-            <span><a title="<?php echo $this->escape($productItem['title']); ?>" href="<?php echo $this->escape($productItem['cartUrl']); ?>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> <?php _e('Add To cart'); ?></a></span>
+            <span class="productPriceCart"><a title="<?php echo $this->escape($productItem['title']); ?>" href="<?php echo $this->escape($productItem['cartUrl']); ?>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> <?php _e('Add To cart'); ?></a></span>
         </div>
         <div class="pull-right">
             <span class="label label-info">
-            <?php echo $this->escape($productItem['stock']); ?> <?php _e('in stock'); ?>
+            <?php echo $this->escape($productItem['stock']); ?> <?php _e('In stock'); ?>
             </span>
         </div>
     <?php } else { ?>
-        <div class="text-error"><strong><?php _e('Finished'); ?></strong></div>
+        <div class="text-error"><strong><?php _e('Out of stock'); ?></strong></div>
     <?php } ?>
 </div>
 <?php } ?>

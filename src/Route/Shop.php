@@ -316,8 +316,8 @@ class Shop extends Standard
                 }
             } elseif ($mergedParams['action'] == 'levelAjax') {
                 $url['process'] = $mergedParams['process'];
-                $url['id'] = $mergedParams['id'];
             }
+            $url['id'] = $mergedParams['id'];
         }
 
         // Set if controller is user

@@ -36,7 +36,7 @@ return array(
         ),
 
         'user' => array(
-            'label'         => _t('User'),
+            'label'         => _t('My Order'),
             'permission'    => array(
                 'resource'  => 'user',
             ),

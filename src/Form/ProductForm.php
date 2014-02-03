@@ -210,6 +210,18 @@ class ProductForm  extends BaseForm
                 
             )
         ));
+        // price_sign
+        $this->add(array(
+            'name' => 'price_sign',
+            'options' => array(
+                'label' => __('Price Sing'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+                
+            )
+        ));
         // price_discount
         $this->add(array(
             'name' => 'price_discount',
@@ -280,16 +292,16 @@ class ProductForm  extends BaseForm
                 )
             ));
         }
-        // extra_field
-        $this->add(array(
-            'name' => 'extra_field',
-            'type' => 'fieldset',
-            'options' => array(
-                'label' => __('Extra fields'),
-            ),
-        ));
         // Set extra field
         if (!empty($this->field)) {
+            // extra_field
+            $this->add(array(
+                'name' => 'extra_field',
+                'type' => 'fieldset',
+                'options' => array(
+                    'label' => __('Extra fields'),
+                ),
+            ));
             foreach ($this->field as $field) {
                 if ($field['type'] == 'select') {
                     $this->add(array(

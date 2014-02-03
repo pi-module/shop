@@ -29,6 +29,7 @@ CREATE TABLE `{product}` (
   `stock_alert` int(10) unsigned NOT NULL,
   `price` decimal(16,2) NOT NULL,
   `price_discount` decimal(16,2) NOT NULL,
+  `price_sign` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 );
 

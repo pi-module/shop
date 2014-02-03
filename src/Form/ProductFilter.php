@@ -116,6 +116,16 @@ class ProductFilter extends InputFilter
                 ),
             ),
         ));
+        // price_sign
+        $this->add(array(
+            'name' => 'price_sign',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // price_discount
         $this->add(array(
             'name' => 'price_discount',

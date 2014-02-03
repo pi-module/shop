@@ -332,6 +332,24 @@ return array(
             'value' => 1
         ),
         // Order
+        'order_method' => array(
+            'title' => __('Order method'),
+            'description' => '',
+            'edit' => array(
+                'type' => 'select',
+                'options' => array(
+                    'options' => array(
+                        'both' => __('Both'),
+                        'online' => __('Online'),
+                        'active' => __('active'),
+                        'inactive' => __('Inactive'),
+                    ),
+                ),
+            ),
+            'filter' => 'text',
+            'value' => 'both',
+            'category' => 'order',
+        ),
         'order_code_prefix' => array(
             'category' => 'order',
             'title' => __('Code Prefix'),

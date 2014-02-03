@@ -25,6 +25,8 @@ use Zend\Math\Rand;
  * Pi::api('order', 'shop')->listProduct($id);
  * Pi::api('order', 'shop')->userOrder();
  * Pi::api('order', 'shop')->codeOrder();
+ * Pi::api('order', 'shop')->sendUserMail($order);
+ * Pi::api('order', 'shop')->sendAdminMail($order);
  */
 
 class Order extends AbstractApi
@@ -266,5 +268,46 @@ class Order extends AbstractApi
         // Generate order code
         $code = sprintf('%s-%s', $prefix, $rand);
         return $code;
+    }
+
+    public function sendUserMail($order)
+    {
+        $to = array(
+            $order['email'] => sprintf('%s %s',$order['first_name'], $order['last_name']),
+        );
+        // Set template info
+        $order['time_create'] = _date($order['time_create']);
+        $order['time_payment'] = _date($order['time_payment']);
+        // Set template
+        if ($order['payment_method'] == 'online') {
+            $template = 'order-online-user';
+        } else {
+            $template = 'order-offline-user';
+        }
+        $data = Pi::service('mail')->template($template, $order);
+        // Set message
+        $message = Pi::service('mail')->message($data['subject'], $data['body'], $data['format']);
+        $message->addTo($to);
+        $message->setEncoding("UTF-8");
+        // Send mail
+        Pi::service('mail')->send($message);
+    }
+
+    public function sendAdminMail($order)
+    {
+        $to = array(
+            Pi::config('adminmail', 'mail')  => Pi::config('adminname', 'mail'),
+        );
+        // Set template info
+        $order['time_create'] = _date($order['time_create']);
+        $order['time_payment'] = _date($order['time_payment']);
+        // Set template
+        $data = Pi::service('mail')->template('order-admin', $order);
+        // Set message
+        $message = Pi::service('mail')->message($data['subject'], $data['body'], $data['format']);
+        $message->addTo($to);
+        $message->setEncoding("UTF-8");
+        // Send mail
+        Pi::service('mail')->send($message);
     }
 }
