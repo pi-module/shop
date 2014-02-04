@@ -1,9 +1,9 @@
 <?php $this->css($this->assetModule('css/front.css')); ?>
-<li class="col-md-4 productBox">
-	<div class="thumbnail">
-		<?php if($product['image']){ ?>
-    	<a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
-		<?php } ?>
+<div class="col-sm-4 col-md-3 productBox">
+    <div class="thumbnail">
+        <?php if($product['image']) { ?>
+        <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
+        <?php } ?>
         <div class="caption">
             <h4>
                 <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
@@ -27,5 +27,5 @@
             </div>
             <?php } ?>
         </div>
-	</div>
-</li>
+    </div>
+</div>

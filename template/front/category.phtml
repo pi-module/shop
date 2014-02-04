@@ -1,12 +1,14 @@
 <?php if (isset($categories) && !empty($categories)) { ?>
-<div class="well well-small clearfix">
-	<div class="page-header">
-		<strong><?php _e('Categories'); ?> : </strong>
-	</div>
+<div class="clearfix categoryList">
 	<ul>
 		<?php foreach($categories as $category) { ?>
-		<li class="col-md-4">
-			<a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="fa fa-folder-open"></i> <?php echo $this->escape($category['title']); ?></a>
+		<li class="col-sm-4 col-md-3 list-unstyled">
+			<?php if($category['image']) { ?>
+            <div class="categoryImage text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><img class="img-thumbnail" src="<?php echo $category['thumbUrl']; ?>" alt="<?php echo $this->escape($category['title']); ?>" /></a></div>
+            <div class="categoryTitle text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a></div>
+			<?php } else { ?>
+			<div class="categoryTitle text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="fa fa-folder-open"></i> <?php echo $this->escape($category['title']); ?></a></div>
+			<?php } ?>
 		</li>
 		<?php } ?>
 	</ul>

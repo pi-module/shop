@@ -1,0 +1,49 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pi shop module\n"
+"POT-Creation-Date: 2014-02-04 16:13+0330\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Pi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _b\n"
+"X-Poedit-Basepath: /var/www/html/local/pi/pi-develop/usr/module/shop/\n"
+"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-develop/usr/module/shop/"
+"config\n"
+"X-Poedit-SearchPath-1: /var/www/html/local/pi/pi-develop/usr/module/shop/"
+"src\n"
+"X-Poedit-SearchPath-2: /var/www/html/local/pi/pi-develop/usr/module/shop/"
+"config\n"
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:16
+msgid "New Product"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:17
+msgid "New Product list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:22
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:59
+msgid "Number"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:53
+msgid "Random Product"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:54
+msgid "RandomProduct list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:90
+msgid "Category"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:91
+msgid "Category list"
+msgstr ""

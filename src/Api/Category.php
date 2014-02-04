@@ -65,6 +65,8 @@ class Category extends AbstractApi
 
     public function categoryList($parent = null)
     {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
         $return = array();
         if (is_null($parent)) {
             $where = array('status' => 1);
@@ -81,6 +83,12 @@ class Category extends AbstractApi
                 'controller'    => 'category',
                 'slug'          => $return[$row->id]['slug'],
             ));
+            $return[$row->id]['thumbUrl'] = Pi::url(
+                sprintf('upload/%s/thumb/%s/%s', 
+                    $config['image_path'], 
+                    $return[$row->id]['path'], 
+                    $return[$row->id]['image']
+                ));
         }
         return $return;
     }  
