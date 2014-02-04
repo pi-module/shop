@@ -164,20 +164,28 @@ class CategoryController extends ActionController
                 }
                 $row->assign($values);
                 $row->save();
-                // Check it save or not
-                if ($row->id) {
-                	// Set category as page for dress up block 
-                	if(empty($values['id'])) {
-	                	$this->setPage($row->slug, $row->title);
-                	} else {	
-                	  	$this->updatePage($category['slug'], $row->slug, $row->title);
-                    }
-                    Pi::service('registry')->page->clear($this->getModule());
-                    $message = __('Category data saved successfully.');
-                    $this->jump(array('action' => 'index'), $message);
-                } else {
-                    $message = __('Category data not saved.');
+                // Set category as page for dress up block 
+                if(empty($values['id'])) {
+	                $this->setPage($row->slug, $row->title);
+                } else {	
+                	$this->updatePage($category['slug'], $row->slug, $row->title);
                 }
+                Pi::service('registry')->page->clear($this->getModule());
+                // Add / Edit sitemap
+                if (Pi::service('module')->isActive('sitemap')) {
+                    $loc = Pi::url($this->url('shop', array(
+                        'module' => $module, 
+                        'controller' => 'category', 
+                        'slug' => $values['slug']
+                    )));
+                    if (empty($values['id'])) {
+                        Pi::api('sitemap', 'sitemap')->add('shop', 'category', $row->id, $loc);
+                    } else {
+                        Pi::api('sitemap', 'sitemap')->update('shop', 'category', $row->id, $loc);
+                    }              
+                }
+                $message = __('Category data saved successfully.');
+                $this->jump(array('action' => 'index'), $message);
             } else {
                 $message = __('Invalid data, please check and re-submit.');
             }	

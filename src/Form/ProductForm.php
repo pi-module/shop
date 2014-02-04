@@ -210,11 +210,11 @@ class ProductForm  extends BaseForm
                 
             )
         ));
-        // price_sign
+        // price_title
         $this->add(array(
-            'name' => 'price_sign',
+            'name' => 'price_title',
             'options' => array(
-                'label' => __('Price Sing'),
+                'label' => __('Price title'),
             ),
             'attributes' => array(
                 'type' => 'text',

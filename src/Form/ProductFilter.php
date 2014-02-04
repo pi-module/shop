@@ -116,9 +116,9 @@ class ProductFilter extends InputFilter
                 ),
             ),
         ));
-        // price_sign
+        // price_title
         $this->add(array(
-            'name' => 'price_sign',
+            'name' => 'price_title',
             'required' => false,
             'filters' => array(
                 array(

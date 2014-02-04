@@ -49,7 +49,7 @@ class ProductController extends ActionController
         'seo_keywords', 'seo_description', 'status', 'time_create', 'time_update', 
         'uid', 'hits', 'sales', 'image', 'path', 'comment', 'point', 'count', 
         'favorite', 'attach', 'extra', 'related', 'review', 'recommended', 
-        'stock', 'stock_alert', 'price', 'price_discount', 'price_sign'
+        'stock', 'stock_alert', 'price', 'price_discount', 'price_title'
     );
 
     /**
@@ -272,18 +272,18 @@ class ProductController extends ActionController
                 if (!empty($extra)) {
                     Pi::api('extra', 'shop')->Set($extra, $row->id);
                 }
-                // Add to sitemap
-                if (empty($values['id']) && Pi::service('module')->isActive('sitemap')) {
-                    $link = array();
-                    $link['loc'] = Pi::url($this->url('', array(
+                // Add / Edit sitemap
+                if (Pi::service('module')->isActive('sitemap')) {
+                    $loc = Pi::url($this->url('shop', array(
                         'module' => $module, 
                         'controller' => 'product', 
                         'slug' => $values['slug']
                     )));
-                    $link['lastmod'] = date("Y-m-d H:i:s"); // Or set empty
-                    $link['changefreq'] = 'daily'; // Or set empty
-                    $link['priority'] = ''; // Or set empty
-                    Pi::api('sitemap', 'sitemap')->add('shop', 'product', $link);
+                    if (empty($values['id'])) {
+                        Pi::api('sitemap', 'sitemap')->add('shop', 'product', $row->id, $loc);
+                    } else {
+                        Pi::api('sitemap', 'sitemap')->update('shop', 'product', $row->id, $loc);
+                    }              
                 }
                 // Check it save or not
                 if ($row->id) {
@@ -341,13 +341,13 @@ class ProductController extends ActionController
             $this->getModel('review')->delete(array('product' => $row->id));
             // Remove sitemap
             if (Pi::service('module')->isActive('sitemap')) {
-                $loc = Pi::url($this->url('', array(
+                $loc = Pi::url($this->url('shop', array(
                         'module' => $module, 
                         'controller' => 'product', 
                         'slug' => $row->slug
                     )));
-                Pi::api('sitemap', 'sitemap')->remove('shop', 'product', $loc);
-            } 
+                Pi::api('sitemap', 'sitemap')->remove($loc);
+            }
             // Remove page
             $row->delete();
             $this->jump(array('action' => 'index'), __('This product deleted'));
