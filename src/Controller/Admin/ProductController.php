@@ -202,7 +202,7 @@ class ProductController extends ActionController
                 }
                 // Tag
                 if (!empty($values['tag'])) {
-                    $tag = explode(' ', $values['tag']);
+                    $tag = explode('|', $values['tag']);
                 }
                 // upload image
                 if (!empty($file['image']['name'])) {
@@ -303,7 +303,7 @@ class ProductController extends ActionController
                 if (Pi::service('module')->isActive('tag')) {
                     $tag = Pi::service('tag')->get($module, $product['id'], '');
                     if (is_array($tag)) {
-                        $product['tag'] = implode(' ', $tag);
+                        $product['tag'] = implode('|', $tag);
                     }
                 }
                 // Set data 
@@ -763,13 +763,13 @@ class ProductController extends ActionController
         // Check
         if ($product && !empty($id)) {
             // remove file
-            $files = array(
+            /* $files = array(
                 Pi::path(sprintf('upload/%s/original/%s/%s', $this->config('image_path'), $product->path, $product->image)),
                 Pi::path(sprintf('upload/%s/large/%s/%s', $this->config('image_path'), $product->path, $product->image)),
                 Pi::path(sprintf('upload/%s/medium/%s/%s', $this->config('image_path'), $product->path, $product->image)),
                 Pi::path(sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $product->path, $product->image)),
             );
-            Pi::service('file')->remove($files);
+            Pi::service('file')->remove($files); */
             // clear DB
             $product->image = '';
             $product->path = '';

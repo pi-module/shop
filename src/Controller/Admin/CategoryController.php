@@ -213,13 +213,13 @@ class CategoryController extends ActionController
         // Check
         if ($category && !empty($id)) {
             // remove file
-            $files = array(
+            /* $files = array(
                 Pi::path(sprintf('upload/%s/original/%s/%s', $this->config('image_path'), $category->path, $category->image)),
                 Pi::path(sprintf('upload/%s/large/%s/%s', $this->config('image_path'), $category->path, $category->image)),
                 Pi::path(sprintf('upload/%s/medium/%s/%s', $this->config('image_path'), $category->path, $category->image)),
                 Pi::path(sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $category->path, $category->image)),
             );
-            Pi::service('file')->remove($files);
+            Pi::service('file')->remove($files); */
             // clear DB
             $category->image = '';
             $category->path = '';
