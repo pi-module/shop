@@ -41,7 +41,7 @@ class CheckoutController extends ActionController
      * location Columns
      */
     protected $locationColumns = array(
-        'id','paren','title','status'
+        'id', 'paren', 'title', 'status'
     );
 
     /**
@@ -92,8 +92,7 @@ class CheckoutController extends ActionController
         }
         // Go to update page if empty
         if (empty($option['delivery'])) {
-            $message = __('First add delivery method');
-            $this->jump(array(array('action' => 'deliveryUpdate')), $message);
+            return $this->redirect()->toRoute('', array('action' => 'deliveryUpdate'));
         }
         // Set form
         $form = new LocationForm('location', $option);

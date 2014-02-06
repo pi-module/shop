@@ -27,6 +27,7 @@ use Zend\Math\Rand;
  * Pi::api('order', 'shop')->codeOrder();
  * Pi::api('order', 'shop')->sendUserMail($order);
  * Pi::api('order', 'shop')->sendAdminMail($order);
+ * Pi::api('order', 'shop')->checkoutConfig();
  */
 
 class Order extends AbstractApi
@@ -57,6 +58,27 @@ class Order extends AbstractApi
         $order = array();
         }
         return $order;
+    }
+
+    public function checkoutConfig()
+    {
+        $return = array();
+        // Set location
+        $select = Pi::model('location', 'shop')->select();
+        $location = Pi::model('location', 'shop')->selectWith($select)->toArray();
+        $return['location'] = (empty($location)) ? 0 : 1;
+        // Set delivery
+        $select = Pi::model('delivery', 'shop')->select();
+        $delivery = Pi::model('delivery', 'shop')->selectWith($select)->toArray();
+        $return['delivery'] = (empty($delivery)) ? 0 : 1;
+        // Set payment
+        $payment = '';
+        if (Pi::service('module')->isActive('payment')) {
+            $payment = Pi::api('gateway', 'payment')->getActiveGatewayList();
+        }
+        $return['payment'] = (empty($payment)) ? 0 : 1;
+        // return
+        return $return;
     }
 
     public function orderStatus($status_order)
@@ -272,6 +294,7 @@ class Order extends AbstractApi
 
     public function sendUserMail($order)
     {
+        // Set user mail
         $to = array(
             $order['email'] => sprintf('%s %s',$order['first_name'], $order['last_name']),
         );
@@ -295,9 +318,19 @@ class Order extends AbstractApi
 
     public function sendAdminMail($order)
     {
+        // Set system mail
         $to = array(
             Pi::config('adminmail', 'mail')  => Pi::config('adminname', 'mail'),
         );
+        // Get config and set mail list
+        $config = Pi::service('registry')->config->read($this->getModule());
+        $mails = $config['order_mail'];
+        $mails = (empty($mails)) ? '' : explode('|', $mails);
+        if (!empty($mails)) {
+            foreach ($mails as $mail) {
+                $to[$mail] = $mail;
+            }
+        }
         // Set template info
         $order['time_create'] = _date($order['time_create']);
         $order['time_payment'] = _date($order['time_payment']);

@@ -18,13 +18,15 @@ use Zend\Form\Element\Select;
 
 class Gateway extends Select
 {
-
     /**
      * @return array
      */
     public function getValueOptions()
     {
-        $this->valueOptions = Pi::api('gateway', 'payment')->getActiveGatewayName();
+        $this->valueOptions = array();
+        if (Pi::service('module')->isActive('payment')) {
+            $this->valueOptions = Pi::api('gateway', 'payment')->getActiveGatewayName();
+        }
         $this->valueOptions['offline'] = __('Offline'); 
         return $this->valueOptions;
     }

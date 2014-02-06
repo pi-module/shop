@@ -9,21 +9,19 @@
 ?>
 <div id="js-order" class="shop">
     <h3><?php echo $this->escape($title); ?></h3>
-    <div class="row">
-        <div class="col-md-8"><?php include $this->templateComponent('form'); ?></div>
-        <div class="col-md-4">
-            <div data-spy="affix" class="col-md-3 infoCart well well well-small">
-                <h3><?php _e('Invoice'); ?></h3>
-                <p><strong><?php _e('Total Price'); ?></strong> : <span id="cart-total-price"><?php echo $this->escape($cart['invoice']['total']['price_view']); ?></span></p>
-                <p><strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php echo $this->escape($cart['invoice']['total']['discount_view']); ?></span></p>
-                <p><strong><?php _e('Total Number'); ?></strong> : <span id="cart-total-number"><?php echo $this->escape($cart['invoice']['total']['number']); ?></span></p>
-                <p><strong><?php _e('Total Shipping'); ?></strong> : <span id="cart-total-shipping"><?php echo $this->escape($cart['invoice']['total']['shipping_view']); ?></span></p>
-                <p><strong><?php _e('Final Price'); ?></strong> : <span  id="cart-total-total" class="label label-success"><?php echo $this->escape($cart['invoice']['total']['total_price_view']); ?></span></p>
-                <p><strong><?php _e('Location'); ?></strong> : <span id="cart-location"></span></p>
-                <p><strong><?php _e('Delivery'); ?></strong> : <span id="cart-delivery"></span></p>
-                <p><strong><?php _e('Payment'); ?></strong> : <span id="cart-payment"></span></p>
-            </div>
-        </div>
+    <div class="col-md-8"><?php include $this->templateComponent('form'); ?></div>
+    <div class="col-md-4 ">
+        <div data-spy="affix" class="cartInfo well well-small">
+            <h3><?php _e('Pre Invoice'); ?></h3>
+            <p><strong><?php _e('Total Price'); ?></strong> : <span id="cart-total-price"><?php echo $this->escape($cart['invoice']['total']['price_view']); ?></span></p>
+            <p><strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php echo $this->escape($cart['invoice']['total']['discount_view']); ?></span></p>
+            <p><strong><?php _e('Total Number'); ?></strong> : <span id="cart-total-number"><?php echo $this->escape($cart['invoice']['total']['number']); ?></span></p>
+            <p><strong><?php _e('Total Shipping'); ?></strong> : <span id="cart-total-shipping"><?php echo $this->escape($cart['invoice']['total']['shipping_view']); ?></span></p>
+            <p><strong><?php _e('Final Price'); ?></strong> : <span  id="cart-total-total" class="label label-success"><?php echo $this->escape($cart['invoice']['total']['total_price_view']); ?></span></p>
+            <p><strong><?php _e('Location'); ?></strong> : <span id="cart-location"></span></p>
+            <p><strong><?php _e('Delivery'); ?></strong> : <span id="cart-delivery"></span></p>
+            <p><strong><?php _e('Payment'); ?></strong> : <span id="cart-payment"></span></p>
+        </div>    
     </div>
 </div>
 <script>
@@ -35,13 +33,13 @@
         },
         init: function() {
             _.bindAll(this);
-            this.$('.select-location').on("change",this.locationAction);
-            this.$('.select-delivery').on("change",this.deliveryAction);
-            this.$('.select-payment').on("change",this.paymentAction);
+            this.$('#select-location').on("change",this.locationAction);
+            this.$('#select-delivery').on("change",this.deliveryAction);
+            this.$('#select-payment').on("change",this.paymentAction);
         },
         locationAction: function(e) {
             var url = "<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'location', 'id' => '')); ?>";
-            $.getJSON(url + $('.select-location').val()).done(function(result) {
+            $.getJSON(url + $('#select-location').val()).done(function(result) {
                 if (result.status == 1) {
                     var htmlOptins = '';
                     $.each(result.data, function( index, value ) {
@@ -57,13 +55,14 @@
                             + "<option value='" + value.delivery + "'>" + value.title + "</option>";
                         }
                     });
-                    $('.select-delivery').html(htmlOptins);
+                    $('#select-delivery').html(htmlOptins);
                 }
+                $('#cart-location').html(result.location);
             });
         },
         deliveryAction: function(e) {
             var url = "<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'delivery', 'id' => '')); ?>";
-            $.getJSON(url + $('.select-delivery').val()).done(function(result) {
+            $.getJSON(url + $('#select-delivery').val()).done(function(result) {
                 if (result.status == 1) {
                     $('#cart-total-shipping').html(result.data.shipping);
                     $('#cart-total-total').html(result.data.total);
@@ -74,13 +73,15 @@
                             + "<option value='" + value.path + "'>"  + value.title + "</option>";
                         }
                     });
-                    $('.select-payment').html(htmlOptins);
+                    $('#select-payment').html(htmlOptins);
                 }
+                $('#cart-delivery').html(result.delivery);
+                $('#cart-payment').html(result.payment);
             });
         },
         paymentAction: function(e) {
             var url = "<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'payment', 'id' => '')); ?>";
-            $.getJSON(url + $('.select-payment').val()).done(function(result) {
+            $.getJSON(url + $('#select-payment').val()).done(function(result) {
                 if (result.status == 1) {
                     $('#cart-location').html(result.data.location);
                     $('#cart-delivery').html(result.data.delivery);

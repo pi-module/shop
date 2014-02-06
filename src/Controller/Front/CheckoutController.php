@@ -184,6 +184,8 @@ class CheckoutController extends ActionController
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
+        // Get config
+        $config = Pi::service('registry')->config->read('shop', 'order');
         // Get info from url
         $id = $this->params('id');
         $process = $this->params('process');
@@ -214,6 +216,7 @@ class CheckoutController extends ActionController
                     // Set return
                     $return['status'] = 1;
                     $return['data'] = $data;
+                    $return['location'] = $location['title'];
                 }
                 break;
 
@@ -255,6 +258,8 @@ class CheckoutController extends ActionController
                     $return['data'] = $data;
                     $return['data']['shipping'] = $invoice['total']['shipping'];
                     $return['data']['total'] = $invoice['total']['total_price'];
+                    $return['delivery'] = $delivery['title'];
+                    $return['payment'] = ($config['order_method'] == 'offline') ? __('Offline') : '';
                 }
                 break; 
 
@@ -516,9 +521,10 @@ class CheckoutController extends ActionController
         $invoice['total']['location'] = (isset($cart['invoice']['total']['location'])) ? $cart['invoice']['total']['location'] : 0;
         $invoice['total']['delivery'] = (isset($cart['invoice']['total']['delivery'])) ? $cart['invoice']['total']['delivery'] : 0;
         $invoice['total']['shipping'] = (isset($cart['invoice']['total']['shipping'])) ? intval($cart['invoice']['total']['shipping']) : 0;
+        $invoice['total']['payment'] = (isset($cart['invoice']['total']['payment'])) ? $cart['invoice']['total']['payment'] : 'offline';
         $invoice['total']['location_title'] = (isset($cart['invoice']['total']['location_title'])) ? $cart['invoice']['total']['location_title'] : '';
         $invoice['total']['delivery_title'] = (isset($cart['invoice']['total']['delivery_title'])) ? $cart['invoice']['total']['delivery_title'] : '';
-        $invoice['total']['payment_title'] = (isset($cart['invoice']['total']['payment_title'])) ? $cart['invoice']['total']['payment_title'] : '';
+        $invoice['total']['payment_title'] = (isset($cart['invoice']['total']['payment_title'])) ? $cart['invoice']['total']['payment_title'] : __('Offline');
         $invoice['total']['total_price'] = intval($invoice['total']['price'] - $invoice['total']['discount']) + $invoice['total']['shipping'];
         $invoice['total']['price_view'] = Pi::api('product', 'shop')->viewPrice($invoice['total']['price']);
     	$invoice['total']['discount_view'] = Pi::api('product', 'shop')->viewPrice($invoice['total']['discount']);

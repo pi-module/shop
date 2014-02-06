@@ -21,6 +21,7 @@ class OrderForm  extends BaseForm
     public function __construct($name = null, $option = array())
     {
         $this->config = Pi::service('registry')->config->read('shop', 'order');
+        $this->checkout = Pi::api('order', 'shop')->checkoutConfig();
         parent::__construct($name);
     }
 
@@ -176,21 +177,26 @@ class OrderForm  extends BaseForm
             ));
         }
         // location
-        if ($this->config['order_location']) {
+        if ($this->config['order_location'] 
+            && $this->checkout['location']) 
+        {
             $this->add(array(
                 'name' => 'location',
                 'type' => 'Module\Shop\Form\Element\Location',
                 'options' => array(
                     'label' => __('Location'),
+                    'parent' => 1,
                 ),
                 'attributes' => array(
-                    'class' => 'form-group select-location',
-                    'size'  => 5
+                    'id'    => 'select-location',
                 )
             ));
         }
         // delivery
-        if ($this->config['order_delivery']) {
+        if ($this->config['order_delivery'] 
+            && $this->checkout['location'] 
+            && $this->checkout['delivery']) 
+        {
             $this->add(array(
                 'name' => 'delivery',
                 'type' => 'select',
@@ -199,26 +205,27 @@ class OrderForm  extends BaseForm
                     'value_options' => array(),
                 ),
                 'attributes' => array(
-                    'class' => 'form-group select-delivery',
+                    'id'    => 'select-delivery',
                     'size'  => 5
                 )
             ));
         }
         // payment_adapter
-        if ($this->config['order_payment']) {
+        if ($this->config['order_payment'] 
+            && ($this->config['order_method'] != 'offline') 
+            && $this->checkout['location'] 
+            && $this->checkout['delivery'] 
+            && $this->checkout['payment']) 
+        {
             $this->add(array(
                 'name' => 'payment_adapter',
-                //'type' => 'Module\Shop\Form\Element\Gateway',
-                //'options' => array(
-                //    'label' => __('Adapter'),
-                //),
                 'type' => 'select',
                 'options' => array(
                     'label' => __('Adapter'),
                     'value_options' => array(),
                 ),
                 'attributes' => array(
-                    'class' => 'form-group select-payment col-md-12',
+                    'id'    => 'select-payment',
                     'size'  => 5
                 )
             ));

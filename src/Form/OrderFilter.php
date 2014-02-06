@@ -21,6 +21,7 @@ class OrderFilter extends InputFilter
     public function __construct($extra = null)
     {
         $config = Pi::service('registry')->config->read('shop', 'order');
+        $checkout = Pi::api('order', 'shop')->checkoutConfig();
         // name
         if ($config['order_name']) {
             // first_name
@@ -155,7 +156,9 @@ class OrderFilter extends InputFilter
             ));
         }
         // location
-        if ($config['order_location']) {
+        if ($config['order_location'] 
+            && $checkout['location']) 
+        {
             $this->add(array(
                 'name' => 'location',
                 'required' => true,
@@ -167,9 +170,29 @@ class OrderFilter extends InputFilter
             ));
         }
         // delivery
-        if ($config['order_delivery']) {
+        if ($config['order_delivery'] 
+            && $checkout['location'] 
+            && $checkout['delivery']) 
+        {
             $this->add(array(
                 'name' => 'delivery',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+        }
+        // delivery
+        if ($config['order_payment'] 
+            && ($config['order_method'] != 'offline') 
+            && $checkout['location'] 
+            && $checkout['delivery'] 
+            && $checkout['payment']) 
+        {
+            $this->add(array(
+                'name' => 'payment_adapter',
                 'required' => true,
                 'filters' => array(
                     array(
@@ -190,10 +213,5 @@ class OrderFilter extends InputFilter
                 ),
             ));
         }
-        // payment_adapter
-        $this->add(array(
-            'name' => 'payment_adapter',
-            'required' => true,
-        ));
     }
 }    	

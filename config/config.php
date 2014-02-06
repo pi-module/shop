@@ -341,7 +341,7 @@ return array(
                     'options' => array(
                         'both' => __('Both'),
                         'online' => __('Online'),
-                        'active' => __('active'),
+                        'offline' => __('Offline'),
                         'inactive' => __('Inactive'),
                     ),
                 ),
@@ -357,6 +357,14 @@ return array(
             'edit' => 'text',
             'filter' => 'string',
             'value' => 'pi' 
+        ),
+        'order_mail' => array(
+            'category' => 'order',
+            'title' => __('List of mails for send order notification'),
+            'description' => __('Use `|` as delimiter to separate mails'),
+            'edit' => 'textarea',
+            'filter' => 'string',
+            'value' => ''
         ),
         'order_name' => array(
             'category' => 'order',

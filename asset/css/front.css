@@ -15,3 +15,15 @@
 #cart-list {
 	min-height: 250px;
 }
+
+.cartBox {
+	margin: 10px 0;
+}
+
+.cartProductInfo {
+	margin-top: 20px;
+}
+
+.cartInfo {
+	min-width: 300px;
+}

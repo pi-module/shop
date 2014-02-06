@@ -25,6 +25,8 @@
 			<div class="col-md-8">
                 <?php include $this->template('front/price'); ?>
 				<?php include $this->template('front/extra'); ?>
+				<?php include $this->template('front/category'); ?>
+			    <?php include $this->template('front/tag'); ?>
 				<div class="productSocial">
 		    	<?php if($config['social_facebook']) { ?>
 		    		<span class="productFacebook"><?php echo $this->facebook(); ?></span>
@@ -39,8 +41,6 @@
 			</div>
 		</div>
 		<div class="productBody">
-			<?php include $this->template('front/category'); ?>
-			<?php include $this->template('front/tag'); ?>
 			<div class="productText well">
 				<strong><?php _e('Description'); ?></strong>
 				<div class="productSummary"><?php echo $productItem['summary']; ?></div>

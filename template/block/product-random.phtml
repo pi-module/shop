@@ -1,1 +1,41 @@
- 
+<div class="shop-block">
+	<div class="shop-block-product clearfix">
+	<?php foreach($block['resources'] as $product) { ?>
+		<div class="col-sm-4 col-md-3 productBox">
+    		<div class="thumbnail">
+        		<?php if($product['image']) { ?>
+        		<a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
+        		<?php } ?>
+        		<div class="caption">
+            		<h4>
+                		<a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
+            		</h4>
+                    <?php if(isset($product['price']) && $block['show-price'] && $block['config']['order_method'] != 'inactive') { ?>
+                    <div class="productPrice clearfix">
+                        <div class="pull-left productPrice">
+                        <?php if($product['stock'] > 0) { ?>
+                            <div class="text-success">
+                                <strong><?php echo $this->escape($product['price_view']); ?></strong>
+                            </div>
+                        <?php } else { ?>
+                            <div class="text-error">
+                                <strong><?php _e('Out of stock'); ?></strong>
+                            </div>
+                        <?php } ?>
+                        </div>
+                        <div class="pull-right">
+                            <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['cartUrl']); ?>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> <?php _e('Add To cart'); ?></a>
+                        </div>
+                    </div>
+                    <?php } ?>
+        		</div>
+    		</div>
+		</div>
+	<?php } ?>
+	</div>
+	<?php if ($block['more-show'] && !empty($block['more-link'])) { ?>
+	<div class="shop-block-more clearfix">
+		<a title="<?php _b('More products'); ?>" href="<?php echo $block['more-link']; ?>"><?php _b('More products'); ?></a>
+	</div>
+	<?php } ?>
+</div>

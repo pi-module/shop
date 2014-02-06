@@ -87,7 +87,7 @@ class ProductController extends IndexController
         $this->view()->headKeywords($product['seo_keywords'], 'set');
         $this->view()->setTemplate('product_item');
         $this->view()->assign('productItem', $product);
-        $this->view()->assign('categories', $product['categories']);
+        $this->view()->assign('categoryItem', $product['categories']);
         $this->view()->assign('config', $config);
         $this->view()->assign('tag', $tag);
     }

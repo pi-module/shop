@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2014-02-04 16:13+0330\n"
+"POT-Creation-Date: 2014-02-06 11:08+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -19,8 +19,8 @@ msgstr ""
 "X-Poedit-SearchPath-2: /var/www/html/local/pi/pi-develop/usr/module/shop/"
 "config\n"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:68
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:127
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:90
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:149
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateOrderForm.php:43
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateDeliveryForm.php:43
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:44
@@ -28,49 +28,49 @@ msgstr ""
 msgid "Not processed"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:73
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:95
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateOrderForm.php:44
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:45
 msgid "Orders validated"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:78
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:100
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateOrderForm.php:45
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:46
 msgid "Orders pending"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:83
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:105
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateOrderForm.php:46
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:47
 msgid "Orders failed"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:88
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:110
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateOrderForm.php:47
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:48
 msgid "Orders cancelled"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:93
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:115
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateOrderForm.php:48
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:49
 msgid "Fraudulent orders"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:98
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:120
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateOrderForm.php:49
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:50
 msgid "Orders finished"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:110
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:132
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdatePaymentForm.php:43
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:62
 msgid "UnPaid"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:115
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:137
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdatePaymentForm.php:44
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:63
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:62
@@ -79,41 +79,41 @@ msgstr ""
 msgid "Paid"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:132
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:154
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateDeliveryForm.php:44
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:76
 msgid "Packed"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:137
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:159
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateDeliveryForm.php:45
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:77
 msgid "Posted"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:142
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:164
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateDeliveryForm.php:46
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:78
 msgid "Delivered"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:147
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:169
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateDeliveryForm.php:47
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:79
 msgid "Back eaten"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:162
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:184
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/OrderController.php:199
 msgid "Not Paid"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:164
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:186
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/OrderController.php:242
 msgid "Not Delivery"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:166
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Api/Order.php:188
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/OrderController.php:151
 msgid "Not Finish"
 msgstr ""
@@ -300,9 +300,13 @@ msgstr ""
 msgid "SEO Description"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ProductForm.php:286
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ProductForm.php:287
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/tag.phtml:7
 msgid "Tags"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ProductForm.php:291
+msgid "Use `|` as delimiter to separate tag terms"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ProductForm.php:302
@@ -322,15 +326,15 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:43
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:44
 msgid "First Name"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:55
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:56
 msgid "Last name"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:69
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:70
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:18
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:59
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_index.phtml:11
@@ -338,7 +342,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:83
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:84
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:19
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:60
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_index.phtml:12
@@ -346,7 +350,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:97
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:98
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:20
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:61
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_index.phtml:13
@@ -354,7 +358,7 @@ msgstr ""
 msgid "Mobile"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:111
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:112
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:21
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:62
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_index.phtml:14
@@ -362,7 +366,7 @@ msgstr ""
 msgid "Company"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:125
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:126
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:25
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:66
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_index.phtml:18
@@ -370,7 +374,7 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:141
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:142
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:22
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:63
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_index.phtml:15
@@ -378,7 +382,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:155
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:156
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:23
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:64
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_index.phtml:16
@@ -386,17 +390,17 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:169
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:170
 msgid "Zip code"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:184
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:187
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_nav.phtml:3
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:22
 msgid "Location"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:198
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:204
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateDeliveryForm.php:41
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:72
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_nav.phtml:4
@@ -408,7 +412,7 @@ msgstr ""
 msgid "Delivery"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:217
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:224
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdatePaymentForm.php:53
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/DeliveryForm.php:75
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:42
@@ -417,7 +421,7 @@ msgstr ""
 msgid "Adapter"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:232
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:239
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:51
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:60
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:86
@@ -427,7 +431,7 @@ msgstr ""
 msgid "Packing"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:244
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:251
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:58
 msgid "Next"
 msgstr ""
@@ -468,6 +472,9 @@ msgstr ""
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ExtraForm.php:62
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/AttachForm.php:84
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/Element/Gateway.php:28
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:262
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:527
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:344
 msgid "Offline"
 msgstr ""
 
@@ -618,20 +625,24 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:95
-msgid "First add delivery method"
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Feed/IndexController.php:24
+msgid "Shop feed"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:144
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Feed/IndexController.php:25
+msgid "Recent products."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:143
 msgid "Location data saved successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:147
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:146
 msgid "Location data not saved."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:150
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:243
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:149
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:242
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/AttachController.php:145
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CategoryController.php:190
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:296
@@ -644,19 +655,19 @@ msgstr ""
 msgid "Invalid data, please check and re-submit."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:174
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:173
 msgid "Add a location"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:237
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:236
 msgid "Delivery data saved successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:240
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:239
 msgid "Delivery data not saved."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:265
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:264
 msgid "Add a delivery"
 msgstr ""
 
@@ -773,7 +784,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:384
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:442
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:785
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:294
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:299
 msgid "Please select product"
 msgstr ""
 
@@ -893,9 +904,9 @@ msgid "Your cart is empty."
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:49
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:364
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:398
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:431
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:369
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:403
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:436
 msgid "So sorry, At this moment order is inactive"
 msgstr ""
 
@@ -912,46 +923,46 @@ msgstr ""
 msgid "Checkout"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:303
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:308
 msgid "Selected product removed from your cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:317
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:322
 msgid "Update number"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:323
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:328
 msgid "You can not set product number to 0"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:379
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:384
 msgid "The product was not marketable."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:406
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:411
 msgid "Your cart are empty."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:421
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:426
 msgid "Your cart are empty"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:441
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:446
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/UserController.php:45
 msgid "Order not set."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:446
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:451
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/UserController.php:50
 msgid "It not your order."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:451
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:456
 msgid "This order not pay"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:458
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:463
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:468
 msgid "This is old order and you pay it before"
 msgstr ""
 
@@ -1192,10 +1203,6 @@ msgstr ""
 msgid "Both"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:344
-msgid "active"
-msgstr ""
-
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:345
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_review.phtml:28
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_review.phtml:69
@@ -1208,54 +1215,62 @@ msgid "Code Prefix"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:363
-msgid "Show name"
+msgid "List of mails for send order notification"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:364
+msgid "Use `|` as delimiter to separate mails"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:371
-msgid "Show email"
+msgid "Show name"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:379
-msgid "Show phone"
+msgid "Show email"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:387
-msgid "Show mobile"
+msgid "Show phone"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:395
-msgid "Show company"
+msgid "Show mobile"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:403
-msgid "Show address"
+msgid "Show company"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:411
-msgid "Show country"
+msgid "Show address"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:419
-msgid "Show city"
+msgid "Show country"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:427
-msgid "Show Zip code"
+msgid "Show city"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:435
-msgid "Show packing"
+msgid "Show Zip code"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:443
-msgid "Show location"
+msgid "Show packing"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:451
-msgid "Show delivery"
+msgid "Show location"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:459
+msgid "Show delivery"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:467
 msgid "Show payment"
 msgstr ""
 
@@ -1548,6 +1563,29 @@ msgstr ""
 msgid "All Reviews"
 msgstr ""
 
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_index.phtml:7
+msgid "Manage checkout options"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_index.phtml:8
+msgid ""
+"On this part, you can manage checkout options, select payment method and add "
+"user location and delivery system, For manage this levels and options you "
+"can check and manage this parts"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_index.phtml:10
+msgid "Check order settings on module configurations"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_index.phtml:11
+msgid "Add delivery methods and select payment options for each method"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_index.phtml:12
+msgid "Add locations and set delivery methods for each location"
+msgstr ""
+
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/attach_index.phtml:3
 msgid "List of attached files"
 msgstr ""
@@ -1708,17 +1746,20 @@ msgstr ""
 msgid "Attached images"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/attach.phtml:75
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/attach.phtml:73
 msgid "Attached archives"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/attach.phtml:87
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/attach.phtml:85
 msgid "Attached docs"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/attach.phtml:99
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/attach.phtml:111
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/attach.phtml:97
 msgid "Attached pdfs"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/attach.phtml:109
+msgid "Attached files"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_finish.phtml:4

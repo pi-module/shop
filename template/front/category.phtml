@@ -1,16 +1,25 @@
 <?php if (isset($categories) && !empty($categories)) { ?>
 <div class="clearfix categoryList">
-	<ul>
-		<?php foreach($categories as $category) { ?>
-		<li class="col-sm-4 col-md-3 list-unstyled">
-			<?php if($category['image']) { ?>
-            <div class="categoryImage text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><img class="img-thumbnail" src="<?php echo $category['thumbUrl']; ?>" alt="<?php echo $this->escape($category['title']); ?>" /></a></div>
-            <div class="categoryTitle text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a></div>
-			<?php } else { ?>
-			<div class="categoryTitle text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="fa fa-folder-open"></i> <?php echo $this->escape($category['title']); ?></a></div>
-			<?php } ?>
-		</li>
+	<div class="page-header">
+		<h4><?php _e('Category list'); ?></h4>
+	</div>
+	<?php foreach($categories as $category) { ?>
+	<div class="col-sm-3 col-md-2">
+		<?php if($category['image']) { ?>
+        <div class="categoryImage text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><img class="img-thumbnail" src="<?php echo $category['thumbUrl']; ?>" alt="<?php echo $this->escape($category['title']); ?>" /></a></div>
+        <div class="categoryTitle text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a></div>
+		<?php } else { ?>
+		<div class="categoryTitle"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="fa fa-folder-open"></i> <?php echo $this->escape($category['title']); ?></a></div>
 		<?php } ?>
-	</ul>
+	</div>
+	<?php } ?>
+</div>
+<?php } elseif (isset($categoryItem) && !empty($categoryItem)) { ?>
+<div class="clearfix categoryList">
+	<?php foreach($categoryItem as $category) { ?>
+	<div class="col-sm-3 col-md-2">
+		<div class="categoryTitle"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="fa fa-folder-open"></i> <?php echo $this->escape($category['title']); ?></a></div>
+	</div>
+	<?php } ?>
 </div>
 <?php } ?>
