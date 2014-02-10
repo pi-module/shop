@@ -42,7 +42,7 @@ class ProductController extends IndexController
         $product = Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
         // Check product
         if (!$product || $product['status'] != 1) {
-            $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The product not found.'));
+            $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The product not found.'), 'error');
         }
         // Update Hits
         $this->getModel('product')->update(array('hits' => $product['hits'] + 1), array('id' => $product['id']));
@@ -109,7 +109,7 @@ class ProductController extends IndexController
         $product = Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
         // Check product
         if (!$product || $product['status'] != 1) {
-            $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The product not found.'));
+            $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The product not found.'), 'error');
         }
         // Form
         $option = array('side' => 'front');
@@ -147,7 +147,7 @@ class ProductController extends IndexController
                         'action' => 'index', 
                         'slug' => $product['slug']
                     );
-                    $this->jump($url, $message);
+                    $this->jump($url, $message, 'success');
                 } else {
                     $message = __('Review data not saved.');
                 }

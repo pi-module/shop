@@ -1,15 +1,13 @@
 <?php if (isset($productList) && !empty($productList)) { ?>
 <div class="productList clearfix">
-	<div class="row">
-		<?php if (isset($productTitle) && !empty($productTitle)) { ?>
-		<div class="page-header">
-			<h4><?php echo $productTitle; ?></h4>
-	    </div>
-	    <?php } ?>
-		<?php foreach($productList as $product) { ?>
-		<?php include $this->template('front/box'); ?>
-		<?php } ?>
-   </div>
+	<?php if (isset($productTitle) && !empty($productTitle)) { ?>
+	<div class="page-header">
+		<h4><?php echo $productTitle; ?></h4>
+	</div>
+	<?php } ?>
+	<?php foreach($productList as $product) { ?>
+	<?php include $this->template('front/box'); ?>
+	<?php } ?>
 </div>
 <div class="clearfix"></div>
 <?php } ?>

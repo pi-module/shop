@@ -11,21 +11,21 @@
                 		<a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
             		</h4>
                     <?php if(isset($product['price']) && $block['show-price'] && $block['config']['order_method'] != 'inactive') { ?>
-                    <div class="productPrice clearfix">
-                        <div class="pull-left productPrice">
+                    <div class="clearfix">
                         <?php if($product['stock'] > 0) { ?>
-                            <div class="text-success">
+                        <div class="pull-left productPrice">
+                            <div class="label label-info">
                                 <strong><?php echo $this->escape($product['price_view']); ?></strong>
                             </div>
-                        <?php } else { ?>
-                            <div class="text-error">
-                                <strong><?php _e('Out of stock'); ?></strong>
-                            </div>
-                        <?php } ?>
                         </div>
                         <div class="pull-right">
-                            <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['cartUrl']); ?>" class="btn btn-primary btn-xs"><i class="fa fa-shopping-cart"></i> <?php _e('Add To cart'); ?></a>
+                            <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['cartUrl']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-shopping-cart"></i> <?php echo _b('Add To cart'); ?></a>
                         </div>
+                        <?php } else { ?>
+                        <div class="label label-danger">
+                            <strong><?php echo _b('Out of stock'); ?></strong>
+                        </div>
+                        <?php } ?>
                     </div>
                     <?php } ?>
         		</div>
@@ -35,7 +35,7 @@
 	</div>
 	<?php if ($block['more-show'] && !empty($block['more-link'])) { ?>
 	<div class="shop-block-more clearfix">
-		<a title="<?php _b('More products'); ?>" href="<?php echo $block['more-link']; ?>"><?php _b('More products'); ?></a>
+		<a title="<?php echo _b('More products'); ?>" href="<?php echo $block['more-link']; ?>"><?php _b('More products'); ?></a>
 	</div>
 	<?php } ?>
 </div>

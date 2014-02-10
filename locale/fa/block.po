@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2014-02-10 18:25+0330\n"
+"POT-Creation-Date: 2014-02-10 18:18+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -21,44 +21,44 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:16
 msgid "New Product"
-msgstr ""
+msgstr "محصولات جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:17
 msgid "New Product list"
-msgstr ""
+msgstr "فهرست محصولات جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:22
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:59
 msgid "Number"
-msgstr ""
+msgstr "تعداد"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:53
 msgid "Random Product"
-msgstr ""
+msgstr "محصولات تصادفی"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:54
 msgid "RandomProduct list"
-msgstr ""
+msgstr "فهرست محصولات تصادفی"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:90
 msgid "Category"
-msgstr ""
+msgstr "شاخه ها"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:91
 msgid "Category list"
-msgstr ""
+msgstr "فهرست شاخه ها"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:22
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:22
-msgid "Add To cart"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:26
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:26
 msgid "Out of stock"
-msgstr ""
+msgstr "نا موجود"
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:27
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:27
+msgid "Add To cart"
+msgstr "خرید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:38
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:38
 msgid "More products"
-msgstr ""
+msgstr "محصولات بیشتر"

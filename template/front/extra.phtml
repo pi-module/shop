@@ -1,6 +1,7 @@
 <?php if (isset($extra) && !empty($extra)) { ?>
 <div class="productExtra">
 	<?php foreach($extra as $field) { ?>
+		<?php if(!empty($field['data'])) { ?>
 		<div class="field-<?php echo $field['id']; ?>">
 			<?php if($field['image']) { ?>
 			<img src="<?php echo $field['imageUrl']; ?>" alt="<?php echo $field['title']; ?>" />
@@ -51,6 +52,7 @@
 			</div>
 			<?php } ?>
 		</div>
+		<?php } ?>
 	<?php } ?>
 </div>
 <?php } ?>

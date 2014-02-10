@@ -38,7 +38,7 @@ class SearchController extends IndexController
             	$_SESSION['shop']['search'] = $form->getData();
             	$message = __('Your search successfully. Go to result page');
             	$url = array('action' => 'result');
-                $this->jump($url, $message);
+                $this->jump($url, $message, 'success');
             }
     	} else {
     		unset($_SESSION['shop']['search']);

@@ -1,22 +1,9 @@
-<?php
-if (isset($tag) && !empty($tag)) { 
-	if (is_array($tag)) { 
-?>
-<div class="well well-small clearfix">
-	<div class="page-header">
-		<strong><?php _e('Tags'); ?> : </strong>
+<?php if (isset($tag) && !empty($tag)) { ?>
+<div class="clearfix tagList">
+	<?php foreach($tag as $term) { ?>
+	<div class="col-sm-4 col-md-3">
+		<div class="categoryTitle"><a title="<?php echo $this->escape($term); ?>" href="<?php echo $this->url('', array('controller' => 'tag', 'action' => 'term', 'slug' => urldecode($term))); ?>"><i class="fa fa-tag"></i> <?php echo $this->escape($term); ?></a></div>
 	</div>
-	<ul>
-		<?php foreach($tag as $term) { ?>
-		<li class="col-md-4">
-			<a title="<?php echo $this->escape($term); ?>" href="<?php echo $this->url('', array('controller' => 'tag', 'action' => 'term', 'slug' => urldecode($term))); ?>"><i class="fa fa-tag"></i> <?php echo $this->escape($term); ?></a>
-		</li>
-		<?php } ?>
-	</ul>
+	<?php } ?>
 </div>
-<?php } else { ?>
-
-<?php 
-	} 
-} 
-?>
+<?php } ?>

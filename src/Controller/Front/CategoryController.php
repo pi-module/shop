@@ -31,7 +31,7 @@ class CategoryController extends IndexController
         $category = $this->getModel('category')->find($slug, 'slug');
         // Check category
         if (!$category || $category['status'] != 1) {
-            $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The category not found.'));
+            $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The category not found.'), 'error');
         }
         // Set info
         $where = array('status' => 1, 'category' => $category['id']);

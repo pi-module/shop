@@ -41,12 +41,12 @@ class CheckoutController extends ActionController
         $cart = $_SESSION['shop']['cart'];
         if (empty($cart)) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
-            $this->jump($url, __('Your cart is empty.'));
+            $this->jump($url, __('Your cart is empty.'), 'error');
         }
         // Check order is active or inactive
         if ($this->config('order_method') == 'inactive') {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
-            $this->jump($url, __('So sorry, At this moment order is inactive'));
+            $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
         }
         // Set order form
         $form = new OrderForm('order');
@@ -158,7 +158,7 @@ class CheckoutController extends ActionController
                     // unset cart
                     $this->setEmpty();
                     // Go to payment
-                    $this->jump($result['invoice_url'], $result['message']);
+                    $this->jump($result['invoice_url'], $result['message'], 'success');
                 } else {
                     $message = __('Checkout data not saved.');
                 }
@@ -366,7 +366,7 @@ class CheckoutController extends ActionController
         // Check order is active or inactive
         if ($this->config('order_method') == 'inactive') {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
-            $this->jump($url, __('So sorry, At this moment order is inactive'));
+            $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
         }
         // Get info from url
         $slug = $this->params('slug');
@@ -381,7 +381,7 @@ class CheckoutController extends ActionController
         // Check product
         if (!$product['marketable']) {
         	$url = array('', 'module' => $module, 'controller' => 'index');
-            $this->jump($url, __('The product was not marketable.'));
+            $this->jump($url, __('The product was not marketable.'), 'error');
         } else {
             // Set total price
             $this->setProduct($product);
@@ -400,7 +400,7 @@ class CheckoutController extends ActionController
         // Check order is active or inactive
         if ($this->config('order_method') == 'inactive') {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
-            $this->jump($url, __('So sorry, At this moment order is inactive'));
+            $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
         }
         // Set Invoice
         $this->setInvoice();
@@ -408,7 +408,7 @@ class CheckoutController extends ActionController
     	if (empty($cart['product'])) {
             $module = $this->params('module');
         	$url = array('', 'module' => $module, 'controller' => 'index');
-            $this->jump($url, __('Your cart are empty.'));
+            $this->jump($url, __('Your cart are empty.'), 'error');
     	}
     	$this->view()->setTemplate('checkout_cart');
     	$this->view()->assign('cart', $cart);
@@ -423,7 +423,7 @@ class CheckoutController extends ActionController
         // Back
         $module = $this->params('module');
         $url = array('', 'module' => $module, 'controller' => 'index');
-        $this->jump($url, __('Your cart are empty'));
+        $this->jump($url, __('Your cart are empty'), 'success');
     }
 
     public function finishAction()

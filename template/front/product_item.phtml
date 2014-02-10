@@ -28,15 +28,11 @@
 				<?php include $this->template('front/category'); ?>
 			    <?php include $this->template('front/tag'); ?>
 				<div class="productSocial">
-		    	<?php if($config['social_facebook']) { ?>
-		    		<span class="productFacebook"><?php echo $this->facebook(); ?></span>
-		    		<?php } ?>
-		    		<?php if($config['social_twitter']) { ?>
-		    		<span class="productTwitter"><?php echo $this->twitter(); ?></span>
-		    		<?php } ?>
-		    		<?php if($config['social_gplus']) { ?>
-		    		<span class="productPlusone"><?php echo $this->plusone(); ?></span>
-		    		<?php } ?>
+					<ul class="list-inline">
+						<?php if($config['social_facebook']) { ?><li class="productFacebook"><?php echo $this->facebook(); ?></li><?php } ?>
+						<?php if($config['social_twitter']) { ?><li class="productTwitter"><?php echo $this->twitter(); ?></li><?php } ?>
+						<?php if($config['social_gplus']) { ?><li class="productPlusone"><?php echo $this->plusone(); ?></li><?php } ?>
+					</ul>
 	    		</div>
 			</div>
 		</div>

@@ -42,12 +42,12 @@ class UserController extends IndexController
         // Check order
         if (!$order->id) {
             $url = array('', 'module' => $module, 'controller' => 'index');
-            $this->jump($url, __('Order not set.'));
+            $this->jump($url, __('Order not set.'), 'error');
         }
         // Check user
         if ($order->uid != Pi::user()->getId()) {
             $url = array('', 'module' => $module, 'controller' => 'index');
-            $this->jump($url, __('It not your order.'));
+            $this->jump($url, __('It not your order.'), 'error');
         }
         // canonize Order
         $order = Pi::api('order', 'shop')->canonizeOrder($order);
@@ -66,7 +66,7 @@ class UserController extends IndexController
         $user = Pi::api('user', 'shop')->findUser();
         if (empty($user)) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
-            $this->jump($url, __('You did not bought any products from us.'));
+            $this->jump($url, __('You did not bought any products from us.'), 'error');
         }
         // return
         return $user;
