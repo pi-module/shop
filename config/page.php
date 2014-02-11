@@ -33,6 +33,10 @@ return array(
             'controller'    => 'checkout',
             'permission'    => 'checkout',
         ),
+        array(
+            'controller'    => 'log',
+            'permission'    => 'log',
+        ),
     ),
     // Front section
     'front' => array(

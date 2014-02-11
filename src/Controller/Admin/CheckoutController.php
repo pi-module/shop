@@ -138,6 +138,9 @@ class CheckoutController extends ActionController
                     $location_delivery->delivery_time = $item['delivery_time'];
                     $location_delivery->save();
                 }
+                // Add log
+                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                Pi::api('log', 'shop')->addLog('location', $row->id, $operation);
                 // Check it save or not
                 if ($row->id) {
                     $message = __('Location data saved successfully.');
@@ -231,6 +234,9 @@ class CheckoutController extends ActionController
                     $delivery_payment->payment = $payment;
                     $delivery_payment->save();
                 }
+                // Add log
+                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                Pi::api('log', 'shop')->addLog('delivery', $row->id, $operation);
                 // Check it save or not
                 if ($row->id) {
                     $message = __('Delivery data saved successfully.');

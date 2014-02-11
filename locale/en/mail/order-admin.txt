@@ -1,1 +1,9 @@
- 
+[comment]Order Admin HTML template[/comment]
+
+[format]html[/format]
+
+[subject]%subject%[/subject]
+
+[body]
+<p>New order added</p>
+[/body]

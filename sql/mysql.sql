@@ -226,3 +226,17 @@ CREATE TABLE `{location_delivery}` (
   `delivery_time` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+CREATE TABLE `{log}` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `uid` int(10) unsigned NOT NULL,
+  `ip` char(15) NOT NULL,
+  `time_create` int(10) unsigned NOT NULL,
+  `section` varchar (32) NOT NULL,
+  `item` int(10) unsigned NOT NULL,
+  `operation` varchar (32) NOT NULL,
+  `description` text,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `time_create` (`time_create`)
+);

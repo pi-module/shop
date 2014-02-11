@@ -145,6 +145,8 @@ class OrderController extends ActionController
                     $order->time_finish = 0;
                 }
                 $order->save();
+                // Add log
+                Pi::api('log', 'shop')->addLog('order', $order->id, 'update');
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('order', 'shop')->orderStatus($order->status_order);
@@ -191,6 +193,8 @@ class OrderController extends ActionController
                     $order->time_payment = 0;
                 }
                 $order->save();
+                // Add log
+                Pi::api('log', 'shop')->addLog('payment', $order->id, 'update');
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('order', 'shop')->paymentStatus($order->status_payment);
@@ -236,6 +240,8 @@ class OrderController extends ActionController
                     $order->time_delivery = 0;
                 }
                 $order->save();
+                // Add log
+                Pi::api('log', 'shop')->addLog('delivery', $order->id, 'update');
                 // Set return
                 $return['status'] = 1;
                 $return['data'] = Pi::api('order', 'shop')->deliveryStatus($order->status_delivery);
@@ -265,6 +271,8 @@ class OrderController extends ActionController
         $order = $this->getModel('order')->find($id);
         $order = Pi::api('order', 'shop')->canonizeOrder($order);
         $order['product'] = Pi::api('order', 'shop')->listProduct($order['id']);
+        // Add log
+        Pi::api('log', 'shop')->addLog('order', $order['id'], 'view');
         // Set view
         $this->view()->setTemplate('order_view');
         $this->view()->assign('order', $order);

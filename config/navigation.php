@@ -101,5 +101,16 @@ return array(
             'controller'    => 'checkout',
             'action'        => 'index',
         ),
+
+        'log' => array(
+            'label'         => _t('Logs'),
+            'permission'    => array(
+                'resource'  => 'log',
+            ),
+            'route'         => 'admin',
+            'module'        => 'shop',
+            'controller'    => 'log',
+            'action'        => 'index',
+        ),
     ),
 );

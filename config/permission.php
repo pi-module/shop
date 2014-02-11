@@ -66,5 +66,11 @@ return array(
                 //'admin',
             ),
         ),
+        'log'  => array(
+            'title'         => __('Logs'),
+            'access'        => array(
+                //'admin',
+            ),
+        ),
     ),
 );

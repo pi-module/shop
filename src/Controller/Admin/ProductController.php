@@ -285,6 +285,9 @@ class ProductController extends ActionController
                         Pi::api('sitemap', 'sitemap')->update('shop', 'product', $row->id, $loc);
                     }              
                 }
+                // Add log
+                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                Pi::api('log', 'shop')->addLog('product', $row->id, $operation);
                 // Check it save or not
                 if ($row->id) {
                     $message = __('Product data saved successfully.');
@@ -348,6 +351,8 @@ class ProductController extends ActionController
                     )));
                 Pi::api('sitemap', 'sitemap')->remove($loc);
             }
+            // Add log
+            Pi::api('log', 'shop')->addLog('product', $row->id, 'delete');
             // Remove page
             $row->delete();
             $this->jump(array('action' => 'index'), __('This product deleted'));
@@ -374,6 +379,8 @@ class ProductController extends ActionController
                 $return['ajaxstatus'] = 1;
                 $return['id'] = $product->id;
                 $return['recommended'] = $product->recommended;
+                // Add log
+                Pi::api('log', 'shop')->addLog('product', $product->id, 'recommend');
             } else {
                 $return['message'] = sprintf(__('Error in set recommended for %s product'), $product->title);
                 $return['ajaxstatus'] = 0;
@@ -587,6 +594,9 @@ class ProductController extends ActionController
                 }
                 $row->assign($values);
                 $row->save();
+                // Add log
+                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                Pi::api('log', 'shop')->addLog('extra', $row->id, $operation);
                 // Check it save or not
                 if ($row->id) {
                     $message = __('Extra field data saved successfully.');
@@ -716,6 +726,9 @@ class ProductController extends ActionController
                 }
                 $row->assign($values);
                 $row->save();
+                // Add log
+                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                Pi::api('log', 'shop')->addLog('special', $row->id, $operation);
                 // Check it save or not
                 if ($row->id) {
                     $message = __('Special data saved successfully.');

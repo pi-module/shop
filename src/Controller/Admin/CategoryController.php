@@ -184,6 +184,9 @@ class CategoryController extends ActionController
                         Pi::api('sitemap', 'sitemap')->update('shop', 'category', $row->id, $loc);
                     }              
                 }
+                // Add log
+                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                Pi::api('log', 'shop')->addLog('category', $row->id, $operation);
                 $message = __('Category data saved successfully.');
                 $this->jump(array('action' => 'index'), $message);
             } else {
