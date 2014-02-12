@@ -7,11 +7,6 @@
 	margin-top: 5px;
 }
 
-/* Product page */
-.productInformation {
-	margin-bottom: 20px;
-}
-
 #cart-list {
 	min-height: 250px;
 }
@@ -26,4 +21,9 @@
 
 .cartInfo {
 	min-width: 300px;
+}
+
+.productItem .panel-heading h3 {
+	padding: 2px;
+	margin: 1px;
 }

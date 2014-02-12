@@ -1,9 +1,9 @@
 <?php if (isset($tag) && !empty($tag)) { ?>
 <div class="clearfix tagList">
 	<?php foreach($tag as $term) { ?>
-	<div class="categoryTitle">
+	<span class="tagItem">
 		<a title="<?php echo $this->escape($term); ?>" href="<?php echo $this->url('', array('controller' => 'tag', 'action' => 'term', 'slug' => urldecode($term))); ?>"><i class="fa fa-tag"></i> <?php echo $this->escape($term); ?></a>
-	</div>
+	</span>
 	<?php } ?>
 </div>
 <?php } ?>

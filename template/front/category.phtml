@@ -15,11 +15,11 @@
 	<?php } ?>
 </div>
 <?php } elseif (isset($categoryItem) && !empty($categoryItem)) { ?>
-<div class="clearfix categoryList">
+<div class="clearfix categoryItemList">
 	<?php foreach($categoryItem as $category) { ?>
-	<div class="col-sm-3 col-md-2">
-		<div class="categoryTitle"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="fa fa-folder-open"></i> <?php echo $this->escape($category['title']); ?></a></div>
-	</div>
+	<span class="categoryTitle">
+		<a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="fa fa-folder-open"></i> <?php echo $this->escape($category['title']); ?></a>
+	</span>
 	<?php } ?>
 </div>
 <?php } ?>
