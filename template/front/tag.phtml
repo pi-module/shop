@@ -1,8 +1,8 @@
 <?php if (isset($tag) && !empty($tag)) { ?>
 <div class="clearfix tagList">
 	<?php foreach($tag as $term) { ?>
-	<div class="col-sm-4 col-md-3">
-		<div class="categoryTitle"><a title="<?php echo $this->escape($term); ?>" href="<?php echo $this->url('', array('controller' => 'tag', 'action' => 'term', 'slug' => urldecode($term))); ?>"><i class="fa fa-tag"></i> <?php echo $this->escape($term); ?></a></div>
+	<div class="categoryTitle">
+		<a title="<?php echo $this->escape($term); ?>" href="<?php echo $this->url('', array('controller' => 'tag', 'action' => 'term', 'slug' => urldecode($term))); ?>"><i class="fa fa-tag"></i> <?php echo $this->escape($term); ?></a>
 	</div>
 	<?php } ?>
 </div>

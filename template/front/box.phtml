@@ -12,9 +12,7 @@
             <div class="clearfix">
                 <?php if($product['stock'] > 0) { ?>
                 <div class="pull-left productPrice">
-                    <div class="label label-info">
-                        <strong><?php echo $this->escape($product['price_view']); ?></strong>
-                    </div>
+                    <strong><?php echo $this->escape($product['price_view']); ?></strong>
                 </div>
                 <div class="pull-right">
                     <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['cartUrl']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-shopping-cart"></i> <?php _e('Add To cart'); ?></a>

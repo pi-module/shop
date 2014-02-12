@@ -1,5 +1,5 @@
 <?php if(isset($productItem['price']) && $config['view_price'] && $config['order_method'] != 'inactive') { ?>
-<div class="productPrice well clearfix">
+<div class="productPrice clearfix">
     <?php if($productItem['stock'] > 0) { ?>
         <div class="pull-left">
         <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>

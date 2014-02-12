@@ -16,31 +16,31 @@
 	$this->css($this->assetModule('css/lightbox.css'));
 ?>
 <div class="shop">
-	<div class="productItem row">
+	<div class="productItem">
 		<div class="productTitle col-md-12"><h3><?php echo $this->escape($productItem['title']); ?></h3></div>
 		<div class="productInformation clearfix">
 			<div class="productImage gallery col-md-4">
 				<a href="<?php echo $productItem['largeUrl']; ?>" title="<?php echo $this->escape($productItem['title']); ?>"><img class="img-thumbnail" src="<?php echo $productItem['mediumUrl']; ?>" alt="<?php echo $this->escape($productItem['title']); ?>" /></a>
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-8 well">
                 <?php include $this->template('front/price'); ?>
 				<?php include $this->template('front/extra'); ?>
+			</div>
+		</div>
+		<div class="productBody col-md-12">
+			<div class="productText well">
+				<strong><?php _e('Description'); ?></strong>
+				<div class="productSummary"><?php echo $productItem['summary']; ?></div>
+				<div class="productDescription"><?php echo $productItem['description']; ?></div>
 				<?php include $this->template('front/category'); ?>
 			    <?php include $this->template('front/tag'); ?>
-				<div class="productSocial">
+			    <div class="productSocial">
 					<ul class="list-inline">
 						<?php if($config['social_facebook']) { ?><li class="productFacebook"><?php echo $this->facebook(); ?></li><?php } ?>
 						<?php if($config['social_twitter']) { ?><li class="productTwitter"><?php echo $this->twitter(); ?></li><?php } ?>
 						<?php if($config['social_gplus']) { ?><li class="productPlusone"><?php echo $this->plusone(); ?></li><?php } ?>
 					</ul>
 	    		</div>
-			</div>
-		</div>
-		<div class="productBody">
-			<div class="productText well">
-				<strong><?php _e('Description'); ?></strong>
-				<div class="productSummary"><?php echo $productItem['summary']; ?></div>
-				<div class="productDescription"><?php echo $productItem['description']; ?></div>
 			</div>
 		</div>
 	</div>
