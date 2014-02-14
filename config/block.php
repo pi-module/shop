@@ -26,27 +26,27 @@ return array(
                 'value' => 10,
             ),
             'show-price' => array(
-                'title' => __('Show price'),
+                'title' => _b('Show price'),
                 'description' => '',
                 'edit' => 'checkbox',
                 'filter' => 'number_int',
                 'value' => 1,
             ),
             'more-show' => array(
-                'title' => __('Show More link to module page'),
+                'title' => _b('Show More link to module page'),
                 'description' => '',
                 'edit' => 'checkbox',
                 'filter' => 'number_int',
                 'value' => 0,
             ),
             'more-link' => array(
-                'title' => __('Set More link to module page'),
+                'title' => _b('Set More link to module page'),
                 'description' => '',
                 'edit' => 'text',
                 'filter' => 'string',
                 'value' => '',
             ),
-        )
+        ),
     ),
     'product-random'    => array(
         'name'          => 'product-random',
@@ -63,27 +63,27 @@ return array(
                 'value' => 10,
             ),
             'show-price' => array(
-                'title' => __('Show price'),
+                'title' => _b('Show price'),
                 'description' => '',
                 'edit' => 'checkbox',
                 'filter' => 'number_int',
                 'value' => 1,
             ),
             'more-show' => array(
-                'title' => __('Show More link to module page'),
+                'title' => _b('Show More link to module page'),
                 'description' => '',
                 'edit' => 'checkbox',
                 'filter' => 'number_int',
                 'value' => 0,
             ),
             'more-link' => array(
-                'title' => __('Set More link to module page'),
+                'title' => _b('Set More link to module page'),
                 'description' => '',
                 'edit' => 'text',
                 'filter' => 'string',
                 'value' => '',
             ),
-        )
+        ),
     ),
     'category'    => array(
         'name'          => 'category',
@@ -91,5 +91,22 @@ return array(
         'description'   => _b('Category list'),
         'render'        => array('block', 'category'),
         'template'      => 'category',
+        'config'        => array(
+            'type' => array(
+                'title' => _b('Category show type'),
+                'description' => '',
+                'edit' => array(
+                    'type' => 'select',
+                    'options' => array(
+                        'options' => array(
+                            'simple' => _b('Simple list'),
+                            'advanced' => _b('Advanced list'),
+                        ),
+                    ),
+                ),
+                'filter' => 'text',
+                'value' => 'simple',
+            ),
+        ),
     ),
 );

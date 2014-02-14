@@ -51,7 +51,8 @@ class TagController extends IndexController
         $template = array(
             'controller' => 'tag',
             'action' => 'term',
-            );
+            'slug' => urlencode($slug),
+        );
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
         // Set view

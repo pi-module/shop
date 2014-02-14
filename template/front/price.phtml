@@ -1,27 +1,26 @@
 <?php if(isset($productItem['price']) && $config['view_price'] && $config['order_method'] != 'inactive') { ?>
 <div class="productPrice clearfix">
-    <?php if($productItem['stock'] > 0) { ?>
-        <div class="pull-left">
-        <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
-            <strong class="text-danger">
-             <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
-            </strong>
+    <ul class="list-unstyled">
+        <?php if(!empty($productItem['price_title'])) { ?>
+        <li><strong><?php echo $config['view_price_title']; ?> : </strong><?php echo $this->escape($productItem['price_title']); ?></li>
         <?php } ?>
-            <?php if(!empty($productItem['price_sign'])) { ?>
-            <span class="productPriceSing"><?php echo $this->escape($productItem['price_title']); ?></span>
+        <li><strong><?php _e('Stock status'); ?> : </strong>
+        <?php if($productItem['stock'] > 0) { ?>
+            <span class="text-success"><?php _e('In stock'); ?><?php if($config['view_stock']) { ?> (<?php echo _number($productItem['stock']); ?>)<?php } ?></span>
+        <?php } else { ?>
+            <span class="text-error"><?php _e('Out of stock'); ?></span>
+        <?php } ?>
+        </li>
+        <?php if($productItem['stock'] > 0) { ?>
+        <li>
+            <strong><?php _e('Price'); ?> : </strong>
+            <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+            <span class="text-danger"><del><?php echo $this->escape($productItem['price_discount_view']); ?></del></span>
             <?php } ?>
-            <strong class="productPriceView text-success">
-            <?php echo $this->escape($productItem['price_view']); ?>  
-            </strong>
-            <span class="productPriceCart"><a title="<?php echo $this->escape($productItem['title']); ?>" href="<?php echo $this->escape($productItem['cartUrl']); ?>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> <?php _e('Add To cart'); ?></a></span>
-        </div>
-        <div class="pull-right">
-            <span class="label label-info">
-            <?php echo $this->escape($productItem['stock']); ?> <?php _e('In stock'); ?>
-            </span>
-        </div>
-    <?php } else { ?>
-        <div class="text-error"><strong><?php _e('Out of stock'); ?></strong></div>
-    <?php } ?>
+            <span><?php echo $this->escape($productItem['price_view']); ?></span>
+            <span class="productPriceCart"><a title="<?php echo $this->escape($productItem['title']); ?>" href="<?php echo $this->escape($productItem['cartUrl']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-shopping-cart"></i> <?php _e('Add To cart'); ?></a></span>
+        </li>
+        <?php } ?>
+    </ul>
 </div>
 <?php } ?>

@@ -154,6 +154,7 @@ class IndexController extends ActionController
 
     public function canonizePaginator($template)
     {
+        $template['slug'] = (isset($template['slug'])) ? $template['slug'] : '';
         // paginator
         $paginator = Paginator::factory(intval($template['count']));
         $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
@@ -165,6 +166,7 @@ class IndexController extends ActionController
                 'module'        => $this->getModule(),
                 'controller'    => $template['controller'],
                 'action'        => $template['action'],
+                'slug'          => $template['slug'],
                 'sort'          => $template['sort'],
                 'stock'         => $template['stock'],
             )),

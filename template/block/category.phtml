@@ -1,9 +1,12 @@
 <div class="shop-block">
+	<?php if ($block['type'] == 'simple') { ?>
 	<div class="shop-block-category clearfix">
 		<ul class="nav nav-pills nav-stacked">
 			<?php foreach($block['resources'] as $category) { ?>
-			<li><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a></li>
+			                    <li><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a></li>
 			<?php } ?>
         </ul>
 	</div>
+	<?php } elseif($block['type'] == 'advanced') { ?>
+	<?php } ?>
 </div>

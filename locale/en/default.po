@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2014-02-11 20:03+0330\n"
+"POT-Creation-Date: 2014-02-13 16:16+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -159,7 +159,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ProductForm.php:98
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ReviewForm.php:61
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/CategoryForm.php:89
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_item.phtml:41
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_item.phtml:34
 msgid "Description"
 msgstr ""
 
@@ -266,6 +266,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:88
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:90
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_special.phtml:13
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:16
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:25
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_order.phtml:48
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_order.phtml:50
@@ -398,7 +399,7 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:187
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_nav.phtml:3
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:21
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:23
 msgid "Location"
 msgstr ""
 
@@ -410,7 +411,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:15
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:81
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_order.phtml:39
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:22
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:24
 msgid "Delivery"
 msgstr ""
 
@@ -444,7 +445,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:15
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:74
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_order.phtml:30
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:23
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:25
 msgid "Payment"
 msgstr ""
 
@@ -1751,19 +1752,23 @@ msgstr ""
 msgid "View order"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:16
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_box.phtml:19
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/box.phtml:20
-msgid "Add To cart"
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:7
+msgid "Stock status"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:20
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:9
 msgid "In stock"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:24
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/box.phtml:24
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:11
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/box.phtml:22
 msgid "Out of stock"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:21
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_box.phtml:19
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/box.phtml:18
+msgid "Add To cart"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/attach.phtml:21
@@ -1863,32 +1868,32 @@ msgid "Empty cart"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:55
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:15
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:16
 msgid "Pre Invoice"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:57
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:16
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:18
 msgid "Total Price"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:58
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:17
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:19
 msgid "Total Discount"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:59
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:18
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:20
 msgid "Total Number"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:60
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:19
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:21
 msgid "Total Shipping"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:61
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:20
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:22
 msgid "Final Price"
 msgstr ""
 
@@ -1896,14 +1901,14 @@ msgstr ""
 msgid "Tag list"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:50
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:54
 msgid "Price : "
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:51
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:55
 msgid "Time : "
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:51
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:55
 msgid "Days"
 msgstr ""

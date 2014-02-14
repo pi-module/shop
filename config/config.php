@@ -141,6 +141,22 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
+        'view_price_title' => array(
+            'category' => 'view',
+            'title' => __('Price title'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => __('Volume'),
+        ),
+        'view_stock' => array(
+            'category' => 'view',
+            'title' => __('Show stock count'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
         // Image
         'image_size' => array(
             'category' => 'image',

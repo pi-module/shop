@@ -84,6 +84,55 @@ class Block
         }
         // Set block array
         $block['resources'] = $category;
+        if ($block['type'] == 'advanced') {
+            $block['tree'] = self::getTree($category);
+            $block['treeHtml'] = self::getTreeHtml($block['tree']);
+        }
         return $block;
     }
-}	
+
+    public static function getTree($elements, $parentId = 0)
+    {
+        $category = array();
+        foreach ($elements as $element) {
+            if ($element['parent'] == $parentId) {
+                $depth = 0;
+                $category[$element['id']]['id'] = $element['id'];
+                $category[$element['id']]['title'] = $element['title'];
+                $category[$element['id']]['url'] = $element['url'];
+                $children = self::getTree($elements, $element['id']);
+                if ($children) {
+                    $depth++;
+                    foreach ($children as $key => $value) {
+                        $category[$element['id']]['children'][$key] = array(
+                            'id' => $value['id'],
+                            'title' => $value['title'],
+                            'url' => $value['url'],
+                            'children' => empty($value['children']) ? '' : $value['children'],
+                        );
+                    }
+                }       
+                unset($elements[$element['id']]);
+                unset($depth);            
+            }
+        }
+        return $category;
+    }
+
+    public static function getTreeHtml($list)
+    {
+        $html = '<ul>' . PHP_EOL;
+        foreach ($list as $sub) {
+            $html .= '<li>' . PHP_EOL;
+            if (!empty($sub['children'])) {
+                $html .= '<a title="' . $sub['title'] . '" href="' . $sub['url'] . '">' . $sub['title'] . '</a>';
+                $html .= self::getTreeHtml($sub['children']);
+            } else {
+                $html .= '<a title="' . $sub['title'] . '" href="' . $sub['url'] . '">' . $sub['title'] . '</a>';
+            }
+            $html .= '</li>' . PHP_EOL;
+        }
+        $html .= '</ul>' . PHP_EOL;
+        return $html;
+    }
+}

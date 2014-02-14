@@ -33,6 +33,18 @@ return array(
                 'member',
             ),
         ),
+        'review' => array(
+            'title'         => _t('Review'),
+            'access'        => array(
+                'member',
+            ),
+        ),
+        'checkout' => array(
+            'title'         => _t('Checkout'),
+            'access'        => array(
+                'member',
+            ),
+        ),
     ),
     // Admin section
     'admin' => array(

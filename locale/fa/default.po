@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2014-02-11 20:04+0330\n"
+"POT-Creation-Date: 2014-02-14 09:41+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -159,7 +159,7 @@ msgstr "خلاصه"
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ProductForm.php:98
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ReviewForm.php:61
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/CategoryForm.php:89
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_item.phtml:41
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_item.phtml:34
 msgid "Description"
 msgstr "توضیحات"
 
@@ -230,7 +230,7 @@ msgstr "خصوصی"
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ProductForm.php:125
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/SearchForm.php:120
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/RelatedForm.php:68
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:46
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:58
 msgid "Category"
 msgstr "شاخه"
 
@@ -266,6 +266,7 @@ msgstr "اخطار پایان موجودی"
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:88
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:90
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_special.phtml:13
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:16
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:25
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_order.phtml:48
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_order.phtml:50
@@ -273,6 +274,7 @@ msgid "Price"
 msgstr "قیمت"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ProductForm.php:217
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:146
 msgid "Price title"
 msgstr "عنوان قیمت"
 
@@ -391,6 +393,7 @@ msgstr "شهر"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:170
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:24
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:65
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_index.phtml:17
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_order.phtml:17
 msgid "Zip code"
@@ -398,7 +401,7 @@ msgstr "کد پستی"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderForm.php:187
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_nav.phtml:3
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:21
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:23
 msgid "Location"
 msgstr "انتخاب مکان"
 
@@ -410,7 +413,7 @@ msgstr "انتخاب مکان"
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:15
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:81
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_order.phtml:39
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:22
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:24
 msgid "Delivery"
 msgstr "روش تحویل"
 
@@ -444,7 +447,7 @@ msgstr "تکمیل سفارش"
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:15
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:74
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/user_order.phtml:30
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:23
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:25
 msgid "Payment"
 msgstr "پرداخت"
 
@@ -456,7 +459,7 @@ msgstr "به روز کردن"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateOrderForm.php:41
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:41
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:58
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:70
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:41
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:29
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:15
@@ -467,7 +470,7 @@ msgstr "سفارش"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ExtraForm.php:61
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/AttachForm.php:83
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:343
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:359
 msgid "Online"
 msgstr "آنلاین"
 
@@ -476,7 +479,7 @@ msgstr "آنلاین"
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/Element/Gateway.php:30
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:262
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:527
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:344
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:360
 msgid "Offline"
 msgstr "آفلاین"
 
@@ -544,7 +547,7 @@ msgstr "همه شاخه ها"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/SpecialForm.php:52
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/AttachForm.php:67
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:40
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:52
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/attach_index.phtml:25
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_review_pending.phtml:19
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_special.phtml:12
@@ -921,7 +924,7 @@ msgid "Checkout data not saved."
 msgstr "اطلاعات شما ذخیره نشد"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:178
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:64
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:76
 msgid "Checkout"
 msgstr "مراحل سفارش"
 
@@ -980,7 +983,7 @@ msgstr "برچسب تنظیم نشده"
 msgid "The tag not found."
 msgstr "برچسب یافت نشد"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/TagController.php:60
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/TagController.php:61
 #, php-format
 msgid "All products by %s tag"
 msgstr "همه محصولات برچسب %s"
@@ -1009,29 +1012,14 @@ msgstr ""
 msgid "You did not bought any products from us."
 msgstr "شما هنوز هیچ محصولی از ما نخریده اید"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:52
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:64
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_index.phtml:42
 msgid "Attach"
 msgstr "پیوست"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:70
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:82
 msgid "Logs"
 msgstr "گزارشات"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:29
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:66
-msgid "Show price"
-msgstr "نمایش قیمت"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:36
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:73
-msgid "Show More link to module page"
-msgstr "نمایش لینک ادامه به صفحه ماژول"
-
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:43
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:80
-msgid "Set More link to module page"
-msgstr "درج لینک ادامه به صفحه ماژول"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/module.php:15
 msgid "Shop"
@@ -1102,186 +1090,194 @@ msgstr "نمایش محصولات ویژه"
 msgid "Number of products on special"
 msgstr "تعداد محصولات ویژه"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:147
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:150
+msgid "Volume"
+msgstr "حجم"
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:154
+msgid "Show stock count"
+msgstr "نمایش تعداد موجودی"
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:163
 msgid "Image Size"
 msgstr "حجم تصویر"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:155
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:171
 msgid "Image path"
 msgstr "مسیر ذخیره تصویر"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:163
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:179
 msgid "Image Extension"
 msgstr "پسوند های مجار برای تصویر"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:171
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:187
 msgid "Large Image height"
 msgstr "ارتفاع تصویر بزرگ"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:179
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:195
 msgid "Large Image width"
 msgstr "عرض تصویر بزرگ"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:187
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:203
 msgid "Medium Image height"
 msgstr "ارتفاع تصویر متوسط"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:195
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:211
 msgid "Medium Image width"
 msgstr "عرض تصویر متوسط"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:203
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:219
 msgid "Thumb Image height"
 msgstr "ارتفاع تصویر بندانگشتی"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:211
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:227
 msgid "Thumb Image width"
 msgstr "عرض تصویر بندانگشتی"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:219
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:235
 msgid "Use lightbox"
 msgstr "استفاده از لایت باکس"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:227
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:243
 msgid "Add Watermark"
 msgstr "اضافه کردن واترمارک به تصویر"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:235
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:251
 msgid "Watermark Image"
 msgstr "تصویر واترمارک"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:242
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:258
 msgid "Watermark Positio"
 msgstr "موقعیت واترمارک"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:248
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:264
 msgid "Top Left"
 msgstr "بالا چپ"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:249
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:265
 msgid "Top Right"
 msgstr "بالا راست"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:250
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:266
 msgid "Bottom Left"
 msgstr "پایین چپ"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:251
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:267
 msgid "Bottom Right"
 msgstr "پایین راست"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:262
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:278
 msgid "Show Google Plus"
 msgstr "نمایش گوگل پلاس"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:270
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:286
 msgid "Show facebook"
 msgstr "نمایش فیسبوک"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:278
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:294
 msgid "Show Twitter"
 msgstr "نمایش تویتر"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:287
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:303
 msgid "File Size"
 msgstr "حجم فایل"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:295
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:311
 msgid "File path"
 msgstr "مسیر ذخیره فایل"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:303
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:319
 msgid "File Extension"
 msgstr "پسوند های مجار برای فایل"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:312
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:328
 msgid "Show search type"
 msgstr "نمایش نوع جستجوی عنوان"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:320
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:336
 msgid "Show search price"
 msgstr "نمایش قیمت در جستجو"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:328
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:344
 msgid "Show search category"
 msgstr "نمایش شاخه در جستجو"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:336
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:352
 msgid "Order method"
 msgstr "روش سفارش"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:342
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:358
 msgid "Both"
 msgstr "هر دو"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:345
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:361
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_review.phtml:28
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_review.phtml:69
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_review_pending.phtml:29
 msgid "Inactive"
 msgstr "غیرفعال"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:355
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:371
 msgid "Code Prefix"
 msgstr "پیشوند کد"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:363
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:379
 msgid "List of mails for send order notification"
 msgstr "فهرست ایمیل هایی که آگاهی رسانی ثبت سفارش به آنها انجام شود"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:364
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:380
 msgid "Use `|` as delimiter to separate mails"
 msgstr "از `|` برای جداسازی ایمیل های استفاده کنید"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:371
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:387
 msgid "Show name"
 msgstr "نمایش نام"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:379
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:395
 msgid "Show email"
 msgstr "نمایش ایمیل"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:387
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:403
 msgid "Show phone"
 msgstr "نمایش تلفن"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:395
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:411
 msgid "Show mobile"
 msgstr "نمایش موبایل"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:403
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:419
 msgid "Show company"
 msgstr "نمایش شرکت"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:411
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:427
 msgid "Show address"
 msgstr "نمایش آدرس"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:419
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:435
 msgid "Show country"
 msgstr "نمایش کشور"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:427
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:443
 msgid "Show city"
 msgstr "نمایش شهر"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:435
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:451
 msgid "Show Zip code"
 msgstr "نمایش کد پستی"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:443
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:459
 msgid "Show packing"
 msgstr "نمایش بسته بندی"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:451
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:467
 msgid "Show location"
 msgstr "انتخاب محل"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:459
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:475
 msgid "Show delivery"
 msgstr "انتخاب روش تحویل"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:467
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:483
 msgid "Show payment"
 msgstr "انتخاب روش پرداخت"
 
@@ -1649,10 +1645,6 @@ msgstr "قیمت مجموع"
 msgid "Details"
 msgstr "جزئیات"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:65
-msgid "Zip ode"
-msgstr ""
-
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:71
 msgid "Time create"
 msgstr "زمان ایجاد"
@@ -1758,20 +1750,24 @@ msgstr "عنوان محصول"
 msgid "View order"
 msgstr "نمایش سفارش"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:16
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_box.phtml:19
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/box.phtml:20
-msgid "Add To cart"
-msgstr "خرید"
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:7
+msgid "Stock status"
+msgstr "وضعیت"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:20
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:9
 msgid "In stock"
-msgstr "موجودی"
+msgstr "موجود"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:24
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/box.phtml:24
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:11
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/box.phtml:22
 msgid "Out of stock"
 msgstr "نا موجود"
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:21
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_box.phtml:19
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/box.phtml:18
+msgid "Add To cart"
+msgstr "خرید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/attach.phtml:21
 msgid "Attached video"
@@ -1873,32 +1869,32 @@ msgid "Empty cart"
 msgstr "خالی کردن"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:55
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:15
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:16
 msgid "Pre Invoice"
 msgstr "پیش فاکتور"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:57
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:16
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:18
 msgid "Total Price"
 msgstr "قیمت کل"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:58
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:17
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:19
 msgid "Total Discount"
 msgstr "تخفیف کل"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:59
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:18
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:20
 msgid "Total Number"
 msgstr "تعداد کل"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:60
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:19
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:21
 msgid "Total Shipping"
 msgstr "هزینه ارسال کل"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_cart.phtml:61
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:20
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:22
 msgid "Final Price"
 msgstr "قیمت نهایی"
 
@@ -1906,14 +1902,29 @@ msgstr "قیمت نهایی"
 msgid "Tag list"
 msgstr "فهرست برچسب ها"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:50
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:54
 msgid "Price : "
 msgstr "قیمت : "
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:51
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:55
 msgid "Time : "
 msgstr "زمان : "
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:51
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/checkout_information.phtml:55
 msgid "Days"
 msgstr "روز"
+
+#~ msgid "Show price"
+#~ msgstr "نمایش قیمت"
+
+#~ msgid "Show More link to module page"
+#~ msgstr "نمایش لینک ادامه به صفحه ماژول"
+
+#~ msgid "Set More link to module page"
+#~ msgstr "درج لینک ادامه به صفحه ماژول"
+
+#~ msgid "Simple list"
+#~ msgstr "فهرست ساده"
+
+#~ msgid "Advanced list"
+#~ msgstr "فهرست کامل"

@@ -42,22 +42,23 @@ return array(
     'front' => array(
         array(
             'controller'    => 'index',
-            'permission'    => 'index',
+            'permission'    => 'public',
             'block'         => 1,
         ),
         array(
             'controller'    => 'category',
-            'permission'    => 'category',
+            'permission'    => 'public',
             'block'         => 1,
         ),
         array(
             'controller'    => 'product',
-            'permission'    => 'product',
+            'permission'    => 'public',
             'block'         => 1,
         ),
+        
         array(
             'controller'    => 'tag',
-            'permission'    => 'tag',
+            'permission'    => 'public',
             'block'         => 1,
         ),
         array(
@@ -73,6 +74,24 @@ return array(
         array(
             'controller'    => 'checkout',
             'permission'    => 'checkout',
+            'block'         => 1,
+        ),
+        array(
+            'controller'    => 'product',
+            'action'        => 'review',
+            'permission'    => 'review',
+            'block'         => 1,
+        ),
+        array(
+            'controller'    => 'category',
+            'action'        => 'list',
+            'permission'    => 'public',
+            'block'         => 1,
+        ),
+        array(
+            'controller'    => 'tag',
+            'action'        => 'list',
+            'permission'    => 'public',
             'block'         => 1,
         ),
     ),

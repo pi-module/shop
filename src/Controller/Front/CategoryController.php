@@ -24,7 +24,7 @@ class CategoryController extends IndexController
         // Get info from url
         $module = $this->params('module');
         $slug = $this->params('slug');
-        $action = $this->params('action');
+        //$action = $this->params('action');
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get category information from model
@@ -40,7 +40,7 @@ class CategoryController extends IndexController
         // Set paginator info
         $template = array(
             'controller' => 'category',
-            'action' => $action,
+            'slug' => $slug,
             );
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
@@ -65,8 +65,8 @@ class CategoryController extends IndexController
         $this->view()->assign('config', $config);
     }
 
-    public static function getMethodFromAction($action)
+    /* public static function getMethodFromAction($action)
     {
         return 'indexAction';
-    }
+    } */
 }

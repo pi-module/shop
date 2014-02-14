@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2014-02-10 18:18+0330\n"
+"POT-Creation-Date: 2014-02-14 09:40+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -32,6 +32,21 @@ msgstr "فهرست محصولات جدید"
 msgid "Number"
 msgstr "تعداد"
 
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:29
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:66
+msgid "Show price"
+msgstr "نمایش قیمت"
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:36
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:73
+msgid "Show More link to module page"
+msgstr "نمایش لینک ادامه به صفحه ماژول"
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:43
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:80
+msgid "Set More link to module page"
+msgstr "تنظیم لینک ادامه به صفحه ماژول"
+
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:53
 msgid "Random Product"
 msgstr "محصولات تصادفی"
@@ -48,17 +63,29 @@ msgstr "شاخه ها"
 msgid "Category list"
 msgstr "فهرست شاخه ها"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:22
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:22
-msgid "Out of stock"
-msgstr "نا موجود"
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:96
+msgid "Category show type"
+msgstr "نوع نمایش"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:27
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:27
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:102
+msgid "Simple list"
+msgstr "فهرست ساده"
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:103
+msgid "Advanced list"
+msgstr "فهرست پیشرفته"
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:20
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:20
 msgid "Add To cart"
 msgstr "خرید"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:38
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:38
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:24
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:24
+msgid "Out of stock"
+msgstr "نا موجود"
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:36
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:36
 msgid "More products"
 msgstr "محصولات بیشتر"

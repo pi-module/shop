@@ -45,6 +45,28 @@ return array(
             'controller'    => 'user',
             'action'        => 'index',
         ),
+
+        'category' => array(
+            'label'         => _t('Category list'),
+            'permission'    => array(
+                'resource'  => 'public',
+            ),
+            'route'         => 'shop',
+            'module'        => 'shop',
+            'controller'    => 'category',
+            'action'        => 'list',
+        ),
+
+        'tag' => array(
+            'label'         => _t('Tag list'),
+            'permission'    => array(
+                'resource'  => 'public',
+            ),
+            'route'         => 'shop',
+            'module'        => 'shop',
+            'controller'    => 'tag',
+            'action'        => 'list',
+        ),
     ),
     'admin' => array(
         'product' => array(
