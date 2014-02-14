@@ -52,11 +52,6 @@ class SearchController extends IndexController
     {
         // Get search
         $search = $_SESSION['shop']['search'];
-
-                echo '<pre>';
-                print_r($_SESSION['shop']['search']);
-                echo '</pre>';
-
         // Get info from url
         $module = $this->params('module');
         // Get config

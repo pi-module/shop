@@ -121,14 +121,12 @@ class Block
 
     public static function getTreeHtml($list)
     {
-        $html = '<ul>' . PHP_EOL;
+        $html = '<ul class="nav nav-pills">' . PHP_EOL;
         foreach ($list as $sub) {
             $html .= '<li>' . PHP_EOL;
+            $html .= '<a title="' . $sub['title'] . '" href="' . $sub['url'] . '">' . $sub['title'] . '</a>' . PHP_EOL;
             if (!empty($sub['children'])) {
-                $html .= '<a title="' . $sub['title'] . '" href="' . $sub['url'] . '">' . $sub['title'] . '</a>';
                 $html .= self::getTreeHtml($sub['children']);
-            } else {
-                $html .= '<a title="' . $sub['title'] . '" href="' . $sub['url'] . '">' . $sub['title'] . '</a>';
             }
             $html .= '</li>' . PHP_EOL;
         }

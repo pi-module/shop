@@ -132,25 +132,27 @@ class SearchForm  extends BaseForm
         // Set extra field
         if (!empty($this->field)) {
             foreach ($this->field as $field) {
-                if ($field['type'] == 'select') {
-                    $this->add(array(
-                        'name' => $field['id'],
-                        'type' => 'select',
-                        'options' => array(
-                            'label' => sprintf('%s (%s)', $field['title'], $field['type']),
-                            'value_options' => $this->makeArray($field['value']),
-                        ),
-                    ));
-                } else {
-                    $this->add(array(
-                        'name' => $field['id'],
-                        'options' => array(
-                            'label' => sprintf('%s (%s)', $field['title'], $field['type']),
-                        ),
-                        'attributes' => array(
-                            'type' => 'text',
-                        )
-                    ));
+                if ($field['search']) {
+                    if ($field['type'] == 'select') {
+                        $this->add(array(
+                            'name' => $field['id'],
+                            'type' => 'select',
+                            'options' => array(
+                                'label' => $field['title'],
+                                'value_options' => $this->makeArray($field['value']),
+                            ),
+                        ));
+                    } else {
+                        $this->add(array(
+                            'name' => $field['id'],
+                            'options' => array(
+                                'label' => $field['title'],
+                            ),
+                            'attributes' => array(
+                                'type' => 'text',
+                            )
+                        ));
+                    }
                 }
             }
         }

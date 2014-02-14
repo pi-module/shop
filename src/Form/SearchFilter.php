@@ -63,10 +63,12 @@ class SearchFilter extends InputFilter
         // Set extra field
         if (!empty($extra)) {
             foreach ($extra as $field) {
-                $this->add(array(
-                    'name' => $field['id'],
-                    'required' => false,
-                ));
+                if ($field['search']) {
+                    $this->add(array(
+                        'name' => $field['id'],
+                        'required' => false,
+                    ));
+                }
             }
         }
     }

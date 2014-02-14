@@ -1,9 +1,6 @@
 <?php if(isset($productItem['price']) && $config['view_price'] && $config['order_method'] != 'inactive') { ?>
 <div class="productPrice clearfix">
     <ul class="list-unstyled">
-        <?php if(!empty($productItem['price_title'])) { ?>
-        <li><strong><?php echo $config['view_price_title']; ?> : </strong><?php echo $this->escape($productItem['price_title']); ?></li>
-        <?php } ?>
         <li><strong><?php _e('Stock status'); ?> : </strong>
         <?php if($productItem['stock'] > 0) { ?>
             <span class="text-success"><?php _e('In stock'); ?><?php if($config['view_stock']) { ?> (<?php echo _number($productItem['stock']); ?>)<?php } ?></span>
@@ -11,6 +8,9 @@
             <span class="text-error"><?php _e('Out of stock'); ?></span>
         <?php } ?>
         </li>
+        <?php if(!empty($productItem['price_title'])) { ?>
+        <li><strong><?php echo $config['view_price_title']; ?> : </strong><?php echo $this->escape($productItem['price_title']); ?></li>
+        <?php } ?>
         <?php if($productItem['stock'] > 0) { ?>
         <li>
             <strong><?php _e('Price'); ?> : </strong>

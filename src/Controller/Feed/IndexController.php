@@ -32,7 +32,8 @@ class IndexController extends FeedController
         foreach ($rowset as $row) {
             $entry = array();
             $entry['title'] = $row->title;
-            $entry['description'] = $row->summary;
+            $description = (empty($row->summary)) ? $row->description : $row->summary;
+            $entry['description'] = strtolower(trim($description));
             $entry['date_modified'] = (int)$row->time_create;
             $entry['link'] = Pi::url(Pi::service('url')->assemble('shop', array(
                 'module'        => $this->getModule(),

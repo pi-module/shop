@@ -26,9 +26,11 @@
 					<div class="productImage gallery col-md-4">
 						<a href="<?php echo $productItem['largeUrl']; ?>" title="<?php echo $this->escape($productItem['title']); ?>"><img src="<?php echo $productItem['mediumUrl']; ?>" alt="<?php echo $this->escape($productItem['title']); ?>" /></a>
 					</div>
-					<div class="col-md-8">
-                		<?php include $this->template('front/price'); ?>
+					<div class="col-md-4">
 						<?php include $this->template('front/extra'); ?>
+					</div>
+					<div class="col-md-4">
+                		<?php include $this->template('front/price'); ?>
 					</div>
 				</div>
 				<div class="productBody">
@@ -47,7 +49,6 @@
 	    				</div>
 					</div>
 				</div>
-
         	</div>
 		</div>
 	</div>
