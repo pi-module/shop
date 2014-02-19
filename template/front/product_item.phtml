@@ -40,6 +40,7 @@
 						<div class="productDescription"><?php echo $productItem['description']; ?></div>
 						<?php include $this->template('front/category'); ?>
 			    		<?php include $this->template('front/tag'); ?>
+			    		<?php if (!empty($vote)) { include $this->template('module/vote:front/votebar'); } ?>
 			    		<div class="social-list">
 							<ul class="list-inline">
 								<?php if($config['social_facebook']) { ?><li class="social-facebook"><?php echo $this->facebook(); ?></li><?php } ?>

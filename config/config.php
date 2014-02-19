@@ -34,6 +34,10 @@ return array(
             'name' => 'file'
         ),
         array(
+            'title' => __('Vote'),
+            'name' => 'vote'
+        ),
+        array(
             'title' => __('Search'),
             'name' => 'search'
         ),
@@ -152,6 +156,14 @@ return array(
         'view_stock' => array(
             'category' => 'view',
             'title' => __('Show stock count'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_tag' => array(
+            'category' => 'view',
+            'title' => __('Show Tags'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -321,6 +333,15 @@ return array(
             'edit' => 'textarea',
             'filter' => 'string',
             'value' => 'jpg,jpeg,png,gif,avi,flv,mp3,mp4,pdf,docs,xdocs,zip,rar'
+        ),
+        // Vote
+        'vote_bar' => array(
+            'category' => 'vote',
+            'title' => __('Use vote system'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
         ),
         // Search 
         'search_type' => array(

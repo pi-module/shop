@@ -80,7 +80,20 @@ class ProductController extends IndexController
             $this->view()->assign('review', $review);
         }
         // Set tag
-        $tag = Pi::service('tag')->get($module, $product['id'], '');
+        if ($config['view_tag']) {
+            $tag = Pi::service('tag')->get($module, $product['id'], '');
+            $this->view()->assign('tag', $tag);  
+        }
+        // Set vote
+        if ($config['vote_bar'] && Pi::service('module')->isActive('vote')) {
+            $vote['point'] = $product['point'];
+            $vote['count'] = $product['count'];
+            $vote['item'] = $product['id'];
+            $vote['table'] = 'product';
+            $vote['module'] = $module;
+            $vote['type'] = 'plus';
+            $this->view()->assign('vote', $vote);
+        }
         // Set view
         $this->view()->headTitle($product['seo_title']);
         $this->view()->headDescription($product['seo_description'], 'set');
@@ -89,7 +102,6 @@ class ProductController extends IndexController
         $this->view()->assign('productItem', $product);
         $this->view()->assign('categoryItem', $product['categories']);
         $this->view()->assign('config', $config);
-        $this->view()->assign('tag', $tag);
     }
 
     public function printAction()
