@@ -38,6 +38,10 @@ return array(
             'name' => 'vote'
         ),
         array(
+            'title' => __('Favourite'),
+            'name' => 'favourite'
+        ),
+        array(
             'title' => __('Search'),
             'name' => 'search'
         ),
@@ -338,6 +342,15 @@ return array(
         'vote_bar' => array(
             'category' => 'vote',
             'title' => __('Use vote system'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        // favourite
+        'favourite_bar' => array(
+            'category' => 'favourite',
+            'title' => __('Use favourite system'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',

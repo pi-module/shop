@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2014-02-19 14:59+0330\n"
+"POT-Creation-Date: 2014-02-19 17:28+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -159,7 +159,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ProductForm.php:98
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ReviewForm.php:61
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/CategoryForm.php:89
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_item.phtml:38
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_item.phtml:40
 msgid "Description"
 msgstr ""
 
@@ -274,7 +274,7 @@ msgid "Price"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ProductForm.php:217
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:150
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:154
 msgid "Price title"
 msgstr ""
 
@@ -460,7 +460,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/UpdateOrderForm.php:41
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/OrderSettingForm.php:41
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/permission.php:70
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:45
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:49
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_view.phtml:29
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:15
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/order_index.phtml:68
@@ -470,7 +470,7 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ExtraForm.php:61
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/AttachForm.php:83
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:380
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:393
 msgid "Online"
 msgstr ""
 
@@ -479,7 +479,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/Element/Gateway.php:30
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:262
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:527
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:381
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:394
 msgid "Offline"
 msgstr ""
 
@@ -531,7 +531,7 @@ msgid "Value"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ExtraForm.php:104
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:41
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:45
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_extra.phtml:32
 msgid "Search"
 msgstr ""
@@ -656,7 +656,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:740
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:888
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/CheckoutController.php:166
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/ProductController.php:167
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/ProductController.php:175
 msgid "Invalid data, please check and re-submit."
 msgstr ""
 
@@ -882,12 +882,12 @@ msgid "Review data saved successfully."
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:885
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/ProductController.php:164
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/ProductController.php:172
 msgid "Review data not saved."
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:901
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/ProductController.php:175
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/ProductController.php:183
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_nav.phtml:6
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_index.phtml:44
 msgid "Review"
@@ -998,11 +998,11 @@ msgid "Search result"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/ProductController.php:45
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/ProductController.php:124
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/ProductController.php:132
 msgid "The product not found."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/ProductController.php:155
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/ProductController.php:163
 msgid "Review data saved successfully. And it show after admin review"
 msgstr ""
 
@@ -1050,244 +1050,252 @@ msgstr ""
 msgid "Vote"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:53
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:62
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:41
+msgid "Favourite"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:57
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:66
 msgid "Perpage"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:70
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:74
 msgid "Show related products"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:78
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:82
 msgid "Show extra fields"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:86
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:94
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:90
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:98
 msgid "Show product attacehed files"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:102
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:106
 msgid "Show product price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:110
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:114
 msgid "Show official review"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:118
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:122
 msgid "Show user review"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:126
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:130
 msgid "Show submit review"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:134
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:138
 msgid "Show special"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:142
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:146
 msgid "Number of products on special"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:154
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:158
 msgid "Volume"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:158
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:162
 msgid "Show stock count"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:166
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:170
 msgid "Show Tags"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:175
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:179
 msgid "Image Size"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:183
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:187
 msgid "Image path"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:191
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:195
 msgid "Image Extension"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:199
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:203
 msgid "Large Image height"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:207
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:211
 msgid "Large Image width"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:215
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:219
 msgid "Medium Image height"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:223
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:227
 msgid "Medium Image width"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:231
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:235
 msgid "Thumb Image height"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:239
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:243
 msgid "Thumb Image width"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:247
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:251
 msgid "Use lightbox"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:255
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:259
 msgid "Add Watermark"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:263
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:267
 msgid "Watermark Image"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:270
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:274
 msgid "Watermark Positio"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:276
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:280
 msgid "Top Left"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:277
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:281
 msgid "Top Right"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:278
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:282
 msgid "Bottom Left"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:279
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:283
 msgid "Bottom Right"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:290
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:294
 msgid "Show Google Plus"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:298
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:302
 msgid "Show facebook"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:306
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:310
 msgid "Show Twitter"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:315
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:319
 msgid "File Size"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:323
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:327
 msgid "File path"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:331
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:335
 msgid "File Extension"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:340
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:344
 msgid "Use vote system"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:349
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:353
+msgid "Use favourite system"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:362
 msgid "Show search type"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:357
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:370
 msgid "Show search price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:365
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:378
 msgid "Show search category"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:373
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:386
 msgid "Order method"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:379
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:392
 msgid "Both"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:382
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:395
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_review.phtml:28
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_review.phtml:69
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_review_pending.phtml:29
 msgid "Inactive"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:392
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:405
 msgid "Code Prefix"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:400
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:413
 msgid "List of mails for send order notification"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:401
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:414
 msgid "Use `|` as delimiter to separate mails"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:408
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:421
 msgid "Show name"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:416
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:429
 msgid "Show email"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:424
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:437
 msgid "Show phone"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:432
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:445
 msgid "Show mobile"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:440
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:453
 msgid "Show company"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:448
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:461
 msgid "Show address"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:456
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:469
 msgid "Show country"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:464
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:477
 msgid "Show city"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:472
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:485
 msgid "Show Zip code"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:480
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:493
 msgid "Show packing"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:488
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:501
 msgid "Show location"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:496
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:509
 msgid "Show delivery"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:504
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/config.php:517
 msgid "Show payment"
 msgstr ""
 
