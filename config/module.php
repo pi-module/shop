@@ -11,7 +11,8 @@
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
 return array(
-    'meta'  => array(
+    // Module meta
+    'meta'         => array(
         'title'         => __('Shop'),
         'description'   => __('Shop module for pi.'),
         'version'       => '0.1.0',
@@ -19,14 +20,14 @@ return array(
         'logo'          => 'image/logo.png',
         'readme'        => 'docs/readme.txt',
         'demo'          => 'http://pialog',
-        'icon'          => 'fa fa-shopping-cart',
+        'icon'          => 'fa-shopping-cart',
     ),
     // Author information
-    'author'    => array(
-        'dev'       => 'Hossein Azizabadi',
-        'email'     => 'azizabadi@faragostaresh.com',
-        'architect' => '@voltan',
-        'design'    => '@voltan'
+    'author'        => array(
+        'Name'          => 'Hossein Azizabadi',
+        'email'         => 'azizabadi@faragostaresh.com',
+        'website'       => 'http://www.xoopsengine.org',
+        'credits'       => 'Pi Engine Team'
     ),
     // Resource
     'resource' => array(

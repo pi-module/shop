@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2014-02-10 18:25+0330\n"
+"POT-Creation-Date: 2014-02-19 10:57+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -32,6 +32,21 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:29
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:66
+msgid "Show price"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:36
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:73
+msgid "Show More link to module page"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:43
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:80
+msgid "Set More link to module page"
+msgstr ""
+
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:53
 msgid "Random Product"
 msgstr ""
@@ -48,17 +63,29 @@ msgstr ""
 msgid "Category list"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:22
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:22
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:96
+msgid "Category show type"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:102
+msgid "Simple list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/block.php:103
+msgid "Advanced list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:20
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:20
 msgid "Add To cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:26
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:26
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:24
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:24
 msgid "Out of stock"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:38
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:38
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-random.phtml:36
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/block/product-new.phtml:36
 msgid "More products"
 msgstr ""

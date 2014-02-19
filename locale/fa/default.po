@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2014-02-14 09:41+0330\n"
+"POT-Creation-Date: 2014-02-19 10:57+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -159,7 +159,7 @@ msgstr "خلاصه"
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ProductForm.php:98
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ReviewForm.php:61
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/CategoryForm.php:89
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_item.phtml:34
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/product_item.phtml:38
 msgid "Description"
 msgstr "توضیحات"
 
@@ -318,7 +318,7 @@ msgstr "فیلد های اضافی"
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ReviewForm.php:101
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/ExtraForm.php:126
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/SpecialForm.php:115
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/SearchForm.php:162
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/SearchForm.php:164
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/LocationForm.php:131
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/RelatedForm.php:77
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Form/CategoryForm.php:216
@@ -662,7 +662,7 @@ msgstr "اطلاعات اشتباه، لطفا بررسی کنید و دوبار
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:176
 msgid "Add a location"
-msgstr "اضافه کردن مکان"
+msgstr "مکان جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:242
 msgid "Delivery data saved successfully."
@@ -674,7 +674,7 @@ msgstr "اطلاعات روش تحویل ذخیره نشد"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CheckoutController.php:270
 msgid "Add a delivery"
-msgstr "اضافه کردن روش تحویل"
+msgstr "روش تحویل جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/AttachController.php:59
 msgid "No file attached"
@@ -751,7 +751,7 @@ msgstr "اطلاعات شاخه با موفقیت ذخیره شد"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CategoryController.php:206
 msgid "Add a category"
-msgstr "اضافه کردن شاخه"
+msgstr "شاخه جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/CategoryController.php:231
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:791
@@ -779,7 +779,7 @@ msgstr "اطلاعات محصول ذخیره نشد"
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:322
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_index.phtml:13
 msgid "Add product"
-msgstr "اضافه کردن محصول"
+msgstr "محصول جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:358
 msgid "This product deleted"
@@ -842,7 +842,7 @@ msgstr "اطلاعات فیلد اضافه ذخیره نشد"
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:622
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_extra.phtml:10
 msgid "Add Extra"
-msgstr "اضافه کردن فیلد"
+msgstr "فیلد جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:655
 msgid "Selected field delete"
@@ -863,7 +863,7 @@ msgstr "اطلاعات محصول ویژه ذخیره نشد"
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:753
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_special.phtml:6
 msgid "Add Special"
-msgstr "اضافه کردن ویژه"
+msgstr "محصول ویژه جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Admin/ProductController.php:765
 msgid "Selected special delete"
@@ -992,7 +992,7 @@ msgstr "همه محصولات برچسب %s"
 msgid "Your search successfully. Go to result page"
 msgstr "جستجوی شما با موفقیت انجام شد، نتایج آن را مشاهده می نمایید"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/SearchController.php:134
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/src/Controller/Front/SearchController.php:129
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_related.phtml:32
 msgid "Search result"
 msgstr "نتایج جستجو"
@@ -1021,11 +1021,11 @@ msgstr "پیوست"
 msgid "Logs"
 msgstr "گزارشات"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/module.php:15
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/module.php:16
 msgid "Shop"
 msgstr "فروشگاه"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/module.php:16
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/config/module.php:17
 msgid "Shop module for pi."
 msgstr "سیستم فروشگاه"
 
@@ -1413,7 +1413,7 @@ msgstr "پرینت"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/category_index.phtml:4
 msgid "Add Category"
-msgstr "اضافه کردن شاخه"
+msgstr "شاخه جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/category_index.phtml:6
 msgid "List of Categores"
@@ -1536,7 +1536,7 @@ msgstr "بررسی های تخصصی از %s"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_review.phtml:8
 msgid "Add official review"
-msgstr "اضافه کردن بررسی تخصصی رسمی"
+msgstr "بررسی تخصصی رسمی جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/product_review.phtml:11
 msgid "Official Review"
@@ -1720,7 +1720,7 @@ msgstr "تنظیم به صورت پیشنهاد شده در حال انجام ا
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_delivery.phtml:8
 msgid "Add Delivery methods"
-msgstr "اضافه کردن روش تحویل"
+msgstr " روش تحویل جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_delivery.phtml:10
 msgid "List of Delivery methods"
@@ -1728,7 +1728,7 @@ msgstr "فهرست روش های تحویل"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_location.phtml:8
 msgid "Add Location"
-msgstr "اضافه کردن مکان"
+msgstr "مکان جدید"
 
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/admin/checkout_location.phtml:10
 msgid "List of Location"
@@ -1750,15 +1750,15 @@ msgstr "عنوان محصول"
 msgid "View order"
 msgstr "نمایش سفارش"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:7
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:4
 msgid "Stock status"
 msgstr "وضعیت"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:9
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:6
 msgid "In stock"
 msgstr "موجود"
 
-#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:11
+#: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/price.phtml:8
 #: /var/www/html/local/pi/pi-develop/usr/module/shop/template/front/box.phtml:22
 msgid "Out of stock"
 msgstr "نا موجود"

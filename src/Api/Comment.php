@@ -13,7 +13,7 @@
 namespace Module\Shop\Api;
 
 use Pi;
-use Pi\Application\AbstractComment;
+use Pi\Application\Api\AbstractComment;
 
 class Comment extends AbstractComment
 {
