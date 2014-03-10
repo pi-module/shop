@@ -96,20 +96,6 @@ class CategoryForm  extends BaseForm
                 'description' => '',
             )
         ));
-        // description_footer
-        $this->add(array(
-            'name' => 'description_footer',
-            'options' => array(
-                'label' => __('Footer description'),
-            ),
-            'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '5',
-                'cols' => '40',
-                
-                'description' => '',
-            )
-        ));
         // status
         $this->add(array(
             'name' => 'status',

@@ -204,7 +204,7 @@ class AttachController extends ActionController
                     // Set info
                     $file = $uploader->getUploaded('file');
                     $type = $this->fileType($file);
-                    $title = $this->fileTitle($file);
+                    $title = $this->fileTitle($product['title'], $file);
                     $this->filePath($type, $path, $file);
                     // Set save array
                     $values['file'] = $file;
@@ -267,9 +267,10 @@ class AttachController extends ActionController
         );
     }
 
-    protected function fileTitle($file)
+    protected function fileTitle($title, $file)
     {
-        return pathinfo($file, PATHINFO_FILENAME);
+        $file = pathinfo($file, PATHINFO_FILENAME);
+        return sprintf('%s %s', $title, $file);
     }    
 
     protected function fileType($file)

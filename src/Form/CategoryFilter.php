@@ -66,16 +66,6 @@ class CategoryFilter extends InputFilter
                 ),
             ),
         ));
-        // description_footer
-        $this->add(array(
-            'name' => 'description_footer',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
         // status
         $this->add(array(
             'name' => 'status',

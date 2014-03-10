@@ -41,7 +41,6 @@ CREATE TABLE `{category}` (
   `image` varchar(255) NOT NULL,
   `path` varchar(16) NOT NULL,
   `description` text,
-  `description_footer` text,
   `seo_title` varchar(255) NOT NULL,
   `seo_keywords` varchar(255) NOT NULL,
   `seo_description` varchar(255) NOT NULL,

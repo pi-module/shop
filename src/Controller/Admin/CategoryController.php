@@ -31,7 +31,7 @@ class CategoryController extends ActionController
      * Category Columns
      */
     protected $categoryColumns = array(
-    	'id', 'parent', 'title', 'slug', 'image', 'path', 'description','description_footer',
+    	'id', 'parent', 'title', 'slug', 'image', 'path', 'description',
     	'time_create', 'time_update', 'seo_title', 'seo_keywords', 'seo_description', 'setting', 'status'
     );
 
@@ -54,6 +54,11 @@ class CategoryController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
+            $list[$row->id]['url'] = $this->url('shop', array(
+                'module'        => $module,
+                'controller'    => 'category',
+                'slug'          => $list[$row->id]['slug'],
+            ));
         }
         // Go to update page if empty
         if (empty($list)) {
