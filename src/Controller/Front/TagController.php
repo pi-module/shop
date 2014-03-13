@@ -55,10 +55,18 @@ class TagController extends IndexController
         );
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
+        // Set header and title
+        $title = sprintf(__('All products by %s tag'), $slug);
+        $seoTitle = Pi::api('text', 'shop')->title($title);
+        $seoDescription = Pi::api('text', 'shop')->description($title);
+        $seoKeywords = Pi::api('text', 'shop')->keywords($title);
         // Set view
+        $this->view()->headTitle($seoTitle);
+        $this->view()->headDescription($seoDescription, 'set');
+        $this->view()->headKeywords($seoKeywords, 'set');
         $this->view()->setTemplate('product_list');
         $this->view()->assign('productList', $productList);
-        $this->view()->assign('productTitle', sprintf(__('All products by %s tag'), $slug));
+        $this->view()->assign('productTitle', $title);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
     }
@@ -81,8 +89,17 @@ class TagController extends IndexController
             	'slug' => urldecode($tag['term'])
             	));
         }
+        // Set header and title
+        $title = __('List of all used tags on shop');
+        $seoTitle = Pi::api('text', 'shop')->title($title);
+        $seoDescription = Pi::api('text', 'shop')->description($title);
+        $seoKeywords = Pi::api('text', 'shop')->keywords($title);
         // Set view
+        $this->view()->headTitle($seoTitle);
+        $this->view()->headDescription($seoDescription, 'set');
+        $this->view()->headKeywords($seoKeywords, 'set');
         $this->view()->setTemplate('tag_list');
+        $this->view()->assign('title', $title);
         $this->view()->assign('tagList', $tagList);
     }
 }

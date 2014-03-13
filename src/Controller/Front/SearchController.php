@@ -25,6 +25,8 @@ class SearchController extends IndexController
 	public function indexAction()
     {
     	$option = array();
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
         // Get extra field
         $fields = Pi::api('extra', 'shop')->Get();
         $option['field'] = $fields['extra'];
@@ -44,6 +46,9 @@ class SearchController extends IndexController
     		unset($_SESSION['shop']['search']);
     	}
     	// Set view
+        $this->view()->headTitle($config['text_title_search']);
+        $this->view()->headDescription($config['text_description_search'], 'set');
+        $this->view()->headKeywords($config['text_keywords_search'], 'set');
         $this->view()->setTemplate('search_form');
         $this->view()->assign('form', $form);
     }
@@ -123,10 +128,24 @@ class SearchController extends IndexController
             );
         // Get paginator
         $paginator = $this->searchPaginator($template, $where);
+        // Set header and title
+        if (isset($search['title']) 
+            && !empty($search['title']))
+        {
+            $title = sprintf(__('Search result of %s'), );
+        } else {
+            $title = __('Search result');
+        }
+        $seoTitle = Pi::api('text', 'shop')->title($title);
+        $seoDescription = Pi::api('text', 'shop')->description($title);
+        $seoKeywords = Pi::api('text', 'shop')->keywords($title);
         // Set view
+        $this->view()->headTitle($seoTitle);
+        $this->view()->headDescription($seoDescription, 'set');
+        $this->view()->headKeywords($seoKeywords, 'set');
         $this->view()->setTemplate('product_list');
         $this->view()->assign('productList', $productList);
-        $this->view()->assign('productTitle', __('Search result'));
+        $this->view()->assign('productTitle', $title);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
     }	

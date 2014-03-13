@@ -17,7 +17,7 @@
                             <strong><?php echo $this->escape($product['price_view']); ?></strong>
                         </div>
                         <div class="pull-right">
-                            <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['cartUrl']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-shopping-cart"></i> <?php echo _b('Add To cart'); ?></a>
+                            <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> <?php echo _b('View'); ?></a>
                         </div>
                         <?php } else { ?>
                         <div class="label label-danger">

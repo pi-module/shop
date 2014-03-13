@@ -49,6 +49,10 @@ return array(
             'title' => __('Order'),
             'name' => 'order'
         ),
+        array(
+            'title' => __('Texts'),
+            'name' => 'text'
+        ),
     ),
     'item' => array(
     	// Admin
@@ -519,6 +523,55 @@ return array(
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
+        ),
+        // Texts
+        'text_title_homepage' => array(
+            'category' => 'text',
+            'title' => __('Module main title'),
+            'description' => __('Title for main page and all non-title pages'),
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'Newest products from this website'
+        ),
+        'text_description_homepage' => array(
+            'category' => 'text',
+            'title' => __('Module main description'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'Newest products from this website'
+        ),
+        'text_keywords_homepage' => array(
+            'category' => 'text',
+            'title' => __('Module main keywords'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'product,shop,online,website'
+        ),
+        'text_title_search' => array(
+            'category' => 'text',
+            'title' => __('Module search page title'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'Newest products from this website'
+        ),
+        'text_description_search' => array(
+            'category' => 'text',
+            'title' => __('Module search page description'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'Newest products from this website'
+        ),
+        'text_keywords_search' => array(
+            'category' => 'text',
+            'title' => __('Module search page keywords'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'product,shop,online,website'
         ),
     ),
 );
