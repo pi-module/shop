@@ -53,7 +53,7 @@ class CategoryController extends IndexController
             $this->view()->assign('specialTitle', __('Special products'));
         }
         // Set view
-        $this->view()->headTitle($pcategory['seo_title']);
+        $this->view()->headTitle($category['seo_title']);
         $this->view()->headDescription($category['seo_description'], 'set');
         $this->view()->headKeywords($category['seo_keywords'], 'set');
         $this->view()->setTemplate('product_list');
