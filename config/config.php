@@ -14,43 +14,43 @@
 return array(
     'category' => array(
         array(
-            'title' => __('Admin'),
+            'title' => _a('Admin'),
             'name' => 'admin'
         ),
         array(
-            'title' => __('View'),
+            'title' => _a('View'),
             'name' => 'view'
         ),
         array(
-            'title' => __('Image'),
+            'title' => _a('Image'),
             'name' => 'image'
         ),
         array(
-            'title' => __('Social'),
+            'title' => _a('Social'),
             'name' => 'social'
         ),
         array(
-            'title' => __('File'),
+            'title' => _a('File'),
             'name' => 'file'
         ),
         array(
-            'title' => __('Vote'),
+            'title' => _a('Vote'),
             'name' => 'vote'
         ),
         array(
-            'title' => __('Favourite'),
+            'title' => _a('Favourite'),
             'name' => 'favourite'
         ),
         array(
-            'title' => __('Search'),
+            'title' => _a('Search'),
             'name' => 'search'
         ),
         array(
-            'title' => __('Order'),
+            'title' => _a('Order'),
             'name' => 'order'
         ),
         array(
-            'title' => __('Texts'),
+            'title' => _a('Texts'),
             'name' => 'text'
         ),
     ),
@@ -58,7 +58,7 @@ return array(
     	// Admin
         'admin_perpage' => array(
             'category' => 'admin',
-            'title' => __('Perpage'),
+            'title' => _a('Perpage'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -67,7 +67,7 @@ return array(
         // View
         'view_perpage' => array(
             'category' => 'view',
-            'title' => __('Perpage'),
+            'title' => _a('Perpage'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -75,7 +75,7 @@ return array(
         ),
         'view_related' => array(
             'category' => 'view',
-            'title' => __('Show related products'),
+            'title' => _a('Show related products'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -83,7 +83,7 @@ return array(
         ),
         'view_extra' => array(
             'category' => 'view',
-            'title' => __('Show extra fields'),
+            'title' => _a('Show extra fields'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -91,7 +91,7 @@ return array(
         ),
         'view_attach' => array(
             'category' => 'view',
-            'title' => __('Show product attacehed files'),
+            'title' => _a('Show product attacehed files'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -99,7 +99,7 @@ return array(
         ),
         'view_incategory' => array(
             'category' => 'view',
-            'title' => __('Show product attacehed files'),
+            'title' => _a('Show product attacehed files'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -107,7 +107,7 @@ return array(
         ),
         'view_price' => array(
             'category' => 'view',
-            'title' => __('Show product price'),
+            'title' => _a('Show product price'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -115,7 +115,7 @@ return array(
         ),
         'view_review_official' => array(
             'category' => 'view',
-            'title' => __('Show official review'),
+            'title' => _a('Show official review'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -123,7 +123,7 @@ return array(
         ),
         'view_review_user' => array(
             'category' => 'view',
-            'title' => __('Show user review'),
+            'title' => _a('Show user review'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -131,7 +131,7 @@ return array(
         ),
         'view_review_submit' => array(
             'category' => 'view',
-            'title' => __('Show submit review'),
+            'title' => _a('Show submit review'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -139,7 +139,7 @@ return array(
         ),
         'view_special' => array(
             'category' => 'view',
-            'title' => __('Show special'),
+            'title' => _a('Show special'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -147,7 +147,7 @@ return array(
         ),
         'view_special_number' => array(
             'category' => 'view',
-            'title' => __('Number of products on special'),
+            'title' => _a('Number of products on special'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -155,15 +155,15 @@ return array(
         ),
         'view_price_title' => array(
             'category' => 'view',
-            'title' => __('Price title'),
+            'title' => _a('Price title'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'string',
-            'value' => __('Volume'),
+            'value' => _a('Volume'),
         ),
         'view_stock' => array(
             'category' => 'view',
-            'title' => __('Show stock count'),
+            'title' => _a('Show stock count'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -171,7 +171,7 @@ return array(
         ),
         'view_tag' => array(
             'category' => 'view',
-            'title' => __('Show Tags'),
+            'title' => _a('Show Tags'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -180,7 +180,7 @@ return array(
         // Image
         'image_size' => array(
             'category' => 'image',
-            'title' => __('Image Size'),
+            'title' => _a('Image Size'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -188,7 +188,7 @@ return array(
         ),
         'image_path' => array(
             'category' => 'image',
-            'title' => __('Image path'),
+            'title' => _a('Image path'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'string',
@@ -196,7 +196,7 @@ return array(
         ),
         'image_extension' => array(
             'category' => 'image',
-            'title' => __('Image Extension'),
+            'title' => _a('Image Extension'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'string',
@@ -204,7 +204,7 @@ return array(
         ),
         'image_largeh' => array(
             'category' => 'image',
-            'title' => __('Large Image height'),
+            'title' => _a('Large Image height'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -212,7 +212,7 @@ return array(
         ),
         'image_largew' => array(
             'category' => 'image',
-            'title' => __('Large Image width'),
+            'title' => _a('Large Image width'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -220,7 +220,7 @@ return array(
         ),
         'image_mediumh' => array(
             'category' => 'image',
-            'title' => __('Medium Image height'),
+            'title' => _a('Medium Image height'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -228,7 +228,7 @@ return array(
         ),
         'image_mediumw' => array(
             'category' => 'image',
-            'title' => __('Medium Image width'),
+            'title' => _a('Medium Image width'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -236,7 +236,7 @@ return array(
         ),
         'image_thumbh' => array(
             'category' => 'image',
-            'title' => __('Thumb Image height'),
+            'title' => _a('Thumb Image height'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -244,7 +244,7 @@ return array(
         ),
         'image_thumbw' => array(
             'category' => 'image',
-            'title' => __('Thumb Image width'),
+            'title' => _a('Thumb Image width'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -252,7 +252,7 @@ return array(
         ),
         'image_lightbox' => array(
             'category' => 'image',
-            'title' => __('Use lightbox'),
+            'title' => _a('Use lightbox'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -260,7 +260,7 @@ return array(
         ),
         'image_watermark' => array(
             'category' => 'image',
-            'title' => __('Add Watermark'),
+            'title' => _a('Add Watermark'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -268,23 +268,23 @@ return array(
         ),
         'image_watermark_source' => array(
             'category' => 'image',
-            'title' => __('Watermark Image'),
+            'title' => _a('Watermark Image'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'string',
             'value' => ''
         ),
         'image_watermark_position' => array(
-            'title' => __('Watermark Positio'),
+            'title' => _a('Watermark Positio'),
             'description' => '',
             'edit' => array(
                 'type' => 'select',
                 'options' => array(
                     'options' => array(
-                        'top-left' => __('Top Left'),
-                        'top-right' => __('Top Right'),
-                        'bottom-left' => __('Bottom Left'),
-                        'bottom-right' => __('Bottom Right'),
+                        'top-left' => _a('Top Left'),
+                        'top-right' => _a('Top Right'),
+                        'bottom-left' => _a('Bottom Left'),
+                        'bottom-right' => _a('Bottom Right'),
                     ),
                 ),
             ),
@@ -295,7 +295,7 @@ return array(
         // Social
         'social_gplus' => array(
             'category' => 'social',
-            'title' => __('Show Google Plus'),
+            'title' => _a('Show Google Plus'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -303,7 +303,7 @@ return array(
         ),
         'social_facebook' => array(
             'category' => 'social',
-            'title' => __('Show facebook'),
+            'title' => _a('Show facebook'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -311,7 +311,7 @@ return array(
         ),
         'social_twitter' => array(
             'category' => 'social',
-            'title' => __('Show Twitter'),
+            'title' => _a('Show Twitter'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -320,7 +320,7 @@ return array(
         // File
         'file_size' => array(
             'category' => 'file',
-            'title' => __('File Size'),
+            'title' => _a('File Size'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
@@ -328,7 +328,7 @@ return array(
         ),
         'file_path' => array(
             'category' => 'file',
-            'title' => __('File path'),
+            'title' => _a('File path'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'string',
@@ -336,7 +336,7 @@ return array(
         ),
         'file_extension' => array(
             'category' => 'file',
-            'title' => __('File Extension'),
+            'title' => _a('File Extension'),
             'description' => '',
             'edit' => 'textarea',
             'filter' => 'string',
@@ -345,7 +345,7 @@ return array(
         // Vote
         'vote_bar' => array(
             'category' => 'vote',
-            'title' => __('Use vote system'),
+            'title' => _a('Use vote system'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -354,7 +354,7 @@ return array(
         // favourite
         'favourite_bar' => array(
             'category' => 'favourite',
-            'title' => __('Use favourite system'),
+            'title' => _a('Use favourite system'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -363,7 +363,7 @@ return array(
         // Search 
         'search_type' => array(
             'category' => 'search',
-            'title' => __('Show search type'),
+            'title' => _a('Show search type'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -371,7 +371,7 @@ return array(
         ),
         'search_price' => array(
             'category' => 'search',
-            'title' => __('Show search price'),
+            'title' => _a('Show search price'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -379,7 +379,7 @@ return array(
         ),
         'search_category' => array(
             'category' => 'search',
-            'title' => __('Show search category'),
+            'title' => _a('Show search category'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -387,16 +387,16 @@ return array(
         ),
         // Order
         'order_method' => array(
-            'title' => __('Order method'),
+            'title' => _a('Order method'),
             'description' => '',
             'edit' => array(
                 'type' => 'select',
                 'options' => array(
                     'options' => array(
-                        'both' => __('Both'),
-                        'online' => __('Online'),
-                        'offline' => __('Offline'),
-                        'inactive' => __('Inactive'),
+                        'both' => _a('Both'),
+                        'online' => _a('Online'),
+                        'offline' => _a('Offline'),
+                        'inactive' => _a('Inactive'),
                     ),
                 ),
             ),
@@ -406,7 +406,7 @@ return array(
         ),
         'order_code_prefix' => array(
             'category' => 'order',
-            'title' => __('Code Prefix'),
+            'title' => _a('Code Prefix'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'string',
@@ -414,15 +414,15 @@ return array(
         ),
         'order_mail' => array(
             'category' => 'order',
-            'title' => __('List of mails for send order notification'),
-            'description' => __('Use `|` as delimiter to separate mails'),
+            'title' => _a('List of mails for send order notification'),
+            'description' => _a('Use `|` as delimiter to separate mails'),
             'edit' => 'textarea',
             'filter' => 'string',
             'value' => ''
         ),
         'order_name' => array(
             'category' => 'order',
-            'title' => __('Show name'),
+            'title' => _a('Show name'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -430,7 +430,7 @@ return array(
         ),
         'order_email' => array(
             'category' => 'order',
-            'title' => __('Show email'),
+            'title' => _a('Show email'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -438,7 +438,7 @@ return array(
         ),
         'order_phone' => array(
             'category' => 'order',
-            'title' => __('Show phone'),
+            'title' => _a('Show phone'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -446,7 +446,7 @@ return array(
         ),
         'order_mobile' => array(
             'category' => 'order',
-            'title' => __('Show mobile'),
+            'title' => _a('Show mobile'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -454,7 +454,7 @@ return array(
         ),
         'order_company' => array(
             'category' => 'order',
-            'title' => __('Show company'),
+            'title' => _a('Show company'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -462,7 +462,7 @@ return array(
         ),
         'order_address' => array(
             'category' => 'order',
-            'title' => __('Show address'),
+            'title' => _a('Show address'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -470,7 +470,7 @@ return array(
         ),
         'order_country' => array(
             'category' => 'order',
-            'title' => __('Show country'),
+            'title' => _a('Show country'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -478,7 +478,7 @@ return array(
         ),
         'order_city' => array(
             'category' => 'order',
-            'title' => __('Show city'),
+            'title' => _a('Show city'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -486,7 +486,7 @@ return array(
         ),
         'order_zip' => array(
             'category' => 'order',
-            'title' => __('Show Zip code'),
+            'title' => _a('Show Zip code'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -494,7 +494,7 @@ return array(
         ),
         'order_packing' => array(
             'category' => 'order',
-            'title' => __('Show packing'),
+            'title' => _a('Show packing'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -502,7 +502,7 @@ return array(
         ),
         'order_location' => array(
             'category' => 'order',
-            'title' => __('Show location'),
+            'title' => _a('Show location'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -510,7 +510,7 @@ return array(
         ),
         'order_delivery' => array(
             'category' => 'order',
-            'title' => __('Show delivery'),
+            'title' => _a('Show delivery'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -518,7 +518,7 @@ return array(
         ),
         'order_payment' => array(
             'category' => 'order',
-            'title' => __('Show payment'),
+            'title' => _a('Show payment'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -527,15 +527,15 @@ return array(
         // Texts
         'text_title_homepage' => array(
             'category' => 'text',
-            'title' => __('Module main title'),
-            'description' => __('Title for main page and all non-title pages'),
+            'title' => _a('Module main title'),
+            'description' => _a('Title for main page and all non-title pages'),
             'edit' => 'text',
             'filter' => 'string',
             'value' => 'Newest products from this website'
         ),
         'text_description_homepage' => array(
             'category' => 'text',
-            'title' => __('Module main description'),
+            'title' => _a('Module main description'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'string',
@@ -543,7 +543,7 @@ return array(
         ),
         'text_keywords_homepage' => array(
             'category' => 'text',
-            'title' => __('Module main keywords'),
+            'title' => _a('Module main keywords'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'string',
@@ -551,7 +551,7 @@ return array(
         ),
         'text_title_search' => array(
             'category' => 'text',
-            'title' => __('Module search page title'),
+            'title' => _a('Module search page title'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'string',
@@ -559,7 +559,7 @@ return array(
         ),
         'text_description_search' => array(
             'category' => 'text',
-            'title' => __('Module search page description'),
+            'title' => _a('Module search page description'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'string',
@@ -567,7 +567,7 @@ return array(
         ),
         'text_keywords_search' => array(
             'category' => 'text',
-            'title' => __('Module search page keywords'),
+            'title' => _a('Module search page keywords'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'string',

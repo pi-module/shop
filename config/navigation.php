@@ -13,7 +13,7 @@
 return array(
     'front'   => array(
         'index' => array(
-            'label'         => _t('Index'),
+            'label'         => _a('Index'),
             'permission'    => array(
                 'resource'  => 'public',
             ),
@@ -25,7 +25,7 @@ return array(
 
 
         'search' => array(
-            'label'         => _t('Search'),
+            'label'         => _a('Search'),
             'permission'    => array(
                 'resource'  => 'search',
             ),
@@ -36,7 +36,7 @@ return array(
         ),
 
         'user' => array(
-            'label'         => _t('My Order'),
+            'label'         => _a('My Orders'),
             'permission'    => array(
                 'resource'  => 'user',
             ),
@@ -47,7 +47,7 @@ return array(
         ),
 
         'category' => array(
-            'label'         => _t('Category list'),
+            'label'         => _a('Category list'),
             'permission'    => array(
                 'resource'  => 'public',
             ),
@@ -58,7 +58,7 @@ return array(
         ),
 
         'tag' => array(
-            'label'         => _t('Tag list'),
+            'label'         => _a('Tag list'),
             'permission'    => array(
                 'resource'  => 'public',
             ),
@@ -70,7 +70,7 @@ return array(
     ),
     'admin' => array(
         'product' => array(
-            'label'         => _t('Product'),
+            'label'         => _a('Product'),
             'permission'    => array(
                 'resource'  => 'product',
             ),
@@ -81,7 +81,7 @@ return array(
         ),
 
         'category' => array(
-            'label'         => _t('Category'),
+            'label'         => _a('Category'),
             'permission'    => array(
                 'resource'  => 'category',
             ),
@@ -92,7 +92,7 @@ return array(
         ),
 
         'attach' => array(
-            'label'         => _t('Attach'),
+            'label'         => _a('Attach'),
             'permission'    => array(
                 'resource'  => 'attach',
             ),
@@ -103,7 +103,7 @@ return array(
         ),
 
         'order' => array(
-            'label'         => _t('Order'),
+            'label'         => _a('Orders'),
             'permission'    => array(
                 'resource'  => 'order',
             ),
@@ -114,7 +114,7 @@ return array(
         ),
 
         'checkout' => array(
-            'label'         => _t('Checkout'),
+            'label'         => _a('Checkout'),
             'permission'    => array(
                 'resource'  => 'checkout',
             ),
@@ -125,7 +125,7 @@ return array(
         ),
 
         'log' => array(
-            'label'         => _t('Logs'),
+            'label'         => _a('Logs'),
             'permission'    => array(
                 'resource'  => 'log',
             ),
@@ -136,7 +136,7 @@ return array(
         ),
 
         'tools' => array(
-            'label'         => _t('Tools'),
+            'label'         => _a('Tools'),
             'permission'    => array(
                 'resource'  => 'tools',
             ),

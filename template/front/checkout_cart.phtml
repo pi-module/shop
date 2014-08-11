@@ -79,7 +79,7 @@
         },
         removeAction: function(e) {
             var tar = $(e.target);
-            if (confirm('<?php echo _a('Are you sure to delete this product from your cart? '); ?>')) {
+            if (confirm('<?php echo _e('Are you sure to delete this product from your cart? '); ?>')) {
                 $.getJSON(tar.attr("data-link")).done(function(result){
                     if(result.ajaxStatus==1){
                         if (result.actionName=='remove'){

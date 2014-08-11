@@ -14,33 +14,33 @@ return array(
     // Front section
     'front' => array(
         'public'    => array(
-            'title'         => _t('Global public resource'),
+            'title'         => _a('Global public resource'),
             'access'        => array(
                 'guest',
                 'member',
             ),
         ),
         'search' => array(
-            'title'         => _t('Search'),
+            'title'         => _a('Search'),
             'access'        => array(
                 'guest',
                 'member',
             ),
         ),
         'user' => array(
-            'title'         => _t('User'),
+            'title'         => _a('User'),
             'access'        => array(
                 'member',
             ),
         ),
         'review' => array(
-            'title'         => _t('Review'),
+            'title'         => _a('Review'),
             'access'        => array(
                 'member',
             ),
         ),
         'checkout' => array(
-            'title'         => _t('Checkout'),
+            'title'         => _a('Checkout'),
             'access'        => array(
                 'member',
             ),
@@ -49,43 +49,43 @@ return array(
     // Admin section
     'admin' => array(
         'product'        => array(
-            'title'         => __('Product'),
+            'title'         => _a('Product'),
             'access'        => array(
                 //'admin',
             ),
         ),
         'category'      => array(
-            'title'         => __('Category'),
+            'title'         => _a('Category'),
             'access'        => array(
                 //'admin',
             ),
         ),
         'attach'         => array(
-            'title'         => __('Attach'),
+            'title'         => _a('Attach'),
             'access'        => array(
                 //'admin',
             ),
         ),
         'order'  => array(
-            'title'         => __('Order'),
+            'title'         => _a('Orders'),
             'access'        => array(
                 //'admin',
             ),
         ),
         'checkout'  => array(
-            'title'         => __('Checkout'),
+            'title'         => _a('Checkout'),
             'access'        => array(
                 //'admin',
             ),
         ),
         'log'  => array(
-            'title'         => __('Logs'),
+            'title'         => _a('Logs'),
             'access'        => array(
                 //'admin',
             ),
         ),
         'tools'  => array(
-            'title'         => __('Tools'),
+            'title'         => _a('Tools'),
             'access'        => array(
                 //'admin',
             ),
