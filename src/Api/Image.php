@@ -16,12 +16,36 @@ use Pi;
 use Pi\Application\Api\AbstractApi;
 
 /*
+ * Pi::api('image', 'shop')->rename($image, $prefix);
  * Pi::api('image', 'shop')->process($image, $path);
  */
 
 class Image extends AbstractApi
 {  
-
+    public function rename($image = '', $prefix = 'image_')
+    {
+        // Check image name
+        if (empty($image)) {
+            return $prefix . '%random%';
+        }
+        // Separating image name and extension
+        $name = pathinfo($image, PATHINFO_FILENAME);
+        $extension = pathinfo($image, PATHINFO_EXTENSION);
+        $extension = strtolower($extension);
+        // strip name
+        $name = _strip($name);
+        $name = strtolower(trim($name));
+        $name = preg_replace("/[^a-zA-Z0-9 ]+/", "", $name);
+        $name = array_filter(explode(' ', $name));
+        $name = implode('-', $name) . '.' . $extension;
+        // Check text length
+        if (mb_strlen($name,'UTF-8') < 8) {
+            $name = $prefix . '%random%';
+        }
+        // return
+        return $name;
+    }
+    
 	public function process($image, $path)
 	{
         $config = Pi::service('registry')->config->read($this->getModule(), 'image');

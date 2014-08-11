@@ -10,7 +10,6 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Shop\Controller\Admin;
 
 use Pi;
@@ -23,7 +22,8 @@ use Zend\Json\Json;
 
 class AttachController extends ActionController
 {
-    protected $FilePrefix = 'attach_';
+    protected $AttachPrefix = 'attach_';
+
     protected $attachColumns = array(
         'id', 'title', 'file', 'path', 'product', 'time_create', 'size', 'type', 'status', 'hits'
     );
@@ -53,10 +53,6 @@ class AttachController extends ActionController
             } else {
                 $file[$row->id]['link'] = Pi::url('upload/' . $this->config('file_path') . '/' . $file[$row->id]['type'] . '/' . $file[$row->id]['path'] . '/' . $file[$row->id]['file']);
             }
-        }
-        // Go to update page if empty
-        if (empty($file)) {
-            $this->jump(array('controller' => 'product', 'action' => 'index'), __('No file attached'));
         }
         // Set paginator
         $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
@@ -193,17 +189,24 @@ class AttachController extends ActionController
                 // start upload
                 $path = sprintf('%s/%s', date('Y'), date('m'));
                 $destination = Pi::path(sprintf('upload/%s/file/%s', $this->config('file_path'), $path));
+                // Get file type
+                $file = $this->request->getFiles();
+                $type = $this->fileType($file['file']['name']);
+                if ($type == 'image') {
+                    $fileName = Pi::api('image', 'shop')->rename($file['file']['name'], $this->AttachPrefix);
+                } else {
+                    $fileName = $this->AttachPrefix . '%random%';
+                }
                 // Upload
                 $uploader = new Upload;
                 $uploader->setDestination($destination);
-                $uploader->setRename($this->FilePrefix . '%random%');
+                $uploader->setRename($fileName);
                 $uploader->setExtension($this->config('file_extension'));
                 $uploader->setSize($this->config('file_size'));
                 if ($uploader->isValid()) {
                     $uploader->receive();
                     // Set info
                     $file = $uploader->getUploaded('file');
-                    $type = $this->fileType($file);
                     $title = $this->fileTitle($product['title'], $file);
                     $this->filePath($type, $path, $file);
                     // Set save array
@@ -270,6 +273,8 @@ class AttachController extends ActionController
     protected function fileTitle($title, $file)
     {
         $file = pathinfo($file, PATHINFO_FILENAME);
+        $file = array_filter(explode('-', $file));
+        $file = implode(' ', $file);
         return sprintf('%s %s', $title, $file);
     }    
 
