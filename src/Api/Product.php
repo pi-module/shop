@@ -30,6 +30,7 @@ use Zend\Json\Json;
  * Pi::api('product', 'shop')->viewPrice($price);
  * Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
  * Pi::api('product', 'shop')->canonizeProductLight($product);
+ * Pi::api('product', 'shop')->sitemap();
  */
 
 class Product extends AbstractApi
@@ -392,5 +393,27 @@ class Product extends AbstractApi
         unset($product['sales']);
         // return product
         return $product; 
+    }
+
+    public function sitemap()
+    {
+        if (Pi::service('module')->isActive('sitemap')) {
+            // Remove old links
+            Pi::api('sitemap', 'sitemap')->removeAll($this->getModule(), 'product');
+            // find and import
+            $columns = array('id', 'slug');
+            $select = Pi::model('product', $this->getModule())->select()->columns($columns);
+            $rowset = Pi::model('product', $this->getModule())->selectWith($select);
+            foreach ($rowset as $row) {
+                // Make url
+                $loc = Pi::url(Pi::service('url')->assemble('shop', array(
+                    'module'        => $this->getModule(),
+                    'controller'    => 'product',
+                    'slug'          => $row->slug,
+                )));
+                // Add to sitemap
+                Pi::api('sitemap', 'sitemap')->groupLink($loc, $row->status, $this->getModule(), 'product', $row->id);
+            }
+        }
     }
 }	

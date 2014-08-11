@@ -21,6 +21,7 @@ use Zend\Json\Json;
  * Pi::api('category', 'shop')->findFromCategory($category);
  * Pi::api('category', 'shop')->categoryList($parent);
  * Pi::api('category', 'shop')->categoryCount();
+ * Pi::api('category', 'shop')->sitemap();
  */
 
 class Category extends AbstractApi
@@ -99,5 +100,27 @@ class Category extends AbstractApi
         $select = Pi::model('category', $this->getModule())->select()->columns($columns);
         $count = Pi::model('category', $this->getModule())->selectWith($select)->current()->count;
         return $count;
+    }
+
+    public function sitemap()
+    {
+        if (Pi::service('module')->isActive('sitemap')) {
+            // Remove old links
+            Pi::api('sitemap', 'sitemap')->removeAll($this->getModule(), 'category');
+            // find and import
+            $columns = array('id', 'slug');
+            $select = Pi::model('category', $this->getModule())->select()->columns($columns);
+            $rowset = Pi::model('category', $this->getModule())->selectWith($select);
+            foreach ($rowset as $row) {
+                // Make url
+                $loc = Pi::url(Pi::service('url')->assemble('shop', array(
+                    'module'        => $this->getModule(),
+                    'controller'    => 'category',
+                    'slug'          => $row->slug,
+                )));
+                // Add to sitemap
+                Pi::api('sitemap', 'sitemap')->groupLink($loc, $row->status, $this->getModule(), 'category', $row->id);
+            }
+        }
     }
 }

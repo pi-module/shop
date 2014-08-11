@@ -274,16 +274,14 @@ class ProductController extends ActionController
                 }
                 // Add / Edit sitemap
                 if (Pi::service('module')->isActive('sitemap')) {
+                    // Set loc
                     $loc = Pi::url($this->url('shop', array(
-                        'module' => $module, 
-                        'controller' => 'product', 
-                        'slug' => $values['slug']
+                        'module'      => $module, 
+                        'controller'  => 'product', 
+                        'slug'        => $values['slug']
                     )));
-                    if (empty($values['id'])) {
-                        Pi::api('sitemap', 'sitemap')->add('shop', 'product', $row->id, $loc);
-                    } else {
-                        Pi::api('sitemap', 'sitemap')->update('shop', 'product', $row->id, $loc);
-                    }              
+                    // Update sitemap
+                    Pi::api('sitemap', 'sitemap')->singleLink($loc, $row->status, $module, 'product', $row->id);         
                 }
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
@@ -345,9 +343,9 @@ class ProductController extends ActionController
             // Remove sitemap
             if (Pi::service('module')->isActive('sitemap')) {
                 $loc = Pi::url($this->url('shop', array(
-                        'module' => $module, 
-                        'controller' => 'product', 
-                        'slug' => $row->slug
+                        'module'      => $module, 
+                        'controller'  => 'product', 
+                        'slug'        => $row->slug
                     )));
                 Pi::api('sitemap', 'sitemap')->remove($loc);
             }

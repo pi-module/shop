@@ -169,25 +169,16 @@ class CategoryController extends ActionController
                 }
                 $row->assign($values);
                 $row->save();
-                // Set category as page for dress up block 
-                /* if(empty($values['id'])) {
-	                $this->setPage($row->slug, $row->title);
-                } else {	
-                	$this->updatePage($category['slug'], $row->slug, $row->title);
-                }
-                Pi::service('registry')->page->clear($this->getModule());*/
                 // Add / Edit sitemap
                 if (Pi::service('module')->isActive('sitemap')) {
+                    // Set loc
                     $loc = Pi::url($this->url('shop', array(
-                        'module' => $module, 
-                        'controller' => 'category', 
-                        'slug' => $values['slug']
+                        'module'      => $module, 
+                        'controller'  => 'category', 
+                        'slug'        => $values['slug']
                     )));
-                    if (empty($values['id'])) {
-                        Pi::api('sitemap', 'sitemap')->add('shop', 'category', $row->id, $loc);
-                    } else {
-                        Pi::api('sitemap', 'sitemap')->update('shop', 'category', $row->id, $loc);
-                    }              
+                    // Update sitemap
+                    Pi::api('sitemap', 'sitemap')->singleLink($loc, $row->status, $module, 'category', $row->id);         
                 }
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
@@ -248,65 +239,4 @@ class CategoryController extends ActionController
             'message' => $message,
         );
     }
-
-    /**
-     * Add page settings to system
-     *
-     * @author Taiwen Jiang <taiwenjiang@tsinghua.org.cn>
-     * @param string $name
-     * @param string $title
-     * @return int
-     */
-    /* protected function setPage($name, $title)
-    {
-        $page = array(
-            'section'       => 'front',
-            'module'        => $this->getModule(),
-            'controller'    => 'category',
-            'action'        => $name,
-            'title'         => $title,
-            'block'         => 1,
-            'custom'        => 0,
-        );
-        $row = Pi::model('page')->createRow($page);
-        $row->save();
-        return $row->id;
-    } */
-
-    /**
-     * Remove from system page settings
-     *
-     * @author Taiwen Jiang <taiwenjiang@tsinghua.org.cn>
-     * @param stinr $name
-     * @return int
-     */
-    /* protected function removePage($name)
-    {
-        $where = array(
-            'section'       => 'front',
-            'module'        => $this->getModule(),
-            'controller'    => 'category',
-            'action'        => $name,
-        );
-        $count = Pi::model('page')->delete($where);
-        return $count;
-    } */
-    
-    /**
-     * Update from system page settings
-     *
-     * @param stinr $name
-     * @return int
-     */
-    /* protected function updatePage($old_action, $new_action, $new_title)
-    {
-        $where = array(
-            'section'       => 'front',
-            'module'        => $this->getModule(),
-            'controller'    => 'category',
-            'action'        => $old_action,
-        );
-        $count = Pi::model('page')->update(array('action' => $new_action, 'title' => $new_title), $where);
-        return $count;
-    } */
 }
