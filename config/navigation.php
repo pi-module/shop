@@ -134,5 +134,16 @@ return array(
             'controller'    => 'log',
             'action'        => 'index',
         ),
+
+        'tools' => array(
+            'label'         => _t('Tools'),
+            'permission'    => array(
+                'resource'  => 'tools',
+            ),
+            'route'         => 'admin',
+            'module'        => 'shop',
+            'controller'    => 'tools',
+            'action'        => 'index',
+        ),
     ),
 );

@@ -37,6 +37,10 @@ return array(
             'controller'    => 'log',
             'permission'    => 'log',
         ),
+        array(
+            'controller'    => 'tools',
+            'permission'    => 'tools',
+        ),
     ),
     // Front section
     'front' => array(

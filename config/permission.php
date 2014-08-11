@@ -84,5 +84,11 @@ return array(
                 //'admin',
             ),
         ),
+        'tools'  => array(
+            'title'         => __('Tools'),
+            'access'        => array(
+                //'admin',
+            ),
+        ),
     ),
 );

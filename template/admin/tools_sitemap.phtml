@@ -1,0 +1,9 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="shop">
+	<p>
+		<a class="btn btn-danger" title="<?php _e('Sitemap'); ?>" href="<?php echo $this->url('', array('action' => 'sitemap')); ?>"><i class="fa fa-sitemap"></i> <?php _e('Sitemap'); ?></a>
+	</p>
+	<h3><?php echo $this->escape($title); ?></h3>
+	<div class="alert alert-success"><?php echo $this->escape($message); ?></div>
+	<?php include $this->templateComponent('forms'); ?>
+</div>

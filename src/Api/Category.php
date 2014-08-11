@@ -108,7 +108,7 @@ class Category extends AbstractApi
             // Remove old links
             Pi::api('sitemap', 'sitemap')->removeAll($this->getModule(), 'category');
             // find and import
-            $columns = array('id', 'slug');
+            $columns = array('id', 'slug', 'status');
             $select = Pi::model('category', $this->getModule())->select()->columns($columns);
             $rowset = Pi::model('category', $this->getModule())->selectWith($select);
             foreach ($rowset as $row) {
