@@ -38,6 +38,7 @@ class Comment extends AbstractComment
 
         foreach ($items as $id) {
             $result[$id] = array(
+                'id'    => $products[$id]['id'],
                 'title' => $products[$id]['title'],
                 'url'   => $products[$id]['productUrl'],
                 'uid'   => $products[$id]['uid'],
