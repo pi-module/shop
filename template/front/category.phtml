@@ -3,16 +3,20 @@
 	<div class="page-header">
 		<h4><?php _e('Category list'); ?></h4>
 	</div>
+	<div class="text-center">
+	<div class="btn-group">
 	<?php foreach($categories as $category) { ?>
+	<?php if($category['image']) { ?>
 	<div class="col-sm-3 col-md-2">
-		<?php if($category['image']) { ?>
-        <div class="categoryImage text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><img class="img-thumbnail" src="<?php echo $category['thumbUrl']; ?>" alt="<?php echo $this->escape($category['title']); ?>" /></a></div>
+		<div class="categoryImage text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><img class="img-thumbnail" src="<?php echo $category['thumbUrl']; ?>" alt="<?php echo $this->escape($category['title']); ?>" /></a></div>
         <div class="categoryTitle text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a></div>
-		<?php } else { ?>
-		<div class="categoryTitle"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="fa fa-folder-open"></i> <?php echo $this->escape($category['title']); ?></a></div>
-		<?php } ?>
 	</div>
+	<?php } else { ?>
+	<a class="btn btn-default" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a>
 	<?php } ?>
+	<?php } ?>
+	</div>
+	</div>
 </div>
 <?php } elseif (isset($categoryItem) && !empty($categoryItem)) { ?>
 <div class="clearfix categoryItemList">
