@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2014-08-11 15:04+0330\n"
+"POT-Creation-Date: 2014-11-21 11:19+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -18,15 +18,18 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-random.phtml:20
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-new.phtml:20
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-tag.phtml:20
 msgid "View"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-random.phtml:24
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-new.phtml:24
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-tag.phtml:24
 msgid "Out of stock"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-random.phtml:36
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-new.phtml:36
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-tag.phtml:36
 msgid "More products"
 msgstr ""

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2014-08-11 15:04+0330\n"
+"POT-Creation-Date: 2014-11-21 11:19+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -52,9 +52,9 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:58
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:84
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:134
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:22
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:61
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:90
 msgid "Category"
 msgstr ""
 
@@ -91,14 +91,90 @@ msgid "My Orders"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:50
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:135
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:105
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:91
 msgid "Category list"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:61
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:112
 msgid "Tag list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:16
+msgid "New Product"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:17
+msgid "New Product list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:22
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:59
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:103
+msgid "Number"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:29
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:66
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:110
+msgid "Show price"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:36
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:73
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:117
+msgid "Show More link to module page"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:43
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:80
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:124
+msgid "Set More link to module page"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:53
+msgid "Random Product"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:54
+msgid "Random Product list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:90
+msgid "Tag Product"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:91
+msgid "Products from selected tag"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:96
+msgid "Tag term"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:140
+msgid "Category show type"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:146
+msgid "Simple list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:147
+msgid "Advanced list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/module.php:16
+msgid "Shop"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/module.php:17
+msgid "Shop module for pi."
+msgstr ""
+
+#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/comment.php:15
+msgid "Shop comments"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:55
@@ -115,62 +191,6 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:98
 msgid "Product review"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:16
-msgid "New Product"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:17
-msgid "New Product list"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:22
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:59
-msgid "Number"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:29
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:66
-msgid "Show price"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:36
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:73
-msgid "Show More link to module page"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:43
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:80
-msgid "Set More link to module page"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:53
-msgid "Random Product"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:54
-msgid "RandomProduct list"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:96
-msgid "Category show type"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:102
-msgid "Simple list"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:103
-msgid "Advanced list"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/module.php:16
-msgid "Shop"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/module.php:17
-msgid "Shop module for pi."
 msgstr ""
 
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:17
@@ -489,8 +509,4 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:570
 msgid "Module search page keywords"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/comment.php:15
-msgid "Shop comments"
 msgstr ""
