@@ -65,9 +65,10 @@ class SearchController extends IndexController
         $where = array('status' => 1);
         // Set title
         if (isset($search['title']) 
-            && !empty($search['title']))
-        {
+            && !empty($search['title'])
+        ) {
             switch ($search['type']) {
+                default:
                 case 1:
                     $where['title LIKE ?'] = '%' . $search['title'] . '%';
                     break;
@@ -118,7 +119,7 @@ class SearchController extends IndexController
             $where['id'] = $categoryId;
         } elseif (empty($categoryId) && !empty($extraId)) {
             $where['id'] = $extraId;
-        }
+        } 
         // Get product List
         $productList = $this->searchList($where);
         // Set paginator info
@@ -132,7 +133,7 @@ class SearchController extends IndexController
         if (isset($search['title']) 
             && !empty($search['title']))
         {
-            $title = sprintf(__('Search result of %s'), );
+            $title = sprintf(__('Search result of %s'), $search['title']);
         } else {
             $title = __('Search result');
         }

@@ -83,7 +83,7 @@ class Block
             // get products
             if (!empty($tagId)) {
                 // Set info
-                $where = array('status' => 1, 'product' => $tagId);
+                $where = array('status' => 1, 'id' => $tagId);
                 $order = array(new \Zend\Db\Sql\Predicate\Expression('RAND()'));
                 $limit = intval($block['number']);
                 // Get category list
