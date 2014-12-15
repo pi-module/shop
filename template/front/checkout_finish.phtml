@@ -2,6 +2,9 @@
 <div class="shop">
     <div class="alert alert-success">
         <h4><?php _e('Finish order payment'); ?></h4>
+        <?php if (isset($invoice) && !empty($invoice)) { ?>
+        <p><?php echo $invoice['log']['gatewayMessage']; ?></p>
+        <?php } ?>
         <p><?php echo sprintf(__('You pay your order at <strong>%s</strong> by <strong>%s</strong> gateway And your order id is <strong>%s</strong>'), $order['time_payment_view'], $order['payment_adapter'], $order['code']); ?></p>
     </div>
     <p>

@@ -473,12 +473,16 @@ class CheckoutController extends ActionController
         $order['order_link'] = $this->url('', array('module' => $module, 'controller' => 'user', 'action' => 'order', 'id' => $order['id']));
         $order['user_link'] = $this->url('', array('module' => $module, 'controller' => 'user'));
         $order['index_link'] = $this->url('', array('module' => $module, 'controller' => 'index'));
+        // Get invoice information
+        Pi::service('i18n')->load(array('module/payment', 'default'));
+        $invoice = Pi::api('invoice', 'payment')->getInvoiceFromItem('shop', 'order', $order['id']);
         // Send Mail
         Pi::api('order', 'shop')->sendUserMail($order);
         Pi::api('order', 'shop')->sendAdminMail($order);
         // Set view
         $this->view()->setTemplate('checkout_finish');
         $this->view()->assign('order', $order);
+        $this->view()->assign('invoice', $invoice);
     }
 
     protected function setEmpty()
