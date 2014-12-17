@@ -33,12 +33,6 @@ return array(
                 'member',
             ),
         ),
-        'review' => array(
-            'title'         => _a('Review'),
-            'access'        => array(
-                'member',
-            ),
-        ),
         'checkout' => array(
             'title'         => _a('Checkout'),
             'access'        => array(

@@ -23,7 +23,6 @@ CREATE TABLE `{product}` (
     `attach` tinyint(3) unsigned NOT NULL default '0',
     `extra` tinyint(3) unsigned NOT NULL default '0',
     `related` tinyint(3) unsigned NOT NULL default '0',
-    `review` tinyint(3) unsigned NOT NULL default '0',
     `recommended` tinyint(1) unsigned NOT NULL default '0',
     `stock` int(10) unsigned NOT NULL default '0',
     `stock_alert` int(10) unsigned NOT NULL default '0',
@@ -155,18 +154,6 @@ CREATE TABLE `{special}` (
     KEY `product` (`product`),
     KEY `time_publish` (`time_publish`),
     KEY `status` (`status`)
-);
-
-CREATE TABLE `{review}` (
-    `id` int(10) unsigned NOT NULL auto_increment,
-    `uid` int(10) unsigned NOT NULL default '0',
-    `product` int(10) unsigned NOT NULL default '0',
-    `title` varchar(255) NOT NULL default '',
-    `description` text,
-    `time_create` int(10) unsigned NOT NULL default '0',
-    `official` tinyint(1) unsigned NOT NULL default '0',
-    `status` tinyint(1) unsigned NOT NULL default '0',
-    PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `{order}` (

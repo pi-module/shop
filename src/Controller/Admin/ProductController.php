@@ -25,8 +25,6 @@ use Module\Shop\Form\ExtraForm;
 use Module\Shop\Form\ExtraFilter;
 use Module\Shop\Form\SpecialForm;
 use Module\Shop\Form\SpecialFilter;
-use Module\Shop\Form\ReviewForm;
-use Module\Shop\Form\ReviewFilter;
 use Zend\Json\Json;
 
 class ProductController extends ActionController
@@ -48,7 +46,7 @@ class ProductController extends ActionController
     	'id', 'title', 'slug', 'category', 'summary', 'description', 'seo_title', 
         'seo_keywords', 'seo_description', 'status', 'time_create', 'time_update', 
         'uid', 'hits', 'sales', 'image', 'path', 'comment', 'point', 'count', 
-        'favorite', 'attach', 'extra', 'related', 'review', 'recommended', 
+        'favorite', 'attach', 'extra', 'related', 'recommended', 
         'stock', 'stock_alert', 'price', 'price_discount', 'price_title'
     );
 
@@ -64,13 +62,6 @@ class ProductController extends ActionController
      */
     protected $specialColumns = array(
         'id', 'product', 'price', 'time_publish', 'time_expire', 'status'
-    );
-
-    /**
-     * review Columns
-     */
-    protected $reviewColumns = array(
-        'id', 'uid', 'product', 'title', 'description', 'time_create', 'official', 'status'
     );
 
     /**
@@ -323,7 +314,7 @@ class ProductController extends ActionController
         $this->view()->assign('message', $message);
     }
 
-    public function deleteAction()
+    /* public function deleteAction()
     {
         $this->view()->setTemplate(false);
         $id = $this->params('id');
@@ -340,8 +331,6 @@ class ProductController extends ActionController
             $this->getModel('field_data')->delete(array('product' => $row->id));
             // Special
             $this->getModel('special')->delete(array('product' => $row->id));
-            // Review
-            $this->getModel('review')->delete(array('product' => $row->id));
             // Remove sitemap
             if (Pi::service('module')->isActive('sitemap')) {
                 $loc = Pi::url($this->url('shop', array(
@@ -359,7 +348,7 @@ class ProductController extends ActionController
         } else {
             $this->jump(array('action' => 'index'), __('Please select product'));
         }
-    }
+    } */
 
     public function recommendAction()
     {
@@ -802,103 +791,5 @@ class ProductController extends ActionController
             'status' => $status,
             'message' => $message,
         );
-    }
-
-    public function reviewAction()
-    {
-        // Get id and status
-        $id = $this->params('id');
-        // find product
-        $product = $this->getModel('product')->find($id)->toArray();
-        // find official review
-        $reviewOfficial = Pi::api('review', 'shop')->official($product['id']);
-        // find list review
-        $reviewList = Pi::api('review', 'shop')->listReview($product['id']);
-        // Set view
-        $this->view()->setTemplate('product_review');
-        $this->view()->assign('reviewOfficial', $reviewOfficial);
-        $this->view()->assign('reviewList', $reviewList);
-        $this->view()->assign('product', $product);
-    }
-
-    public function reviewPendingAction()
-    {
-        // find list review
-        $reviewList = Pi::api('review', 'shop')->pendingReview();
-        // Set view
-        $this->view()->setTemplate('product_review_pending');
-        $this->view()->assign('reviewList', $reviewList);
-    }
-
-    public function reviewUpdateAction()
-    {
-        // Get id and product
-        $id = $this->params('id');
-        $product = $this->params('product');
-        // Check product and official
-        if ($product) {
-            $product = $this->getModel('product')->find($product)->toArray();
-            $hasOfficial = Pi::api('review', 'shop')->hasOfficial($product['id']);
-        } else {
-            $message = __('Select product for manage review.');
-            $url = array('action' => 'index');
-            $this->jump($url, $message);
-        }
-        // Check review
-        if ($id) {
-            $review = $this->getModel('review')->find($id)->toArray();
-        }
-        // Form
-        $form = new ReviewForm('review');
-        if ($this->request->isPost()) {
-            $data = $this->request->getPost();
-            $form->setInputFilter(new ReviewFilter);
-            $form->setData($data);
-            if ($form->isValid()) {
-                $values = $form->getData();
-                // Set just category fields
-                foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->reviewColumns)) {
-                        unset($values[$key]);
-                    }
-                }
-                // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('review')->find($values['id']);
-                } else {
-                    $row = $this->getModel('review')->createRow();
-                    $values['time_create'] = time();
-                    $values['uid'] = Pi::user()->getId();
-                    $values['product'] = $product['id'];
-                    $values['official'] = $hasOfficial ? 0 : 1;
-                }
-                $row->assign($values);
-                $row->save();
-                // Update review count
-                Pi::api('product', 'shop')->reviewCount($product['id']);
-                // Check it save or not
-                if ($row->id) {
-                    $message = __('Review data saved successfully.');
-                    $url = array('action' => 'review', 'id' => $product['id']);
-                    $this->jump($url, $message);
-                } else {
-                    $message = __('Review data not saved.');
-                }
-            } else {
-                $message = __('Invalid data, please check and re-submit.');
-            }   
-        } else {
-            if (isset($review) && is_array($review)) {
-                $form->setData($review);
-                $message = 'You can edit this review';
-            } else {
-                $message = 'You can add new review';
-            }
-        }
-        // Set view
-        $this->view()->setTemplate('product_review_update');
-        $this->view()->assign('form', $form);
-        $this->view()->assign('title', __('Review'));
-        $this->view()->assign('message', $message);
     }
 }

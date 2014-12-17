@@ -95,13 +95,6 @@ return array(
             'block'         => 1,
         ),
         array(
-            'label'         => _a('Product review'),
-            'controller'    => 'product',
-            'action'        => 'review',
-            'permission'    => 'review',
-            'block'         => 1,
-        ),
-        array(
             'label'         => _a('Category list'),
             'controller'    => 'category',
             'action'        => 'list',
