@@ -1,19 +1,19 @@
 <div class="shop-block">
 	<div class="shop-block-product clearfix">
 	<?php foreach($block['resources'] as $product) { ?>
-		<div class="col-sm-4 col-md-3 productBox">
+		<div class="col-sm-4 col-md-3 productBox h-product">
     		<div class="thumbnail">
         		<?php if($product['image']) { ?>
-        		<a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
+        		<a class="u-photo" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
         		<?php } ?>
         		<div class="caption">
-            		<h4>
+            		<h4 class="p-name">
                 		<a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
             		</h4>
                     <?php if(isset($product['price']) && $block['show-price'] && $block['config']['order_method'] != 'inactive') { ?>
                     <div class="clearfix">
                         <?php if($product['stock'] > 0) { ?>
-                        <div class="pull-left productPrice">
+                        <div class="pull-left productPrice p-price">
                             <strong><?php echo $this->escape($product['price_view']); ?></strong>
                         </div>
                         <div class="pull-right">

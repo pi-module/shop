@@ -40,13 +40,13 @@
 ?>
 <div class="itemGallery gallery clearfix thumbnail">
 	<?php if(isset($productItem['image']) && !empty($productItem['image'])) { ?>
-	<div class="itemImageMain text-center clearfix">
+	<div class="itemImageMain text-center clearfix u-photo">
 		<a href="<?php echo $this->escape($productItem['largeUrl']); ?>" title="<?php echo $this->escape($productItem['title']); ?>">
 			<img class="img-responsive" src="<?php echo $this->escape($productItem['mediumUrl']); ?>" alt="<?php echo $this->escape($productItem['title']); ?>" />
 		</a>
 	</div>
 	<?php } elseif(isset($category['image']) && !empty($category['image'])) { ?>
-	<div class="itemImageMain text-center clearfix">
+	<div class="itemImageMain text-center clearfix u-photo">
 		<a href="<?php echo $this->escape($category['largeUrl']); ?>" title="<?php echo $this->escape($category['title']); ?>">
 			<img class="img-responsive" src="<?php echo $this->escape($category['itemimageUrl']); ?>" alt="<?php echo $this->escape($category['title']); ?>" />
 		</a>
@@ -55,7 +55,7 @@
 	<?php if (isset($attach['image']) && !empty($attach['image'])) { ?>
 	<div class="owl-carousel itemImageAttach text-center clearfix">
 		<?php foreach($attach['image'] as $image) { ?>
-    	<a href="<?php echo $this->escape($image['largeUrl']); ?>" title="<?php echo $this->escape($image['title']); ?>">
+    	<a class="u-photo" href="<?php echo $this->escape($image['largeUrl']); ?>" title="<?php echo $this->escape($image['title']); ?>">
 			<img class="img-responsive" src="<?php echo $this->escape($image['mediumUrl']); ?>" alt="<?php echo $this->escape($image['title']); ?>" />
 		</a>
     	<?php } ?>

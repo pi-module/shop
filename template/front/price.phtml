@@ -17,7 +17,7 @@
             <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
             <span class="text-danger"><del><?php echo $this->escape($productItem['price_discount_view']); ?></del></span>
             <?php } ?>
-            <span><?php echo $this->escape($productItem['price_view']); ?></span>
+            <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
             <span class="productPriceCart"><a title="<?php echo $this->escape($productItem['title']); ?>" href="<?php echo $this->escape($productItem['cartUrl']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-shopping-cart"></i> <?php _e('Add To cart'); ?></a></span>
         </li>
         <?php } ?>

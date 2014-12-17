@@ -1,19 +1,19 @@
 <?php if (!isset($shopBoxSize) || empty($shopBoxSize)) {
     $shopBoxSize = 'col-sm-12 col-md-3';
 } ?>
-<div class="<?php echo $shopBoxSize; ?> productBox">
+<div class="<?php echo $shopBoxSize; ?> productBox h-product">
     <div class="thumbnail">
         <?php if($product['image']) { ?>
-        <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
+        <a class="u-photo" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
         <?php } ?>
         <div class="caption">
-            <h3>
+            <h3 class="p-name">
                 <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
             </h3>
             <?php if(isset($product['price']) && $config['view_price'] && $config['order_method'] != 'inactive') { ?>
             <div class="clearfix">
                 <?php if($product['stock'] > 0) { ?>
-                <div class="pull-left productPrice">
+                <div class="pull-left productPrice p-price">
                     <strong><?php echo $this->escape($product['price_view']); ?></strong>
                 </div>
                 <div class="pull-right">

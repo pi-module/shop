@@ -21,9 +21,9 @@
 ?>
 <div class="clearfix">
 	<div class="productItem">
-	<div class="panel panel-default">
+	<div class="panel panel-default h-product">
 		<div class="panel-heading">
-			<h1 class="panel-title"><?php echo $this->escape($productItem['title']); ?></h1>
+			<h1 class="panel-title p-name"><?php echo $this->escape($productItem['title']); ?></h1>
 		</div>
 		<div class="panel-body">
 			<div class="col-md-7">
@@ -40,8 +40,8 @@
 					</div>	
 				</div>
 				<div class="productInfoBox well clearfix">
-					<div><?php include $this->template('front/category'); ?></div>
-					<div><?php include $this->template('front/tag'); ?></div>
+					<div class="p-brand"><?php include $this->template('front/category'); ?></div>
+					<div class="p-category"><?php include $this->template('front/tag'); ?></div>
 				</div>
 			</div>
 			<div class="col-md-5">
@@ -50,8 +50,8 @@
 			<div class="col-md-12">
 				<div class="productBody">
 					<p><strong><?php _e('Description'); ?></strong></p>
-					<div class="productSummary"><?php echo $productItem['summary']; ?></div>
-					<div class="productDescription"><?php echo $productItem['description']; ?></div>
+					<div class="productSummary e-description"><?php echo $productItem['summary']; ?></div>
+					<div class="productDescription p-review"><?php echo $productItem['description']; ?></div>
 					<div class="productMedia">
 						<?php include $this->template('front/attach_audio'); ?>
 					    <?php include $this->template('front/extra_audio'); ?>

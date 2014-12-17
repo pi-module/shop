@@ -3,7 +3,7 @@
 	<div class="productExtra">
 	<?php foreach($extra['all'] as $field) { ?>
 		<?php if(!empty($field['data'])) { ?>
-		<div class="field-<?php echo $field['id']; ?>">
+		<div class="field-<?php echo $field['id']; ?> u-identifier">
 			<?php if($field['image']) { ?>
 			<img src="<?php echo $field['imageUrl']; ?>" alt="<?php echo $field['title']; ?>" />
 			<?php } ?>
