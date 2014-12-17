@@ -15,7 +15,7 @@ return array(
     'meta'         => array(
         'title'         => _a('Shop'),
         'description'   => _a('Shop module for pi.'),
-        'version'       => '0.2.4',
+        'version'       => '0.2.5',
         'license'       => 'New BSD',
         'logo'          => 'image/logo.png',
         'readme'        => 'docs/readme.txt',
@@ -26,7 +26,7 @@ return array(
     'author'        => array(
         'Name'          => 'Hossein Azizabadi',
         'email'         => 'azizabadi@faragostaresh.com',
-        'website'       => 'http://www.xoopsengine.org',
+        'website'       => 'http://pialog.org',
         'credits'       => 'Pi Engine Team'
     ),
     // Resource

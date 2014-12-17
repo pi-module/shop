@@ -41,8 +41,8 @@
 <div class="itemGallery gallery clearfix thumbnail">
 	<?php if(isset($productItem['image']) && !empty($productItem['image'])) { ?>
 	<div class="itemImageMain text-center clearfix">
-		<a href="<?php echo $this->escape($itemItem['largeUrl']); ?>" title="<?php echo $this->escape($itemItem['title']); ?>">
-			<img class="img-responsive" src="<?php echo $this->escape($itemItem['itemimageUrl']); ?>" alt="<?php echo $this->escape($itemItem['title']); ?>" />
+		<a href="<?php echo $this->escape($productItem['largeUrl']); ?>" title="<?php echo $this->escape($productItem['title']); ?>">
+			<img class="img-responsive" src="<?php echo $this->escape($productItem['mediumUrl']); ?>" alt="<?php echo $this->escape($productItem['title']); ?>" />
 		</a>
 	</div>
 	<?php } elseif(isset($category['image']) && !empty($category['image'])) { ?>
