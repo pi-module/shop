@@ -5,8 +5,8 @@
     $this->jQuery();
     $this->backbone();
 ?>
-<div id="js-order" class="shop">
-    <?php include $this->templateComponent('forms'); ?>
+<div id="js-order" class="clearfix">
+    <?php echo $this->form($form); ?>
 	<table class="table table-striped table-bordered table-condensed">
 		<tr>
 			<th><?php _e('ID'); ?></th>

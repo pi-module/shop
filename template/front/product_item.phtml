@@ -13,14 +13,14 @@
 	});");
 	$this->css($this->assetModule('css/magnific-popup.css'));
 ?>
-<div class="shop">
+<div class="clearfix">
 	<div class="productItem">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title"><?php echo $this->escape($productItem['title']); ?></h3>
+			<h1 class="panel-title"><?php echo $this->escape($productItem['title']); ?></h1>
 		</div>
 		<div class="panel-body">
-			<div class="col-md-8">
+			<div class="col-md-7">
 				<?php include $this->template('front/extra'); ?>
 				<div class="productInfoBox well clearfix">
 					<div class="col-md-6">
@@ -36,19 +36,8 @@
 					<div><?php include $this->template('front/tag'); ?></div>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="productImage gallery text-center">
-					<div class="productImageMain">
-						<div class="col-sm-6 col-md-12">
-							<div class="thumbnail">
-								<a href="<?php echo $productItem['largeUrl']; ?>" title="<?php echo $this->escape($productItem['title']); ?>">
-									<img src="<?php echo $productItem['mediumUrl']; ?>" alt="<?php echo $this->escape($productItem['title']); ?>" />
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="productImageAttach"><?php include $this->template('front/attach_image'); ?></div>
-				</div>
+			<div class="col-md-5">
+				<?php include $this->template('front/gallery'); ?>
 			</div>
 			<div class="col-md-12">
 				<div class="productBody">

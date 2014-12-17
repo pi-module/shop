@@ -1,9 +1,7 @@
-<?php
-    $this->css($this->assetModule('css/front.css'));
-?>
-<div class="shop">
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="clearfix">
 	<div class="well">
-		<h3><?php echo $this->escape($user['first_name']); ?> <?php echo $this->escape($user['last_name']); ?></h3>
+		<h1><?php echo $this->escape($user['first_name']); ?> <?php echo $this->escape($user['last_name']); ?></h1>
 		<ul class="clearfix list-unstyled">
 			<li class="col-md-5"><strong><?php _e('Order Name'); ?></strong> : <?php echo $this->escape($user['first_name']); ?> <?php echo $this->escape($user['last_name']); ?></li>
 			<li class="col-md-5"><strong><?php _e('User Name'); ?></strong> : <?php echo $this->escape($user['user']['identity']); ?> ( <?php echo $this->escape($user['user']['name']); ?> ) <span class="label label-info"><?php echo $this->escape($user['user']['id']); ?></span></li>

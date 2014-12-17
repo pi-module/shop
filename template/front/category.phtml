@@ -1,29 +1,63 @@
+<?php if (isset($category) && !empty($category)) { ?>
+<div class="clearfix categoryItem row">
+	<?php if (!empty($category['description']) || !empty($category['image'])) { ?>
+	<div class="clearfix">
+		<div class="col-md-12">
+			<h1><?php echo $this->escape($category['title']); ?></h1>
+		    <hr />
+		    <br />
+		</div>
+		<div class="col-md-5">
+			<?php include $this->template('front/gallery'); ?>
+		</div>
+		<div class="col-md-7">
+			<?php echo $category['description']; ?>
+		</div>
+	</div>
+	<br />
+	<?php } else { ?>
+	<div class="col-md-12">
+		<h1><?php echo $this->escape($category['title']); ?></h1>
+	</div>
+	<?php } ?>
+</div>
+<?php } ?>
 <?php if (isset($categories) && !empty($categories)) { ?>
 <div class="clearfix categoryList">
+	<?php if($config['view_title']) { ?>
 	<div class="page-header">
 		<h4><?php _e('Category list'); ?></h4>
 	</div>
+    <?php } ?>
 	<div class="text-center">
-	<div class="btn-group">
-	<?php foreach($categories as $category) { ?>
-	<?php if($category['image']) { ?>
-	<div class="col-sm-3 col-md-2">
-		<div class="categoryImage text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><img class="img-thumbnail" src="<?php echo $category['thumbUrl']; ?>" alt="<?php echo $this->escape($category['title']); ?>" /></a></div>
-        <div class="categoryTitle text-center"><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a></div>
-	</div>
-	<?php } else { ?>
-	<a class="btn btn-default" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a>
-	<?php } ?>
-	<?php } ?>
-	</div>
+		<div class="btn-group">
+		<?php foreach($categories as $category) { ?>
+			<?php if($category['image']) { ?>
+			<div class="col-sm-3 col-md-2">
+				<div class="categoryImage text-center">
+					<a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>">
+						<img class="img-thumbnail" src="<?php echo $category['thumbUrl']; ?>" alt="<?php echo $this->escape($category['title']); ?>" />
+					</a>
+				</div>
+    			<div class="categoryTitle text-center">
+    				<a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>">
+    					<?php echo $this->escape($category['title']); ?>
+    				</a><
+    				</div>
+			</div>
+			<?php } else { ?>
+			<a class="btn btn-default" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a>
+			<?php } ?>
+		<?php } ?>
+		</div>
 	</div>
 </div>
-<?php } elseif (isset($categoryItem) && !empty($categoryItem)) { ?>
+<?php } ?>
+<?php if (isset($categoryItem) && !empty($categoryItem)) { ?>
 <div class="clearfix categoryItemList">
+	<i class="fa fa-folder"></i> <?php _e('Category'); ?> : 
 	<?php foreach($categoryItem as $category) { ?>
-	<span class="categoryTitle">
-		<a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><i class="fa fa-folder-open"></i> <?php echo $this->escape($category['title']); ?></a>
-	</span>
+	<a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a>
 	<?php } ?>
 </div>
 <?php } ?>

@@ -1,0 +1,64 @@
+<?php
+	$this->jQuery();
+	$this->js(array(
+		$this->assetModule('js/jquery.magnific-popup.min.js'),
+		$this->assetModule('js/owl.carousel.min.js'),
+	));
+	$this->css(array(
+		$this->assetModule('css/magnific-popup.css'),
+		$this->assetModule('css/owl.carousel.css'),
+	));
+	$this->footScript()->appendScript("$('.gallery').each(function() {
+    	$(this).magnificPopup({
+        	delegate: 'a',
+        	type: 'image',
+        	gallery: {
+          	enabled:true
+        	}
+    	});
+	});");
+	$iconOwlLeft = '<i class="owl-prev fa fa-angle-left"></i>';
+	$iconOwlRight = '<i class="owl-next fa fa-angle-right"></i>';
+	$this->footScript()->appendScript("$(document).ready(function($) {
+		$('.owl-carousel').owlCarousel({
+    		loop:false,
+    		rtl:true,
+    		margin:3,
+    		nav:true,
+    		autoplay:true,
+    		dots:false,
+    		autoplayTimeout:6000,
+    		autoplayHoverPause:true,
+    		navText: ['" . $iconOwlLeft . "', '" . $iconOwlRight . "'],
+    		responsive:{
+        		0:{items:1},
+        		600:{items:2},
+        		1000:{items:3}
+    		}
+		})
+    });");
+?>
+<div class="itemGallery gallery clearfix thumbnail">
+	<?php if(isset($productItem['image']) && !empty($productItem['image'])) { ?>
+	<div class="itemImageMain text-center clearfix">
+		<a href="<?php echo $this->escape($itemItem['largeUrl']); ?>" title="<?php echo $this->escape($itemItem['title']); ?>">
+			<img class="img-responsive" src="<?php echo $this->escape($itemItem['itemimageUrl']); ?>" alt="<?php echo $this->escape($itemItem['title']); ?>" />
+		</a>
+	</div>
+	<?php } elseif(isset($category['image']) && !empty($category['image'])) { ?>
+	<div class="itemImageMain text-center clearfix">
+		<a href="<?php echo $this->escape($category['largeUrl']); ?>" title="<?php echo $this->escape($category['title']); ?>">
+			<img class="img-responsive" src="<?php echo $this->escape($category['itemimageUrl']); ?>" alt="<?php echo $this->escape($category['title']); ?>" />
+		</a>
+	</div>
+	<?php } ?>
+	<?php if (isset($attach['image']) && !empty($attach['image'])) { ?>
+	<div class="owl-carousel itemImageAttach text-center clearfix">
+		<?php foreach($attach['image'] as $image) { ?>
+    	<a href="<?php echo $this->escape($image['largeUrl']); ?>" title="<?php echo $this->escape($image['title']); ?>">
+			<img class="img-responsive" src="<?php echo $this->escape($image['mediumUrl']); ?>" alt="<?php echo $this->escape($image['title']); ?>" />
+		</a>
+    	<?php } ?>
+	</div>
+	<?php } ?>
+</div>

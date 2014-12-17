@@ -1,13 +1,15 @@
-<?php $this->css($this->assetModule('css/front.css')); ?>
-<div class="col-sm-4 col-md-3 productBox">
+<?php if (!isset($shopBoxSize) || empty($shopBoxSize)) {
+    $shopBoxSize = 'col-sm-12 col-md-3';
+} ?>
+<div class="<?php echo $shopBoxSize; ?> productBox">
     <div class="thumbnail">
         <?php if($product['image']) { ?>
         <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
         <?php } ?>
         <div class="caption">
-            <h4>
+            <h3>
                 <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
-            </h4>
+            </h3>
             <?php if(isset($product['price']) && $config['view_price'] && $config['order_method'] != 'inactive') { ?>
             <div class="clearfix">
                 <?php if($product['stock'] > 0) { ?>

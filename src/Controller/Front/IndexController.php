@@ -52,7 +52,7 @@ class IndexController extends ActionController
         $this->view()->headKeywords($config['text_keywords_homepage'], 'set');
     	$this->view()->setTemplate('product_list');
         $this->view()->assign('productList', $productList);
-        $this->view()->assign('productTitle', __('New products'));
+        $this->view()->assign('productTitleH1', __('New products'));
         $this->view()->assign('categories', $category);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);

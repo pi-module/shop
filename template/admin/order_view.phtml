@@ -7,7 +7,7 @@
     $this->jQuery();
     $this->backbone();
 ?>
-<div id="js-order" class="shop">
+<div id="js-order" class="clearfix">
 	<div class="order" data-id="<?php echo $this->escape($order['id']); ?>" data-order="<?php echo $this->escape($order['url_update_order']); ?>" data-payment="<?php echo $this->escape($order['url_update_payment']); ?>" data-delivery="<?php echo $this->escape($order['url_update_delivery']); ?>">
 		<div class="well">
 			<h3><?php _e('Customer'); ?></h3>

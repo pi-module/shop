@@ -7,8 +7,8 @@
     $this->bootstrap('js/bootstrap.min.js');
     $this->backbone();
 ?>
-<div id="js-order" class="shop">
-    <h3><?php echo $this->escape($title); ?></h3>
+<div id="js-order" class="clearfix">
+    <h1><?php echo $this->escape($title); ?></h1>
     <div class="col-md-8"><?php include $this->templateComponent('form'); ?></div>
     <div class="col-md-4 ">
         <div data-spy="affix" class="cartInfo">
