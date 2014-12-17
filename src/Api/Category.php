@@ -17,15 +17,24 @@ use Pi\Application\Api\AbstractApi;
 use Zend\Json\Json;
 
 /*
+ * Pi::api('category', 'shop')->getCategory($parameter, $type = 'id');
  * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status);
  * Pi::api('category', 'shop')->findFromCategory($category);
  * Pi::api('category', 'shop')->categoryList($parent);
  * Pi::api('category', 'shop')->categoryCount();
+ * Pi::api('category', 'shop')->canonizeCategory($category);
  * Pi::api('category', 'shop')->sitemap();
  */
 
 class Category extends AbstractApi
 {
+    public function getCategory($parameter, $type = 'id')
+    {
+        $category = Pi::model('category', $this->getModule())->find($parameter, $type);
+        $category = $this->canonizeCategory($category);
+        return $category;
+    }  
+
     /**
      * Set product category to link table
      */
@@ -100,6 +109,69 @@ class Category extends AbstractApi
         $select = Pi::model('category', $this->getModule())->select()->columns($columns);
         $count = Pi::model('category', $this->getModule())->selectWith($select)->current()->count;
         return $count;
+    }
+
+    public function canonizeCategory($category)
+    {
+        // Check
+        if (empty($category)) {
+            return '';
+        }
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // boject to array
+        $category = $category->toArray();
+        // Set description text
+        $category['description'] = Pi::service('markup')->render($category['description'], 'html', 'html');
+        // Set times
+        $category['time_create_view'] = _date($category['time_create']);
+        $category['time_update_view'] = _date($category['time_update']);
+        // Set item url
+        $category['categoryUrl'] = Pi::service('url')->assemble('shop', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'category',
+            'slug'          => $category['slug'],
+        ));
+        // Set image url
+        if ($category['image']) {
+            // Set image original url
+            $category['originalUrl'] = Pi::url(
+                sprintf('upload/%s/original/%s/%s', 
+                    $config['image_path'], 
+                    $category['path'], 
+                    $category['image']
+                ));
+            // Set image large url
+            $category['largeUrl'] = Pi::url(
+                sprintf('upload/%s/large/%s/%s', 
+                    $config['image_path'], 
+                    $category['path'], 
+                    $category['image']
+                ));
+            // Set image item url
+            $category['itemimageUrl'] = Pi::url(
+                sprintf('upload/%s/item/%s/%s', 
+                    $config['image_path'], 
+                    $category['path'], 
+                    $category['image']
+                ));
+            // Set image medium url
+            $category['mediumUrl'] = Pi::url(
+                sprintf('upload/%s/medium/%s/%s', 
+                    $config['image_path'], 
+                    $category['path'], 
+                    $category['image']
+                ));
+            // Set image thumb url
+            $category['thumbUrl'] = Pi::url(
+                sprintf('upload/%s/thumb/%s/%s', 
+                    $config['image_path'], 
+                    $category['path'], 
+                    $category['image']
+                ));
+        }
+        // return category
+        return $category; 
     }
 
     public function sitemap()

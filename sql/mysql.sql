@@ -3,6 +3,7 @@ CREATE TABLE `{product}` (
     `title` varchar(255) NOT NULL default '',
     `slug` varchar(255) NOT NULL default '',
     `category` varchar(255) NOT NULL default '',
+    `brand` int(10) unsigned NOT NULL default '0',
     `summary` text,
     `description` text,
     `seo_title` varchar(255) NOT NULL default '',

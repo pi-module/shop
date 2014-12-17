@@ -25,6 +25,8 @@ class SearchController extends IndexController
 	public function indexAction()
     {
     	$option = array();
+        // Get info from url
+        $module = $this->params('module');
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get extra field

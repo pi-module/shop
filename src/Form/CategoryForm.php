@@ -22,7 +22,7 @@ class CategoryForm  extends BaseForm
     
     public function __construct($name = null, $option = array())
     {
-        $this->category = array(0 => 'Root');
+        $this->category = array(0 => '');
         $this->thumbUrl = $option['thumbUrl'];
         $this->removeUrl = empty($option['removeUrl']) ? '' : $option['removeUrl'];
         parent::__construct($name);

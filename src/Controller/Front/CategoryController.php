@@ -67,6 +67,9 @@ class CategoryController extends IndexController
         $this->view()->assign('config', $config);
     }
 
+    public function listAction()
+    {}
+
     /* public static function getMethodFromAction($action)
     {
         return 'indexAction';

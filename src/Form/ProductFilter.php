@@ -81,6 +81,11 @@ class ProductFilter extends InputFilter
             'name' => 'category',
             'required' => true,
         ));
+        // brand
+        $this->add(array(
+            'name' => 'brand',
+            'required' => false,
+        ));
         // image
         $this->add(array(
             'name' => 'image',

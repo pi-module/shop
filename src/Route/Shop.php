@@ -10,7 +10,6 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Shop\Route;
 
 use Pi\Mvc\Router\Http\Standard;
@@ -55,81 +54,77 @@ class Shop extends Standard
         }
 
         // Make Match
-        if (isset($matches['controller'])) {
+        if (isset($matches['controller']) && !empty($parts[1])) {
             switch ($matches['controller']) {
                 case 'category':
-                    if (!empty($parts[1])) {
-                        //$matches['action'] = $this->decode($parts[1]);
-                        $matches['slug'] = $this->decode($parts[1]);
-                        // Set page
-                        if (isset($parts[2]) && $parts[2] == 'page') {
-                            $matches['page'] = intval($parts[3]);
-                            // Set sort and stock
-                            if (isset($parts[4]) && $parts[4] == 'sort' 
-                                && isset($parts[6]) && $parts[6] == 'stock') {
-                                $matches['sort'] = $this->decode($parts[5]);
-                                $matches['stock'] = $this->decode($parts[7]);
-                            } elseif (isset($parts[4]) && $parts[4] == 'sort') {
-                                $matches['sort'] = $this->decode($parts[5]);
-                            } elseif (isset($parts[4]) && $parts[4] == 'stock') {
-                                $matches['stock'] = $this->decode($parts[5]);
-                            } 
-                        } else {
-                            // Set sort and stock
-                            if (isset($parts[2]) && $parts[2] == 'sort' 
-                                && isset($parts[4]) && $parts[4] == 'stock') {
-                                $matches['sort'] = $this->decode($parts[3]);
-                                $matches['stock'] = $this->decode($parts[5]);
-                            } elseif (isset($parts[2]) && $parts[2] == 'sort') {
-                                $matches['sort'] = $this->decode($parts[3]);
-                            } elseif (isset($parts[2]) && $parts[2] == 'stock') {
-                                $matches['stock'] = $this->decode($parts[3]);
-                            } 
-                        }
-                    }
+                    $matches['slug'] = $this->decode($parts[1]);
+                    // Set sort and stock
+                    if (isset($parts[2]) && $parts[2] == 'sort' 
+                        && isset($parts[4]) && $parts[4] == 'stock') {
+                        $matches['sort'] = $this->decode($parts[3]);
+                        $matches['stock'] = $this->decode($parts[5]);
+                    } elseif (isset($parts[2]) && $parts[2] == 'sort') {
+                        $matches['sort'] = $this->decode($parts[3]);
+                    } elseif (isset($parts[2]) && $parts[2] == 'stock') {
+                        $matches['stock'] = $this->decode($parts[3]);
+                    } 
                     break;
 
                 case 'checkout':
-                    if (!empty($parts[1])) {
-                        if ($parts[1] == 'information') {
-                            $matches['action'] = 'information';
-                        } elseif ($parts[1] == 'add') {
-                            $matches['action'] = 'add';
-                            $matches['slug'] = $this->decode($parts[2]);
-                        } elseif ($parts[1] == 'finish') {    
-                            $matches['action'] = 'finish';
-                            $matches['id'] = intval($parts[2]);
-                        } elseif ($parts[1] == 'empty') {
-                            $matches['action'] = 'empty';
-                        } elseif ($parts[1] == 'cart') {
-                            $matches['action'] = 'cart';
-                        } elseif ($parts[1] == 'levelAjax') {
-                            $matches['action'] = 'levelAjax';
+                    if ($parts[1] == 'information') {
+                        $matches['action'] = 'information';
+                    } elseif ($parts[1] == 'add') {
+                        $matches['action'] = 'add';
+                        $matches['slug'] = $this->decode($parts[2]);
+                    } elseif ($parts[1] == 'finish') {    
+                        $matches['action'] = 'finish';
+                        $matches['id'] = intval($parts[2]);
+                    } elseif ($parts[1] == 'empty') {
+                        $matches['action'] = 'empty';
+                    } elseif ($parts[1] == 'cart') {
+                        $matches['action'] = 'cart';
+                    } elseif ($parts[1] == 'levelAjax') {
+                        $matches['action'] = 'levelAjax';
+                        $matches['process'] = $this->decode($parts[2]);
+                        if (is_numeric($parts[3])) {
+                            $matches['id'] = intval($parts[3]);
+                        } elseif ($parts[2] == 'payment') {
+                            $matches['id'] = $this->decode($parts[3]);
+                        }
+                    } elseif ($parts[1] == 'cartAjax') {    
+                        $matches['action'] = 'cartAjax';
+                    } elseif ($parts[1] == 'basketAjax') {
+                        $matches['action'] = 'basketAjax';
+                        if (isset($parts[2]) &&  in_array($parts[2], array('remove', 'number'))) {
                             $matches['process'] = $this->decode($parts[2]);
-                            if (is_numeric($parts[3])) {
-                                $matches['id'] = intval($parts[3]);
-                            } elseif ($parts[2] == 'payment') {
-                                $matches['id'] = $this->decode($parts[3]);
+                            $matches['product'] = intval($parts[3]);
+                            if (isset($parts[4]) && in_array($parts[4], array(1, -1))) {
+                                $matches['number'] = $parts[4];
                             }
-                        } elseif ($parts[1] == 'cartAjax') {    
-                            $matches['action'] = 'cartAjax';
-                        } elseif ($parts[1] == 'basketAjax') {
-                            $matches['action'] = 'basketAjax';
-                            if (isset($parts[2]) &&  in_array($parts[2], array('remove', 'number'))) {
-                                $matches['process'] = $this->decode($parts[2]);
-                                $matches['product'] = intval($parts[3]);
-                                if (isset($parts[4]) && in_array($parts[4], array(1, -1))) {
-                                    $matches['number'] = $parts[4];
-                                }
-                            }
-                        }   
-                    }
+                        }
+                    }   
                     break; 
 
                 case 'index':
-                    // Set page
-                    if (isset($parts[0]) && $parts[0] == 'page') {
-                        $matches['page'] = intval($parts[1]);
+                    // Set sort and stock
+                    if (isset($parts[0]) && $parts[0] == 'sort' 
+                        && isset($parts[2]) && $parts[2] == 'stock') {
+                        $matches['sort'] = $this->decode($parts[1]);
+                        $matches['stock'] = $this->decode($parts[3]);
+                    } elseif (isset($parts[0]) && $parts[0] == 'sort') {
+                        $matches['sort'] = $this->decode($parts[1]);
+                    } elseif (isset($parts[0]) && $parts[0] == 'stock') {
+                        $matches['stock'] = $this->decode($parts[1]);
+                    }
+                    break;
+
+                case 'product':
+                    $matches['slug'] = $this->decode($parts[1]);
+                    break; 
+
+                case 'search':
+                    if ($parts[1] == 'result') {
+                        $matches['action'] = 'result';
                         // Set sort and stock
                         if (isset($parts[2]) && $parts[2] == 'sort' 
                             && isset($parts[4]) && $parts[4] == 'stock') {
@@ -139,104 +134,34 @@ class Shop extends Standard
                             $matches['sort'] = $this->decode($parts[3]);
                         } elseif (isset($parts[2]) && $parts[2] == 'stock') {
                             $matches['stock'] = $this->decode($parts[3]);
-                        }
-                    } else {
-                        // Set sort and stock
-                        if (isset($parts[0]) && $parts[0] == 'sort' 
-                            && isset($parts[2]) && $parts[2] == 'stock') {
-                            $matches['sort'] = $this->decode($parts[1]);
-                            $matches['stock'] = $this->decode($parts[3]);
-                        } elseif (isset($parts[0]) && $parts[0] == 'sort') {
-                            $matches['sort'] = $this->decode($parts[1]);
-                        } elseif (isset($parts[0]) && $parts[0] == 'stock') {
-                            $matches['stock'] = $this->decode($parts[1]);
-                        }
-                    }
-                     
-                    break;
-
-                case 'product':
-                    if (!empty($parts[1])) {
-                        $matches['slug'] = $this->decode($parts[1]);
-                    }
-                    break; 
-
-                case 'search':
-                    if (!empty($parts[1])) {
-                        if ($parts[1] == 'result') {
-                            $matches['action'] = 'result';
-                            // Set page
-                            if (isset($parts[2]) && $parts[2] == 'page') {
-                                $matches['page'] = intval($parts[3]);
-                                // Set sort and stock
-                                if (isset($parts[4]) && $parts[4] == 'sort' 
-                                    && isset($parts[6]) && $parts[6] == 'stock') {
-                                    $matches['sort'] = $this->decode($parts[5]);
-                                    $matches['stock'] = $this->decode($parts[7]);
-                                } elseif (isset($parts[4]) && $parts[4] == 'sort') {
-                                    $matches['sort'] = $this->decode($parts[5]);
-                                } elseif (isset($parts[4]) && $parts[4] == 'stock') {
-                                    $matches['stock'] = $this->decode($parts[5]);
-                                } 
-                            } else {
-                                // Set sort and stock
-                                if (isset($parts[2]) && $parts[2] == 'sort' 
-                                    && isset($parts[4]) && $parts[4] == 'stock') {
-                                    $matches['sort'] = $this->decode($parts[3]);
-                                    $matches['stock'] = $this->decode($parts[5]);
-                                } elseif (isset($parts[2]) && $parts[2] == 'sort') {
-                                    $matches['sort'] = $this->decode($parts[3]);
-                                } elseif (isset($parts[2]) && $parts[2] == 'stock') {
-                                    $matches['stock'] = $this->decode($parts[3]);
-                                } 
-                            }
-                        }
+                        } 
                     }
                     break;
 
                 case 'tag':
-                    if (!empty($parts[1])) {
-                        if ($parts[1] == 'term') {
-                            $matches['action'] = 'term';
-                            $matches['slug'] = urldecode($parts[2]);
-                            // Set page
-                            if (isset($parts[3]) && $parts[3] == 'page') {
-                                $matches['page'] = intval($parts[4]);
-                                // Set sort and stock
-                                if (isset($parts[5]) && $parts[5] == 'sort' 
-                                    && isset($parts[7]) && $parts[7] == 'stock') {
-                                    $matches['sort'] = $this->decode($parts[6]);
-                                    $matches['stock'] = $this->decode($parts[8]);
-                                } elseif (isset($parts[5]) && $parts[5] == 'sort') {
-                                    $matches['sort'] = $this->decode($parts[6]);
-                                } elseif (isset($parts[5]) && $parts[5] == 'stock') {
-                                    $matches['stock'] = $this->decode($parts[6]);
-                                } 
-                            } else {
-                                // Set sort and stock
-                                if (isset($parts[3]) && $parts[3] == 'sort' 
-                                    && isset($parts[5]) && $parts[5] == 'stock') {
-                                    $matches['sort'] = $this->decode($parts[4]);
-                                    $matches['stock'] = $this->decode($parts[6]);
-                                } elseif (isset($parts[3]) && $parts[3] == 'sort') {
-                                    $matches['sort'] = $this->decode($parts[4]);
-                                } elseif (isset($parts[3]) && $parts[3] == 'stock') {
-                                    $matches['stock'] = $this->decode($parts[4]);
-                                } 
-                            }
-                        } elseif ($parts[1] == 'list') {
-                            $matches['action'] = 'list';
-                        }
+                    if ($parts[1] == 'term') {
+                        $matches['action'] = 'term';
+                        $matches['slug'] = urldecode($parts[2]);
+                        // Set sort and stock
+                        if (isset($parts[3]) && $parts[3] == 'sort' 
+                            && isset($parts[5]) && $parts[5] == 'stock') {
+                            $matches['sort'] = $this->decode($parts[4]);
+                            $matches['stock'] = $this->decode($parts[6]);
+                        } elseif (isset($parts[3]) && $parts[3] == 'sort') {
+                            $matches['sort'] = $this->decode($parts[4]);
+                        } elseif (isset($parts[3]) && $parts[3] == 'stock') {
+                            $matches['stock'] = $this->decode($parts[4]);
+                        } 
+                    } elseif ($parts[1] == 'list') {
+                        $matches['action'] = 'list';
                     }
                     break;    
 
                 case 'user':
-                    if (!empty($parts[1])) {
-                        if ($parts[1] == 'order') {
-                            $matches['action'] = 'order';
-                            $matches['id'] = intval($parts[2]);
-                        }  
-                    }
+                    if ($parts[1] == 'order') {
+                        $matches['action'] = 'order';
+                        $matches['id'] = intval($parts[2]);
+                    }  
                     break;
             }    
         } 

@@ -23,6 +23,7 @@ class ProductForm  extends BaseForm
     public function __construct($name = null, $option = array())
     {
         $this->field = $option['field'];
+        $this->category = array(0 => '');
         $this->thumbUrl = (isset($option['thumbUrl'])) ? $option['thumbUrl'] : '';
         $this->removeUrl = (isset($option['removeUrl'])) ? $option['removeUrl'] : '';
         parent::__construct($name);
@@ -87,7 +88,6 @@ class ProductForm  extends BaseForm
                 'type' => 'textarea',
                 'rows' => '5',
                 'cols' => '40',
-                
                 'description' => '',
             )
         ));
@@ -124,6 +124,19 @@ class ProductForm  extends BaseForm
             'options' => array(
                 'label' => __('Category'),
                 'category' => '',
+            ),
+        ));
+        // brand
+        $this->add(array(
+            'name' => 'brand',
+            'type' => 'Module\Shop\Form\Element\Category',
+            'options' => array(
+                'label' => __('Brand'),
+                'category' => $this->category,
+            ),
+            'attributes' => array(
+                'size' => 1,
+                'multiple' => 0,
             ),
         ));
         // Image

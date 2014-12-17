@@ -158,6 +158,7 @@ class IndexController extends ActionController
     public function canonizePaginator($template)
     {
         $template['slug'] = (isset($template['slug'])) ? $template['slug'] : '';
+        $template['action'] = (isset($template['action'])) ? $template['action'] : 'index';
         // paginator
         $paginator = Paginator::factory(intval($template['count']));
         $paginator->setItemCountPerPage(intval($this->config('view_perpage')));

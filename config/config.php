@@ -153,6 +153,14 @@ return array(
             'filter'       => 'number_int',
             'value'        => 1
         ),
+        'view_breadcrumbs' => array(
+            'category'     => 'view',
+            'title'        => _a('Show breadcrumbs'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
         // Image
         'image_size' => array(
             'category'     => 'image',
