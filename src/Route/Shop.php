@@ -56,18 +56,23 @@ class Shop extends Standard
         // Make Match
         if (isset($matches['controller']) && !empty($parts[1])) {
             switch ($matches['controller']) {
+
                 case 'category':
-                    $matches['slug'] = $this->decode($parts[1]);
-                    // Set sort and stock
-                    if (isset($parts[2]) && $parts[2] == 'sort' 
-                        && isset($parts[4]) && $parts[4] == 'stock') {
-                        $matches['sort'] = $this->decode($parts[3]);
-                        $matches['stock'] = $this->decode($parts[5]);
-                    } elseif (isset($parts[2]) && $parts[2] == 'sort') {
-                        $matches['sort'] = $this->decode($parts[3]);
-                    } elseif (isset($parts[2]) && $parts[2] == 'stock') {
-                        $matches['stock'] = $this->decode($parts[3]);
-                    } 
+                    if ($parts[1] == 'list') {
+                        $matches['action'] = 'list';
+                    } else {
+                        $matches['slug'] = $this->decode($parts[1]);
+                        // Set sort and stock
+                        if (isset($parts[2]) && $parts[2] == 'sort' 
+                            && isset($parts[4]) && $parts[4] == 'stock') {
+                            $matches['sort'] = $this->decode($parts[3]);
+                            $matches['stock'] = $this->decode($parts[5]);
+                        } elseif (isset($parts[2]) && $parts[2] == 'sort') {
+                            $matches['sort'] = $this->decode($parts[3]);
+                        } elseif (isset($parts[2]) && $parts[2] == 'stock') {
+                            $matches['stock'] = $this->decode($parts[3]);
+                        } 
+                    }
                     break;
 
                 case 'checkout':

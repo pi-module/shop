@@ -44,10 +44,20 @@ class Breadcrumbs extends AbstractBreadcrumbs
                 // Set
         		switch ($params['controller']) {
                     case 'category':
-                        $category = Pi::api('category', 'shop')->getCategory($params['slug'], 'slug');
-                        $result[] = array(
-                            'label' => $category['title'],
-                        );
+                        switch ($params['action']) {
+                            case 'list':
+                                $result[] = array(
+                                    'label' => __('Category list'),
+                                );
+                                break;
+
+                            case 'index':
+                                $category = Pi::api('category', 'shop')->getCategory($params['slug'], 'slug');
+                                $result[] = array(
+                                    'label' => $category['title'],
+                                );
+                                break;
+                        }
                         break;
 
                     case 'checkout':
@@ -109,7 +119,7 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         break;
 
                     case 'tag':
-                        if ($params['slug']) {
+                        if (!empty($params['slug'])) {
                             $result[] = array(
                                 'label' => __('Tag list'),
                                 'href'  => Pi::url(Pi::service('url')->assemble('shop', array(

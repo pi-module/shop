@@ -1,0 +1,28 @@
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="clearfix">
+	<div class="page-header">
+		<h1><?php _e('Category list'); ?></h1>
+	</div>
+	<?php if (isset($categories) && !empty($categories)) { ?>
+	<div class="categories clearfix">
+		<?php foreach($categories as $category) { ?>
+		<div class="col-xs-12 col-sm-6 col-md-3">
+			<div class="thumbnail">
+				<a href="<?php echo $this->escape($category['categoryUrl']); ?>" title="<?php echo $this->escape($category['title']); ?>">
+					<img src="<?php echo $this->escape($category['mediumUrl']); ?>" alt="<?php echo $this->escape($category['title']); ?>">
+				</a>
+				<div class="caption">
+					<a href="<?php echo $this->escape($category['categoryUrl']); ?>" title="<?php echo $this->escape($category['title']); ?>">
+						<h3><?php echo $this->escape($category['title']); ?></h3>
+					</a>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+	</div>
+	<?php } else { ?>
+	<div class="alert alert-warning" role="alert">
+		<?php _e('No category has been made on this part yet. please check this page later'); ?>
+	</div>
+	<?php } ?>
+</div>

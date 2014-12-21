@@ -10,7 +10,6 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Shop\Controller\Front;
 
 use Pi;
@@ -24,7 +23,6 @@ class CategoryController extends IndexController
         // Get info from url
         $module = $this->params('module');
         $slug = $this->params('slug');
-        //$action = $this->params('action');
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get category information from model
@@ -34,14 +32,17 @@ class CategoryController extends IndexController
             $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The category not found.'), 'error');
         }
         // Set info
-        $where = array('status' => 1, 'category' => $category['id']);
+        $where = array(
+            'status'      => 1, 
+            'category'    => $category['id']
+        );
         // Get product List
         $productList = $this->productList($where);
         // Set paginator info
         $template = array(
-            'controller' => 'category',
-            'slug' => $slug,
-            );
+            'controller'  => 'category',
+            'slug'        => $slug,
+        );
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
         // category list
@@ -68,10 +69,32 @@ class CategoryController extends IndexController
     }
 
     public function listAction()
-    {}
-
-    /* public static function getMethodFromAction($action)
     {
-        return 'indexAction';
-    } */
+        // Get info from url
+        $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Set info
+        $categories = array();
+        $where = array('status' => 1);
+        $order = array('title DESC', 'id DESC');
+        $select = $this->getModel('category')->select()->order($order);
+        $rowset = $this->getModel('category')->selectWith($select);
+        // Make list
+        foreach ($rowset as $row) {
+            $categories[$row->id] = Pi::api('category', 'shop')->canonizeCategory($row);
+        }
+        // Set header and title
+        $title = __('Category list');
+        $seoTitle = Pi::api('text', 'shop')->title($title);
+        $seoDescription = Pi::api('text', 'shop')->description($title);
+        $seoKeywords = Pi::api('text', 'shop')->keywords($title);
+        // Set view
+        $this->view()->headTitle($seoTitle);
+        $this->view()->headDescription($seoDescription, 'set');
+        $this->view()->headKeywords($seoKeywords, 'set');
+        $this->view()->setTemplate('category_list');
+        $this->view()->assign('categories', $categories);
+        $this->view()->assign('config', $config);
+    }
 }
