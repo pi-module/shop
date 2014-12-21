@@ -88,11 +88,11 @@ class Category extends AbstractApi
         $rowset = Pi::model('category', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $return[$row->id] = $row->toArray();
-            $return[$row->id]['url'] = Pi::service('url')->assemble('shop', array(
+            $return[$row->id]['url'] = Pi::url(Pi::service('url')->assemble('shop', array(
                 'module'        => $this->getModule(),
                 'controller'    => 'category',
                 'slug'          => $return[$row->id]['slug'],
-            ));
+            )));
             $return[$row->id]['thumbUrl'] = Pi::url(
                 sprintf('upload/%s/thumb/%s/%s', 
                     $config['image_path'], 
@@ -127,11 +127,11 @@ class Category extends AbstractApi
         $category['time_create_view'] = _date($category['time_create']);
         $category['time_update_view'] = _date($category['time_update']);
         // Set item url
-        $category['categoryUrl'] = Pi::service('url')->assemble('shop', array(
+        $category['categoryUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
             'module'        => $this->getModule(),
             'controller'    => 'category',
             'slug'          => $category['slug'],
-        ));
+        )));
         // Set image url
         if ($category['image']) {
             // Set image original url

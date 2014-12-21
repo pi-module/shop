@@ -266,11 +266,11 @@ class Product extends AbstractApi
         $product['category'] = Json::decode($product['category']);
         foreach ($product['category'] as $category) {
             $product['categories'][$category]['title'] = $categoryList[$category]['title'];
-            $product['categories'][$category]['url'] = Pi::service('url')->assemble('shop', array(
+            $product['categories'][$category]['url'] = Pi::url(Pi::service('url')->assemble('shop', array(
                 'module'        => $this->getModule(),
                 'controller'    => 'category',
                 'slug'          => $categoryList[$category]['slug'],
-            ));
+            )));
         }
         // Set price
         $product['price_view'] = $this->viewPrice($product['price']);
@@ -326,18 +326,18 @@ class Product extends AbstractApi
         $product['time_create_view'] = _date($product['time_create']);
         $product['time_update_view'] = _date($product['time_update']);
         // Set product url
-        $product['productUrl'] = Pi::service('url')->assemble('shop', array(
+        $product['productUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
             'module'        => $this->getModule(),
             'controller'    => 'product',
             'slug'          => $product['slug'],
-        ));
+        )));
         // Set cart url
-        $product['cartUrl'] = Pi::service('url')->assemble('shop', array(
+        $product['cartUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
             'module'        => $this->getModule(),
             'controller'    => 'checkout',
             'action'        => 'add',
             'slug'          => $product['slug'],
-        ));
+        )));
         // Set price
         $product['price_view'] = $this->viewPrice($product['price']);
         $product['price_discount_view'] = $this->viewPrice($product['price_discount']);

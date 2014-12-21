@@ -117,12 +117,12 @@ class CheckoutController extends ActionController
                 if ($row->payment_method == 'offline') {
                     $result['status'] = 1;
                     $result['message'] = __('Your order saved and we will call you soon');
-                    $result['invoice_url'] = $this->url('', array(
+                    $result['invoice_url'] = Pi::url($this->url('', array(
                         'module'        => $this->params('module'), 
                         'controller'    => 'checkout',
                         'action'        => 'finish',
                         'id'            => $row->id,
-                    ));
+                    )));
                 } else {
                     // Set invoice description
                     $description = array();
@@ -470,9 +470,21 @@ class CheckoutController extends ActionController
         }
         // canonize Order
         $order = Pi::api('order', 'shop')->canonizeOrder($order);
-        $order['order_link'] = $this->url('', array('module' => $module, 'controller' => 'user', 'action' => 'order', 'id' => $order['id']));
-        $order['user_link'] = $this->url('', array('module' => $module, 'controller' => 'user'));
-        $order['index_link'] = $this->url('', array('module' => $module, 'controller' => 'index'));
+        // Set links
+        $order['order_link'] = Pi::url($this->url('', array(
+            'module'      => $module, 
+            'controller'  => 'user', 
+            'action'      => 'order', 
+            'id'          => $order['id']
+        )));
+        $order['user_link'] = Pi::url($this->url('', array(
+            'module'      => $module, 
+            'controller'  => 'user'
+        )));
+        $order['index_link'] = Pi::url($this->url('', array(
+            'module'      => $module, 
+            'controller'  => 'index'
+        )));
         // Get invoice information
         Pi::service('i18n')->load(array('module/payment', 'default'));
         $invoice = Pi::api('invoice', 'payment')->getInvoiceFromItem('shop', 'order', $order['id']);

@@ -54,11 +54,11 @@ class CategoryController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
-            $list[$row->id]['url'] = $this->url('shop', array(
+            $list[$row->id]['url'] = Pi::url($this->url('shop', array(
                 'module'        => $module,
                 'controller'    => 'category',
                 'slug'          => $list[$row->id]['slug'],
-            ));
+            )));
         }
         // Go to update page if empty
         if (empty($list)) {

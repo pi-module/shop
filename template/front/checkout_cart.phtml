@@ -39,12 +39,12 @@
                     </table>
                     <div class="panel-footer clearfix">
                         <div class="pull-left">
-                            <a class="btn btn-primary" title="<?php _e('Back to Shoping'); ?>" href="<?php echo $this->url('', array('controller' => 'index')); ?>"><?php _e('Back to Shoping'); ?></a>
-                            <a class="btn btn-primary" title="<?php _e('Refresh cart'); ?>" href="<?php echo $this->url('', array('action' => 'cart')); ?>"><?php _e('Refresh cart'); ?></a>
-                            <a class="btn btn-primary" title="<?php _e('Empty cart'); ?>" href="<?php echo $this->url('', array('action' => 'empty')); ?>"><?php _e('Empty cart'); ?></a>
+                            <a class="btn btn-primary" title="<?php _e('Back to Shoping'); ?>" href="<?php echo Pi::url($this->url('', array('controller' => 'index'))); ?>"><?php _e('Back to Shoping'); ?></a>
+                            <a class="btn btn-primary" title="<?php _e('Refresh cart'); ?>" href="<?php echo Pi::url($this->url('', array('action' => 'cart'))); ?>"><?php _e('Refresh cart'); ?></a>
+                            <a class="btn btn-primary" title="<?php _e('Empty cart'); ?>" href="<?php echo Pi::url($this->url('', array('action' => 'empty'))); ?>"><?php _e('Empty cart'); ?></a>
                         </div>
                         <div class="pull-right">
-                            <a class="btn btn-primary" title="<?php _e('Next'); ?>" href="<?php echo $this->url('', array('action' => 'information')); ?>"><?php _e('Next'); ?></a>
+                            <a class="btn btn-primary" title="<?php _e('Next'); ?>" href="<?php echo Pi::url($this->url('', array('action' => 'information'))); ?>"><?php _e('Next'); ?></a>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
             this.updateAction(tar);
         },
         updateAction: function(e) {
-            var url = "<?php echo $this->url('', array('action' => 'cartAjax')); ?>";
+            var url = "<?php echo Pi::url($this->url('', array('action' => 'cartAjax'))); ?>";
             $.getJSON(url).done(function(result){
                 if (result.status == 1) {
                     $('#cart-total-price').html(result.data.price);

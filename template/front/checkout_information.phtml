@@ -42,7 +42,7 @@
             this.$('#select-payment').on("change",this.paymentAction);
         },
         locationAction: function(e) {
-            var url = "<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'location', 'id' => '')); ?>";
+            var url = "<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'location', 'id' => ''))); ?>";
             $.getJSON(url + $('#select-location').val()).done(function(result) {
                 if (result.status == 1) {
                     var htmlOptins = '';
@@ -65,7 +65,7 @@
             });
         },
         deliveryAction: function(e) {
-            var url = "<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'delivery', 'id' => '')); ?>";
+            var url = "<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'delivery', 'id' => ''))); ?>";
             $.getJSON(url + $('#select-delivery').val()).done(function(result) {
                 if (result.status == 1) {
                     $('#cart-total-shipping').html(result.data.shipping);
@@ -84,7 +84,7 @@
             });
         },
         paymentAction: function(e) {
-            var url = "<?php echo $this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'payment', 'id' => '')); ?>";
+            var url = "<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'payment', 'id' => ''))); ?>";
             $.getJSON(url + $('#select-payment').val()).done(function(result) {
                 if (result.status == 1) {
                     $('#cart-location').html(result.data.location);

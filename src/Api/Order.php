@@ -41,12 +41,12 @@ class Order extends AbstractApi
         $row->status_payment = 2;
         $row->save();
         // Set back url
-        return Pi::service('url')->assemble('shop', array(
+        return Pi::url(Pi::service('url')->assemble('shop', array(
             'module'        => $this->getModule(),
             'controller'    => 'checkout',
             'action'        => 'finish',
             'id'            => $row->id,
-        ));
+        )));
     }
 
     public function findOrder($id)
@@ -201,41 +201,41 @@ class Order extends AbstractApi
         // Set user
         $order['user'] = Pi::user()->get($order['uid'], array('id', 'identity', 'name', 'email'));
         // Set url_update_order
-        $order['url_update_order'] = Pi::service('url')->assemble('', array(
+        $order['url_update_order'] = Pi::url(Pi::service('url')->assemble('', array(
             'controller'    => 'order',
             'action'        => 'updateOrder',
             'id'            => $order['id'],
-        ));
+        )));
         // Set url_update_payment
-        $order['url_update_payment'] = Pi::service('url')->assemble('', array(
+        $order['url_update_payment'] = Pi::url(Pi::service('url')->assemble('', array(
             'controller'    => 'order',
             'action'        => 'updatePayment',
             'id'            => $order['id'],
-        ));
+        )));
         // Set url_update_delivery
-        $order['url_update_delivery'] = Pi::service('url')->assemble('', array(
+        $order['url_update_delivery'] = Pi::url(Pi::service('url')->assemble('', array(
             'controller'    => 'order',
             'action'        => 'updateDelivery',
             'id'            => $order['id'],
-        ));
+        )));
         // Set url_edit
-        $order['url_edit'] = Pi::service('url')->assemble('', array(
+        $order['url_edit'] = Pi::url(Pi::service('url')->assemble('', array(
             'controller'    => 'order',
             'action'        => 'edit',
             'id'            => $order['id'],
-        ));
+        )));
         // Set url_print
-        $order['url_print'] = Pi::service('url')->assemble('', array(
+        $order['url_print'] = Pi::url(Pi::service('url')->assemble('', array(
             'controller'    => 'order',
             'action'        => 'print',
             'id'            => $order['id'],
-        ));
+        )));
         // Set url_view
-        $order['url_view'] = Pi::service('url')->assemble('', array(
+        $order['url_view'] = Pi::url(Pi::service('url')->assemble('', array(
             'controller'    => 'order',
             'action'        => 'view',
             'id'            => $order['id'],
-        ));
+        )));
         // Status order
         $status_order = $this->orderStatus($order['status_order']);
         $order['orderClass'] = $status_order['orderClass'];

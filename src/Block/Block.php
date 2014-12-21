@@ -114,11 +114,11 @@ class Block
         $rowset = Pi::model('category', $module)->selectWith($select);
         foreach ($rowset as $row) {
             $category[$row->id] = $row->toArray();
-            $category[$row->id]['url'] = Pi::service('url')->assemble('shop', array(
+            $category[$row->id]['url'] = Pi::url(Pi::service('url')->assemble('shop', array(
                 'module'        => $module,
                 'controller'    => 'category',
                 'slug'          => $category[$row->id]['slug'],
-            ));
+            )));
         }
         // Set block array
         $block['resources'] = $category;

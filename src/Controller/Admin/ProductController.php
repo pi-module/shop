@@ -106,11 +106,11 @@ class ProductController extends ActionController
             $product[$row->id] = $row->toArray();
             $product[$row->id]['time_create_view'] = _date($product[$row->id]['time_create']);
             $product[$row->id]['time_update_view'] = _date($product[$row->id]['time_update']);
-            $product[$row->id]['productUrl'] = $this->url('shop', array(
+            $product[$row->id]['productUrl'] = Pi::url($this->url('shop', array(
                 'module'        => $module,
                 'controller'    => 'product',
                 'slug'          => $product[$row->id]['slug'],
-            ));
+            )));
         }
         // Go to update page if empty
         if (empty($product) && empty($status)) {

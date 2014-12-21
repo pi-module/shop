@@ -36,9 +36,9 @@ class Breadcrumbs extends AbstractBreadcrumbs
                 $result = array(
                     array(
                         'label' => $moduleData['title'],
-                        'href'  => Pi::service('url')->assemble('shop', array(
+                        'href'  => Pi::url(Pi::service('url')->assemble('shop', array(
                             'module' => $this->getModule(),
-                        )),
+                        ))),
                     ),
                 );
                 // Set
@@ -61,10 +61,10 @@ class Breadcrumbs extends AbstractBreadcrumbs
                             case 'information':
                                 $result[] = array(
                                     'label' => __('Cart'),
-                                    'href'  => Pi::service('url')->assemble('shop', array(
+                                    'href'  => Pi::url(Pi::service('url')->assemble('shop', array(
                                         'controller' => 'checkout',
                                         'action'     => 'cart',
-                                    )),
+                                    ))),
                                 );
                                 $result[] = array(
                                     'label' => __('Set information'),
@@ -93,10 +93,10 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         if ($params['action'] == 'result') {
                             $result[] = array(
                                 'label' => __('Search'),
-                                'href'  => Pi::service('url')->assemble('shop', array(
+                                'href'  => Pi::url(Pi::service('url')->assemble('shop', array(
                                     'controller' => 'search',
                                     'action'     => 'index',
-                                )),
+                                ))),
                             );
                             $result[] = array(
                                 'label' => __('Result'),
@@ -112,10 +112,10 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         if ($params['slug']) {
                             $result[] = array(
                                 'label' => __('Tag list'),
-                                'href'  => Pi::service('url')->assemble('shop', array(
+                                'href'  => Pi::url(Pi::service('url')->assemble('shop', array(
                                     'controller' => 'tag',
                                     'action'     => 'list',
-                                )),
+                                ))),
                             );
                             $result[] = array(
                                 'label' => $params['slug'],
@@ -138,10 +138,10 @@ class Breadcrumbs extends AbstractBreadcrumbs
                             case 'order':
                                 $result[] = array(
                                     'label' => __('Dashboard'),
-                                    'href'  => Pi::service('url')->assemble('shop', array(
+                                    'href'  => Pi::url(Pi::service('url')->assemble('shop', array(
                                         'controller' => 'user',
                                         'action'     => 'index',
-                                    )),
+                                    ))),
                                 );
                                 $result[] = array(
                                     'label' => __('Order information'),

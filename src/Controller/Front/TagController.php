@@ -83,11 +83,11 @@ class TagController extends IndexController
             $tag = Pi::model('tag', 'tag')->find($row->term, 'term');
             $tagList[$row->id] = $row->toArray();
             $tagList[$row->id]['term'] = $tag['term'];
-            $tagList[$row->id]['url'] = $this->url('', array(
+            $tagList[$row->id]['url'] = Pi::url($this->url('', array(
             	'controller' => 'tag', 
             	'action' => 'term', 
             	'slug' => urldecode($tag['term'])
-            	));
+            	)));
         }
         // Set header and title
         $title = __('List of all used tags on shop');
