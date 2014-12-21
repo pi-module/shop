@@ -26,6 +26,7 @@ use Zend\Json\Json;
  * Pi::api('product', 'shop')->attachCount($id);
  * Pi::api('product', 'shop')->relatedCount($id);
  * Pi::api('product', 'shop')->AttachList($id);
+ * Pi::api('product', 'shop')->FavoriteList();
  * Pi::api('product', 'shop')->viewPrice($price);
  * Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
  * Pi::api('product', 'shop')->canonizeProductLight($product);
@@ -205,6 +206,50 @@ class Product extends AbstractApi
         }
         // return
         return $file;
+    }
+
+    public function favoriteList()
+    {
+        // Get user id
+        $uid = Pi::user()->getId();
+        // Check user
+        if ($uid > 0) {
+            $favoriteIds = Pi::api('favourite', 'favourite')->userFavourite($uid, $this->getModule(), 10);
+            // Check list of ides
+            if (!empty($favoriteIds)) {
+                // Get config
+                $config = Pi::service('registry')->config->read($this->getModule());
+                // Set list
+                $list =  array();
+                $where = array('id' => $favoriteIds, 'status' => 1);
+                $select = Pi::model('product', $this->getModule())->select()->where($where);
+                $rowset = Pi::model('product', $this->getModule())->selectWith($select);
+                foreach ($rowset as $row) {
+                    $story =  array();
+                    $story['title'] = $row->title;
+                    $story['url'] = Pi::url(Pi::service('url')->assemble('shop', array(
+                        'module'        => $this->getModule(),
+                        'controller'    => 'product',
+                        'slug'          => $row->slug,
+                    )));
+                    $story['image'] = '';
+                    if ($row->image) {
+                        $story['image'] = Pi::url(
+                            sprintf('upload/%s/thumb/%s/%s', 
+                            $config['image_path'], 
+                            $row->path, 
+                            $row->image
+                        ));
+                    }    
+                    $list[$row->id] = $story;
+                }
+                return $list;
+            } else {
+                return '';
+            }
+        } else {
+            return '';
+        }
     }
 
     /**
