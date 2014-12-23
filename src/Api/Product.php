@@ -22,7 +22,7 @@ use Zend\Json\Json;
  * Pi::api('product', 'shop')->getListFromId($id);
  * Pi::api('product', 'shop')->getListFromIdLight($id);
  * Pi::api('product', 'shop')->searchRelated($title, $type);
- * Pi::api('product', 'shop')->extraCount($id);
+ * Pi::api('product', 'shop')->attributeCount($id);
  * Pi::api('product', 'shop')->attachCount($id);
  * Pi::api('product', 'shop')->relatedCount($id);
  * Pi::api('product', 'shop')->AttachList($id);
@@ -107,16 +107,16 @@ class Product extends AbstractApi
     }	
 
     /**
-     * Set number of used extra fields for selected product
+     * Set number of used attribute fields for selected product
      */
-    public function extraCount($id)
+    public function attributeCount($id)
     {
         // Get attach count
         $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
         $select = Pi::model('field_data', $this->getModule())->select()->columns($columns);
         $count = Pi::model('field_data', $this->getModule())->selectWith($select)->current()->count;
         // Set attach count
-        Pi::model('product', $this->getModule())->update(array('extra' => $count), array('id' => $id));
+        Pi::model('product', $this->getModule())->update(array('attribute' => $count), array('id' => $id));
     }
 
     /**
@@ -429,7 +429,7 @@ class Product extends AbstractApi
         unset($product['count']);
         unset($product['favorite']);
         unset($product['attach']);
-        unset($product['extra']);
+        unset($product['attribute']);
         unset($product['related']);
         unset($product['recommended']);
         unset($product['stock']);

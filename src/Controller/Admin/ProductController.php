@@ -10,7 +10,6 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Shop\Controller\Admin;
 
 use Pi;
@@ -22,8 +21,6 @@ use Module\Shop\Form\ProductForm;
 use Module\Shop\Form\ProductFilter;
 use Module\Shop\Form\RelatedForm;
 use Module\Shop\Form\RelatedFilter;
-use Module\Shop\Form\ExtraForm;
-use Module\Shop\Form\ExtraFilter;
 use Module\Shop\Form\SpecialForm;
 use Module\Shop\Form\SpecialFilter;
 use Zend\Json\Json;
@@ -36,26 +33,14 @@ class ProductController extends ActionController
     protected $ImageProductPrefix = 'product_';
 
     /**
-     * Extra Image Prefix
-     */
-    protected $ImageExtraPrefix = 'extra_';
-
-    /**
      * Product Columns
      */
     protected $productColumns = array(
     	'id', 'title', 'slug', 'category', 'summary', 'description', 'seo_title', 
         'seo_keywords', 'seo_description', 'status', 'time_create', 'time_update', 
         'uid', 'hits', 'sales', 'image', 'path', 'comment', 'point', 'count', 
-        'favorite', 'attach', 'extra', 'related', 'recommended', 'brand',
+        'favorite', 'attach', 'attribute', 'related', 'recommended', 'brand',
         'stock', 'stock_alert', 'stock_type', 'price', 'price_discount', 'price_title'
-    );
-
-    /**
-     * Extra Columns
-     */
-    protected $extraColumns = array(
-        'id', 'title', 'image', 'type', 'order', 'status', 'search', 'value'
     );
 
     /**
@@ -168,9 +153,9 @@ class ProductController extends ActionController
                 $option['removeUrl'] = $this->url('', array('action' => 'remove', 'id' => $product['id']));
             }
         }
-        // Get extra field
-        $fields = Pi::api('extra', 'shop')->Get();
-        $option['field'] = $fields['extra'];
+        // Get attribute field
+        $fields = Pi::api('attribute', 'shop')->Get();
+        $option['field'] = $fields['attribute'];
         // Set form
         $form = new ProductForm('product', $option);
         $form->setAttribute('enctype', 'multipart/form-data');
@@ -182,15 +167,15 @@ class ProductController extends ActionController
             $filter = new Filter\Slug;
             $data['slug'] = $filter($slug);
             // Form filter
-            $form->setInputFilter(new ProductFilter($fields['extra']));
+            $form->setInputFilter(new ProductFilter($fields['attribute']));
             $form->setData($data);
             if ($form->isValid()) {
             	$values = $form->getData();
-                // Set extra data array
+                // Set attribute data array
                 if (!empty($fields['field'])) {
                     foreach ($fields['field'] as $field) {
-                        $extra[$field]['field'] = $field;
-                        $extra[$field]['data'] = $values[$field];
+                        $attribute[$field]['field'] = $field;
+                        $attribute[$field]['data'] = $values[$field];
                     }
                 }
                 // Tag
@@ -268,9 +253,9 @@ class ProductController extends ActionController
                         Pi::service('tag')->update($module, $row->id, '', $tag);
                     }
                 }
-                // Extra
-                if (!empty($extra)) {
-                    Pi::api('extra', 'shop')->Set($extra, $row->id);
+                // Attribute
+                if (!empty($attribute)) {
+                    Pi::api('attribute', 'shop')->Set($attribute, $row->id);
                 }
                 // Add / Edit sitemap
                 if (Pi::service('module')->isActive('sitemap')) {
@@ -298,8 +283,8 @@ class ProductController extends ActionController
             }	
         } else {
             if ($id) {
-                // Get Extra
-                $product = Pi::api('extra', 'shop')->Form($product);
+                // Get Attribute
+                $product = Pi::api('attribute', 'shop')->Form($product);
                 // Get tag list
                 if (Pi::service('module')->isActive('tag')) {
                     $tag = Pi::service('tag')->get($module, $product['id'], '');
@@ -334,7 +319,7 @@ class ProductController extends ActionController
             $this->getModel('related')->delete(array('product_id' => $row->id));
             // Attach
             $this->getModel('attach')->delete(array('product' => $row->id));
-            // Extra Field Data
+            // attribute Field Data
             $this->getModel('field_data')->delete(array('product' => $row->id));
             // Special
             $this->getModel('special')->delete(array('product' => $row->id));
@@ -497,161 +482,6 @@ class ProductController extends ActionController
             Pi::api('product', 'shop')->relatedCount($product['id']);
         }
         return $return;
-    }
-
-    /**
-     * attribute Action
-     */
-    public function attributeAction()
-    {
-        $this->view()->setTemplate('product_attribute');
-        $this->view()->assign('title', __('Add Attribute'));
-        $this->view()->assign('message', __('This option ready on next version'));
-    }
-
-    /**
-     * extra Action
-     */
-    public function extraAction()
-    {
-        // Get info
-        $select = $this->getModel('field')->select()->order(array('order ASC'));
-        $rowset = $this->getModel('field')->selectWith($select);
-        // Make list
-        foreach ($rowset as $row) {
-            $field[$row->id] = $row->toArray();
-            $field[$row->id]['imageUrl'] = Pi::url(sprintf('upload/%s/icon/%s', $this->config('file_path'), $field[$row->id]['image']));
-        }
-        // Go to update page if empty
-        if (empty($field)) {
-            return $this->redirect()->toRoute('', array('action' => 'extraUpdate'));
-        }
-        // Set view
-        $this->view()->setTemplate('product_extra');
-        $this->view()->assign('fields', $field);
-    }
-
-    /**
-     * extra Action
-     */
-    public function extraUpdateAction()
-    {
-        // Get id
-        $id = $this->params('id');
-        $module = $this->params('module');
-        // Get extra
-        if ($id) {
-            $extra = $this->getModel('field')->find($id)->toArray();
-        }
-        // Set form
-        $form = new ExtraForm('extra', $options);
-        $form->setAttribute('enctype', 'multipart/form-data');
-        if ($this->request->isPost()) {
-            $data = $this->request->getPost();
-            $file = $this->request->getFiles();
-            $form->setInputFilter(new ExtraFilter);
-            $form->setData($data);
-            if ($form->isValid()) {
-                $values = $form->getData();
-                // upload image
-                if (!empty($file['image']['name'])) {
-                    // Set upload path
-                    $path = Pi::path(sprintf('upload/%s/icon', $this->config('file_path')));
-                    // Upload
-                    $uploader = new Upload;
-                    $uploader->setDestination($path);
-                    $uploader->setRename($this->ImageExtraPrefix . '%random%');
-                    $uploader->setExtension($this->config('image_extension'));
-                    $uploader->setSize($this->config('image_size'));
-                    if ($uploader->isValid()) {
-                        $uploader->receive();
-                        // Get image name
-                        $values['image'] = $uploader->getUploaded('image');
-                    } else {
-                        $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
-                    }
-                } elseif (!isset($values['image'])) {
-                    $values['image'] = '';  
-                }
-                // Set just product fields
-                foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->extraColumns)) {
-                        unset($values[$key]);
-                    }
-                }
-                // Set order
-                $select = $this->getModel('field')->select()->columns(array('order'))->order(array('order DESC'))->limit(1);
-                $values['order'] = $this->getModel('field')->selectWith($select)->current()->order + 1;
-                // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('field')->find($values['id']);
-                } else {
-                    $row = $this->getModel('field')->createRow();
-                }
-                $row->assign($values);
-                $row->save();
-                // Add log
-                $operation = (empty($values['id'])) ? 'add' : 'edit';
-                Pi::api('log', 'shop')->addLog('extra', $row->id, $operation);
-                // Check it save or not
-                if ($row->id) {
-                    $message = __('Extra field data saved successfully.');
-                    $url = array('action' => 'extra');
-                    $this->jump($url, $message);
-                } else {
-                    $message = __('Extra field data not saved.');
-                }
-            } else {
-                $message = __('Invalid data, please check and re-submit.');
-            }
-        } else {
-            if ($id) {
-                $form->setData($extra);
-                $message = 'You can edit this extra field';
-            } else {
-                $message = 'You can add new extra field';
-            }
-        }
-        // Set view
-        $this->view()->setTemplate('product_extra_update');
-        $this->view()->assign('form', $form);
-        $this->view()->assign('title', __('Add Extra'));
-        $this->view()->assign('message', $message);
-    }
-
-    public function extraSortAction()
-    {
-        $order = 1;
-        if ($this->request->isPost()) {
-            $data = $this->request->getPost();
-            foreach ($data['mod'] as $id) {
-                if ($id > 0) {
-                    $row = $this->getModel('field')->find($id);
-                    $row->order = $order;
-                    $row->save();
-                    $order++;
-                }
-            }
-        }
-        // Set view
-        $this->view()->setTemplate(false);
-    }
-
-    public function extraDeleteAction()
-    {
-        // Get information
-        $this->view()->setTemplate(false);
-        $id = $this->params('id');
-        $row = $this->getModel('field')->find($id);
-        if ($row) {
-            // Remove all data
-            $this->getModel('field_data')->delete(array('field' => $row->id));
-            // Remove field
-            $row->delete();
-            $this->jump(array('action' => 'extra'), __('Selected field delete'));
-        } else {
-            $this->jump(array('action' => 'extra'), __('Please select field'));
-        }
     }
 
     public function specialAction()

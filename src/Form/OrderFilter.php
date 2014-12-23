@@ -18,7 +18,7 @@ use Zend\InputFilter\InputFilter;
 
 class OrderFilter extends InputFilter
 {
-    public function __construct($extra = null)
+    public function __construct()
     {
         $config = Pi::service('registry')->config->read('shop', 'order');
         $checkout = Pi::api('order', 'shop')->checkoutConfig();

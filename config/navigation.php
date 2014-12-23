@@ -91,6 +91,17 @@ return array(
             'action'        => 'index',
         ),
 
+        'attribute' => array(
+            'label'         => _a('Attribute'),
+            'permission'    => array(
+                'resource'  => 'attribute',
+            ),
+            'route'         => 'admin',
+            'module'        => 'shop',
+            'controller'    => 'attribute',
+            'action'        => 'index',
+        ),
+
         'attach' => array(
             'label'         => _a('Attach'),
             'permission'    => array(

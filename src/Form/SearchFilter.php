@@ -18,7 +18,7 @@ use Zend\InputFilter\InputFilter;
 
 class SearchFilter extends InputFilter
 {
-    public function __construct($extra = null)
+    public function __construct($attribute = null)
     {
         // type
         $this->add(array(
@@ -60,9 +60,9 @@ class SearchFilter extends InputFilter
             'name' => 'category',
             'required' => false,
         ));
-        // Set extra field
-        if (!empty($extra)) {
-            foreach ($extra as $field) {
+        // Set attribute field
+        if (!empty($attribute)) {
+            foreach ($attribute as $field) {
                 if ($field['search']) {
                     $this->add(array(
                         'name' => $field['id'],

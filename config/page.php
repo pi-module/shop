@@ -24,6 +24,11 @@ return array(
             'permission'    => 'category',
         ),
         array(
+            'label'         => _a('Attribute'),
+            'controller'    => 'attribute',
+            'permission'    => 'attribute',
+        ),
+        array(
             'label'         => _a('Attach'),
             'controller'    => 'attach',
             'permission'    => 'attach',

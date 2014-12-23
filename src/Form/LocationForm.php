@@ -18,7 +18,6 @@ use Pi\Form\Form as BaseForm;
 
 class LocationForm  extends BaseForm
 {
-
     public function __construct($name = null, $option = array())
     {
         $this->delivery = $option['delivery'];

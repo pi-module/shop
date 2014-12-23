@@ -37,10 +37,10 @@ class ProductController extends IndexController
         }
         // Update Hits
         $this->getModel('product')->update(array('hits' => $product['hits'] + 1), array('id' => $product['id']));
-        // Get extra
-        if ($product['extra'] && $config['view_extra']) {
-            $extra = Pi::api('extra', 'shop')->Product($product['id']);
-            $this->view()->assign('extra', $extra);
+        // Get attribute
+        if ($product['attribute'] && $config['view_attribute']) {
+            $attribute = Pi::api('attribute', 'shop')->Product($product['id']);
+            $this->view()->assign('attribute', $attribute);
         }
         // Get related
         if ($product['related'] && $config['view_related']) {
@@ -57,7 +57,7 @@ class ProductController extends IndexController
             $where = array('status' => 1, 'category' => $product['category']);
             $productList = $this->productList($where);
             $this->view()->assign('productList', $productList);
-            $this->view()->assign('productTitle', __('New products'));
+            $this->view()->assign('productTitleH2', __('New products'));
         }
         // Set tag
         if ($config['view_tag']) {

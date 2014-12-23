@@ -129,7 +129,7 @@ class SearchForm  extends BaseForm
                 ),
             ));
         }
-        // Set extra field
+        // Set attribute field
         if (!empty($this->field)) {
             foreach ($this->field as $field) {
                 if ($field['search']) {

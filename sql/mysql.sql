@@ -22,7 +22,7 @@ CREATE TABLE `{product}` (
     `count` int(10) unsigned NOT NULL default '0',
     `favourite` int(10) unsigned NOT NULL default '0',
     `attach` tinyint(3) unsigned NOT NULL default '0',
-    `extra` tinyint(3) unsigned NOT NULL default '0',
+    `attribute` tinyint(3) unsigned NOT NULL default '0',
     `related` tinyint(3) unsigned NOT NULL default '0',
     `recommended` tinyint(1) unsigned NOT NULL default '0',
     `stock` int(10) unsigned NOT NULL default '0',

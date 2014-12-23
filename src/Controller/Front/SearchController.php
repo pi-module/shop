@@ -29,14 +29,14 @@ class SearchController extends IndexController
         $module = $this->params('module');
         // Get config
         $config = Pi::service('registry')->config->read($module);
-        // Get extra field
-        $fields = Pi::api('extra', 'shop')->Get();
-        $option['field'] = $fields['extra'];
+        // Get attribute field
+        $fields = Pi::api('attribute', 'shop')->Get();
+        $option['field'] = $fields['attribute'];
         // Set form
     	$form = new SearchForm('search', $option);
     	if ($this->request->isPost()) {
     		$data = $this->request->getPost();
-    		$form->setInputFilter(new SearchFilter($fields['extra']));
+    		$form->setInputFilter(new SearchFilter($fields['attribute']));
             $form->setData($data);
             if ($form->isValid()) {
             	$_SESSION['shop']['search'] = $form->getData();
@@ -107,20 +107,20 @@ class SearchController extends IndexController
         {
             $categoryId = Pi::api('category', 'shop')->findFromCategory($search['category']);
         }
-        // Set extra
-        $extraSearch = Pi::api('extra', 'shop')->SearchForm($search);
-        if (!empty($extraSearch)) {
-            $extraId = Pi::api('extra', 'shop')->findFromExtra($extraSearch);
+        // Set attribute
+        $attributeSearch = Pi::api('attribute', 'shop')->SearchForm($search);
+        if (!empty($attributeSearch)) {
+            $attributeId = Pi::api('attribute', 'shop')->findFromAttribute($attributeSearch);
         }
         // Set where id
-        if (!empty($categoryId) && !empty($extraId)) {
-            $productId = array_merge($categoryId, $extraId);
+        if (!empty($categoryId) && !empty($attributeId)) {
+            $productId = array_merge($categoryId, $attributeId);
             $productId = array_unique($productId);
             $where['id'] = $productId;
-        } elseif (!empty($categoryId) && empty($extraId)) {
+        } elseif (!empty($categoryId) && empty($attributeId)) {
             $where['id'] = $categoryId;
-        } elseif (empty($categoryId) && !empty($extraId)) {
-            $where['id'] = $extraId;
+        } elseif (empty($categoryId) && !empty($attributeId)) {
+            $where['id'] = $attributeId;
         } 
         // Get product List
         $productList = $this->searchList($where);

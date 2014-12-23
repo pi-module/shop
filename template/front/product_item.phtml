@@ -27,7 +27,7 @@
 		</div>
 		<div class="panel-body">
 			<div class="col-md-7">
-				<?php include $this->template('front/extra'); ?>
+				<?php include $this->template('front/attribute'); ?>
 				<div class="productInfoBox well clearfix">
 					<div class="col-md-6">
 						<div class="productPrice"><?php include $this->template('front/price'); ?></div>
@@ -54,9 +54,9 @@
 					<div class="productDescription p-review"><?php echo $productItem['description']; ?></div>
 					<div class="productMedia">
 						<?php include $this->template('front/attach_audio'); ?>
-					    <?php include $this->template('front/extra_audio'); ?>
+					    <?php include $this->template('front/attribute_audio'); ?>
 					    <?php include $this->template('front/attach_video'); ?>
-					    <?php include $this->template('front/extra_video'); ?>
+					    <?php include $this->template('front/attribute_video'); ?>
 					</div>
 				</div>
 			</div>
@@ -76,6 +76,8 @@
 	</div>
 	<?php include $this->template('front/attach'); ?>
 	<?php include $this->template('front/related'); ?>
-	<?php include $this->template('front/list'); ?>
+	<div class="row">
+		<?php include $this->template('front/list'); ?>
+	</div>
 	</div>
 </div>

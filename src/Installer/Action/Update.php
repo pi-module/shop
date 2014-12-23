@@ -75,6 +75,22 @@ class Update extends BasicUpdate
             }
         }
 
+        // Update to version 0.3.7
+        if (version_compare($moduleVersion, '0.3.7', '<')) {
+            // Alter table field `type`
+            $sql = sprintf("ALTER TABLE %s CHANGE `extra` `attribute` tinyint(3) unsigned NOT NULL default '0'", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }    
 }

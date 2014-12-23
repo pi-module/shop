@@ -18,7 +18,7 @@ use Zend\InputFilter\InputFilter;
 
 class ProductFilter extends InputFilter
 {
-    public function __construct($extra = null)
+    public function __construct($attribute = null)
     {
         // id
         $this->add(array(
@@ -183,9 +183,9 @@ class ProductFilter extends InputFilter
                 'required' => false,
             ));
         }
-        // Set extra field
-        if (!empty($extra)) {
-            foreach ($extra as $field) {
+        // Set attribute field
+        if (!empty($attribute)) {
+            foreach ($attribute as $field) {
                 $this->add(array(
                     'name' => $field['id'],
                     'required' => false,

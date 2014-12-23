@@ -114,7 +114,7 @@ class ProductForm  extends BaseForm
                     2 => __('Pending review'),
                     3 => __('Draft'),
                     4 => __('Private'),
-                    4 => __('Delete'),
+                    5 => __('Delete'),
                 ),
             ),
         ));
@@ -327,7 +327,7 @@ class ProductForm  extends BaseForm
                 'name' => 'extra_field',
                 'type' => 'fieldset',
                 'options' => array(
-                    'label' => __('Extra fields'),
+                    'label' => __('Attributes'),
                 ),
             ));
             foreach ($this->field as $field) {

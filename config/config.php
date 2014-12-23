@@ -81,9 +81,9 @@ return array(
             'filter'       => 'number_int',
             'value'        => 1
         ),
-        'view_extra' => array(
+        'view_attribute' => array(
             'category'     => 'view',
-            'title'        => _a('Show extra fields'),
+            'title'        => _a('Show attribute fields'),
             'description'  => '',
             'edit'         => 'checkbox',
             'filter'       => 'number_int',

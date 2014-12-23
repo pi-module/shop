@@ -54,6 +54,12 @@ return array(
                 //'admin',
             ),
         ),
+        'attribute'      => array(
+            'title'         => _a('Attribute'),
+            'access'        => array(
+                //'admin',
+            ),
+        ),
         'attach'         => array(
             'title'         => _a('Attach'),
             'access'        => array(
