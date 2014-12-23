@@ -13,8 +13,8 @@
 namespace Module\Shop\Controller\Front;
 
 use Pi;
+use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
-use Zend\Json\Json;
 
 class CategoryController extends IndexController
 {
@@ -86,12 +86,15 @@ class CategoryController extends IndexController
         }
         // Set header and title
         $title = __('Category list');
-        $seoTitle = Pi::api('text', 'shop')->title($title);
-        $seoDescription = Pi::api('text', 'shop')->description($title);
-        $seoKeywords = Pi::api('text', 'shop')->keywords($title);
+        // Set seo_keywords
+        $filter = new Filter\HeadKeywords;
+        $filter->setOptions(array(
+            'force_replace' => true
+        ));
+        $seoKeywords = $filter($title);
         // Set view
-        $this->view()->headTitle($seoTitle);
-        $this->view()->headDescription($seoDescription, 'set');
+        $this->view()->headTitle($title);
+        $this->view()->headDescription($title, 'set');
         $this->view()->headKeywords($seoKeywords, 'set');
         $this->view()->setTemplate('category_list');
         $this->view()->assign('categories', $categories);

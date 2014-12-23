@@ -10,12 +10,11 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Shop\Controller\Front;
 
 use Pi;
+use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
-use Zend\Json\Json;
 
 class TagController extends IndexController
 {
@@ -64,12 +63,15 @@ class TagController extends IndexController
         $paginator = $this->productPaginator($template, $where);
         // Set header and title
         $title = sprintf(__('All products by %s tag'), $slug);
-        $seoTitle = Pi::api('text', 'shop')->title($title);
-        $seoDescription = Pi::api('text', 'shop')->description($title);
-        $seoKeywords = Pi::api('text', 'shop')->keywords($title);
+        // Set seo_keywords
+        $filter = new Filter\HeadKeywords;
+        $filter->setOptions(array(
+            'force_replace' => true
+        ));
+        $seoKeywords = $filter($title);
         // Set view
-        $this->view()->headTitle($seoTitle);
-        $this->view()->headDescription($seoDescription, 'set');
+        $this->view()->headTitle($title);
+        $this->view()->headDescription($title, 'set');
         $this->view()->headKeywords($seoKeywords, 'set');
         $this->view()->setTemplate('product_list');
         $this->view()->assign('productList', $productList);
@@ -102,12 +104,15 @@ class TagController extends IndexController
         }
         // Set header and title
         $title = __('List of all used tags on shop');
-        $seoTitle = Pi::api('text', 'shop')->title($title);
-        $seoDescription = Pi::api('text', 'shop')->description($title);
-        $seoKeywords = Pi::api('text', 'shop')->keywords($title);
+        // Set seo_keywords
+        $filter = new Filter\HeadKeywords;
+        $filter->setOptions(array(
+            'force_replace' => true
+        ));
+        $seoKeywords = $filter($title);
         // Set view
-        $this->view()->headTitle($seoTitle);
-        $this->view()->headDescription($seoDescription, 'set');
+        $this->view()->headTitle($title);
+        $this->view()->headDescription($title, 'set');
         $this->view()->headKeywords($seoKeywords, 'set');
         $this->view()->setTemplate('tag_list');
         $this->view()->assign('title', $title);
