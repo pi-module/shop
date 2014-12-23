@@ -48,7 +48,7 @@ class ProductController extends ActionController
         'seo_keywords', 'seo_description', 'status', 'time_create', 'time_update', 
         'uid', 'hits', 'sales', 'image', 'path', 'comment', 'point', 'count', 
         'favorite', 'attach', 'extra', 'related', 'recommended', 'brand',
-        'stock', 'stock_alert', 'price', 'price_discount', 'price_title'
+        'stock', 'stock_alert', 'stock_type', 'price', 'price_discount', 'price_title'
     );
 
     /**

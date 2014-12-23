@@ -94,7 +94,7 @@ class ProductFilter extends InputFilter
         // stock
         $this->add(array(
             'name' => 'stock',
-            'required' => false,
+            'required' => true,
             'filters' => array(
                 array(
                     'name' => 'StringTrim',
@@ -110,6 +110,11 @@ class ProductFilter extends InputFilter
                     'name' => 'StringTrim',
                 ),
             ),
+        ));
+        // stock_type
+        $this->add(array(
+            'name' => 'stock_type',
+            'required' => true,
         ));
         // price
         $this->add(array(

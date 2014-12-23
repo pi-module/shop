@@ -320,6 +320,25 @@ class Product extends AbstractApi
         // Set price
         $product['price_view'] = $this->viewPrice($product['price']);
         $product['price_discount_view'] = $this->viewPrice($product['price_discount']);
+        // Set stock
+        switch ($product['stock_type']) {
+            default:
+            case 1:
+                $product['stock_type_view'] = __('In stock');
+                break;
+            
+            case 2:
+                $product['stock_type_view'] = __('Out of stock');
+                break;
+
+            case 3:
+                $product['stock_type_view'] = __('Coming soon');
+                break;
+
+            case 4:
+                $product['stock_type_view'] = __('Contact');
+                break;
+        }
         // Set marketable
         $product['marketable'] = $this->marketable($product);
         // Set image url

@@ -24,11 +24,9 @@
 <?php } ?>
 <?php if (isset($categories) && !empty($categories)) { ?>
 <div class="clearfix categoryList">
-	<?php if($config['view_title']) { ?>
 	<div class="page-header">
 		<h4><?php _e('Category list'); ?></h4>
 	</div>
-    <?php } ?>
 	<div class="text-center">
 		<div class="btn-group">
 		<?php foreach($categories as $category) { ?>

@@ -114,6 +114,7 @@ class ProductForm  extends BaseForm
                     2 => __('Pending review'),
                     3 => __('Draft'),
                     4 => __('Private'),
+                    4 => __('Delete'),
                 ),
             ),
         ));
@@ -210,6 +211,20 @@ class ProductForm  extends BaseForm
                 'description' => '',
                 
             )
+        ));
+        // stock_type
+        $this->add(array(
+            'name' => 'stock_type',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Stock type'),
+                'value_options' => array(
+                    1 => __('In stock'),
+                    2 => __('Out of stock'),
+                    3 => __('Coming soon'),
+                    4 => __('Contact'),
+                ),
+            ),
         ));
         // price
         $this->add(array(

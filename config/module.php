@@ -15,7 +15,7 @@ return array(
     'meta'         => array(
         'title'         => _a('Shop'),
         'description'   => _a('Shop module for pi.'),
-        'version'       => '0.3.1',
+        'version'       => '0.3.3',
         'license'       => 'New BSD',
         'logo'          => 'image/logo.png',
         'readme'        => 'docs/readme.txt',
