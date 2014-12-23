@@ -12,27 +12,30 @@
 	<div class="shop-block-category-advanced">
     	<?php echo $block['treeHtml']; ?>
 	</div>
-	<script type="text/javascript">
-	var MenuTree = {
-    	collapse: function(element) {
-        	element.slideToggle(600);
-    	},
-    	walk: function() {
-        	$('a', '.shop-block-category-advanced').each(function() {
-            	var $a = $(this);
-            	var $li = $a.parent();
-            	if ($a.next().is('ul')) {
-                	var $ul = $a.next();
-                	$a.click(function(e) {
-                    	e.preventDefault();
-                    	MenuTree.collapse($ul);
-                    	$a.toggleClass('active');
-                	});
-            	}
-        	});
-    	}
-	};
-	MenuTree.walk();
-	</script>
+    <?php 
+        $script =<<<'EOT'
+        var MenuTree = {
+            collapse: function(element) {
+                element.slideToggle(600);
+            },
+            walk: function() {
+                $('a', '.shop-block-category-advanced').each(function() {
+                    var $a = $(this);
+                    var $li = $a.parent();
+                    if ($a.next().is('ul')) {
+                        var $ul = $a.next();
+                        $a.click(function(e) {
+                            e.preventDefault();
+                            MenuTree.collapse($ul);
+                            $a.toggleClass('active');
+                        });
+                    }
+                });
+            }
+        };
+        MenuTree.walk();
+EOT;
+        $this->footScript()->appendScript($script);
+    ?>
 	<?php } ?>
 </div>

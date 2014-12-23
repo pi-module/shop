@@ -6,6 +6,87 @@
     $this->jQuery();
     $this->bootstrap('js/bootstrap.min.js');
     $this->backbone();
+
+    $script =<<<'EOT'
+(function($) {
+    var page = {
+        el: $('#js-order'),
+        $: function(selector) {
+            return this.el.find(selector);
+        },
+        init: function() {
+            _.bindAll(this);
+            this.$('#select-location').on("change",this.locationAction);
+            this.$('#select-delivery').on("change",this.deliveryAction);
+            this.$('#select-payment').on("change",this.paymentAction);
+        },
+        locationAction: function(e) {
+            var url = "%s";
+            $.getJSON(url + $('#select-location').val()).done(function(result) {
+                if (result.status == 1) {
+                    var htmlOptins = '';
+                    $.each(result.data, function( index, value ) {
+                        if (value.status==1) {
+                            htmlOptins = htmlOptins 
+                            + "<option value='" + value.delivery + "'>" 
+                                + value.title + " - "
+                                + " %s " + value.price + " - "
+                                + " %s " + value.delivery_time  + " %s "
+                            + "</option>";
+                        } else {
+                            htmlOptins = htmlOptins 
+                            + "<option value='" + value.delivery + "'>" + value.title + "</option>";
+                        }
+                    });
+                    $('#select-delivery').html(htmlOptins);
+                }
+                $('#cart-location').html(result.location);
+            });
+        },
+        deliveryAction: function(e) {
+            var url = "%s";
+            $.getJSON(url + $('#select-delivery').val()).done(function(result) {
+                if (result.status == 1) {
+                    $('#cart-total-shipping').html(result.data.shipping);
+                    $('#cart-total-total').html(result.data.total);
+                    var htmlOptins = '';
+                    $.each(result.data.payment, function( index, value ) {
+                        if (value.status==1) {
+                            htmlOptins = htmlOptins 
+                            + "<option value='" + value.path + "'>"  + value.title + "</option>";
+                        }
+                    });
+                    $('#select-payment').html(htmlOptins);
+                }
+                $('#cart-delivery').html(result.delivery);
+                $('#cart-payment').html(result.payment);
+            });
+        },
+        paymentAction: function(e) {
+            var url = "%s";
+            $.getJSON(url + $('#select-payment').val()).done(function(result) {
+                if (result.status == 1) {
+                    $('#cart-location').html(result.data.location);
+                    $('#cart-delivery').html(result.data.delivery);
+                    $('#cart-payment').html(result.data.payment);
+                }
+            });
+        },
+    }
+    page.init();
+})(jQuery)
+EOT;
+    $script =  sprintf(
+        $script,
+        Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'location', 'id' => ''))),
+        __('Price : '),
+        __('Time : '),
+        __('Days'),
+        Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'delivery', 'id' => ''))),
+        Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'payment', 'id' => '')))
+    );
+    $this->footScript()->appendScript($script);
+
 ?>
 <div id="js-order" class="clearfix">
     <h1><?php echo $this->escape($title); ?></h1>
@@ -28,72 +109,3 @@
         </div>    
     </div>
 </div>
-<script>
-(function($) {
-    var page = {
-        el: $('#js-order'),
-        $: function(selector) {
-            return this.el.find(selector);
-        },
-        init: function() {
-            _.bindAll(this);
-            this.$('#select-location').on("change",this.locationAction);
-            this.$('#select-delivery').on("change",this.deliveryAction);
-            this.$('#select-payment').on("change",this.paymentAction);
-        },
-        locationAction: function(e) {
-            var url = "<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'location', 'id' => ''))); ?>";
-            $.getJSON(url + $('#select-location').val()).done(function(result) {
-                if (result.status == 1) {
-                    var htmlOptins = '';
-                    $.each(result.data, function( index, value ) {
-                        if (value.status==1) {
-                            htmlOptins = htmlOptins 
-                            + "<option value='" + value.delivery + "'>" 
-                                + value.title + " - "
-                                + " <?php _e('Price : '); ?> " + value.price + " - "
-                                + " <?php _e('Time : '); ?> " + value.delivery_time  + " <?php _e('Days'); ?> "
-                            + "</option>";
-                        } else {
-                            htmlOptins = htmlOptins 
-                            + "<option value='" + value.delivery + "'>" + value.title + "</option>";
-                        }
-                    });
-                    $('#select-delivery').html(htmlOptins);
-                }
-                $('#cart-location').html(result.location);
-            });
-        },
-        deliveryAction: function(e) {
-            var url = "<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'delivery', 'id' => ''))); ?>";
-            $.getJSON(url + $('#select-delivery').val()).done(function(result) {
-                if (result.status == 1) {
-                    $('#cart-total-shipping').html(result.data.shipping);
-                    $('#cart-total-total').html(result.data.total);
-                    var htmlOptins = '';
-                    $.each(result.data.payment, function( index, value ) {
-                        if (value.status==1) {
-                            htmlOptins = htmlOptins 
-                            + "<option value='" + value.path + "'>"  + value.title + "</option>";
-                        }
-                    });
-                    $('#select-payment').html(htmlOptins);
-                }
-                $('#cart-delivery').html(result.delivery);
-                $('#cart-payment').html(result.payment);
-            });
-        },
-        paymentAction: function(e) {
-            var url = "<?php echo Pi::url($this->url('', array('controller' => 'checkout', 'action' => 'levelAjax', 'process' => 'payment', 'id' => ''))); ?>";
-            $.getJSON(url + $('#select-payment').val()).done(function(result) {
-                if (result.status == 1) {
-                    $('#cart-location').html(result.data.location);
-                    $('#cart-delivery').html(result.data.delivery);
-                    $('#cart-payment').html(result.data.payment);
-                }
-            });
-        },
-    }
-    page.init();
-})(jQuery)
-</script>

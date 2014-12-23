@@ -1,25 +1,19 @@
 <?php
-	$this->jQuery();
-	$this->js(array(
-		$this->assetModule('js/jquery.magnific-popup.min.js'),
-		$this->assetModule('js/owl.carousel.min.js'),
-	));
-	$this->css(array(
-		$this->assetModule('css/magnific-popup.css'),
-		$this->assetModule('css/owl.carousel.css'),
-	));
-	$this->footScript()->appendScript("$('.gallery').each(function() {
-    	$(this).magnificPopup({
-        	delegate: 'a',
-        	type: 'image',
-        	gallery: {
-          	enabled:true
-        	}
-    	});
-	});");
-	$iconOwlLeft = '<i class="owl-prev fa fa-angle-left"></i>';
+    $iconOwlLeft = '<i class="owl-prev fa fa-angle-left"></i>';
 	$iconOwlRight = '<i class="owl-next fa fa-angle-right"></i>';
-	$this->footScript()->appendScript("$(document).ready(function($) {
+    $script1 =<<<'EOT'
+    $('.gallery').each(function() {
+    	$(this).magnificPopup({
+       		delegate: 'a',
+       		type: 'image',
+       		gallery: {
+      			enabled:true
+       		}
+    	});
+	});
+EOT;
+    $script2 =<<<'EOT'
+    $(document).ready(function($) {
 		$('.owl-carousel').owlCarousel({
     		loop:false,
     		rtl:true,
@@ -29,14 +23,24 @@
     		dots:false,
     		autoplayTimeout:6000,
     		autoplayHoverPause:true,
-    		navText: ['" . $iconOwlLeft . "', '" . $iconOwlRight . "'],
+    		navText: ['%s', '%s'],
     		responsive:{
         		0:{items:1},
         		600:{items:2},
         		1000:{items:3}
     		}
 		})
-    });");
+    });
+EOT;
+    $script2 =  sprintf($script2, $iconOwlLeft, $iconOwlRight);
+	$this->jQuery(array(
+		'extension/jquery.magnific-popup.min.js',
+		'extension/magnific-popup.css',
+	));
+	$this->js($this->assetModule('js/owl.carousel.min.js'));
+	$this->css($this->assetModule('css/owl.carousel.css'));
+	$this->footScript()->appendScript($script1);
+	$this->footScript()->appendScript($script2);
 ?>
 <div class="itemGallery gallery clearfix thumbnail">
 	<?php if(isset($productItem['image']) && !empty($productItem['image'])) { ?>

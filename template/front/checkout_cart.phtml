@@ -6,6 +6,69 @@
     $this->jQuery();
     $this->bootstrap('js/bootstrap.min.js');
     $this->backbone();
+
+    $script =<<<'EOT'
+(function($){
+    var page = {
+        el: $('#shop-cart-page'),
+        $: function(selector) {
+            return this.el.find(selector);
+        },
+        init: function() {
+            this.$('.js-number').click(_.bind(this.numberAction, this));
+            this.$('.js-remove').click(_.bind(this.removeAction, this));
+        },
+        removeAction: function(e) {
+            var tar = $(e.target);
+            if (confirm('%s')) {
+                $.getJSON(tar.attr("data-link")).done(function(result){
+                    if(result.ajaxStatus==1){
+                        if (result.actionName=='remove'){
+                            $('#cart-product-' + result.id).slideUp('fast');
+                        }
+                    }
+                });
+            }
+            this.updateAction(tar);
+        },
+        numberAction: function(e) {
+            var tar = $(e.target);
+            this.updateAction(tar);
+            $.getJSON(tar.attr("data-link")).done(function(result){
+                if(result.ajaxStatus==1){
+                    if (result.actionName=='number'){
+                        if (result.actionStatus==1){
+                            $('#cart-product-' + result.id + '-number').html(result.actionNumber);
+                            $('#cart-product-' + result.id + '-total').html(result.actionTotal);
+                        } else {
+                            alert(result.message);
+                        }
+                    }
+                }
+            });
+            this.updateAction(tar);
+        },
+        updateAction: function(e) {
+            var url = "%s";
+            $.getJSON(url).done(function(result){
+                if (result.status == 1) {
+                    $('#cart-total-price').html(result.data.price);
+                    $('#cart-total-discount').html(result.data.discount);
+                    $('#cart-total-number').html(result.data.number);
+                    $('#cart-total-total').html(result.data.total);
+                }
+            });
+        },
+    }
+    page.init();
+})(jQuery)
+EOT;
+    $script =  sprintf(
+        $script, 
+        __('Are you sure to delete this product from your cart?'), 
+        $this->url('', array('action' => 'cartAjax'))
+    );
+    $this->footScript()->appendScript($script);
 ?>
 <div id="shop-cart-page" class="clearfix">
 	<div class="clearfix">
@@ -26,9 +89,9 @@
                                 <p><strong><?php _e('Discount'); ?></strong> : <span class="cart-product-discount">0</span></p>
                                 <p>
                                     <strong><?php _e('Number'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-number"><?php echo $this->escape($product['number']); ?> </span>
-                                    <span class="btn-group">
-                                        <button id="button-numberplus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-xs js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'basketAjax', 'process' => 'number', 'product' => $product['id'], 'number' => 1)); ?>"><i class="fa fa-plus"></i></button>
-                                        <button id="button-numberminus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-xs js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'basketAjax', 'process' => 'number', 'product' => $product['id'], 'number' => -1)); ?>"><i class="fa fa-minus"></i></button>
+                                    <span>
+                                        <button id="button-numberplus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-default btn-sm js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'basketAjax', 'process' => 'number', 'product' => $product['id'], 'number' => 1)); ?>"><i class="fa fa-plus"></i></button>
+                                        <button id="button-numberminus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-default btn-sm js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'basketAjax', 'process' => 'number', 'product' => $product['id'], 'number' => -1)); ?>"><i class="fa fa-minus"></i></button>
                                     </span>
                                 </p>
                                 <p><strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total"class="label label-success"><?php echo $this->escape($product['total_view']); ?></span></p>
@@ -66,59 +129,3 @@
         </div>
 	</div>
 </div>
-<script>
-(function($){
-    var page = {
-        el: $('#shop-cart-page'),
-        $: function(selector) {
-            return this.el.find(selector);
-        },
-        init: function() {
-            this.$('.js-number').click(_.bind(this.numberAction, this));
-            this.$('.js-remove').click(_.bind(this.removeAction, this));
-        },
-        removeAction: function(e) {
-            var tar = $(e.target);
-            if (confirm('<?php echo _e('Are you sure to delete this product from your cart? '); ?>')) {
-                $.getJSON(tar.attr("data-link")).done(function(result){
-                    if(result.ajaxStatus==1){
-                        if (result.actionName=='remove'){
-                            $('#cart-product-' + result.id).slideUp('fast');
-                        }
-                    }
-                });
-            }
-            this.updateAction(tar);
-        },
-        numberAction: function(e) {
-            var tar = $(e.target);
-            this.updateAction(tar);
-            $.getJSON(tar.attr("data-link")).done(function(result){
-                if(result.ajaxStatus==1){
-                    if (result.actionName=='number'){
-                        if (result.actionStatus==1){
-                            $('#cart-product-' + result.id + '-number').html(result.actionNumber);
-                            $('#cart-product-' + result.id + '-total').html(result.actionTotal);
-                        } else {
-                            alert(result.message);
-                        }
-                    }
-                }
-            });
-            this.updateAction(tar);
-        },
-        updateAction: function(e) {
-            var url = "<?php echo Pi::url($this->url('', array('action' => 'cartAjax'))); ?>";
-            $.getJSON(url).done(function(result){
-                if (result.status == 1) {
-                    $('#cart-total-price').html(result.data.price);
-                    $('#cart-total-discount').html(result.data.discount);
-                    $('#cart-total-number').html(result.data.number);
-                    $('#cart-total-total').html(result.data.total);
-                }
-            });
-        },
-    }
-    page.init();
-})(jQuery)
-</script>
