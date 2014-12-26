@@ -170,6 +170,14 @@ return array(
             'filter'       => 'number_int',
             'value'        => 1000000
         ),
+        'image_quality' => array(
+            'category'     => 'image',
+            'title'        => _a('Image quality'),
+            'description'  => _a('Between 0 to 100'),
+            'edit'         => 'text',
+            'filter'       => 'number_int',
+            'value'        => 100
+        ),
         'image_path' => array(
             'category'     => 'image',
             'title'        => _a('Image path'),
@@ -503,7 +511,7 @@ return array(
             'description'  => _a('Title for main page and all non-title pages'),
             'edit'         => 'text',
             'filter'       => 'string',
-            'value'        => 'Newest products from this website'
+            'value'        => ''
         ),
         'text_description_homepage' => array(
             'category'     => 'text',
@@ -511,7 +519,7 @@ return array(
             'description'  => '',
             'edit'         => 'text',
             'filter'       => 'string',
-            'value'        => 'Newest products from this website'
+            'value'        => _a('Newest products from this website')
         ),
         'text_keywords_homepage' => array(
             'category'     => 'text',
@@ -519,7 +527,7 @@ return array(
             'description'  => '',
             'edit'         => 'text',
             'filter'       => 'string',
-            'value'        => 'product,shop,online,website'
+            'value'        => _a('product,shop,online,website')
         ),
         'text_title_search' => array(
             'category'     => 'text',
@@ -527,7 +535,7 @@ return array(
             'description'  => '',
             'edit'         => 'text',
             'filter'       => 'string',
-            'value'        => 'Newest products from this website'
+            'value'        => _a('Search')
         ),
         'text_description_search' => array(
             'category'     => 'text',
@@ -535,7 +543,7 @@ return array(
             'description'  => '',
             'edit'         => 'text',
             'filter'       => 'string',
-            'value'        => 'Newest products from this website'
+            'value'        => _a('Search on website products')
         ),
         'text_keywords_search' => array(
             'category'     => 'text',
@@ -543,7 +551,15 @@ return array(
             'description'  => '',
             'edit'         => 'text',
             'filter'       => 'string',
-            'value'        => 'product,shop,online,website'
+            'value'        => _a('search,product,shop,online,website')
+        ),
+        'text_description_index' => array(
+            'category'     => 'text',
+            'title'        => _a('Description for index page'),
+            'description'  => '',
+            'edit'         => 'textarea',
+            'filter'       => 'string',
+            'value'        => ''
         ),
     ),
 );

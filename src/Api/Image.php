@@ -80,25 +80,35 @@ class Image extends AbstractApi
         	sprintf('upload/%s/thumb/%s/%s', $config['image_path'], $path, $image)
         );
 
+        // Set options
+        $options = array(
+            'quality' => empty($config['image_quality']) ? 100 : $config['image_quality'],
+        );
+        
         // Resize to large
         Pi::service('image')->resize(
             $original, 
             array($config['image_largew'], $config['image_largeh'], true),
-            $large
+            $large,
+            '',
+            $options
         );
 
         // Resize to medium
         Pi::service('image')->resize(
             $original, 
             array($config['image_mediumw'], $config['image_mediumh'], true),
-            $medium
+            $medium,
+            '',
+            $options
         );
-
         // Resize to thumb
         Pi::service('image')->resize(
             $original, 
             array($config['image_thumbw'], $config['image_thumbh'], true),
-            $thumb
+            $thumb,
+            '',
+            $options
         );
 
         // Watermark

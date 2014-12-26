@@ -25,6 +25,7 @@ class IndexController extends ActionController
     {
         // Get info from url
         $module = $this->params('module');
+        $page = $this->params('page', 1);
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Set product info
@@ -56,6 +57,8 @@ class IndexController extends ActionController
         $this->view()->assign('categories', $category);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
+        $this->view()->assign('showIndexDesc', 1);
+        $this->view()->assign('page', $page);
     }
 
     public function productList($where)
