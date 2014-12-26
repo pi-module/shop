@@ -99,7 +99,7 @@ return array(
         ),
         'view_incategory' => array(
             'category'     => 'view',
-            'title'        => _a('Show product attacehed files'),
+            'title'        => _a('Show other products from this category'),
             'description'  => '',
             'edit'         => 'checkbox',
             'filter'       => 'number_int',

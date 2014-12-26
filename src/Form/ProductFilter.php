@@ -51,7 +51,7 @@ class ProductFilter extends InputFilter
                 )),
             ),
         ));
-        // summary
+        // text_summary
         $this->add(array(
             'name' => 'summary',
             'required' => false,
@@ -61,9 +61,9 @@ class ProductFilter extends InputFilter
                 ),
             ),
         ));
-        // description
+        // text_description
         $this->add(array(
-            'name' => 'description',
+            'name' => 'text_description',
             'required' => false,
             'filters' => array(
                 array(

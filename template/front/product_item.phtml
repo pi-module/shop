@@ -4,16 +4,16 @@
     $this->doctype('HTML5');
     $this->headMeta($this->escape($productItem['title']), 'og:title', 'property');
     $this->headMeta($this->escape($productItem['productUrl']), 'og:url', 'property');
-    if (isset($productItem['summary']) && !empty($productItem['summary'])) {
-	    $this->headMeta($this->escape($productItem['summary']), 'og:description', 'property');
+    if (isset($productItem['text_summary']) && !empty($productItem['text_summary'])) {
+	    $this->headMeta($this->escape($productItem['text_summary']), 'og:description', 'property');
     }
     if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
 	    $this->headMeta($this->escape($productItem['largeUrl']), 'og:image', 'property');
     }
     // Set twitter for meta
     $this->headMeta($this->escape($productItem['title']), 'twitter:title');
-    if (isset($productItem['summary']) && !empty($productItem['summary'])) {
-	    $this->headMeta($this->escape($productItem['summary']), 'twitter:description');
+    if (isset($productItem['text_summary']) && !empty($productItem['text_summary'])) {
+	    $this->headMeta($this->escape($productItem['text_summary']), 'twitter:description');
     }
     if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
 	    $this->headMeta($this->escape($productItem['largeUrl']), 'twitter:image');
@@ -50,8 +50,8 @@
 			<div class="col-md-12">
 				<div class="productBody">
 					<p><strong><?php _e('Description'); ?></strong></p>
-					<div class="productSummary e-description"><?php echo $productItem['summary']; ?></div>
-					<div class="productDescription p-review"><?php echo $productItem['description']; ?></div>
+					<div class="productSummary e-description"><?php echo $productItem['text_summary']; ?></div>
+					<div class="productDescription p-review"><?php echo $productItem['text_description']; ?></div>
 					<div class="productMedia">
 						<?php include $this->template('front/attach_audio'); ?>
 					    <?php include $this->template('front/attribute_audio'); ?>

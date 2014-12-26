@@ -32,7 +32,7 @@ class CategoryController extends ActionController
      * Category Columns
      */
     protected $categoryColumns = array(
-    	'id', 'parent', 'title', 'slug', 'image', 'path', 'description',
+    	'id', 'parent', 'title', 'slug', 'image', 'path', 'text_description',
     	'time_create', 'time_update', 'seo_title', 'seo_keywords', 'seo_description', 'setting', 'status'
     );
 

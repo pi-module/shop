@@ -121,8 +121,8 @@ class Category extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
         // boject to array
         $category = $category->toArray();
-        // Set description text
-        $category['description'] = Pi::service('markup')->render($category['description'], 'html', 'html');
+        // Set text_description
+        $category['text_description'] = Pi::service('markup')->render($category['text_description'], 'html', 'html');
         // Set times
         $category['time_create_view'] = _date($category['time_create']);
         $category['time_update_view'] = _date($category['time_update']);

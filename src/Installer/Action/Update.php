@@ -43,6 +43,11 @@ class Update extends BasicUpdate
         $productTable    = $productModel->getTable();
         $productAdapter  = $productModel->getAdapter();
 
+        // Set category model
+        $categoryModel    = Pi::model('category', $this->module);
+        $categoryTable    = $categoryModel->getTable();
+        $categoryAdapter  = $categoryModel->getAdapter();
+
         // Update to version 0.3.0
         if (version_compare($moduleVersion, '0.3.0', '<')) {
             // Alter table field `type`
@@ -81,6 +86,49 @@ class Update extends BasicUpdate
             $sql = sprintf("ALTER TABLE %s CHANGE `extra` `attribute` tinyint(3) unsigned NOT NULL default '0'", $productTable);
             try {
                 $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
+        // Update to version 0.3.8
+        if (version_compare($moduleVersion, '0.3.8', '<')) {
+            
+            // Alter table field `summary`
+            $sql = sprintf("ALTER TABLE %s CHANGE `summary` `text_summary` text", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Alter table field `description`
+            $sql = sprintf("ALTER TABLE %s CHANGE `description` `text_description` text", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Alter table field `description`
+            $sql = sprintf("ALTER TABLE %s CHANGE `description` `text_description` text", $categoryTable);
+            try {
+                $categoryAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
                     'status'    => false,

@@ -82,17 +82,15 @@ class CategoryForm  extends BaseForm
                 
             )
         ));
-        // description
+        // text_description
         $this->add(array(
-            'name' => 'description',
+            'name' => 'text_description',
             'options' => array(
                 'label' => __('Description'),
+                'editor' => 'html',
             ),
             'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '5',
-                'cols' => '40',
-                
+                'type' => 'editor',
                 'description' => '',
             )
         ));

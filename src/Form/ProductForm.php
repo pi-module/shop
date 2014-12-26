@@ -78,9 +78,9 @@ class ProductForm  extends BaseForm
                 
             )
         ));
-        // summary
+        // text_summary
         $this->add(array(
-            'name' => 'summary',
+            'name' => 'text_summary',
             'options' => array(
                 'label' => __('Summary'),
             ),
@@ -91,9 +91,9 @@ class ProductForm  extends BaseForm
                 'description' => '',
             )
         ));
-        // description
+        // text_description
         $this->add(array(
-            'name' => 'description',
+            'name' => 'text_description',
             'options' => array(
                 'label' => __('Description'),
                 'editor' => 'html',
@@ -138,6 +138,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'size' => 1,
                 'multiple' => 0,
+                'description' => __('Just use for breadcrumbs and mobile apps'),
             ),
         ));
         // Image

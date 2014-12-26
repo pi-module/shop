@@ -50,7 +50,7 @@ class Install extends BasicInstall
         $categoryData = array(
             'title'            => __('Default'),
             'slug'             => __('default'),
-            'description'      => __('This is a default category for shop module'),
+            'text_description' => __('This is a default category for shop module'),
             'seo_title'        => __('default category'),
             'seo_keywords'     => __('default,category'),
             'seo_description'  => __('default category'),
@@ -65,7 +65,7 @@ class Install extends BasicInstall
             'title'            => __('Demo product'),
             'slug'             => __('demo-product'),
             'category'         => Json::encode(array('1')),
-            'summary'          => __('This is a summery for this demo product'),
+            'text_summary'     => __('This is a summery for this demo product'),
             'seo_title'        => __('demo product'),
             'seo_keywords'     => __('demo,product'),
             'seo_description'  => __('demo product'),

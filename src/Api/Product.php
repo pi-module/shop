@@ -287,10 +287,10 @@ class Product extends AbstractApi
         $categoryList = (empty($categoryList)) ? Pi::api('category', 'shop')->categoryList() : $categoryList;
         // boject to array
         $product = $product->toArray();
-        // Set summary text
-        $product['summary'] = Pi::service('markup')->render($product['summary'], 'text', 'html');
-        // Set description text
-        $product['description'] = Pi::service('markup')->render($product['description'], 'html', 'html');
+        // Set text_summary
+        $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'text', 'html');
+        // Set text_description
+        $product['text_description'] = Pi::service('markup')->render($product['text_description'], 'html', 'html');
         // Set times
         $product['time_create_view'] = _date($product['time_create']);
         $product['time_update_view'] = _date($product['time_update']);
