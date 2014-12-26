@@ -188,7 +188,7 @@ class ProductController extends ActionController
                     $values['path'] = sprintf('%s/%s', date('Y'), date('m'));
                     $originalPath = Pi::path(sprintf('upload/%s/original/%s', $this->config('image_path'), $values['path']));
                     // Image name
-                    $imageName = Pi::api('image', 'shop')->rename($file['image']['name'], $this->ImageProductPrefix);
+                    $imageName = Pi::api('image', 'shop')->rename($file['image']['name'], $this->ImageProductPrefix, $values['path']);
                     // Upload
                     $uploader = new Upload;
                     $uploader->setDestination($originalPath);

@@ -16,14 +16,16 @@ use Pi;
 use Pi\Application\Api\AbstractApi;
 
 /*
- * Pi::api('image', 'shop')->rename($image, $prefix);
+ * Pi::api('image', 'shop')->rename($image, $prefix, $path);
  * Pi::api('image', 'shop')->process($image, $path);
  */
 
 class Image extends AbstractApi
 {  
-    public function rename($image = '', $prefix = 'image_')
+    public function rename($image = '', $prefix = 'image_', $path = '')
     {
+        $config = Pi::service('registry')->config->read($this->getModule(), 'image');
+        
         // Check image name
         if (empty($image)) {
             return $prefix . '%random%';
@@ -41,6 +43,14 @@ class Image extends AbstractApi
         // Check text length
         if (mb_strlen($name,'UTF-8') < 8) {
             $name = $prefix . '%random%';
+        }
+        // Set original path
+        $original = Pi::path(
+            sprintf('upload/%s/original/%s/%s', $config['image_path'], $path, $name)
+        );
+        // Check file exist
+        if (Pi::service('file')->exists($original)) {
+            return $prefix . '%random%';
         }
         // return
         return $name;
@@ -72,30 +82,33 @@ class Image extends AbstractApi
 
         // Resize to large
         Pi::service('image')->resize(
-        	$original, 
-        	array($config['image_largew'], $config['image_largeh']), 
-        	$large
+            $original, 
+            array($config['image_largew'], $config['image_largeh'], true),
+            $large
         );
 
         // Resize to medium
         Pi::service('image')->resize(
-        	$original, 
-        	array($config['image_mediumw'], $config['image_mediumh']), 
-        	$medium
+            $original, 
+            array($config['image_mediumw'], $config['image_mediumh'], true),
+            $medium
         );
 
         // Resize to thumb
         Pi::service('image')->resize(
-        	$original, 
-        	array($config['image_thumbw'], $config['image_thumbh']), 
-        	$thumb
+            $original, 
+            array($config['image_thumbw'], $config['image_thumbh'], true),
+            $thumb
         );
 
         // Watermark
         if ($config['image_watermark']) {
-        	// Set watermark image
-        	$watermarkImage = (empty($config['image_watermark_source'])) ? '' : Pi::path($config['image_watermark_source']);
-        	$watermarkImage = (file_exists($watermarkImage)) ? $watermarkImage : '';
+            // Set watermark image
+            $watermarkImage = (empty($config['image_watermark_source'])) ? '' : Pi::path($config['image_watermark_source']);
+            if (empty($watermarkImage) || !file_exists($watermarkImage)) {
+                $logoFile = Pi::service('asset')->logo();
+                $watermarkImage = Pi::path($logoFile);
+            }
         	
             // Watermark large
         	Pi::service('image')->watermark(
