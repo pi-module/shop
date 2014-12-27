@@ -66,7 +66,7 @@ class TagController extends IndexController
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
         $filter->setOptions(array(
-            'force_replace' => true
+            'force_replace_space' => true
         ));
         $seoKeywords = $filter($title);
         // Set view
@@ -107,7 +107,7 @@ class TagController extends IndexController
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
         $filter->setOptions(array(
-            'force_replace' => true
+            'force_replace_space' => true
         ));
         $seoKeywords = $filter($title);
         // Set view
