@@ -128,6 +128,39 @@ class IndexController extends ActionController
         return $product;   
     }
 
+    public function productJsonList($where)
+    {
+        // Set info
+        $product = array();
+        $limit = 150;
+        $page = $this->params('page', 1);
+        $module = $this->params('module');
+        $offset = (int)($page - 1) * $limit;
+        $order = array('time_create DESC', 'id DESC');
+        // Set info
+        $columns = array('product' => new Expression('DISTINCT product'));
+        // Get info from link table
+        $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order)->offset($offset)->limit($limit);
+        $rowset = $this->getModel('link')->selectWith($select)->toArray();
+        // Make list
+        foreach ($rowset as $id) {
+            $productId[] = $id['product'];
+        }
+        if (empty($productId)) {
+            return $product;
+        }
+        // Set info
+        $where = array('status' => 1, 'id' => $productId);
+        // Get list of product
+        $select = $this->getModel('product')->select()->where($where)->order($order);
+        $rowset = $this->getModel('product')->selectWith($select);
+        foreach ($rowset as $row) {
+            $product[] = Pi::api('product', 'shop')->canonizeProductJson($row);
+        }
+        // return product
+        return $product;
+    }
+
     public function productPaginator($template, $where)
     {
         $template['module'] = $this->params('module');

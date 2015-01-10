@@ -65,6 +65,7 @@ class Install extends BasicInstall
             'title'            => __('Demo product'),
             'slug'             => __('demo-product'),
             'category'         => Json::encode(array('1')),
+            'brand'            => 1,
             'text_summary'     => __('This is a summery for this demo product'),
             'seo_title'        => __('demo product'),
             'seo_keywords'     => __('demo,product'),

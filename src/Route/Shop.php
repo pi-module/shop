@@ -31,7 +31,7 @@ class Shop extends Standard
     );
 
     protected $controllerList = array(
-        'category', 'checkout', 'index', 'product', 'search', 'tag', 'user'
+        'category', 'checkout', 'index', 'json', 'product', 'search', 'tag', 'user'
     );
 
     /**
@@ -168,6 +168,15 @@ class Shop extends Standard
                         $matches['id'] = intval($parts[2]);
                     }  
                     break;
+
+                case 'json':
+                    $matches['action'] = $this->decode($parts[1]);
+                    if (isset($parts[2]) && $parts[2] == 'id') {
+                        $matches['id'] = intval($parts[3]);
+                    }
+                    break; 
+
+                    print_r($matches);
             }    
         } 
 

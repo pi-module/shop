@@ -30,6 +30,7 @@ use Zend\Json\Json;
  * Pi::api('product', 'shop')->viewPrice($price);
  * Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
  * Pi::api('product', 'shop')->canonizeProductLight($product);
+ * Pi::api('product', 'shop')->canonizeProductJson($product);
  * Pi::api('product', 'shop')->sitemap();
  */
 
@@ -439,6 +440,102 @@ class Product extends AbstractApi
         unset($product['uid']);
         unset($product['hits']);
         unset($product['sales']);
+        // return product
+        return $product; 
+    }
+
+    public function canonizeProductJson($product)
+    {
+        // Check
+        if (empty($product)) {
+            return '';
+        }
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // boject to array
+        $product = $product->toArray();
+        // Set text_summary
+        $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'text', 'html');
+        // Set text_description
+        $product['text_description'] = Pi::service('markup')->render($product['text_description'], 'html', 'html');
+        // Set times
+        $product['time_create_view'] = _date($product['time_create']);
+        $product['time_update_view'] = _date($product['time_update']);
+        // Set product url
+        $product['productUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'product',
+            'slug'          => $product['slug'],
+        )));
+        // Set cart url
+        $product['cartUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'checkout',
+            'action'        => 'add',
+            'slug'          => $product['slug'],
+        )));
+        // Set cart url
+        $product['cartJsonUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'json',
+            'action'        => 'add',
+            'id'            => $id['slug'],
+        )));
+        // Set price
+        $product['price_view'] = $this->viewPrice($product['price']);
+        $product['price_discount_view'] = $this->viewPrice($product['price_discount']);
+        // Set stock
+        switch ($product['stock_type']) {
+            default:
+            case 1:
+                $product['stock_type_view'] = __('In stock');
+                break;
+            
+            case 2:
+                $product['stock_type_view'] = __('Out of stock');
+                break;
+
+            case 3:
+                $product['stock_type_view'] = __('Coming soon');
+                break;
+
+            case 4:
+                $product['stock_type_view'] = __('Contact');
+                break;
+        }
+        // Set marketable
+        $product['marketable'] = $this->marketable($product);
+        // Set image url
+        if ($product['image']) {
+            // Set image original url
+            $product['originalUrl'] = Pi::url(
+                sprintf('upload/%s/original/%s/%s', 
+                    $config['image_path'], 
+                    $product['path'], 
+                    $product['image']
+                ));
+            // Set image large url
+            $product['largeUrl'] = Pi::url(
+                sprintf('upload/%s/large/%s/%s', 
+                    $config['image_path'], 
+                    $product['path'], 
+                    $product['image']
+                ));
+            // Set image medium url
+            $product['mediumUrl'] = Pi::url(
+                sprintf('upload/%s/medium/%s/%s', 
+                    $config['image_path'], 
+                    $product['path'], 
+                    $product['image']
+                ));
+            // Set image thumb url
+            $product['thumbUrl'] = Pi::url(
+                sprintf('upload/%s/thumb/%s/%s', 
+                    $config['image_path'], 
+                    $product['path'], 
+                    $product['image']
+                ));
+        }
         // return product
         return $product; 
     }
