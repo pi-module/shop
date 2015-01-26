@@ -337,7 +337,7 @@ class ProductForm  extends BaseForm
                         'name' => $field['id'],
                         'type' => 'select',
                         'options' => array(
-                            'label' => sprintf('%s (%s)', $field['title'], $field['type']),
+                            'label' => sprintf('%s %s - %s', $field['title'], $field['type'] , $field['id']),
                             'value_options' => $this->makeArray($field['value']),
                         ),
                     ));
@@ -345,7 +345,7 @@ class ProductForm  extends BaseForm
                     $this->add(array(
                         'name' => $field['id'],
                         'options' => array(
-                            'label' => sprintf('%s (%s)', $field['title'], $field['type']),
+                            'label' => sprintf('%s %s - %s', $field['title'], $field['type'] , $field['id']),
                         ),
                         'attributes' => array(
                             'type' => 'text',

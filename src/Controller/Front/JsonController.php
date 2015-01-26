@@ -85,6 +85,13 @@ class JsonController extends IndexController
             $productSingle = array();
         } else {
             $productSingle = $product;
+            if ($product['attribute'] && $config['view_attribute']) {
+                $attributes = Pi::api('attribute', 'shop')->Product($product['id']);
+                //$productSingle['attributes'] = $attributes['all'];
+                foreach ($attributes['all'] as $attribute) {
+                    $productSingle['attribute-' . $attribute['id']] = $attribute['data'];
+                }
+            }
         }
         $productSingle = array($productSingle);
         // Set view

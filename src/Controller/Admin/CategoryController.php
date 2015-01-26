@@ -32,14 +32,14 @@ class CategoryController extends ActionController
      * Category Columns
      */
     protected $categoryColumns = array(
-    	'id', 'parent', 'title', 'slug', 'image', 'path', 'text_description',
-    	'time_create', 'time_update', 'seo_title', 'seo_keywords', 'seo_description', 'setting', 'status'
+        'id', 'parent', 'title', 'slug', 'image', 'path', 'text_description',
+        'time_create', 'time_update', 'seo_title', 'seo_keywords', 'seo_description', 'setting', 'status'
     );
 
     /**
      * index Action
      */
-	public function indexAction()
+    public function indexAction()
     {
         // Get page
         $page = $this->params('page', 1);
@@ -109,7 +109,7 @@ class CategoryController extends ActionController
         $form = new CategoryForm('category', $option);
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
-        	$data = $this->request->getPost();
+            $data = $this->request->getPost();
             $file = $this->request->getFiles();
             // Set slug
             $slug = ($data['slug']) ? $data['slug'] : $data['title'];
@@ -119,9 +119,9 @@ class CategoryController extends ActionController
             $form->setInputFilter(new CategoryFilter);
             $form->setData($data);
             if ($form->isValid()) {
-            	$values = $form->getData();
+                $values = $form->getData();
                 // upload image
-                if (!empty($file['image']['name'])) {
+                /* if (!empty($file['image']['name'])) {
                     // Set upload path
                     $values['path'] = sprintf('%s/%s', date('Y'), date('m'));
                     $originalPath = Pi::path(sprintf('upload/%s/original/%s', $this->config('image_path'), $values['path']));
@@ -144,9 +144,9 @@ class CategoryController extends ActionController
                     }
                 } elseif (!isset($values['image'])) {
                     $values['image'] = '';  
-                }
-            	// Set just category fields
-            	foreach (array_keys($values) as $key) {
+                } */
+                // Set just category fields
+                foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->categoryColumns)) {
                         unset($values[$key]);
                     }
@@ -167,10 +167,14 @@ class CategoryController extends ActionController
                 $filter = new Filter\HeadDescription;
                 $values['seo_description'] = $filter($description);
                 // Set time
+                $values['image'] = '';
+                $values['path'] = '';
                 if (empty($values['id'])) {
                     $values['time_create'] = time();
                 }
                 $values['time_update'] = time();
+
+
                 // Save values
                 if (!empty($values['id'])) {
                     $row = $this->getModel('category')->find($values['id']);
@@ -180,7 +184,7 @@ class CategoryController extends ActionController
                 $row->assign($values);
                 $row->save();
                 // Add / Edit sitemap
-                if (Pi::service('module')->isActive('sitemap')) {
+                /* if (Pi::service('module')->isActive('sitemap')) {
                     // Set loc
                     $loc = Pi::url($this->url('shop', array(
                         'module'      => $module, 
@@ -189,21 +193,16 @@ class CategoryController extends ActionController
                     )));
                     // Update sitemap
                     Pi::api('sitemap', 'sitemap')->singleLink($loc, $row->status, $module, 'category', $row->id);         
-                }
+                } */
                 // Add log
-                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                /* $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('category', $row->id, $operation);
-                $message = __('Category data saved successfully.');
+                $message = __('Category data saved successfully.'); */
                 $this->jump(array('action' => 'index'), $message);
-            } else {
-                $message = __('Invalid data, please check and re-submit.');
-            }	
+            }  
         } else {
             if ($id) {
                 $form->setData($category);
-                $message = 'You can edit this category';
-            } else {
-                $message = 'You can add new category';
             }
         }
         // Set view

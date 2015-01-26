@@ -444,7 +444,7 @@ class Product extends AbstractApi
         return $product; 
     }
 
-    public function canonizeProductJson($product)
+    public function canonizeProductJson($product, $categoryList = array())
     {
         // Check
         if (empty($product)) {
@@ -452,6 +452,8 @@ class Product extends AbstractApi
         }
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+        // Get category list
+        $categoryList = (empty($categoryList)) ? Pi::api('category', 'shop')->categoryList() : $categoryList;
         // boject to array
         $product = $product->toArray();
         // Set text_summary
@@ -536,6 +538,16 @@ class Product extends AbstractApi
                     $product['image']
                 ));
         }
+        // Set brand information
+        $product['brandTitle'] = $categoryList[$product['brand']]['title'];
+        // Set attribute
+        if ($product['attribute'] && $config['view_attribute']) {
+            $attributes = Pi::api('attribute', 'shop')->Product($product['id']);
+            //$productSingle['attributes'] = $attributes['all'];
+            foreach ($attributes['all'] as $attribute) {
+                $product['attribute-' . $attribute['id']] = $attribute['data'];
+            }
+        }
         // return product
         return $product; 
     }
@@ -561,4 +573,4 @@ class Product extends AbstractApi
             }
         }
     }
-}	
+}
