@@ -121,7 +121,7 @@ class CategoryController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // upload image
-                /* if (!empty($file['image']['name'])) {
+                if (!empty($file['image']['name'])) {
                     // Set upload path
                     $values['path'] = sprintf('%s/%s', date('Y'), date('m'));
                     $originalPath = Pi::path(sprintf('upload/%s/original/%s', $this->config('image_path'), $values['path']));
@@ -144,7 +144,7 @@ class CategoryController extends ActionController
                     }
                 } elseif (!isset($values['image'])) {
                     $values['image'] = '';  
-                } */
+                }
                 // Set just category fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->categoryColumns)) {
@@ -184,7 +184,7 @@ class CategoryController extends ActionController
                 $row->assign($values);
                 $row->save();
                 // Add / Edit sitemap
-                /* if (Pi::service('module')->isActive('sitemap')) {
+                if (Pi::service('module')->isActive('sitemap')) {
                     // Set loc
                     $loc = Pi::url($this->url('shop', array(
                         'module'      => $module, 
@@ -193,11 +193,11 @@ class CategoryController extends ActionController
                     )));
                     // Update sitemap
                     Pi::api('sitemap', 'sitemap')->singleLink($loc, $row->status, $module, 'category', $row->id);         
-                } */
+                }
                 // Add log
-                /* $operation = (empty($values['id'])) ? 'add' : 'edit';
+                $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('category', $row->id, $operation);
-                $message = __('Category data saved successfully.'); */
+                $message = __('Category data saved successfully.');
                 $this->jump(array('action' => 'index'), $message);
             }  
         } else {
