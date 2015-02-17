@@ -124,17 +124,6 @@ return array(
             'action'        => 'index',
         ),
 
-        'checkout' => array(
-            'label'         => _a('Checkout'),
-            'permission'    => array(
-                'resource'  => 'checkout',
-            ),
-            'route'         => 'admin',
-            'module'        => 'shop',
-            'controller'    => 'checkout',
-            'action'        => 'index',
-        ),
-
         'log' => array(
             'label'         => _a('Logs'),
             'permission'    => array(

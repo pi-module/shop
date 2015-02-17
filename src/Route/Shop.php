@@ -31,7 +31,7 @@ class Shop extends Standard
     );
 
     protected $controllerList = array(
-        'category', 'checkout', 'index', 'json', 'product', 'search', 'tag', 'user'
+        'cart', 'category', 'index', 'json', 'product', 'search', 'tag', 'user'
     );
 
     /**
@@ -75,9 +75,9 @@ class Shop extends Standard
                     }
                     break;
 
-                case 'checkout':
-                    if ($parts[1] == 'information') {
-                        $matches['action'] = 'information';
+                case 'cart':
+                    if ($parts[1] == 'complete') {    
+                        $matches['action'] = 'complete';
                     } elseif ($parts[1] == 'add') {
                         $matches['action'] = 'add';
                         $matches['slug'] = $this->decode($parts[2]);
@@ -86,8 +86,8 @@ class Shop extends Standard
                         $matches['id'] = intval($parts[2]);
                     } elseif ($parts[1] == 'empty') {
                         $matches['action'] = 'empty';
-                    } elseif ($parts[1] == 'cart') {
-                        $matches['action'] = 'cart';
+                    } elseif ($parts[1] == 'index') {
+                        $matches['action'] = 'index';
                     } elseif ($parts[1] == 'levelAjax') {
                         $matches['action'] = 'levelAjax';
                         $matches['process'] = $this->decode($parts[2]);
@@ -96,10 +96,10 @@ class Shop extends Standard
                         } elseif ($parts[2] == 'payment') {
                             $matches['id'] = $this->decode($parts[3]);
                         }
-                    } elseif ($parts[1] == 'cartAjax') {    
-                        $matches['action'] = 'cartAjax';
-                    } elseif ($parts[1] == 'basketAjax') {
-                        $matches['action'] = 'basketAjax';
+                    } elseif ($parts[1] == 'update') {    
+                        $matches['action'] = 'update';
+                    } elseif ($parts[1] == 'basket') {
+                        $matches['action'] = 'basket';
                         if (isset($parts[2]) &&  in_array($parts[2], array('remove', 'number'))) {
                             $matches['process'] = $this->decode($parts[2]);
                             $matches['product'] = intval($parts[3]);
@@ -108,7 +108,7 @@ class Shop extends Standard
                             }
                         }
                     }   
-                    break; 
+                    break;
 
                 case 'index':
                     // Set sort and stock
@@ -239,14 +239,12 @@ class Shop extends Standard
 
         // Set if controller is checkou
         if ($mergedParams['controller'] == 'checkout') {
-            if ($mergedParams['action'] == 'basketAjax') {    
+            if ($mergedParams['action'] == 'basket') {    
                 $url['process'] = $mergedParams['process'];
                 $url['product'] = $mergedParams['product'];
                 if (!empty($mergedParams['number'])) {
                     $url['number'] = $mergedParams['number'];
                 }
-            } elseif ($mergedParams['action'] == 'levelAjax') {
-                $url['process'] = $mergedParams['process'];
             }
             if (isset($mergedParams['id'])) {
                 $url['id'] = $mergedParams['id'];

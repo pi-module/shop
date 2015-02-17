@@ -25,13 +25,13 @@ class CheckoutController extends ActionController
     /**
      * order Columns
      */
-    protected $orderColumns = array(
+    /* protected $orderColumns = array(
         'id', 'uid', 'code', 'first_name', 'last_name', 'email', 'phone', 'mobile', 'company', 'address', 
         'country', 'city', 'zip_code', 'ip', 'status_order', 'status_payment', 'status_delivery', 
         'time_create', 'time_payment', 'time_delivery', 'time_finish', 'user_note', 'admin_note', 
         'number', 'product_price', 'discount_price', 'shipping_price', 'packing_price', 
         'total_price', 'paid_price', 'packing', 'delivery', 'location','payment_method', 'payment_adapter',
-    );	
+    );
 
     public function informationAction()
     {
@@ -576,5 +576,5 @@ class CheckoutController extends ActionController
         // Set session
         $cart['product'][$product['id']] = $product;
         $_SESSION['shop']['cart'] = $cart;
-    }
+    } */
 }

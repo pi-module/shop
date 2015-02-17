@@ -304,7 +304,7 @@ class Product extends AbstractApi
         // Set cart url
         $product['cartUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
             'module'        => $this->getModule(),
-            'controller'    => 'checkout',
+            'controller'    => 'cart',
             'action'        => 'add',
             'slug'          => $product['slug'],
         )));
