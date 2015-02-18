@@ -167,6 +167,8 @@ class CartController extends ActionController
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
+        // Set template
+        $this->view()->setTemplate(false);
         // Set order array
     	$order = array();
     	$order['module_name'] = $this->params('module');
