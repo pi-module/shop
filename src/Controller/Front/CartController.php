@@ -144,6 +144,8 @@ class CartController extends ActionController
 
     public function updateAction()
     {
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
         // Set Invoice
         $this->setInvoice();
         // Set cart
@@ -163,10 +165,8 @@ class CartController extends ActionController
 
     public function completeAction()
     {
-        // Empty order
-        if (isset($_SESSION['order'])) {
-            unset($_SESSION['order']);
-        }
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
         // Set order array
     	$order = array();
     	$order['module_name'] = $this->params('module');
@@ -183,17 +183,18 @@ class CartController extends ActionController
     			'packing_price'   => 0,
     			'vat_price'       => 0,
     			'number'          => $product['number'],
+                'title'           => '',
     		);
     		$order['product'][$product['id']] = $singelProduct;
     	}
-        // Set order to session
-        $_SESSION['order'] = $order;
-        // Go to order
-        $url = array('', 'module' => 'order', 'controller' => 'index', 'action' => 'checkout');
+        // Unset shop session
+        $this->setEmpty();
+        // Set and go to order
+        $url = Pi::api('order', 'order')->setOrder($order);
         return $this->redirect()->toRoute('', $url);
     }
 
-    public function finishAction()
+    /* public function finishAction()
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
@@ -262,7 +263,7 @@ class CartController extends ActionController
         $this->view()->setTemplate('checkout_finish');
         $this->view()->assign('order', $order);
         $this->view()->assign('invoice', $invoice);
-    }
+    } */
 
     protected function setEmpty()
     {

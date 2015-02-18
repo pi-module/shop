@@ -175,8 +175,6 @@ class Shop extends Standard
                         $matches['id'] = intval($parts[3]);
                     }
                     break; 
-
-                    print_r($matches);
             }    
         } 
 

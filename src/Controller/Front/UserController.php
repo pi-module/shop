@@ -18,7 +18,7 @@ use Pi\Mvc\Controller\ActionController;
 
 class UserController extends IndexController
 {
-	public function indexAction()
+	/* public function indexAction()
     {
         // User
     	$user = $this->getUser();
@@ -70,5 +70,5 @@ class UserController extends IndexController
         }
         // return
         return $user;
-    }
+    } */
 }

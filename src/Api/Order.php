@@ -32,7 +32,16 @@ use Zend\Math\Rand;
 
 class Order extends AbstractApi
 {
-    public function updatePayment($item, $amount, $adapter)
+    public function listProduct()
+    {}
+
+    public function singleProduct()
+    {}
+
+    public function afterOrder()
+    {}
+
+    /* public function updatePayment($item, $amount, $adapter)
     {
         $row = Pi::model('order', $this->getModule())->find($item);
         $row->paid_price = $amount;
@@ -342,5 +351,5 @@ class Order extends AbstractApi
         $message->setEncoding("UTF-8");
         // Send mail
         Pi::service('mail')->send($message);
-    }
+    } */
 }
