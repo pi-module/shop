@@ -191,7 +191,7 @@ class CartController extends ActionController
         $this->setEmpty();
         // Set and go to order
         $url = Pi::api('order', 'order')->setOrder($order);
-        return $this->redirect()->toRoute('', $url);
+        Pi::service('url')->redirect($url);
     }
 
     /* public function finishAction()
