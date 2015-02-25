@@ -49,10 +49,6 @@ return array(
             'title'  => _a('Order'),
             'name'   => 'order'
         ),
-        array(
-            'title'  => _a('Texts'),
-            'name'   => 'text'
-        ),
     ),
     'item' => array(
     	// Admin
@@ -400,32 +396,8 @@ return array(
             'value'        => 'onetime',
         ),
         // Texts
-        'text_title_homepage' => array(
-            'category'     => 'text',
-            'title'        => _a('Module main title'),
-            'description'  => _a('Title for main page and all non-title pages'),
-            'edit'         => 'text',
-            'filter'       => 'string',
-            'value'        => ''
-        ),
-        'text_description_homepage' => array(
-            'category'     => 'text',
-            'title'        => _a('Module main description'),
-            'description'  => '',
-            'edit'         => 'text',
-            'filter'       => 'string',
-            'value'        => _a('Newest products from this website')
-        ),
-        'text_keywords_homepage' => array(
-            'category'     => 'text',
-            'title'        => _a('Module main keywords'),
-            'description'  => '',
-            'edit'         => 'text',
-            'filter'       => 'string',
-            'value'        => _a('product,shop,online,website')
-        ),
         'text_title_search' => array(
-            'category'     => 'text',
+            'category'     => 'head_meta',
             'title'        => _a('Module search page title'),
             'description'  => '',
             'edit'         => 'text',
@@ -433,7 +405,7 @@ return array(
             'value'        => _a('Search')
         ),
         'text_description_search' => array(
-            'category'     => 'text',
+            'category'     => 'head_meta',
             'title'        => _a('Module search page description'),
             'description'  => '',
             'edit'         => 'text',
@@ -441,7 +413,7 @@ return array(
             'value'        => _a('Search on website products')
         ),
         'text_keywords_search' => array(
-            'category'     => 'text',
+            'category'     => 'head_meta',
             'title'        => _a('Module search page keywords'),
             'description'  => '',
             'edit'         => 'text',
@@ -449,7 +421,7 @@ return array(
             'value'        => _a('search,product,shop,online,website')
         ),
         'text_description_index' => array(
-            'category'     => 'text',
+            'category'     => 'head_meta',
             'title'        => _a('Description for index page'),
             'description'  => '',
             'edit'         => 'textarea',
@@ -457,7 +429,7 @@ return array(
             'value'        => ''
         ),
         'force_replace_space' => array(
-            'category'     => 'text',
+            'category'     => 'head_meta',
             'title'        => _a('Force replace space by comma(,)'),
             'description'  => '',
             'edit'         => 'checkbox',

@@ -82,7 +82,7 @@ class Image extends AbstractApi
 
         // Set options
         $options = array(
-            'quality' => empty($config['image_quality']) ? 100 : $config['image_quality'],
+            'quality' => empty($config['image_quality']) ? 75 : $config['image_quality'],
         );
         
         // Resize to large

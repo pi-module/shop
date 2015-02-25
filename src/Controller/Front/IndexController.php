@@ -48,9 +48,6 @@ class IndexController extends ActionController
             $this->view()->assign('specialTitle', __('Special products'));
         }
         // Set view
-        $this->view()->headTitle($config['text_title_homepage']);
-        $this->view()->headDescription($config['text_description_homepage'], 'set');
-        $this->view()->headKeywords($config['text_keywords_homepage'], 'set');
     	$this->view()->setTemplate('product_list');
         $this->view()->assign('productList', $productList);
         $this->view()->assign('productTitleH1', __('New products'));
