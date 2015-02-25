@@ -172,7 +172,9 @@ class CartController extends ActionController
         // Set order array
     	$order = array();
     	$order['module_name'] = $this->params('module');
-    	$order['type'] = 'onetime';
+    	//$order['type'] = 'onetime';
+        $order['type'] = 'installment';
+        $order['plan'] = 4;
     	// Get product list
     	$products = $_SESSION['shop']['cart']['invoice']['product'];
         // Set products to order
@@ -192,7 +194,7 @@ class CartController extends ActionController
         // Unset shop session
         $this->setEmpty();
         // Set and go to order
-        $url = Pi::api('order', 'order')->setOrder($order);
+        $url = Pi::api('order', 'order')->setOrderInfo($order);
         Pi::service('url')->redirect($url);
     }
 
