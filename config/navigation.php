@@ -35,17 +35,6 @@ return array(
             'action'        => 'index',
         ),
 
-        'user' => array(
-            'label'         => _a('My Orders'),
-            'permission'    => array(
-                'resource'  => 'user',
-            ),
-            'route'         => 'shop',
-            'module'        => 'shop',
-            'controller'    => 'user',
-            'action'        => 'index',
-        ),
-
         'category' => array(
             'label'         => _a('Category list'),
             'permission'    => array(
@@ -110,17 +99,6 @@ return array(
             'route'         => 'admin',
             'module'        => 'shop',
             'controller'    => 'attach',
-            'action'        => 'index',
-        ),
-
-        'order' => array(
-            'label'         => _a('Orders'),
-            'permission'    => array(
-                'resource'  => 'order',
-            ),
-            'route'         => 'admin',
-            'module'        => 'shop',
-            'controller'    => 'order',
             'action'        => 'index',
         ),
 

@@ -81,3 +81,8 @@
 	</div>
 	</div>
 </div>
+<?php if ($config['order_type'] == 'installment' && !empty($productItem['installment'])) { ?>
+<pre>
+	<?php print_r($productItem['installment']); ?>
+</pre>
+<?php } ?>

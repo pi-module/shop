@@ -56,7 +56,7 @@ class AttachController extends ActionController
         }
         // Set paginator
         $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
-        $select = $this->getModel('attach')->select()->columns($columns)->where($where);
+        $select = $this->getModel('attach')->select()->columns($columns);
         $count = $this->getModel('attach')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));

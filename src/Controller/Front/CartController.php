@@ -173,7 +173,7 @@ class CartController extends ActionController
     	$order = array();
     	$order['module_name'] = $this->params('module');
     	//$order['type'] = 'onetime';
-        $order['type'] = 'installment';
+        $order['type'] = $this->config('order_type');
         $order['plan'] = 4;
     	// Get product list
     	$products = $_SESSION['shop']['cart']['invoice']['product'];

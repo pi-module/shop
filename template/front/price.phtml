@@ -1,4 +1,4 @@
-<?php if(isset($productItem['price']) && $config['view_price'] && $config['order_method'] != 'inactive') { ?>
+<?php if(isset($productItem['price']) && $config['view_price'] && $config['order_active']) { ?>
 <div class="productPrice clearfix">
     <ul class="list-unstyled">
         <li><strong><?php _e('Stock status'); ?> : </strong>

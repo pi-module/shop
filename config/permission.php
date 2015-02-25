@@ -66,18 +66,6 @@ return array(
                 //'admin',
             ),
         ),
-        'order'  => array(
-            'title'         => _a('Orders'),
-            'access'        => array(
-                //'admin',
-            ),
-        ),
-        'checkout'  => array(
-            'title'         => _a('Checkout'),
-            'access'        => array(
-                //'admin',
-            ),
-        ),
         'log'  => array(
             'title'         => _a('Logs'),
             'access'        => array(

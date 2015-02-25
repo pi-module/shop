@@ -12,7 +12,7 @@
                     <?php echo $this->escape($product['title']); ?>
                 </a>
             </h3>
-            <?php if(isset($product['price']) && $config['view_price'] && $config['order_method'] != 'inactive') { ?>
+            <?php if(isset($product['price']) && $config['view_price'] && $config['order_active']) { ?>
             <div class="clearfix">
                 <?php if($product['stock_type'] == 1 && $product['stock'] > 0) { ?>
                 <div class="pull-left productPrice p-price">

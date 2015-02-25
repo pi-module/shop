@@ -34,16 +34,6 @@ return array(
             'permission'    => 'attach',
         ),
         array(
-            'label'         => _a('Orders'),
-            'controller'    => 'order',
-            'permission'    => 'order',
-        ),
-        array(
-            'label'         => _a('Checkout'),
-            'controller'    => 'checkout',
-            'permission'    => 'checkout',
-        ),
-        array(
             'label'         => _a('Logs'),
             'controller'    => 'log',
             'permission'    => 'log',

@@ -382,6 +382,23 @@ return array(
             'filter'       => 'number_int',
             'value'        => 0
         ),
+        'order_type' => array(
+            'category'     => 'order',
+            'title'        => _a('Order type'),
+            'description'  => '',
+            'edit'         => array(
+                'type'     => 'select',
+                'options'  => array(
+                    'options' => array(
+                        'onetime'      => _a('One time'),
+                        'recurring'     => _a('Recurring'),
+                        'installment'   => _a('Installment'),
+                    ),
+                ),
+            ),
+            'filter'       => 'text',
+            'value'        => 'onetime',
+        ),
         // Texts
         'text_title_homepage' => array(
             'category'     => 'text',
