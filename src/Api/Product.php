@@ -19,6 +19,7 @@ use Zend\Json\Json;
 /*
  * Pi::api('product', 'shop')->getProduct($parameter, $type);
  * Pi::api('product', 'shop')->getProductLight($parameter, $type);
+ * Pi::api('product', 'shop')->getProductOrder($id);
  * Pi::api('product', 'shop')->getListFromId($id);
  * Pi::api('product', 'shop')->getListFromIdLight($id);
  * Pi::api('product', 'shop')->searchRelated($title, $type);
@@ -30,6 +31,7 @@ use Zend\Json\Json;
  * Pi::api('product', 'shop')->viewPrice($price);
  * Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
  * Pi::api('product', 'shop')->canonizeProductLight($product);
+ * Pi::api('product', 'shop')->canonizeProductOrder($product);
  * Pi::api('product', 'shop')->canonizeProductJson($product);
  * Pi::api('product', 'shop')->sitemap();
  */
@@ -51,6 +53,14 @@ class Product extends AbstractApi
         // Get product
         $product = Pi::model('product', $this->getModule())->find($parameter, $type);
         $product = $this->canonizeProductLight($product);
+        return $product;
+    }
+
+    public function getProductOrder($id)
+    {
+        // Get product
+        $product = Pi::model('product', $this->getModule())->find($id);
+        $product = $this->canonizeProductOrder($product);
         return $product;
     }
 
@@ -442,6 +452,43 @@ class Product extends AbstractApi
         unset($product['sales']);
         // return product
         return $product; 
+    }
+
+    public function canonizeProductOrder($product)
+    {
+        // Check
+        if (empty($product)) {
+            return '';
+        }
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // boject to array
+        $product = $product->toArray();
+        // Set product url
+        $product['productUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
+            'module'        => $this->getModule(),
+            'controller'    => 'product',
+            'slug'          => $product['slug'],
+        )));
+        // Set image url
+        $product['thumbUrl'] = '';
+        if ($product['image']) {
+            // Set image thumb url
+            $product['thumbUrl'] = Pi::url(
+                sprintf('upload/%s/thumb/%s/%s', 
+                    $config['image_path'], 
+                    $product['path'], 
+                    $product['image']
+                ));
+        }
+        // Set order product
+        $productOrder = array(
+            'title'        => $product['title'],
+            'productUrl'   => $product['productUrl'],
+            'thumbUrl'     => $product['thumbUrl'],
+        );
+        // return product
+        return $productOrder; 
     }
 
     public function canonizeProductJson($product, $categoryList = array())

@@ -17,29 +17,15 @@ use Pi\Application\Api\AbstractApi;
 use Zend\Math\Rand;
 
 /*
- * Pi::api('order', 'shop')->updatePayment();
- * Pi::api('order', 'shop')->canonizeOrder($order);
- * Pi::api('order', 'shop')->orderStatus($status_order);
- * Pi::api('order', 'shop')->paymentStatus($status_payment);
- * Pi::api('order', 'shop')->deliveryStatus($status_delivery);
- * Pi::api('order', 'shop')->listProduct($id);
- * Pi::api('order', 'shop')->userOrder();
- * Pi::api('order', 'shop')->codeOrder();
- * Pi::api('order', 'shop')->sendUserMail($order);
- * Pi::api('order', 'shop')->sendAdminMail($order);
- * Pi::api('order', 'shop')->checkoutConfig();
+ * Pi::api('order', 'shop')->getProductDetails($id);
  */
 
 class Order extends AbstractApi
 {
-    public function listProduct()
-    {}
-
-    public function singleProduct()
-    {}
-
-    public function afterOrder()
-    {}
+    public function getProductDetails($id)
+    {
+        return Pi::api('product', 'shop')->getProductOrder($id);
+    }
 
     /* public function updatePayment($item, $amount, $adapter)
     {
