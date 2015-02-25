@@ -27,7 +27,51 @@
 		</div>
 		<div class="panel-body">
 			<div class="col-md-7">
-				<?php include $this->template('front/attribute'); ?>
+
+
+
+
+
+<?php if ($config['order_type'] == 'installment' && !empty($productItem['installment'])) { ?>
+<div class="panel-group" id="planAccordion" role="tablist" aria-multiselectable="true">
+	<?php foreach ($productItem['installment'] as $plan) { ?>
+	<div class="panel panel-default">
+		<div class="panel-heading" role="tab" id="heading<?php echo $this->escape($plan['id']); ?>Two">
+   			<h4 class="panel-title">
+    			<a class="collapsed" data-toggle="collapse" data-parent="#planAccordion" href="#collapse<?php echo $this->escape($plan['id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo $this->escape($plan['id']); ?>"><?php echo $this->escape($plan['title']); ?></a>
+			</h4>
+		</div>
+		<div id="collapse<?php echo $this->escape($plan['id']); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $this->escape($plan['id']); ?>Two">
+    		<table class="table">
+				<tr>
+            		<th><?php _e('Month'); ?></th>
+            		<th><?php _e('Price'); ?></th>
+            		<th><?php _e('Due time'); ?></th>
+        		</tr>
+    			<?php foreach ($plan['invoices'] as $key => $invoice) { ?>
+            	<tr>
+                	<td scope="row">
+                		<?php if ($key == 0) { ?>
+                    	<?php _e('PerPayment'); ?>
+                		<?php } else { ?>
+                    	<?php echo sprintf(__('Month %s'), _number($key)); ?>
+                		<?php } ?>
+                	</td>
+                	<td><?php echo $this->escape($invoice['price']); ?></td>
+                	<td><?php echo _date($this->escape($invoice['duedate'])); ?></td>
+            	</tr>
+    			<?php } ?>
+      		</table>
+      		<div class="productPriceCart text-center" style="margin: 10px;">
+                <a title="<?php echo $this->escape($productItem['title']); ?>" href="<?php echo $this->escape($productItem['cartUrl']); ?>/plan/<?php echo $this->escape($plan['id']); ?>" class="btn btn-success">
+                  		<i class="fa fa-shopping-cart"></i> <?php _e('Add to cart'); ?>
+                </a>
+           </div>
+		</div>
+	</div>
+	<?php } ?>
+</div>
+<?php } else { ?>
 				<div class="productInfoBox well clearfix">
 					<div class="col-md-6">
 						<div class="productPrice"><?php include $this->template('front/price'); ?></div>
@@ -43,6 +87,15 @@
 					<div class="p-brand"><?php include $this->template('front/category'); ?></div>
 					<div class="p-category"><?php include $this->template('front/tag'); ?></div>
 				</div>
+<?php } ?>
+				<?php include $this->template('front/attribute'); ?>
+
+
+
+
+
+
+
 			</div>
 			<div class="col-md-5">
 				<?php include $this->template('front/gallery'); ?>
@@ -81,8 +134,3 @@
 	</div>
 	</div>
 </div>
-<?php if ($config['order_type'] == 'installment' && !empty($productItem['installment'])) { ?>
-<pre>
-	<?php print_r($productItem['installment']); ?>
-</pre>
-<?php } ?>
