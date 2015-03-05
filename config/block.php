@@ -15,7 +15,7 @@ return array(
         'name'          => 'product-new',
         'title'         => _a('New Product'),
         'description'   => _a('New Product list'),
-        'render'        => 'block::productNew',
+        'render'        => array('block', 'productNew'),
         'template'      => 'product-new',
         'config'        => array(
             'number' => array(
@@ -52,7 +52,7 @@ return array(
         'name'          => 'product-random',
         'title'         => _a('Random Product'),
         'description'   => _a('Random Product list'),
-        'render'        => 'block::productRandom',
+        'render'        => array('block', 'productRandom'),
         'template'      => 'product-random',
         'config'        => array(
             'number' => array(
@@ -89,7 +89,7 @@ return array(
         'name'          => 'product-tag',
         'title'         => _a('Tag Product'),
         'description'   => _a('Products from selected tag'),
-        'render'        => 'block::productTag',
+        'render'        => array('block', 'productTag'),
         'template'      => 'product-tag',
         'config'        => array(
             'tag-term' => array(
@@ -133,7 +133,7 @@ return array(
         'name'          => 'category',
         'title'         => _a('Category'),
         'description'   => _a('Category list'),
-        'render'        => 'block::category',
+        'render'        => array('block', 'category'),
         'template'      => 'category',
         'config'        => array(
             'type' => array(
