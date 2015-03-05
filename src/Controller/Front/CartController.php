@@ -51,6 +51,7 @@ class CartController extends ActionController
         }
         // Get info from url
         $slug = $this->params('slug');
+        $plan = $this->params('plan');
         $module = $this->params('module');
         // Set view
         $this->view()->setTemplate(false);
@@ -59,6 +60,7 @@ class CartController extends ActionController
         // Find product
         $product = $this->getModel('product')->find($slug, 'slug');
         $product = Pi::api('product', 'shop')->canonizeProductLight($product);
+        $product['plan'] = $plan;
         // Check product
         if (!$product['marketable']) {
         	$url = array('', 'module' => $module, 'controller' => 'index');
@@ -169,14 +171,17 @@ class CartController extends ActionController
         Pi::service('authentication')->requireLogin();
         // Set template
         $this->view()->setTemplate(false);
+        // Set cart
+        $cart = $_SESSION['shop']['cart'];
         // Set order array
     	$order = array();
     	$order['module_name'] = $this->params('module');
-    	//$order['type'] = 'onetime';
         $order['type'] = $this->config('order_type');
-        $order['plan'] = 4;
+        if ($this->config('order_type') == 'installment') {
+            $order['plan'] = $cart['invoice']['total']['plan'];
+        }
     	// Get product list
-    	$products = $_SESSION['shop']['cart']['invoice']['product'];
+    	$products = $cart['invoice']['product'];
         // Set products to order
     	foreach ($products as $product) {
     		$singelProduct =  array(
@@ -283,6 +288,7 @@ class CartController extends ActionController
         $invoice['total']['number'] = 0;
         $invoice['total']['discount'] = 0;
         $invoice['total']['shipping'] = 0;
+        $invoice['total']['plan'] = 0;
         // Get cart
     	$cart = $_SESSION['shop']['cart'];
         // Set invoice product
@@ -304,6 +310,8 @@ class CartController extends ActionController
             // Update cart product
             $cart['product'][$item['id']]['total'] = $item['total'];
             $cart['product'][$item['id']]['total_view'] = $item['total_view'];
+            // Set plan
+            $invoice['total']['plan'] = $product['plan'];
     	}
         // Set price
         $invoice['total']['location'] = (isset($cart['invoice']['total']['location'])) ? $cart['invoice']['total']['location'] : 0;

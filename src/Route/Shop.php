@@ -81,6 +81,9 @@ class Shop extends Standard
                     } elseif ($parts[1] == 'add') {
                         $matches['action'] = 'add';
                         $matches['slug'] = $this->decode($parts[2]);
+                        if (isset($parts[3]) && $parts[3] == 'plan') {
+                            $matches['plan'] = intval($parts[4]);
+                        }
                     } elseif ($parts[1] == 'finish') {    
                         $matches['action'] = 'finish';
                         $matches['id'] = intval($parts[2]);
@@ -189,7 +192,6 @@ class Shop extends Standard
             && !in_array($matches['stock'], array(0,1))) {
             unset($matches['stock']);
         }
-
         return $matches;
     }
 
