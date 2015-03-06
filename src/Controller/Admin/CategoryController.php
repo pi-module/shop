@@ -126,7 +126,7 @@ class CategoryController extends ActionController
                     $values['path'] = sprintf('%s/%s', date('Y'), date('m'));
                     $originalPath = Pi::path(sprintf('upload/%s/original/%s', $this->config('image_path'), $values['path']));
                     // Image name
-                    $imageName = Pi::api('image', 'shop')->rename($file['image']['name'], $this->ImageCategoryPrefix, $values['path']);
+                    $imageName = Pi::api('image', 'shop')->rename($file['image']['name'], $this->ImageProductPrefix, $values['path']);
                     // Upload
                     $uploader = new Upload;
                     $uploader->setDestination($originalPath);
@@ -167,14 +167,10 @@ class CategoryController extends ActionController
                 $filter = new Filter\HeadDescription;
                 $values['seo_description'] = $filter($description);
                 // Set time
-                $values['image'] = '';
-                $values['path'] = '';
                 if (empty($values['id'])) {
                     $values['time_create'] = time();
                 }
                 $values['time_update'] = time();
-
-
                 // Save values
                 if (!empty($values['id'])) {
                     $row = $this->getModel('category')->find($values['id']);

@@ -52,7 +52,7 @@ EOT;
 	<?php } elseif(isset($category['image']) && !empty($category['image'])) { ?>
 	<div class="itemImageMain text-center clearfix u-photo">
 		<a href="<?php echo $this->escape($category['largeUrl']); ?>" title="<?php echo $this->escape($category['title']); ?>">
-			<img class="img-responsive" src="<?php echo $this->escape($category['itemimageUrl']); ?>" alt="<?php echo $this->escape($category['title']); ?>" />
+			<img class="img-responsive" src="<?php echo $this->escape($category['mediumUrl']); ?>" alt="<?php echo $this->escape($category['title']); ?>" />
 		</a>
 	</div>
 	<?php } ?>

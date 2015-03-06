@@ -62,6 +62,8 @@ class IndexController extends ActionController
     {
         // Set info
         $id = array();
+        $product = array();
+        $productId = array();
         $page = $this->params('page', 1);
         $module = $this->params('module');
         $sort = $this->params('sort', 'create');
@@ -84,14 +86,16 @@ class IndexController extends ActionController
             $productId[] = $id['product'];
         }
         // Set info
-        $where = array('status' => 1, 'id' => $productId);
-        // Get category list
-        $categoryList = Pi::api('category', 'shop')->categoryList();
-        // Get list of product
-        $select = $this->getModel('product')->select()->where($where)->order($order);
-        $rowset = $this->getModel('product')->selectWith($select);
-        foreach ($rowset as $row) {
-            $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
+        if (!empty($productId)) {
+            $where = array('status' => 1, 'id' => $productId);
+            // Get category list
+            $categoryList = Pi::api('category', 'shop')->categoryList();
+            // Get list of product
+            $select = $this->getModel('product')->select()->where($where)->order($order);
+            $rowset = $this->getModel('product')->selectWith($select);
+            foreach ($rowset as $row) {
+                $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
+            }
         }
         // return product
         return $product;
@@ -101,6 +105,7 @@ class IndexController extends ActionController
     {
         // Set info
         $id = array();
+        $product = array();
         $page = $this->params('page', 1);
         $module = $this->params('module');
         $sort = $this->params('sort', 'create');

@@ -148,13 +148,6 @@ class Category extends AbstractApi
                     $category['path'], 
                     $category['image']
                 ));
-            // Set image item url
-            $category['itemimageUrl'] = Pi::url(
-                sprintf('upload/%s/item/%s/%s', 
-                    $config['image_path'], 
-                    $category['path'], 
-                    $category['image']
-                ));
             // Set image medium url
             $category['mediumUrl'] = Pi::url(
                 sprintf('upload/%s/medium/%s/%s', 

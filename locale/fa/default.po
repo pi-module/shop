@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-03-06 15:53+0330\n"
+"POT-Creation-Date: 2015-03-06 16:24+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/shop\n"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:50
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:88
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:89
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/category.phtml:28
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/category_list.phtml:4
 msgid "Category list"
@@ -141,26 +141,26 @@ msgstr "فیلد انتخابی حذف شد"
 msgid "Please select field"
 msgstr "لطفا یک فیلد انتخاب کنید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:200
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:196
 msgid "Category data saved successfully."
 msgstr "اطلاعات شاخه با موفقیت ذخیره شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:211
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:207
 msgid "Add a category"
 msgstr "شاخه جدید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:236
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:232
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:618
 #, php-format
 msgid "Image of %s removed"
 msgstr "تصویر مربوط به %s حذف شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:239
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:235
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:621
 msgid "Image not remove"
 msgstr "تصویر حذف نشد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:243
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:239
 msgid "Please select category"
 msgstr "لطفا یک شاخه انتخاب کنید"
 
@@ -293,16 +293,16 @@ msgstr "شما نمی توانید تعداد یک محصول را ۰ تنظیم
 msgid "Offline"
 msgstr "آفلاین"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:32
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:33
 msgid "The category not found."
 msgstr "شاخه یافت نشد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:55
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/IndexController.php:48
 msgid "Special products"
 msgstr "محصولات ویژه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:57
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:58
 #, php-format
 msgid "All products on %s category"
 msgstr "تمام محصولات در شاخه  %s"
