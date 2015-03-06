@@ -1,9 +1,13 @@
+<?php
+// Load language
+Pi::service('i18n')->load(array('module/order', 'default'));
+?>
 <div class="panel-group" id="planAccordion" role="tablist" aria-multiselectable="true">
 	<?php foreach ($productItem['installment'] as $plan) { ?>
 	<div class="panel panel-default">
 		<div class="panel-heading" role="tab" id="heading<?php echo $this->escape($plan['id']); ?>Two">
    			<h4 class="panel-title">
-    			<a class="collapsed" data-toggle="collapse" data-parent="#planAccordion" href="#collapse<?php echo $this->escape($plan['id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo $this->escape($plan['id']); ?>"><?php echo $this->escape($plan['title']); ?></a>
+    			<a class="collapsed" data-toggle="collapse" data-parent="#planAccordion" href="#collapse<?php echo $this->escape($plan['id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo $this->escape($plan['id']); ?>"><?php _e($plan['title']); ?></a>
 			</h4>
 		</div>
 		<div id="collapse<?php echo $this->escape($plan['id']); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $this->escape($plan['id']); ?>Two">
@@ -22,7 +26,7 @@
                     	<?php echo sprintf(__('Month %s'), _number($key)); ?>
                 		<?php } ?>
                 	</td>
-                	<td><?php echo $this->escape($invoice['price']); ?></td>
+                	<td><?php echo _currency($this->escape($invoice['price'])); ?></td>
                 	<td><?php echo _date($this->escape($invoice['duedate'])); ?></td>
             	</tr>
     			<?php } ?>

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2014-11-21 11:19+0330\n"
+"POT-Creation-Date: 2015-03-06 12:53+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,28 +9,27 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _b\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-release-2.4.0/usr/module/"
-"shop\n"
+"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/shop\n"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-random.phtml:20
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-new.phtml:20
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-tag.phtml:20
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-new.phtml:20
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-random.phtml:20
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-tag.phtml:20
 msgid "View"
 msgstr "نمایش"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-random.phtml:24
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-new.phtml:24
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-tag.phtml:24
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-new.phtml:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-random.phtml:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-tag.phtml:28
 msgid "Out of stock"
 msgstr "نا موجود"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-random.phtml:36
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-new.phtml:36
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/template/block/product-tag.phtml:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-new.phtml:40
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-random.phtml:40
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-tag.phtml:40
 msgid "More products"
 msgstr "محصولات بیشتر"
 

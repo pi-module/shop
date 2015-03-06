@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2014-11-21 11:18+0330\n"
+"POT-Creation-Date: 2015-03-06 12:53+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,507 +9,537 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-release-2.4.0/usr/module/"
-"shop\n"
+"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/shop\n"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:17
-msgid "Global public resource"
-msgstr "دسترسی های عمومی"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:24
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:28
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:86
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:45
-msgid "Search"
-msgstr "جستجو"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:31
-msgid "User"
-msgstr "کاربر"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:37
-msgid "Review"
-msgstr "بررسی"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:43
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:76
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:117
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:37
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:92
-msgid "Checkout"
-msgstr "پرداخت"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:52
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:73
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:17
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:67
-msgid "Product"
-msgstr "محصول"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:58
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:84
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:134
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:22
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:61
-msgid "Category"
-msgstr "شاخه"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:64
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:95
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:27
-msgid "Attach"
-msgstr "پیوست"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:70
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:106
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:32
-msgid "Orders"
-msgstr "سفارش ها"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:82
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:128
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:42
-msgid "Logs"
-msgstr "گزارش ها"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/permission.php:88
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:139
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:47
-msgid "Tools"
-msgstr "ابزار ها"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:16
-msgid "Index"
-msgstr "صفحه اصلی"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:39
-msgid "My Orders"
-msgstr "سفارش های من"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:50
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:135
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:105
-msgid "Category list"
-msgstr "فهرست شاخه ها"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/navigation.php:61
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:112
-msgid "Tag list"
-msgstr "فهرست برچسب ها"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:16
 msgid "New Product"
 msgstr "محصولات جدید"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:17
 msgid "New Product list"
 msgstr "فهرست محوصلات جدید"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:22
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:59
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:22
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:103
 msgid "Number"
 msgstr "تعداد"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:29
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:66
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:110
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:29
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:66
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:110
 msgid "Show price"
 msgstr "نمایش قیمت"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:36
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:73
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:73
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:117
 msgid "Show More link to module page"
 msgstr "نمایش لینک ادامه به ماژول"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:43
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:80
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:124
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:80
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:124
 msgid "Set More link to module page"
 msgstr "درج لینک ادامه به ماژول"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:53
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:53
 msgid "Random Product"
 msgstr "محصولات تصادفی"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:54
 msgid "Random Product list"
 msgstr "فهرست محوصلات تصادفی"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:90
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:90
 msgid "Tag Product"
 msgstr "محصولات بر اساس برچسب"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:91
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:91
 msgid "Products from selected tag"
 msgstr "فهرست محصولات بر اساس برچسب انتخابی"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:96
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:96
 msgid "Tag term"
 msgstr "واژه برچسب"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:140
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:134
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:73
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:22
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:56
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:52
+msgid "Category"
+msgstr "شاخه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:135
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:39
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:93
+msgid "Category list"
+msgstr "فهرست شاخه ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:140
 msgid "Category show type"
 msgstr "نوع نمایش شاخه بندی"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:146
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:146
 msgid "Simple list"
 msgstr "فهرست ساده"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/block.php:147
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:147
 msgid "Advanced list"
 msgstr "فهرست پیشرفته"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/module.php:16
-msgid "Shop"
-msgstr "فروشگاه"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/module.php:17
-msgid "Shop module for pi."
-msgstr "سیستم فروشگاه پای"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/comment.php:15
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/comment.php:15
 msgid "Shop comments"
 msgstr "نمایش نظرات"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:55
-msgid "Index page"
-msgstr "صفحه اصلی"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:74
-msgid "Tags"
-msgstr "برچسب ها"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:80
-msgid "User panel"
-msgstr "پنل کاربر"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/page.php:98
-msgid "Product review"
-msgstr "بررسی تخصصی محصولات"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:17
 msgid "Admin"
 msgstr "بخش مدیر"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:21
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:21
 msgid "View"
 msgstr "نمایش"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:25
 msgid "Image"
 msgstr "تصویر"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:29
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:29
 msgid "Social"
 msgstr "شبکه های اجتماعی"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:33
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:33
 msgid "File"
 msgstr "فایل"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:37
 msgid "Vote"
 msgstr "رای"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:41
 msgid "Favourite"
 msgstr "علاقه مندی"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:49
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:45
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:405
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:81
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:24
+msgid "Search"
+msgstr "جستجو"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:49
 msgid "Order"
 msgstr "سفارش"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:53
-msgid "Texts"
-msgstr "متن ها"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:61
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:70
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:57
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:66
 msgid "Perpage"
 msgstr "تعداد در هر صفحه"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:78
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:74
 msgid "Show related products"
 msgstr "نمایش محصولات مرتبط"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:86
-msgid "Show extra fields"
-msgstr "نمایش فیلد های اضافی"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:82
+msgid "Show attribute fields"
+msgstr "نمایش خواص"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:94
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:102
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:90
 msgid "Show product attacehed files"
 msgstr "نمایش فایل های پیوست"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:110
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:98
+msgid "Show other products from this category"
+msgstr "نمایش محصولات دیگر این شاخه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:106
 msgid "Show product price"
 msgstr "نمایش قیمت محصول"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:118
-msgid "Show official review"
-msgstr "نمایش بررسی تخصصی رسمی"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:126
-msgid "Show user review"
-msgstr "نمایش بررسی تخصصی کاربران"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:134
-msgid "Show submit review"
-msgstr "نمایش دکمه ارسال بررسی"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:142
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:114
 msgid "Show special"
 msgstr "نمایش محصولات ویژه"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:150
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:122
 msgid "Number of products on special"
 msgstr "تعداد محوصلات ویژه"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:158
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:130
 msgid "Price title"
 msgstr "عنوان برای قیمت"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:162
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:134
 msgid "Volume"
 msgstr "مقدار"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:166
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:138
 msgid "Show stock count"
 msgstr "نمایش موجودی در جستجو"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:174
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:146
 msgid "Show Tags"
 msgstr "نمایش برچسب ها"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:183
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:154
+msgid "Show breadcrumbs"
+msgstr "نمایش ناوبری"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:163
 msgid "Image Size"
 msgstr "حجم تصویر"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:191
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:171
+msgid "Image quality"
+msgstr "کیفیت تصویر "
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:172
+msgid "Between 0 to 100 and support both of JPG and PNG, default is 75"
+msgstr "بین ۰ تا ۱۰۰ تنظیم شود و برای هر دو فرمت PNG و JPG ، مقدار پیش فرض ۷۵"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:179
 msgid "Image path"
 msgstr "مسیر ذخیره تصویر"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:199
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:187
 msgid "Image Extension"
 msgstr "پسوند های مجار برای تصویر"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:207
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:195
 msgid "Large Image height"
 msgstr "ارتفاع تصویر بزرگ"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:215
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:203
 msgid "Large Image width"
 msgstr "عرض تصویر بزرگ"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:223
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:211
 msgid "Medium Image height"
 msgstr "ارتفاع تصویر متوسط"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:231
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:219
 msgid "Medium Image width"
 msgstr "عرض تصویر متوسط"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:239
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:227
 msgid "Thumb Image height"
 msgstr "ارتفاع تصویر بندانگشتی"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:247
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:235
 msgid "Thumb Image width"
 msgstr "عرض تصویر بندانگشتی"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:255
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:243
 msgid "Use lightbox"
 msgstr "استفاده از لایت باکس"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:263
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:251
 msgid "Add Watermark"
 msgstr "اضافه کردن واترمارک به تصویر"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:271
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:259
 msgid "Watermark Image"
 msgstr "تصویر واترمارک"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:278
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:266
 msgid "Watermark Positio"
 msgstr "موقعیت واترمارک"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:284
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:272
 msgid "Top Left"
 msgstr "بالا چپ"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:285
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:273
 msgid "Top Right"
 msgstr "بالا راست"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:286
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:274
 msgid "Bottom Left"
 msgstr "پایین چپ"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:287
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:275
 msgid "Bottom Right"
 msgstr "پایین راست"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:298
-msgid "Show Google Plus"
-msgstr "نمایش گوگل پلاس"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:285
+msgid "Social sharing items"
+msgstr "اشتراک گذاری در شبکه های اجتماعی"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:306
-msgid "Show facebook"
-msgstr "نمایش فیسبوک"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:314
-msgid "Show Twitter"
-msgstr "نمایش تویتر"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:323
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:299
 msgid "File Size"
 msgstr "حجم فایل"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:331
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:307
 msgid "File path"
 msgstr "مسیر ذخیره فایل"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:339
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:315
 msgid "File Extension"
 msgstr "سوند های مجار برای فایل"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:348
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:324
 msgid "Use vote system"
 msgstr "استفاده از سیستم رای"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:357
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:333
 msgid "Use favourite system"
 msgstr "استفاده از سیستم مورد علاقه"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:366
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:342
 msgid "Show search type"
 msgstr "نمایش نوع جستجوی عنوان"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:374
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:350
 msgid "Show search price"
 msgstr "نمایش قیمت در جستجو"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:382
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:358
 msgid "Show search category"
 msgstr "نمایش شاخه در جستجو"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:390
-msgid "Order method"
-msgstr "روش سفارش"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:367
+msgid "Order is active ?"
+msgstr "ثبت سفارش فعال باشد؟"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:396
-msgid "Both"
-msgstr "هردو"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:375
+msgid "Anonymous users can set order"
+msgstr "کاربر مهمان بتواند سفارش ثبت کند"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:397
-msgid "Online"
-msgstr "آنلاین"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:383
+msgid "Order type"
+msgstr "نوع سفارش"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:398
-msgid "Offline"
-msgstr "آفلاین"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:389
+msgid "One time"
+msgstr "خرید یک باره"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:399
-msgid "Inactive"
-msgstr "غیر فعال"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:390
+msgid "Recurring"
+msgstr "خرید دوره ای"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:409
-msgid "Code Prefix"
-msgstr "پیشوند کد سفارش"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:391
+msgid "Installment"
+msgstr "خرید قسطی"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:417
-msgid "List of mails for send order notification"
-msgstr "فهرست ایمیل ها برای ارسال اطلاع رسانی ثبت سفارش"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:418
-msgid "Use `|` as delimiter to separate mails"
-msgstr "با جدا کننده `|` ایمیل ها را تفکیک کنید"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:425
-msgid "Show name"
-msgstr "نمایش نام"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:433
-msgid "Show email"
-msgstr "نمایش ایمیل"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:441
-msgid "Show phone"
-msgstr "نمایش شماره تلفن"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:449
-msgid "Show mobile"
-msgstr "نمایش شماره موبایل"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:457
-msgid "Show company"
-msgstr "نمایش شرکت"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:465
-msgid "Show address"
-msgstr "نمایش آدرس"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:473
-msgid "Show country"
-msgstr "نمایش کشور"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:481
-msgid "Show city"
-msgstr "نمایش شهر"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:489
-msgid "Show Zip code"
-msgstr "نمایش کد پستی"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:497
-msgid "Show packing"
-msgstr "نمایش انتخاب بسته بندی"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:505
-msgid "Show location"
-msgstr "نمایش انتخاب مکان"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:513
-msgid "Show delivery"
-msgstr "نمایش روش تحویل"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:521
-msgid "Show payment"
-msgstr "نمایش روش پرداخت"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:530
-msgid "Module main title"
-msgstr "عنوان اصلی ماژول"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:531
-msgid "Title for main page and all non-title pages"
-msgstr "عنوان برای صفحه اصلی و تمام صفحات بدون عنوان"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:538
-msgid "Module main description"
-msgstr "توضیحات اصلی ماژول"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:546
-msgid "Module main keywords"
-msgstr "کلمات کلیدی اصلی ماژول"
-
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:554
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:401
 msgid "Module search page title"
 msgstr "عنوان صفحه جستجو ماژول"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:562
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:409
 msgid "Module search page description"
 msgstr "توضیحات صفحه جستجو ماژول"
 
-#: /var/www/html/local/pi/pi-release-2.4.0/usr/module/shop/config/config.php:570
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:413
+msgid "Search on website products"
+msgstr "جستجو در بین محصولات وب سایت"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:417
 msgid "Module search page keywords"
 msgstr "کلمات کلیدی صفحه جستجو ماژول"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:421
+msgid "search,product,shop,online,website"
+msgstr "جستجو,محصول,فروشگاه,آنلاین,وب سایت"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:425
+msgid "Description for index page"
+msgstr "توضیحات برای صفحه اصلی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:433
+msgid "Force replace space by comma(,)"
+msgstr " جایگزینی اسپیس با کاما"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/module.php:16
+msgid "Shop"
+msgstr "فروشگاه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/module.php:17
+msgid "Shop system."
+msgstr "سیستم فروشگاه اینترنتی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:16
+msgid "Index"
+msgstr "صفحه اصلی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:50
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:100
+msgid "Tag list"
+msgstr "فهرست برچسب ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:46
+msgid "Product"
+msgstr "محصول"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:84
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:27
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:58
+msgid "Attribute"
+msgstr "خواص"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:95
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:32
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:64
+msgid "Attach"
+msgstr "پیوست"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:106
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:37
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:70
+msgid "Logs"
+msgstr "گزارش ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:42
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:76
+msgid "Tools"
+msgstr "ابزار ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:50
+msgid "Index page"
+msgstr "صفحه اصلی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:69
+msgid "Tags"
+msgstr "برچسب ها"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:75
+msgid "User panel"
+msgstr "پنل کاربر"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:87
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:37
+msgid "Checkout"
+msgstr "پرداخت"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:17
+msgid "Global public resource"
+msgstr "دسترسی های عمومی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:31
+msgid "User"
+msgstr "کاربر"
+
+#~ msgid "Review"
+#~ msgstr "بررسی"
+
+#~ msgid "Orders"
+#~ msgstr "سفارش ها"
+
+#~ msgid "My Orders"
+#~ msgstr "سفارش های من"
+
+#~ msgid "Shop module for pi."
+#~ msgstr "سیستم فروشگاه پای"
+
+#~ msgid "Product review"
+#~ msgstr "بررسی تخصصی محصولات"
+
+#~ msgid "Texts"
+#~ msgstr "متن ها"
+
+#~ msgid "Show extra fields"
+#~ msgstr "نمایش فیلد های اضافی"
+
+#~ msgid "Show official review"
+#~ msgstr "نمایش بررسی تخصصی رسمی"
+
+#~ msgid "Show user review"
+#~ msgstr "نمایش بررسی تخصصی کاربران"
+
+#~ msgid "Show submit review"
+#~ msgstr "نمایش دکمه ارسال بررسی"
+
+#~ msgid "Show Google Plus"
+#~ msgstr "نمایش گوگل پلاس"
+
+#~ msgid "Show facebook"
+#~ msgstr "نمایش فیسبوک"
+
+#~ msgid "Show Twitter"
+#~ msgstr "نمایش تویتر"
+
+#~ msgid "Order method"
+#~ msgstr "روش سفارش"
+
+#~ msgid "Both"
+#~ msgstr "هردو"
+
+#~ msgid "Online"
+#~ msgstr "آنلاین"
+
+#~ msgid "Offline"
+#~ msgstr "آفلاین"
+
+#~ msgid "Inactive"
+#~ msgstr "غیر فعال"
+
+#~ msgid "Code Prefix"
+#~ msgstr "پیشوند کد سفارش"
+
+#~ msgid "List of mails for send order notification"
+#~ msgstr "فهرست ایمیل ها برای ارسال اطلاع رسانی ثبت سفارش"
+
+#~ msgid "Use `|` as delimiter to separate mails"
+#~ msgstr "با جدا کننده `|` ایمیل ها را تفکیک کنید"
+
+#~ msgid "Show name"
+#~ msgstr "نمایش نام"
+
+#~ msgid "Show email"
+#~ msgstr "نمایش ایمیل"
+
+#~ msgid "Show phone"
+#~ msgstr "نمایش شماره تلفن"
+
+#~ msgid "Show mobile"
+#~ msgstr "نمایش شماره موبایل"
+
+#~ msgid "Show company"
+#~ msgstr "نمایش شرکت"
+
+#~ msgid "Show address"
+#~ msgstr "نمایش آدرس"
+
+#~ msgid "Show country"
+#~ msgstr "نمایش کشور"
+
+#~ msgid "Show city"
+#~ msgstr "نمایش شهر"
+
+#~ msgid "Show Zip code"
+#~ msgstr "نمایش کد پستی"
+
+#~ msgid "Show packing"
+#~ msgstr "نمایش انتخاب بسته بندی"
+
+#~ msgid "Show location"
+#~ msgstr "نمایش انتخاب مکان"
+
+#~ msgid "Show delivery"
+#~ msgstr "نمایش روش تحویل"
+
+#~ msgid "Show payment"
+#~ msgstr "نمایش روش پرداخت"
+
+#~ msgid "Module main title"
+#~ msgstr "عنوان اصلی ماژول"
+
+#~ msgid "Title for main page and all non-title pages"
+#~ msgstr "عنوان برای صفحه اصلی و تمام صفحات بدون عنوان"
+
+#~ msgid "Module main description"
+#~ msgstr "توضیحات اصلی ماژول"
+
+#~ msgid "Module main keywords"
+#~ msgstr "کلمات کلیدی اصلی ماژول"
 
 #~ msgid "Authors"
 #~ msgstr "پدیدآورنده ها"
@@ -602,8 +632,7 @@ msgstr "کلمات کلیدی صفحه جستجو ماژول"
 #~ msgstr "کلاس برای ابعدا تصویر"
 
 #~ msgid "Bootstrap 3 grid options like : col-xs-6 col-sm-6 col-md-3"
-#~ msgstr ""
-#~ "بر اساس سیستم گرید بوت استرپ ۳ ، به طور مثال : col-xs-6 col-sm-6 col-md-3"
+#~ msgstr "بر اساس سیستم گرید بوت استرپ ۳ ، به طور مثال : col-xs-6 col-sm-6 col-md-3"
 
 #~ msgid "News"
 #~ msgstr "اخبار"
@@ -621,8 +650,7 @@ msgstr "کلمات کلیدی صفحه جستجو ماژول"
 #~ msgstr "تبلیغات"
 
 #~ msgid "Set topic as system page for support customise layout for blocks"
-#~ msgstr ""
-#~ "قراردادن موضوعات به عنوان یک صفحه سیستم برای شخصی سازی تنظیم بلاک و ویجت"
+#~ msgstr "قراردادن موضوعات به عنوان یک صفحه سیستم برای شخصی سازی تنظیم بلاک و ویجت"
 
 #~ msgid "Set story authors"
 #~ msgstr "تنظیم پدیدآورنده های مطلب"
@@ -682,8 +710,7 @@ msgstr "کلمات کلیدی صفحه جستجو ماژول"
 #~ msgstr "فقط نمایش مطالب مربوط به X روز گذشته"
 
 #~ msgid "Set 0 for show all news, Or set day number for limit news in days"
-#~ msgstr ""
-#~ "برای نمایش همه مطالب ۰ وارد کنید و یا محدوده روز های اخیر را مشخص کنید"
+#~ msgstr "برای نمایش همه مطالب ۰ وارد کنید و یا محدوده روز های اخیر را مشخص کنید"
 
 #~ msgid "Feed number"
 #~ msgstr "تعداد در صفحه خوراک"
