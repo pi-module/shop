@@ -60,24 +60,17 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         }
                         break;
 
-                    case 'checkout':
+                    case 'cart':
                         switch ($params['action']) {
-                            case 'cart':
+                            case 'index':
                                 $result[] = array(
                                     'label' => __('Cart'),
                                 );
                                 break;
 
-                            case 'information':
+                            case 'finish':
                                 $result[] = array(
-                                    'label' => __('Cart'),
-                                    'href'  => Pi::url(Pi::service('url')->assemble('shop', array(
-                                        'controller' => 'checkout',
-                                        'action'     => 'cart',
-                                    ))),
-                                );
-                                $result[] = array(
-                                    'label' => __('Set information'),
+                                    'label' => __('Finish'),
                                 );
                                 break;
                         }
@@ -136,29 +129,6 @@ class Breadcrumbs extends AbstractBreadcrumbs
                             );
                         }
                         break; 
-
-                    case 'user':
-                        switch ($params['action']) {
-                            case 'index':
-                                $result[] = array(
-                                    'label' => __('Dashboard'),
-                                );
-                                break;
-
-                            case 'order':
-                                $result[] = array(
-                                    'label' => __('Dashboard'),
-                                    'href'  => Pi::url(Pi::service('url')->assemble('shop', array(
-                                        'controller' => 'user',
-                                        'action'     => 'index',
-                                    ))),
-                                );
-                                $result[] = array(
-                                    'label' => __('Order information'),
-                                );
-                                break;
-                        }
-                        break;
         		}
         	} else {
                 $result = array(
