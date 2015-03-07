@@ -2,15 +2,18 @@
 <div class="clearfix">
     <div class="alert alert-success">
         <h1><?php _e('Finish order payment'); ?></h1>
-        <?php if (isset($invoice) && !empty($invoice)) { ?>
-        <p><?php echo $invoice['log']['gatewayMessage']; ?></p>
+        <?php if (isset($invoices) && !empty($invoices)) { ?>
+        <?php foreach ($invoices as $invoice) { ?>
+            <?php foreach ($invoice['log'] as $log) { ?>
+            <p><?php echo $log['gatewayMessage']; ?></p>
+            <?php } ?>
         <?php } ?>
-        <p><?php echo sprintf(__('You pay your order at <strong>%s</strong> by <strong>%s</strong> gateway And your order id is <strong>%s</strong>'), $order['time_payment_view'], $order['payment_adapter'], $order['code']); ?></p>
+        <?php } ?>
+        <p><?php echo sprintf(__('You pay your order at <strong>%s</strong> by <strong>%s</strong> gateway And your order id is <strong>%s</strong>'), $order['time_payment_view'], $order['gateway'], $order['code']); ?></p>
     </div>
     <p>
         <a class="btn btn-primary" title="<?php _e('Order link'); ?>" href="<?php echo $order['order_link']; ?>"><?php _e('Order link'); ?></a>
         <a class="btn btn-primary" title="<?php _e('User panel'); ?>" href="<?php echo $order['user_link']; ?>"><?php _e('User panel'); ?></a>
         <a class="btn btn-primary" title="<?php _e('Shop index'); ?>" href="<?php echo $order['index_link']; ?>"><?php _e('Shop index'); ?></a>
-
     </p>
 </div>

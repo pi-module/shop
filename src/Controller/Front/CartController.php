@@ -203,12 +203,12 @@ class CartController extends ActionController
         Pi::service('url')->redirect($url);
     }
 
-    /* public function finishAction()
+    public function finishAction()
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
         // Check order is active or inactive
-        if ($this->config('order_method') == 'inactive') {
+        if (!$this->config('order_active')) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index', 'action' => 'index');
             $this->jump($url, __('So sorry, At this moment order is inactive'));
         }
@@ -216,63 +216,53 @@ class CartController extends ActionController
         $id = $this->params('id');
         $module = $this->params('module');
         // Find order
-        $order = $this->getModel('order')->find($id);
+        $order = Pi::api('order', 'order')->getOrder($id);
         // Check order
-        if (!$order->id) {
+        if (!$order['id']) {
             $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
             $this->jump($url, __('Order not set.'));
         }
         // Check user
-        if ($order->uid != Pi::user()->getId()) {
+        if ($order['uid'] != Pi::user()->getId()) {
             $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
             $this->jump($url, __('It not your order.'));
         }
         // Check status payment
-        if ($order->payment_method == 'online' && $order->status_payment != 2) {
+        if ($order['status_payment'] != 2) {
             $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
             $this->jump($url, __('This order not pay'));
         }
         // Check time payment
         $time = time() - 3600;
-        if ($order->payment_method == 'online') {
-            if ($time > $order->time_payment) {
-                $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
-                $this->jump($url, __('This is old order and you pay it before'));
-            }
-        } else {
-            if ($time > $order->time_create) {
-                $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
-                $this->jump($url, __('This is old order and you pay it before'));
-            }
+        if ($time > $order['time_payment']) {
+            $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+            $this->jump($url, __('This is old order and you pay it before'));
         }
-        // canonize Order
-        $order = Pi::api('order', 'shop')->canonizeOrder($order);
         // Set links
-        $order['order_link'] = Pi::url($this->url('', array(
-            'module'      => $module, 
-            'controller'  => 'user', 
-            'action'      => 'order', 
+        $order['order_link'] = Pi::url($this->url('order', array(
+            'module'      => 'order', 
+            'controller'  => 'detail', 
+            'action'      => 'index', 
             'id'          => $order['id']
         )));
-        $order['user_link'] = Pi::url($this->url('', array(
-            'module'      => $module, 
-            'controller'  => 'user'
+        $order['user_link'] = Pi::url($this->url('order', array(
+            'module'      => 'order', 
+            'controller'  => 'index', 
+            'action'      => 'index', 
         )));
         $order['index_link'] = Pi::url($this->url('', array(
             'module'      => $module, 
-            'controller'  => 'index'
+            'controller'  => 'index',
+            'action'      => 'index',
         )));
         // Get invoice information
-        Pi::service('i18n')->load(array('module/payment', 'default'));
-        $invoice = Pi::api('invoice', 'payment')->getInvoiceFromItem('shop', 'order', $order['id']);
-        // Send Mail
-        Pi::api('order', 'shop')->sendUserMail($order);
-        Pi::api('order', 'shop')->sendAdminMail($order);
+        Pi::service('i18n')->load(array('module/order', 'default'));
+        $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         // Set view
         $this->view()->setTemplate('checkout_finish');
         $this->view()->assign('order', $order);
-        $this->view()->assign('invoice', $invoice);
-    } */
+        $this->view()->assign('invoices', $invoices);
+    }
 
     protected function setEmpty()
     {

@@ -18,6 +18,7 @@ use Zend\Math\Rand;
 
 /*
  * Pi::api('order', 'shop')->getProductDetails($id);
+ * Pi::api('order', 'shop')->postPaymentUpdate($order, $basket);
  */
 
 class Order extends AbstractApi
@@ -25,6 +26,17 @@ class Order extends AbstractApi
     public function getProductDetails($id)
     {
         return Pi::api('product', 'shop')->getProductOrder($id);
+    }
+
+    public function postPaymentUpdate($order, $basket)
+    {
+
+
+
+        // Send Mail
+        Pi::api('order', 'shop')->sendUserMail($order);
+        Pi::api('order', 'shop')->sendAdminMail($order);
+
     }
 
     /* public function updatePayment($item, $amount, $adapter)
