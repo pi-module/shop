@@ -101,18 +101,15 @@ EOT;
                     </table>
                     <div class="panel-footer clearfix">
                         <div class="pull-left">
-                            <a class="btn btn-primary" title="<?php _e('Back to Shoping'); ?>" href="<?php echo Pi::url($this->url('', array('controller' => 'index'))); ?>"><?php _e('Back to Shoping'); ?></a>
-                            <a class="btn btn-primary" title="<?php _e('Refresh cart'); ?>" href="<?php echo Pi::url($this->url('', array('action' => 'index'))); ?>"><?php _e('Refresh cart'); ?></a>
-                            <a class="btn btn-primary" title="<?php _e('Empty cart'); ?>" href="<?php echo Pi::url($this->url('', array('action' => 'empty'))); ?>"><?php _e('Empty cart'); ?></a>
-                        </div>
-                        <div class="pull-right">
-                            <a class="btn btn-primary" title="<?php _e('Next'); ?>" href="<?php echo Pi::url($this->url('', array('action' => 'complete'))); ?>"><?php _e('Next'); ?></a>
+                            <a class="btn btn-primary btn-xs" title="<?php _e('Back to Shoping'); ?>" href="<?php echo Pi::url($this->url('', array('controller' => 'index'))); ?>"><?php _e('Back to Shoping'); ?></a>
+                            <a class="btn btn-primary btn-xs" title="<?php _e('Refresh cart'); ?>" href="<?php echo Pi::url($this->url('', array('action' => 'index'))); ?>"><?php _e('Refresh cart'); ?></a>
+                            <a class="btn btn-primary btn-xs" title="<?php _e('Empty cart'); ?>" href="<?php echo Pi::url($this->url('', array('action' => 'empty'))); ?>"><?php _e('Empty cart'); ?></a>
                         </div>
                     </div>
                 </div>
 			</div>
             <div class="col-md-4 ">
-                <div data-spy="affix" class="cartInfo">
+                <div class="clearfix">
                     <div class="panel panel-default">
                         <div class="panel-heading"><?php _e('Pre Invoice'); ?></div>
                         <div class="panel-body">
@@ -122,6 +119,9 @@ EOT;
                             <p><strong><?php _e('Total Shipping'); ?></strong> : <span id="cart-total-shipping"><?php echo $this->escape($cart['invoice']['total']['shipping_view']); ?></span></p>
                             <p><strong><?php _e('Final Price'); ?></strong> : <span  id="cart-total-total" class="label label-success"><?php echo $this->escape($cart['invoice']['total']['total_price_view']); ?></span></p>
                         </div>
+                    </div>
+                    <div class="clearfix text-center">
+                        <a class="btn btn-success btn-lg" title="<?php _e('Next'); ?>" href="<?php echo Pi::url($this->url('', array('action' => 'complete'))); ?>"><?php _e('Next'); ?></a>
                     </div>
                 </div>
             </div>
