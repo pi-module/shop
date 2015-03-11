@@ -82,10 +82,6 @@ class ProductController extends IndexController
             $favourite['module'] = $module;
             $this->view()->assign('favourite', $favourite);
         }
-        // Check order
-        if ($config['order_type'] == 'installment' && Pi::service('module')->isActive('order')) {
-            $product['installment'] = Pi::api('installment', 'order')->setPriceForView($product['price']);
-        }
         // Set view
         $this->view()->headTitle($product['seo_title']);
         $this->view()->headDescription($product['seo_description'], 'set');

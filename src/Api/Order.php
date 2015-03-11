@@ -35,8 +35,8 @@ class Order extends AbstractApi
         /* TODO */
 
         // Send Mail
-        $this->sendUserMail($order);
-        $this->sendAdminMail($order);
+        //$this->sendUserMail($order);
+        //$this->sendAdminMail($order);
         // Set back url
         return Pi::url(Pi::service('url')->assemble('shop', array(
             'module'        => $this->getModule(),
@@ -66,7 +66,7 @@ class Order extends AbstractApi
     {
         // Set system mail
         $to = array(
-            Pi::config('adminmail'  => Pi::config('adminname'),
+            Pi::config('adminmail') => Pi::config('adminname'),
         );
         // Get config and set mail list
         $config = Pi::service('registry')->config->read($this->getModule());

@@ -177,9 +177,6 @@ class CartController extends ActionController
     	$order = array();
     	$order['module_name'] = $this->params('module');
         $order['type'] = $this->config('order_type');
-        if ($this->config('order_type') == 'installment') {
-            $order['plan'] = $cart['invoice']['total']['plan'];
-        }
     	// Get product list
     	$products = $cart['invoice']['product'];
         // Set products to order

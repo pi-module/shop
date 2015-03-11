@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2015-03-06 16:24+0330\n"
+"POT-Creation-Date: 2015-03-11 12:35+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:16
 msgid "New Product"
-msgstr "محصولات جدید"
+msgstr "فهرست محوصلات جدید"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:17
 msgid "New Product list"

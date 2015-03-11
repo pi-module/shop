@@ -27,9 +27,6 @@
 		</div>
 		<div class="panel-body">
 			<div class="col-md-7">
-				<?php if ($config['order_type'] == 'installment' && !empty($productItem['installment'])) { ?>
-				<?php include $this->template('front/installment'); ?>
-				<?php } else { ?>
 				<div class="productInfoBox well clearfix">
 					<div class="col-md-6">
 						<div class="productPrice"><?php include $this->template('front/price'); ?></div>
@@ -45,7 +42,6 @@
 					<div class="p-brand"><?php include $this->template('front/category'); ?></div>
 					<div class="p-category"><?php include $this->template('front/tag'); ?></div>
 				</div>
-				<?php } ?>
 				<?php include $this->template('front/attribute'); ?>
 			</div>
 			<div class="col-md-5">
