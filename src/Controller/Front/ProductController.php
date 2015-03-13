@@ -26,11 +26,9 @@ class ProductController extends IndexController
         $module = $this->params('module');
         // Get config
         $config = Pi::service('registry')->config->read($module);
-        // Get category list
-        $categoryList = Pi::api('category', 'shop')->categoryList();
         // Find product
         $product = $this->getModel('product')->find($slug, 'slug');
-        $product = Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
+        $product = Pi::api('product', 'shop')->canonizeProduct($product);
         // Check product
         if (!$product || $product['status'] != 1) {
             $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The product not found.'), 'error');

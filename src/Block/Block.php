@@ -27,14 +27,12 @@ class Block
         $where = array('status' => 1);
         $order = array('time_create DESC', 'id DESC');
         $limit = intval($block['number']);
-        // Get category list
-        $categoryList = Pi::api('category', 'shop')->categoryList();
         // Get list of product
         $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
         $rowset = Pi::model('product', $module)->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
+            $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
         }
         // Set block array
         $block['resources'] = $product;
@@ -52,14 +50,12 @@ class Block
         $where = array('status' => 1);
         $order = array(new \Zend\Db\Sql\Predicate\Expression('RAND()'));
         $limit = intval($block['number']);
-        // Get category list
-        $categoryList = Pi::api('category', 'shop')->categoryList();
         // Get list of product
         $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
         $rowset = Pi::model('product', $module)->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
+            $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
         }
         // Set block array
         $block['resources'] = $product;
@@ -86,14 +82,12 @@ class Block
                 $where = array('status' => 1, 'id' => $tagId);
                 $order = array(new \Zend\Db\Sql\Predicate\Expression('RAND()'));
                 $limit = intval($block['number']);
-                // Get category list
-                $categoryList = Pi::api('category', 'shop')->categoryList();
                 // Get list of product
                 $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
                 $rowset = Pi::model('product', $module)->selectWith($select);
                 // Make list
                 foreach ($rowset as $row) {
-                    $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
+                    $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
                 }
             }
         }

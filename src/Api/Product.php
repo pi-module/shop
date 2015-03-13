@@ -40,11 +40,9 @@ class Product extends AbstractApi
 {
     public function getProduct($parameter, $type = 'id')
     {
-        // Get category list
-        $categoryList = Pi::api('category', 'shop')->categoryList();
         // Get product
         $product = Pi::model('product', $this->getModule())->find($parameter, $type);
-        $product = $this->canonizeProduct($product, $categoryList);
+        $product = $this->canonizeProduct($product);
         return $product;
     }
 
@@ -294,7 +292,7 @@ class Product extends AbstractApi
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Get category list
-        $categoryList = (empty($categoryList)) ? Pi::api('category', 'shop')->categoryList() : $categoryList;
+        $categoryList = (empty($categoryList)) ? Pi::registry('categoryList', 'shop')->read() : $categoryList;
         // boject to array
         $product = $product->toArray();
         // Set text_summary

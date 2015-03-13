@@ -88,13 +88,11 @@ class IndexController extends ActionController
         // Set info
         if (!empty($productId)) {
             $where = array('status' => 1, 'id' => $productId);
-            // Get category list
-            $categoryList = Pi::api('category', 'shop')->categoryList();
             // Get list of product
             $select = $this->getModel('product')->select()->where($where)->order($order);
             $rowset = $this->getModel('product')->selectWith($select);
             foreach ($rowset as $row) {
-                $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
+                $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
             }
         }
         // return product
@@ -117,14 +115,12 @@ class IndexController extends ActionController
         if (isset($stock) && $stock == 1) {
             $where['stock'] > 0;
         }
-        // Get category list
-        $categoryList = Pi::api('category', 'shop')->categoryList();
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)
         ->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('product')->selectWith($select);
         foreach ($rowset as $row) {
-            $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
+            $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
         }
         // return product
         return $product;   

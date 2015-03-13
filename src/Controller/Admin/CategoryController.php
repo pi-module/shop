@@ -10,7 +10,6 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Shop\Controller\Admin;
 
 use Pi;
@@ -190,6 +189,8 @@ class CategoryController extends ActionController
                     // Update sitemap
                     Pi::api('sitemap', 'sitemap')->singleLink($loc, $row->status, $module, 'category', $row->id);         
                 }
+                // Clear registry
+                Pi::registry('categoryList', 'shop')->clear();
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('category', $row->id, $operation);
