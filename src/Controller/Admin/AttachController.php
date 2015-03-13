@@ -281,6 +281,7 @@ class AttachController extends ActionController
     protected function fileType($file)
     {
         $extension = pathinfo($file, PATHINFO_EXTENSION);
+        $extension = strtolower($extension);
         switch ($extension) {
             case 'zip':
             case 'rar':

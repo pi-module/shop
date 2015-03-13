@@ -18,7 +18,7 @@
 		<ul>
 		<?php foreach($attach['doc'] as $doc) { ?>
 			<li>
-				<a rel="external" title="<?php echo $doc['title']; ?>" href="<?php echo $doc['link']; ?>"><?php echo $doc['title']; ?></a>
+				<a rel="external" title="<?php echo $doc['title']; ?>" href="<?php echo $doc['fileUrl']; ?>"><?php echo $doc['title']; ?></a>
 			</li>
 		<?php } ?>
 		</ul>
@@ -30,7 +30,7 @@
 		<ul>
 		<?php foreach($attach['pdf'] as $pdf) { ?>
 			<li>
-				<a rel="external" title="<?php echo $pdf['title']; ?>" href="<?php echo $pdf['link']; ?>"><?php echo $pdf['title']; ?></a>
+				<a rel="external" title="<?php echo $pdf['title']; ?>" href="<?php echo $pdf['fileUrl']; ?>"><?php echo $pdf['title']; ?></a>
 			</li>
 		<?php } ?>
 		</ul>
@@ -42,7 +42,7 @@
 		<ul>
 		<?php foreach($attach['other'] as $other) { ?>
 			<li>
-				<a rel="external" title="<?php echo $other['title']; ?>" href="<?php echo $other['link']; ?>"><?php echo $other['title']; ?></a>
+				<a rel="external" title="<?php echo $other['title']; ?>" href="<?php echo $other['fileUrl']; ?>"><?php echo $other['title']; ?></a>
 			</li>
 		<?php } ?>
 		</ul>

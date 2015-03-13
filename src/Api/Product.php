@@ -207,9 +207,8 @@ class Product extends AbstractApi
                     ));
             } else {
                 $file[$row->type][$row->id]['fileUrl'] = Pi::url(
-                    sprintf('upload/%s/%s/%s/%s', 
+                    sprintf('upload/%s/file/%s/%s', 
                         $config['file_path'], 
-                        $file[$row->type][$row->id]['type'], 
                         $file[$row->type][$row->id]['path'], 
                         $file[$row->type][$row->id]['file']
                     ));

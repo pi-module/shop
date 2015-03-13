@@ -1,18 +1,13 @@
 <?php if(isset($attribute['audio']) && !empty($attribute['audio'])) { ?>
 <div class="clearfix">
-	<?php 
-		$this->jQuery();
-		$this->js($this->assetModule('player/audiojs/audio.min.js'));
-		$this->footScript()->appendScript("audiojs.events.ready(function(){var as = audiojs.createAll();});");
-	?>
 	<div class="attribute-audio">
-	    <?php foreach($attribute['audio'] as $field) { ?>
-		<?php if(!empty($field['data'])) { ?>
-		<div class="player-media col-md-12 u-audio">
-			<audio src="<?php echo $field['data']; ?>" preload="auto" />
+	<?php foreach($attribute['audio'] as $audio) { ?>
+	<?php if(!empty($audio['data'])) { ?>
+    	<div class="pi-player clearfix">
+		<?php echo $this->videojs($audio['data'], '', 640, 100); ?>
 		</div>
-		<?php } ?>
-	    <?php } ?>
+	<?php } ?>
+	<?php } ?>
 	</div>
 </div>
 <?php } ?>
