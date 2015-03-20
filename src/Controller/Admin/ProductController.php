@@ -23,6 +23,8 @@ use Module\Shop\Form\ProductAdditionalForm;
 use Module\Shop\Form\ProductAdditionalFilter;
 use Module\Shop\Form\RelatedForm;
 use Module\Shop\Form\RelatedFilter;
+use Module\Shop\Form\AdminSearchForm;
+use Module\Shop\Form\AdminSearchFilter;
 use Zend\Json\Json;
 
 class ProductController extends ActionController
@@ -53,52 +55,54 @@ class ProductController extends ActionController
         $module = $this->params('module');
         $status = $this->params('status');
         $category = $this->params('category');
+        $title = $this->params('title');
         // Set info
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $order = array('time_create DESC', 'id DESC');
         $limit = intval($this->config('admin_perpage'));
-        $list = array();
-        // Set where
-        $whereLink = array();
-        if (!empty($status)) {
-            $whereLink['status'] = $status;
+        $product = array();
+        // Get
+        if (empty($title)) {
+            // Set where
+            $whereLink = array();
+            if (!empty($status)) {
+                $whereLink['status'] = $status;
+            }
+            if (!empty($category)) {
+                $whereLink['category'] = $category;
+            }
+            $columnsLink = array('product' => new \Zend\Db\Sql\Predicate\Expression('DISTINCT product'));
+            // Get info from link table
+            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order)->offset($offset)->limit($limit);
+            $rowset = $this->getModel('link')->selectWith($select)->toArray();
+            // Make list
+            foreach ($rowset as $id) {
+                $productId[] = $id['product'];
+            }
+            // Set info
+            $whereProduct = array('id' => $productId);
+        } else {
+            $whereProduct = array();
+            $whereProduct['title LIKE ?'] = '%' . $title . '%';
         }
-        if (!empty($category)) {
-            $whereLink['category'] = $category;
-        }
-        $columnsLink = array('product' => new \Zend\Db\Sql\Predicate\Expression('DISTINCT product'));
-        // Get info from link table
-        $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('link')->selectWith($select)->toArray();
-        // Make list
-        foreach ($rowset as $id) {
-            $productId[] = $id['product'];
-        }
-        // Set info
-        $columnProduct = array('id', 'title', 'slug', 'status', 'time_create', 'recommended');
-        $whereProduct = array('id' => $productId);
         // Get list of product
-        $select = $this->getModel('product')->select()->columns($columnProduct)->where($whereProduct)->order($order);
+        $select = $this->getModel('product')->select()->where($whereProduct)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $product[$row->id] = $row->toArray();
-            $product[$row->id]['time_create_view'] = _date($product[$row->id]['time_create']);
-            $product[$row->id]['time_update_view'] = _date($product[$row->id]['time_update']);
-            $product[$row->id]['productUrl'] = Pi::url($this->url('shop', array(
-                'module'        => $module,
-                'controller'    => 'product',
-                'slug'          => $product[$row->id]['slug'],
-            )));
+            $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
         }
-        // Go to update page if empty
-        if (empty($product) && empty($status)) {
-            return $this->redirect()->toRoute('', array('action' => 'update'));
-        }
+        // Set count
+        if (empty($title)) {
+            $columnsLink = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
+            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink);
+            $count = $this->getModel('link')->selectWith($select)->current()->count;
+        } else {
+            $columnsLink = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+            $select = $this->getModel('product')->select()->where($whereProduct)->columns($columnsLink);
+            $count = $this->getModel('product')->selectWith($select)->current()->count;
+        }    
         // Set paginator
-        $countLink = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
-        $select = $this->getModel('link')->select()->where($whereLink)->columns($countLink);
-        $count = $this->getModel('link')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
@@ -111,12 +115,50 @@ class ProductController extends ActionController
                 'action'        => 'index',
                 'category'      => $category,
                 'status'        => $status,
+                'title'         => $title,
             )),
         ));
+        // Set form
+        $values = array(
+            'title' => $title,
+        );
+        $form = new AdminSearchForm('search');
+        $form->setAttribute('action', $this->url('', array('action' => 'process')));
+        $form->setData($values);
         // Set view
         $this->view()->setTemplate('product_index');
         $this->view()->assign('list', $product);
         $this->view()->assign('paginator', $paginator);
+        $this->view()->assign('form', $form);
+    }
+
+    public function processAction()
+    {
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form = new AdminSearchForm('search');
+            $form->setInputFilter(new AdminSearchFilter());
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                $message = __('View filtered products');
+                $url = array(
+                    'action' => 'index',
+                    'title' => $values['title'],
+                );
+            } else {
+                $message = __('Not valid');
+                $url = array(
+                    'action' => 'index',
+                );
+            }
+        } else {
+            $message = __('Not set');
+            $url = array(
+                'action' => 'index',
+            );
+        } 
+        return $this->jump($url, $message);  
     }
 
     /**
@@ -304,7 +346,7 @@ class ProductController extends ActionController
                         $attribute[$field]['data'] = $values[$field];
                     }
                 }
-                // Set just item fields
+                // Set just product fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->productColumns)) {
                         unset($values[$key]);
