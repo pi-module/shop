@@ -34,6 +34,11 @@ return array(
             'permission'    => 'attach',
         ),
         array(
+            'label'         => _a('Special'),
+            'controller'    => 'special',
+            'permission'    => 'special',
+        ),
+        array(
             'label'         => _a('Logs'),
             'controller'    => 'log',
             'permission'    => 'log',

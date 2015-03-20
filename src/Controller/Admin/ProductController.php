@@ -23,8 +23,6 @@ use Module\Shop\Form\ProductAdditionalForm;
 use Module\Shop\Form\ProductAdditionalFilter;
 use Module\Shop\Form\RelatedForm;
 use Module\Shop\Form\RelatedFilter;
-use Module\Shop\Form\SpecialForm;
-use Module\Shop\Form\SpecialFilter;
 use Zend\Json\Json;
 
 class ProductController extends ActionController
@@ -43,13 +41,6 @@ class ProductController extends ActionController
         'uid', 'hits', 'sales', 'image', 'path', 'comment', 'point', 'count', 
         'favorite', 'attach', 'attribute', 'related', 'recommended', 'category_main',
         'stock', 'stock_alert', 'stock_type', 'price', 'price_discount', 'price_title'
-    );
-
-    /**
-     * Special Columns
-     */
-    protected $specialColumns = array(
-        'id', 'product', 'price', 'time_publish', 'time_expire', 'status'
     );
 
     /**
@@ -527,115 +518,6 @@ class ProductController extends ActionController
             Pi::api('product', 'shop')->relatedCount($product['id']);
         }
         return $return;
-    }
-
-    public function specialAction()
-    {
-        // Get product and category
-        $where = array('time_expire > ?' => time());
-        $columns = array('product');
-        $select = $this->getModel('special')->select()->where($where)->columns($columns);
-        $idSet = $this->getModel('special')->selectWith($select)->toArray();
-        if (empty($idSet)) {
-            return $this->redirect()->toRoute('', array('action' => 'specialUpdate'));
-        }
-        // Set topics and stores
-        foreach ($idSet as $special) {
-            $productArr[] = $special['product'];
-        }
-        // Get products
-        $where = array('id' => array_unique($productArr));
-        $columns = array('id', 'title', 'slug');
-        $select = $this->getModel('product')->select()->where($where)->columns($columns);
-        $productSet = $this->getModel('product')->selectWith($select);
-        // Make product list
-        foreach ($productSet as $row) {
-            $productList[$row->id] = $row->toArray();
-        }
-        // Get special
-        $where = array('time_expire > ?' => time());
-        $order = array('id DESC', 'time_publish DESC');
-        $select = $this->getModel('special')->select()->where($where)->order($order);
-        $specialSet = $this->getModel('special')->selectWith($select);
-        // Make special list
-        foreach ($specialSet as $row) {
-            $specialList[$row->id] = $row->toArray();
-            $specialList[$row->id]['productTitle'] = $productList[$row->product]['title'];
-            $specialList[$row->id]['productSlug'] = $productList[$row->product]['slug'];
-            $specialList[$row->id]['time_publish'] = _date($specialList[$row->id]['time_publish']);
-            $specialList[$row->id]['time_expire'] = _date($specialList[$row->id]['time_expire']);
-        }
-        // Set view
-        $this->view()->setTemplate('product_special');
-        $this->view()->assign('specials', $specialList);
-    }
-
-    public function specialUpdateAction()
-    {
-        // Get id
-        $id = $this->params('id');
-        $form = new SpecialForm('special');
-        if ($this->request->isPost()) {
-            $data = $this->request->getPost();
-            $form->setInputFilter(new SpecialFilter);
-            $form->setData($data);
-            if ($form->isValid()) {
-                $values = $form->getData();
-                foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->specialColumns)) {
-                        unset($values[$key]);
-                    }
-                }
-                // Set time
-                $values['time_publish'] = strtotime($values['time_publish']);
-                $values['time_expire'] = strtotime($values['time_expire']);
-                // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('special')->find($values['id']);
-                } else {
-                    $row = $this->getModel('special')->createRow();
-                }
-                $row->assign($values);
-                $row->save();
-                // Add log
-                $operation = (empty($values['id'])) ? 'add' : 'edit';
-                Pi::api('log', 'shop')->addLog('special', $row->id, $operation);
-                // Check it save or not
-                if ($row->id) {
-                    $message = __('Special data saved successfully.');
-                    $this->jump(array('action' => 'special'), $message);
-                } else {
-                    $message = __('Special data not saved.');
-                }
-            } else {
-                $message = __('Invalid data, please check and re-submit.');
-            }
-        } else {
-            if ($id) {
-                $values = $this->getModel('special')->find($id)->toArray();
-                $form->setData($values);
-                $message = 'You can edit this special';
-            } else {
-                $message = 'You can add new special';
-            }
-        }
-        $this->view()->setTemplate('product_special_update');
-        $this->view()->assign('form', $form);
-        $this->view()->assign('title', __('Add Special'));
-        $this->view()->assign('message', $message);
-    }
-
-    public function specialDeleteAction()
-    {
-        // Get information
-        $this->view()->setTemplate(false);
-        $id = $this->params('id');
-        $row = $this->getModel('special')->find($id);
-        if ($row) {
-            $row->delete();
-            $this->jump(array('action' => 'special'), __('Selected special delete'));
-        }
-        $this->jump(array('action' => 'special'), __('Please select special'));
     }
 
     public function removeAction()

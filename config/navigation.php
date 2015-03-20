@@ -102,6 +102,17 @@ return array(
             'action'        => 'index',
         ),
 
+        'special' => array(
+            'label'         => _a('Special'),
+            'permission'    => array(
+                'resource'  => 'special',
+            ),
+            'route'         => 'admin',
+            'module'        => 'shop',
+            'controller'    => 'special',
+            'action'        => 'index',
+        ),
+
         'log' => array(
             'label'         => _a('Logs'),
             'permission'    => array(

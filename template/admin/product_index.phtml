@@ -7,8 +7,6 @@
     $this->js($this->assetModule('script/system-msg.js', 'system'));
 ?>
 <div class="clearfix">
-	<?php $navList = 1; ?>
-	<?php include $this->template('admin/product_nav'); ?>
 	<p>
 	   <a class="btn btn-primary" title="<?php _e('Add product'); ?>" href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'update')); ?>"><i class="fa fa-folder-open"></i> <?php _e('Add product'); ?></a>
 	</p>
@@ -29,20 +27,29 @@
 		?>
 		<tr>
 			<td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($product['id']); ?></span></td>
-			<td>
+			<td class="product-ajax">
 				<?php if($product['recommended'] == 1) { ?>
 				<button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '0')); ?>" ><i class="fa fa-heart"></i></button>
 				<?php } else { ?>
-				<button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '1')); ?>" ><i class="fa fa-heart-empty"></i></button>	
+				<button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '1')); ?>" ><i class="fa fa-heart-o"></i></button>	
 				<?php } ?>
 				<?php echo $this->escape($product['title']); ?>
 			</td>
 			<td>
-				<a class="btn btn-primary" title="<?php _e('View'); ?>" href="<?php echo $product['productUrl']; ?>"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
-				<a class="btn btn-primary" title="<?php _e('Attach'); ?>" href="<?php echo $this->url('', array('controller' => 'attach', 'action' => 'add', 'id' => $product['id'])); ?>"><i class="fa fa-upload"></i> <?php _e('Attach'); ?></a>
-				<a class="btn btn-primary" title="<?php _e('Related'); ?>" href="<?php echo $this->url('', array('action' => 'related', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Related'); ?></a>
-				<a class="btn btn-primary" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'update', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
-				<!-- <a class="btn btn-danger" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Delete'); ?></a> -->
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-edit"></i> <?php _e('Manage'); ?> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a title="<?php _e('Edit basic information'); ?>" href="<?php echo $this->url('', array('action' => 'update', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit basic information'); ?></a></li>
+						<li><a title="<?php _e('Edit additional information'); ?>" href="<?php echo $this->url('', array('action' => 'additional', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit additional information'); ?></a></li>
+						<li><a title="<?php _e('Attach files'); ?>" href="<?php echo $this->url('', array('controller' => 'attach', 'action' => 'add', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Attach files'); ?></a></li>
+						<li><a title="<?php _e('Related'); ?>" href="<?php echo $this->url('', array('action' => 'related', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Related'); ?></a></li>
+					</ul>
+				</div>
+                <?php if($product['status'] == 1) { ?>
+				<a class="btn btn-success btn-xs" title="<?php _e('View'); ?>" href="<?php echo $product['productUrl']; ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+				<?php } ?>
 			</td>
 		</tr>
 		<?php } ?>
@@ -56,7 +63,7 @@
 </div>
 <script type="text/javascript" >
 (function($){
-    $("#product-list").on("click","button",function(){
+    $("#product-list .product-ajax").on("click","button",function(){
        systemMessage.wait("<?php _e('Recommended in process'); ?>");
        $.getJSON($(this).attr("data-link")).done(function(result){
           if(result.ajaxstatus==1){
@@ -64,7 +71,7 @@
 	          	 var buttonClass = 'fa fa-heart';
           	 }
           	 if(result.recommended==0){
-	          	 var buttonClass = 'fa fa-heart-empty';
+	          	 var buttonClass = 'fa fa-heart-o';
           	 }
           	 $('#button-' + result.id + ' i').attr('class', buttonClass);
              systemMessage.succ(result.message);

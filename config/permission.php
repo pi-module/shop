@@ -66,6 +66,12 @@ return array(
                 //'admin',
             ),
         ),
+        'special'         => array(
+            'title'         => _a('Special'),
+            'access'        => array(
+                //'admin',
+            ),
+        ),
         'log'  => array(
             'title'         => _a('Logs'),
             'access'        => array(
