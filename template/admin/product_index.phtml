@@ -44,7 +44,7 @@
 						<li><a title="<?php _e('Edit basic information'); ?>" href="<?php echo $this->url('', array('action' => 'update', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit basic information'); ?></a></li>
 						<li><a title="<?php _e('Edit additional information'); ?>" href="<?php echo $this->url('', array('action' => 'additional', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit additional information'); ?></a></li>
 						<li><a title="<?php _e('Attach files'); ?>" href="<?php echo $this->url('', array('controller' => 'attach', 'action' => 'add', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Attach files'); ?></a></li>
-						<li><a title="<?php _e('Related'); ?>" href="<?php echo $this->url('', array('action' => 'related', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Related'); ?></a></li>
+						<li><a title="<?php _e('Related products'); ?>" href="<?php echo $this->url('', array('action' => 'related', 'id' => $product['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Related products'); ?></a></li>
 					</ul>
 				</div>
                 <?php if($product['status'] == 1) { ?>

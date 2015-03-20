@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-03-11 12:35+0330\n"
+"POT-Creation-Date: 2015-03-20 12:26+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -14,6 +14,47 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/shop\n"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:60
+msgid "Text"
+msgstr "متن"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:64
+msgid "Link"
+msgstr "لینک"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:68
+msgid "Video"
+msgstr "ویدیو"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:72
+msgid "Audio"
+msgstr "صدا"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:76
+msgid "File"
+msgstr "فایل"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:80
+msgid "Currency"
+msgstr "قیمت"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:84
+msgid "Date"
+msgstr "تاریخ"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:88
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:90
+msgid "Number"
+msgstr "تعداد"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:92
+msgid "Select"
+msgstr "انتخاب"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:96
+msgid "Checkbox"
+msgstr "چک باکس"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:50
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:89
@@ -33,8 +74,7 @@ msgstr "پایان"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:98
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:109
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:104
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:30
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:139
 msgid "Search"
 msgstr "جستجو"
 
@@ -48,29 +88,29 @@ msgstr "نتیجه"
 msgid "Tag list"
 msgstr "فهرست برچسب ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:338
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:540
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:335
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:537
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:223
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:7
 msgid "In stock"
 msgstr "موجود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:342
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:544
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:339
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:541
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:224
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/box.phtml:30
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:11
 msgid "Out of stock"
 msgstr "نا موجود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:346
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:548
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:343
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:545
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:225
 msgid "Coming soon"
 msgstr "به زودی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:350
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:552
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:347
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:549
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:226
 msgid "Contact"
 msgstr "تماس بگیرید"
@@ -99,10 +139,7 @@ msgid "All changes in file saved successfully."
 msgstr "همه تغییرات در فایل با موفقیت ذخیره شد"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:141
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:124
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:283
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:410
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:567
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:445
 msgid "Invalid data, please check and re-submit."
 msgstr "اطلاعات اشتباه، لطفا بررسی کنید و دوباره ارسال کنید"
 
@@ -118,120 +155,118 @@ msgstr "فایل پیوست شده شما با موفقیت حذف شد"
 msgid "Please select file"
 msgstr "لطفا یک فایل انتخاب کنید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:94
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:143
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:205
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:142
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:188
 msgid "Problem in upload image. please try again"
 msgstr "مشکل در بارگذاری تصویر، لطفا مجددا امتحان کنید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:120
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:128
 msgid "Attribute field data saved successfully."
 msgstr "اطلاعات صفت جدید با موفقیت ذخیره شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:134
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:140
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:8
 msgid "Add attribute"
 msgstr "خاصیت جدید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:166
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:172
 msgid "Selected field delete"
 msgstr "فیلد انتخابی حذف شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:168
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:174
 msgid "Please select field"
 msgstr "لطفا یک فیلد انتخاب کنید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:196
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:197
 msgid "Category data saved successfully."
 msgstr "اطلاعات شاخه با موفقیت ذخیره شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:207
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:208
 msgid "Add a category"
 msgstr "شاخه جدید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:232
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:618
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:233
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:544
 #, php-format
 msgid "Image of %s removed"
 msgstr "تصویر مربوط به %s حذف شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:235
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:621
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:236
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:547
 msgid "Image not remove"
 msgstr "تصویر حذف نشد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:239
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:240
 msgid "Please select category"
 msgstr "لطفا یک شاخه انتخاب کنید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:277
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:255
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:328
 msgid "Product data saved successfully."
 msgstr "اطلاعات محصول با موفقیت ذخیره شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:280
-msgid "Product data not saved."
-msgstr "اطلاعات محصول ذخیره نشد"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:306
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:13
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:274
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:11
 msgid "Add product"
 msgstr "محصول جدید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:360
-#, php-format
-msgid "%s set recommended successfully"
-msgstr "محصول %s پیشنهاد شده شد"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:367
-#, php-format
-msgid "Error in set recommended for %s product"
-msgstr "خطا در تنظیم پیشنهاد شده برای محصول %s"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:373
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:431
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:625
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:286
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:408
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:466
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:551
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:103
 msgid "Please select product"
 msgstr "لطفا یک محصول انتخاب کنید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:415
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:341
+msgid "Manage additional information"
+msgstr "مدیریت اطلاعات تکمیلی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:395
+#, php-format
+msgid "%s set recommended successfully"
+msgstr "محصول %s پیشنهاد شده شد"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:402
+#, php-format
+msgid "Error in set recommended for %s product"
+msgstr "خطا در تنظیم پیشنهاد شده برای محصول %s"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:450
 msgid "Add Related"
 msgstr "اضافه کردن مشابه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:457
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:492
 msgid "OK Add"
 msgstr "با موفقیت اضافه شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:463
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:498
 msgid "Error Add , It added before"
 msgstr "خطا، این مورد قبلا اضافه شده است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:470
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:505
 msgid "Error , Product and related is same"
 msgstr "خطا، محصول و مشابه یکی هستند"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:477
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:512
 msgid "OK Remove"
 msgstr "با موفقیت حذف شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:561
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:101
 msgid "Special data saved successfully."
 msgstr "اطلاعات محولات ویژه با موفقیت ذخیره شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:564
-msgid "Special data not saved."
-msgstr "اطلاعات محصول ویژه ذخیره نشد"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:580
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_special.phtml:6
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:112
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:4
 msgid "Add Special"
 msgstr "محصول ویژه جدید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:592
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:123
 msgid "Selected special delete"
 msgstr "محصول ویژه انتخاب شده حذف شد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:594
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:125
 msgid "Please select special"
 msgstr "لطفا یک محصول ویژه انتخاب کنید"
 
@@ -306,7 +341,7 @@ msgstr "این یک سفارش قدیمی است و شما قبلا آن را پ
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:310
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:84
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:62
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:79
 msgid "Offline"
 msgstr "آفلاین"
 
@@ -325,11 +360,11 @@ msgid "All products on %s category"
 msgstr "تمام محصولات در شاخه  %s"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/IndexController.php:53
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/ProductController.php:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/ProductController.php:58
 msgid "New products"
 msgstr "آخرین محصولات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/ProductController.php:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/ProductController.php:34
 msgid "The product not found."
 msgstr "این محصول یافت نشد"
 
@@ -343,7 +378,7 @@ msgid "Search result of %s"
 msgstr "نتایج جستجوی %s"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/SearchController.php:140
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:32
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:30
 msgid "Search result"
 msgstr "نتایج جستجو"
 
@@ -369,46 +404,46 @@ msgid "List of all used tags on shop"
 msgstr "فهرست تمام برچسب های استفاده شده در فروشگاه"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:55
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:47
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:48
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:65
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:61
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:41
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:66
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:45
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:23
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:18
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:10
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:19
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:19
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:17
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:34
 msgid "Title"
 msgstr "عنوان"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:67
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:52
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:26
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_special.phtml:12
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:10
 msgid "Product"
 msgstr "محصول"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:81
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:59
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:76
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:102
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:111
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:101
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:58
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:29
 msgid "Status"
 msgstr "وضعیت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:83
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:78
 msgid "Online"
 msgstr "آنلاین"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:93
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:126
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:172
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:200
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:98
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:362
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:77
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:164
@@ -417,53 +452,80 @@ msgstr "آنلاین"
 msgid "Submit"
 msgstr "ارسال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:71
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:126
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:68
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:120
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/category.phtml:56
+msgid "Category"
+msgstr "شاخه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:91
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:24
+msgid "Set"
+msgstr "محل نمایش"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:21
 msgid "Type"
 msgstr "نوع"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:73
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:105
 msgid "Text : type text content"
 msgstr "متن : نوشتن محتوای متنی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:74
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:106
 msgid "Link : add url for click"
 msgstr "لینک : اضافه کردن لینک برای کلیک"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:75
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:107
 msgid "Video : add flv or mp4 url for play on video player"
 msgstr "ویدیو : درج لینک flv یا mp4 برای نمایش در پخش کننده ویدیو"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:76
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:108
 msgid "Audio : add mp3 url for play on audio player"
 msgstr "صدا : درج لینک mp3 برای پخش در پخش کننده صوتی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:77
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:109
 msgid "File : add file link for download"
 msgstr "فایل : درج لینک فایل برای دانلود"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:78
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:110
 msgid "Currency : add view price for anything"
 msgstr "قیمت : درج قیمت برای نمایش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:79
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:111
 msgid "Date : add date for view"
 msgstr "تاریخ : درج تاریخ برای نمایش"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:80
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:112
 msgid "Number : add number"
 msgstr "عدد : درج عدد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:81
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:113
 msgid "Select : add select box for choose"
 msgstr "انتخاب : درج باکس انتخاب"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:89
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:114
+msgid "Checkbox : add check box for 0 or 1"
+msgstr "چک باکس : درج چک باکس با ذخیره ۰ یا ۱"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:125
 msgid "Value"
 msgstr "مقدار"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:114
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:149
+msgid "Icon"
+msgstr "آیکن"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:153
+msgid "Use fontawesome.io icons, and set icon name like fa-home"
+msgstr ""
+"از آیکن های سایت fontawesome.io استفاده کنید، و نام آیکن رو وارد کنید. مثل : "
+"fa-home"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:160
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:143
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:176
 msgid "Image"
@@ -488,7 +550,7 @@ msgstr "توضیحات"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:113
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:103
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:39
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:52
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:59
 msgid "Published"
 msgstr "منتشر شده"
 
@@ -496,7 +558,7 @@ msgstr "منتشر شده"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:114
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:104
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:40
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:53
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:60
 msgid "Pending review"
 msgstr "در انتظار تایید"
 
@@ -552,26 +614,18 @@ msgstr "خلاصه"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:117
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:27
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:45
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_special.phtml:27
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:25
 msgid "Delete"
 msgstr "حذف"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:126
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:68
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:120
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/category.phtml:56
-msgid "Category"
-msgstr "شاخه"
-
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:135
-msgid "Brand"
-msgstr "برند ( شاخه )"
+msgid "Main category"
+msgstr "شاخه اصلی"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:141
-msgid "Just use for breadcrumbs and mobile apps"
-msgstr "فقط در ناوبری و نرم افزار موبایل کاربرد دارد"
+msgid "Use for breadcrumbs ,mobile app and attribute"
+msgstr "برای استفاده در ناوبری ، نرم افزار موبایل و خواص محصول"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:189
 msgid "Product options"
@@ -591,7 +645,7 @@ msgstr "نوع موجودی"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:234
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:64
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_special.phtml:13
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:11
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:87
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:17
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:22
@@ -613,10 +667,6 @@ msgstr "برچسب ها"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:320
 msgid "Use `|` as delimiter to separate tag terms"
 msgstr "با استفاده از `|` کلمات را از هم جدا کنید"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:331
-msgid "Attributes"
-msgstr "خواص"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:54
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:44
@@ -778,10 +828,10 @@ msgstr "فهرست تمام فایل های پیوست شده"
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:7
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:9
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/log_index.phtml:6
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:18
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:18
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:35
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_special.phtml:11
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:33
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:9
 msgid "ID"
 msgstr "شناسه"
 
@@ -795,10 +845,10 @@ msgstr "ایجاد"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:11
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:11
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:20
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:20
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_special.phtml:16
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:18
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:18
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:35
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:14
 msgid "Action"
 msgstr "عملکرد"
 
@@ -807,10 +857,9 @@ msgid "Get"
 msgstr "دریافت"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:26
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:27
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:26
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:44
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_special.phtml:26
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:24
 msgid "Edit"
 msgstr "ویرایش"
 
@@ -827,8 +876,8 @@ msgid "No file upload yet"
 msgstr "هنوز هیچ فایلی بارگذاری نشده است"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:10
-msgid "List of attribute fields"
-msgstr "فهرست خواص"
+msgid "List of attributes"
+msgstr "فهرست خواص محصول"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:4
 msgid "Add Category"
@@ -839,7 +888,7 @@ msgid "List of Categores"
 msgstr "فهرست شاخه ها"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:51
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/box.phtml:22
 msgid "View"
 msgstr "نمایش"
@@ -876,35 +925,39 @@ msgstr "آیتم"
 msgid "Operation"
 msgstr "عملکرد"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:15
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:13
 msgid "List of product"
 msgstr "فهرست محصولات"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:42
-msgid "Attach"
-msgstr "پیوست"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:41
+msgid "Manage"
+msgstr "مدیریت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:43
-msgid "Related"
-msgstr "مشابه"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:44
+msgid "Edit basic information"
+msgstr "ویرایش اطلاعات پایه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:45
+msgid "Edit additional information"
+msgstr "ویرایش اطلاعات اضافی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:46
+msgid "Attach files"
+msgstr "پیوست فایل"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:47
+msgid "Related products"
+msgstr "محصولات مشابه"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:61
 msgid "Trash"
 msgstr "سطل آشغال"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:67
 msgid "Recommended in process"
 msgstr "تنظیم به صورت پیشنهاد شده در حال انجام است"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_nav.phtml:2
-msgid "List"
-msgstr "فهرست"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_nav.phtml:3
-msgid "Special"
-msgstr "ویژه"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:13
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:11
 msgid ""
 "You can manage product related here, remove related productes or find new "
 "product by search system and add them to related"
@@ -912,42 +965,42 @@ msgstr ""
 "شما میتوانید محصولات مشابه را در اینجا مدیریت کنید، محصولات مشابه را حذف "
 "کنید و یا محصولات جدید برای درج به عنوان محصول مشابه جستجو کنید"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:15
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:13
 msgid "List of related products"
 msgstr "فهرست محصولات مشابه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:26
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:24
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:97
 msgid "Remove"
 msgstr "حذف"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:41
 msgid "Add"
 msgstr "اضافه کردن"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:46
 msgid "Search form"
 msgstr "فرم جستجو"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:52
 msgid "Related product in process"
 msgstr "در حال پردازش محصولات مشابه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_special.phtml:8
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:16
+msgid "Remove image product in process"
+msgstr "حذف تصویر محصول در حال انجام است"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:6
 msgid "List of specials"
 msgstr "فهرست محصولات ویژه"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_special.phtml:14
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:12
 msgid "Publish"
 msgstr "منتشر شده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_special.phtml:15
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:13
 msgid "Expire"
 msgstr "باطی شده"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:18
-msgid "Remove image product in process"
-msgstr "حذف تصویر محصول در حال انجام است"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/tools_index.phtml:4
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/tools_index.phtml:10
@@ -1006,10 +1059,6 @@ msgstr "فهرست محصولات انتخابی در سب خرید"
 msgid "Discount"
 msgstr "تخفیف"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:90
-msgid "Number"
-msgstr "تعداد"
-
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:96
 msgid "Total"
 msgstr "مجموع"
@@ -1026,33 +1075,33 @@ msgstr "به روز کردن"
 msgid "Empty cart"
 msgstr "خالی کردن"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:109
-msgid "Next"
-msgstr "تکمیل سفارش"
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:114
 msgid "Pre Invoice"
 msgstr "پیش فاکتور"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:119
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:116
 msgid "Total Price"
 msgstr "قیمت کل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:120
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:117
 msgid "Total Discount"
 msgstr "تخفیف کل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:121
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:118
 msgid "Total Number"
 msgstr "تعداد کل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:122
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:119
 msgid "Total Shipping"
 msgstr "هزینه ارسال کل"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:123
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:120
 msgid "Final Price"
 msgstr "قیمت نهایی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:124
+msgid "Next"
+msgstr "تکمیل سفارش"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_finish.phtml:4
 msgid "Finish order payment"
@@ -1125,6 +1174,36 @@ msgid ""
 msgstr ""
 "هنوز هیچ کلمه کلیدی برای این بخش ساخته نشده است. لطفا بعدا این صفحه را بررسی "
 "نمایید"
+
+#~ msgid "Product data not saved."
+#~ msgstr "اطلاعات محصول ذخیره نشد"
+
+#~ msgid "Special data not saved."
+#~ msgstr "اطلاعات محصول ویژه ذخیره نشد"
+
+#~ msgid "Brand"
+#~ msgstr "برند ( شاخه )"
+
+#~ msgid "Just use for breadcrumbs and mobile apps"
+#~ msgstr "فقط در ناوبری و نرم افزار موبایل کاربرد دارد"
+
+#~ msgid "Attributes"
+#~ msgstr "خواص"
+
+#~ msgid "List of attribute fields"
+#~ msgstr "فهرست خواص"
+
+#~ msgid "Attach"
+#~ msgstr "پیوست"
+
+#~ msgid "Related"
+#~ msgstr "مشابه"
+
+#~ msgid "List"
+#~ msgstr "فهرست"
+
+#~ msgid "Special"
+#~ msgstr "ویژه"
 
 #~ msgid "Set information"
 #~ msgstr "تنظیم اطلاعات"
@@ -1505,9 +1584,6 @@ msgstr ""
 
 #~ msgid "Social"
 #~ msgstr "شبکه های اجتماعی"
-
-#~ msgid "File"
-#~ msgstr "فایل"
 
 #~ msgid "Vote"
 #~ msgstr "رای"
