@@ -10,7 +10,6 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Shop\Form;
 
 use Pi;
@@ -45,9 +44,19 @@ class AttributeFilter extends InputFilter
                 ),
             ),
         ));
+        // category
+        $this->add(array(
+            'name' => 'category',
+            'required' => true,
+        ));
         // status
         $this->add(array(
             'name' => 'status',
+            'required' => true,
+        ));
+        // position
+        $this->add(array(
+            'name' => 'position',
             'required' => true,
         ));
         // type
@@ -58,6 +67,11 @@ class AttributeFilter extends InputFilter
         // search
         $this->add(array(
             'name' => 'search',
+            'required' => false,
+        ));
+        // icon
+        $this->add(array(
+            'name' => 'icon',
             'required' => false,
         ));
         // image

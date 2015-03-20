@@ -127,18 +127,18 @@ class ProductForm  extends BaseForm
                 'category' => '',
             ),
         ));
-        // brand
+        // category_main
         $this->add(array(
-            'name' => 'brand',
+            'name' => 'category_main',
             'type' => 'Module\Shop\Form\Element\Category',
             'options' => array(
-                'label' => __('Brand'),
+                'label' => __('Main category'),
                 'category' => $this->category,
             ),
             'attributes' => array(
                 'size' => 1,
                 'multiple' => 0,
-                'description' => __('Just use for breadcrumbs and mobile apps'),
+                'description' => __('Use for breadcrumbs ,mobile app and attribute'),
             ),
         ));
         // Image
@@ -322,7 +322,7 @@ class ProductForm  extends BaseForm
             ));
         }
         // Set extra field
-        if (!empty($this->field)) {
+        /* if (!empty($this->field)) {
             // extra_field
             $this->add(array(
                 'name' => 'extra_field',
@@ -353,7 +353,7 @@ class ProductForm  extends BaseForm
                     ));
                 }
             }
-        }
+        } */
         // Save
         $this->add(array(
             'name' => 'submit',

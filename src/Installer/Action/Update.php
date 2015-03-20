@@ -48,6 +48,11 @@ class Update extends BasicUpdate
         $categoryTable    = $categoryModel->getTable();
         $categoryAdapter  = $categoryModel->getAdapter();
 
+        // Set field model
+        $fieldModel    = Pi::model('field', $this->module);
+        $fieldTable    = $fieldModel->getTable();
+        $fieldAdapter  = $fieldModel->getAdapter();
+
         // Update to version 0.3.0
         if (version_compare($moduleVersion, '0.3.0', '<')) {
             // Alter table field `type`
@@ -129,6 +134,88 @@ class Update extends BasicUpdate
             $sql = sprintf("ALTER TABLE %s CHANGE `description` `text_description` text", $categoryTable);
             try {
                 $categoryAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
+        // Update to version 1.0.5
+        if (version_compare($moduleVersion, '1.0.5', '<')) {
+            
+            // Add table of field_category
+            $sql =<<<'EOD'
+CREATE TABLE `{field_category}` (
+    `id` int (10) unsigned NOT NULL auto_increment,
+    `field` int(10) unsigned NOT NULL default '0',
+    `category` int(10) unsigned NOT NULL default '0',
+    PRIMARY KEY (`id`),
+    KEY `field` (`field`),
+    KEY `category` (`category`),
+    KEY `field_category` (`field`, `category`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'SQL schema query for author table failed: '
+                                   . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+
+            // Alter table field `type`
+            $sql = sprintf("ALTER TABLE %s CHANGE `brand` `category_main` int(10) unsigned NOT NULL default '0'", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Alter table field `icon`
+            $sql = sprintf("ALTER TABLE %s ADD `icon` varchar(32) NOT NULL default ''", $fieldTable);
+            try {
+                $fieldAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Alter table field `position`
+            $sql = sprintf("ALTER TABLE %s ADD `position` int(10) unsigned NOT NULL default '0' , ADD INDEX (`position`)", $fieldTable);
+            try {
+                $fieldAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Alter table field `type`
+            $sql = sprintf("ALTER TABLE %s CHANGE `type` `type` enum('text','link','currency','date','number','select','video','audio','file', 'checkbox') NOT NULL default 'text'", $fieldTable);
+            try {
+                $fieldAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
                     'status'    => false,

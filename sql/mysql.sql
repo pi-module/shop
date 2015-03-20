@@ -3,7 +3,7 @@ CREATE TABLE `{product}` (
     `title` varchar(255) NOT NULL default '',
     `slug` varchar(255) NOT NULL default '',
     `category` varchar(255) NOT NULL default '',
-    `brand` int(10) unsigned NOT NULL default '0',
+    `category_main` int(10) unsigned NOT NULL default '0',
     `text_summary` text,
     `text_description` text,
     `seo_title` varchar(255) NOT NULL default '',
@@ -119,17 +119,30 @@ CREATE TABLE `{field}` (
     `id` int (10) unsigned NOT NULL auto_increment,
     `title` varchar(255) NOT NULL default '',
     `image` varchar(255) NOT NULL default '',
-    `type` enum('text','link','currency','date','number','select','video','audio','file') NOT NULL default 'text',
+    `icon` varchar(32) NOT NULL default '',
+    `type` enum('text','link','currency','date','number','select','video','audio','file', 'checkbox') NOT NULL default 'text',
     `order` int(10) unsigned NOT NULL default '0',
     `status` tinyint(1) unsigned NOT NULL default '1',
     `search` tinyint(1) unsigned NOT NULL default '1',
+    `position` int(10) unsigned NOT NULL default '0',
     `value` text,
     PRIMARY KEY (`id`),
     KEY `title` (`title`),
     KEY `order` (`order`),
     KEY `status` (`status`),
     KEY `search` (`search`),
+    KEY `position` (`position`),
     KEY `order_status` (`order`, `status`)
+);
+
+CREATE TABLE `{field_category}` (
+    `id` int (10) unsigned NOT NULL auto_increment,
+    `field` int(10) unsigned NOT NULL default '0',
+    `category` int(10) unsigned NOT NULL default '0',
+    PRIMARY KEY (`id`),
+    KEY `field` (`field`),
+    KEY `category` (`category`),
+    KEY `field_category` (`field`, `category`)
 );
 
 CREATE TABLE `{field_data}` (

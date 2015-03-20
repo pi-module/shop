@@ -582,8 +582,8 @@ class Product extends AbstractApi
                     $product['image']
                 ));
         }
-        // Set brand information
-        $product['brandTitle'] = $categoryList[$product['brand']]['title'];
+        // Set category_main information
+        $product['categoryMainTitle'] = $categoryList[$product['category_main']]['title'];
         // Set attribute
         if ($product['attribute'] && $config['view_attribute']) {
             $attributes = Pi::api('attribute', 'shop')->Product($product['id']);

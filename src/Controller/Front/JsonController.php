@@ -49,19 +49,19 @@ class JsonController extends IndexController
     public function productCategoryAction()
     {
         // Get info from url
-        $brand = $this->params('id');
+        $categoryMain = $this->params('id');
         $module = $this->params('module');
         // Get config
         $config = Pi::service('registry')->config->read($module);
-        // Get category information from model by brand id
-        $brand = $this->getModel('category')->find($brand);
-        $brand = Pi::api('category', 'shop')->canonizeCategory($brand);
+        // Get category information from model by category_main id
+        $categoryMain = $this->getModel('category')->find($categoryMain);
+        $categoryMain = Pi::api('category', 'shop')->canonizeCategory($categoryMain);
         // Check category
-        if (!$brand || $brand['status'] != 1) {
+        if (!$categoryMain || $categoryMain['status'] != 1) {
             $productList = array();
         } else {
             // Set story info
-            $where = array('status' => 1, 'category' => $brand['id']);
+            $where = array('status' => 1, 'category' => $categoryMain['id']);
             // Get story List
             $productList = $this->productJsonList($where);
         }

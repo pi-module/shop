@@ -49,6 +49,10 @@ return array(
             'title'  => _a('Order'),
             'name'   => 'order'
         ),
+        array(
+            'title'  => _a('Attribute'),
+            'name'   => 'attribute'
+        ),
     ),
     'item' => array(
     	// Admin
@@ -435,6 +439,77 @@ return array(
             'edit'         => 'checkbox',
             'filter'       => 'number_int',
             'value'        => 1
+        ),
+        // Attribute
+        'attribute_position_1' => array(
+            'category'     => 'attribute',
+            'title'        => _a('Set 1 name'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Set 1')
+        ),
+        'attribute_position_2' => array(
+            'category'     => 'attribute',
+            'title'        => _a('Set 2 name'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Set 2')
+        ),
+        'attribute_position_3' => array(
+            'category'     => 'attribute',
+            'title'        => _a('Set 3 name'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Set 3')
+        ),
+        'attribute_position_4' => array(
+            'category'     => 'attribute',
+            'title'        => _a('Set 4 name'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Set 4')
+        ),
+        'attribute_position_5' => array(
+            'category'     => 'attribute',
+            'title'        => _a('Set 5 name'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Set 5')
+        ),
+        'attribute_position_6' => array(
+            'category'     => 'attribute',
+            'title'        => _a('Set 6 name'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Set 6')
+        ),
+        'attribute_position_7' => array(
+            'category'     => 'attribute',
+            'title'        => _a('Set 7 name'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Set 7')
+        ),
+        'attribute_position_8' => array(
+            'category'     => 'attribute',
+            'title'        => _a('Set 8 name'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Set 8')
+        ),
+        'attribute_position_9' => array(
+            'category'     => 'attribute',
+            'title'        => _a('Set 9 name'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Set 9')
+        ),
+        'attribute_position_10' => array(
+            'category'     => 'attribute',
+            'title'        => _a('Set 10 name'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+            'value'        => _a('Set 10')
         ),
     ),
 );

@@ -81,9 +81,9 @@ class ProductFilter extends InputFilter
             'name' => 'category',
             'required' => true,
         ));
-        // brand
+        // category_main
         $this->add(array(
-            'name' => 'brand',
+            'name' => 'category_main',
             'required' => true,
         ));
         // image
@@ -184,13 +184,13 @@ class ProductFilter extends InputFilter
             ));
         }
         // Set attribute field
-        if (!empty($attribute)) {
+        /* if (!empty($attribute)) {
             foreach ($attribute as $field) {
                 $this->add(array(
                     'name' => $field['id'],
                     'required' => false,
                 ));
             }
-        }
+        } */
     }
 }    	

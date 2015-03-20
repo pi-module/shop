@@ -10,7 +10,6 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-
 namespace Module\Shop\Form;
 
 use Pi;
@@ -18,8 +17,10 @@ use Pi\Form\Form as BaseForm;
 
 class AttributeForm extends BaseForm
 {
-    public function __construct($name = null)
+    public function __construct($name = null, $option = array())
     {
+        $this->module = Pi::service('module')->current();
+        $this->position = Pi::api('attribute', 'shop')->attributePositionForm();
         parent::__construct($name);
     }
 
@@ -49,6 +50,22 @@ class AttributeForm extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
+                'required'  => true,
+            )
+        ));
+        // category
+        $this->add(array(
+            'name' => 'category',
+            'type' => 'Module\Shop\Form\Element\Category',
+            'options' => array(
+                'label' => __('Category'),
+                'module' => $this->module,
+                'category' => '',
+            ),
+            'attributes' => array(
+                'required'  => true,
+                'size'      => 5,
+                'multiple'  => 1,
             )
         ));
         // status
@@ -62,6 +79,21 @@ class AttributeForm extends BaseForm
                     0 => __('Offline'),
                 ),
             ),
+            'attributes' => array(
+                'required'  => true,
+            )
+        ));
+        // position
+        $this->add(array(
+            'name' => 'position',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Set'),
+                'value_options' => $this->position,
+            ),
+            'attributes' => array(
+                'required'  => true,
+            )
         ));
         // type
         $this->add(array(
@@ -69,18 +101,22 @@ class AttributeForm extends BaseForm
             'type' => 'select',
             'options' => array(
                 'label' => __('Type'),
-                'value_options' => array(
-                    'text' => __('Text : type text content'),
-                    'link' => __('Link : add url for click'),
-                    'video' => __('Video : add flv or mp4 url for play on video player'),
-                    'audio' => __('Audio : add mp3 url for play on audio player'),
-                    'file' => __('File : add file link for download'),
-                    'currency' => __('Currency : add view price for anything'),
-                    'date' => __('Date : add date for view'),
-                    'number' => __('Number : add number'),
-                    'select' => __('Select : add select box for choose'),
+                'value_options'    => array(
+                    'text'      => __('Text : type text content'),
+                    'link'      => __('Link : add url for click'),
+                    'video'     => __('Video : add flv or mp4 url for play on video player'),
+                    'audio'     => __('Audio : add mp3 url for play on audio player'),
+                    'file'      => __('File : add file link for download'),
+                    'currency'  => __('Currency : add view price for anything'),
+                    'date'      => __('Date : add date for view'),
+                    'number'    => __('Number : add number'),
+                    'select'    => __('Select : add select box for choose'),
+                    'checkbox'  => __('Checkbox : add check box for 0 or 1'),
                 ),
             ),
+            'attributes' => array(
+                'required'  => true,
+            )
         ));
         // value
         $this->add(array(
@@ -92,7 +128,6 @@ class AttributeForm extends BaseForm
                 'type' => 'textarea',
                 'rows' => '5',
                 'cols' => '40',
-                
                 'description' => '',
             )
         ));
@@ -105,6 +140,17 @@ class AttributeForm extends BaseForm
             ),
             'attributes' => array(
                 'description' => '',
+            )
+        ));
+        // icon
+        $this->add(array(
+            'name' => 'icon',
+            'options' => array(
+                'label' => __('Icon'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('Use fontawesome.io icons, and set icon name like fa-home'),
             )
         ));
         // image

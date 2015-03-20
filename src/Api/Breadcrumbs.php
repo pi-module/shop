@@ -78,9 +78,9 @@ class Breadcrumbs extends AbstractBreadcrumbs
 
                     case 'product':
                         $product = Pi::api('product', 'shop')->getProductLight($params['slug'], 'slug');
-                        // Check have brand
-                        if ($product['brand'] > 0) {
-                            $category = Pi::api('category', 'shop')->getCategory($product['brand']);
+                        // Check have category_main
+                        if ($product['category_main'] > 0) {
+                            $category = Pi::api('category', 'shop')->getCategory($product['category_main']);
                             $result[] = array(
                                 'label' => $category['title'],
                                 'href'  => $category['categoryUrl'],

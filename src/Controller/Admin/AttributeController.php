@@ -20,30 +20,33 @@ use Module\Shop\Form\AttributeFilter;
 
 class AttributeController extends ActionController
 {
-    /**
-     * Attribute Image Prefix
-     */
     protected $ImageAttributePrefix = 'attribute_';
 
-    /**
-     * Attribute Columns
-     */
     protected $attributeColumns = array(
-        'id', 'title', 'image', 'type', 'order', 'status', 'search', 'value'
+        'id', 'title', 'image', 'icon', 'type', 'order', 'status', 'search', 'value', 'position'
     );
 
-    /**
-     * Attribute Action
-     */
     public function indexAction()
     {
+        // Get category list
+        //$categoryList = Pi::registry('categoryList', 'shop')->read();
+        // Get position list
+        $position = Pi::api('attribute', 'shop')->attributePositionForm();
         // Get info
         $select = $this->getModel('field')->select()->order(array('order ASC'));
         $rowset = $this->getModel('field')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
             $field[$row->id] = $row->toArray();
-            $field[$row->id]['imageUrl'] = Pi::url(sprintf('upload/%s/icon/%s', $this->config('file_path'), $field[$row->id]['image']));
+            $field[$row->id]['imageUrl'] = Pi::url(
+                sprintf('upload/%s/icon/%s', $this->config('file_path'), $field[$row->id]['image']));
+            $field[$row->id]['position_view'] = $position[$row->position];
+
+            /* $categoryIds = Pi::api('attribute', 'shop')->getCategory($row->id);
+            foreach ($categoryIds as $categoryId) {
+                $categoryTitle[] = $categoryList[$categoryId]['title'];
+            }
+            $field[$row->id]['categoryTitle'] = implode(",", $categoryTitle); */
         }
         // Go to update page if empty
         if (empty($field)) {
@@ -65,6 +68,7 @@ class AttributeController extends ActionController
         // Get attribute
         if ($id) {
             $attribute = $this->getModel('field')->find($id)->toArray();
+            $attribute['category'] = Pi::api('attribute', 'shop')->getCategory($attribute['id']);
         }
         // Set form
         $form = new AttributeForm('attribute', $options);
@@ -103,7 +107,9 @@ class AttributeController extends ActionController
                     }
                 }
                 // Set order
-                $select = $this->getModel('field')->select()->columns(array('order'))->order(array('order DESC'))->limit(1);
+                $columns = array('order');
+                $order = array('order DESC');
+                $select = $this->getModel('field')->select()->columns($columns)->order($order)->limit(1);
                 $values['order'] = $this->getModel('field')->selectWith($select)->current()->order + 1;
                 // Save values
                 if (!empty($values['id'])) {
@@ -113,6 +119,8 @@ class AttributeController extends ActionController
                 }
                 $row->assign($values);
                 $row->save();
+                //
+                Pi::api('attribute', 'shop')->setCategory($row->id, $data['category']);
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('attribute', $row->id, $operation);
@@ -120,8 +128,6 @@ class AttributeController extends ActionController
                 $message = __('Attribute field data saved successfully.');
                 $url = array('action' => 'index');
                 $this->jump($url, $message);
-            } else {
-                $message = __('Invalid data, please check and re-submit.');
             }
         } else {
             if ($id) {

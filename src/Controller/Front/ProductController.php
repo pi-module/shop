@@ -37,7 +37,7 @@ class ProductController extends IndexController
         $this->getModel('product')->update(array('hits' => $product['hits'] + 1), array('id' => $product['id']));
         // Get attribute
         if ($product['attribute'] && $config['view_attribute']) {
-            $attribute = Pi::api('attribute', 'shop')->Product($product['id']);
+            $attribute = Pi::api('attribute', 'shop')->Product($product['id'], $product['category_main']);
             $this->view()->assign('attribute', $attribute);
         }
         // Get related

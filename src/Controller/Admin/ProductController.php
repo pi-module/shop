@@ -19,6 +19,8 @@ use Pi\Paginator\Paginator;
 use Pi\File\Transfer\Upload;
 use Module\Shop\Form\ProductForm;
 use Module\Shop\Form\ProductFilter;
+use Module\Shop\Form\ProductAdditionalForm;
+use Module\Shop\Form\ProductAdditionalFilter;
 use Module\Shop\Form\RelatedForm;
 use Module\Shop\Form\RelatedFilter;
 use Module\Shop\Form\SpecialForm;
@@ -39,7 +41,7 @@ class ProductController extends ActionController
     	'id', 'title', 'slug', 'category', 'text_summary', 'text_description', 'seo_title', 
         'seo_keywords', 'seo_description', 'status', 'time_create', 'time_update', 
         'uid', 'hits', 'sales', 'image', 'path', 'comment', 'point', 'count', 
-        'favorite', 'attach', 'attribute', 'related', 'recommended', 'brand',
+        'favorite', 'attach', 'attribute', 'related', 'recommended', 'category_main',
         'stock', 'stock_alert', 'stock_type', 'price', 'price_discount', 'price_title'
     );
 
@@ -153,9 +155,6 @@ class ProductController extends ActionController
                 $option['removeUrl'] = $this->url('', array('action' => 'remove', 'id' => $product['id']));
             }
         }
-        // Get attribute field
-        $fields = Pi::api('attribute', 'shop')->Get();
-        $option['field'] = $fields['attribute'];
         // Set form
         $form = new ProductForm('product', $option);
         $form->setAttribute('enctype', 'multipart/form-data');
@@ -167,17 +166,10 @@ class ProductController extends ActionController
             $filter = new Filter\Slug;
             $data['slug'] = $filter($slug);
             // Form filter
-            $form->setInputFilter(new ProductFilter($fields['attribute']));
+            $form->setInputFilter(new ProductFilter);
             $form->setData($data);
             if ($form->isValid()) {
             	$values = $form->getData();
-                // Set attribute data array
-                if (!empty($fields['field'])) {
-                    foreach ($fields['field'] as $field) {
-                        $attribute[$field]['field'] = $field;
-                        $attribute[$field]['data'] = $values[$field];
-                    }
-                }
                 // Tag
                 if (!empty($values['tag'])) {
                     $tag = explode('|', $values['tag']);
@@ -254,10 +246,6 @@ class ProductController extends ActionController
                         Pi::service('tag')->update($module, $row->id, '', $tag);
                     }
                 }
-                // Attribute
-                if (!empty($attribute)) {
-                    Pi::api('attribute', 'shop')->Set($attribute, $row->id);
-                }
                 // Add / Edit sitemap
                 if (Pi::service('module')->isActive('sitemap')) {
                     // Set loc
@@ -273,19 +261,11 @@ class ProductController extends ActionController
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('product', $row->id, $operation);
                 // Check it save or not
-                if ($row->id) {
-                    $message = __('Product data saved successfully.');
-                    $this->jump(array('action' => 'index'), $message);
-                } else {
-                    $message = __('Product data not saved.');
-                }
-            } else {
-                $message = __('Invalid data, please check and re-submit.');
+                $message = __('Product data saved successfully.');
+                $this->jump(array('action' => 'additional', 'id' => $row->id), $message);
             }	
         } else {
             if ($id) {
-                // Get Attribute
-                $product = Pi::api('attribute', 'shop')->Form($product);
                 // Get tag list
                 if (Pi::service('module')->isActive('tag')) {
                     $tag = Pi::service('tag')->get($module, $product['id'], '');
@@ -295,16 +275,80 @@ class ProductController extends ActionController
                 }
                 // Set data 
                 $form->setData($product);
-                $message = 'You can edit this product';
-            } else {
-                $message = 'You can add new product';
             }
         }   
         // Set view
         $this->view()->setTemplate('product_update');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Add product'));
-        $this->view()->assign('message', $message);
+    }
+
+    public function additionalAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        // Find product
+        if ($id) {
+            $product = $this->getModel('product')->find($id)->toArray();
+        } else {
+            $this->jump(array('action' => 'index'), __('Please select product'));
+        }
+        // Get attribute field
+        $fields = Pi::api('attribute', 'shop')->Get($product['category_main']);
+        $option['field'] = $fields['attribute'];
+        // Set form
+        $form = new ProductAdditionalForm('product', $option);
+        $form->setAttribute('enctype', 'multipart/form-data');
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new ProductAdditionalFilter($option));
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Set attribute data array
+                if (!empty($fields['field'])) {
+                    foreach ($fields['field'] as $field) {
+                        $attribute[$field]['field'] = $field;
+                        $attribute[$field]['data'] = $values[$field];
+                    }
+                }
+                // Set just item fields
+                foreach (array_keys($values) as $key) {
+                    if (!in_array($key, $this->productColumns)) {
+                        unset($values[$key]);
+                    }
+                }
+                // Set time
+                $values['time_update'] = time();
+                // Save
+                $row = $this->getModel('product')->find($values['id']);
+                $row->assign($values);
+                $row->save();
+                // attribute
+                if (!empty($attribute)) {
+                    Pi::api('attribute', 'shop')->Set($attribute, $row->id);
+                }
+                // Add log
+                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                Pi::api('log', 'shop')->addLog('product', $row->id, $operation);
+                // Check it save or not
+                if ($row->id) {
+                    $message = __('Product data saved successfully.');
+                    $this->jump(array('controller' => 'attach', 'action' => 'add', 'id' => $row->id), $message);
+                }
+            }   
+        } else {
+            // Get attribute
+            $product = Pi::api('attribute', 'shop')->Form($product);
+            // Set data 
+            $form->setData($product);
+        }
+        // Set view
+        $this->view()->setTemplate('product_update');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('title', __('Manage additional information'));
+
     }
 
     /* public function deleteAction()
