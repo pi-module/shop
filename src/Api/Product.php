@@ -28,7 +28,6 @@ use Zend\Json\Json;
  * Pi::api('product', 'shop')->relatedCount($id);
  * Pi::api('product', 'shop')->AttachList($id);
  * Pi::api('product', 'shop')->FavoriteList();
- * Pi::api('product', 'shop')->viewPrice($price);
  * Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
  * Pi::api('product', 'shop')->canonizeProductLight($product);
  * Pi::api('product', 'shop')->canonizeProductOrder($product);
@@ -260,20 +259,6 @@ class Product extends AbstractApi
         }
     }
 
-    /**
-     * Set product view price
-     */
-    public function viewPrice($price)
-    {
-        if ($price > 0) {
-            $viewPrice = _currency($price);
-        } else {
-            $viewPrice = 0;
-        }
-        return $viewPrice;
-
-    }
-
     public function marketable($product)
     {
         if ($product['price'] > 0 && $product['stock'] > 0) {
@@ -326,8 +311,8 @@ class Product extends AbstractApi
             )));
         }
         // Set price
-        $product['price_view'] = $this->viewPrice($product['price']);
-        $product['price_discount_view'] = $this->viewPrice($product['price_discount']);
+        $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
+        $product['price_discount_view'] = Pi::api('api', 'shop')->viewPrice($product['price_discount']);
         // Set stock
         switch ($product['stock_type']) {
             default:
@@ -411,8 +396,8 @@ class Product extends AbstractApi
             'slug'          => $product['slug'],
         )));
         // Set price
-        $product['price_view'] = $this->viewPrice($product['price']);
-        $product['price_discount_view'] = $this->viewPrice($product['price_discount']);
+        $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
+        $product['price_discount_view'] = Pi::api('api', 'shop')->viewPrice($product['price_discount']);
         // Set marketable
         $product['marketable'] = $this->marketable($product);
         // Set image url
@@ -528,8 +513,8 @@ class Product extends AbstractApi
             'id'            => $id['slug'],
         )));
         // Set price
-        $product['price_view'] = $this->viewPrice($product['price']);
-        $product['price_discount_view'] = $this->viewPrice($product['price_discount']);
+        $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
+        $product['price_discount_view'] = Pi::api('api', 'shop')->viewPrice($product['price_discount']);
         // Set stock
         switch ($product['stock_type']) {
             default:

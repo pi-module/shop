@@ -26,7 +26,7 @@ Pi::service('i18n')->load(array('module/order', 'default'));
                     	<?php echo sprintf(__('Month %s'), _number($key)); ?>
                 		<?php } ?>
                 	</td>
-                	<td><?php echo _currency($this->escape($invoice['price'])); ?></td>
+                	<td><?php echo Pi::api('api', 'shop')->viewPrice($this->escape($invoice['price'])); ?></td>
                 	<td><?php echo _date($this->escape($invoice['duedate'])); ?></td>
             	</tr>
     			<?php } ?>
