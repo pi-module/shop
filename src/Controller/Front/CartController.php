@@ -285,10 +285,10 @@ class CartController extends ActionController
             $item['id'] = $product['id'];
             $item['number'] = $product['number'];
             $item['price'] = $product['price'];
-            $item['price_view'] = Pi::api('product', 'shop')->viewPrice($item['price']);
+            $item['price_view'] = Pi::api('api', 'shop')->viewPrice($item['price']);
             $item['discount'] = 0;
             $item['total'] = ($product['number'] * $product['price']);
-            $item['total_view'] = Pi::api('product', 'shop')->viewPrice($item['total']);
+            $item['total_view'] = Pi::api('api', 'shop')->viewPrice($item['total']);
             $invoice['product'][$product['id']] = $item;
             // Set total
     		$invoice['total']['price'] = $invoice['total']['price'] + ($product['price'] * $product['number']);
@@ -309,10 +309,10 @@ class CartController extends ActionController
         $invoice['total']['delivery_title'] = (isset($cart['invoice']['total']['delivery_title'])) ? $cart['invoice']['total']['delivery_title'] : '';
         $invoice['total']['payment_title'] = (isset($cart['invoice']['total']['payment_title'])) ? $cart['invoice']['total']['payment_title'] : __('Offline');
         $invoice['total']['total_price'] = intval($invoice['total']['price'] - $invoice['total']['discount']) + $invoice['total']['shipping'];
-        $invoice['total']['price_view'] = Pi::api('product', 'shop')->viewPrice($invoice['total']['price']);
-    	$invoice['total']['discount_view'] = Pi::api('product', 'shop')->viewPrice($invoice['total']['discount']);
-        $invoice['total']['shipping_view'] = Pi::api('product', 'shop')->viewPrice($invoice['total']['shipping']);
-    	$invoice['total']['total_price_view'] = Pi::api('product', 'shop')->viewPrice($invoice['total']['total_price']);
+        $invoice['total']['price_view'] = Pi::api('api', 'shop')->viewPrice($invoice['total']['price']);
+    	$invoice['total']['discount_view'] = Pi::api('api', 'shop')->viewPrice($invoice['total']['discount']);
+        $invoice['total']['shipping_view'] = Pi::api('api', 'shop')->viewPrice($invoice['total']['shipping']);
+    	$invoice['total']['total_price_view'] = Pi::api('api', 'shop')->viewPrice($invoice['total']['total_price']);
     	// Set Seaaion
     	$cart['invoice'] = $invoice;
         $_SESSION['shop']['cart'] = $cart;
@@ -339,7 +339,7 @@ class CartController extends ActionController
         }
         // Set total price
         $product['total'] = intval(($product['price'] * $product['number']));
-        $product['total_view'] = Pi::api('product', 'shop')->viewPrice($product['total']);
+        $product['total_view'] = Pi::api('api', 'shop')->viewPrice($product['total']);
         // Set session
         $cart['product'][$product['id']] = $product;
         $_SESSION['shop']['cart'] = $cart;
