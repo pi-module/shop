@@ -165,13 +165,6 @@ class Shop extends Standard
                     }
                     break;    
 
-                case 'user':
-                    if ($parts[1] == 'order') {
-                        $matches['action'] = 'order';
-                        $matches['id'] = intval($parts[2]);
-                    }  
-                    break;
-
                 case 'json':
                     $matches['action'] = $this->decode($parts[1]);
                     if (isset($parts[2]) && $parts[2] == 'id') {
@@ -231,11 +224,6 @@ class Shop extends Standard
         {
             $url['action'] = $mergedParams['action'];
         }
-        
-        // Set slug
-        if (!empty($mergedParams['slug'])) {
-            $url['slug'] = $mergedParams['slug'];
-        }
 
         // Set if controller is checkou
         if ($mergedParams['controller'] == 'checkout') {
@@ -246,16 +234,16 @@ class Shop extends Standard
                     $url['number'] = $mergedParams['number'];
                 }
             }
-            if (isset($mergedParams['id'])) {
-                $url['id'] = $mergedParams['id'];
-            }
+        }
+        
+        // Set slug
+        if (!empty($mergedParams['slug'])) {
+            $url['slug'] = $mergedParams['slug'];
         }
 
-        // Set if controller is user
-        if ($mergedParams['controller'] == 'user') {
-            if ($mergedParams['action'] == 'order') {
-                $url['id'] = $mergedParams['id'];
-            }   
+        // Set id
+        if (!empty($mergedParams['id'])) {
+            $url['id'] = $mergedParams['id'];
         }
 
         // Set page

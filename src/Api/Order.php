@@ -46,7 +46,7 @@ class Order extends AbstractApi
         )));
     }
 
-    public function sendUserMail($order)
+    /* public function sendUserMail($order)
     {
         // Set user mail
         $to = array(
@@ -85,5 +85,5 @@ class Order extends AbstractApi
         $message->setEncoding("UTF-8");
         // Send mail
         Pi::service('mail')->send($message);
-    }
+    } */
 }
