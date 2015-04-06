@@ -5,17 +5,15 @@
     	<h2><?php echo $attributeSingle['title']; ?></h2>
 			<?php foreach($attributeSingle['info'] as $field) { ?>
 			<?php if(!empty($field['data'])) { ?>
-			<div class="field-<?php echo $field['id']; ?> col-md-6">
+			<div class="field-<?php echo $field['id']; ?> col-md-12">
 				<?php if($field['icon']) { ?>
                 <i class="fa <?php echo $field['icon']; ?>"></i>
-				<?php } elseif($field['image']) { ?>
-				<img src="<?php echo $field['imageUrl']; ?>" alt="<?php echo $field['title']; ?>" />
 				<?php } ?>
 				<?php if($field['type'] == 'text' || $field['type'] == 'select') { ?>
 				<span><?php echo $field['title']; ?></span>
 				<span> : <?php echo $field['data']; ?></span>
 				<?php } elseif($field['type'] == 'link') { ?>
-				<span><a title="<?php echo $field['title']; ?>" href="<?php echo $field['data']; ?>"><?php echo $field['title']; ?></a></span>
+				<span><a title="<?php echo $field['title']; ?>" href="<?php echo $field['data']; ?>" target="_blank"><?php echo $field['title']; ?></a></span>
 				<?php } elseif($field['type'] == 'file') { ?>
 				<span><a title="<?php echo $field['title']; ?>" href="<?php echo $field['data']; ?>"><?php echo $field['title']; ?></a></span>
 				<?php } elseif($field['type'] == 'currency') { ?>

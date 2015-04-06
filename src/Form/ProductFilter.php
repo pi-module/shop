@@ -53,7 +53,7 @@ class ProductFilter extends InputFilter
         ));
         // text_summary
         $this->add(array(
-            'name' => 'summary',
+            'name' => 'text_summary',
             'required' => false,
             'filters' => array(
                 array(

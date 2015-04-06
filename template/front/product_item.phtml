@@ -46,6 +46,18 @@
 			</div>
 			<div class="col-md-5">
 				<?php include $this->template('front/gallery'); ?>
+				<?php if ($config['social_sharing']) { ?>
+        		<div class="clearfix">
+            		<div class="socialSharing">
+                		<?php echo $this->socialSharing(
+                    		$config['social_sharing'], 
+                    		$this->escape($productItem['title']), 
+                    		$this->escape($productItem['productUrl']), 
+                    		$this->escape($productItem['largeUrl'])
+                		); ?>
+            		</div>
+        		</div>
+        		<?php } ?>
 			</div>
 			<div class="col-md-12">
 				<div class="productBody">
@@ -61,18 +73,6 @@
 				</div>
 			</div>
 		</div>
-        <?php if ($config['social_sharing']) { ?>
-        <div class="clearfix">
-            <div class="col-md-5 col-sm-10 col-xs-12 socialSharing">
-                <?php echo $this->socialSharing(
-                    $config['social_sharing'], 
-                    $this->escape($productItem['title']), 
-                    $this->escape($productItem['productUrl']), 
-                    $this->escape($productItem['largeUrl'])
-                ); ?>
-            </div>
-        </div>
-        <?php } ?>
 	</div>
 	<?php include $this->template('front/attach'); ?>
 	<?php include $this->template('front/related'); ?>
