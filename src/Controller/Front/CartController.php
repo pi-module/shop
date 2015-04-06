@@ -176,7 +176,8 @@ class CartController extends ActionController
         // Set order array
     	$order = array();
     	$order['module_name'] = $this->params('module');
-        $order['type'] = $this->config('order_type');
+        $order['type_payment'] = $this->config('order_type');
+        $order['type_commodity'] = 'product';
     	// Get product list
     	$products = $cart['invoice']['product'];
         // Set products to order
