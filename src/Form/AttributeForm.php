@@ -153,17 +153,6 @@ class AttributeForm extends BaseForm
                 'description' => __('Use fontawesome.io icons, and set icon name like fa-home'),
             )
         ));
-        // image
-        $this->add(array(
-            'name' => 'image',
-            'options' => array(
-                'label' => __('Image'),
-            ),
-            'attributes' => array(
-                'type' => 'file',
-                'description' => '',
-            )
-        ));
         // Save
         $this->add(array(
             'name' => 'submit',

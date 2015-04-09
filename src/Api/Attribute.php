@@ -178,29 +178,16 @@ class Attribute extends AbstractApi
                     case 'audio':
                         $field['audio'][$row->id] = $row->toArray();
                         $field['audio'][$row->id]['data'] = isset($data[$row->id]['data']) ? $data[$row->id]['data'] : '';
-                        if ($field['audio'][$row->id]['image']) {
-                            $field['audio'][$row->id]['imageUrl'] = Pi::url('upload/' . $this->getModule() . '/attribute/' . $field['audio'][$row->id]['image']);
-                        }
                         break;
 
                     case 'video':
                         $field['video'][$row->id] = $row->toArray();
                         $field['video'][$row->id]['data'] = isset($data[$row->id]['data']) ? $data[$row->id]['data'] : '';
-                        if ($field['video'][$row->id]['image']) {
-                            $field['video'][$row->id]['imageUrl'] = Pi::url('upload/' . $this->getModule() . '/attribute/' . $field['video'][$row->id]['image']);
-                        }
                         break;
                     
                     default:
                         $field['all'][$row->position]['info'][$row->id] = $row->toArray();
                         $field['all'][$row->position]['info'][$row->id]['data'] = isset($data[$row->id]['data']) ? $data[$row->id]['data'] : '';
-                        if ($field['all'][$row->position]['info'][$row->id]['image']) {
-                            $field['all'][$row->position]['info'][$row->id]['imageUrl'] = Pi::url(
-                                sprintf('upload/%s/attribute/%s', 
-                                $this->getModule(), 
-                                $field['all'][$row->position]['info'][$row->id]['image']
-                            ));
-                        }
                         $field['all'][$row->position]['title'] = $position[$row->position];
                         break;
                 }             
@@ -260,22 +247,16 @@ class Attribute extends AbstractApi
 
     public function attributePositionForm()
     {
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
-        // Set position array
-        $position = array(
-            1 => $config['attribute_position_1'],
-            2 => $config['attribute_position_2'],
-            3 => $config['attribute_position_3'],
-            4 => $config['attribute_position_4'],
-            5 => $config['attribute_position_5'],
-            6 => $config['attribute_position_6'],
-            7 => $config['attribute_position_7'],
-            8 => $config['attribute_position_8'],
-            9 => $config['attribute_position_9'],
-            10 => $config['attribute_position_10'],
-        );
-        return $position;
+        // Get info
+        $list = array('' => '');
+        $order = array('order ASC', 'id ASC');
+        $select = Pi::model('field_position', $this->getModule())->select()->order($order);
+        $rowset = Pi::model('field_position', $this->getModule())->selectWith($select);
+        // Make list
+        foreach ($rowset as $row) {
+            $list[$row->id] = $row->title;
+        }
+        return $list;
     }
 
     public function setCategory($field, $categoryArr)

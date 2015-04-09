@@ -29,6 +29,11 @@ return array(
             'permission'    => 'attribute',
         ),
         array(
+            'label'         => _a('Attribute position'),
+            'controller'    => 'position',
+            'permission'    => 'position',
+        ),
+        array(
             'label'         => _a('Attach'),
             'controller'    => 'attach',
             'permission'    => 'attach',

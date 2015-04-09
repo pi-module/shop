@@ -226,6 +226,49 @@ EOD;
             }
         }
 
+        // Update to version 1.0.8
+        if (version_compare($moduleVersion, '1.0.8', '<')) {
+            // Add table of field_position
+            $sql =<<<'EOD'
+CREATE TABLE `{field_position}` (
+    `id` int (10) unsigned NOT NULL auto_increment,
+    `title` varchar(255) NOT NULL default '',
+    `order` int(10) unsigned NOT NULL default '0',
+    `status` tinyint(1) unsigned NOT NULL default '1',
+    PRIMARY KEY (`id`),
+    KEY `title` (`title`),
+    KEY `order` (`order`),
+    KEY `status` (`status`),
+    KEY `order_status` (`order`, `status`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'SQL schema query for author table failed: '
+                                   . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+            // Alter table : DROP image
+            $sql = sprintf("ALTER TABLE %s DROP `image`;", $fieldTable);
+            try {
+                $fieldAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }    
 }

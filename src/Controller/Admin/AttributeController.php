@@ -20,16 +20,12 @@ use Module\Shop\Form\AttributeFilter;
 
 class AttributeController extends ActionController
 {
-    protected $ImageAttributePrefix = 'attribute_';
-
     protected $attributeColumns = array(
-        'id', 'title', 'image', 'icon', 'type', 'order', 'status', 'search', 'value', 'position'
+        'id', 'title', 'icon', 'type', 'order', 'status', 'search', 'value', 'position'
     );
 
     public function indexAction()
     {
-        // Get category list
-        //$categoryList = Pi::registry('categoryList', 'shop')->read();
         // Get position list
         $position = Pi::api('attribute', 'shop')->attributePositionForm();
         // Get info
@@ -38,15 +34,7 @@ class AttributeController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $field[$row->id] = $row->toArray();
-            $field[$row->id]['imageUrl'] = Pi::url(
-                sprintf('upload/%s/icon/%s', $this->config('file_path'), $field[$row->id]['image']));
             $field[$row->id]['position_view'] = $position[$row->position];
-
-            /* $categoryIds = Pi::api('attribute', 'shop')->getCategory($row->id);
-            foreach ($categoryIds as $categoryId) {
-                $categoryTitle[] = $categoryList[$categoryId]['title'];
-            }
-            $field[$row->id]['categoryTitle'] = implode(",", $categoryTitle); */
         }
         // Go to update page if empty
         if (empty($field)) {
@@ -80,26 +68,6 @@ class AttributeController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                // upload image
-                if (!empty($file['image']['name'])) {
-                    // Set upload path
-                    $path = Pi::path(sprintf('upload/%s/icon', $this->config('file_path')));
-                    // Upload
-                    $uploader = new Upload;
-                    $uploader->setDestination($path);
-                    $uploader->setRename($this->ImageAttributePrefix . '%random%');
-                    $uploader->setExtension($this->config('image_extension'));
-                    $uploader->setSize($this->config('image_size'));
-                    if ($uploader->isValid()) {
-                        $uploader->receive();
-                        // Get image name
-                        $values['image'] = $uploader->getUploaded('image');
-                    } else {
-                        $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
-                    }
-                } elseif (!isset($values['image'])) {
-                    $values['image'] = '';  
-                }
                 // Set just product fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->attributeColumns)) {

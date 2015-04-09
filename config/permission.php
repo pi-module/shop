@@ -60,6 +60,12 @@ return array(
                 //'admin',
             ),
         ),
+        'position'      => array(
+            'title'         => _a('Attribute position'),
+            'access'        => array(
+                //'admin',
+            ),
+        ),
         'attach'         => array(
             'title'         => _a('Attach'),
             'access'        => array(

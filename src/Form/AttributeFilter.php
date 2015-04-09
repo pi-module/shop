@@ -74,10 +74,5 @@ class AttributeFilter extends InputFilter
             'name' => 'icon',
             'required' => false,
         ));
-        // image
-        $this->add(array(
-            'name' => 'image',
-            'required' => false,
-        ));
     }
 }

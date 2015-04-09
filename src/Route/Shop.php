@@ -81,9 +81,9 @@ class Shop extends Standard
                     } elseif ($parts[1] == 'add') {
                         $matches['action'] = 'add';
                         $matches['slug'] = $this->decode($parts[2]);
-                        if (isset($parts[3]) && $parts[3] == 'plan') {
-                            $matches['plan'] = intval($parts[4]);
-                        }
+                        //if (isset($parts[3]) && $parts[3] == 'plan') {
+                        //    $matches['plan'] = intval($parts[4]);
+                        //}
                     } elseif ($parts[1] == 'finish') {    
                         $matches['action'] = 'finish';
                         $matches['id'] = intval($parts[2]);
@@ -226,7 +226,7 @@ class Shop extends Standard
         }
 
         // Set if controller is checkou
-        if ($mergedParams['controller'] == 'checkout') {
+        if ($mergedParams['controller'] == 'cart') {
             if ($mergedParams['action'] == 'basket') {    
                 $url['process'] = $mergedParams['process'];
                 $url['product'] = $mergedParams['product'];

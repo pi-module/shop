@@ -118,7 +118,6 @@ CREATE TABLE `{attach}` (
 CREATE TABLE `{field}` (
     `id` int (10) unsigned NOT NULL auto_increment,
     `title` varchar(255) NOT NULL default '',
-    `image` varchar(255) NOT NULL default '',
     `icon` varchar(32) NOT NULL default '',
     `type` enum('text','link','currency','date','number','select','video','audio','file', 'checkbox') NOT NULL default 'text',
     `order` int(10) unsigned NOT NULL default '0',
@@ -143,6 +142,18 @@ CREATE TABLE `{field_category}` (
     KEY `field` (`field`),
     KEY `category` (`category`),
     KEY `field_category` (`field`, `category`)
+);
+
+CREATE TABLE `{field_position}` (
+    `id` int (10) unsigned NOT NULL auto_increment,
+    `title` varchar(255) NOT NULL default '',
+    `order` int(10) unsigned NOT NULL default '0',
+    `status` tinyint(1) unsigned NOT NULL default '1',
+    PRIMARY KEY (`id`),
+    KEY `title` (`title`),
+    KEY `order` (`order`),
+    KEY `status` (`status`),
+    KEY `order_status` (`order`, `status`)
 );
 
 CREATE TABLE `{field_data}` (

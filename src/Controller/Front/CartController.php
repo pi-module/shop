@@ -51,7 +51,7 @@ class CartController extends ActionController
         }
         // Get info from url
         $slug = $this->params('slug');
-        $plan = $this->params('plan');
+        //$plan = $this->params('plan');
         $module = $this->params('module');
         // Set view
         $this->view()->setTemplate(false);
@@ -60,7 +60,7 @@ class CartController extends ActionController
         // Find product
         $product = $this->getModel('product')->find($slug, 'slug');
         $product = Pi::api('product', 'shop')->canonizeProductLight($product);
-        $product['plan'] = $plan;
+        //$product['plan'] = $plan;
         // Check product
         if (!$product['marketable']) {
         	$url = array('', 'module' => $module, 'controller' => 'index');
@@ -271,14 +271,15 @@ class CartController extends ActionController
 
     protected function setInvoice()
     {    
-    	$invoice = array();
+    	// Get cart
+        $cart = $_SESSION['shop']['cart'];
+        // Set invoice
+        $invoice = array();
         $invoice['total']['price'] = 0;
         $invoice['total']['number'] = 0;
         $invoice['total']['discount'] = 0;
         $invoice['total']['shipping'] = 0;
-        $invoice['total']['plan'] = 0;
-        // Get cart
-    	$cart = $_SESSION['shop']['cart'];
+        //$invoice['total']['plan'] = 0;
         // Set invoice product
     	foreach ($cart['product'] as $product) {
     		// Set product item
@@ -299,16 +300,16 @@ class CartController extends ActionController
             $cart['product'][$item['id']]['total'] = $item['total'];
             $cart['product'][$item['id']]['total_view'] = $item['total_view'];
             // Set plan
-            $invoice['total']['plan'] = $product['plan'];
+            //$invoice['total']['plan'] = $product['plan'];
     	}
         // Set price
-        $invoice['total']['location'] = (isset($cart['invoice']['total']['location'])) ? $cart['invoice']['total']['location'] : 0;
-        $invoice['total']['delivery'] = (isset($cart['invoice']['total']['delivery'])) ? $cart['invoice']['total']['delivery'] : 0;
+        //$invoice['total']['location'] = (isset($cart['invoice']['total']['location'])) ? $cart['invoice']['total']['location'] : 0;
+        //$invoice['total']['delivery'] = (isset($cart['invoice']['total']['delivery'])) ? $cart['invoice']['total']['delivery'] : 0;
+        //$invoice['total']['payment'] = (isset($cart['invoice']['total']['payment'])) ? $cart['invoice']['total']['payment'] : 'offline';
+        //$invoice['total']['location_title'] = (isset($cart['invoice']['total']['location_title'])) ? $cart['invoice']['total']['location_title'] : '';
+        //$invoice['total']['delivery_title'] = (isset($cart['invoice']['total']['delivery_title'])) ? $cart['invoice']['total']['delivery_title'] : '';
+        //$invoice['total']['payment_title'] = (isset($cart['invoice']['total']['payment_title'])) ? $cart['invoice']['total']['payment_title'] : __('Offline');
         $invoice['total']['shipping'] = (isset($cart['invoice']['total']['shipping'])) ? intval($cart['invoice']['total']['shipping']) : 0;
-        $invoice['total']['payment'] = (isset($cart['invoice']['total']['payment'])) ? $cart['invoice']['total']['payment'] : 'offline';
-        $invoice['total']['location_title'] = (isset($cart['invoice']['total']['location_title'])) ? $cart['invoice']['total']['location_title'] : '';
-        $invoice['total']['delivery_title'] = (isset($cart['invoice']['total']['delivery_title'])) ? $cart['invoice']['total']['delivery_title'] : '';
-        $invoice['total']['payment_title'] = (isset($cart['invoice']['total']['payment_title'])) ? $cart['invoice']['total']['payment_title'] : __('Offline');
         $invoice['total']['total_price'] = intval($invoice['total']['price'] - $invoice['total']['discount']) + $invoice['total']['shipping'];
         $invoice['total']['price_view'] = Pi::api('api', 'shop')->viewPrice($invoice['total']['price']);
     	$invoice['total']['discount_view'] = Pi::api('api', 'shop')->viewPrice($invoice['total']['discount']);
