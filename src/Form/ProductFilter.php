@@ -85,6 +85,9 @@ class ProductFilter extends InputFilter
         $this->add(array(
             'name' => 'category_main',
             'required' => true,
+            'validators'    => array(
+                new \Module\Shop\Validator\Category,
+            ),
         ));
         // image
         $this->add(array(

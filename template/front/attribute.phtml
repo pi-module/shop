@@ -50,7 +50,7 @@
 			<tr>
 				<?php if($field['type'] == 'text' || $field['type'] == 'select') { ?>
 				<td class="col-md-3"><?php echo $field['title']; ?></td>
-				<td class="col-md-9"> : <?php echo $field['data']; ?></td>
+				<td class="col-md-9"><?php echo $field['data']; ?></td>
 				<?php } elseif($field['type'] == 'link') { ?>
 				<td  class="col-md-12" colspan="2"><a title="<?php echo $field['title']; ?>" href="<?php echo $field['data']; ?>" target="_blank"><?php echo $field['title']; ?></a></td>
 				<?php } elseif($field['type'] == 'file') { ?>
