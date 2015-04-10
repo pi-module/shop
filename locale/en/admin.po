@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2015-03-20 12:50+0330\n"
+"POT-Creation-Date: 2015-04-10 12:31+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.7.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: .\n"
@@ -70,14 +70,14 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:134
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:73
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:22
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:66
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:52
 msgid "Category"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:135
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:39
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:103
 msgid "Category list"
 msgstr ""
 
@@ -126,9 +126,9 @@ msgid "Favourite"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:45
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:409
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:413
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:28
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:86
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:91
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:24
 msgid "Search"
 msgstr ""
@@ -137,308 +137,225 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:53
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:84
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:27
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:58
-msgid "Attribute"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:61
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:70
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:57
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:66
 msgid "Perpage"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:78
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:74
 msgid "Show related products"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:86
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:82
 msgid "Show attribute fields"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:94
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:90
 msgid "Show product attacehed files"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:102
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:98
 msgid "Show other products from this category"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:110
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:106
 msgid "Show product price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:118
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:114
 msgid "Show special"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:126
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:122
 msgid "Number of products on special"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:134
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:130
 msgid "Price title"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:138
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:134
 msgid "Volume"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:142
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:138
 msgid "Show stock count"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:150
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:146
 msgid "Show Tags"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:158
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:154
 msgid "Show breadcrumbs"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:167
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:162
+msgid "Show category list"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:171
 msgid "Image Size"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:175
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:179
 msgid "Image quality"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:176
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:180
 msgid "Between 0 to 100 and support both of JPG and PNG, default is 75"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:183
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:187
 msgid "Image path"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:191
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:195
 msgid "Image Extension"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:199
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:203
 msgid "Large Image height"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:207
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:211
 msgid "Large Image width"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:215
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:219
 msgid "Medium Image height"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:223
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:227
 msgid "Medium Image width"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:231
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:235
 msgid "Thumb Image height"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:239
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:243
 msgid "Thumb Image width"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:247
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:251
 msgid "Use lightbox"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:255
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:259
 msgid "Add Watermark"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:263
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:267
 msgid "Watermark Image"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:270
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:274
 msgid "Watermark Positio"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:276
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:280
 msgid "Top Left"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:277
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:281
 msgid "Top Right"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:278
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:282
 msgid "Bottom Left"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:279
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:283
 msgid "Bottom Right"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:289
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:293
 msgid "Social sharing items"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:303
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:307
 msgid "File Size"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:311
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:315
 msgid "File path"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:319
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:323
 msgid "File Extension"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:328
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:332
 msgid "Use vote system"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:337
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:341
 msgid "Use favourite system"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:346
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:350
 msgid "Show search type"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:354
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:358
 msgid "Show search price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:362
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:366
 msgid "Show search category"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:371
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:375
 msgid "Order is active ?"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:379
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:383
 msgid "Anonymous users can set order"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:387
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:391
 msgid "Order type"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:393
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:397
 msgid "One time"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:394
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:398
 msgid "Recurring"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:395
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:399
 msgid "Installment"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:405
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:409
 msgid "Module search page title"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:413
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:417
 msgid "Module search page description"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:417
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:421
 msgid "Search on website products"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:421
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:425
 msgid "Module search page keywords"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:425
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:429
 msgid "search,product,shop,online,website"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:429
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:433
 msgid "Description for index page"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:437
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:441
 msgid "Force replace space by comma(,)"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:446
-msgid "Set 1 name"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:449
-msgid "Set 1"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:453
-msgid "Set 2 name"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:456
-msgid "Set 2"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:460
-msgid "Set 3 name"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:463
-msgid "Set 3"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:467
-msgid "Set 4 name"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:470
-msgid "Set 4"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:474
-msgid "Set 5 name"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:477
-msgid "Set 5"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:481
-msgid "Set 6 name"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:484
-msgid "Set 6"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:488
-msgid "Set 7 name"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:491
-msgid "Set 7"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:495
-msgid "Set 8 name"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:498
-msgid "Set 8"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:502
-msgid "Set 9 name"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:505
-msgid "Set 9"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:509
-msgid "Set 10 name"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:512
-msgid "Set 10"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/module.php:16
@@ -454,54 +371,66 @@ msgid "Index"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:50
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:105
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:110
 msgid "Tag list"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:62
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:67
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:72
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:46
 msgid "Product"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:84
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:27
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:58
+msgid "Attribute"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:95
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:32
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:64
-msgid "Attach"
+msgid "Attribute position"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:106
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:37
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:70
-msgid "Special"
+msgid "Attach"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:117
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:42
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:76
-msgid "Logs"
+msgid "Special"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:128
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:47
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:82
+msgid "Logs"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:139
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:52
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:88
 msgid "Tools"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:55
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:60
 msgid "Index page"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:74
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:79
 msgid "Tags"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:80
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:85
 msgid "User panel"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:92
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:97
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/permission.php:37
 msgid "Checkout"
 msgstr ""

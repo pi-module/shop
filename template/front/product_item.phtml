@@ -26,6 +26,21 @@
 			<h1 class="panel-title p-name"><?php echo $this->escape($productItem['title']); ?></h1>
 		</div>
 		<div class="panel-body">
+			<div class="col-md-5">
+				<?php include $this->template('front/gallery'); ?>
+				<?php if ($config['social_sharing']) { ?>
+        		<div class="clearfix">
+            		<div class="socialSharing">
+                		<?php echo $this->socialSharing(
+                    		$config['social_sharing'], 
+                    		$this->escape($productItem['title']), 
+                    		$this->escape($productItem['productUrl']), 
+                    		$this->escape($productItem['largeUrl'])
+                		); ?>
+            		</div>
+        		</div>
+        		<?php } ?>
+			</div>
 			<div class="col-md-7">
 				<div class="productInfoBox well clearfix">
 					<div class="col-md-6">
@@ -42,28 +57,13 @@
 					<div class="p-brand"><?php include $this->template('front/category'); ?></div>
 					<div class="p-category"><?php include $this->template('front/tag'); ?></div>
 				</div>
-				<?php include $this->template('front/attribute'); ?>
-			</div>
-			<div class="col-md-5">
-				<?php include $this->template('front/gallery'); ?>
-				<?php if ($config['social_sharing']) { ?>
-        		<div class="clearfix">
-            		<div class="socialSharing">
-                		<?php echo $this->socialSharing(
-                    		$config['social_sharing'], 
-                    		$this->escape($productItem['title']), 
-                    		$this->escape($productItem['productUrl']), 
-                    		$this->escape($productItem['largeUrl'])
-                		); ?>
-            		</div>
-        		</div>
-        		<?php } ?>
+				<div class="productSummary e-description"><?php echo $productItem['text_summary']; ?></div>
 			</div>
 			<div class="col-md-12">
 				<div class="productBody">
 					<p><strong><?php _e('Description'); ?></strong></p>
-					<div class="productSummary e-description"><?php echo $productItem['text_summary']; ?></div>
 					<div class="productDescription p-review"><?php echo $productItem['text_description']; ?></div>
+					<?php include $this->template('front/attribute'); ?>
 					<div class="productMedia">
 						<?php include $this->template('front/attach_audio'); ?>
 					    <?php include $this->template('front/attribute_audio'); ?>
