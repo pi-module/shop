@@ -202,7 +202,7 @@ class ProductForm  extends BaseForm
             )
         ));
         // stock_alert
-        $this->add(array(
+        /* $this->add(array(
             'name' => 'stock_alert',
             'options' => array(
                 'label' => __('Stock Alert'),
@@ -212,7 +212,7 @@ class ProductForm  extends BaseForm
                 'description' => '',
                 
             )
-        ));
+        )); */
         // stock_type
         $this->add(array(
             'name' => 'stock_type',
@@ -240,7 +240,7 @@ class ProductForm  extends BaseForm
             )
         ));
         // price_title
-        $this->add(array(
+        /* $this->add(array(
             'name' => 'price_title',
             'options' => array(
                 'label' => __('Price title'),
@@ -250,7 +250,7 @@ class ProductForm  extends BaseForm
                 'description' => '',
                 
             )
-        ));
+        )); */
         // price_discount
         $this->add(array(
             'name' => 'price_discount',
@@ -367,7 +367,7 @@ class ProductForm  extends BaseForm
         ));
     }
 
-    public function makeArray($string)
+    /* public function makeArray($string)
     {
         $list = array();
         $variable = explode('|', $string);
@@ -375,5 +375,5 @@ class ProductForm  extends BaseForm
             $list[$value] = $value;
         }
         return $list;
-    }
+    } */
 }
