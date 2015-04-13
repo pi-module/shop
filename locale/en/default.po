@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-04-10 12:31+0330\n"
+"POT-Creation-Date: 2015-04-13 13:21+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -156,20 +156,20 @@ msgstr ""
 msgid "Please select file"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:96
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:99
 msgid "Attribute field data saved successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:108
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:111
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:8
 msgid "Add attribute"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:140
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:143
 msgid "Selected field delete"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:142
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:145
 msgid "Please select field"
 msgstr ""
 
@@ -425,7 +425,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:66
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:45
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:18
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:21
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:10
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/position_index.phtml:10
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:38
@@ -483,13 +483,13 @@ msgid "Category"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:91
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:24
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:27
 msgid "Set"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:103
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:21
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:24
 msgid "Type"
 msgstr ""
 
@@ -637,7 +637,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:79
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:117
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:31
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:25
 msgid "Delete"
 msgstr ""
@@ -666,10 +666,6 @@ msgstr ""
 msgid "Stock"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:208
-msgid "Stock Alert"
-msgstr ""
-
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:221
 msgid "Stock type"
 msgstr ""
@@ -681,10 +677,6 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:17
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:22
 msgid "Price"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:246
-msgid "Price title"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:258
@@ -890,7 +882,7 @@ msgid "Get"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:27
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:30
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:26
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/position_index.phtml:25
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:24

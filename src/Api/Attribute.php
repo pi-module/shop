@@ -50,7 +50,7 @@ class Attribute extends AbstractApi
         }
         // find
         $whereField = array('status' => 1, 'id' => $id);
-        $orderField = array('order DESC', 'position ASC', 'id DESC');
+        $orderField = array('order ASC', 'position ASC', 'id DESC');
         $select = Pi::model('field', $this->getModule())->select()->where($whereField)->order($orderField);
         $rowset = Pi::model('field', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {

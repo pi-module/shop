@@ -10,7 +10,10 @@
 	<h3><?php _e('List of attributes'); ?></h3>
 	<div id="attribute-sort">
 		<div class="attribute-field">
-			<?php foreach($fields as $field) { ?>
+			<?php foreach($positions as $key => $position) { ?>
+			<h4><?php echo $this->escape($position); ?></h4>
+			<?php if (isset($fields[$key]) && !empty($fields[$key])) { ?>
+			<?php foreach($fields[$key] as $field) { ?>
 			<div id="mod_<?php echo $this->escape($field['id']); ?>">
 				<div class="tree-item">
 					<div class="tree-item-header" style="cursor:move;">
@@ -32,6 +35,8 @@
 					</div>
 				</div>
 			</div>
+			<?php } ?>
+			<?php } ?>
 			<?php } ?>
 		</div>
 	</div>

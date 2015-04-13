@@ -33,8 +33,8 @@ class AttributeController extends ActionController
         $rowset = $this->getModel('field')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $field[$row->id] = $row->toArray();
-            $field[$row->id]['position_view'] = $position[$row->position];
+            $field[$row->position][$row->id] = $row->toArray();
+            $field[$row->position][$row->id]['position_view'] = $position[$row->position];
         }
         // Go to update page if empty
         if (empty($field)) {
@@ -43,6 +43,7 @@ class AttributeController extends ActionController
         // Set view
         $this->view()->setTemplate('attribute_index');
         $this->view()->assign('fields', $field);
+        $this->view()->assign('positions', $position);
     }
 
     /**
@@ -75,10 +76,12 @@ class AttributeController extends ActionController
                     }
                 }
                 // Set order
-                $columns = array('order');
-                $order = array('order DESC');
-                $select = $this->getModel('field')->select()->columns($columns)->order($order)->limit(1);
-                $values['order'] = $this->getModel('field')->selectWith($select)->current()->order + 1;
+                if (empty($values['id'])) {
+                    $columns = array('order');
+                    $order = array('order DESC');
+                    $select = $this->getModel('field')->select()->columns($columns)->order($order)->limit(1);
+                    $values['order'] = $this->getModel('field')->selectWith($select)->current()->order + 1;
+                }
                 // Save values
                 if (!empty($values['id'])) {
                     $row = $this->getModel('field')->find($values['id']);
