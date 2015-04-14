@@ -562,6 +562,30 @@ class ProductController extends ActionController
         return $return;
     }
 
+    public function priceAction()
+    {
+        // Check post
+        if ($this->request->isPost()) {
+            // Get from post
+            $data = $this->request->getPost();
+            $data = $data->toArray();
+            // Check price
+            if (!empty($data['price'])) {
+                foreach ($data['price'] as $id => $price) {
+                    $this->getModel('product')->update(
+                        array('price' => (int) $price),
+                        array('id' => (int) $id)
+                    );
+                }
+            }
+
+        }    
+        return $this->jump(
+            array('action' => 'index'),
+            __('Product prices updated successfully.')
+        );
+    }
+
     public function removeAction()
     {
         // Get id and status

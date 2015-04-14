@@ -97,7 +97,7 @@ class ProductFilter extends InputFilter
         // stock
         $this->add(array(
             'name' => 'stock',
-            'required' => true,
+            'required' => false,
             'filters' => array(
                 array(
                     'name' => 'StringTrim',

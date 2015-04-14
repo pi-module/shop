@@ -55,6 +55,7 @@ class SpecialForm extends BaseForm
                 'description' => __('Select product for add to Special'),
                 'size' => 1,
                 'multiple' => 0,
+                'required' => true,
             ),
         ));
         // price
@@ -66,7 +67,7 @@ class SpecialForm extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                
+                'required' => true,
             )
         ));
         // time_publish
@@ -79,6 +80,7 @@ class SpecialForm extends BaseForm
                 'type' => 'date',
                 'value' => date('Y-m-d'),
                 'description' => '',
+                'required' => true,
             )
         ));
         // time_expire
@@ -91,6 +93,7 @@ class SpecialForm extends BaseForm
                 'type' => 'date',
                 'value' => date('Y-m-d', strtotime('+1 week')),
                 'description' => '',
+                'required' => true,
             )
         ));
         // status
@@ -106,6 +109,9 @@ class SpecialForm extends BaseForm
                     4 => __('Private'),
                 ),
             ),
+            'attributes' => array(
+                'required' => true,
+            )
         ));
         // Save
         $this->add(array(

@@ -22,7 +22,7 @@ class ProductForm  extends BaseForm
 
     public function __construct($name = null, $option = array())
     {
-        $this->field = $option['field'];
+        //$this->field = $option['field'];
         $this->category = array(0 => '');
         $this->thumbUrl = (isset($option['thumbUrl'])) ? $option['thumbUrl'] : '';
         $this->removeUrl = (isset($option['removeUrl'])) ? $option['removeUrl'] : '';
@@ -63,7 +63,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                
+                'required' => true,
             )
         ));
         // slug
@@ -75,7 +75,6 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                
             )
         ));
         // text_summary
@@ -83,11 +82,10 @@ class ProductForm  extends BaseForm
             'name' => 'text_summary',
             'options' => array(
                 'label' => __('Summary'),
+                'editor' => 'html',
             ),
             'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '5',
-                'cols' => '40',
+                'type' => 'editor',
                 'description' => '',
             )
         ));
@@ -117,6 +115,9 @@ class ProductForm  extends BaseForm
                     5 => __('Delete'),
                 ),
             ),
+            'attributes' => array(
+                'required' => true,
+            )
         ));
         // category
         $this->add(array(
@@ -126,6 +127,9 @@ class ProductForm  extends BaseForm
                 'label' => __('Category'),
                 'category' => '',
             ),
+            'attributes' => array(
+                'required' => true,
+            )
         ));
         // category_main
         $this->add(array(
@@ -139,6 +143,7 @@ class ProductForm  extends BaseForm
                 'size' => 1,
                 'multiple' => 0,
                 'description' => __('Use for breadcrumbs ,mobile app and attribute'),
+                'required' => true,
             ),
         ));
         // Image
@@ -198,7 +203,6 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                
             )
         ));
         // stock_alert
@@ -226,6 +230,9 @@ class ProductForm  extends BaseForm
                     4 => __('Contact'),
                 ),
             ),
+            'attributes' => array(
+                'required' => true,
+            )
         ));
         // price
         $this->add(array(

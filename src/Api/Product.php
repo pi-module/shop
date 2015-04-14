@@ -281,7 +281,7 @@ class Product extends AbstractApi
         // boject to array
         $product = $product->toArray();
         // Set text_summary
-        $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'text', 'html');
+        $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'html', 'html');
         // Set text_description
         $product['text_description'] = Pi::service('markup')->render($product['text_description'], 'html', 'html');
         // Set times
@@ -486,7 +486,7 @@ class Product extends AbstractApi
         // boject to array
         $product = $product->toArray();
         // Set text_summary
-        $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'text', 'html');
+        $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'html', 'html');
         // Set text_description
         $product['text_description'] = Pi::service('markup')->render($product['text_description'], 'html', 'html');
         // Set times

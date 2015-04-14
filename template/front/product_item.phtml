@@ -61,8 +61,10 @@
 			</div>
 			<div class="col-md-12">
 				<div class="productBody">
+					<?php if (!empty($productItem['text_description'])) { ?>
 					<p><strong><?php _e('Description'); ?></strong></p>
 					<div class="productDescription p-review"><?php echo $productItem['text_description']; ?></div>
+					<?php } ?>
 					<?php include $this->template('front/attribute'); ?>
 					<div class="productMedia">
 						<?php include $this->template('front/attach_audio'); ?>

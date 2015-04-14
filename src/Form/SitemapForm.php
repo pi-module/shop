@@ -36,6 +36,9 @@ class SitemapForm extends BaseForm
                     3 => __('Just category table'),
                 ),
             ),
+            'attributes' => array(
+                'required' => true,
+            )
         ));
         // Save
         $this->add(array(

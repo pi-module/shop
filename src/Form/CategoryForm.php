@@ -67,7 +67,7 @@ class CategoryForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                
+                'required' => true,
             )
         ));
         // slug
@@ -107,6 +107,9 @@ class CategoryForm  extends BaseForm
                     4 => __('Private'),
                 ),
             ),
+            'attributes' => array(
+                'required' => true,
+            )
         ));
         // Image
         if ($this->thumbUrl) {

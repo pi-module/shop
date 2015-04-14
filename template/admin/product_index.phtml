@@ -32,11 +32,12 @@
 		</div>
 	</div>
 	<h3><?php _e('List of product'); ?></h3>
+	<form method="post" action="<?php echo $this->url('', array('action' => 'price')); ?>">
 	<table id="product-list" class="table table-striped table-bordered table-condensed">
 		<tr>
-			<th><?php _e('ID'); ?></th>
-			<th><?php _e('Title'); ?></th>
-			<th><?php _e('Action'); ?></th>
+			<th class="col-md-6"><?php _e('Title'); ?></th>
+			<th class="col-md-2"><?php _e('Action'); ?></th>
+			<th class="col-md-4"><?php _e('Price'); ?></th>
 		</tr>
 		<?php foreach($list as $product) { ?>
 		<?php
@@ -47,8 +48,8 @@
 		}	
 		?>
 		<tr>
-			<td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($product['id']); ?></span></td>
 			<td class="product-ajax">
+				<span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($product['id']); ?></span>
 				<?php if($product['recommended'] == 1) { ?>
 				<button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link" data-toggle="button" data-link="<?php echo $this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '0')); ?>" ><i class="fa fa-heart"></i></button>
 				<?php } else { ?>
@@ -72,9 +73,21 @@
 				<a class="btn btn-success btn-xs" title="<?php _e('View'); ?>" href="<?php echo $product['productUrl']; ?>" target="_blank"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
 				<?php } ?>
 			</td>
+			<td>
+				<span class="col-md-6">
+					<?php echo $product['price_view']; ?>
+				</span>
+				<span class="col-md-6">
+					<input type="text" name="price[<?php echo $product['id']; ?>]" value="<?php echo $product['price']; ?>" class="form-control">
+				</span>
+			</td>
 		</tr>
 		<?php } ?>
 	</table>
+        <div class="text-right">
+            <input type="submit" value="<?php _e('Update prices'); ?>" class="btn btn-primary">
+        </div>
+	</form>
 	<div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
 	<p>
 		<span class="label label-success"><?php _e('Published'); ?></span>
