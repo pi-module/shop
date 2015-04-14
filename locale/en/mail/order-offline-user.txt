@@ -1,9 +1,0 @@
-[comment]Order Admin HTML template[/comment]
-
-[format]html[/format]
-
-[subject]%subject%[/subject]
-
-[body]
-<p>New offline order added</p>
-[/body]
