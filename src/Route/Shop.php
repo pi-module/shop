@@ -80,10 +80,6 @@ class Shop extends Standard
                         $matches['action'] = 'complete';
                     } elseif ($parts[1] == 'add') {
                         $matches['action'] = 'add';
-                        $matches['slug'] = $this->decode($parts[2]);
-                        //if (isset($parts[3]) && $parts[3] == 'plan') {
-                        //    $matches['plan'] = intval($parts[4]);
-                        //}
                     } elseif ($parts[1] == 'finish') {    
                         $matches['action'] = 'finish';
                         $matches['id'] = intval($parts[2]);
@@ -99,8 +95,6 @@ class Shop extends Standard
                         } elseif ($parts[2] == 'payment') {
                             $matches['id'] = $this->decode($parts[3]);
                         }
-                    } elseif ($parts[1] == 'update') {    
-                        $matches['action'] = 'update';
                     } elseif ($parts[1] == 'basket') {
                         $matches['action'] = 'basket';
                         if (isset($parts[2]) &&  in_array($parts[2], array('remove', 'number'))) {

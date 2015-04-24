@@ -298,7 +298,7 @@ class Product extends AbstractApi
             'module'        => $this->getModule(),
             'controller'    => 'cart',
             'action'        => 'add',
-            'slug'          => $product['slug'],
+            //'slug'          => $product['slug'],
         )));
         // Set category information
         $product['category'] = Json::decode($product['category']);
@@ -365,6 +365,10 @@ class Product extends AbstractApi
                     $product['image']
                 ));
         }
+        // Setting
+        $setting = json::decode($product['setting'], true);
+        $product['color'] = $setting['color'];
+        $product['warranty'] = $setting['warranty'];
         // return product
         return $product; 
     }
@@ -393,7 +397,7 @@ class Product extends AbstractApi
             'module'        => $this->getModule(),
             'controller'    => 'checkout',
             'action'        => 'add',
-            'slug'          => $product['slug'],
+            //'slug'          => $product['slug'],
         )));
         // Set price
         $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
@@ -503,7 +507,7 @@ class Product extends AbstractApi
             'module'        => $this->getModule(),
             'controller'    => 'checkout',
             'action'        => 'add',
-            'slug'          => $product['slug'],
+            //'slug'          => $product['slug'],
         )));
         // Set cart url
         $product['cartJsonUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(

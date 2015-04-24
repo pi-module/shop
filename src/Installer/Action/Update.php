@@ -269,6 +269,47 @@ EOD;
             }
         }
 
+        // Update to version 1.0.9
+        if (version_compare($moduleVersion, '1.0.9', '<')) {
+            // Add table of basket
+            $sql =<<<'EOD'
+CREATE TABLE `{basket}` (
+    `id` int(10) unsigned NOT NULL auto_increment,
+    `uid` int(10) unsigned NOT NULL default '0',
+    `value` varchar(255) NOT NULL default '',
+    `data` text,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `value` (`value`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'SQL schema query for author table failed: '
+                                   . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+
+            // Alter table field `setting`
+            $sql = sprintf("ALTER TABLE %s ADD `setting` text", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                                   . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }    
 }

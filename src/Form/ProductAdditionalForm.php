@@ -43,6 +43,40 @@ class ProductAdditionalForm extends BaseForm
                 'type' => 'hidden',
             ),
         ));
+        // Set fieldset
+        $this->add(array(
+            'name' => 'extra_order',
+            'type' => 'fieldset',
+            'options' => array(
+                'label' => __('Order information'),
+            ),
+        ));
+        // color
+        $this->add(array(
+            'name' => 'color',
+            'options' => array(
+                'label' => __('Color'),
+            ),
+            'attributes' => array(
+                'type' => 'textarea',
+                'rows' => '5',
+                'cols' => '40',
+                'description' => '',
+            )
+        ));
+        // warranty
+        $this->add(array(
+            'name' => 'warranty',
+            'options' => array(
+                'label' => __('Warranty'),
+            ),
+            'attributes' => array(
+                'type' => 'textarea',
+                'rows' => '5',
+                'cols' => '40',
+                'description' => '',
+            )
+        ));
         // Set attribute field
         if (!empty($this->field)) {
             foreach ($this->position as $key => $value) {

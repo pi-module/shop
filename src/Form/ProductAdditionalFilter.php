@@ -26,6 +26,26 @@ class ProductAdditionalFilter extends InputFilter
             'name' => 'id',
             'required' => false,
         ));
+        // color
+        $this->add(array(
+            'name' => 'color',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // warranty
+        $this->add(array(
+            'name' => 'warranty',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // Set attribute
         if (!empty($option['field'])) {
             foreach ($position as $key => $value) {

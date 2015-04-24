@@ -18,7 +18,7 @@
         <li><strong><?php echo $config['view_price_title']; ?> : </strong><?php echo $this->escape($productItem['price_title']); ?></li>
         <?php } ?>
         <?php if($productItem['stock_type'] == 1 && $productItem['stock'] > 0) { ?>
-        <li>
+        <li class="form-group">
             <strong><?php _e('Price'); ?> : </strong>
             <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
             <span class="text-danger"><del><?php echo $this->escape($productItem['price_discount_view']); ?></del></span>
@@ -26,11 +26,30 @@
             <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
         </li>
         <li>
-            <span class="productPriceCart">
-                <a title="<?php echo $this->escape($productItem['title']); ?>" href="<?php echo $this->escape($productItem['cartUrl']); ?>" class="btn btn-success">
-                    <i class="fa fa-shopping-cart"></i> <?php _e('Add to cart'); ?>
-                </a>
-            </span>
+            <form action="<?php echo $this->escape($productItem['cartUrl']); ?>" method="post">
+                <input name="id" type="hidden" value="<?php echo $this->escape($productItem['id']); ?>">
+                <?php if (isset($productItem['color']) && !empty($productItem['color'])) { ?>
+                <div class="form-group">
+                    <label><?php _e('Color'); ?></label>
+                    <?php foreach ($productItem['color'] as $key => $color) { ?>
+                    <label class="radio-inline">
+                        <input type="radio" name="color" id="colorOptions<?php echo $key; ?>" value="<?php echo $this->escape($color); ?>"<?php if ($key == 0) {echo ' checked';} ?>> <?php echo $this->escape($color); ?>
+                    </label>
+                    <?php } ?>
+                </div>
+                <?php } ?>
+                <?php if (isset($productItem['warranty']) && !empty($productItem['warranty'])) { ?>
+                <div class="form-group">
+                    <label><?php _e('Warranty'); ?></label>
+                    <?php foreach ($productItem['warranty'] as $key => $warranty) { ?>
+                    <label class="radio-inline">
+                        <input type="radio" name="warranty" id="warrantyOptions<?php echo $key; ?>" value="<?php echo $this->escape($warranty); ?>"<?php if ($key == 0) {echo ' checked';} ?>> <?php echo $this->escape($warranty); ?>
+                    </label>
+                    <?php } ?>
+                </div>
+                <?php } ?>
+                <button type="submit" class="btn btn-success"><i class="fa fa-shopping-cart"></i> <?php _e('Add to cart'); ?></button>
+            </form>
         </li>
         <?php } ?>
     </ul>

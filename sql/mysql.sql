@@ -31,6 +31,7 @@ CREATE TABLE `{product}` (
     `price` decimal(16,2) NOT NULL default '0.00',
     `price_discount` decimal(16,2) NOT NULL default '0.00',
     `price_title` varchar(255) NOT NULL default '',
+    `setting` text,
     PRIMARY KEY (`id`),
     UNIQUE KEY `slug` (`slug`),
     KEY `title` (`title`),
@@ -194,4 +195,13 @@ CREATE TABLE `{log}` (
     PRIMARY KEY (`id`),
     KEY `uid` (`uid`),
     KEY `time_create` (`time_create`)
+);
+
+CREATE TABLE `{basket}` (
+    `id` int(10) unsigned NOT NULL auto_increment,
+    `uid` int(10) unsigned NOT NULL default '0',
+    `value` varchar(255) NOT NULL default '',
+    `data` text,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `value` (`value`)
 );

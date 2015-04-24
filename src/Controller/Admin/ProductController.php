@@ -42,7 +42,7 @@ class ProductController extends ActionController
         'seo_keywords', 'seo_description', 'status', 'time_create', 'time_update', 
         'uid', 'hits', 'sales', 'image', 'path', 'comment', 'point', 'count', 
         'favorite', 'attach', 'attribute', 'related', 'recommended', 'category_main',
-        'stock', 'stock_alert', 'stock_type', 'price', 'price_discount', 'price_title'
+        'stock', 'stock_alert', 'stock_type', 'price', 'price_discount', 'price_title', 'setting'
     );
 
     /**
@@ -346,6 +346,12 @@ class ProductController extends ActionController
                         $attribute[$field]['data'] = $values[$field];
                     }
                 }
+                // Set setting
+                $setting = array(
+                    'color'     => explode('|', $values['color']),
+                    'warranty'  => explode('|', $values['warranty']),
+                );
+                $values['setting'] = json::encode($setting);
                 // Set just product fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->productColumns)) {
@@ -372,6 +378,9 @@ class ProductController extends ActionController
                 }
             }   
         } else {
+            $setting = json::decode($product['setting'], true);
+            $product['color'] = implode("|", $setting['color']);
+            $product['warranty'] = implode("|", $setting['warranty']);
             // Get attribute
             $product = Pi::api('attribute', 'shop')->Form($product);
             // Set data 

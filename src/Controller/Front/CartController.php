@@ -28,48 +28,54 @@ class CartController extends ActionController
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
         }
-        // Set Invoice
-        $this->setInvoice();
-    	$cart = $_SESSION['shop']['cart'];
-    	if (empty($cart['product'])) {
+        // Get basket
+        $basket = Pi::api('basket', 'shop')->getBasket();
+        // Check basket
+    	if (empty($basket['products'])) {
             $module = $this->params('module');
         	$url = array('', 'module' => $module, 'controller' => 'index');
             $this->jump($url, __('Your cart are empty.'), 'error');
     	}
+        // Set view
     	$this->view()->setTemplate('checkout_cart');
-    	$this->view()->assign('cart', $cart);
+    	$this->view()->assign('basket', $basket);
     }
 
     public function addAction()
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
+        // Get module
+        $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
         // Check order is active or inactive
-        if (!$this->config('order_active')) {
+        if (!$config['order_active']) {
             $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
             $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
         }
-        // Get info from url
-        $slug = $this->params('slug');
-        //$plan = $this->params('plan');
-        $module = $this->params('module');
-        // Set view
-        $this->view()->setTemplate(false);
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
-        // Find product
-        $product = $this->getModel('product')->find($slug, 'slug');
-        $product = Pi::api('product', 'shop')->canonizeProductLight($product);
-        //$product['plan'] = $plan;
-        // Check product
-        if (!$product['marketable']) {
-        	$url = array('', 'module' => $module, 'controller' => 'index');
-            $this->jump($url, __('The product was not marketable.'), 'error');
+        // Check post
+        if ($this->request->isPost()) {
+            // Get post
+            $data = $this->request->getPost()->toArray();
+            // Find product
+            $product = $this->getModel('product')->find($data['id']);
+            $product = Pi::api('product', 'shop')->canonizeProductLight($product);
+            // Check product
+            if (!$product['marketable']) {
+                $url = array('', 'module' => $module, 'controller' => 'index');
+                $this->jump($url, __('The product was not marketable.'), 'error');
+            } else {
+                // Check color
+                $color = isset($data['color']) ? $data['color'] : '';
+                $warranty = isset($data['warranty']) ? $data['warranty'] : '';
+                // Set basket
+                $basket = Pi::api('basket', 'shop')->setBasket($product['id'], 1, $color, $warranty);
+                // Go to cart
+                $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
+                return $this->redirect()->toRoute('', $url);
+            }
         } else {
-            // Set total price
-            $this->setProduct($product);
-            // Set Invoice
-            $this->setInvoice();
             // Go to cart
             $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
             return $this->redirect()->toRoute('', $url);
@@ -81,7 +87,7 @@ class CartController extends ActionController
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
         // Set empty
-        $this->setEmpty();
+        Pi::api('basket', 'shop')->emptyBasket();
         // Back
         $module = $this->params('module');
         $url = array('', 'module' => $module, 'controller' => 'index');
@@ -92,8 +98,8 @@ class CartController extends ActionController
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
-        // Set cart
-        $cart = $_SESSION['shop']['cart'];
+        // Get basket
+        $basket = Pi::api('basket', 'shop')->getBasket();
         // Get info from url
         $process = $this->params('process');
         $product = $this->params('product');
@@ -108,13 +114,13 @@ class CartController extends ActionController
         // process
         switch ($process) {
         	case 'remove':
-                unset($cart['product'][$product]);
+                Pi::api('basket', 'shop')->removeProduct($product);
         	    $return['message'] = __('Selected product removed from your cart');
                 $return['ajaxStatus'] = 1;
                 $return['actionStatus'] = 1;
         		break;
 
-        	case 'number':
+        	/* case 'number':
         	    $number = $cart['product'][$product]['number'];
         	    if ($number > 0) {
         	    	$getNumber = $this->params('number');
@@ -135,33 +141,9 @@ class CartController extends ActionController
         	    	}
         	    }
         		break;
+            */
         }
-        // Set session
-        $_SESSION['shop']['cart'] = $cart;
-        // Set Invoice
-        $this->setInvoice();
         // return
-        return $return;
-    }
-
-    public function updateAction()
-    {
-        // Check user is login or not
-        Pi::service('authentication')->requireLogin();
-        // Set Invoice
-        $this->setInvoice();
-        // Set cart
-        $invoice = $_SESSION['shop']['cart']['invoice']['total'];
-        // Set data
-        $data = array();
-        $data['price'] = $invoice['price'];
-        $data['discount'] = $invoice['discount'];
-        $data['number'] = $invoice['number'];
-        $data['total'] = $invoice['total_price'];
-        // Set return
-        $return = array();
-        $return['status'] = 1;
-        $return['data'] = $data;
         return $return;
     }
 
@@ -171,17 +153,15 @@ class CartController extends ActionController
         Pi::service('authentication')->requireLogin();
         // Set template
         $this->view()->setTemplate(false);
-        // Set cart
-        $cart = $_SESSION['shop']['cart'];
+        // Get basket
+        $basket = Pi::api('basket', 'shop')->getBasket();
         // Set order array
     	$order = array();
     	$order['module_name'] = $this->params('module');
         $order['type_payment'] = $this->config('order_type');
         $order['type_commodity'] = 'product';
-    	// Get product list
-    	$products = $cart['invoice']['product'];
         // Set products to order
-    	foreach ($products as $product) {
+    	foreach ($basket['products'] as $product) {
     		$singelProduct =  array(
     			'product'         => $product['id'],
     			'product_price'   => $product['price'],
@@ -191,11 +171,15 @@ class CartController extends ActionController
     			'vat_price'       => 0,
     			'number'          => $product['number'],
                 'title'           => '',
+                'extra'           => array(
+                    'color'       => $product['color'],
+                    'warranty'    => $product['warranty'],
+                ),
     		);
     		$order['product'][$product['id']] = $singelProduct;
     	}
         // Unset shop session
-        $this->setEmpty();
+        Pi::api('basket', 'shop')->emptyBasket();
         // Set and go to order
         $url = Pi::api('order', 'order')->setOrderInfo($order);
         Pi::service('url')->redirect($url);
@@ -262,14 +246,14 @@ class CartController extends ActionController
         $this->view()->assign('invoices', $invoices);
     }
 
-    protected function setEmpty()
+    /* protected function setEmpty()
     {
         if (isset($_SESSION['shop']['cart'])) {
             unset($_SESSION['shop']['cart']);
         }
-    }
+    } */
 
-    protected function setInvoice()
+    /* protected function setInvoice()
     {    
     	// Get cart
         $cart = $_SESSION['shop']['cart'];
@@ -320,9 +304,9 @@ class CartController extends ActionController
         $_SESSION['shop']['cart'] = $cart;
         // return invoice
         return $invoice;
-    }
+    } */
 
-    protected function setProduct($product)
+    /* protected function setProduct($product)
     {
         $cart = $_SESSION['shop']['cart'];
         // Set number
@@ -345,5 +329,5 @@ class CartController extends ActionController
         // Set session
         $cart['product'][$product['id']] = $product;
         $_SESSION['shop']['cart'] = $cart;
-    }
+    } */
 }
