@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-04-14 15:57+0330\n"
+"POT-Creation-Date: 2015-04-24 18:54+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -44,7 +44,7 @@ msgid "Date"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:88
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:92
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:103
 msgid "Number"
 msgstr ""
 
@@ -90,14 +90,14 @@ msgid "Tag list"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:320
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:522
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:526
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:227
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:7
 msgid "In stock"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:324
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:526
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:530
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:228
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/box.phtml:30
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:11
@@ -105,13 +105,13 @@ msgid "Out of stock"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:328
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:530
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:534
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:229
 msgid "Coming soon"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:332
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:534
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:538
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:230
 msgid "Contact"
 msgstr ""
@@ -140,7 +140,7 @@ msgid "All changes in file saved successfully."
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:141
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:487
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:496
 msgid "Invalid data, please check and re-submit."
 msgstr ""
 
@@ -187,13 +187,13 @@ msgid "Add a category"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:233
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:610
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:619
 #, php-format
 msgid "Image of %s removed"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:236
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:613
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:622
 msgid "Image not remove"
 msgstr ""
 
@@ -223,7 +223,7 @@ msgid "Not set"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:297
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:370
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:376
 msgid "Product data saved successfully."
 msgstr ""
 
@@ -233,48 +233,48 @@ msgid "Add product"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:328
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:450
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:508
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:617
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:459
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:517
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:626
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:109
 msgid "Please select product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:383
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:392
 msgid "Manage additional information"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:437
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:446
 #, php-format
 msgid "%s set recommended successfully"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:444
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:453
 #, php-format
 msgid "Error in set recommended for %s product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:492
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:501
 msgid "Add Related"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:534
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:543
 msgid "OK Add"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:540
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:549
 msgid "Error Add , It added before"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:547
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:556
 msgid "Error , Product and related is same"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:554
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:563
 msgid "OK Remove"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:585
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:594
 msgid "Product prices updated successfully."
 msgstr ""
 
@@ -316,8 +316,8 @@ msgid "Recent products."
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:29
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:50
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:211
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:55
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:195
 msgid "So sorry, At this moment order is inactive"
 msgstr ""
 
@@ -329,35 +329,27 @@ msgstr ""
 msgid "The product was not marketable."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:88
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:94
 msgid "Your cart are empty"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:112
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:118
 msgid "Selected product removed from your cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:126
-msgid "Update number"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:132
-msgid "You can not set product number to 0"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:221
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:205
 msgid "Order not set."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:226
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:210
 msgid "It not your order."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:231
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:215
 msgid "This order not pay"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:237
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:221
 msgid "This is old order and you pay it before"
 msgstr ""
 
@@ -469,7 +461,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:161
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:206
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:88
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:132
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:372
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:77
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:164
@@ -560,7 +552,7 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:89
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:96
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_item.phtml:65
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_item.phtml:61
 msgid "Description"
 msgstr ""
 
@@ -646,6 +638,22 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:51
+msgid "Order information"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:58
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:96
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:33
+msgid "Color"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:71
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:99
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:43
+msgid "Warranty"
+msgstr ""
+
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:47
 msgid "General options"
 msgstr ""
@@ -678,7 +686,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:65
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:40
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:11
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:89
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:94
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:17
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:22
 msgid "Price"
@@ -1009,7 +1017,7 @@ msgid "List of related products"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:24
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:99
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:110
 msgid "Remove"
 msgstr ""
 
@@ -1090,51 +1098,47 @@ msgstr ""
 msgid "List of prodcuts on cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:90
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:101
 msgid "Discount"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:109
 msgid "Total"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:106
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:117
 msgid "Back to Shoping"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:107
-msgid "Refresh cart"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:108
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:118
 msgid "Empty cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:116
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:126
 msgid "Pre Invoice"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:118
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:128
 msgid "Total Price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:119
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:129
 msgid "Total Discount"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:120
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:130
 msgid "Total Number"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:121
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:131
 msgid "Total Shipping"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:122
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:132
 msgid "Final Price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:126
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:136
 msgid "Next"
 msgstr ""
 
@@ -1179,7 +1183,7 @@ msgid "Month %s"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:36
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:31
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:51
 msgid "Add to cart"
 msgstr ""
 
