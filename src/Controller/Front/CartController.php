@@ -163,8 +163,14 @@ class CartController extends ActionController
         // Set products to order
     	foreach ($basket['products'] as $product) {
             $extra = array(
-                'color'       => $product['color'],
-                'warranty'    => $product['warranty'],
+                'color'       => array(
+                    'title'   => __('Color'),
+                    'value'   => $product['color'],
+                ),
+                'warranty'    => array(
+                    'title'   => __('Warranty'),
+                    'value'   => $product['warranty'],
+                ),
             );
     		$singelProduct =  array(
     			'product'         => $product['id'],
