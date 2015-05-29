@@ -51,30 +51,71 @@ class ProductAdditionalForm extends BaseForm
                 'label' => __('Order information'),
             ),
         ));
-        // color
+        // property_color
         $this->add(array(
-            'name' => 'color',
+            'name' => 'propertyColor',
+            'type' => 'Module\Shop\Form\Element\PropertyColor',
             'options' => array(
-                'label' => __('Color'),
+                'label' => __('Add color'),
+            ),
+        ));
+        // Set color
+        $color = '';
+        if (isset($this->option['color']) && !empty($this->option['color'])) {
+            foreach ($this->option['color'] as $key => $value) {
+                $colorTemplate =<<<'EOT'
+<div class="col-sm-12 js-form-element">
+    <span class="col-sm-8">Color<input class="form-control" type="text" value="%s" name="property_color[%s][color]"/></span>
+    <span class="col-sm-3">Number<input class="form-control" type="text" value="%s" name="property_color[%s][number]"/></span>
+    <a href="#" class="remove_property_color col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
+</div>
+EOT;
+                $colorTemplate = sprintf($colorTemplate, $value['color'], $key, $value['number'], $key);
+                $color = sprintf('%s %s', $colorTemplate, $color);
+            }
+        }
+        // property_color_list
+        $this->add(array(
+            'name' => 'propertyColorList',
+            'type' => 'description',
+            'options' => array(
+                'label' => __('Color list'),
             ),
             'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '5',
-                'cols' => '40',
-                'description' => '',
+                'description' => sprintf('<div class="property-color-list">%s</div>', $color),
             )
         ));
-        // warranty
+        // property_warranty
         $this->add(array(
-            'name' => 'warranty',
+            'name' => 'propertyWarranty',
+            'type' => 'Module\Shop\Form\Element\PropertyWarranty',
             'options' => array(
-                'label' => __('Warranty'),
+                'label' => __('Add warranty'),
+            ),
+        ));
+        // Set warranty
+        $warranty = '';
+        if (isset($this->option['warranty']) && !empty($this->option['warranty'])) {
+            foreach ($this->option['warranty'] as $value) {
+                $warrantyTemplate =<<<'EOT'
+<div class="col-sm-12 js-form-element">
+    <span class="col-sm-11"><input class="form-control" type="text" value="%s" name="property_warranty[]"/></span>
+    <a href="#" class="remove_property_warranty col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
+</div>
+EOT;
+                $warrantyTemplate = sprintf($warrantyTemplate, $value);
+                $warranty = sprintf('%s %s', $warrantyTemplate, $warranty);
+            }
+        }
+        // property_warranty_list
+        $this->add(array(
+            'name' => 'propertyWarrantyList',
+            'type' => 'description',
+            'options' => array(
+                'label' => __('Warranty list'),
             ),
             'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '5',
-                'cols' => '40',
-                'description' => '',
+                'description' => sprintf('<div class="property-warranty-list">%s</div>', $warranty),
             )
         ));
         // Set attribute field

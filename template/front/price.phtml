@@ -32,9 +32,11 @@
                 <div class="form-group">
                     <label><?php _e('Color'); ?></label>
                     <?php foreach ($productItem['color'] as $key => $color) { ?>
+                    <?php if ($color['number'] > 0) { ?>
                     <label class="radio-inline">
-                        <input type="radio" name="color" id="colorOptions<?php echo $key; ?>" value="<?php echo $this->escape($color); ?>"<?php if ($key == 0) {echo ' checked';} ?>> <?php echo $this->escape($color); ?>
+                        <input type="radio" name="color" id="colorOptions<?php echo $key; ?>" value="<?php echo $this->escape($color['color']); ?>"<?php if ($key == 0) {echo ' checked';} ?>> <?php echo $this->escape($color['color']); ?>
                     </label>
+                    <?php } ?>
                     <?php } ?>
                 </div>
                 <?php } ?>

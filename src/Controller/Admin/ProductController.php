@@ -330,11 +330,12 @@ class ProductController extends ActionController
         // Get attribute field
         $fields = Pi::api('attribute', 'shop')->Get($product['category_main']);
         $option['field'] = $fields['attribute'];
-        // Set form
-        $form = new ProductAdditionalForm('product', $option);
-        $form->setAttribute('enctype', 'multipart/form-data');
+        // Check post
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
+            // Set form
+            $form = new ProductAdditionalForm('product', $option);
+            $form->setAttribute('enctype', 'multipart/form-data');
             $form->setInputFilter(new ProductAdditionalFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
@@ -348,8 +349,8 @@ class ProductController extends ActionController
                 }
                 // Set setting
                 $setting = array(
-                    'color'     => explode('|', $values['color']),
-                    'warranty'  => explode('|', $values['warranty']),
+                    'color'     => $data['property_color'],
+                    'warranty'  => $data['property_warranty'],
                 );
                 $values['setting'] = json::encode($setting);
                 // Set just product fields
@@ -379,11 +380,13 @@ class ProductController extends ActionController
             }   
         } else {
             $setting = json::decode($product['setting'], true);
-            $product['color'] = implode("|", $setting['color']);
-            $product['warranty'] = implode("|", $setting['warranty']);
+            $option['color'] = $setting['color'];
+            $option['warranty'] = $setting['warranty'];
             // Get attribute
             $product = Pi::api('attribute', 'shop')->Form($product);
-            // Set data 
+            // Set form
+            $form = new ProductAdditionalForm('product', $option);
+            $form->setAttribute('enctype', 'multipart/form-data');
             $form->setData($product);
         }
         // Set view

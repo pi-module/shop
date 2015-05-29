@@ -15,7 +15,7 @@ namespace Module\Shop\Form\Element;
 use Pi;
 use Zend\Form\Element\Button as ZendButton;
 
-class Remove extends ZendButton
+class PropertyWarranty extends ZendButton
 {
     /**
      * @return array
@@ -23,10 +23,8 @@ class Remove extends ZendButton
     public function getAttributes()
     {
         $this->Attributes = array(
-            'class'        => 'img-remove btn btn-danger btn-sm',
-            'data-toggle'  => 'button',
-            'data-link'    => $this->attributes['link'],
+            'class'        => 'add_property_warranty btn btn-success',
         );
         return $this->Attributes;
     }
-}
+} 
