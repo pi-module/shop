@@ -1,12 +1,12 @@
 <?php
-    $this->css(array(
-        $this->assetModule('css/front.css'),
-        $this->assetModule('script/system-ui.css', 'system'),
-    ));
-    $this->jQuery();
-    $this->backbone();
+$this->css(array(
+    $this->assetModule('css/front.css'),
+    $this->assetModule('script/system-ui.css', 'system'),
+));
+$this->jQuery();
+$this->backbone();
 
-    $script =<<<'EOT'
+$script =<<<'EOT'
 (function($){
     var page = {
         el: $('#shop-cart-page'),
@@ -62,54 +62,54 @@
     page.init();
 })(jQuery)
 EOT;
-    $script =  sprintf(
-        $script, 
-        __('Are you sure to delete this product from your cart?'), 
-        $this->url('', array('action' => 'update'))
-    );
-    $this->footScript()->appendScript($script);
+$script =  sprintf(
+    $script,
+    __('Are you sure to delete this product from your cart?'),
+    $this->url('', array('action' => 'update'))
+);
+$this->footScript()->appendScript($script);
 ?>
 <div id="shop-cart-page" class="clearfix">
-	<div class="clearfix">
+    <div class="clearfix">
         <div class="clearfix cartBox">
             <div id="cart-list" class="col-md-8 cartProduct">
                 <div class="panel panel-default">
                     <div class="panel-heading"><?php _e('List of prodcuts on cart'); ?></div>
                     <table class="table">
                         <thead></thead>
-		                <?php foreach($basket['products'] as $product) { ?>
-                        <tr data-id="<?php echo $product['id']; ?>" id="cart-product-<?php echo $this->escape($product['id']); ?>">
-                            <td class="col-md-4 cartProductTitle">
-                                <h4 class="media-heading">
-                                    <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank"><?php echo $this->escape($product['title']); ?>
-                                    </a>
-                                </h4>
-                                <?php if (!empty($product['image'])) { ?>
-                                <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank">
-                                    <img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" class="media-object" />
-                                </a>
-                                <?php } ?>
-                            </td>
-                            <td class="col-md-8 cartProductInfo">
-                                <p><strong><?php _e('Price'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['price_view']); ?></span></p>
-                                <?php if (!empty($product['color'])) { ?>
-                                <p><strong><?php _e('Color'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['color']); ?></span></p>
-                                <?php } ?>
-                                <?php if (!empty($product['warranty'])) { ?>
-                                <p><strong><?php _e('Warranty'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['warranty']); ?></span></p>
-                                <?php } ?>
-                                <!-- <p><strong><?php _e('Discount'); ?></strong> : <span class="cart-product-discount">0</span></p> -->
-                                <!-- <p>
+                        <?php foreach($basket['products'] as $product) { ?>
+                            <tr data-id="<?php echo $product['id']; ?>" id="cart-product-<?php echo $this->escape($product['id']); ?>">
+                                <td class="col-md-4 cartProductTitle">
+                                    <h4 class="media-heading">
+                                        <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank"><?php echo $this->escape($product['title']); ?>
+                                        </a>
+                                    </h4>
+                                    <?php if (!empty($product['image'])) { ?>
+                                        <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank">
+                                            <img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" class="media-object" />
+                                        </a>
+                                    <?php } ?>
+                                </td>
+                                <td class="col-md-8 cartProductInfo">
+                                    <p><strong><?php _e('Price'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['price_view']); ?></span></p>
+                                    <?php if (!empty($product['color'])) { ?>
+                                        <p><strong><?php _e('Color'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['color']); ?></span></p>
+                                    <?php } ?>
+                                    <?php if (!empty($product['warranty'])) { ?>
+                                        <p><strong><?php _e('Warranty'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['warranty']); ?></span></p>
+                                    <?php } ?>
+                                    <!-- <p><strong><?php _e('Discount'); ?></strong> : <span class="cart-product-discount">0</span></p> -->
+                                    <!-- <p>
                                     <strong><?php _e('Number'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-number"><?php echo $this->escape($product['number']); ?> </span>
                                     <span>
                                         <button id="button-numberplus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-default btn-sm js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => 1))); ?>"><i class="fa fa-plus"></i></button>
                                         <button id="button-numberminus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-default btn-sm js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => -1))); ?>"><i class="fa fa-minus"></i></button>
                                     </span>
                                 </p> -->
-                                <p><strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total"class="label label-success"><?php echo $this->escape($product['total_view']); ?></span></p>
-                                <p><button id="button-remove-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-danger btn-xs js-remove" data-toggle="button" data-remove-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'remove', 'product' => $product['id']))); ?>"><i class="fa fa-ok fa fa-white"></i> <?php _e('Remove'); ?></button></p>
-                            </td>
-                        </tr>
+                                    <p><strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total"class="label label-success"><?php echo $this->escape($product['total_view']); ?></span></p>
+                                    <p><button id="button-remove-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-danger btn-xs js-remove" data-toggle="button" data-remove-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'remove', 'product' => $product['id']))); ?>"><i class="fa fa-ok fa fa-white"></i> <?php _e('Remove'); ?></button></p>
+                                </td>
+                            </tr>
                         <?php } ?>
                     </table>
                     <div class="panel-footer clearfix">
@@ -119,7 +119,7 @@ EOT;
                         </div>
                     </div>
                 </div>
-			</div>
+            </div>
             <div class="col-md-4 ">
                 <div class="clearfix">
                     <div class="panel panel-default">
@@ -138,5 +138,5 @@ EOT;
                 </div>
             </div>
         </div>
-	</div>
+    </div>
 </div>

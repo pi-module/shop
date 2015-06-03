@@ -1,18 +1,18 @@
 <div class="shop-block">
-	<?php if ($block['type'] == 'simple') { ?>
-	<div class="shop-block-category clearfix">
-		<ul class="nav nav-pills nav-stacked">
-			<?php foreach($block['resources'] as $category) { ?>
-			    <li><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a></li>
-			<?php } ?>
-        </ul>
-	</div>
-	<?php } elseif($block['type'] == 'advanced') { ?>
-	<?php $this->css($this->assetModule('css/tree.css', 'shop')); ?>
-	<div class="shop-block-category-advanced">
-    	<?php echo $block['treeHtml']; ?>
-	</div>
-    <?php 
+    <?php if ($block['type'] == 'simple') { ?>
+        <div class="shop-block-category clearfix">
+            <ul class="nav nav-pills nav-stacked">
+                <?php foreach($block['resources'] as $category) { ?>
+                    <li><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a></li>
+                <?php } ?>
+            </ul>
+        </div>
+    <?php } elseif($block['type'] == 'advanced') { ?>
+        <?php $this->css($this->assetModule('css/tree.css', 'shop')); ?>
+        <div class="shop-block-category-advanced">
+            <?php echo $block['treeHtml']; ?>
+        </div>
+        <?php
         $script =<<<'EOT'
         var MenuTree = {
             collapse: function(element) {
@@ -36,6 +36,6 @@
         MenuTree.walk();
 EOT;
         $this->footScript()->appendScript($script);
-    ?>
-	<?php } ?>
+        ?>
+    <?php } ?>
 </div>

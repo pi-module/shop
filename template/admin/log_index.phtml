@@ -1,28 +1,28 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
-	<h3><?php _e('List of user logs'); ?></h3>
-	<table class="table table-striped table-bordered table-condensed">
-		<tr>
-			<th><?php _e('ID'); ?></th>
-			<th><?php _e('User'); ?></th>
-			<th><?php _e('Ip'); ?></th>
-			<th><?php _e('Time'); ?></th>
-			<th><?php _e('Section'); ?></th>
-			<th><?php _e('Item'); ?></th>
-			<th><?php _e('Operation'); ?></th>
+    <h3><?php _e('List of user logs'); ?></h3>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th><?php _e('ID'); ?></th>
+            <th><?php _e('User'); ?></th>
+            <th><?php _e('Ip'); ?></th>
+            <th><?php _e('Time'); ?></th>
+            <th><?php _e('Section'); ?></th>
+            <th><?php _e('Item'); ?></th>
+            <th><?php _e('Operation'); ?></th>
 
-		</tr>
-		<?php foreach($list as $log) { ?>
-		<tr>
-			<td><?php echo $this->escape($log['id']); ?></td>
-			<td><?php echo $this->escape($log['uid']); ?></td>
-			<td><?php echo $this->escape($log['ip']); ?></td>
-			<td><?php echo $this->escape($log['time_create']); ?></td>
-			<td><?php echo $this->escape($log['section']); ?></td>
-			<td><?php echo $this->escape($log['item']); ?></td>
-			<td><?php echo $this->escape($log['operation']); ?></td>
-		</tr>
-		<?php } ?>
-	</table>
-	<div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
+        </tr>
+        <?php foreach($list as $log) { ?>
+            <tr>
+                <td><?php echo $this->escape($log['id']); ?></td>
+                <td><?php echo $this->escape($log['uid']); ?></td>
+                <td><?php echo $this->escape($log['ip']); ?></td>
+                <td><?php echo $this->escape($log['time_create']); ?></td>
+                <td><?php echo $this->escape($log['section']); ?></td>
+                <td><?php echo $this->escape($log['item']); ?></td>
+                <td><?php echo $this->escape($log['operation']); ?></td>
+            </tr>
+        <?php } ?>
+    </table>
+    <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
 </div>

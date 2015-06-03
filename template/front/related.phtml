@@ -1,14 +1,14 @@
 <?php if (isset($related) && !empty($related)) { ?>
-<div class="productRelated productList clearfix">
-	<div class="row">
-		<div class="page-header">
-			<h4><?php _e('Related Products'); ?></h4>
-	    </div>
-        <ul class="thumbnails">
-		<?php foreach($related as $product) { ?>
-		<?php include $this->template('front/box'); ?>
-		<?php } ?>
-		</ul>
-   </div>
-</div>
+    <div class="productRelated productList clearfix">
+        <div class="row">
+            <div class="page-header">
+                <h4><?php _e('Related Products'); ?></h4>
+            </div>
+            <ul class="thumbnails">
+                <?php foreach($related as $product) { ?>
+                    <?php include $this->template('front/box'); ?>
+                <?php } ?>
+            </ul>
+        </div>
+    </div>
 <?php } ?>

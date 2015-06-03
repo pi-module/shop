@@ -4,7 +4,7 @@
 <div class="<?php echo $shopBoxSize; ?> productBox h-product">
     <div class="thumbnail">
         <?php if($product['image']) { ?>
-        <a class="u-photo" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
+            <a class="u-photo" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
         <?php } ?>
         <div class="caption">
             <h3 class="p-name">
@@ -13,24 +13,24 @@
                 </a>
             </h3>
             <?php if(isset($product['price']) && $config['view_price'] && $config['order_active']) { ?>
-            <div class="clearfix">
-                <?php if($product['stock_type'] == 1 && $product['stock'] > 0) { ?>
-                <div class="pull-left productPrice p-price">
-                    <strong><?php echo $this->escape($product['price_view']); ?></strong>
+                <div class="clearfix">
+                    <?php if($product['stock_type'] == 1 && $product['stock'] > 0) { ?>
+                        <div class="pull-left productPrice p-price">
+                            <strong><?php echo $this->escape($product['price_view']); ?></strong>
+                        </div>
+                        <div class="pull-right">
+                            <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                        </div>
+                    <?php } elseif ($product['stock_type'] != 1) { ?>
+                        <div class="label label-danger">
+                            <strong><?php echo $this->escape($product['stock_type_view']); ?></strong>
+                        </div>
+                    <?php } else { ?>
+                        <div class="label label-danger">
+                            <strong><?php _e('Out of stock'); ?></strong>
+                        </div>
+                    <?php } ?>
                 </div>
-                <div class="pull-right">
-                    <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
-                </div>
-                <?php } elseif ($product['stock_type'] != 1) { ?>
-                <div class="label label-danger">
-                    <strong><?php echo $this->escape($product['stock_type_view']); ?></strong>
-                </div>
-                <?php } else { ?>
-                <div class="label label-danger">
-                    <strong><?php _e('Out of stock'); ?></strong>
-                </div>
-                <?php } ?>
-            </div>
             <?php } ?>
         </div>
     </div>
