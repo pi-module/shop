@@ -34,14 +34,20 @@ class AttributeFilter extends InputFilter
                 ),
             ),
         ));
-        // value
+        // name
         $this->add(array(
-            'name' => 'value',
-            'required' => false,
-            'filters' => array(
+            'name'          => 'name',
+            'required'      => true,
+            'filters'       => array(
                 array(
-                    'name' => 'StringTrim',
+                    'name'  => 'StringTrim',
                 ),
+            ),
+            'validators'    => array(
+                new \Module\Guide\Validator\NameDuplicate(array(
+                    'module'            => Pi::service('module')->current(),
+                    'table'             => 'field',
+                )),
             ),
         ));
         // category
@@ -56,23 +62,38 @@ class AttributeFilter extends InputFilter
         ));
         // position
         $this->add(array(
-            'name' => 'position',
-            'required' => true,
+            'name'          => 'position',
+            'required'      => true,
         ));
         // type
         $this->add(array(
-            'name' => 'type',
-            'required' => true,
+            'name'          => 'type',
+            'required'      => true,
         ));
-        // search
+        // data
         $this->add(array(
-            'name' => 'search',
-            'required' => false,
+            'name'          => 'data',
+            'required'      => false,
+        ));
+        // default
+        $this->add(array(
+            'name'          => 'default',
+            'required'      => false,
+        ));
+        // information
+        $this->add(array(
+            'name'          => 'information',
+            'required'      => false,
         ));
         // icon
         $this->add(array(
-            'name' => 'icon',
-            'required' => false,
+            'name'          => 'icon',
+            'required'      => false,
+        ));
+        // search
+        $this->add(array(
+            'name'          => 'search',
+            'required'      => false,
         ));
     }
 }

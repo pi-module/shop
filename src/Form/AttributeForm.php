@@ -53,6 +53,18 @@ class AttributeForm extends BaseForm
                 'required'  => true,
             )
         ));
+        // name
+        $this->add(array(
+            'name' => 'name',
+            'options' => array(
+                'label' => __('Name'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('Set name for call anywhere'),
+                'required'  => true,
+            )
+        ));
         // category
         $this->add(array(
             'name' => 'category',
@@ -118,11 +130,11 @@ class AttributeForm extends BaseForm
                 'required'  => true,
             )
         ));
-        // value
+        // data
         $this->add(array(
-            'name' => 'value',
+            'name' => 'data',
             'options' => array(
-                'label' => __('Value'),
+                'label' => __('General data'),
             ),
             'attributes' => array(
                 'type' => 'textarea',
@@ -131,15 +143,26 @@ class AttributeForm extends BaseForm
                 'description' => '',
             )
         ));
-        // search
+        // default
         $this->add(array(
-            'name' => 'search',
-            'type' => 'checkbox',
+            'name' => 'default',
             'options' => array(
-                'label' => __('Search'),
+                'label' => __('Default data'),
             ),
             'attributes' => array(
+                'type' => 'text',
                 'description' => '',
+            )
+        ));
+        // information
+        $this->add(array(
+            'name' => 'information',
+            'options' => array(
+                'label' => __('Extra information'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('Put URL for click by user'),
             )
         ));
         // icon
@@ -151,6 +174,17 @@ class AttributeForm extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => __('Use fontawesome.io icons, and set icon name like fa-home'),
+            )
+        ));
+        // search
+        $this->add(array(
+            'name' => 'search',
+            'type' => 'checkbox',
+            'options' => array(
+                'label' => __('Search'),
+            ),
+            'attributes' => array(
+                'description' => '',
             )
         ));
         // Save

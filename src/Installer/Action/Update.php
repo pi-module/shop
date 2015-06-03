@@ -16,6 +16,7 @@ use Pi;
 use Pi\Application\Installer\Action\Update as BasicUpdate;
 use Pi\Application\Installer\SqlSchema;
 use Zend\EventManager\Event;
+use Zend\Json\Json;
 
 class Update extends BasicUpdate
 {
@@ -305,6 +306,36 @@ EOD;
                     'status'    => false,
                     'message'   => 'Table alter query failed: '
                                    . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
+        // Update to version 1.1.0
+        if (version_compare($moduleVersion, '1.1.0', '<')) {
+            // Update value
+            $select = $fieldModel->select();
+            $rowset = $fieldModel->selectWith($select);
+            foreach ($rowset as $row) {
+                // Set value
+                $value = array(
+                    'data'    => $row->value,
+                    'default' => '',
+                );
+                $value = Json::encode($value);
+                // Save value
+                $row->value = $value;
+                $row->save();
+            }
+            // Alter table : ADD name
+            $sql = sprintf("ALTER TABLE %s ADD `name` varchar(64) default NULL , ADD UNIQUE `name` (`name`)", $fieldTable);
+            try {
+                $fieldAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }

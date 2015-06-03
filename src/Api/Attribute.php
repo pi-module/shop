@@ -248,7 +248,10 @@ class Attribute extends AbstractApi
     public function attributePositionForm()
     {
         // Get info
-        $list = array('' => '');
+        $list = array(
+            '' => '',
+            0  => __('Hidden'),
+        );
         $order = array('order ASC', 'id ASC');
         $select = Pi::model('field_position', $this->getModule())->select()->order($order);
         $rowset = Pi::model('field_position', $this->getModule())->selectWith($select);

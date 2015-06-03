@@ -14,9 +14,10 @@ namespace Module\Shop\Controller\Admin;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Pi\File\Transfer\Upload;
+use Pi\Filter;
 use Module\Shop\Form\AttributeForm;
 use Module\Shop\Form\AttributeFilter;
+use Zend\Json\Json;
 
 class AttributeController extends ActionController
 {
@@ -58,17 +59,32 @@ class AttributeController extends ActionController
         if ($id) {
             $attribute = $this->getModel('field')->find($id)->toArray();
             $attribute['category'] = Pi::api('attribute', 'shop')->getCategory($attribute['id']);
+            // Set value
+            $value = Json::decode($attribute['value'], true);
+            $attribute['data'] = $value['data'];
+            $attribute['default'] = $value['default'];
+            $attribute['information'] = $value['information'];
         }
         // Set form
         $form = new AttributeForm('attribute', $options);
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $file = $this->request->getFiles();
+            // Set name
+            $filter = new Filter\Slug;
+            $data['name'] = $filter($data['name']);
+            // Form filter
             $form->setInputFilter(new AttributeFilter);
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+                // Set value
+                $value = array(
+                    'data'         => $data['data'],
+                    'default'      => $data['default'],
+                    'information'  => $data['information'],
+                );
+                $values['value'] = Json::encode($value);
                 // Set just product fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->attributeColumns)) {
