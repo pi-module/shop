@@ -365,10 +365,10 @@ class Product extends AbstractApi
                     $product['image']
                 ));
         }
-        // Setting
+        /* // Setting
         $setting = json::decode($product['setting'], true);
         $product['color'] = $setting['color'];
-        $product['warranty'] = $setting['warranty'];
+        $product['warranty'] = $setting['warranty']; */
         // return product
         return $product; 
     }

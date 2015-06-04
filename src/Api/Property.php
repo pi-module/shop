@@ -17,14 +17,14 @@ use Pi;
 use Pi\Application\Api\AbstractApi;
 
 /*
- * Pi::api('property', 'shop')->Get();
- * Pi::api('property', 'shop')->Set($properties, $product);
- * Pi::api('property', 'shop')->Form($values);
+ * Pi::api('property', 'shop')->getList();
+ * Pi::api('property', 'shop')->setValue($properties, $product);
+ * Pi::api('property', 'shop')->getValue($product);
  */
 
 class Property extends AbstractApi
 {
-    public function Get()
+    public function getList()
     {
         // find
         $list = array();
@@ -38,14 +38,10 @@ class Property extends AbstractApi
         return $list;
     }
 
-    public function Set($properties, $product)
+    public function setValue($properties, $product)
     {
         //Remove
         Pi::model('property_value', $this->getModule())->delete(array('product' => $product));
-
-        echo '<pre>';
-        print_r($properties);
-        echo '</pre>';
         // Add
         foreach ($properties as $propertyId => $propertyValues) {
             foreach ($propertyValues as $propertyValue) {
@@ -66,7 +62,7 @@ class Property extends AbstractApi
         }
     }
 
-    public function Form($product)
+    public function getValue($product)
     {
         $values = array();
         $where = array('product' => $product);

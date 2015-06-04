@@ -28,27 +28,29 @@
                 <li>
                     <form action="<?php echo $this->escape($productItem['cartUrl']); ?>" method="post">
                         <input name="id" type="hidden" value="<?php echo $this->escape($productItem['id']); ?>">
-                        <?php if (isset($productItem['color']) && !empty($productItem['color'])) { ?>
-                            <div class="form-group">
-                                <label><?php _e('Color'); ?></label>
-                                <?php foreach ($productItem['color'] as $key => $color) { ?>
-                                    <?php if ($color['number'] > 0) { ?>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="color" id="colorOptions<?php echo $key; ?>" value="<?php echo $this->escape($color['color']); ?>"<?php if ($key == 0) {echo ' checked';} ?>> <?php echo $this->escape($color['color']); ?>
-                                        </label>
+                        <?php foreach ($property['list'] as $propertyList) { ?>
+                            <?php if (!empty($property['value'][$propertyList['id']])) { ?>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-3 control-label"><?php echo $this->escape($propertyList['title']); ?></label>
+                                    <?php if ($propertyList['type'] == 'checkbox') { ?>
+                                        <div class="col-sm-9">
+                                            <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="<?php echo sprintf('property-%s', $propertyList['id']); ?>" id="<?php echo sprintf('property-options-%s', $key); ?>" value="<?php echo $this->escape($propertyValue['name']); ?>"<?php if ($key == 0) {echo ' checked';} ?>> <?php echo $this->escape($propertyValue['name']); ?>
+                                                </label>
+                                            <?php } ?>
+                                        </div>
+                                    <?php } elseif ($propertyList['type'] == 'selectbox') { ?>
+                                        <div class="col-sm-8">
+                                            <select name="<?php echo sprintf('property-%s', $propertyList['id']); ?>" class="form-control">
+                                                <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
+                                                    <option value="<?php echo $this->escape($propertyValue['name']); ?>"><?php echo $this->escape($propertyValue['name']); ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
                                     <?php } ?>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
-                        <?php if (isset($productItem['warranty']) && !empty($productItem['warranty'])) { ?>
-                            <div class="form-group">
-                                <label><?php _e('Warranty'); ?></label>
-                                <?php foreach ($productItem['warranty'] as $key => $warranty) { ?>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="warranty" id="warrantyOptions<?php echo $key; ?>" value="<?php echo $this->escape($warranty); ?>"<?php if ($key == 0) {echo ' checked';} ?>> <?php echo $this->escape($warranty); ?>
-                                    </label>
-                                <?php } ?>
-                            </div>
+                                </div>
+                            <?php } ?>
                         <?php } ?>
                         <button type="submit" class="btn btn-success"><i class="fa fa-shopping-cart"></i> <?php _e('Add to cart'); ?></button>
                     </form>

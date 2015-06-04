@@ -72,7 +72,7 @@ class ProductController extends IndexController
             $vote['type'] = 'plus';
             $this->view()->assign('vote', $vote);
         }
-        // favourite
+        // Set favourite
         if ($config['favourite_bar'] && Pi::service('module')->isActive('favourite')) {
             $favourite['is'] = Pi::api('favourite', 'favourite')->loadFavourite($module, 'product', $product['id']);
             $favourite['item'] = $product['id'];
@@ -80,6 +80,14 @@ class ProductController extends IndexController
             $favourite['module'] = $module;
             $this->view()->assign('favourite', $favourite);
         }
+        // Set property
+        $property = array();
+        $property['list'] = Pi::api('property', 'shop')->getList();
+        $property['value'] = Pi::api('property', 'shop')->getValue($product['id']);
+        $this->view()->assign('property', $property);
+        echo '<pre>';
+        print_r($property);
+        echo '</pre>';
         // Set view
         $this->view()->headTitle($product['seo_title']);
         $this->view()->headDescription($product['seo_description'], 'set');

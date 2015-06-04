@@ -331,7 +331,7 @@ class ProductController extends ActionController
         $fields = Pi::api('attribute', 'shop')->Get($product['category_main']);
         $option['field'] = $fields['attribute'];
         // Get property
-        $property = Pi::api('property', 'shop')->Get();
+        $property = Pi::api('property', 'shop')->getList();
         $option['property'] = $property;
         $option['propertyValue'] = '';
         // Check post
@@ -369,7 +369,7 @@ class ProductController extends ActionController
                 }
                 // Set property
                 if (isset($data['property']) && !empty($data['property'])) {
-                    Pi::api('property', 'shop')->Set($data['property'], $row->id);
+                    Pi::api('property', 'shop')->setValue($data['property'], $row->id);
                 }
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
@@ -384,7 +384,7 @@ class ProductController extends ActionController
             // Get attribute
             $product = Pi::api('attribute', 'shop')->Form($product);
             // Get property Value
-            $option['propertyValue'] = Pi::api('property', 'shop')->Form($product['id']);
+            $option['propertyValue'] = Pi::api('property', 'shop')->getValue($product['id']);
             // Set form
             $form = new ProductAdditionalForm('product', $option);
             $form->setAttribute('enctype', 'multipart/form-data');
