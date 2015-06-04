@@ -190,13 +190,13 @@ CREATE TABLE `{property_value}` (
   `id`       INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `property` INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `product`  INT(10) UNSIGNED NOT NULL DEFAULT '0',
-  `value`    VARCHAR(255)     NOT NULL DEFAULT '',
+  `name`     VARCHAR(255)     NOT NULL DEFAULT '',
   `stock`    INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `price`    DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`),
   KEY `property` (`property`),
   KEY `product` (`product`),
-  KEY `value` (`value`),
+  KEY `name` (`name`),
   KEY `property_product` (`property`, `product`)
 );
 

@@ -22,6 +22,8 @@ class ProductAdditionalForm extends BaseForm
         $this->option = $option;
         $this->field = $option['field'];
         $this->position = Pi::api('attribute', 'shop')->attributePositionForm();
+        $this->property = $option['property'];
+        $this->propertyValue = $option['propertyValue'];
         $this->module = Pi::service('module')->current();
         parent::__construct($name);
     }
@@ -51,73 +53,122 @@ class ProductAdditionalForm extends BaseForm
                 'label' => __('Order information'),
             ),
         ));
-        // property_color
-        $this->add(array(
-            'name' => 'propertyColor',
-            'type' => 'Module\Shop\Form\Element\PropertyColor',
-            'options' => array(
-                'label' => __('Add color'),
-            ),
-        ));
-        // Set color
-        $color = '';
-        if (isset($this->option['color']) && !empty($this->option['color'])) {
-            foreach ($this->option['color'] as $key => $value) {
-                $colorTemplate =<<<'EOT'
+        // Set property
+        foreach ($this->property as $property) {
+            // add property
+            $this->add(array(
+                'name' => sprintf('property-%s', $property['id']),
+                'type' => 'Module\Shop\Form\Element\Property',
+                'options' => array(
+                    'label' => sprintf(__('Add %s'), $property['title']),
+                ),
+                'attributes' => array(
+                    'id' => $property['id'],
+                ),
+            ));
+            // Set property information
+            $html = '';
+            if (isset($this->propertyValue) && !empty($this->propertyValue)) {
+                $i = 30;
+                foreach ($this->propertyValue[$property['id']]  as $propertyValue) {
+                    if ($property['influence_stock'] && $property['influence_price']) {
+                        $htmlTemplate =<<<'EOT'
 <div class="col-sm-12 js-form-element">
-    <span class="col-sm-8">Color<input class="form-control" type="text" value="%s" name="property_color[%s][color]"/></span>
-    <span class="col-sm-3">Number<input class="form-control" type="text" value="%s" name="property_color[%s][number]"/></span>
-    <a href="#" class="remove_property_color col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
+    <span class="col-sm-4">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
+    <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][stock]"/></span>
+    <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][price]"/></span>
+    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
 </div>
 EOT;
-                $colorTemplate = sprintf($colorTemplate, $value['color'], $key, $value['number'], $key);
-                $color = sprintf('%s %s', $colorTemplate, $color);
-            }
-        }
-        // property_color_list
-        $this->add(array(
-            'name' => 'propertyColorList',
-            'type' => 'description',
-            'options' => array(
-                'label' => __('Color list'),
-            ),
-            'attributes' => array(
-                'description' => sprintf('<div class="property-color-list">%s</div>', $color),
-            )
-        ));
-        // property_warranty
-        $this->add(array(
-            'name' => 'propertyWarranty',
-            'type' => 'Module\Shop\Form\Element\PropertyWarranty',
-            'options' => array(
-                'label' => __('Add warranty'),
-            ),
-        ));
-        // Set warranty
-        $warranty = '';
-        if (isset($this->option['warranty']) && !empty($this->option['warranty'])) {
-            foreach ($this->option['warranty'] as $value) {
-                $warrantyTemplate =<<<'EOT'
+                        $htmlTemplate = sprintf(
+                            $htmlTemplate,
+                            __('Name'),
+                            $propertyValue['name'],
+                            $property['id'],
+                            $i,
+                            __('Stock'),
+                            $propertyValue['stock'],
+                            $property['id'],
+                            $i,
+                            __('Price'),
+                            $propertyValue['price'],
+                            $property['id'],
+                            $i,
+                            $property['id']
+                        );
+                    } elseif ($property['influence_stock']) {
+                        $htmlTemplate =<<<'EOT'
 <div class="col-sm-12 js-form-element">
-    <span class="col-sm-11"><input class="form-control" type="text" value="%s" name="property_warranty[]"/></span>
-    <a href="#" class="remove_property_warranty col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
+    <span class="col-sm-8">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
+    <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][stock]"/></span>
+    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
 </div>
 EOT;
-                $warrantyTemplate = sprintf($warrantyTemplate, $value);
-                $warranty = sprintf('%s %s', $warrantyTemplate, $warranty);
+                        $htmlTemplate = sprintf(
+                            $htmlTemplate,
+                            __('Name'),
+                            $propertyValue['name'],
+                            $property['id'],
+                            $i,
+                            __('Stock'),
+                            $propertyValue['stock'],
+                            $property['id'],
+                            $i,
+                            $property['id']
+                        );
+                    } elseif ($property['influence_price']) {
+                        $htmlTemplate =<<<'EOT'
+<div class="col-sm-12 js-form-element">
+    <span class="col-sm-8">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
+    <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][price]"/></span>
+    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
+</div>
+EOT;
+                        $htmlTemplate = sprintf(
+                            $htmlTemplate,
+                            __('Name'),
+                            $propertyValue['name'],
+                            $property['id'],
+                            $i,
+                            __('Price'),
+                            $propertyValue['price'],
+                            $property['id'],
+                            $i,
+                            $property['id']
+                        );
+                    } else {
+                        $htmlTemplate =<<<'EOT'
+<div class="col-sm-12 js-form-element">
+    <span class="col-sm-11">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
+    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
+</div>
+EOT;
+                        $htmlTemplate = sprintf(
+                            $htmlTemplate,
+                            __('Name'),
+                            $propertyValue['name'],
+                            $property['id'],
+                            $i,
+                            $property['id']
+                        );
+                    }
+                    $html = sprintf('%s %s', $htmlTemplate, $html);
+                    $i++;
+
+                }
             }
+            // Set property list
+            $this->add(array(
+                'name' => sprintf('property-list-%s', $property['id']),
+                'type' => 'description',
+                'options' => array(
+                    'label' => sprintf(__('%s list'), $property['title']),
+                ),
+                'attributes' => array(
+                    'description' => sprintf('<div class="property-list-%s">%s</div>', $property['id'], $html),
+                )
+            ));
         }
-        // property_warranty_list
-        $this->add(array(
-            'name' => 'propertyWarrantyList',
-            'type' => 'description',
-            'options' => array(
-                'label' => __('Warranty list'),
-            ),
-            'attributes' => array(
-                'description' => sprintf('<div class="property-warranty-list">%s</div>', $warranty),
-            )
-        ));
         // Set attribute field
         if (!empty($this->field)) {
             foreach ($this->position as $key => $value) {

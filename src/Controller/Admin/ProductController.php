@@ -330,6 +330,10 @@ class ProductController extends ActionController
         // Get attribute field
         $fields = Pi::api('attribute', 'shop')->Get($product['category_main']);
         $option['field'] = $fields['attribute'];
+        // Get property
+        $property = Pi::api('property', 'shop')->Get();
+        $option['property'] = $property;
+        $option['propertyValue'] = '';
         // Check post
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -347,12 +351,6 @@ class ProductController extends ActionController
                         $attribute[$field]['data'] = $values[$field];
                     }
                 }
-                // Set setting
-                $setting = array(
-                    'color'     => $data['property_color'],
-                    'warranty'  => $data['property_warranty'],
-                );
-                $values['setting'] = json::encode($setting);
                 // Set just product fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->productColumns)) {
@@ -365,9 +363,13 @@ class ProductController extends ActionController
                 $row = $this->getModel('product')->find($values['id']);
                 $row->assign($values);
                 $row->save();
-                // attribute
-                if (!empty($attribute)) {
+                // Set attribute
+                if (isset($attribute) && !empty($attribute)) {
                     Pi::api('attribute', 'shop')->Set($attribute, $row->id);
+                }
+                // Set property
+                if (isset($data['property']) && !empty($data['property'])) {
+                    Pi::api('property', 'shop')->Set($data['property'], $row->id);
                 }
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
@@ -377,13 +379,12 @@ class ProductController extends ActionController
                     $message = __('Product data saved successfully.');
                     $this->jump(array('controller' => 'attach', 'action' => 'add', 'id' => $row->id), $message);
                 }
-            }   
+            }
         } else {
-            $setting = json::decode($product['setting'], true);
-            $option['color'] = $setting['color'];
-            $option['warranty'] = $setting['warranty'];
             // Get attribute
             $product = Pi::api('attribute', 'shop')->Form($product);
+            // Get property Value
+            $option['propertyValue'] = Pi::api('property', 'shop')->Form($product['id']);
             // Set form
             $form = new ProductAdditionalForm('product', $option);
             $form->setAttribute('enctype', 'multipart/form-data');
@@ -392,6 +393,7 @@ class ProductController extends ActionController
         // Set view
         $this->view()->setTemplate('product_update');
         $this->view()->assign('form', $form);
+        $this->view()->assign('properties', $property);
         $this->view()->assign('title', __('Manage additional information'));
 
     }

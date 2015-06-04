@@ -5,6 +5,40 @@ $this->css(array(
 ));
 $this->jQuery();
 $this->js($this->assetModule('script/system-msg.js', 'system'));
+// Set property
+if (isset($properties) && !empty($properties)) {
+    foreach ($properties as $property) {
+        if ($property['influence_stock'] && $property['influence_price']) {
+            $htmlTemplate = '<div class="col-sm-12 js-form-element"><span class="col-sm-4">' . __('Name') . '<input class="form-control" type="text" name="property[' . $property['id'] . '][\'+ x +\'][name]"/></span><span class="col-sm-3">' . __('Stock') . '<input class="form-control" type="text" name="property[' . $property['id'] . '][\'+ x +\'][stock]"/></span><span class="col-sm-3">' . __('Price') . '<input class="form-control" type="text" name="property[' . $property['id'] . '][\'+ x +\'][price]"/></span><a href="#" class="remove_property_' . $property['id'] . ' col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a></div>';
+        } elseif ($property['influence_stock']) {
+            $htmlTemplate = '<div class="col-sm-12 js-form-element"><span class="col-sm-8">' . __('Name') . '<input class="form-control" type="text" name="property[' . $property['id'] . '][\'+ x +\'][name]"/></span><span class="col-sm-3">' . __('Stock') . '<input class="form-control" type="text" name="property[' . $property['id'] . '][\'+ x +\'][stock]"/></span><a href="#" class="remove_property_' . $property['id'] . ' col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a></div>';
+        } elseif ($property['influence_price']) {
+            $htmlTemplate = '<div class="col-sm-12 js-form-element"><span class="col-sm-8">' . __('Name') . '<input class="form-control" type="text" name="property[' . $property['id'] . '][\'+ x +\'][name]"/></span><span class="col-sm-3">' . __('Price') . '<input class="form-control" type="text" name="property[' . $property['id'] . '][\'+ x +\'][price]"/></span><a href="#" class="remove_property_' . $property['id'] . ' col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a></div>';
+        } else {
+            $htmlTemplate = '<div class="col-sm-12 js-form-element"><span class="col-sm-11">' . __('Name') . '<input class="form-control" type="text" name="property[' . $property['id'] . '][\'+ x +\'][name]"/></span><a href="#" class="remove_property_' . $property['id'] . ' col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a></div>';
+        }
+        $script =<<<'EOT'
+            $(document).ready(function() {
+                var max_fields      = 30; //maximum input boxes allowed
+                var wrapper         = $("#product-form .property-list-%s"); //Fields wrapper
+                var add_button      = $(".add_property_%s"); //Add button ID
+                var x = 1; //initlal text box count
+                $(add_button).click(function(e){ //on add input button click
+                    e.preventDefault();
+                    if(x < max_fields){ //max input box allowed
+                        x++; //text box increment
+                        $(wrapper).append('%s'); //add input box
+                    }
+                });
+                $(wrapper).on("click",".remove_property_%s", function(e){ //user click on remove text
+                    e.preventDefault(); $(this).parent('div').remove(); x--;
+                })
+            });
+EOT;
+        $script = sprintf($script, $property['id'], $property['id'], $htmlTemplate, $property['id']);
+        $this->footScript()->appendScript($script);
+    }
+}
 ?>
 <div id="product-form" class="clearfix">
     <h3><?php echo $this->escape($title); ?></h3>
@@ -23,40 +57,4 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
             });
         });
     })(jQuery)
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        var max_fields      = 30; //maximum input boxes allowed
-        var wrapper         = $("#product-form .property-color-list"); //Fields wrapper
-        var add_button      = $(".add_property_color"); //Add button ID
-        var x = 1; //initlal text box count
-        $(add_button).click(function(e){ //on add input button click
-            e.preventDefault();
-            if(x < max_fields){ //max input box allowed
-                x++; //text box increment
-                $(wrapper).append('<div class="col-sm-12 js-form-element"><span class="col-sm-8">Color<input class="form-control" type="text" name="property_color['+ x +'][color]"/></span><span class="col-sm-3">Number<input class="form-control" type="text" name="property_color['+ x +'][number]"/></span><a href="#" class="remove_property_color col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a></div>'); //add input box
-            }
-        });
-        $(wrapper).on("click",".remove_property_color", function(e){ //user click on remove text
-            e.preventDefault(); $(this).parent('div').remove(); x--;
-        })
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        var max_fields      = 30; //maximum input boxes allowed
-        var wrapper         = $("#product-form .property-warranty-list"); //Fields wrapper
-        var add_button      = $(".add_property_warranty"); //Add button ID
-        var x = 1; //initlal text box count
-        $(add_button).click(function(e){ //on add input button click
-            e.preventDefault();
-            if(x < max_fields){ //max input box allowed
-                x++; //text box increment
-                $(wrapper).append('<div class="col-sm-12 js-form-element"><span class="col-sm-11"><input class="form-control" type="text" name="property_warranty[]"/></span><a href="#" class="remove_property_warranty col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a></div>'); //add input box
-            }
-        });
-        $(wrapper).on("click",".remove_property_warranty", function(e){ //user click on remove text
-            e.preventDefault(); $(this).parent('div').remove(); x--;
-        })
-    });
 </script>
