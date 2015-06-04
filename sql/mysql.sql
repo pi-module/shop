@@ -171,6 +171,35 @@ CREATE TABLE `{field_data}` (
   KEY `field_product` (`field`, `product`)
 );
 
+CREATE TABLE `{property}` (
+  `id`              INT(10) UNSIGNED              NOT NULL AUTO_INCREMENT,
+  `title`           VARCHAR(255)                  NOT NULL DEFAULT '',
+  `order`           INT(10) UNSIGNED              NOT NULL DEFAULT '0',
+  `status`          TINYINT(1) UNSIGNED           NOT NULL DEFAULT '1',
+  `influence_stock` TINYINT(1) UNSIGNED           NOT NULL DEFAULT '1',
+  `influence_price` TINYINT(1) UNSIGNED           NOT NULL DEFAULT '1',
+  `type`            ENUM('checkbox', 'selectbox') NOT NULL DEFAULT 'checkbox',
+  PRIMARY KEY (`id`),
+  KEY `title` (`title`),
+  KEY `order` (`order`),
+  KEY `status` (`status`),
+  KEY `order_status` (`order`, `status`)
+);
+
+CREATE TABLE `{property_value}` (
+  `id`       INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `property` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `product`  INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `value`    VARCHAR(255)     NOT NULL DEFAULT '',
+  `stock`    INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `price`    DECIMAL(16, 2)   NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`id`),
+  KEY `property` (`property`),
+  KEY `product` (`product`),
+  KEY `value` (`value`),
+  KEY `property_product` (`property`, `product`)
+);
+
 CREATE TABLE `{special}` (
   `id`           INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `product`      INT(10) UNSIGNED    NOT NULL DEFAULT '0',

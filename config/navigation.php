@@ -102,6 +102,17 @@ return array(
             'action'        => 'index',
         ),
 
+        'property' => array(
+            'label'         => _a('Order property'),
+            'permission'    => array(
+                'resource'  => 'property',
+            ),
+            'route'         => 'admin',
+            'module'        => 'shop',
+            'controller'    => 'property',
+            'action'        => 'index',
+        ),
+
         'attach' => array(
             'label'         => _a('Attach'),
             'permission'    => array(

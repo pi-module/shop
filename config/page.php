@@ -34,6 +34,11 @@ return array(
             'permission'    => 'position',
         ),
         array(
+            'label'         => _a('Order property'),
+            'controller'    => 'property',
+            'permission'    => 'property',
+        ),
+        array(
             'label'         => _a('Attach'),
             'controller'    => 'attach',
             'permission'    => 'attach',

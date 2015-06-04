@@ -66,6 +66,12 @@ return array(
                 //'admin',
             ),
         ),
+        'property'      => array(
+            'title'         => _a('Order property'),
+            'access'        => array(
+                //'admin',
+            ),
+        ),
         'attach'         => array(
             'title'         => _a('Attach'),
             'access'        => array(
