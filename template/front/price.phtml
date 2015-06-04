@@ -4,9 +4,10 @@
             <li><strong><?php _e('Stock status'); ?> : </strong>
                 <?php if($productItem['stock_type'] == 1) { ?>
                     <?php if($productItem['stock'] > 0) { ?>
-                        <span class="text-success"><?php _e('In stock'); ?>
+                        <span class="text-success">
+                            <?php _e('In stock'); ?>
                             <?php if($config['view_stock']) { ?> (<?php echo _number($productItem['stock']); ?>)<?php } ?>
-        </span>
+                        </span>
                     <?php } else { ?>
                         <span class="text-danger"><?php _e('Out of stock'); ?></span>
                     <?php } ?>
