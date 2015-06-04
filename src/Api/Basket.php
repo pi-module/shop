@@ -18,7 +18,7 @@ use Pi\Application\Api\AbstractApi;
 use Zend\Json\Json;
 
 /*
- * Pi::api('basket', 'shop')->setBasket($id, $number = 1, $color = '', $warranty = '');
+ * Pi::api('basket', 'shop')->setBasket($id, $number, $properties);
  * Pi::api('basket', 'shop')->getBasket();
  * Pi::api('basket', 'shop')->emptyBasket();
  * Pi::api('basket', 'shop')->removeProduct($id);
@@ -26,23 +26,35 @@ use Zend\Json\Json;
 
 class Basket extends AbstractApi
 {
-    public function setBasket($id, $number = 1, $color = '', $warranty = '')
+    public function setBasket($id, $number = 1, $properties = array())
     {
         // Get uid
         $uid = Pi::user()->getId();
         // find backet
         $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
+        // Get property list
+        $propertyList = Pi::api('property', 'shop')->getList();
+        // Set product property
+        $productProperty = array();
+        foreach ($properties as $key => $property) {
+            $productProperty[$key] = array(
+                'id' => $propertyList[$key]['id'],
+                'title' => $propertyList[$key]['title'],
+                'value' => $property,
+            );
+        }
+        // Set product
+        $product = array(
+            'id'        => $id,
+            'number'    => $number,
+            'property'  => $productProperty,
+        );
         // Check basket
         if (empty($basket)) {
         	// Set data
         	$data = array();
         	$data['time'] = time();
-        	$data['product'][$id] = array(
-        		'id'        => $id,
-        		'number'    => $number,
-        		'color'     => $color,
-        		'warranty'  => $warranty,
-        	);
+        	$data['product'][$id] = $product;
         	// Set basket
         	$basket = Pi::model('basket', $this->getModule())->createRow();
         	$basket->uid = $uid;
@@ -53,12 +65,7 @@ class Basket extends AbstractApi
         	// Set data
         	$data = json::decode($basket->data, true);
         	$data['time'] = time();
-        	$data['product'][$id] = array(
-        		'id'        => $id,
-        		'number'    => $number,
-        		'color'     => $color,
-        		'warranty'  => $warranty,
-        	);
+            $data['product'][$id] = $product;
         	// Set basket
         	$basket->data = json::encode($data);
         	$basket->save();
@@ -92,8 +99,7 @@ class Basket extends AbstractApi
         foreach ($basket['data']['product'] as $product) {
         	$productInfo = Pi::api('product', 'shop')->getProductLight($product['id']);
         	$productInfo['number'] = $product['number'];
-        	$productInfo['color'] = $product['color'];
-        	$productInfo['warranty'] = $product['warranty'];
+        	$productInfo['property'] = $product['property'];
         	$productInfo['total'] = $productInfo['price'] * $product['number'];
         	$productInfo['total_view'] = Pi::api('api', 'shop')->viewPrice($productInfo['total']);
         	$basket['products'][$product['id']] = $productInfo;

@@ -37,13 +37,13 @@
                                         <div class="col-sm-9">
                                             <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="<?php echo sprintf('property-%s', $propertyList['id']); ?>" id="<?php echo sprintf('property-options-%s', $key); ?>" value="<?php echo $this->escape($propertyValue['name']); ?>"<?php if ($key == 0) {echo ' checked';} ?>> <?php echo $this->escape($propertyValue['name']); ?>
+                                                    <input type="radio" name="property[<?php echo $this->escape($propertyList['id']); ?>]" value="<?php echo $this->escape($propertyValue['name']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
                                                 </label>
                                             <?php } ?>
                                         </div>
                                     <?php } elseif ($propertyList['type'] == 'selectbox') { ?>
                                         <div class="col-sm-8">
-                                            <select name="<?php echo sprintf('property-%s', $propertyList['id']); ?>" class="form-control">
+                                            <select name="property[<?php echo $this->escape($propertyList['id']); ?>]" class="form-control">
                                                 <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
                                                     <option value="<?php echo $this->escape($propertyValue['name']); ?>"><?php echo $this->escape($propertyValue['name']); ?></option>
                                                 <?php } ?>

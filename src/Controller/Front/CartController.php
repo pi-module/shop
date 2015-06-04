@@ -58,6 +58,8 @@ class CartController extends ActionController
         if ($this->request->isPost()) {
             // Get post
             $data = $this->request->getPost()->toArray();
+            $this->view()->assign('test', $data);
+            $this->view()->setTemplate('empty');
             // Find product
             $product = $this->getModel('product')->find($data['id']);
             $product = Pi::api('product', 'shop')->canonizeProductLight($product);
@@ -67,10 +69,12 @@ class CartController extends ActionController
                 $this->jump($url, __('The product was not marketable.'), 'error');
             } else {
                 // Check color
-                $color = isset($data['color']) ? $data['color'] : '';
-                $warranty = isset($data['warranty']) ? $data['warranty'] : '';
+                $property = array();
+                if (isset($data['property']) && !empty($data['property'])) {
+                    $property = $data['property'];
+                }
                 // Set basket
-                $basket = Pi::api('basket', 'shop')->setBasket($product['id'], 1, $color, $warranty);
+                Pi::api('basket', 'shop')->setBasket($product['id'], 1, $property);
                 // Go to cart
                 $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
                 return $this->redirect()->toRoute('', $url);
@@ -162,16 +166,16 @@ class CartController extends ActionController
         $order['type_commodity'] = 'product';
         // Set products to order
     	foreach ($basket['products'] as $product) {
-            $extra = array(
-                'color'       => array(
-                    'title'   => __('Color'),
-                    'value'   => $product['color'],
-                ),
-                'warranty'    => array(
-                    'title'   => __('Warranty'),
-                    'value'   => $product['warranty'],
-                ),
-            );
+            // Set extra
+            $extra = array();
+            foreach ($product['property'] as $property)
+            {
+                $extra[$property['id']] = array(
+                    'title'   => $property['title'],
+                    'value'   => $property['value'],
+                );
+            }
+            // Set single product
     		$singelProduct =  array(
     			'product'         => $product['id'],
     			'product_price'   => $product['price'],

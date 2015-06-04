@@ -92,11 +92,10 @@ $this->footScript()->appendScript($script);
                                 </td>
                                 <td class="col-md-8 cartProductInfo">
                                     <p><strong><?php _e('Price'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['price_view']); ?></span></p>
-                                    <?php if (!empty($product['color'])) { ?>
-                                        <p><strong><?php _e('Color'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['color']); ?></span></p>
-                                    <?php } ?>
-                                    <?php if (!empty($product['warranty'])) { ?>
-                                        <p><strong><?php _e('Warranty'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['warranty']); ?></span></p>
+                                    <?php if (!empty($product['property'])) { ?>
+                                        <?php foreach ($product['property'] as $property) { ?>
+                                            <p><strong><?php echo $this->escape($property['title']); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($property['value']); ?></span></p>
+                                        <?php } ?>
                                     <?php } ?>
                                     <!-- <p><strong><?php _e('Discount'); ?></strong> : <span class="cart-product-discount">0</span></p> -->
                                     <!-- <p>
@@ -140,3 +139,4 @@ $this->footScript()->appendScript($script);
         </div>
     </div>
 </div>
+<pre><?php print_r($basket); ?></pre>
