@@ -1,0 +1,28 @@
+<form action="<?php echo $this->escape($productItem['cartUrl']); ?>" method="post">
+    <input name="id" type="hidden" value="<?php echo $this->escape($productItem['id']); ?>">
+    <?php foreach ($property['list'] as $propertyList) { ?>
+        <?php if (!empty($property['value'][$propertyList['id']])) { ?>
+            <div class="form-group clearfix">
+                <label class="col-sm-3 control-label"><?php echo $this->escape($propertyList['title']); ?></label>
+                <?php if ($propertyList['type'] == 'checkbox') { ?>
+                    <div class="col-sm-9">
+                        <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
+                            <label class="radio-inline input-sm">
+                                <input type="radio" name="property[<?php echo $this->escape($propertyList['id']); ?>]" value="<?php echo $this->escape($propertyValue['name']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
+                            </label>
+                        <?php } ?>
+                    </div>
+                <?php } elseif ($propertyList['type'] == 'selectbox') { ?>
+                    <div class="col-sm-8">
+                        <select name="property[<?php echo $this->escape($propertyList['id']); ?>]" class="form-control input-sm">
+                            <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
+                                <option value="<?php echo $this->escape($propertyValue['name']); ?>"><?php echo $this->escape($propertyValue['name']); ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    <?php } ?>
+    <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-shopping-cart"></i> <?php _e('Add to cart'); ?></button>
+</form>

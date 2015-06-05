@@ -133,14 +133,6 @@ return array(
             'filter'       => 'string',
             'value'        => _a('Volume'),
         ),
-        'view_stock' => array(
-            'category'     => 'view',
-            'title'        => _a('Show stock count'),
-            'description'  => '',
-            'edit'         => 'checkbox',
-            'filter'       => 'number_int',
-            'value'        => 1
-        ),
         'view_tag' => array(
             'category'     => 'view',
             'title'        => _a('Show Tags'),
@@ -395,13 +387,31 @@ return array(
                 'options'  => array(
                     'options' => array(
                         'onetime'      => _a('One time'),
-                        'recurring'     => _a('Recurring'),
-                        'installment'   => _a('Installment'),
+                        'recurring'    => _a('Recurring'),
+                        'installment'  => _a('Installment'),
                     ),
                 ),
             ),
             'filter'       => 'text',
             'value'        => 'onetime',
+        ),
+        'order_stock' => array(
+            'category'     => 'order',
+            'title'        => _a('Order stock'),
+            'description'  => '',
+            'edit'         => array(
+                'type'     => 'select',
+                'options'  => array(
+                    'options' => array(
+                        'never'     => _a('Never check stock'),
+                        'manual'    => _a('Manual setting'),
+                        'product'   => _a('Use product stock'),
+                        'property'  => _a('Use property stock'),
+                    ),
+                ),
+            ),
+            'filter'       => 'text',
+            'value'        => 'never',
         ),
         // Texts
         'text_title_search' => array(

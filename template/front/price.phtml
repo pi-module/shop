@@ -1,24 +1,7 @@
-<?php if(isset($productItem['price']) && $config['view_price'] && $config['order_active']) { ?>
+<?php if(isset($productItem['price']) && $config['order_active']) { ?>
     <div class="productPrice clearfix">
         <ul class="list-unstyled">
-            <li><strong><?php _e('Stock status'); ?> : </strong>
-                <?php if($productItem['stock_type'] == 1) { ?>
-                    <?php if($productItem['stock'] > 0) { ?>
-                        <span class="text-success">
-                            <?php _e('In stock'); ?>
-                            <?php if($config['view_stock']) { ?> (<?php echo _number($productItem['stock']); ?>)<?php } ?>
-                        </span>
-                    <?php } else { ?>
-                        <span class="text-danger"><?php _e('Out of stock'); ?></span>
-                    <?php } ?>
-                <?php } else { ?>
-                    <span class="text-danger"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
-                <?php } ?>
-            </li>
-            <?php if(!empty($productItem['price_title'])) { ?>
-                <li><strong><?php echo $config['view_price_title']; ?> : </strong><?php echo $this->escape($productItem['price_title']); ?></li>
-            <?php } ?>
-            <?php if($productItem['stock_type'] == 1 && $productItem['stock'] > 0) { ?>
+            <?php if ($config['order_stock'] == 'never') { ?>
                 <li class="form-group">
                     <strong><?php _e('Price'); ?> : </strong>
                     <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
@@ -27,34 +10,62 @@
                     <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
                 </li>
                 <li>
-                    <form action="<?php echo $this->escape($productItem['cartUrl']); ?>" method="post">
-                        <input name="id" type="hidden" value="<?php echo $this->escape($productItem['id']); ?>">
-                        <?php foreach ($property['list'] as $propertyList) { ?>
-                            <?php if (!empty($property['value'][$propertyList['id']])) { ?>
-                                <div class="form-group clearfix">
-                                    <label class="col-sm-3 control-label"><?php echo $this->escape($propertyList['title']); ?></label>
-                                    <?php if ($propertyList['type'] == 'checkbox') { ?>
-                                        <div class="col-sm-9">
-                                            <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
-                                                <label class="radio-inline input-sm">
-                                                    <input type="radio" name="property[<?php echo $this->escape($propertyList['id']); ?>]" value="<?php echo $this->escape($propertyValue['name']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
-                                                </label>
-                                            <?php } ?>
-                                        </div>
-                                    <?php } elseif ($propertyList['type'] == 'selectbox') { ?>
-                                        <div class="col-sm-8">
-                                            <select name="property[<?php echo $this->escape($propertyList['id']); ?>]" class="form-control input-sm">
-                                                <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
-                                                    <option value="<?php echo $this->escape($propertyValue['name']); ?>"><?php echo $this->escape($propertyValue['name']); ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                            <?php } ?>
+                    <?php include $this->template('front/product_order'); ?>
+                </li>
+            <?php } elseif ($config['order_stock'] == 'manual') { ?>
+                <?php if($productItem['stock_type'] == 1) { ?>
+                    <li>
+                        <strong><?php _e('Stock status'); ?> : </strong>
+                        <span class="text-success"><?php _e('In stock'); ?></span>
+                    </li>
+                    <li class="form-group">
+                        <strong><?php _e('Price'); ?> : </strong>
+                        <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+                            <span class="text-danger"><del><?php echo $this->escape($productItem['price_discount_view']); ?></del></span>
                         <?php } ?>
-                        <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-shopping-cart"></i> <?php _e('Add to cart'); ?></button>
-                    </form>
+                        <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
+                    </li>
+                    <li>
+                        <?php include $this->template('front/product_order'); ?>
+                    </li>
+                <?php } else { ?>
+                    <li>
+                        <strong><?php _e('Stock status'); ?> : </strong>
+                        <span class="text-danger"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                    </li>
+                <?php } ?>
+            <?php } elseif ($config['order_stock'] == 'product') { ?>
+                <?php if($productItem['stock'] > 0) { ?>
+                    <li>
+                        <strong><?php _e('Stock status'); ?> : </strong>
+                        <span class="text-success"><?php _e('In stock'); ?></span>
+                    </li>
+                    <li class="form-group">
+                        <strong><?php _e('Price'); ?> : </strong>
+                        <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+                            <span class="text-danger"><del><?php echo $this->escape($productItem['price_discount_view']); ?></del></span>
+                        <?php } ?>
+                        <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
+                    </li>
+                    <li>
+                        <?php include $this->template('front/product_order'); ?>
+                    </li>
+                <?php } else { ?>
+                    <li>
+                        <strong><?php _e('Stock status'); ?> : </strong>
+                        <span class="text-danger"><?php _e('Out of stock'); ?></span>
+                    </li>
+                <?php } ?>
+            <?php } elseif ($config['order_stock'] == 'property') { ?>
+                <li class="form-group">
+                    <strong><?php _e('Price'); ?> : </strong>
+                    <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+                        <span class="text-danger"><del><?php echo $this->escape($productItem['price_discount_view']); ?></del></span>
+                    <?php } ?>
+                    <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
+                </li>
+                <li>
+                    <?php include $this->template('front/product_order'); ?>
                 </li>
             <?php } ?>
         </ul>

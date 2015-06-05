@@ -104,16 +104,6 @@ class ProductFilter extends InputFilter
                 ),
             ),
         ));
-        // stock_alert
-        /* $this->add(array(
-            'name' => 'stock_alert',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        )); */
         // stock_type
         $this->add(array(
             'name' => 'stock_type',
@@ -129,16 +119,6 @@ class ProductFilter extends InputFilter
                 ),
             ),
         ));
-        // price_title
-        /* $this->add(array(
-            'name' => 'price_title',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        )); */
         // price_discount
         $this->add(array(
             'name' => 'price_discount',
@@ -186,14 +166,5 @@ class ProductFilter extends InputFilter
                 'required' => false,
             ));
         }
-        // Set attribute field
-        /* if (!empty($attribute)) {
-            foreach ($attribute as $field) {
-                $this->add(array(
-                    'name' => $field['id'],
-                    'required' => false,
-                ));
-            }
-        } */
     }
 }    	

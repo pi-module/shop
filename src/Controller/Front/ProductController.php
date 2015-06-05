@@ -85,9 +85,6 @@ class ProductController extends IndexController
         $property['list'] = Pi::api('property', 'shop')->getList();
         $property['value'] = Pi::api('property', 'shop')->getValue($product['id']);
         $this->view()->assign('property', $property);
-        echo '<pre>';
-        print_r($property);
-        echo '</pre>';
         // Set view
         $this->view()->headTitle($product['seo_title']);
         $this->view()->headDescription($product['seo_description'], 'set');

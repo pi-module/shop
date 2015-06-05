@@ -63,28 +63,28 @@ class Product extends AbstractApi
 
     public function searchRelated($title, $type)
     {
-    	$list = array();
-    	switch ($type) {
-    		case 1:
-    		    $where = array('title LIKE ?' => '%' . $title . '%');
-    			break;
+        $list = array();
+        switch ($type) {
+            case 1:
+                $where = array('title LIKE ?' => '%' . $title . '%');
+                break;
 
-    		case 2:
-    		    $where = array('title LIKE ?' => $title . '%');
-    			break;
-    			
-    		case 3:
-    		    $where = array('title LIKE ?' => '%' . $title);
-    			break;
-    			
-    		case 4:
-    		    $where = array('title' => $title);
-    			break;			
-    	}
-    	$columns = array('id');
-    	$select = Pi::model('product', $this->getModule())->select()->where($where)->columns($columns);
-    	$rowset = Pi::model('product', $this->getModule())->selectWith($select);
-    	foreach ($rowset as $row) {
+            case 2:
+                $where = array('title LIKE ?' => $title . '%');
+                break;
+
+            case 3:
+                $where = array('title LIKE ?' => '%' . $title);
+                break;
+
+            case 4:
+                $where = array('title' => $title);
+                break;
+        }
+        $columns = array('id');
+        $select = Pi::model('product', $this->getModule())->select()->where($where)->columns($columns);
+        $rowset = Pi::model('product', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
             $list[] = $row->id;
         }
         return $list;
@@ -112,7 +112,7 @@ class Product extends AbstractApi
             $list[$row->id] = $this->canonizeProductLight($row);
         }
         return $list;
-    }	
+    }
 
     /**
      * Set number of used attribute fields for selected product
@@ -176,37 +176,37 @@ class Product extends AbstractApi
             if ($file[$row->type][$row->id]['type'] == 'image') {
                 // Set image original url
                 $file[$row->type][$row->id]['originalUrl'] = Pi::url(
-                    sprintf('upload/%s/original/%s/%s', 
-                        $config['image_path'], 
-                        $file[$row->type][$row->id]['path'], 
+                    sprintf('upload/%s/original/%s/%s',
+                        $config['image_path'],
+                        $file[$row->type][$row->id]['path'],
                         $file[$row->type][$row->id]['file']
                     ));
                 // Set image large url
                 $file[$row->type][$row->id]['largeUrl'] = Pi::url(
-                    sprintf('upload/%s/large/%s/%s', 
-                        $config['image_path'], 
-                        $file[$row->type][$row->id]['path'], 
+                    sprintf('upload/%s/large/%s/%s',
+                        $config['image_path'],
+                        $file[$row->type][$row->id]['path'],
                         $file[$row->type][$row->id]['file']
                     ));
                 // Set image medium url
                 $file[$row->type][$row->id]['mediumUrl'] = Pi::url(
-                    sprintf('upload/%s/medium/%s/%s', 
-                        $config['image_path'], 
-                        $file[$row->type][$row->id]['path'], 
+                    sprintf('upload/%s/medium/%s/%s',
+                        $config['image_path'],
+                        $file[$row->type][$row->id]['path'],
                         $file[$row->type][$row->id]['file']
                     ));
                 // Set image thumb url
                 $file[$row->type][$row->id]['thumbUrl'] = Pi::url(
-                    sprintf('upload/%s/thumb/%s/%s', 
-                        $config['image_path'], 
-                        $file[$row->type][$row->id]['path'], 
+                    sprintf('upload/%s/thumb/%s/%s',
+                        $config['image_path'],
+                        $file[$row->type][$row->id]['path'],
                         $file[$row->type][$row->id]['file']
                     ));
             } else {
                 $file[$row->type][$row->id]['fileUrl'] = Pi::url(
-                    sprintf('upload/%s/file/%s/%s', 
-                        $config['file_path'], 
-                        $file[$row->type][$row->id]['path'], 
+                    sprintf('upload/%s/file/%s/%s',
+                        $config['file_path'],
+                        $file[$row->type][$row->id]['path'],
                         $file[$row->type][$row->id]['file']
                     ));
             }
@@ -242,12 +242,12 @@ class Product extends AbstractApi
                     $story['image'] = '';
                     if ($row->image) {
                         $story['image'] = Pi::url(
-                            sprintf('upload/%s/thumb/%s/%s', 
-                            $config['image_path'], 
-                            $row->path, 
-                            $row->image
-                        ));
-                    }    
+                            sprintf('upload/%s/thumb/%s/%s',
+                                $config['image_path'],
+                                $row->path,
+                                $row->image
+                            ));
+                    }
                     $list[$row->id] = $story;
                 }
                 return $list;
@@ -261,10 +261,41 @@ class Product extends AbstractApi
 
     public function marketable($product)
     {
-        if ($product['price'] > 0 && $product['stock'] > 0) {
-            return 1;
-        } else {
-            return 0;
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        // check
+        switch ($config['order_stock']) {
+            case 'never':
+                if ($product['price'] > 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+                break;
+
+            case 'manual':
+                if ($product['price'] > 0 && $product['stock_type'] == 1) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+                break;
+
+            case 'product':
+                if ($product['price'] > 0 && $product['stock'] > 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+                break;
+
+            case 'property':
+                if ($product['price'] > 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+                break;
         }
     }
 
@@ -319,7 +350,7 @@ class Product extends AbstractApi
             case 1:
                 $product['stock_type_view'] = __('In stock');
                 break;
-            
+
             case 2:
                 $product['stock_type_view'] = __('Out of stock');
                 break;
@@ -338,39 +369,35 @@ class Product extends AbstractApi
         if ($product['image']) {
             // Set image original url
             $product['originalUrl'] = Pi::url(
-                sprintf('upload/%s/original/%s/%s', 
-                    $config['image_path'], 
-                    $product['path'], 
+                sprintf('upload/%s/original/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
                     $product['image']
                 ));
             // Set image large url
             $product['largeUrl'] = Pi::url(
-                sprintf('upload/%s/large/%s/%s', 
-                    $config['image_path'], 
-                    $product['path'], 
+                sprintf('upload/%s/large/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
                     $product['image']
                 ));
             // Set image medium url
             $product['mediumUrl'] = Pi::url(
-                sprintf('upload/%s/medium/%s/%s', 
-                    $config['image_path'], 
-                    $product['path'], 
+                sprintf('upload/%s/medium/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
                     $product['image']
                 ));
             // Set image thumb url
             $product['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s', 
-                    $config['image_path'], 
-                    $product['path'], 
+                sprintf('upload/%s/thumb/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
                     $product['image']
                 ));
         }
-        /* // Setting
-        $setting = json::decode($product['setting'], true);
-        $product['color'] = $setting['color'];
-        $product['warranty'] = $setting['warranty']; */
         // return product
-        return $product; 
+        return $product;
     }
 
     public function canonizeProductLight($product)
@@ -408,9 +435,9 @@ class Product extends AbstractApi
         if ($product['image']) {
             // Set image thumb url
             $product['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s', 
-                    $config['image_path'], 
-                    $product['path'], 
+                sprintf('upload/%s/thumb/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
                     $product['image']
                 ));
         }
@@ -437,7 +464,7 @@ class Product extends AbstractApi
         unset($product['hits']);
         unset($product['sales']);
         // return product
-        return $product; 
+        return $product;
     }
 
     public function canonizeProductOrder($product)
@@ -461,9 +488,9 @@ class Product extends AbstractApi
         if ($product['image']) {
             // Set image thumb url
             $product['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s', 
-                    $config['image_path'], 
-                    $product['path'], 
+                sprintf('upload/%s/thumb/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
                     $product['image']
                 ));
         }
@@ -474,7 +501,7 @@ class Product extends AbstractApi
             'thumbUrl'     => $product['thumbUrl'],
         );
         // return product
-        return $productOrder; 
+        return $productOrder;
     }
 
     public function canonizeProductJson($product, $categoryList = array())
@@ -525,7 +552,7 @@ class Product extends AbstractApi
             case 1:
                 $product['stock_type_view'] = __('In stock');
                 break;
-            
+
             case 2:
                 $product['stock_type_view'] = __('Out of stock');
                 break;
@@ -544,30 +571,30 @@ class Product extends AbstractApi
         if ($product['image']) {
             // Set image original url
             $product['originalUrl'] = Pi::url(
-                sprintf('upload/%s/original/%s/%s', 
-                    $config['image_path'], 
-                    $product['path'], 
+                sprintf('upload/%s/original/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
                     $product['image']
                 ));
             // Set image large url
             $product['largeUrl'] = Pi::url(
-                sprintf('upload/%s/large/%s/%s', 
-                    $config['image_path'], 
-                    $product['path'], 
+                sprintf('upload/%s/large/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
                     $product['image']
                 ));
             // Set image medium url
             $product['mediumUrl'] = Pi::url(
-                sprintf('upload/%s/medium/%s/%s', 
-                    $config['image_path'], 
-                    $product['path'], 
+                sprintf('upload/%s/medium/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
                     $product['image']
                 ));
             // Set image thumb url
             $product['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s', 
-                    $config['image_path'], 
-                    $product['path'], 
+                sprintf('upload/%s/thumb/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
                     $product['image']
                 ));
         }
@@ -582,7 +609,7 @@ class Product extends AbstractApi
             }
         }
         // return product
-        return $product; 
+        return $product;
     }
 
     public function sitemap()

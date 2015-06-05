@@ -22,10 +22,10 @@ class ProductForm  extends BaseForm
 
     public function __construct($name = null, $option = array())
     {
-        //$this->field = $option['field'];
         $this->category = array(0 => '');
         $this->thumbUrl = (isset($option['thumbUrl'])) ? $option['thumbUrl'] : '';
         $this->removeUrl = (isset($option['removeUrl'])) ? $option['removeUrl'] : '';
+        $this->config = Pi::service('registry')->config->read('shop');
         parent::__construct($name);
     }
 
@@ -195,45 +195,51 @@ class ProductForm  extends BaseForm
             ),
         ));
         // stock
-        $this->add(array(
-            'name' => 'stock',
-            'options' => array(
-                'label' => __('Stock'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
-        // stock_alert
-        /* $this->add(array(
-            'name' => 'stock_alert',
-            'options' => array(
-                'label' => __('Stock Alert'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                
-            )
-        )); */
-        // stock_type
-        $this->add(array(
-            'name' => 'stock_type',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Stock type'),
-                'value_options' => array(
-                    1 => __('In stock'),
-                    2 => __('Out of stock'),
-                    3 => __('Coming soon'),
-                    4 => __('Contact'),
+        if ($this->config['order_stock'] == 'product') {
+            $this->add(array(
+                'name' => 'stock',
+                'options' => array(
+                    'label' => __('Stock'),
                 ),
-            ),
-            'attributes' => array(
-                'required' => true,
-            )
-        ));
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                )
+            ));
+        } else {
+            $this->add(array(
+                'name' => 'stock',
+                'attributes' => array(
+                    'type' => 'hidden',
+                ),
+            ));
+        }
+        // stock_type
+        if ($this->config['order_stock'] == 'manual') {
+            $this->add(array(
+                'name' => 'stock_type',
+                'type' => 'select',
+                'options' => array(
+                    'label' => __('Stock type'),
+                    'value_options' => array(
+                        1 => __('In stock'),
+                        2 => __('Out of stock'),
+                        3 => __('Coming soon'),
+                        4 => __('Contact'),
+                    ),
+                ),
+                'attributes' => array(
+                    'required' => true,
+                )
+            ));
+        } else {
+            $this->add(array(
+                'name' => 'stock_type',
+                'attributes' => array(
+                    'type' => 'hidden',
+                ),
+            ));
+        }
         // price
         $this->add(array(
             'name' => 'price',
@@ -243,21 +249,9 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                
+
             )
         ));
-        // price_title
-        /* $this->add(array(
-            'name' => 'price_title',
-            'options' => array(
-                'label' => __('Price title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                
-            )
-        )); */
         // price_discount
         $this->add(array(
             'name' => 'price_discount',
@@ -267,7 +261,7 @@ class ProductForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                
+
             )
         ));
         // extra_seo
@@ -331,39 +325,6 @@ class ProductForm  extends BaseForm
                 )
             ));
         }
-        // Set extra field
-        /* if (!empty($this->field)) {
-            // extra_field
-            $this->add(array(
-                'name' => 'extra_field',
-                'type' => 'fieldset',
-                'options' => array(
-                    'label' => __('Attributes'),
-                ),
-            ));
-            foreach ($this->field as $field) {
-                if ($field['type'] == 'select') {
-                    $this->add(array(
-                        'name' => $field['id'],
-                        'type' => 'select',
-                        'options' => array(
-                            'label' => sprintf('%s %s - %s', $field['title'], $field['type'] , $field['id']),
-                            'value_options' => $this->makeArray($field['value']),
-                        ),
-                    ));
-                } else {
-                    $this->add(array(
-                        'name' => $field['id'],
-                        'options' => array(
-                            'label' => sprintf('%s %s - %s', $field['title'], $field['type'] , $field['id']),
-                        ),
-                        'attributes' => array(
-                            'type' => 'text',
-                        )
-                    ));
-                }
-            }
-        } */
         // Save
         $this->add(array(
             'name' => 'submit',
@@ -373,14 +334,4 @@ class ProductForm  extends BaseForm
             )
         ));
     }
-
-    /* public function makeArray($string)
-    {
-        $list = array();
-        $variable = explode('|', $string);
-        foreach ($variable as $value) {
-            $list[$value] = $value;
-        }
-        return $list;
-    } */
 }
