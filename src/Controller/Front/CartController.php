@@ -166,15 +166,6 @@ class CartController extends ActionController
         $order['type_commodity'] = 'product';
         // Set products to order
     	foreach ($basket['products'] as $product) {
-            // Set extra
-            $extra = array();
-            foreach ($product['property'] as $property)
-            {
-                $extra[$property['id']] = array(
-                    'title'   => $property['title'],
-                    'value'   => $property['value'],
-                );
-            }
             // Set single product
     		$singelProduct =  array(
     			'product'         => $product['id'],
@@ -185,7 +176,7 @@ class CartController extends ActionController
     			'vat_price'       => 0,
     			'number'          => $product['number'],
                 'title'           => '',
-                'extra'           => json::encode($extra),
+                'extra'           => json::encode($product['property']),
     		);
     		$order['product'][$product['id']] = $singelProduct;
     	}
