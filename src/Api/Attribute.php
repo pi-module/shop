@@ -34,7 +34,7 @@ class Attribute extends AbstractApi
     /*
       * Get list of attribute fields for show in forms
       */
-    public function Get($category)
+    public function Get($category = '')
     {
         // Set return
         $return = array(
@@ -288,10 +288,13 @@ class Attribute extends AbstractApi
         return array_unique($category);
     }
 
-    public function getField($category)
+    public function getField($category = '')
     {
         $field = array();
-        $where = array('category' => $category);
+        $where = array();
+        if (!empty($category)) {
+            $where = array('category' => $category);
+        }
         $select = Pi::model('field_category', $this->getModule())->select()->where($where);
         $rowset = Pi::model('field_category', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {

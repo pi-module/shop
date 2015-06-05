@@ -29,24 +29,15 @@ class SearchController extends IndexController
         $module = $this->params('module');
         // Get config
         $config = Pi::service('registry')->config->read($module);
-        // Get attribute field
+        // Set search form
         $fields = Pi::api('attribute', 'shop')->Get();
         $option['field'] = $fields['attribute'];
-        // Set form
-    	$form = new SearchForm('search', $option);
-    	if ($this->request->isPost()) {
-    		$data = $this->request->getPost();
-    		$form->setInputFilter(new SearchFilter($fields['attribute']));
-            $form->setData($data);
-            if ($form->isValid()) {
-            	$_SESSION['shop']['search'] = $form->getData();
-            	$message = __('Your search successfully. Go to result page');
-            	$url = array('action' => 'result');
-                $this->jump($url, $message, 'success');
-            }
-    	} else {
-    		unset($_SESSION['shop']['search']);
-    	}
+        $form = new SearchForm('search', $option);
+        $form->setAttribute('action', Pi::url($this->url('shop', array(
+            'module'        => $module,
+            'controller'    => 'search',
+            'action'        => 'filter',
+        ))));
     	// Set view
         $this->view()->headTitle($config['text_title_search']);
         $this->view()->headDescription($config['text_description_search'], 'set');
@@ -55,12 +46,61 @@ class SearchController extends IndexController
         $this->view()->assign('form', $form);
     }
 
+    public function filterAction()
+    {
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $data = $data->toArray();
+            // Set search session
+            $search = array();
+            // Set title
+            if (isset($data['title']) && !empty($data['title'])) {
+                $search['title'] = $data['title'];
+            }
+            // Set price_from
+            if (isset($data['price_from']) && intval($data['price_from']) > 0) {
+                $search['price_from'] = intval($data['price_from']);
+            }
+            // Set price_to
+            if (isset($data['price_to']) && intval($data['price_to']) > 0) {
+                $search['price_to'] = intval($data['price_to']);
+            }
+            // Set category
+            if (isset($data['category']) && intval($data['category']) > 0) {
+                $search['category'] = intval($data['category']);
+            }
+            // Set attribute
+            $attributeSearch = Pi::api('attribute', 'shop')->SearchForm($data);
+            foreach ($attributeSearch as $attribute) {
+                $search[$attribute['field']] = $attribute['data'];
+            }
+            // Make url
+            $url = $this->url('', array(
+                'controller' => 'search',
+                'action'     => 'result',
+                'slug'       => http_build_query($search),
+            ));
+            // jump
+            return $this->jump($url);
+        } else {
+            $message = __('Search again');
+            $url = array('action' => 'index');
+            $this->jump($url, $message, 'error');
+        }
+    }
+
     public function resultAction()
     {
-        // Get search
-        $search = $_SESSION['shop']['search'];
         // Get info from url
         $module = $this->params('module');
+        $slug = $this->params('slug');
+        // Get search
+        parse_str($slug, $search);
+        if (empty($search)) {
+            $message = __('Your search session is empty, please search again');
+            $url = array('action' => 'index');
+            $this->jump($url, $message, 'error');
+        }
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Set product info from search
@@ -90,22 +130,21 @@ class SearchController extends IndexController
         }
         // Set price_from
         if (isset($search['price_from']) 
-            && !empty($search['price_from']))
+            && intval($search['price_from']) > 0)
         {
             $where['price >= ?'] = $search['price_from'];
         }
         // Set price_to
         if (isset($search['price_to']) 
-            && !empty($search['price_to']))
+            && intval($search['price_to']) > 0)
         {
             $where['price <= ?'] = $search['price_from'];
         }
         // Set category
         if (isset($search['category']) 
-            && !empty($search['category']) 
-            && is_array($search['category']))
+            && intval($search['category']) > 0)
         {
-            $categoryId = Pi::api('category', 'shop')->findFromCategory($search['category']);
+            $categoryId = Pi::api('category', 'shop')->findFromCategory(intval($search['category']));
         }
         // Set attribute
         $attributeSearch = Pi::api('attribute', 'shop')->SearchForm($search);
@@ -121,7 +160,7 @@ class SearchController extends IndexController
             $where['id'] = $categoryId;
         } elseif (empty($categoryId) && !empty($attributeId)) {
             $where['id'] = $attributeId;
-        } 
+        }
         // Get product List
         $productList = $this->searchList($where);
         // Set paginator info
@@ -139,6 +178,16 @@ class SearchController extends IndexController
         } else {
             $title = __('Search result');
         }
+        // Set search form
+        $fields = Pi::api('attribute', 'shop')->Get();
+        $option['field'] = $fields['attribute'];
+        $form = new SearchForm('search', $option);
+        $form->setData($search);
+        $form->setAttribute('action', Pi::url($this->url('shop', array(
+            'module'        => $module,
+            'controller'    => 'search',
+            'action'        => 'filter',
+        ))));
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
         $filter->setOptions(array(
@@ -154,5 +203,6 @@ class SearchController extends IndexController
         $this->view()->assign('productTitleH1', $title);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
+        $this->view()->assign('form', $form);
     }	
 }

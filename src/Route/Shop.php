@@ -127,16 +127,9 @@ class Shop extends Standard
                 case 'search':
                     if ($parts[1] == 'result') {
                         $matches['action'] = 'result';
-                        // Set sort and stock
-                        if (isset($parts[2]) && $parts[2] == 'sort' 
-                            && isset($parts[4]) && $parts[4] == 'stock') {
-                            $matches['sort'] = $this->decode($parts[3]);
-                            $matches['stock'] = $this->decode($parts[5]);
-                        } elseif (isset($parts[2]) && $parts[2] == 'sort') {
-                            $matches['sort'] = $this->decode($parts[3]);
-                        } elseif (isset($parts[2]) && $parts[2] == 'stock') {
-                            $matches['stock'] = $this->decode($parts[3]);
-                        } 
+                        $matches['slug'] = $this->decode($parts[2]);
+                    } elseif ($parts[1] == 'filter') {
+                        $matches['action'] = 'filter';
                     }
                     break;
 

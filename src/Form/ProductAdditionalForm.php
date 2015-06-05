@@ -227,10 +227,11 @@ EOT;
         ));
     }
 
-    public function makeArray($string)
+    public function makeArray($values)
     {
         $list = array();
-        $variable = explode('|', $string);
+        $values = json_decode($values, true);
+        $variable = explode('|', $values['data']);
         foreach ($variable as $value) {
             $list[$value] = $value;
         }

@@ -16,6 +16,7 @@ namespace Module\Shop\Controller\Front;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
+use Module\Shop\Form\SearchForm;
 use Zend\Db\Sql\Predicate\Expression;
 use Zend\Json\Json;
 
@@ -47,6 +48,15 @@ class IndexController extends ActionController
             $this->view()->assign('specialList', $specialList);
             $this->view()->assign('specialTitle', __('Special products'));
         }
+        // Set search form
+        $fields = Pi::api('attribute', 'shop')->Get();
+        $option['field'] = $fields['attribute'];
+        $form = new SearchForm('search', $option);
+        $form->setAttribute('action', Pi::url($this->url('shop', array(
+            'module'        => $module,
+            'controller'    => 'search',
+            'action'        => 'filter',
+        ))));
         // Set view
     	$this->view()->setTemplate('product_list');
         $this->view()->assign('productList', $productList);
@@ -56,6 +66,7 @@ class IndexController extends ActionController
         $this->view()->assign('config', $config);
         $this->view()->assign('showIndexDesc', 1);
         $this->view()->assign('page', $page);
+        $this->view()->assign('form', $form);
     }
 
     public function productList($where)

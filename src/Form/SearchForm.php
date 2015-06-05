@@ -18,9 +18,9 @@ use Pi\Form\Form as BaseForm;
 
 class SearchForm  extends BaseForm
 {
-	public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = array())
     {
-        $this->field = $option['field'];
+        $this->option = $option;
         $this->config = Pi::service('registry')->config->read('shop', 'search');
         parent::__construct($name);
     }
@@ -28,7 +28,7 @@ class SearchForm  extends BaseForm
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new ProductFilter;
+            $this->filter = new SearchFilter($this->option);
         }
         return $this->filter;
     }
@@ -68,7 +68,7 @@ class SearchForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                
+
             )
         ));
         // price
@@ -82,7 +82,7 @@ class SearchForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+
                 )
             ));
             // price_to
@@ -94,7 +94,7 @@ class SearchForm  extends BaseForm
                 'attributes' => array(
                     'type' => 'text',
                     'description' => '',
-                    
+
                 )
             ));
         } else {
@@ -118,7 +118,10 @@ class SearchForm  extends BaseForm
                 'type' => 'Module\Shop\Form\Element\Category',
                 'options' => array(
                     'label' => __('Category'),
-                    'category' => '',
+                ),
+                'attributes' => array(
+                    'size' => 1,
+                    'multiple' => 0,
                 ),
             ));
         } else {
@@ -130,29 +133,41 @@ class SearchForm  extends BaseForm
             ));
         }
         // Set attribute field
-        if (!empty($this->field)) {
-            foreach ($this->field as $field) {
-                if ($field['search']) {
-                    if ($field['type'] == 'select') {
-                        $this->add(array(
-                            'name' => $field['id'],
-                            'type' => 'select',
-                            'options' => array(
-                                'label' => $field['title'],
-                                'value_options' => $this->makeArray($field['value']),
-                            ),
-                        ));
-                    } else {
-                        $this->add(array(
-                            'name' => $field['id'],
-                            'options' => array(
-                                'label' => $field['title'],
-                            ),
-                            'attributes' => array(
-                                'type' => 'text',
-                            )
-                        ));
+        if (!empty($this->option['field'])) {
+            foreach ($this->option['field'] as $fields) {
+                foreach ($fields as $field) {
+                    if ($field['search']) {
+                        if ($field['type'] == 'select') {
+                            $this->add(array(
+                                'name' => $field['id'],
+                                'type' => 'select',
+                                'options' => array(
+                                    'label' => $field['title'],
+                                    'value_options' => $this->makeArray($field['value']),
+                                ),
+                            ));
+                        } elseif ($field['type'] == 'checkbox') {
+                            $this->add(array(
+                                'name' => $field['id'],
+                                'type' => 'checkbox',
+                                'options' => array(
+                                    'label' => $field['title'],
+                                ),
+                                'attributes' => array()
+                            ));
+                        } else {
+                            $this->add(array(
+                                'name' => $field['id'],
+                                'options' => array(
+                                    'label' => $field['title'],
+                                ),
+                                'attributes' => array(
+                                    'type' => 'text',
+                                )
+                            ));
+                        }
                     }
+
                 }
             }
         }
@@ -166,10 +181,11 @@ class SearchForm  extends BaseForm
         ));
     }
 
-    public function makeArray($string)
+    public function makeArray($values)
     {
         $list = array();
-        $variable = explode('|', $string);
+        $values = json_decode($values, true);
+        $variable = explode('|', $values['data']);
         foreach ($variable as $value) {
             $list[$value] = $value;
         }

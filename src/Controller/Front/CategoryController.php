@@ -15,6 +15,7 @@ namespace Module\Shop\Controller\Front;
 use Pi;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
+use Module\Shop\Form\SearchForm;
 
 class CategoryController extends IndexController
 {
@@ -54,6 +55,15 @@ class CategoryController extends IndexController
             $this->view()->assign('specialList', $specialList);
             $this->view()->assign('specialTitle', __('Special products'));
         }
+        // Set search form
+        $fields = Pi::api('attribute', 'shop')->Get();
+        $option['field'] = $fields['attribute'];
+        $form = new SearchForm('search', $option);
+        $form->setAttribute('action', Pi::url($this->url('shop', array(
+            'module'        => $module,
+            'controller'    => 'search',
+            'action'        => 'filter',
+        ))));
         // Set title
         $title = sprintf(__('All products on %s category'), $category['title']);
         // Set view
@@ -67,6 +77,7 @@ class CategoryController extends IndexController
         $this->view()->assign('categories', $categories);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
+        $this->view()->assign('form', $form);
     }
 
     public function listAction()

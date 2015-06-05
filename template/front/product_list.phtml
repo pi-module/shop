@@ -1,7 +1,16 @@
 <?php $this->css($this->assetModule('css/front.css')); ?>
 <div class="clearfix">
-    <?php include $this->template('front/category'); ?>
-    <?php include $this->template('front/special'); ?>
-    <?php include $this->template('front/list'); ?>
+    <?php $shopBoxSize = 'col-sm-12 col-md-4'; ?>
+    <div class="clearfix row">
+        <div class="col-sm-12 col-md-3">
+            <?php include $this->template('front/category_side'); ?>
+            <?php include $this->template('front/search_form'); ?>
+        </div>
+        <div class="col-sm-12 col-md-9">
+            <?php include $this->template('front/category'); ?>
+            <?php include $this->template('front/special'); ?>
+            <?php include $this->template('front/list'); ?>
+        </div>
+    </div>
     <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
 </div>
