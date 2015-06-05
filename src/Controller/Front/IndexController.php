@@ -37,7 +37,7 @@ class IndexController extends ActionController
         $template = array(
             'controller' => 'index',
             'action' => 'index',
-            );
+        );
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
         // category list

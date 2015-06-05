@@ -12,22 +12,9 @@
                         </h4>
                         <?php if(isset($product['price']) && $block['show-price'] && $block['config']['order_method'] != 'inactive') { ?>
                             <div class="clearfix">
-                                <?php if($product['stock_type'] == 1 && $product['stock'] > 0) { ?>
-                                    <div class="pull-left productPrice p-price">
-                                        <strong><?php echo $this->escape($product['price_view']); ?></strong>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> <?php echo _b('View'); ?></a>
-                                    </div>
-                                <?php } elseif ($product['stock_type'] != 1) { ?>
-                                    <div class="label label-danger">
-                                        <strong><?php echo $this->escape($product['stock_type_view']); ?></strong>
-                                    </div>
-                                <?php } else { ?>
-                                    <div class="label label-danger">
-                                        <strong><?php echo _b('Out of stock'); ?></strong>
-                                    </div>
-                                <?php } ?>
+                                <div class="productPrice p-price">
+                                    <?php echo $this->escape($product['price_view']); ?>
+                                </div>
                             </div>
                         <?php } ?>
                     </div>
