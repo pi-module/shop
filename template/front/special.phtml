@@ -1,15 +1,12 @@
 <?php if (isset($specialList) && !empty($specialList)) { ?>
     <div class="productList clearfix">
-        <div class="row">
-            <?php if (isset($specialTitle) && !empty($specialTitle)) { ?>
-                <div class="page-header">
-                    <h4><?php echo $specialTitle; ?></h4>
-                </div>
+        <div class="page-header">
+            <h4><?php _e('Special products'); ?></h4>
+        </div>
+        <div class="specialList clearfix">
+            <?php foreach($specialList as $product) { ?>
+                <?php include $this->template('front/box'); ?>
             <?php } ?>
-            <pre>
-        <?php print_r($specialList); ?>
-	    </pre>
         </div>
     </div>
-    <div class="clearfix"></div>
 <?php } ?>

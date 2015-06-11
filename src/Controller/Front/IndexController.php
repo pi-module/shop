@@ -26,27 +26,42 @@ class IndexController extends ActionController
     {
         // Get info from url
         $module = $this->params('module');
-        $page = $this->params('page', 1);
         // Get config
         $config = Pi::service('registry')->config->read($module);
-        // Set product info
-        $where = array('status' => 1);
-        // Get product List
-        $productList = $this->productList($where);
-        // Set paginator info
-        $template = array(
-            'controller' => 'index',
-            'action' => 'index',
-        );
-        // Get paginator
-        $paginator = $this->productPaginator($template, $where);
+        // Check homepage type
+        if ($config['homepage_type'] == 'list') {
+            // Get info from url
+            $page = $this->params('page', 1);
+            // Set product info
+            $where = array('status' => 1);
+            // Get product List
+            $productList = $this->productList($where);
+            // Set paginator info
+            $template = array(
+                'controller' => 'index',
+                'action' => 'index',
+            );
+            // Get paginator
+            $paginator = $this->productPaginator($template, $where);
+            // Set view
+            $this->view()->setTemplate('product_list');
+            $this->view()->assign('page', $page);
+            $this->view()->assign('paginator', $paginator);
+            $this->view()->assign('productList', $productList);
+            $this->view()->assign('productTitleH1', __('New products'));
+            $this->view()->assign('showIndexDesc', 1);
+        } elseif ($config['homepage_type'] == 'brand') {
+            $title = (!empty($config['homepage_title'])) ? $config['homepage_title'] : __('Shop index');
+            // Set view
+            $this->view()->setTemplate('homepage');
+            $this->view()->assign('productTitleH1', $title);
+        }
         // category list
         $category = Pi::api('category', 'shop')->categoryList(0);
         // Get special
         if ($config['view_special']) {
             $specialList = Pi::api('special', 'shop')->getAll();
             $this->view()->assign('specialList', $specialList);
-            $this->view()->assign('specialTitle', __('Special products'));
         }
         // Set search form
         $fields = Pi::api('attribute', 'shop')->Get();
@@ -58,14 +73,8 @@ class IndexController extends ActionController
             'action'        => 'filter',
         ))));
         // Set view
-    	$this->view()->setTemplate('product_list');
-        $this->view()->assign('productList', $productList);
-        $this->view()->assign('productTitleH1', __('New products'));
         $this->view()->assign('categories', $category);
-        $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
-        $this->view()->assign('showIndexDesc', 1);
-        $this->view()->assign('page', $page);
         $this->view()->assign('form', $form);
     }
 

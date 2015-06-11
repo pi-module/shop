@@ -125,7 +125,7 @@ return array(
         ),
 
         'special' => array(
-            'label'         => _a('Special'),
+            'label'         => _a('Special products'),
             'permission'    => array(
                 'resource'  => 'special',
             ),

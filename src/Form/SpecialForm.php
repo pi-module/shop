@@ -58,44 +58,6 @@ class SpecialForm extends BaseForm
                 'required' => true,
             ),
         ));
-        // price
-        $this->add(array(
-            'name' => 'price',
-            'options' => array(
-                'label' => __('Price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-                'required' => true,
-            )
-        ));
-        // time_publish
-        $this->add(array(
-            'name' => 'time_publish',
-            'options' => array(
-                'label' => __('Publish date'),
-            ),
-            'attributes' => array(
-                'type' => 'date',
-                'value' => date('Y-m-d'),
-                'description' => '',
-                'required' => true,
-            )
-        ));
-        // time_expire
-        $this->add(array(
-            'name' => 'time_expire',
-            'options' => array(
-                'label' => __('Expire date'),
-            ),
-            'attributes' => array(
-                'type' => 'date',
-                'value' => date('Y-m-d', strtotime('+1 week')),
-                'description' => '',
-                'required' => true,
-            )
-        ));
         // status
         $this->add(array(
             'name' => 'status',

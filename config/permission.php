@@ -79,7 +79,7 @@ return array(
             ),
         ),
         'special'         => array(
-            'title'         => _a('Special'),
+            'title'         => _a('Special products'),
             'access'        => array(
                 //'admin',
             ),

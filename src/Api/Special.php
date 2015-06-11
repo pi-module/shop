@@ -28,24 +28,21 @@ class Special extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
         $special = array();
         // Set options
-        $where = array('status' => 1, 'time_publish < ?' => time(), 'time_expire > ?' => time()); 
-        $order = array('id DESC', 'time_publish DESC');
+        $where = array('status' => 1);
+        $order = array('id DESC');
+        $columns = array('product');
         $limit = intval($config['view_special_number']);
         // Get ids
         $model = Pi::model('special', $this->getModule());
-        $select = $model->select()->where($where)->order($order)->limit($limit);
+        $select = $model->select()->where($where)->columns($columns)->order($order)->limit($limit);
         $rowset = $model->selectWith($select);
         foreach ($rowset as $row) {
-            $specialList[$row->id] = $row->toArray();
             $specialId[] = $row->product;
         }
+        print_r($specialId);
         // Get list of products
         if (!empty($specialId)) {
-            $specialProduct = Pi::api('product', 'shop')->getListFromId($specialId);
-            foreach ($specialList as $item) {
-                $special[$item['id']] = $item;
-                $special[$item['id']]['productInformation'] = $specialProduct[$item['product']];
-            }
+            $special = Pi::api('product', 'shop')->getListFromId($specialId);
         }
         return $special;
     }

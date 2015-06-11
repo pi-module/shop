@@ -1,0 +1,30 @@
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="clearfix">
+    <div class="clearfix row">
+        <div class="col-sm-12 col-md-3">
+            <?php include $this->template('front/category_side'); ?>
+            <?php include $this->template('front/search_form'); ?>
+        </div>
+        <div class="col-sm-12 col-md-9">
+            <div class="page-header">
+                <h1><?php echo $productTitleH1; ?></h1>
+            </div>
+            <?php if (!empty($config['text_description_index'])) { ?>
+                <div class="well shopIndexDescription">
+                    <?php echo $config['text_description_index']; ?>
+                </div>
+            <?php } ?>
+            <?php if (!empty($config['homepage_widget'])) { ?>
+                <?php $widgets = explode("|", $config['homepage_widget']); ?>
+                <div class="clearfix shopWidgetList">
+                    <?php foreach ($widgets as $widget) { ?>
+                        <div class="shopWidgetSingle">
+                            <?php echo $this->widget($widget); ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+            <?php include $this->template('front/special'); ?>
+        </div>
+    </div>
+</div>

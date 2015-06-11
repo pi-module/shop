@@ -61,6 +61,36 @@ return array(
             'value'        => 10
         ),
         // View
+        'homepage_type' => array(
+            'title'        => _a('Homepage type'),
+            'description'  => '',
+            'edit'         => array(
+                'type'     => 'select',
+                'options'  => array(
+                    'options' => array(
+                        'list'  => _a('List of all products'),
+                        'brand' => _a('List of brands and widgets'),
+                    ),
+                ),
+            ),
+            'filter'       => 'text',
+            'value'        => 'list',
+            'category'     => 'view',
+        ),
+        'homepage_widget' => array(
+            'category'     => 'view',
+            'title'        => _a('Homepage widget'),
+            'description'  => _a('Put widget name here, Use `|` as delimiter to separate widgets'),
+            'edit'         => 'text',
+            'filter'       => 'string',
+        ),
+        'homepage_title' => array(
+            'category'     => 'view',
+            'title'        => _a('Homepage title'),
+            'description'  => '',
+            'edit'         => 'text',
+            'filter'       => 'string',
+        ),
         'view_perpage' => array(
             'category'     => 'view',
             'title'        => _a('Perpage'),
@@ -123,7 +153,7 @@ return array(
             'description'  => '',
             'edit'         => 'text',
             'filter'       => 'number_int',
-            'value'        => 1
+            'value'        => 6
         ),
         'view_price_title' => array(
             'category'     => 'view',

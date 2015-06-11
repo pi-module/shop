@@ -30,21 +30,6 @@ class SpecialFilter extends InputFilter
             'name' => 'product',
             'required' => true,
         ));
-        // price
-        $this->add(array(
-            'name' => 'price',
-            'required' => true,
-        ));
-        // time_publish
-        $this->add(array(
-            'name' => 'time_publish',
-            'required' => true,
-        ));
-        // time_expire
-        $this->add(array(
-            'name' => 'time_expire',
-            'required' => true,
-        ));
         // status
         $this->add(array(
             'name' => 'status',

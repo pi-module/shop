@@ -44,7 +44,7 @@ return array(
             'permission'    => 'attach',
         ),
         array(
-            'label'         => _a('Special'),
+            'label'         => _a('Special products'),
             'controller'    => 'special',
             'permission'    => 'special',
         ),

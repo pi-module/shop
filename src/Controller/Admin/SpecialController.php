@@ -29,9 +29,8 @@ class SpecialController extends ActionController
     public function indexAction()
     {
         // Get product and category
-        $where = array('time_expire > ?' => time());
         $columns = array('product');
-        $select = $this->getModel('special')->select()->where($where)->columns($columns);
+        $select = $this->getModel('special')->select()->columns($columns);
         $idSet = $this->getModel('special')->selectWith($select)->toArray();
         if (empty($idSet)) {
             return $this->redirect()->toRoute('', array('action' => 'update'));
@@ -50,9 +49,8 @@ class SpecialController extends ActionController
             $productList[$row->id] = $row->toArray();
         }
         // Get special
-        $where = array('time_expire > ?' => time());
         $order = array('id DESC', 'time_publish DESC');
-        $select = $this->getModel('special')->select()->where($where)->order($order);
+        $select = $this->getModel('special')->select()->order($order);
         $specialSet = $this->getModel('special')->selectWith($select);
         // Make special list
         foreach ($specialSet as $row) {
