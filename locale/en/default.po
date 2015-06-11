@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-06-05 12:22+0330\n"
+"POT-Creation-Date: 2015-06-11 12:30+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -67,28 +67,28 @@ msgstr ""
 msgid "Category list"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:67
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:68
 msgid "Cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:73
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:74
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:29
 msgid "Finish"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:98
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:109
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:100
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:111
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AdminSearchForm.php:52
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:184
 msgid "Search"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:105
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:107
 msgid "Result"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:117
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:128
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:119
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:130
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/tag_list.phtml:4
 msgid "Tag list"
 msgstr ""
@@ -96,8 +96,8 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:351
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:553
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:225
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:19
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:41
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:26
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:47
 msgid "In stock"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:557
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:226
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/box.phtml:30
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:56
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:57
 msgid "Out of stock"
 msgstr ""
 
@@ -292,20 +292,20 @@ msgstr ""
 msgid "Add property"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:101
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:99
 msgid "Special data saved successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:112
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:110
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:4
 msgid "Add Special"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:123
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:121
 msgid "Selected special delete"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:125
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:123
 msgid "Please select special"
 msgstr ""
 
@@ -371,19 +371,14 @@ msgstr ""
 msgid "The category not found."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:56
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/IndexController.php:49
-msgid "Special products"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:68
-#, php-format
-msgid "All products on %s category"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/IndexController.php:63
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/IndexController.php:51
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/ProductController.php:58
 msgid "New products"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/IndexController.php:54
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_finish.phtml:15
+msgid "Shop index"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/ProductController.php:34
@@ -463,7 +458,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:73
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:109
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:73
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:66
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:58
 msgid "Status"
 msgstr ""
@@ -488,7 +483,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:77
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:179
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SitemapForm.php:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:121
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:83
 msgid "Submit"
 msgstr ""
 
@@ -512,7 +507,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:127
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:68
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:120
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/category.phtml:27
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/category.phtml:29
 msgid "Category"
 msgstr ""
 
@@ -603,7 +598,7 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:89
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:96
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_item.phtml:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_item.phtml:55
 msgid "Description"
 msgstr ""
 
@@ -611,7 +606,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:75
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:111
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:75
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:106
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:68
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:39
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:22
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:93
@@ -622,7 +617,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:76
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:112
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:76
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:107
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:69
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:40
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:23
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:94
@@ -633,7 +628,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:77
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:113
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:77
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:108
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:70
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:24
 msgid "Draft"
 msgstr ""
@@ -642,7 +637,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:78
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:114
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:78
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:109
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:71
 msgid "Private"
 msgstr ""
 
@@ -691,7 +686,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:79
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:38
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:19
 msgid "Delete"
 msgstr ""
 
@@ -715,17 +710,15 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:93
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:133
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:247
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:65
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:40
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:12
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:11
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:94
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:6
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:22
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:44
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:9
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:48
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:65
 msgid "Price"
 msgstr ""
 
@@ -841,14 +834,6 @@ msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:55
 msgid "Select product for add to Special"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:77
-msgid "Publish date"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:90
-msgid "Expire date"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:51
@@ -969,7 +954,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:18
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:35
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/property_index.phtml:11
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:14
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:11
 msgid "Action"
 msgstr ""
 
@@ -982,7 +967,7 @@ msgstr ""
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:26
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/position_index.phtml:25
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/property_index.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:24
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:18
 msgid "Edit"
 msgstr ""
 
@@ -1133,14 +1118,6 @@ msgstr ""
 msgid "List of specials"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:12
-msgid "Publish"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:13
-msgid "Expire"
-msgstr ""
-
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/tools_index.phtml:4
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/tools_index.phtml:10
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/tools_sitemap.phtml:4
@@ -1253,10 +1230,6 @@ msgstr ""
 msgid "User panel"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_finish.phtml:15
-msgid "Shop index"
-msgstr ""
-
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:16
 msgid "Month"
 msgstr ""
@@ -1279,10 +1252,10 @@ msgstr ""
 msgid "Add to cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:18
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:33
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:40
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:55
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:25
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:36
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:46
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:56
 msgid "Stock status"
 msgstr ""
 
@@ -1294,8 +1267,24 @@ msgstr ""
 msgid "Add To cart"
 msgstr ""
 
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_item.phtml:54
+msgid "Specifications"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_item.phtml:56
+msgid "Media"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_item.phtml:57
+msgid "Related"
+msgstr ""
+
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/related.phtml:5
 msgid "Related Products"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/special.phtml:4
+msgid "Special products"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/tag_list.phtml:18
