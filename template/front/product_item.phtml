@@ -20,62 +20,71 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
 }
 ?>
 <div class="clearfix">
-    <div class="productItem">
-        <div class="panel panel-default h-product">
-            <div class="panel-heading">
-                <h1 class="panel-title p-name"><?php echo $this->escape($productItem['title']); ?></h1>
+    <div class="productItem h-product">
+        <div class="col-md-4">
+            <?php include $this->template('front/gallery'); ?>
+            <ul class="list-inline">
+                <?php if (!empty($vote)) { ?><li><?php include $this->template('votebar.phtml', 'front', 'vote'); ?></li><?php } ?>
+                <?php if (!empty($favourite)) { ?><li><?php include $this->template('favouritebar.phtml', 'front', 'favourite'); ?></li><?php } ?>
+            </ul>
+            <?php if ($config['social_sharing']) { ?>
+                <div class="clearfix">
+                    <div class="socialSharing">
+                        <?php echo $this->socialSharing(
+                            $config['social_sharing'],
+                            $this->escape($productItem['title']),
+                            $this->escape($productItem['productUrl']),
+                            $this->escape($productItem['largeUrl'])
+                        ); ?>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+        <div class="col-md-8">
+            <div class="productTitle clearfix">
+                <h1 class="p-name"><?php echo $this->escape($productItem['title']); ?></h1>
             </div>
-            <div class="panel-body">
-                <div class="col-md-5">
-                    <?php include $this->template('front/gallery'); ?>
-                    <?php if ($config['social_sharing']) { ?>
-                        <div class="clearfix">
-                            <div class="socialSharing">
-                                <?php echo $this->socialSharing(
-                                    $config['social_sharing'],
-                                    $this->escape($productItem['title']),
-                                    $this->escape($productItem['productUrl']),
-                                    $this->escape($productItem['largeUrl'])
-                                ); ?>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-                <div class="col-md-7">
-                    <div class="productInfoBox well clearfix">
-                        <div class="productPrice"><?php include $this->template('front/price'); ?></div>
-                        <ul class="list-inline">
-                            <?php if (!empty($vote)) { ?><li><?php include $this->template('votebar.phtml', 'front', 'vote'); ?></li><?php } ?>
-                            <?php if (!empty($favourite)) { ?><li><?php include $this->template('favouritebar.phtml', 'front', 'favourite'); ?></li><?php } ?>
-                        </ul>
-                    </div>
-                    <div class="productInfoBox well clearfix">
-                        <div class="p-brand"><?php include $this->template('front/category'); ?></div>
-                        <div class="p-category"><?php include $this->template('front/tag'); ?></div>
-                    </div>
-                    <div class="productSummary e-description"><?php echo $productItem['text_summary']; ?></div>
-                </div>
-                <div class="col-md-12">
-                    <div class="productBody">
-                        <?php if (!empty($productItem['text_description'])) { ?>
-                            <p><strong><?php _e('Description'); ?></strong></p>
-                            <div class="productDescription p-review"><?php echo $productItem['text_description']; ?></div>
-                        <?php } ?>
+            <div class="productInfoBox clearfix">
+                <div class="productPrice"><?php include $this->template('front/price'); ?></div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div role="tabpanel">
+                <ul class="nav nav-tabs nav-justified" role="tablist">
+                    <li role="presentation" class="active"><a href="#tab-1" aria-controls="tab-1" role="tab" data-toggle="tab"><?php _e('Specifications'); ?></a></li>
+                    <li role="presentation"><a href="#tab-2" aria-controls="tab-2" role="tab" data-toggle="tab"><?php _e('Description'); ?></a></li>
+                    <li role="presentation"><a href="#tab-3" aria-controls="tab-3" role="tab" data-toggle="tab"><?php _e('Media'); ?></a></li>
+                    <li role="presentation"><a href="#tab-4" aria-controls="tab-4" role="tab" data-toggle="tab"><?php _e('Related'); ?></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tab-1">
                         <?php include $this->template('front/attribute'); ?>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="tab-2">
+                        <div class="productInfoBox productSummary e-description clearfix"><?php echo $productItem['text_summary']; ?></div>
+                        <div class="productInfoBox productDescription p-review clearfix"><?php echo $productItem['text_description']; ?></div>
+                        <div class="productInfoBox clearfix">
+                            <div class="p-brand"><?php include $this->template('front/category'); ?></div>
+                            <div class="p-category"><?php include $this->template('front/tag'); ?></div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="tab-3">
                         <div class="productMedia">
                             <?php include $this->template('front/attach_audio'); ?>
                             <?php include $this->template('front/attribute_audio'); ?>
                             <?php include $this->template('front/attach_video'); ?>
                             <?php include $this->template('front/attribute_video'); ?>
                         </div>
+                        <div class="productAttach">
+                            <?php include $this->template('front/attach'); ?>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="tab-4">
+                        <?php include $this->template('front/related'); ?>
+                        <?php include $this->template('front/list'); ?>
                     </div>
                 </div>
             </div>
-        </div>
-        <?php include $this->template('front/attach'); ?>
-        <?php include $this->template('front/related'); ?>
-        <div class="row">
-            <?php include $this->template('front/list'); ?>
         </div>
     </div>
 </div>

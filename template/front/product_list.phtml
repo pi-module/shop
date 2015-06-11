@@ -12,5 +12,7 @@
             <?php include $this->template('front/list'); ?>
         </div>
     </div>
-    <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
+    <div class="paginator">
+        <?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?>
+    </div>
 </div>

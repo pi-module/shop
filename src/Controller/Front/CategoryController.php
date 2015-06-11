@@ -65,14 +65,14 @@ class CategoryController extends IndexController
             'action'        => 'filter',
         ))));
         // Set title
-        $title = sprintf(__('All products on %s category'), $category['title']);
+        //$title = sprintf(__('All products on %s category'), $category['title']);
         // Set view
         $this->view()->headTitle($category['seo_title']);
         $this->view()->headDescription($category['seo_description'], 'set');
         $this->view()->headKeywords($category['seo_keywords'], 'set');
         $this->view()->setTemplate('product_list');
         $this->view()->assign('productList', $productList);
-        $this->view()->assign('productTitleH2', $title);
+        //$this->view()->assign('productTitleH2', $title);
         $this->view()->assign('category', $category);
         $this->view()->assign('categories', $categories);
         $this->view()->assign('paginator', $paginator);
