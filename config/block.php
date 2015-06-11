@@ -18,6 +18,13 @@ return array(
         'render'        => array('block', 'productNew'),
         'template'      => 'product-new',
         'config'        => array(
+            'category' => array(
+                'title'        => _a('Category'),
+                'description'  => '',
+                'edit'         => 'Module\Shop\Form\Element\Category',
+                'filter'       => 'string',
+                'value'        => 0,
+            ),
             'number' => array(
                 'title'        => _a('Number'),
                 'description'  => '',

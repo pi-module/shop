@@ -10,7 +10,7 @@
                         <h4 class="p-name">
                             <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
                         </h4>
-                        <?php if(isset($product['price']) && $block['show-price'] && $block['config']['order_method'] != 'inactive') { ?>
+                        <?php if(isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
                             <div class="clearfix">
                                 <div class="productPrice p-price">
                                     <?php echo $this->escape($product['price_view']); ?>
