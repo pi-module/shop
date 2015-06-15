@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2015-06-11 12:29+0330\n"
+"POT-Creation-Date: 2015-06-15 20:20+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -24,7 +24,9 @@ msgid "New Product list"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:22
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:141
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:83
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:199
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:205
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:73
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:22
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:71
@@ -33,64 +35,95 @@ msgid "Category"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:29
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:110
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:90
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:151
 msgid "Number"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:36
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:73
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:117
-msgid "Show price"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:97
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:158
+msgid "Item list type"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:42
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:164
+msgid "Vertical"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:43
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:80
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:124
-msgid "Show More link to module page"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:165
+msgid "Horizontal"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:50
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:87
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:131
-msgid "Set More link to module page"
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:44
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:105
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:166
+msgid "List"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:45
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:106
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:167
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:220
+msgid "Slide"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:53
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:114
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:175
+msgid "Show price"
 msgstr ""
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:121
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:182
+msgid "Show More link to module page"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:67
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:128
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:189
+msgid "Set More link to module page"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:77
 msgid "Random Product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:78
 msgid "Random Product list"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:97
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:138
 msgid "Tag Product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:139
 msgid "Products from selected tag"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:144
 msgid "Tag term"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:142
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:200
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:39
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:108
 msgid "Category list"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:147
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:212
 msgid "Category show type"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:153
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:218
 msgid "Simple list"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:154
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:219
 msgid "Advanced list"
 msgstr ""
 

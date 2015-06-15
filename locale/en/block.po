@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-06-11 12:29+0330\n"
+"POT-Creation-Date: 2015-06-15 20:21+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -15,8 +15,15 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/shop\n"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-new.phtml:27
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-random.phtml:27
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-tag.phtml:27
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/category.phtml:28
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-new.phtml:80
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-random.phtml:80
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-tag.phtml:80
+msgid "View"
+msgstr ""
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-new.phtml:92
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-random.phtml:92
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-tag.phtml:92
 msgid "More products"
 msgstr ""

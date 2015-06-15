@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2015-06-11 12:30+0330\n"
+"POT-Creation-Date: 2015-06-15 20:21+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -24,7 +24,9 @@ msgid "New Product list"
 msgstr "فهرست محوصلات جدید"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:22
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:141
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:83
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:199
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:205
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:73
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:22
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:71
@@ -33,64 +35,95 @@ msgid "Category"
 msgstr "شاخه"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:29
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:110
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:90
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:151
 msgid "Number"
 msgstr "تعداد"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:36
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:73
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:117
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:97
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:158
+msgid "Item list type"
+msgstr "نوع فهرست"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:42
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:164
+msgid "Vertical"
+msgstr "عمودی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:43
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:104
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:165
+msgid "Horizontal"
+msgstr "افقی"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:44
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:105
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:166
+msgid "List"
+msgstr "فهرست"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:45
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:106
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:167
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:220
+msgid "Slide"
+msgstr "اسلاید"
+
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:53
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:114
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:175
 msgid "Show price"
 msgstr "نمایش قیمت"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:43
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:80
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:124
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:121
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:182
 msgid "Show More link to module page"
 msgstr "نمایش لینک ادامه به ماژول"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:50
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:87
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:131
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:67
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:128
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:189
 msgid "Set More link to module page"
 msgstr "درج لینک ادامه به ماژول"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:60
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:77
 msgid "Random Product"
 msgstr "محصولات تصادفی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:61
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:78
 msgid "Random Product list"
 msgstr "فهرست محصولات تصادفی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:97
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:138
 msgid "Tag Product"
 msgstr "محصولات بر اساس برچسب"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:98
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:139
 msgid "Products from selected tag"
 msgstr "فهرست محصولات بر اساس برچسب انتخابی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:103
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:144
 msgid "Tag term"
 msgstr "واژه برچسب"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:142
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:200
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/navigation.php:39
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/page.php:108
 msgid "Category list"
 msgstr "فهرست شاخه ها"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:147
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:212
 msgid "Category show type"
 msgstr "نوع نمایش شاخه بندی"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:153
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:218
 msgid "Simple list"
 msgstr "فهرست ساده"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:154
+#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/block.php:219
 msgid "Advanced list"
 msgstr "فهرست پیشرفته"
 
@@ -161,7 +194,9 @@ msgstr "ویجت های صفحه اول"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:83
 msgid "Put widget name here, Use `|` as delimiter to separate widgets"
-msgstr "نام ویجت را وارد کنید ، با استفاده از جدا کننده `|` ویجت ها را از هم جدا کنید."
+msgstr ""
+"نام ویجت را وارد کنید ، با استفاده از جدا کننده `|` ویجت ها را از هم جدا "
+"کنید."
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/config/config.php:89
 msgid "Homepage title"
@@ -761,7 +796,8 @@ msgstr "کاربر"
 #~ msgstr "کلاس برای ابعدا تصویر"
 
 #~ msgid "Bootstrap 3 grid options like : col-xs-6 col-sm-6 col-md-3"
-#~ msgstr "بر اساس سیستم گرید بوت استرپ ۳ ، به طور مثال : col-xs-6 col-sm-6 col-md-3"
+#~ msgstr ""
+#~ "بر اساس سیستم گرید بوت استرپ ۳ ، به طور مثال : col-xs-6 col-sm-6 col-md-3"
 
 #~ msgid "News"
 #~ msgstr "اخبار"
@@ -779,7 +815,8 @@ msgstr "کاربر"
 #~ msgstr "تبلیغات"
 
 #~ msgid "Set topic as system page for support customise layout for blocks"
-#~ msgstr "قراردادن موضوعات به عنوان یک صفحه سیستم برای شخصی سازی تنظیم بلاک و ویجت"
+#~ msgstr ""
+#~ "قراردادن موضوعات به عنوان یک صفحه سیستم برای شخصی سازی تنظیم بلاک و ویجت"
 
 #~ msgid "Set story authors"
 #~ msgstr "تنظیم پدیدآورنده های مطلب"
@@ -789,9 +826,6 @@ msgstr "کاربر"
 
 #~ msgid "Show Style"
 #~ msgstr "نسبک نمایش"
-
-#~ msgid "List"
-#~ msgstr "فهرست"
 
 #~ msgid "Media"
 #~ msgstr "مدیا"
@@ -839,7 +873,8 @@ msgstr "کاربر"
 #~ msgstr "فقط نمایش مطالب مربوط به X روز گذشته"
 
 #~ msgid "Set 0 for show all news, Or set day number for limit news in days"
-#~ msgstr "برای نمایش همه مطالب ۰ وارد کنید و یا محدوده روز های اخیر را مشخص کنید"
+#~ msgstr ""
+#~ "برای نمایش همه مطالب ۰ وارد کنید و یا محدوده روز های اخیر را مشخص کنید"
 
 #~ msgid "Feed number"
 #~ msgstr "تعداد در صفحه خوراک"
