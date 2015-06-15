@@ -1,11 +1,48 @@
 <div class="shop-block">
     <?php if ($block['type'] == 'simple') { ?>
         <div class="shop-block-category clearfix">
-            <ul class="nav nav-pills nav-stacked">
+            <ul class="list-group">
                 <?php foreach($block['resources'] as $category) { ?>
-                    <li><a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a></li>
+                    <li class="list-group-item">
+                        <a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a>
+                    </li>
                 <?php } ?>
             </ul>
+        </div>
+    <?php } elseif($block['type'] == 'slide') { ?>
+        <?php
+        $script =<<<'EOT'
+$(document).ready(function() {
+    $('.hover-captions').hover(
+        function(){
+            $(this).find('.hover-caption').slideDown(250);
+        },
+        function(){
+            $(this).find('.hover-caption').slideUp(250);
+        }
+    );
+});
+EOT;
+        $this->jQuery();
+        $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
+        $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
+        $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
+        $this->footScript()->appendScript($script);
+        ?>
+        <div class="owl-carousel text-center clearfix hover-captions-container">
+            <?php foreach($block['resources'] as $category) { ?>
+                <div class="item hover-captions hover-captions-slide">
+                    <div class="hover-caption">
+                        <h3><?php echo $this->escape($category['title']); ?></h3>
+                        <p>
+                            <a class="u-url hover-caption-more" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['itemUrl']); ?>">
+                                <?php echo $this->escape($category['title']); ?>
+                            </a>
+                        </p>
+                    </div>
+                    <img class="media-object img-rounded img-responsive u-photo" src="<?php echo $category['largeUrl']; ?>" alt="<?php echo $this->escape($category['title']); ?>">
+                </div>
+            <?php } ?>
         </div>
     <?php } elseif($block['type'] == 'advanced') { ?>
         <?php $this->css($this->assetModule('css/tree.css', 'shop')); ?>
