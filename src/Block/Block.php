@@ -27,7 +27,10 @@ class Block
         // Set info
         $order = array('time_create DESC', 'id DESC');
         $limit = intval($block['number']);
-        if (!empty($block['category'])) {
+        if (isset($block['category']) &&
+            !empty($block['category']) &&
+            !in_array(0, $block['category'])
+        ) {
             // Set info
             $where = array(
                 'status'      => 1,
@@ -69,7 +72,10 @@ class Block
         // Set info
         $order = array(new Expression('RAND()'));
         $limit = intval($block['number']);
-        if (!empty($block['category'])) {
+        if (isset($block['category']) &&
+            !empty($block['category']) &&
+            !in_array(0, $block['category'])
+        ) {
             // Set info
             $where = array(
                 'status'      => 1,
@@ -119,7 +125,7 @@ class Block
             if (!empty($tagId)) {
                 // Set info
                 $where = array('status' => 1, 'id' => $tagId);
-                $order = array(new \Zend\Db\Sql\Predicate\Expression('RAND()'));
+                $order = array(new Expression('RAND()'));
                 $limit = intval($block['number']);
                 // Get list of product
                 $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
@@ -142,21 +148,15 @@ class Block
         $block = array_merge($block, $options);
         // Set info
         $order = array('display_order DESC', 'id DESC');
-        $columns = array('id', 'parent', 'title', 'slug');
         $where = array('status' => 1);
         if (!empty($block['category']) && !in_array(0, $block['category'])) {
             $where['id'] = $block['category'];
         }
         // Select
-        $select = Pi::model('category', $module)->select()->columns($columns)->where($where)->order($order);
+        $select = Pi::model('category', $module)->select()->where($where)->order($order);
         $rowset = Pi::model('category', $module)->selectWith($select);
         foreach ($rowset as $row) {
-            $category[$row->id] = $row->toArray();
-            $category[$row->id]['url'] = Pi::url(Pi::service('url')->assemble('shop', array(
-                'module'        => $module,
-                'controller'    => 'category',
-                'slug'          => $category[$row->id]['slug'],
-            )));
+            $category[$row->id] = Pi::api('category', 'shop')->canonizeCategory($row);
         }
         // Set block array
         $block['resources'] = $category;

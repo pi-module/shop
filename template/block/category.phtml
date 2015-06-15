@@ -4,7 +4,7 @@
             <ul class="list-group">
                 <?php foreach($block['resources'] as $category) { ?>
                     <li class="list-group-item">
-                        <a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a>
+                        <a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['categoryUrl']); ?>"><?php echo $this->escape($category['title']); ?></a>
                     </li>
                 <?php } ?>
             </ul>
@@ -35,12 +35,12 @@ EOT;
                     <div class="hover-caption">
                         <h3><?php echo $this->escape($category['title']); ?></h3>
                         <p>
-                            <a class="u-url hover-caption-more" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['itemUrl']); ?>">
-                                <?php echo $this->escape($category['title']); ?>
+                            <a class="u-url hover-caption-more" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                <?php echo _b('View'); ?>
                             </a>
                         </p>
                     </div>
-                    <img class="media-object img-rounded img-responsive u-photo" src="<?php echo $category['largeUrl']; ?>" alt="<?php echo $this->escape($category['title']); ?>">
+                    <img class="media-object img-responsive u-photo" src="<?php echo $category['largeUrl']; ?>" alt="<?php echo $this->escape($category['title']); ?>">
                 </div>
             <?php } ?>
         </div>

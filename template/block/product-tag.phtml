@@ -89,11 +89,11 @@ EOT;
                             <h3><?php echo $this->escape($product['title']); ?></h3>
                             <p>
                                 <a class="u-url hover-caption-more" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['itemUrl']); ?>">
-                                    <?php echo $this->escape($product['title']); ?>
+                                    <?php echo _b('View'); ?>
                                 </a>
                             </p>
                         </div>
-                        <img class="media-object img-rounded img-responsive u-photo" src="<?php echo $product['largeUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>">
+                        <img class="media-object img-responsive u-photo" src="<?php echo $product['largeUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>">
                     </div>
                 <?php } ?>
             </div>
