@@ -32,6 +32,23 @@ return array(
                 'filter'       => 'number_int',
                 'value'        => 10,
             ),
+            'list-type' => array(
+                'title'        => _a('Item list type'),
+                'description'  => '',
+                'edit'         => array(
+                    'type'     => 'select',
+                    'options'  => array(
+                        'options'         => array(
+                            'vertical'    => _a('Vertical'),
+                            'horizontal'  => _a('Horizontal'),
+                            'list'        => _a('List'),
+                            'slide'       => _a('Slide'),
+                        ),
+                    ),
+                ),
+                'filter'       => 'text',
+                'value'        => 'vertical',
+            ),
             'show-price' => array(
                 'title'        => _a('Show price'),
                 'description'  => '',
@@ -62,12 +79,36 @@ return array(
         'render'        => array('block', 'productRandom'),
         'template'      => 'product-random',
         'config'        => array(
+            'category' => array(
+                'title'        => _a('Category'),
+                'description'  => '',
+                'edit'         => 'Module\Shop\Form\Element\Category',
+                'filter'       => 'string',
+                'value'        => 0,
+            ),
             'number' => array(
                 'title'        => _a('Number'),
                 'description'  => '',
                 'edit'         => 'text',
                 'filter'       => 'number_int',
                 'value'        => 10,
+            ),
+            'list-type' => array(
+                'title'        => _a('Item list type'),
+                'description'  => '',
+                'edit'         => array(
+                    'type'     => 'select',
+                    'options'  => array(
+                        'options'         => array(
+                            'vertical'    => _a('Vertical'),
+                            'horizontal'  => _a('Horizontal'),
+                            'list'        => _a('List'),
+                            'slide'       => _a('Slide'),
+                        ),
+                    ),
+                ),
+                'filter'       => 'text',
+                'value'        => 'vertical',
             ),
             'show-price' => array(
                 'title'        => _a('Show price'),
@@ -112,6 +153,23 @@ return array(
                 'edit'         => 'text',
                 'filter'       => 'number_int',
                 'value'        => 10,
+            ),
+            'list-type' => array(
+                'title'        => _a('Item list type'),
+                'description'  => '',
+                'edit'         => array(
+                    'type'     => 'select',
+                    'options'  => array(
+                        'options'         => array(
+                            'vertical'    => _a('Vertical'),
+                            'horizontal'  => _a('Horizontal'),
+                            'list'        => _a('List'),
+                            'slide'       => _a('Slide'),
+                        ),
+                    ),
+                ),
+                'filter'       => 'text',
+                'value'        => 'vertical',
             ),
             'show-price' => array(
                 'title'        => _a('Show price'),

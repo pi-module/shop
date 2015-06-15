@@ -1,24 +1,101 @@
 <div class="shop-block">
     <div class="shop-block-product clearfix">
-        <?php foreach($block['resources'] as $product) { ?>
-            <div class="col-sm-4 col-md-3 productBox h-product">
-                <div class="thumbnail">
-                    <?php if($product['image']) { ?>
-                        <a class="u-photo" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
-                    <?php } ?>
-                    <div class="caption">
-                        <h4 class="p-name">
-                            <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
-                        </h4>
-                        <?php if(isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
-                            <div class="clearfix">
-                                <div class="productPrice p-price">
-                                    <?php echo $this->escape($product['price_view']); ?>
-                                </div>
-                            </div>
+        <?php if($block['list-type'] == 'vertical') { ?>
+            <?php foreach($block['resources'] as $product) { ?>
+                <div class="col-sm-4 col-md-3 productBox h-product">
+                    <div class="thumbnail">
+                        <?php if($product['image']) { ?>
+                            <a class="u-photo" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>">
+                                <img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" />
+                            </a>
                         <?php } ?>
+                        <div class="caption">
+                            <h4 class="p-name">
+                                <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>">
+                                    <?php echo $this->escape($product['title']); ?>
+                                </a>
+                            </h4>
+                            <?php if(isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
+                                <div class="clearfix">
+                                    <div class="productPrice p-price">
+                                        <?php echo $this->escape($product['price_view']); ?>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
+            <?php } ?>
+        <?php } elseif($block['list-type'] == 'horizontal') { ?>
+            <?php foreach($block['resources'] as $product) { ?>
+                <div class="col-sm-12 col-md-12 productBox h-product">
+                    <div class="thumbnail">
+                        <?php if($product['image']) { ?>
+                            <a class="u-photo" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>">
+                                <img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" />
+                            </a>
+                        <?php } ?>
+                        <div class="caption">
+                            <h4 class="p-name">
+                                <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>">
+                                    <?php echo $this->escape($product['title']); ?>
+                                </a>
+                            </h4>
+                            <?php if(isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
+                                <div class="clearfix">
+                                    <div class="productPrice p-price">
+                                        <?php echo $this->escape($product['price_view']); ?>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } elseif($block['list-type'] == 'list') { ?>
+            <ul class="list-unstyled list-group">
+                <?php foreach($block['resources'] as $product) { ?>
+                    <li class="p-name list-group-item">
+                        <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>">
+                            <?php echo $this->escape($product['title']); ?>
+                        </a>
+                    </li>
+                <?php } ?>
+            </ul>
+        <?php } elseif($block['list-type'] == 'slide') { ?>
+            <?php
+            $script =<<<'EOT'
+$(document).ready(function() {
+    $('.hover-captions').hover(
+        function(){
+            $(this).find('.hover-caption').slideDown(250);
+        },
+        function(){
+            $(this).find('.hover-caption').slideUp(250);
+        }
+    );
+});
+EOT;
+            $this->jQuery();
+            $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
+            $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
+            $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
+            $this->footScript()->appendScript($script);
+            ?>
+            <div class="owl-carousel itemImageAttach text-center clearfix hover-captions-container">
+                <?php foreach($block['resources'] as $product) { ?>
+                    <div class="item hover-captions hover-captions-slide">
+                        <div class="hover-caption">
+                            <h3><?php echo $this->escape($product['title']); ?></h3>
+                            <p>
+                                <a class="u-url hover-caption-more" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['itemUrl']); ?>">
+                                    <?php echo $this->escape($product['title']); ?>
+                                </a>
+                            </p>
+                        </div>
+                        <img class="media-object img-rounded img-responsive u-photo" src="<?php echo $product['largeUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>">
+                    </div>
+                <?php } ?>
             </div>
         <?php } ?>
     </div>

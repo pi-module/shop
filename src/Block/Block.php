@@ -67,9 +67,28 @@ class Block
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
         $product = array();
         // Set info
-        $where = array('status' => 1);
-        $order = array(new \Zend\Db\Sql\Predicate\Expression('RAND()'));
+        $order = array(new Expression('RAND()'));
         $limit = intval($block['number']);
+        if (!empty($block['category'])) {
+            // Set info
+            $where = array(
+                'status'      => 1,
+                'category'    => $block['category'],
+            );
+            // Set info
+            $columns = array('product' => new Expression('DISTINCT product'));
+            // Get info from link table
+            $select = Pi::model('link', $module)->select()->where($where)->columns($columns)->order($order)->limit($limit);
+            $rowset = Pi::model('link', $module)->selectWith($select)->toArray();
+            // Make list
+            foreach ($rowset as $id) {
+                $productId[] = $id['product'];
+            }
+            // Set info
+            $where = array('status' => 1, 'id' => $productId);
+        } else {
+            $where = array('status' => 1);
+        }
         // Get list of product
         $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
         $rowset = Pi::model('product', $module)->selectWith($select);
