@@ -144,6 +144,10 @@ class Block
         $order = array('display_order DESC', 'id DESC');
         $columns = array('id', 'parent', 'title', 'slug');
         $where = array('status' => 1);
+        if (!empty($block['category']) && !in_array(0, $block['category'])) {
+            $where['id'] = $block['category'];
+        }
+        // Select
         $select = Pi::model('category', $module)->select()->columns($columns)->where($where)->order($order);
         $rowset = Pi::model('category', $module)->selectWith($select);
         foreach ($rowset as $row) {

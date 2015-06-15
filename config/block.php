@@ -201,6 +201,13 @@ return array(
         'render'        => array('block', 'category'),
         'template'      => 'category',
         'config'        => array(
+            'category' => array(
+                'title'        => _a('Category'),
+                'description'  => '',
+                'edit'         => 'Module\Shop\Form\Element\Category',
+                'filter'       => 'string',
+                'value'        => 0,
+            ),
             'type' => array(
                 'title'        => _a('Category show type'),
                 'description'  => '',
@@ -208,8 +215,9 @@ return array(
                     'type' => 'select',
                     'options' => array(
                         'options' => array(
-                            'simple' => _a('Simple list'),
-                            'advanced' => _a('Advanced list'),
+                            'simple'    => _a('Simple list'),
+                            'advanced'  => _a('Advanced list'),
+                            'slide'     => _a('Slide'),
                         ),
                     ),
                 ),
