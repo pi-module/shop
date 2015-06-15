@@ -13,13 +13,10 @@
                 </a>
             </h3>
             <?php if(isset($product['price']) && $config['view_price'] && $config['order_active']) { ?>
-                <div class="clearfix">
+                <div class="clearfix text-center">
                     <?php if($product['stock_type'] == 1 && $product['stock'] > 0) { ?>
-                        <div class="pull-left productPrice p-price">
+                        <div class="productPrice p-price">
                             <strong><?php echo $this->escape($product['price_view']); ?></strong>
-                        </div>
-                        <div class="pull-right">
-                            <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> <?php _e('View'); ?></a>
                         </div>
                     <?php } elseif ($product['stock_type'] != 1) { ?>
                         <div class="label label-danger">
