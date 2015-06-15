@@ -11,23 +11,11 @@
         </div>
     <?php } elseif($block['type'] == 'slide') { ?>
         <?php
-        $script =<<<'EOT'
-$(document).ready(function() {
-    $('.hover-captions').hover(
-        function(){
-            $(this).find('.hover-caption').slideDown(250);
-        },
-        function(){
-            $(this).find('.hover-caption').slideUp(250);
-        }
-    );
-});
-EOT;
         $this->jQuery();
         $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
         $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
+        $this->js($this->assetModule('js/caption.hover.js', 'shop'));
         $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
-        $this->footScript()->appendScript($script);
         ?>
         <div class="owl-carousel text-center clearfix hover-captions-container">
             <?php foreach($block['resources'] as $category) { ?>
