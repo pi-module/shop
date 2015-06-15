@@ -8,19 +8,27 @@
         <tr>
             <th><?php _e('ID'); ?></th>
             <th><?php _e('Title'); ?></th>
+            <th><?php _e('Display order'); ?></th>
             <th><?php _e('Action'); ?></th>
         </tr>
         <?php foreach($list as $category) { ?>
             <?php
             if($category['status'] == 1) {
                 $labelIdClass = 'label-success';
-            } else {
+            } elseif($category['status'] == 2) {
                 $labelIdClass = 'label-warning';
+            } elseif($category['status'] == 3) {
+                $labelIdClass = 'label-warning';
+            } elseif($category['status'] == 4) {
+                $labelIdClass = 'label-warning';
+            } elseif($category['status'] == 5) {
+                $labelIdClass = 'label-danger';
             }
             ?>
             <tr>
                 <td><span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($category['id']); ?></span></td>
                 <td><?php echo $this->escape($category['title']); ?></td>
+                <td><?php echo $this->escape($category['display_order']); ?></td>
                 <td>
                     <a class="btn btn-primary" title="<?php _e('View'); ?>" href="<?php echo $category['url']; ?>"><i class="fa fa-edit"></i> <?php _e('View'); ?></a>
                     <a class="btn btn-primary" title="<?php _e('Edit'); ?>" href="<?php echo $this->url('', array('action' => 'update', 'id' => $category['id'])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
@@ -29,4 +37,11 @@
         <?php } ?>
     </table>
     <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
+    <p>
+        <span class="label label-success"><?php _e('Published'); ?></span>
+        <span class="label label-warning"><?php _e('Pending review'); ?></span>
+        <span class="label label-warning"><?php _e('Draft'); ?></span>
+        <span class="label label-warning"><?php _e('Private'); ?></span>
+        <span class="label label-danger"><?php _e('Trash'); ?></span>
+    </p>
 </div>

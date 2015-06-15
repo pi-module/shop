@@ -141,9 +141,10 @@ class Block
         $block = array();
         $block = array_merge($block, $options);
         // Set info
+        $order = array('display_order DESC', 'id DESC');
         $columns = array('id', 'parent', 'title', 'slug');
         $where = array('status' => 1);
-        $select = Pi::model('category', $module)->select()->columns($columns)->where($where);
+        $select = Pi::model('category', $module)->select()->columns($columns)->where($where)->order($order);
         $rowset = Pi::model('category', $module)->selectWith($select);
         foreach ($rowset as $row) {
             $category[$row->id] = $row->toArray();

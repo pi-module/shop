@@ -89,7 +89,7 @@ class CategoryController extends IndexController
         // Set info
         $categories = array();
         $where = array('status' => 1);
-        $order = array('title DESC', 'id DESC');
+        $order = array('display_order DESC', 'id DESC');
         $select = $this->getModel('category')->select()->order($order);
         $rowset = $this->getModel('category')->selectWith($select);
         // Make list

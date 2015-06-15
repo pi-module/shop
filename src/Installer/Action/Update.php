@@ -410,6 +410,22 @@ EOD;
             }
         }
 
+        // Update to version 1.1.6
+        if (version_compare($moduleVersion, '1.1.6', '<')) {
+            // Alter table : ADD display_order
+            $sql = sprintf("ALTER TABLE %s ADD `display_order` int(10) unsigned NOT NULL default '0' , ADD INDEX (`display_order`) ", $categoryTable);
+            try {
+                $categoryAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }    
 }

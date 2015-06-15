@@ -28,14 +28,6 @@ class CategoryController extends ActionController
     protected $ImageCategoryPrefix = 'category_';
 
     /**
-     * Category Columns
-     */
-    protected $categoryColumns = array(
-        'id', 'parent', 'title', 'slug', 'image', 'path', 'text_description',
-        'time_create', 'time_update', 'seo_title', 'seo_keywords', 'seo_description', 'setting', 'status'
-    );
-
-    /**
      * index Action
      */
     public function indexAction()
@@ -45,7 +37,7 @@ class CategoryController extends ActionController
         $module = $this->params('module');
         // Get info
         $list = array();
-        $columns = array('id', 'title', 'slug', 'status');
+        $columns = array('id', 'title', 'slug', 'status', 'display_order');
         $order = array('id DESC', 'time_create DESC');
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit = intval($this->config('admin_perpage'));
@@ -143,12 +135,6 @@ class CategoryController extends ActionController
                     }
                 } elseif (!isset($values['image'])) {
                     $values['image'] = '';  
-                }
-                // Set just category fields
-                foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->categoryColumns)) {
-                        unset($values[$key]);
-                    }
                 }
                 // Set seo_title
                 $title = ($values['seo_title']) ? $values['seo_title'] : $values['title'];

@@ -94,6 +94,18 @@ class CategoryForm  extends BaseForm
                 'description' => '',
             )
         ));
+        // display_order
+        $this->add(array(
+            'name' => 'display_order',
+            'options' => array(
+                'label' => __('Display order'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+                'required'  => false,
+            )
+        ));
         // status
         $this->add(array(
             'name' => 'status',

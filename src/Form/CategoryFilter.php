@@ -66,6 +66,11 @@ class CategoryFilter extends InputFilter
                 ),
             ),
         ));
+        // display_order
+        $this->add(array(
+            'name' => 'display_order',
+            'required' => false,
+        ));
         // status
         $this->add(array(
             'name' => 'status',

@@ -57,13 +57,15 @@ CREATE TABLE `{category}` (
   `time_update`      INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `setting`          TEXT,
   `status`           TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+  `display_order`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `parent` (`parent`),
   KEY `title` (`title`),
   KEY `time_create` (`time_create`),
   KEY `status` (`status`),
-  KEY `category_list` (`status`, `parent`, `id`)
+  KEY `display_order` (`display_order`),
+  KEY `category_list` (`status`, `parent`, `display_order`, `id`)
 );
 
 CREATE TABLE `{link}` (
