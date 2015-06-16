@@ -1,12 +1,25 @@
 <?php if (isset($related) && !empty($related)) { ?>
-    <div class="productRelated productList clearfix">
+    <div class="productRelated itemList clearfix">
+        <div class="page-header">
+            <h2><?php _e('Related Products'); ?></h2>
+        </div>
         <div class="row">
-            <div class="page-header">
-                <h4><?php _e('Related Products'); ?></h4>
-            </div>
             <ul class="thumbnails">
                 <?php foreach($related as $product) { ?>
-                    <?php include $this->template('front/box'); ?>
+                    <div class="col-sm-12 col-md-3 itemBox h-review">
+                        <div class="thumbnail p-item h-card">
+                            <?php if($product['image']) { ?>
+                                <a class="u-url" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['itemUrl']); ?>">
+                                    <img class="img-responsive u-photo" src="<?php echo $this->escape($product['mediumUrl']); ?>" alt="<?php echo $this->escape($product['title']); ?>" />
+                                </a>
+                            <?php } ?>
+                            <h3 class="p-name">
+                                <a class="u-url" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['itemUrl']); ?>">
+                                    <?php echo $this->escape($product['title']); ?>
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
                 <?php } ?>
             </ul>
         </div>

@@ -160,14 +160,14 @@ class Block
         }
         // Set block array
         $block['resources'] = $category;
-        if ($block['type'] == 'advanced') {
+        /* if ($block['type'] == 'advanced') {
             $block['tree'] = self::getTree($category);
             $block['treeHtml'] = self::getTreeHtml($block['tree']);
-        }
+        } */
         return $block;
     }
 
-    public static function getTree($elements, $parentId = 0)
+    /* public static function getTree($elements, $parentId = 0)
     {
         $category = array();
         foreach ($elements as $element) {
@@ -193,9 +193,9 @@ class Block
             }
         }
         return $category;
-    }
+    } */
 
-    public static function getTreeHtml($list)
+    /* public static function getTreeHtml($list)
     {
         $html = '<ul class="nav nav-pills">' . PHP_EOL;
         foreach ($list as $sub) {
@@ -208,5 +208,5 @@ class Block
         }
         $html .= '</ul>' . PHP_EOL;
         return $html;
-    }
+    } */
 }
