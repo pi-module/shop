@@ -45,7 +45,7 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
                 <h1 class="p-name"><?php echo $this->escape($productItem['title']); ?></h1>
             </div>
             <div class="productInfoBox clearfix">
-                <div class="productPrice"><?php include $this->template('front/price'); ?></div>
+                <div class="productPrice"><?php include $this->template('front/product_price'); ?></div>
             </div>
         </div>
         <div class="col-md-12">
@@ -88,3 +88,4 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
         </div>
     </div>
 </div>
+<pre><?php print_r($property); ?></pre>

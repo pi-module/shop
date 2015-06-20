@@ -7,16 +7,20 @@
                 <?php if ($propertyList['type'] == 'checkbox') { ?>
                     <div class="col-sm-9">
                         <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
-                            <label class="radio-inline input-sm">
-                                <input type="radio" name="property[<?php echo $this->escape($propertyList['id']); ?>]" value="<?php echo $this->escape($propertyValue['name']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
-                            </label>
+                            <?php if ($propertyValue['stock'] > 0) { ?>
+                                <label class="radio-inline input-sm">
+                                    <input type="radio" name="property[<?php echo $this->escape($propertyList['id']); ?>]" value="<?php echo $this->escape($propertyValue['name']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
+                                </label>
+                            <?php } ?>
                         <?php } ?>
                     </div>
                 <?php } elseif ($propertyList['type'] == 'selectbox') { ?>
                     <div class="col-sm-8">
                         <select name="property[<?php echo $this->escape($propertyList['id']); ?>]" class="form-control input-sm">
                             <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
-                                <option value="<?php echo $this->escape($propertyValue['name']); ?>"><?php echo $this->escape($propertyValue['name']); ?></option>
+                                <?php if ($propertyValue['stock'] > 0) { ?>
+                                    <option value="<?php echo $this->escape($propertyValue['name']); ?>"><?php echo $this->escape($propertyValue['name']); ?></option>
+                                <?php } ?>
                             <?php } ?>
                         </select>
                     </div>

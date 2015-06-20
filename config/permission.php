@@ -72,6 +72,12 @@ return array(
                 //'admin',
             ),
         ),
+        'discount'      => array(
+            'title'         => _a('Discount'),
+            'access'        => array(
+                //'admin',
+            ),
+        ),
         'attach'         => array(
             'title'         => _a('Attach'),
             'access'        => array(

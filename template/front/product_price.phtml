@@ -8,9 +8,9 @@
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <strong><?php _e('Price'); ?> : </strong>
                     <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
-                        <span class="text-danger">
+                        <div class="text-danger">
                             <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
-                        </span>
+                        </div>
                     <?php } ?>
                     <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
                 </div>
@@ -22,19 +22,24 @@
                         <?php include $this->template('front/product_order'); ?>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-12">
-                        <strong><?php _e('Stock status'); ?> : </strong>
-                        <span class="text-success"><?php _e('In stock'); ?></span>
-
+                        <div class="clearfix">
+                            <strong><?php _e('Stock status'); ?> : </strong>
+                            <span class="text-success"><?php _e('In stock'); ?></span>
+                        </div>
                         <strong><?php _e('Price'); ?> : </strong>
                         <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
-                            <span class="text-danger"><del><?php echo $this->escape($productItem['price_discount_view']); ?></del></span>
+                            <div class="text-danger">
+                                <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+                            </div>
                         <?php } ?>
                         <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
                     </div>
                 </div>
             <?php } else { ?>
-                <strong><?php _e('Stock status'); ?> : </strong>
-                <span class="text-danger"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                <div class="clearfix">
+                    <strong><?php _e('Stock status'); ?> : </strong>
+                    <span class="text-danger"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                </div>
             <?php } ?>
         <?php } elseif ($config['order_stock'] == 'product') { ?>
             <?php if($productItem['stock'] > 0) { ?>
@@ -43,18 +48,24 @@
                         <?php include $this->template('front/product_order'); ?>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-12">
-                        <strong><?php _e('Stock status'); ?> : </strong>
-                        <span class="text-success"><?php _e('In stock'); ?></span>
+                        <div class="clearfix">
+                            <strong><?php _e('Stock status'); ?> : </strong>
+                            <span class="text-success"><?php _e('In stock'); ?></span>
+                        </div>
                         <strong><?php _e('Price'); ?> : </strong>
                         <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
-                            <span class="text-danger"><del><?php echo $this->escape($productItem['price_discount_view']); ?></del></span>
+                            <div class="text-danger">
+                                <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+                            </div>
                         <?php } ?>
                         <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
                     </div>
                 </div>
             <?php } else { ?>
-                <strong><?php _e('Stock status'); ?> : </strong>
-                <span class="text-danger"><?php _e('Out of stock'); ?></span>
+                <div class="clearfix">
+                    <strong><?php _e('Stock status'); ?> : </strong>
+                    <span class="text-danger"><?php _e('Out of stock'); ?></span>
+                </div>
             <?php } ?>
         <?php } elseif ($config['order_stock'] == 'property') { ?>
             <div class="clearfix">
@@ -64,7 +75,9 @@
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <strong><?php _e('Price'); ?> : </strong>
                     <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
-                        <span class="text-danger"><del><?php echo $this->escape($productItem['price_discount_view']); ?></del></span>
+                        <div class="text-danger">
+                            <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+                        </div>
                     <?php } ?>
                     <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
                 </div>

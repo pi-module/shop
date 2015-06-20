@@ -23,7 +23,6 @@ return array(
             'action'        => 'index',
         ),
 
-
         'search' => array(
             'label'         => _a('Search'),
             'permission'    => array(
@@ -110,6 +109,17 @@ return array(
             'route'         => 'admin',
             'module'        => 'shop',
             'controller'    => 'property',
+            'action'        => 'index',
+        ),
+
+        'discount' => array(
+            'label'         => _a('Discount'),
+            'permission'    => array(
+                'resource'  => 'discount',
+            ),
+            'route'         => 'admin',
+            'module'        => 'shop',
+            'controller'    => 'discount',
             'action'        => 'index',
         ),
 

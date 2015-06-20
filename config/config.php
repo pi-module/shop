@@ -443,6 +443,14 @@ return array(
             'filter'       => 'text',
             'value'        => 'never',
         ),
+        'order_discount' => array(
+            'category'     => 'order',
+            'title'        => _a('Active discount system'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
         // Texts
         'text_title_search' => array(
             'category'     => 'head_meta',

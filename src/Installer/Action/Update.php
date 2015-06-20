@@ -426,6 +426,36 @@ EOD;
             }
         }
 
+        // Update to version 1.1.8
+        if (version_compare($moduleVersion, '1.1.8', '<')) {
+            // Add table of discount
+            $sql =<<<'EOD'
+CREATE TABLE `{discount}` (
+  `id`      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title`   VARCHAR(255)        NOT NULL DEFAULT '',
+  `role`    VARCHAR(64)      NOT NULL DEFAULT 'member',
+  `percent` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
+  `status`  TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `role` (`role`),
+  KEY `status` (`status`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status'    => false,
+                    'message'   => 'SQL schema query for author table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+        }
+
         return true;
     }    
 }

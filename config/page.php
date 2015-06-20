@@ -39,6 +39,11 @@ return array(
             'permission'    => 'property',
         ),
         array(
+            'label'         => _a('Discount'),
+            'controller'    => 'discount',
+            'permission'    => 'discount',
+        ),
+        array(
             'label'         => _a('Attach'),
             'controller'    => 'attach',
             'permission'    => 'attach',

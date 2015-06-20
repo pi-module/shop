@@ -341,6 +341,24 @@ class Product extends AbstractApi
                 'slug'          => $categoryList[$category]['slug'],
             )));
         }
+        // Set discount
+        if ($config['order_discount']) {
+            $userDiscunt = 0;
+            $uid = Pi::user()->getId();
+            $roles = Pi::user()->getRole($uid);
+            $discounts = Pi::api('discount', 'shop')->getList();
+            if (!empty($discounts)) {
+                foreach ($discounts as $discount) {
+                    if (in_array($discount['role'], $roles)) {
+                        $userDiscunt = $discount['percent'];
+                    }
+                }
+            }
+            if ($userDiscunt > 0) {
+                $product['price_discount'] = $product['price'];
+                $product['price'] = ($product['price'] - ($product['price'] * ($userDiscunt / 100)));
+            }
+        }
         // Set price
         $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
         $product['price_discount_view'] = Pi::api('api', 'shop')->viewPrice($product['price_discount']);
@@ -426,6 +444,24 @@ class Product extends AbstractApi
             'action'        => 'add',
             //'slug'          => $product['slug'],
         )));
+        // Set discount
+        if ($config['order_discount']) {
+            $userDiscunt = 0;
+            $uid = Pi::user()->getId();
+            $roles = Pi::user()->getRole($uid);
+            $discounts = Pi::api('discount', 'shop')->getList();
+            if (!empty($discounts)) {
+                foreach ($discounts as $discount) {
+                    if (in_array($discount['role'], $roles)) {
+                        $userDiscunt = $discount['percent'];
+                    }
+                }
+            }
+            if ($userDiscunt > 0) {
+                $product['price_discount'] = $product['price'];
+                $product['price'] = ($product['price'] - ($product['price'] * ($userDiscunt / 100)));
+            }
+        }
         // Set price
         $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
         $product['price_discount_view'] = Pi::api('api', 'shop')->viewPrice($product['price_discount']);
@@ -543,6 +579,24 @@ class Product extends AbstractApi
             'action'        => 'add',
             'id'            => $id['slug'],
         )));
+        // Set discount
+        if ($config['order_discount']) {
+            $userDiscunt = 0;
+            $uid = Pi::user()->getId();
+            $roles = Pi::user()->getRole($uid);
+            $discounts = Pi::api('discount', 'shop')->getList();
+            if (!empty($discounts)) {
+                foreach ($discounts as $discount) {
+                    if (in_array($discount['role'], $roles)) {
+                        $userDiscunt = $discount['percent'];
+                    }
+                }
+            }
+            if ($userDiscunt > 0) {
+                $product['price_discount'] = $product['price'];
+                $product['price'] = ($product['price'] - ($product['price'] * ($userDiscunt / 100)));
+            }
+        }
         // Set price
         $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
         $product['price_discount_view'] = Pi::api('api', 'shop')->viewPrice($product['price_discount']);
