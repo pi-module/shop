@@ -187,6 +187,14 @@ return array(
             'filter'       => 'number_int',
             'value'        => 1
         ),
+        'view_question' => array(
+            'category'     => 'view',
+            'title'        => _a('Show fast question form'),
+            'description'  => '',
+            'edit'         => 'checkbox',
+            'filter'       => 'number_int',
+            'value'        => 1
+        ),
         // Image
         'image_size' => array(
             'category'     => 'image',

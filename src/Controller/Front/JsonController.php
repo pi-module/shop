@@ -101,10 +101,14 @@ class JsonController extends IndexController
 
     public function questionAction()
     {
+        // Get info from url
+        $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
         // Set view
         $this->view()->setTemplate(false)->setLayout('layout-content');
         // Check post
-        if ($this->request->isPost()) {
+        if ($this->request->isPost() && $config['view_question']) {
             // Get from post
             $data = $this->request->getPost();
             $data = $data->toArray();
