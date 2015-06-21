@@ -1,0 +1,23 @@
+[comment]User question[/comment]
+
+[format]html[/format]
+
+[subject]User question[/subject]
+
+[body]
+<div style="padding: 1px; direction: ltr;">
+	<h3 style="font-size: 1.1em;">Dear admin</h3>
+	<div style="padding: 3px; margin: 2px;">Your website user ask question about your product</div>
+	<div style="padding: 3px; margin: 2px;">
+        <p><strong>Name</strong> : <span>%name%</span></p>
+        <p><strong>Email</strong> : <span>%email%</span></p>
+        <p><strong>Question</strong> : <span>%question%</span></p>
+        <p><strong>Product name</strong> : <span>%title%</span></p>
+        <p><strong>Product id</strong> : <span>%id%</span></p>
+	</div>
+	<div style="padding: 3px; margin: 2px;">Dont reply to this email</div>
+	<div style="margin-top: 10px">
+        <a href="%site_url%" title="%site_name%">%site_name%</a>
+    </divp>
+</div>
+[/body]

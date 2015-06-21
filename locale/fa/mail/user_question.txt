@@ -1,0 +1,23 @@
+[comment]User question[/comment]
+
+[format]html[/format]
+
+[subject]سوال کاربر در مورد محصول[/subject]
+
+[body]
+<div style="padding: 1px; direction: ltr;">
+	<h3 style="font-size: 1.1em;">مدیر عزیز</h3>
+	<div style="padding: 3px; margin: 2px;">یک کاربر از وب سایت شما ، سوالی در مورد محصول به شرح زیر ارسال کرده است</div>
+	<div style="padding: 3px; margin: 2px;">
+        <p><strong>نام کاربر</strong> : <span>%name%</span></p>
+        <p><strong>ایمیل کاربر</strong> : <span>%email%</span></p>
+        <p><strong>سوال کاربر</strong> : <span>%question%</span></p>
+        <p><strong>نام محصول</strong> : <span>%title%</span></p>
+        <p><strong>شناسه محصول</strong> : <span>%id%</span></p>
+	</div>
+	<div style="padding: 3px; margin: 2px;">Dont reply to this email</div>
+	<div style="margin-top: 10px">
+        <a href="%site_url%" title="%site_name%">%site_name%</a>
+    </divp>
+</div>
+[/body]

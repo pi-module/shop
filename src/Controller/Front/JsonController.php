@@ -98,4 +98,48 @@ class JsonController extends IndexController
         $this->view()->setTemplate(false)->setLayout('layout-content');
         return Json::encode($productSingle);
     }
+
+    public function questionAction()
+    {
+        // Set view
+        $this->view()->setTemplate(false)->setLayout('layout-content');
+        // Check post
+        if ($this->request->isPost()) {
+            // Get from post
+            $data = $this->request->getPost();
+            $data = $data->toArray();
+            // Check notification module
+            if (Pi::service('module')->isActive('notification')) {
+                // Get admin main
+                $adminmail = Pi::config('adminmail');
+                $adminname = Pi::config('adminname');
+
+                // Set mail information
+                $information = array(
+                    'name'     => $data['name'],
+                    'email'    => $data['email'],
+                    'question' => $data['question'],
+                    'id'       => $data['id'],
+                    'title'    => $data['title'],
+                );
+
+                // Set toAdmin
+                $toAdmin = array(
+                    $adminmail => $adminname,
+                );
+
+                // Send mail to admin
+                Pi::api('mail', 'notification')->send(
+                    $toAdmin,
+                    'user_question',
+                    $information,
+                    Pi::service('module')->current()
+                );
+            }
+
+            echo '<pre>';
+            print_r($data);
+            echo '</pre>';
+        }
+    }
 }
