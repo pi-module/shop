@@ -137,9 +137,9 @@ class JsonController extends IndexController
                 );
             }
 
-            echo '<pre>';
-            print_r($data);
-            echo '</pre>';
+            // back
+            $message = __('Your question send to admin');
+            $this->jump($data['back'], $message);
         }
     }
 }
