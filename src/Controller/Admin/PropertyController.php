@@ -39,7 +39,7 @@ class PropertyController extends ActionController
             return $this->redirect()->toRoute('', array('action' => 'update'));
         }
         // Set view
-        $this->view()->setTemplate('property_index');
+        $this->view()->setTemplate('property-index');
         $this->view()->assign('list', $list);
     }
 
@@ -83,7 +83,7 @@ class PropertyController extends ActionController
             }
         }
         // Set view
-        $this->view()->setTemplate('property_update');
+        $this->view()->setTemplate('property-update');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Add property'));
     }

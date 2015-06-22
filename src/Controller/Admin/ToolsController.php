@@ -21,7 +21,7 @@ class ToolsController extends ActionController
     public function indexAction()
     {
         // Set template
-        $this->view()->setTemplate('tools_index');
+        $this->view()->setTemplate('tools-index');
     }
 
     public function sitemapAction()
@@ -48,7 +48,7 @@ class ToolsController extends ActionController
             $message = __('Sitemap rebuild finished');
         }    
         // Set view
-        $this->view()->setTemplate('tools_sitemap');
+        $this->view()->setTemplate('tools-sitemap');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Rebuild sitemap links'));
         $this->view()->assign('message', $message);

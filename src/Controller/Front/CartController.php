@@ -37,7 +37,7 @@ class CartController extends ActionController
             $this->jump($url, __('Your cart are empty.'), 'error');
     	}
         // Set view
-    	$this->view()->setTemplate('checkout_cart');
+    	$this->view()->setTemplate('checkout-cart');
     	$this->view()->assign('basket', $basket);
     }
 
@@ -243,7 +243,7 @@ class CartController extends ActionController
         Pi::service('i18n')->load(array('module/order', 'default'));
         $invoices = Pi::api('invoice', 'order')->getInvoiceFromOrder($order['id']);
         // Set view
-        $this->view()->setTemplate('checkout_finish');
+        $this->view()->setTemplate('checkout-finish');
         $this->view()->assign('order', $order);
         $this->view()->assign('invoices', $invoices);
     }

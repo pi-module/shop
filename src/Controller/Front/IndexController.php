@@ -44,7 +44,7 @@ class IndexController extends ActionController
             // Get paginator
             $paginator = $this->productPaginator($template, $where);
             // Set view
-            $this->view()->setTemplate('product_list');
+            $this->view()->setTemplate('product-list');
             $this->view()->assign('page', $page);
             $this->view()->assign('paginator', $paginator);
             $this->view()->assign('productList', $productList);

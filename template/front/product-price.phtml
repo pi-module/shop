@@ -3,7 +3,7 @@
         <?php if ($config['order_stock'] == 'never') { ?>
             <div class="clearfix">
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <?php include $this->template('front/product_order'); ?>
+                    <?php include $this->template('front/product-order'); ?>
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <strong><?php _e('Price'); ?> : </strong>
@@ -19,7 +19,7 @@
             <?php if($productItem['stock_type'] == 1) { ?>
                 <div class="clearfix">
                     <div class="col-md-8 col-sm-6 col-xs-12">
-                        <?php include $this->template('front/product_order'); ?>
+                        <?php include $this->template('front/product-order'); ?>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="clearfix">
@@ -45,7 +45,7 @@
             <?php if($productItem['stock'] > 0) { ?>
                 <div class="clearfix">
                     <div class="col-md-8 col-sm-6 col-xs-12">
-                        <?php include $this->template('front/product_order'); ?>
+                        <?php include $this->template('front/product-order'); ?>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="clearfix">
@@ -70,7 +70,7 @@
         <?php } elseif ($config['order_stock'] == 'property') { ?>
             <div class="clearfix">
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <?php include $this->template('front/product_order'); ?>
+                    <?php include $this->template('front/product-order'); ?>
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <strong><?php _e('Price'); ?> : </strong>

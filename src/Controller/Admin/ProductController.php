@@ -126,7 +126,7 @@ class ProductController extends ActionController
         $form->setAttribute('action', $this->url('', array('action' => 'process')));
         $form->setData($values);
         // Set view
-        $this->view()->setTemplate('product_index');
+        $this->view()->setTemplate('product-index');
         $this->view()->assign('list', $product);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('form', $form);
@@ -311,7 +311,7 @@ class ProductController extends ActionController
             }
         }   
         // Set view
-        $this->view()->setTemplate('product_update');
+        $this->view()->setTemplate('product-update');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Add product'));
     }
@@ -391,7 +391,7 @@ class ProductController extends ActionController
             $form->setData($product);
         }
         // Set view
-        $this->view()->setTemplate('product_update');
+        $this->view()->setTemplate('product-update');
         $this->view()->assign('form', $form);
         $this->view()->assign('properties', $property);
         $this->view()->assign('title', __('Manage additional information'));
@@ -501,7 +501,7 @@ class ProductController extends ActionController
             }	
         }
         // Set view
-    	$this->view()->setTemplate('product_related');
+    	$this->view()->setTemplate('product-related');
     	$this->view()->assign('title', __('Add Related'));
     	$this->view()->assign('form', $form);
     	$this->view()->assign('product', $product);

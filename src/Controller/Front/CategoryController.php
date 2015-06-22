@@ -70,7 +70,7 @@ class CategoryController extends IndexController
         $this->view()->headTitle($category['seo_title']);
         $this->view()->headDescription($category['seo_description'], 'set');
         $this->view()->headKeywords($category['seo_keywords'], 'set');
-        $this->view()->setTemplate('product_list');
+        $this->view()->setTemplate('product-list');
         $this->view()->assign('productList', $productList);
         //$this->view()->assign('productTitleH2', $title);
         $this->view()->assign('category', $category);
@@ -108,7 +108,7 @@ class CategoryController extends IndexController
         $this->view()->headTitle($title);
         $this->view()->headDescription($title, 'set');
         $this->view()->headKeywords($seoKeywords, 'set');
-        $this->view()->setTemplate('category_list');
+        $this->view()->setTemplate('category-list');
         $this->view()->assign('categories', $categories);
         $this->view()->assign('config', $config);
     }

@@ -61,7 +61,7 @@ class SpecialController extends ActionController
             $specialList[$row->id]['time_expire'] = _date($specialList[$row->id]['time_expire']);
         }
         // Set view
-        $this->view()->setTemplate('special_index');
+        $this->view()->setTemplate('special-index');
         $this->view()->assign('specials', $specialList);
     }
 
@@ -105,7 +105,7 @@ class SpecialController extends ActionController
                 $form->setData($values);
             }
         }
-        $this->view()->setTemplate('special_update');
+        $this->view()->setTemplate('special-update');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Add Special'));
     }

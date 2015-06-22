@@ -42,7 +42,7 @@ class SearchController extends IndexController
         $this->view()->headTitle($config['text_title_search']);
         $this->view()->headDescription($config['text_description_search'], 'set');
         $this->view()->headKeywords($config['text_keywords_search'], 'set');
-        $this->view()->setTemplate('search_form');
+        $this->view()->setTemplate('search-form');
         $this->view()->assign('form', $form);
     }
 
@@ -198,7 +198,7 @@ class SearchController extends IndexController
         $this->view()->headTitle($title);
         $this->view()->headDescription($title, 'set');
         $this->view()->headKeywords($seoKeywords, 'set');
-        $this->view()->setTemplate('product_list');
+        $this->view()->setTemplate('product-list');
         $this->view()->assign('productList', $productList);
         $this->view()->assign('productTitleH1', $title);
         $this->view()->assign('paginator', $paginator);

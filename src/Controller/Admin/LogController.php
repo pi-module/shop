@@ -53,7 +53,7 @@ class LogController extends ActionController
             )),
         ));
         // Set view
-        $this->view()->setTemplate('log_index');
+        $this->view()->setTemplate('log-index');
         $this->view()->assign('list', $list);
         $this->view()->assign('paginator', $paginator);
     }

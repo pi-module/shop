@@ -73,7 +73,7 @@ class CategoryController extends ActionController
             )),
         ));
         // Set view
-        $this->view()->setTemplate('category_index');
+        $this->view()->setTemplate('category-index');
         $this->view()->assign('list', $list);
         $this->view()->assign('paginator', $paginator);
     }
@@ -189,7 +189,7 @@ class CategoryController extends ActionController
             }
         }
         // Set view
-        $this->view()->setTemplate('category_update');
+        $this->view()->setTemplate('category-update');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Add a category'));
         $this->view()->assign('message', $message);
