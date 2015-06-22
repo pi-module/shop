@@ -395,7 +395,6 @@ class ProductController extends ActionController
         $this->view()->assign('form', $form);
         $this->view()->assign('properties', $property);
         $this->view()->assign('title', __('Manage additional information'));
-
     }
 
     /* public function deleteAction()

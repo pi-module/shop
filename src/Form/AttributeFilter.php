@@ -44,7 +44,7 @@ class AttributeFilter extends InputFilter
                 ),
             ),
             'validators'    => array(
-                new \Module\Guide\Validator\NameDuplicate(array(
+                new \Module\Shop\Validator\NameDuplicate(array(
                     'module'            => Pi::service('module')->current(),
                     'table'             => 'field',
                 )),
