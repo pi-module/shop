@@ -31,7 +31,9 @@ class CategoryController extends IndexController
         $category = Pi::api('category', 'shop')->canonizeCategory($category);
         // Check category
         if (!$category || $category['status'] != 1) {
-            $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The category not found.'), 'error');
+            $this->getResponse()->setStatusCode(404);
+            $this->terminate(__('The category not found.'), '', 'error-404');
+            return;
         }
         // Set info
         $where = array(

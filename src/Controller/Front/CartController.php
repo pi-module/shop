@@ -25,8 +25,9 @@ class CartController extends ActionController
         Pi::service('authentication')->requireLogin();
         // Check order is active or inactive
         if (!$this->config('order_active')) {
-            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
-            $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
+            $this->getResponse()->setStatusCode(401);
+            $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-404');
+            return;
         }
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
@@ -51,8 +52,9 @@ class CartController extends ActionController
         $config = Pi::service('registry')->config->read($module);
         // Check order is active or inactive
         if (!$config['order_active']) {
-            $url = array('', 'module' => $this->params('module'), 'controller' => 'index');
-            $this->jump($url, __('So sorry, At this moment order is inactive'), 'error');
+            $this->getResponse()->setStatusCode(401);
+            $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-404');
+            return;
         }
         // Check post
         if ($this->request->isPost()) {
@@ -65,8 +67,9 @@ class CartController extends ActionController
             $product = Pi::api('product', 'shop')->canonizeProductLight($product);
             // Check product
             if (!$product['marketable']) {
-                $url = array('', 'module' => $module, 'controller' => 'index');
-                $this->jump($url, __('The product was not marketable.'), 'error');
+                $this->getResponse()->setStatusCode(404);
+                $this->terminate(__('The product was not marketable.'), '', 'error-404');
+                return;
             } else {
                 // Check color
                 $property = array();

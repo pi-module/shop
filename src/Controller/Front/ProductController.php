@@ -31,7 +31,9 @@ class ProductController extends IndexController
         $product = Pi::api('product', 'shop')->canonizeProduct($product);
         // Check product
         if (!$product || $product['status'] != 1) {
-            $this->jump(array('', 'module' => $module, 'controller' => 'index'), __('The product not found.'), 'error');
+            $this->getResponse()->setStatusCode(404);
+            $this->terminate(__('The product not found.'), '', 'error-404');
+            return;
         }
         // Update Hits
         $this->getModel('product')->update(array('hits' => $product['hits'] + 1), array('id' => $product['id']));
