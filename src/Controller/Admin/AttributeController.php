@@ -22,7 +22,7 @@ use Zend\Json\Json;
 class AttributeController extends ActionController
 {
     protected $attributeColumns = array(
-        'id', 'title', 'icon', 'type', 'order', 'status', 'search', 'value', 'position'
+        'id', 'title', 'icon', 'type', 'order', 'status', 'search', 'value', 'position', 'name'
     );
 
     public function indexAction()
