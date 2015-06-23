@@ -72,7 +72,6 @@ class AttributeForm extends BaseForm
             'options' => array(
                 'label' => __('Category'),
                 'module' => $this->module,
-                'category' => '',
             ),
             'attributes' => array(
                 'required'  => true,

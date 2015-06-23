@@ -291,9 +291,10 @@ class Attribute extends AbstractApi
     public function getField($category = '')
     {
         $field = array();
-        $where = array();
         if (!empty($category)) {
-            $where = array('category' => $category);
+            $where = array('category' => array($category, 0));
+        } else {
+            $where = array('category' => 0);
         }
         $select = Pi::model('field_category', $this->getModule())->select()->where($where);
         $rowset = Pi::model('field_category', $this->getModule())->selectWith($select);
