@@ -3,27 +3,28 @@
     width: 100%;
 }
 
-.shop-block-category-advanced   li {
+.shop-block-category-advanced li {
     width: 100%;
 }
 
-.shop-block-category-advanced   li > a {
+.shop-block-category-advanced li > a {
     color: #000;
     text-decoration: none;
 }
-.shop-block-category-advanced   li > a:before {
+
+.shop-block-category-advanced li > a:before {
     content: '+';
     padding-right: 4px;
     font-weight: bold;
 }
 
-.shop-block-category-advanced   li >a.active:before {
+.shop-block-category-advanced li > a.active:before {
     content: '-';
     padding-right: 4px;
     font-weight: bold;
 }
 
-.shop-block-category-advanced  li ul {
+.shop-block-category-advanced li ul {
     margin: 0.5em 0 0.5em 2em;
     display: none;
 }
