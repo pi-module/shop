@@ -1,4 +1,4 @@
-<?php if(isset($productItem['price']) && $config['order_active']) { ?>
+<?php if (isset($productItem['price']) && $config['order_active']) { ?>
     <div class="productPrice clearfix">
         <?php if ($config['order_stock'] == 'never') { ?>
             <div class="clearfix">
@@ -16,7 +16,7 @@
                 </div>
             </div>
         <?php } elseif ($config['order_stock'] == 'manual') { ?>
-            <?php if($productItem['stock_type'] == 1) { ?>
+            <?php if ($productItem['stock_type'] == 1) { ?>
                 <div class="clearfix">
                     <div class="col-md-8 col-sm-6 col-xs-12">
                         <?php include $this->template('front/product-order'); ?>
@@ -42,7 +42,7 @@
                 </div>
             <?php } ?>
         <?php } elseif ($config['order_stock'] == 'product') { ?>
-            <?php if($productItem['stock'] > 0) { ?>
+            <?php if ($productItem['stock'] > 0) { ?>
                 <div class="clearfix">
                     <div class="col-md-8 col-sm-6 col-xs-12">
                         <?php include $this->template('front/product-order'); ?>

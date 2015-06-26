@@ -3,18 +3,22 @@
 } ?>
 <div class="<?php echo $shopBoxSize; ?> productBox h-product">
     <div class="thumbnail">
-        <?php if($product['image']) { ?>
-            <a class="u-photo" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
+        <?php if ($product['image']) { ?>
+            <a class="u-photo" title="<?php echo $this->escape($product['title']); ?>"
+               href="<?php echo $this->escape($product['productUrl']); ?>"><img
+                    src="<?php echo $product['thumbUrl']; ?>"
+                    alt="<?php echo $this->escape($product['title']); ?>"/></a>
         <?php } ?>
         <div class="caption">
             <h3 class="p-name">
-                <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>">
+                <a title="<?php echo $this->escape($product['title']); ?>"
+                   href="<?php echo $this->escape($product['productUrl']); ?>">
                     <?php echo $this->escape($product['title']); ?>
                 </a>
             </h3>
-            <?php if(isset($product['price']) && $config['view_price'] && $config['order_active']) { ?>
+            <?php if (isset($product['price']) && $config['view_price'] && $config['order_active']) { ?>
                 <div class="clearfix text-center">
-                    <?php if($product['stock_type'] == 1 && $product['stock'] > 0) { ?>
+                    <?php if ($product['stock_type'] == 1 && $product['stock'] > 0) { ?>
                         <div class="productPrice p-price">
                             <strong><?php echo $this->escape($product['price_view']); ?></strong>
                         </div>

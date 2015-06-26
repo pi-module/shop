@@ -17,7 +17,7 @@ if (isset($properties) && !empty($properties)) {
         } else {
             $htmlTemplate = '<div class="col-sm-12 js-form-element"><span class="col-sm-11">' . __('Name') . '<input class="form-control" type="text" name="property[' . $property['id'] . '][\'+ x +\'][name]"/></span><a href="#" class="remove_property_' . $property['id'] . ' col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a></div>';
         }
-        $script =<<<'EOT'
+        $script = <<<'EOT'
             $(document).ready(function() {
                 var max_fields      = 30; //maximum input boxes allowed
                 var wrapper         = $("#product-form .property-list-%s"); //Fields wrapper
@@ -45,13 +45,13 @@ EOT;
     <?php echo $this->form($form); ?>
 </div>
 <script type="text/javascript">
-    (function($){
-        $("#product-form").on("click",".img-remove",function(){
+    (function ($) {
+        $("#product-form").on("click", ".img-remove", function () {
             systemMessage.wait("<?php _e('Remove image product in process'); ?>");
-            $.getJSON($(this).attr("data-link")).done(function(result){
-                if(result.status==1){
+            $.getJSON($(this).attr("data-link")).done(function (result) {
+                if (result.status == 1) {
                     systemMessage.succ(result.message);
-                }else{
+                } else {
                     systemMessage.fail(result.message);
                 }
             });

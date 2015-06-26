@@ -3,16 +3,20 @@
         <?php $this->css($this->assetModule('css/block.css', 'shop')); ?>
         <div class="shop-block-category clearfix">
             <div class="thumbnails">
-                <?php foreach($block['resources'] as $category) { ?>
+                <?php foreach ($block['resources'] as $category) { ?>
                     <div class="col-sm-6 col-md-3 h-review">
                         <div class="thumbnail p-item h-card">
-                            <?php if($category['image']) { ?>
-                                <a class="u-url" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['categoryUrl']); ?>">
-                                    <img class="img-responsive u-photo" src="<?php echo $this->escape($category['mediumUrl']); ?>" alt="<?php echo $this->escape($category['title']); ?>" />
+                            <?php if ($category['image']) { ?>
+                                <a class="u-url" title="<?php echo $this->escape($category['title']); ?>"
+                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                    <img class="img-responsive u-photo"
+                                         src="<?php echo $this->escape($category['mediumUrl']); ?>"
+                                         alt="<?php echo $this->escape($category['title']); ?>"/>
                                 </a>
                             <?php } ?>
                             <h3 class="p-name">
-                                <a class="u-url" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                <a class="u-url" title="<?php echo $this->escape($category['title']); ?>"
+                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
                                     <?php echo $this->escape($category['title']); ?>
                                 </a>
                             </h3>
@@ -21,7 +25,7 @@
                 <?php } ?>
             </div>
         </div>
-    <?php } elseif($block['type'] == 'slide') { ?>
+    <?php } elseif ($block['type'] == 'slide') { ?>
         <?php
         $this->jQuery();
         $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
@@ -31,22 +35,26 @@
         ?>
         <div class="shop-block-category clearfix">
             <div class="owl-carousel text-center clearfix hover-captions-container">
-                <?php foreach($block['resources'] as $category) { ?>
+                <?php foreach ($block['resources'] as $category) { ?>
                     <div class="item hover-captions hover-captions-slide">
                         <div class="hover-caption">
                             <h3><?php echo $this->escape($category['title']); ?></h3>
+
                             <p>
-                                <a class="u-url hover-caption-more" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                <a class="u-url hover-caption-more"
+                                   title="<?php echo $this->escape($category['title']); ?>"
+                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
                                     <?php echo _b('View'); ?>
                                 </a>
                             </p>
                         </div>
-                        <img class="media-object img-responsive u-photo" src="<?php echo $category['largeUrl']; ?>" alt="<?php echo $this->escape($category['title']); ?>">
+                        <img class="media-object img-responsive u-photo" src="<?php echo $category['largeUrl']; ?>"
+                             alt="<?php echo $this->escape($category['title']); ?>">
                     </div>
                 <?php } ?>
             </div>
         </div>
-    <?php } elseif($block['type'] == 'advanced') { ?>
+    <?php } elseif ($block['type'] == 'advanced') { ?>
         <?php /*
         <?php $this->css($this->assetModule('css/tree.css', 'shop')); ?>
         <div class="shop-block-category-advanced">

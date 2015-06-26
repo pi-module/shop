@@ -24,8 +24,10 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
         <div class="col-md-4">
             <?php include $this->template('front/gallery'); ?>
             <ul class="list-inline">
-                <?php if (!empty($vote)) { ?><li><?php include $this->template('votebar.phtml', 'front', 'vote'); ?></li><?php } ?>
-                <?php if (!empty($favourite)) { ?><li><?php include $this->template('favouritebar.phtml', 'front', 'favourite'); ?></li><?php } ?>
+                <?php if (!empty($vote)) { ?>
+                    <li><?php include $this->template('votebar.phtml', 'front', 'vote'); ?></li><?php } ?>
+                <?php if (!empty($favourite)) { ?>
+                    <li><?php include $this->template('favouritebar.phtml', 'front', 'favourite'); ?></li><?php } ?>
             </ul>
             <?php if ($config['social_sharing']) { ?>
                 <div class="clearfix">

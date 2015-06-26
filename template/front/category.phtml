@@ -4,8 +4,8 @@
             <div class="clearfix">
                 <div class="col-md-12">
                     <h1><?php echo $this->escape($category['title']); ?></h1>
-                    <hr />
-                    <br />
+                    <hr/>
+                    <br/>
                 </div>
                 <div class="col-md-5">
                     <?php include $this->template('front/gallery'); ?>
@@ -14,7 +14,7 @@
                     <?php echo $category['text_description']; ?>
                 </div>
             </div>
-            <br />
+            <br/>
         <?php } else { ?>
             <div class="col-md-12">
                 <div class="page-header">
@@ -27,8 +27,9 @@
 <?php if (isset($categoryItem) && !empty($categoryItem)) { ?>
     <div class="clearfix categoryItemList">
         <i class="fa fa-folder"></i> <?php _e('Category'); ?> :
-        <?php foreach($categoryItem as $category) { ?>
-            <a title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a>
+        <?php foreach ($categoryItem as $category) { ?>
+            <a title="<?php echo $this->escape($category['title']); ?>"
+               href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a>
         <?php } ?>
     </div>
 <?php } ?>

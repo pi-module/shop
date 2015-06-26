@@ -7,10 +7,13 @@ Pi::service('i18n')->load(array('module/order', 'default'));
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="heading<?php echo $this->escape($plan['id']); ?>Two">
                 <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#planAccordion" href="#collapse<?php echo $this->escape($plan['id']); ?>" aria-expanded="false" aria-controls="collapse<?php echo $this->escape($plan['id']); ?>"><?php _e($plan['title']); ?></a>
+                    <a class="collapsed" data-toggle="collapse" data-parent="#planAccordion"
+                       href="#collapse<?php echo $this->escape($plan['id']); ?>" aria-expanded="false"
+                       aria-controls="collapse<?php echo $this->escape($plan['id']); ?>"><?php _e($plan['title']); ?></a>
                 </h4>
             </div>
-            <div id="collapse<?php echo $this->escape($plan['id']); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $this->escape($plan['id']); ?>Two">
+            <div id="collapse<?php echo $this->escape($plan['id']); ?>" class="panel-collapse collapse" role="tabpanel"
+                 aria-labelledby="heading<?php echo $this->escape($plan['id']); ?>Two">
                 <table class="table">
                     <tr>
                         <th><?php _e('Month'); ?></th>
@@ -32,7 +35,9 @@ Pi::service('i18n')->load(array('module/order', 'default'));
                     <?php } ?>
                 </table>
                 <div class="productPriceCart text-center" style="margin: 10px;">
-                    <a title="<?php echo $this->escape($productItem['title']); ?>" href="<?php echo $this->escape($productItem['cartUrl']); ?>/plan/<?php echo $this->escape($plan['id']); ?>" class="btn btn-success">
+                    <a title="<?php echo $this->escape($productItem['title']); ?>"
+                       href="<?php echo $this->escape($productItem['cartUrl']); ?>/plan/<?php echo $this->escape($plan['id']); ?>"
+                       class="btn btn-success">
                         <i class="fa fa-shopping-cart"></i> <?php _e('Add to cart'); ?>
                     </a>
                 </div>

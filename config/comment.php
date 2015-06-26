@@ -12,9 +12,9 @@
  */
 return array(
     'shop' => array(
-        'title'    => _a('Shop comments'),
-        'icon'     => 'icon-post',
+        'title' => _a('Shop comments'),
+        'icon' => 'icon-post',
         'callback' => 'Module\Shop\Api\Comment',
-        'locator'  => 'Module\Shop\Api\Comment',
+        'locator' => 'Module\Shop\Api\Comment',
     ),
 );

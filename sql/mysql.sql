@@ -240,9 +240,9 @@ CREATE TABLE `{basket}` (
 );
 
 CREATE TABLE `{discount}` (
-  `id`      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id`      INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `title`   VARCHAR(255)        NOT NULL DEFAULT '',
-  `role`    VARCHAR(64)      NOT NULL DEFAULT 'member',
+  `role`    VARCHAR(64)         NOT NULL DEFAULT 'member',
   `percent` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
   `status`  TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),

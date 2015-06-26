@@ -12,15 +12,15 @@
  */
 return array(
     // route name
-    'shop'  => array(
-        'name'      => 'shop',
-        'type'      => 'Module\Shop\Route\Shop',
-        'options'   => array(
-            'route'     => '/shop',
-            'defaults'  => array(
-                'module'        => 'shop',
-                'controller'    => 'index',
-                'action'        => 'index'
+    'shop' => array(
+        'name' => 'shop',
+        'type' => 'Module\Shop\Route\Shop',
+        'options' => array(
+            'route' => '/shop',
+            'defaults' => array(
+                'module' => 'shop',
+                'controller' => 'index',
+                'action' => 'index'
             )
         ),
     )

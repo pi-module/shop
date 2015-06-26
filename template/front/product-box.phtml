@@ -3,20 +3,30 @@ $this->css($this->assetModule('css/front.css'));
 ?>
 <li class="col-md-4 productBox h-product">
     <div class="thumbnail">
-        <?php if($product['image']){ ?>
-            <a class="u-photo" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" /></a>
+        <?php if ($product['image']) { ?>
+            <a class="u-photo" title="<?php echo $this->escape($product['title']); ?>"
+               href="<?php echo $this->escape($product['productUrl']); ?>"><img
+                    src="<?php echo $product['thumbUrl']; ?>"
+                    alt="<?php echo $this->escape($product['title']); ?>"/></a>
         <?php } ?>
         <div class="caption">
-            <h4 class="p-name"><a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a></h4>
+            <h4 class="p-name"><a title="<?php echo $this->escape($product['title']); ?>"
+                                  href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
+            </h4>
+
             <div class="clearFix">
                 <div class="pull-left productPrice">
-                    <?php if($product['price_view'] && $product['stock'] > 0) { ?>
-                        <div class="text-success p-price"><strong><?php echo $this->escape($product['price_view']); ?></strong></div>
+                    <?php if ($product['price_view'] && $product['stock'] > 0) { ?>
+                        <div class="text-success p-price">
+                            <strong><?php echo $this->escape($product['price_view']); ?></strong></div>
                     <?php } else { ?>
                         <div class="text-error"><strong><?php _e('Finished'); ?></strong></div>
                     <?php } ?>
                 </div>
-                <div class="pull-right"><a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['cartUrl']); ?>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> <?php _e('Add To cart'); ?></a></div>
+                <div class="pull-right"><a title="<?php echo $this->escape($product['title']); ?>"
+                                           href="<?php echo $this->escape($product['cartUrl']); ?>"
+                                           class="btn btn-primary"><i
+                            class="fa fa-shopping-cart"></i> <?php _e('Add To cart'); ?></a></div>
             </div>
         </div>
     </div>
