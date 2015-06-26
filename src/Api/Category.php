@@ -33,7 +33,7 @@ class Category extends AbstractApi
         $category = Pi::model('category', $this->getModule())->find($parameter, $type);
         $category = $this->canonizeCategory($category);
         return $category;
-    }  
+    }
 
     /**
      * Set product category to link table
@@ -89,19 +89,19 @@ class Category extends AbstractApi
         foreach ($rowset as $row) {
             $return[$row->id] = $row->toArray();
             $return[$row->id]['url'] = Pi::url(Pi::service('url')->assemble('shop', array(
-                'module'        => $this->getModule(),
-                'controller'    => 'category',
-                'slug'          => $return[$row->id]['slug'],
+                'module' => $this->getModule(),
+                'controller' => 'category',
+                'slug' => $return[$row->id]['slug'],
             )));
             $return[$row->id]['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s', 
-                    $config['image_path'], 
-                    $return[$row->id]['path'], 
+                sprintf('upload/%s/thumb/%s/%s',
+                    $config['image_path'],
+                    $return[$row->id]['path'],
                     $return[$row->id]['image']
                 ));
         }
         return $return;
-    }  
+    }
 
     public function categoryCount()
     {
@@ -128,43 +128,43 @@ class Category extends AbstractApi
         $category['time_update_view'] = _date($category['time_update']);
         // Set item url
         $category['categoryUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
-            'module'        => $this->getModule(),
-            'controller'    => 'category',
-            'slug'          => $category['slug'],
+            'module' => $this->getModule(),
+            'controller' => 'category',
+            'slug' => $category['slug'],
         )));
         // Set image url
         if ($category['image']) {
             // Set image original url
             $category['originalUrl'] = Pi::url(
-                sprintf('upload/%s/original/%s/%s', 
-                    $config['image_path'], 
-                    $category['path'], 
+                sprintf('upload/%s/original/%s/%s',
+                    $config['image_path'],
+                    $category['path'],
                     $category['image']
                 ));
             // Set image large url
             $category['largeUrl'] = Pi::url(
-                sprintf('upload/%s/large/%s/%s', 
-                    $config['image_path'], 
-                    $category['path'], 
+                sprintf('upload/%s/large/%s/%s',
+                    $config['image_path'],
+                    $category['path'],
                     $category['image']
                 ));
             // Set image medium url
             $category['mediumUrl'] = Pi::url(
-                sprintf('upload/%s/medium/%s/%s', 
-                    $config['image_path'], 
-                    $category['path'], 
+                sprintf('upload/%s/medium/%s/%s',
+                    $config['image_path'],
+                    $category['path'],
                     $category['image']
                 ));
             // Set image thumb url
             $category['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s', 
-                    $config['image_path'], 
-                    $category['path'], 
+                sprintf('upload/%s/thumb/%s/%s',
+                    $config['image_path'],
+                    $category['path'],
                     $category['image']
                 ));
         }
         // return category
-        return $category; 
+        return $category;
     }
 
     public function sitemap()
@@ -179,9 +179,9 @@ class Category extends AbstractApi
             foreach ($rowset as $row) {
                 // Make url
                 $loc = Pi::url(Pi::service('url')->assemble('shop', array(
-                    'module'        => $this->getModule(),
-                    'controller'    => 'category',
-                    'slug'          => $row->slug,
+                    'module' => $this->getModule(),
+                    'controller' => 'category',
+                    'slug' => $row->slug,
                 )));
                 // Add to sitemap
                 Pi::api('sitemap', 'sitemap')->groupLink($loc, $row->status, $this->getModule(), 'category', $row->id);

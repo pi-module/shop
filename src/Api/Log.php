@@ -24,13 +24,13 @@ class Log extends AbstractApi
 {
     public function addLog($section, $item, $operation)
     {
-    	$row = Pi::model('log', $this->getModule())->createRow();
-    	$row->uid = Pi::user()->getId();
-    	$row->ip = Pi::user()->getIp();
-    	$row->time_create = time();
-    	$row->section = $section;
-    	$row->item = $item;
-    	$row->operation = $operation;
-    	$row->save();
+        $row = Pi::model('log', $this->getModule())->createRow();
+        $row->uid = Pi::user()->getId();
+        $row->ip = Pi::user()->getIp();
+        $row->time_create = time();
+        $row->section = $section;
+        $row->item = $item;
+        $row->operation = $operation;
+        $row->save();
     }
 }

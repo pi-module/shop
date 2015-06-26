@@ -28,21 +28,21 @@ class Breadcrumbs extends AbstractBreadcrumbs
         $config = Pi::service('registry')->config->read($this->getModule());
         // Check breadcrumbs
         if ($config['view_breadcrumbs']) {
-        	// Set module link
-        	$moduleData = Pi::registry('module')->read($this->getModule());
-        	// Make tree
-        	if (!empty($params['controller']) && $params['controller'] != 'index') {
+            // Set module link
+            $moduleData = Pi::registry('module')->read($this->getModule());
+            // Make tree
+            if (!empty($params['controller']) && $params['controller'] != 'index') {
                 // Set index
                 $result = array(
                     array(
                         'label' => $moduleData['title'],
-                        'href'  => Pi::url(Pi::service('url')->assemble('shop', array(
+                        'href' => Pi::url(Pi::service('url')->assemble('shop', array(
                             'module' => $this->getModule(),
                         ))),
                     ),
                 );
                 // Set
-        		switch ($params['controller']) {
+                switch ($params['controller']) {
                     case 'category':
                         switch ($params['action']) {
                             case 'list':
@@ -85,7 +85,7 @@ class Breadcrumbs extends AbstractBreadcrumbs
                             $result = $this->makeCategoryList($category['parent'], $result);
                             $result[] = array(
                                 'label' => $category['title'],
-                                'href'  => $category['categoryUrl'],
+                                'href' => $category['categoryUrl'],
                             );
                         }
                         // Set product title
@@ -98,9 +98,9 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         if ($params['action'] == 'result') {
                             $result[] = array(
                                 'label' => __('Search'),
-                                'href'  => Pi::url(Pi::service('url')->assemble('shop', array(
+                                'href' => Pi::url(Pi::service('url')->assemble('shop', array(
                                     'controller' => 'search',
-                                    'action'     => 'index',
+                                    'action' => 'index',
                                 ))),
                             );
                             $result[] = array(
@@ -117,9 +117,9 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         if (!empty($params['slug'])) {
                             $result[] = array(
                                 'label' => __('Tag list'),
-                                'href'  => Pi::url(Pi::service('url')->assemble('shop', array(
+                                'href' => Pi::url(Pi::service('url')->assemble('shop', array(
                                     'controller' => 'tag',
-                                    'action'     => 'list',
+                                    'action' => 'list',
                                 ))),
                             );
                             $result[] = array(
@@ -130,28 +130,29 @@ class Breadcrumbs extends AbstractBreadcrumbs
                                 'label' => __('Tag list'),
                             );
                         }
-                        break; 
-        		}
-        	} else {
+                        break;
+                }
+            } else {
                 $result = array(
                     array(
                         'label' => $moduleData['title'],
                     ),
                 );
             }
-        	return $result;
+            return $result;
         } else {
-        	return '';
+            return '';
         }
     }
 
-    public  function makeCategoryList($parent, $result) {
+    public function makeCategoryList($parent, $result)
+    {
         if ($parent > 0) {
             $category = Pi::api('category', 'shop')->getCategory($parent);
             $result = $this->makeCategoryList($category['parent'], $result);
             $result[] = array(
                 'label' => $category['title'],
-                'href'  => $category['categoryUrl'],
+                'href' => $category['categoryUrl'],
             );
 
         }

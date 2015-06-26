@@ -29,20 +29,20 @@ class Comment extends AbstractComment
      */
     public function get($item)
     {
-        
+
         $result = array();
-        $items = (array) $item;
+        $items = (array)$item;
 
         // Set options
         $products = Pi::api('product', 'shop')->getListFromId($items);
 
         foreach ($items as $id) {
             $result[$id] = array(
-                'id'    => $products[$id]['id'],
+                'id' => $products[$id]['id'],
                 'title' => $products[$id]['title'],
-                'url'   => $products[$id]['productUrl'],
-                'uid'   => $products[$id]['uid'],
-                'time'  => $products[$id]['time_create'],
+                'url' => $products[$id]['productUrl'],
+                'uid' => $products[$id]['uid'],
+                'time' => $products[$id]['time_create'],
             );
         }
 

@@ -39,10 +39,10 @@ class Order extends AbstractApi
         //$this->sendAdminMail($order);
         // Set back url
         return Pi::url(Pi::service('url')->assemble('shop', array(
-            'module'        => $this->getModule(),
-            'controller'    => 'cart',
-            'action'        => 'finish',
-            'id'            => $order['id'],
+            'module' => $this->getModule(),
+            'controller' => 'cart',
+            'action' => 'finish',
+            'id' => $order['id'],
         )));
     }
 

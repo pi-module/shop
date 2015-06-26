@@ -21,11 +21,11 @@ use Pi\Application\Api\AbstractApi;
  */
 
 class Image extends AbstractApi
-{  
+{
     public function rename($image = '', $prefix = 'image_', $path = '')
     {
         $config = Pi::service('registry')->config->read($this->getModule(), 'image');
-        
+
         // Check image name
         if (empty($image)) {
             return $prefix . '%random%';
@@ -41,7 +41,7 @@ class Image extends AbstractApi
         $name = array_filter(explode(' ', $name));
         $name = implode('-', $name) . '.' . $extension;
         // Check text length
-        if (mb_strlen($name,'UTF-8') < 8) {
+        if (mb_strlen($name, 'UTF-8') < 8) {
             $name = $prefix . '%random%';
         }
         // Set original path
@@ -55,39 +55,39 @@ class Image extends AbstractApi
         // return
         return $name;
     }
-    
-	public function process($image, $path)
-	{
+
+    public function process($image, $path)
+    {
         $config = Pi::service('registry')->config->read($this->getModule(), 'image');
-        
+
         // Set original path
         $original = Pi::path(
-        	sprintf('upload/%s/original/%s/%s', $config['image_path'], $path, $image)
+            sprintf('upload/%s/original/%s/%s', $config['image_path'], $path, $image)
         );
-        
+
         // Set large path
         $large = Pi::path(
-        	sprintf('upload/%s/large/%s/%s', $config['image_path'], $path, $image)
+            sprintf('upload/%s/large/%s/%s', $config['image_path'], $path, $image)
         );
 
         // Set medium path
         $medium = Pi::path(
-        	sprintf('upload/%s/medium/%s/%s', $config['image_path'], $path, $image)
+            sprintf('upload/%s/medium/%s/%s', $config['image_path'], $path, $image)
         );
 
         // Set thumb path
         $thumb = Pi::path(
-        	sprintf('upload/%s/thumb/%s/%s', $config['image_path'], $path, $image)
+            sprintf('upload/%s/thumb/%s/%s', $config['image_path'], $path, $image)
         );
 
         // Set options
         $options = array(
             'quality' => empty($config['image_quality']) ? 75 : $config['image_quality'],
         );
-        
+
         // Resize to large
         Pi::service('image')->resize(
-            $original, 
+            $original,
             array($config['image_largew'], $config['image_largeh'], true),
             $large,
             '',
@@ -96,7 +96,7 @@ class Image extends AbstractApi
 
         // Resize to medium
         Pi::service('image')->resize(
-            $original, 
+            $original,
             array($config['image_mediumw'], $config['image_mediumh'], true),
             $medium,
             '',
@@ -104,7 +104,7 @@ class Image extends AbstractApi
         );
         // Resize to thumb
         Pi::service('image')->resize(
-            $original, 
+            $original,
             array($config['image_thumbw'], $config['image_thumbh'], true),
             $thumb,
             '',
@@ -119,30 +119,30 @@ class Image extends AbstractApi
                 $logoFile = Pi::service('asset')->logo();
                 $watermarkImage = Pi::path($logoFile);
             }
-        	
+
             // Watermark large
-        	Pi::service('image')->watermark(
-        		$large,
+            Pi::service('image')->watermark(
+                $large,
                 '',
-        		$watermarkImage,
-        		$config['image_watermark_position']
+                $watermarkImage,
+                $config['image_watermark_position']
             );
 
             // Watermark medium
-        	Pi::service('image')->watermark(
-        		$medium,
+            Pi::service('image')->watermark(
+                $medium,
                 '',
-        		$watermarkImage,
-        		$config['image_watermark_position']
+                $watermarkImage,
+                $config['image_watermark_position']
             );
 
             // Watermark thumb
-        	Pi::service('image')->watermark(
-        		$thumb,
+            Pi::service('image')->watermark(
+                $thumb,
                 '',
-        		$watermarkImage,
-        		$config['image_watermark_position']
+                $watermarkImage,
+                $config['image_watermark_position']
             );
         }
-	}
+    }
 }	

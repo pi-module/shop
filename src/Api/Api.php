@@ -28,7 +28,7 @@ class Api extends AbstractApi
             // Load language
             Pi::service('i18n')->load(array('module/order', 'default'));
             // Set price
-            $viewPrice =Pi::api('api', 'order')->viewPrice($price);
+            $viewPrice = Pi::api('api', 'order')->viewPrice($price);
         } else {
             $viewPrice = _currency($price);
         }

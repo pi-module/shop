@@ -62,7 +62,7 @@ class Attribute extends AbstractApi
 
                 case 'link':
                     $type_vew = __('Link');
-                    break;  
+                    break;
 
                 case 'video':
                     $type_vew = __('Video');
@@ -71,10 +71,10 @@ class Attribute extends AbstractApi
                 case 'audio':
                     $type_vew = __('Audio');
                     break;
-                    
+
                 case 'file':
                     $type_vew = __('File');
-                    break;    
+                    break;
 
                 case 'currency':
                     $type_vew = __('Currency');
@@ -82,7 +82,7 @@ class Attribute extends AbstractApi
 
                 case 'date':
                     $type_vew = __('Date');
-                    break;  
+                    break;
 
                 case 'number':
                     $type_vew = __('Number');
@@ -91,10 +91,10 @@ class Attribute extends AbstractApi
                 case 'select':
                     $type_vew = __('Select');
                     break;
-                    
+
                 case 'checkbox':
                     $type_vew = __('Checkbox');
-                    break; 
+                    break;
             }
             $return['attribute'][$row->position][$row->id]['type_vew'] = $type_vew;
             $return['attribute'][$row->position][$row->id]['position_vew'] = $position[$row->position];
@@ -184,13 +184,13 @@ class Attribute extends AbstractApi
                         $field['video'][$row->id] = $row->toArray();
                         $field['video'][$row->id]['data'] = isset($data[$row->id]['data']) ? $data[$row->id]['data'] : '';
                         break;
-                    
+
                     default:
                         $field['all'][$row->position]['info'][$row->id] = $row->toArray();
                         $field['all'][$row->position]['info'][$row->id]['data'] = isset($data[$row->id]['data']) ? $data[$row->id]['data'] : '';
                         $field['all'][$row->position]['title'] = $position[$row->position];
                         break;
-                }             
+                }
             }
         }
         // return
@@ -230,7 +230,7 @@ class Attribute extends AbstractApi
         $column = array('product');
         foreach ($search as $attribute) {
             $where = array(
-                'field' => $attribute['field'], 
+                'field' => $attribute['field'],
                 'data' => $attribute['data'],
             );
             $select = Pi::model('field_data', $this->getModule())->select()->where($where)->columns($column);
@@ -250,7 +250,7 @@ class Attribute extends AbstractApi
         // Get info
         $list = array(
             '' => '',
-            0  => __('Hidden'),
+            0 => __('Hidden'),
         );
         $order = array('order ASC', 'id ASC');
         $select = Pi::model('field_position', $this->getModule())->select()->order($order);

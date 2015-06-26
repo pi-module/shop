@@ -29,12 +29,12 @@ class Related extends AbstractApi
      */
     public function getListAll($product)
     {
-    	$id = $this->getListId($product);
-    	$list = array();
-    	if(!empty($id) && is_array($id)) {
-    		$list = Pi::api('product', 'shop')->getListFromId($id);
-    	}
-    	return $list;
+        $id = $this->getListId($product);
+        $list = array();
+        if (!empty($id) && is_array($id)) {
+            $list = Pi::api('product', 'shop')->getListFromId($id);
+        }
+        return $list;
     }
 
     /**
@@ -44,7 +44,7 @@ class Related extends AbstractApi
     {
         $list = array();
         $where = array('product_id' => $product);
-    	$select = Pi::model('related', $this->getModule())->select()->where($where);
+        $select = Pi::model('related', $this->getModule())->select()->where($where);
         $rowset = Pi::model('related', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $row = $row->toArray();
@@ -58,34 +58,34 @@ class Related extends AbstractApi
      */
     public function getListFind($id)
     {
-    	$list = array();
-    	if(!empty($id) && is_array($id)) {
-    		$list = Pi::api('product', 'shop')->getListFromId($id);
-    	}
-    	return $list;
-    }	
+        $list = array();
+        if (!empty($id) && is_array($id)) {
+            $list = Pi::api('product', 'shop')->getListFromId($id);
+        }
+        return $list;
+    }
 
     public function findList($product, $values)
     {
-    	$list = array();
-    	$from_category = array();
-    	$from_title = array();
-    	// Find product ids from title 
-    	if (!empty($values['title'])) {
-    		$from_title = Pi::api('product', 'shop')->searchRelated($values['title'], $values['type']);
-    	}
-    	// Find product ids from selected cats
-    	if (is_array($values['category']) && !empty($values['category'])) {
-    		$from_category = Pi::api('category', 'shop')->findFromCategory($values['category']);
-    	}
+        $list = array();
+        $from_category = array();
+        $from_title = array();
+        // Find product ids from title
+        if (!empty($values['title'])) {
+            $from_title = Pi::api('product', 'shop')->searchRelated($values['title'], $values['type']);
+        }
+        // Find product ids from selected cats
+        if (is_array($values['category']) && !empty($values['category'])) {
+            $from_category = Pi::api('category', 'shop')->findFromCategory($values['category']);
+        }
         // Set array
         $id = array_merge($from_title, $from_category);
         $id = array_unique($id);
         //unset($id[$product]);
         // Get product list
         if (!empty($id)) {
-        	$list = $this->getListFind($id);
+            $list = $this->getListFind($id);
         }
-    	return $list;
+        return $list;
     }
 }	
