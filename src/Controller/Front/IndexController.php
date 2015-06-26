@@ -22,7 +22,7 @@ use Zend\Json\Json;
 
 class IndexController extends ActionController
 {
-	public function indexAction()
+    public function indexAction()
     {
         // Get info from url
         $module = $this->params('module');
@@ -68,9 +68,9 @@ class IndexController extends ActionController
         $option['field'] = $fields['attribute'];
         $form = new SearchForm('search', $option);
         $form->setAttribute('action', Pi::url($this->url('shop', array(
-            'module'        => $module,
-            'controller'    => 'search',
-            'action'        => 'filter',
+            'module' => $module,
+            'controller' => 'search',
+            'action' => 'filter',
         ))));
         // Set view
         $this->view()->assign('categories', $category);
@@ -99,7 +99,7 @@ class IndexController extends ActionController
         $columns = array('product' => new Expression('DISTINCT product'));
         // Get info from link table
         $select = $this->getModel('link')->select()->where($where)->columns($columns)
-        ->order($order)->offset($offset)->limit($limit);
+            ->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('link')->selectWith($select)->toArray();
         // Make list
         foreach ($rowset as $id) {
@@ -137,13 +137,13 @@ class IndexController extends ActionController
         }
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)
-        ->order($order)->offset($offset)->limit($limit);
+            ->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('product')->selectWith($select);
         foreach ($rowset as $row) {
             $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
         }
         // return product
-        return $product;   
+        return $product;
     }
 
     public function productJsonList($where)
@@ -218,15 +218,15 @@ class IndexController extends ActionController
         $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
         $paginator->setCurrentPageNumber(intval($template['page']));
         $paginator->setUrlOptions(array(
-            'router'    => $this->getEvent()->getRouter(),
-            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params'    => array_filter(array(
-                'module'        => $this->getModule(),
-                'controller'    => $template['controller'],
-                'action'        => $template['action'],
-                'slug'          => $template['slug'],
-                'sort'          => $template['sort'],
-                'stock'         => $template['stock'],
+            'router' => $this->getEvent()->getRouter(),
+            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter(array(
+                'module' => $this->getModule(),
+                'controller' => $template['controller'],
+                'action' => $template['action'],
+                'slug' => $template['slug'],
+                'sort' => $template['sort'],
+                'stock' => $template['stock'],
             )),
         ));
         return $paginator;
@@ -242,17 +242,17 @@ class IndexController extends ActionController
 
             case 'price':
                 $order = array('price DESC', 'id DESC');
-                break; 
-                
+                break;
+
             case 'update':
                 $order = array('time_update DESC', 'id DESC');
-                break; 
+                break;
 
             case 'create':
             default:
                 $order = array('time_create DESC', 'id DESC');
                 break;
-        } 
+        }
         return $order;
     }
 }

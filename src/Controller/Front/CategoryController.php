@@ -19,7 +19,7 @@ use Module\Shop\Form\SearchForm;
 
 class CategoryController extends IndexController
 {
-	public function indexAction()
+    public function indexAction()
     {
         // Get info from url
         $module = $this->params('module');
@@ -37,15 +37,15 @@ class CategoryController extends IndexController
         }
         // Set info
         $where = array(
-            'status'      => 1, 
-            'category'    => $category['id']
+            'status' => 1,
+            'category' => $category['id']
         );
         // Get product List
         $productList = $this->productList($where);
         // Set paginator info
         $template = array(
-            'controller'  => 'category',
-            'slug'        => $slug,
+            'controller' => 'category',
+            'slug' => $slug,
         );
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
@@ -62,9 +62,9 @@ class CategoryController extends IndexController
         $option['field'] = $fields['attribute'];
         $form = new SearchForm('search', $option);
         $form->setAttribute('action', Pi::url($this->url('shop', array(
-            'module'        => $module,
-            'controller'    => 'search',
-            'action'        => 'filter',
+            'module' => $module,
+            'controller' => 'search',
+            'action' => 'filter',
         ))));
         // Set title
         //$title = sprintf(__('All products on %s category'), $category['title']);

@@ -22,9 +22,9 @@ use Zend\Json\Json;
 
 class SearchController extends IndexController
 {
-	public function indexAction()
+    public function indexAction()
     {
-    	$option = array();
+        $option = array();
         // Get info from url
         $module = $this->params('module');
         // Get config
@@ -34,11 +34,11 @@ class SearchController extends IndexController
         $option['field'] = $fields['attribute'];
         $form = new SearchForm('search', $option);
         $form->setAttribute('action', Pi::url($this->url('shop', array(
-            'module'        => $module,
-            'controller'    => 'search',
-            'action'        => 'filter',
+            'module' => $module,
+            'controller' => 'search',
+            'action' => 'filter',
         ))));
-    	// Set view
+        // Set view
         $this->view()->headTitle($config['text_title_search']);
         $this->view()->headDescription($config['text_description_search'], 'set');
         $this->view()->headKeywords($config['text_keywords_search'], 'set');
@@ -77,8 +77,8 @@ class SearchController extends IndexController
             // Make url
             $url = $this->url('', array(
                 'controller' => 'search',
-                'action'     => 'result',
-                'slug'       => http_build_query($search),
+                'action' => 'result',
+                'slug' => http_build_query($search),
             ));
             // jump
             return $this->jump($url);
@@ -106,7 +106,7 @@ class SearchController extends IndexController
         // Set product info from search
         $where = array('status' => 1);
         // Set title
-        if (isset($search['title']) 
+        if (isset($search['title'])
             && !empty($search['title'])
         ) {
             switch ($search['type']) {
@@ -118,32 +118,32 @@ class SearchController extends IndexController
                 case 2:
                     $where['title LIKE ?'] = $search['title'] . '%';
                     break;
-                
+
                 case 3:
                     $where['title LIKE ?'] = '%' . $search['title'];
                     break;
-                
+
                 case 4:
                     $where['title LIKE ?'] = $search['title'];
-                    break;          
+                    break;
             }
         }
         // Set price_from
-        if (isset($search['price_from']) 
-            && intval($search['price_from']) > 0)
-        {
+        if (isset($search['price_from'])
+            && intval($search['price_from']) > 0
+        ) {
             $where['price >= ?'] = $search['price_from'];
         }
         // Set price_to
-        if (isset($search['price_to']) 
-            && intval($search['price_to']) > 0)
-        {
+        if (isset($search['price_to'])
+            && intval($search['price_to']) > 0
+        ) {
             $where['price <= ?'] = $search['price_from'];
         }
         // Set category
-        if (isset($search['category']) 
-            && intval($search['category']) > 0)
-        {
+        if (isset($search['category'])
+            && intval($search['category']) > 0
+        ) {
             $categoryId = Pi::api('category', 'shop')->findFromCategory(intval($search['category']));
         }
         // Set attribute
@@ -167,13 +167,13 @@ class SearchController extends IndexController
         $template = array(
             'controller' => 'search',
             'action' => 'result',
-            );
+        );
         // Get paginator
         $paginator = $this->searchPaginator($template, $where);
         // Set header and title
-        if (isset($search['title']) 
-            && !empty($search['title']))
-        {
+        if (isset($search['title'])
+            && !empty($search['title'])
+        ) {
             $title = sprintf(__('Search result of %s'), $search['title']);
         } else {
             $title = __('Search result');
@@ -184,9 +184,9 @@ class SearchController extends IndexController
         $form = new SearchForm('search', $option);
         $form->setData($search);
         $form->setAttribute('action', Pi::url($this->url('shop', array(
-            'module'        => $module,
-            'controller'    => 'search',
-            'action'        => 'filter',
+            'module' => $module,
+            'controller' => 'search',
+            'action' => 'filter',
         ))));
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
@@ -204,5 +204,5 @@ class SearchController extends IndexController
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
         $this->view()->assign('form', $form);
-    }	
+    }
 }

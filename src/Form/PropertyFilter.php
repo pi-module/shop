@@ -47,18 +47,18 @@ class PropertyFilter extends InputFilter
         ));
         // influence_stock
         $this->add(array(
-            'name'          => 'influence_stock',
-            'required'      => false,
+            'name' => 'influence_stock',
+            'required' => false,
         ));
         // influence_price
         $this->add(array(
-            'name'          => 'influence_price',
-            'required'      => false,
+            'name' => 'influence_price',
+            'required' => false,
         ));
         // type
         $this->add(array(
-            'name'          => 'type',
-            'required'      => false,
+            'name' => 'type',
+            'required' => false,
         ));
     }
 }

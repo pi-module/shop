@@ -23,9 +23,9 @@ class Remove extends ZendButton
     public function getAttributes()
     {
         $this->Attributes = array(
-            'class'        => 'img-remove btn btn-danger btn-sm',
-            'data-toggle'  => 'button',
-            'data-link'    => $this->attributes['link'],
+            'class' => 'img-remove btn btn-danger btn-sm',
+            'data-toggle' => 'button',
+            'data-link' => $this->attributes['link'],
         );
         return $this->Attributes;
     }

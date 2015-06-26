@@ -75,10 +75,10 @@ class PropertyController extends ActionController
                 Pi::api('log', 'shop')->addLog('property', $row->id, $operation);
                 $message = __('Order property data saved successfully.');
                 $this->jump(array('action' => 'index'), $message);
-            }  
+            }
         } else {
             if ($id) {
-            	$position = $this->getModel('property')->find($id)->toArray();
+                $position = $this->getModel('property')->find($id)->toArray();
                 $form->setData($position);
             }
         }

@@ -16,7 +16,7 @@ namespace Module\Shop\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class RelatedForm  extends BaseForm
+class RelatedForm extends BaseForm
 {
 
     public function __construct($name = null)
@@ -34,7 +34,7 @@ class RelatedForm  extends BaseForm
 
     public function init()
     {
-    	// title
+        // title
         $this->add(array(
             'name' => 'title',
             'options' => array(
@@ -43,7 +43,7 @@ class RelatedForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                
+
             )
         ));
         // status

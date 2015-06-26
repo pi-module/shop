@@ -23,7 +23,7 @@ class PropertyColor extends ZendButton
     public function getAttributes()
     {
         $this->Attributes = array(
-            'class'        => 'add_property_color btn btn-success',
+            'class' => 'add_property_color btn btn-success',
         );
         return $this->Attributes;
     }

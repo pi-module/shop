@@ -28,7 +28,7 @@ class Update extends BasicUpdate
         $events = $this->events;
         $events->attach('update.pre', array($this, 'updateSchema'));
         parent::attachDefaultListeners();
-        
+
         return $this;
     }
 
@@ -37,27 +37,27 @@ class Update extends BasicUpdate
      */
     public function updateSchema(Event $e)
     {
-        $moduleVersion  = $e->getParam('version');
-        
+        $moduleVersion = $e->getParam('version');
+
         // Set product model
-        $productModel    = Pi::model('product', $this->module);
-        $productTable    = $productModel->getTable();
-        $productAdapter  = $productModel->getAdapter();
+        $productModel = Pi::model('product', $this->module);
+        $productTable = $productModel->getTable();
+        $productAdapter = $productModel->getAdapter();
 
         // Set category model
-        $categoryModel    = Pi::model('category', $this->module);
-        $categoryTable    = $categoryModel->getTable();
-        $categoryAdapter  = $categoryModel->getAdapter();
+        $categoryModel = Pi::model('category', $this->module);
+        $categoryTable = $categoryModel->getTable();
+        $categoryAdapter = $categoryModel->getAdapter();
 
         // Set field model
-        $fieldModel    = Pi::model('field', $this->module);
-        $fieldTable    = $fieldModel->getTable();
-        $fieldAdapter  = $fieldModel->getAdapter();
+        $fieldModel = Pi::model('field', $this->module);
+        $fieldTable = $fieldModel->getTable();
+        $fieldAdapter = $fieldModel->getAdapter();
 
         // Set property model
-        $propertyModel    = Pi::model('property', $this->module);
-        $propertyTable    = $propertyModel->getTable();
-        $propertyAdapter  = $propertyModel->getAdapter();
+        $propertyModel = Pi::model('property', $this->module);
+        $propertyTable = $propertyModel->getTable();
+        $propertyAdapter = $propertyModel->getAdapter();
 
         // Update to version 0.3.0
         if (version_compare($moduleVersion, '0.3.0', '<')) {
@@ -67,9 +67,9 @@ class Update extends BasicUpdate
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -83,9 +83,9 @@ class Update extends BasicUpdate
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -99,9 +99,9 @@ class Update extends BasicUpdate
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -109,16 +109,16 @@ class Update extends BasicUpdate
 
         // Update to version 0.3.8
         if (version_compare($moduleVersion, '0.3.8', '<')) {
-            
+
             // Alter table field `summary`
             $sql = sprintf("ALTER TABLE %s CHANGE `summary` `text_summary` text", $productTable);
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -129,9 +129,9 @@ class Update extends BasicUpdate
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -142,9 +142,9 @@ class Update extends BasicUpdate
                 $categoryAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -152,9 +152,9 @@ class Update extends BasicUpdate
 
         // Update to version 1.0.5
         if (version_compare($moduleVersion, '1.0.5', '<')) {
-            
+
             // Add table of field_category
-            $sql =<<<'EOD'
+            $sql = <<<'EOD'
 CREATE TABLE `{field_category}` (
     `id` int (10) unsigned NOT NULL auto_increment,
     `field` int(10) unsigned NOT NULL default '0',
@@ -171,9 +171,9 @@ EOD;
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'SQL schema query for author table failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
+                        . $exception->getMessage(),
                 ));
 
                 return false;
@@ -185,9 +185,9 @@ EOD;
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -198,9 +198,9 @@ EOD;
                 $fieldAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -211,9 +211,9 @@ EOD;
                 $fieldAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -224,9 +224,9 @@ EOD;
                 $fieldAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -235,7 +235,7 @@ EOD;
         // Update to version 1.0.8
         if (version_compare($moduleVersion, '1.0.8', '<')) {
             // Add table of field_position
-            $sql =<<<'EOD'
+            $sql = <<<'EOD'
 CREATE TABLE `{field_position}` (
     `id` int (10) unsigned NOT NULL auto_increment,
     `title` varchar(255) NOT NULL default '',
@@ -254,9 +254,9 @@ EOD;
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'SQL schema query for author table failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
+                        . $exception->getMessage(),
                 ));
 
                 return false;
@@ -267,9 +267,9 @@ EOD;
                 $fieldAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -278,7 +278,7 @@ EOD;
         // Update to version 1.0.9
         if (version_compare($moduleVersion, '1.0.9', '<')) {
             // Add table of basket
-            $sql =<<<'EOD'
+            $sql = <<<'EOD'
 CREATE TABLE `{basket}` (
     `id` int(10) unsigned NOT NULL auto_increment,
     `uid` int(10) unsigned NOT NULL default '0',
@@ -294,9 +294,9 @@ EOD;
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'SQL schema query for author table failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
+                        . $exception->getMessage(),
                 ));
 
                 return false;
@@ -308,9 +308,9 @@ EOD;
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
-                                   . $exception->getMessage(),
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
                 ));
                 return false;
             }
@@ -324,7 +324,7 @@ EOD;
             foreach ($rowset as $row) {
                 // Set value
                 $value = array(
-                    'data'    => $row->value,
+                    'data' => $row->value,
                     'default' => '',
                 );
                 $value = Json::encode($value);
@@ -338,8 +338,8 @@ EOD;
                 $fieldAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
                 ));
                 return false;
@@ -349,7 +349,7 @@ EOD;
         // Update to version 1.1.1
         if (version_compare($moduleVersion, '1.1.1', '<')) {
             // Add table of property
-            $sql =<<<'EOD'
+            $sql = <<<'EOD'
 CREATE TABLE `{property}` (
   `id`              INT(10) UNSIGNED              NOT NULL AUTO_INCREMENT,
   `title`           VARCHAR(255)                  NOT NULL DEFAULT '',
@@ -371,8 +371,8 @@ EOD;
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'SQL schema query for author table failed: '
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
                 ));
 
@@ -380,7 +380,7 @@ EOD;
             }
 
             // Add table of property_value
-            $sql =<<<'EOD'
+            $sql = <<<'EOD'
 CREATE TABLE `{property_value}` (
   `id`       INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `property` INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -401,8 +401,8 @@ EOD;
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'SQL schema query for author table failed: '
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
                 ));
 
@@ -418,8 +418,8 @@ EOD;
                 $categoryAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'Table alter query failed: '
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
                 ));
                 return false;
@@ -429,7 +429,7 @@ EOD;
         // Update to version 1.1.8
         if (version_compare($moduleVersion, '1.1.8', '<')) {
             // Add table of discount
-            $sql =<<<'EOD'
+            $sql = <<<'EOD'
 CREATE TABLE `{discount}` (
   `id`      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title`   VARCHAR(255)        NOT NULL DEFAULT '',
@@ -447,8 +447,8 @@ EOD;
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
-                    'status'    => false,
-                    'message'   => 'SQL schema query for author table failed: '
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
                 ));
 
@@ -457,5 +457,5 @@ EOD;
         }
 
         return true;
-    }    
+    }
 }

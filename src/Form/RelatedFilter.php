@@ -35,7 +35,7 @@ class RelatedFilter extends InputFilter
             'name' => 'type',
             'required' => false,
         ));
-    	// category
+        // category
         $this->add(array(
             'name' => 'category',
             'required' => false,

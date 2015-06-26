@@ -15,9 +15,9 @@ namespace Module\Shop\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class AdminSearchForm  extends BaseForm
+class AdminSearchForm extends BaseForm
 {
-	public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = array())
     {
         parent::__construct($name);
     }
@@ -40,8 +40,8 @@ class AdminSearchForm  extends BaseForm
             ),
             'attributes' => array(
                 'type' => 'text',
-                'description' => '', 
-                'required'  => true,
+                'description' => '',
+                'required' => true,
             )
         ));
         // Save

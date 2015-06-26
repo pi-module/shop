@@ -42,17 +42,17 @@ class CategoryFilter extends InputFilter
         ));
         // slug
         $this->add(array(
-            'name'          => 'slug',
-            'required'      => false,
-            'filters'       => array(
+            'name' => 'slug',
+            'required' => false,
+            'filters' => array(
                 array(
-                    'name'  => 'StringTrim',
+                    'name' => 'StringTrim',
                 ),
             ),
-            'validators'    => array(
+            'validators' => array(
                 new \Module\Shop\Validator\SlugDuplicate(array(
-                    'module'            => Pi::service('module')->current(),
-                    'table'             => 'category',
+                    'module' => Pi::service('module')->current(),
+                    'table' => 'category',
                 )),
             ),
         ));

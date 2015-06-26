@@ -40,7 +40,7 @@ class Install extends BasicInstall
     public function postInstall(Event $e)
     {
         $module = $e->getParam('module');
-        
+
         // Set model
         $productModel = Pi::model('product', $module);
         $categoryModel = Pi::model('category', $module);
@@ -48,52 +48,52 @@ class Install extends BasicInstall
 
         // Add category
         $categoryData = array(
-            'title'            => __('Default'),
-            'slug'             => __('default'),
+            'title' => __('Default'),
+            'slug' => __('default'),
             'text_description' => __('This is a default category for shop module'),
-            'seo_title'        => __('default category'),
-            'seo_keywords'     => __('default,category'),
-            'seo_description'  => __('default category'),
-            'time_create'      => time(),
-            'time_update'      => time(),
-            'status'           => '1',
+            'seo_title' => __('default category'),
+            'seo_keywords' => __('default,category'),
+            'seo_description' => __('default category'),
+            'time_create' => time(),
+            'time_update' => time(),
+            'status' => '1',
         );
         $categoryModel->insert($categoryData);
-        
+
         // Add product
         $productData = array(
-            'title'            => __('Demo product'),
-            'slug'             => __('demo-product'),
-            'category'         => Json::encode(array('1')),
-            'category_main'    => 1,
-            'text_summary'     => __('This is a summery for this demo product'),
-            'seo_title'        => __('demo product'),
-            'seo_keywords'     => __('demo,product'),
-            'seo_description'  => __('demo product'),
-            'status'           => '1',
-            'time_create'      => time(),
-            'time_update'      => time(),
-            'stock'            => 1,
-            'price'            => 1000,
+            'title' => __('Demo product'),
+            'slug' => __('demo-product'),
+            'category' => Json::encode(array('1')),
+            'category_main' => 1,
+            'text_summary' => __('This is a summery for this demo product'),
+            'seo_title' => __('demo product'),
+            'seo_keywords' => __('demo,product'),
+            'seo_description' => __('demo product'),
+            'status' => '1',
+            'time_create' => time(),
+            'time_update' => time(),
+            'stock' => 1,
+            'price' => 1000,
         );
         $productModel->insert($productData);
 
         // Add link
         $linkData = array(
-            'product'          => '1',
-            'category'         => '1',
-            'time_create'      => time(),
-            'time_update'      => time(),
-            'stock'            => 1,
-            'price'            => 1000,
-            'status'           => '1',
+            'product' => '1',
+            'category' => '1',
+            'time_create' => time(),
+            'time_update' => time(),
+            'stock' => 1,
+            'price' => 1000,
+            'status' => '1',
         );
         $linkModel->insert($linkData);
 
         // Result
         $result = array(
-            'status'           => true,
-            'message'          => __('Default information added.'),
+            'status' => true,
+            'message' => __('Default information added.'),
         );
         $this->setResult('post-install', $result);
     }

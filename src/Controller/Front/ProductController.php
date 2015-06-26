@@ -62,7 +62,7 @@ class ProductController extends IndexController
         // Set tag
         if ($config['view_tag']) {
             $tag = Pi::service('tag')->get($module, $product['id'], '');
-            $this->view()->assign('tag', $tag);  
+            $this->view()->assign('tag', $tag);
         }
         // Set vote
         if ($config['vote_bar'] && Pi::service('module')->isActive('vote')) {

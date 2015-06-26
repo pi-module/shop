@@ -42,14 +42,14 @@ class DiscountFilter extends InputFilter
         ));
         // percent
         $this->add(array(
-            'name'          => 'percent',
-            'required'      => true,
-            'filters'       => array(
+            'name' => 'percent',
+            'required' => true,
+            'filters' => array(
                 array(
-                    'name'  => 'StringTrim',
+                    'name' => 'StringTrim',
                 ),
             ),
-            'validators'    => array(
+            'validators' => array(
                 new \Module\Shop\Validator\Percent,
             ),
         ));

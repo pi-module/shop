@@ -37,17 +37,17 @@ class ProductFilter extends InputFilter
         ));
         // slug
         $this->add(array(
-            'name'          => 'slug',
-            'required'      => false,
-            'filters'       => array(
+            'name' => 'slug',
+            'required' => false,
+            'filters' => array(
                 array(
-                    'name'  => 'StringTrim',
+                    'name' => 'StringTrim',
                 ),
             ),
-            'validators'    => array(
+            'validators' => array(
                 new \Module\Shop\Validator\SlugDuplicate(array(
-                    'module'            => Pi::service('module')->current(),
-                    'table'             => 'product',
+                    'module' => Pi::service('module')->current(),
+                    'table' => 'product',
                 )),
             ),
         ));
@@ -85,7 +85,7 @@ class ProductFilter extends InputFilter
         $this->add(array(
             'name' => 'category_main',
             'required' => true,
-            'validators'    => array(
+            'validators' => array(
                 new \Module\Shop\Validator\Category,
             ),
         ));

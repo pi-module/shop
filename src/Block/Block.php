@@ -33,8 +33,8 @@ class Block
         ) {
             // Set info
             $where = array(
-                'status'      => 1,
-                'category'    => $block['category'],
+                'status' => 1,
+                'category' => $block['category'],
             );
             // Set info
             $columns = array('product' => new Expression('DISTINCT product'));
@@ -78,8 +78,8 @@ class Block
         ) {
             // Set info
             $where = array(
-                'status'      => 1,
-                'category'    => $block['category'],
+                'status' => 1,
+                'category' => $block['category'],
             );
             // Set info
             $columns = array('product' => new Expression('DISTINCT product'));

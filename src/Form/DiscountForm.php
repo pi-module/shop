@@ -16,7 +16,7 @@ namespace Module\Shop\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class DiscountForm  extends BaseForm
+class DiscountForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {

@@ -16,7 +16,7 @@ namespace Module\Shop\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class ProductForm  extends BaseForm
+class ProductForm extends BaseForm
 {
     protected $thumbUrl = '';
 
@@ -151,8 +151,7 @@ class ProductForm  extends BaseForm
             $this->add(array(
                 'name' => 'imageview',
                 'type' => 'Module\Shop\Form\Element\Image',
-                'options' => array(
-                    //'label' => __('Image'),
+                'options' => array(//'label' => __('Image'),
                 ),
                 'attributes' => array(
                     'src' => $this->thumbUrl,
@@ -320,7 +319,7 @@ class ProductForm  extends BaseForm
                     'label' => __('Tags'),
                 ),
                 'attributes' => array(
-                    'id'          => 'tag',
+                    'id' => 'tag',
                     'description' => __('Use `|` as delimiter to separate tag terms'),
                 )
             ));

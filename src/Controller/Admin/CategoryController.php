@@ -47,9 +47,9 @@ class CategoryController extends ActionController
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
             $list[$row->id]['url'] = Pi::url($this->url('shop', array(
-                'module'        => $module,
-                'controller'    => 'category',
-                'slug'          => $list[$row->id]['slug'],
+                'module' => $module,
+                'controller' => 'category',
+                'slug' => $list[$row->id]['slug'],
             )));
         }
         // Go to update page if empty
@@ -64,12 +64,12 @@ class CategoryController extends ActionController
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
         $paginator->setUrlOptions(array(
-            'router'    => $this->getEvent()->getRouter(),
-            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params'    => array_filter(array(
-                'module'        => $this->getModule(),
-                'controller'    => 'category',
-                'action'        => 'index',
+            'router' => $this->getEvent()->getRouter(),
+            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter(array(
+                'module' => $this->getModule(),
+                'controller' => 'category',
+                'action' => 'index',
             )),
         ));
         // Set view
@@ -134,7 +134,7 @@ class CategoryController extends ActionController
                         $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
                     }
                 } elseif (!isset($values['image'])) {
-                    $values['image'] = '';  
+                    $values['image'] = '';
                 }
                 // Set seo_title
                 $title = ($values['seo_title']) ? $values['seo_title'] : $values['title'];
@@ -144,7 +144,7 @@ class CategoryController extends ActionController
                 $keywords = ($values['seo_keywords']) ? $values['seo_keywords'] : $values['title'];
                 $filter = new Filter\HeadKeywords;
                 $filter->setOptions(array(
-                    'force_replace_space' => (bool) $this->config('force_replace_space'),
+                    'force_replace_space' => (bool)$this->config('force_replace_space'),
                 ));
                 $values['seo_keywords'] = $filter($keywords);
                 // Set seo_description
@@ -168,12 +168,12 @@ class CategoryController extends ActionController
                 if (Pi::service('module')->isActive('sitemap')) {
                     // Set loc
                     $loc = Pi::url($this->url('shop', array(
-                        'module'      => $module, 
-                        'controller'  => 'category', 
-                        'slug'        => $values['slug']
+                        'module' => $module,
+                        'controller' => 'category',
+                        'slug' => $values['slug']
                     )));
                     // Update sitemap
-                    Pi::api('sitemap', 'sitemap')->singleLink($loc, $row->status, $module, 'category', $row->id);         
+                    Pi::api('sitemap', 'sitemap')->singleLink($loc, $row->status, $module, 'category', $row->id);
                 }
                 // Clear registry
                 Pi::registry('categoryList', 'shop')->clear();
@@ -182,7 +182,7 @@ class CategoryController extends ActionController
                 Pi::api('log', 'shop')->addLog('category', $row->id, $operation);
                 $message = __('Category data saved successfully.');
                 $this->jump(array('action' => 'index'), $message);
-            }  
+            }
         } else {
             if ($id) {
                 $form->setData($category);

@@ -23,7 +23,7 @@ class PropertyWarranty extends ZendButton
     public function getAttributes()
     {
         $this->Attributes = array(
-            'class'        => 'add_property_warranty btn btn-success',
+            'class' => 'add_property_warranty btn btn-success',
         );
         return $this->Attributes;
     }

@@ -18,13 +18,13 @@ use Zend\Validator\AbstractValidator;
 
 class Category extends AbstractValidator
 {
-    const TAKEN        = 'categoryExists';
+    const TAKEN = 'categoryExists';
 
     /**
      * @var array
      */
     protected $messageTemplates = array(
-        self::TAKEN     => 'Please select category',
+        self::TAKEN => 'Please select category',
     );
 
     protected $options = array();
@@ -41,10 +41,10 @@ class Category extends AbstractValidator
         $this->setValue($value);
         $value = intval($value);
         if ($value > 0) {
-        	return true;
+            return true;
         } else {
-        	$this->error(static::TAKEN);
-        	return false;
+            $this->error(static::TAKEN);
+            return false;
         }
     }
 }

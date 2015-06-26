@@ -70,9 +70,9 @@ class ProductAdditionalForm extends BaseForm
             $html = '';
             if (isset($this->propertyValue) && !empty($this->propertyValue)) {
                 $i = 30;
-                foreach ($this->propertyValue[$property['id']]  as $propertyValue) {
+                foreach ($this->propertyValue[$property['id']] as $propertyValue) {
                     if ($property['influence_stock'] && $property['influence_price']) {
-                        $htmlTemplate =<<<'EOT'
+                        $htmlTemplate = <<<'EOT'
 <div class="col-sm-12 js-form-element">
     <span class="col-sm-4">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
     <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][stock]"/></span>
@@ -97,7 +97,7 @@ EOT;
                             $property['id']
                         );
                     } elseif ($property['influence_stock']) {
-                        $htmlTemplate =<<<'EOT'
+                        $htmlTemplate = <<<'EOT'
 <div class="col-sm-12 js-form-element">
     <span class="col-sm-8">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
     <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][stock]"/></span>
@@ -117,7 +117,7 @@ EOT;
                             $property['id']
                         );
                     } elseif ($property['influence_price']) {
-                        $htmlTemplate =<<<'EOT'
+                        $htmlTemplate = <<<'EOT'
 <div class="col-sm-12 js-form-element">
     <span class="col-sm-8">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
     <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][price]"/></span>
@@ -137,7 +137,7 @@ EOT;
                             $property['id']
                         );
                     } else {
-                        $htmlTemplate =<<<'EOT'
+                        $htmlTemplate = <<<'EOT'
 <div class="col-sm-12 js-form-element">
     <span class="col-sm-11">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
     <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
@@ -192,7 +192,7 @@ EOT;
                                     'value_options' => $this->makeArray($field['value']),
                                 ),
                             ));
-                        } elseif ($field['type'] == 'checkbox') { 
+                        } elseif ($field['type'] == 'checkbox') {
                             $this->add(array(
                                 'name' => $field['id'],
                                 'type' => 'checkbox',

@@ -120,11 +120,11 @@ class JsonController extends IndexController
 
                 // Set mail information
                 $information = array(
-                    'name'     => $data['name'],
-                    'email'    => $data['email'],
+                    'name' => $data['name'],
+                    'email' => $data['email'],
                     'question' => $data['question'],
-                    'id'       => $data['id'],
-                    'title'    => $data['title'],
+                    'id' => $data['id'],
+                    'title' => $data['title'],
                 );
 
                 // Set toAdmin

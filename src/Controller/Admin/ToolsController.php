@@ -46,7 +46,7 @@ class ToolsController extends ActionController
                     break;
             }
             $message = __('Sitemap rebuild finished');
-        }    
+        }
         // Set view
         $this->view()->setTemplate('tools-sitemap');
         $this->view()->assign('form', $form);

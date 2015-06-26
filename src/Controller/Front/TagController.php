@@ -18,7 +18,7 @@ use Pi\Mvc\Controller\ActionController;
 
 class TagController extends IndexController
 {
-	public function termAction()
+    public function termAction()
     {
         // Get info from url
         $module = $this->params('module');
@@ -51,16 +51,16 @@ class TagController extends IndexController
         }
         // Set info
         $where = array(
-            'status'      => 1, 
-            'product'     => $tagId
+            'status' => 1,
+            'product' => $tagId
         );
         // Get product List
         $productList = $this->productList($where);
         // Set paginator info
         $template = array(
-            'controller'  => 'tag',
-            'action'      => 'term',
-            'slug'        => urlencode($slug),
+            'controller' => 'tag',
+            'action' => 'term',
+            'slug' => urlencode($slug),
         );
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
@@ -99,9 +99,9 @@ class TagController extends IndexController
                 $tagList[$row->id] = $row->toArray();
                 $tagList[$row->id]['term'] = $tag['term'];
                 $tagList[$row->id]['url'] = Pi::url($this->url('', array(
-                    'controller'  => 'tag', 
-                    'action'      => 'term', 
-                    'slug'        => urldecode($tag['term'])
+                    'controller' => 'tag',
+                    'action' => 'term',
+                    'slug' => urldecode($tag['term'])
                 )));
             }
         }

@@ -16,7 +16,7 @@ namespace Module\Shop\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class PositionForm  extends BaseForm
+class PositionForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
@@ -50,7 +50,7 @@ class PositionForm  extends BaseForm
                 'type' => 'text',
                 'description' => '',
                 'required' => true,
-                
+
             )
         ));
         // order
@@ -62,7 +62,7 @@ class PositionForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                
+
             )
         ));
         // status

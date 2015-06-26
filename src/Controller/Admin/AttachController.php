@@ -62,12 +62,12 @@ class AttachController extends ActionController
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
         $paginator->setUrlOptions(array(
-            'router'    => $this->getEvent()->getRouter(),
-            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params'    => array_filter(array(
-                'module'        => $this->getModule(),
-                'controller'    => 'attach',
-                'action'        => 'index',
+            'router' => $this->getEvent()->getRouter(),
+            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter(array(
+                'module' => $this->getModule(),
+                'controller' => 'attach',
+                'action' => 'index',
             )),
         ));
         // Set view
@@ -159,15 +159,15 @@ class AttachController extends ActionController
         Pi::service('log')->active(false);
         // Set return
         $return = array(
-            'status' => 1, 
-            'message' => '', 
-            'id' => '', 
-            'title' => '', 
+            'status' => 1,
+            'message' => '',
+            'id' => '',
+            'title' => '',
             'time_create' => '',
-            'type' => '', 
-            'status' => '', 
-            'hits' => '', 
-            'size' => '', 
+            'type' => '',
+            'status' => '',
+            'hits' => '',
+            'size' => '',
             'preview' => '',
         );
         // Get id
@@ -276,7 +276,7 @@ class AttachController extends ActionController
         $file = array_filter(explode('-', $file));
         $file = implode(' ', $file);
         return sprintf('%s %s', $title, $file);
-    }    
+    }
 
     protected function fileType($file)
     {
@@ -370,7 +370,7 @@ class AttachController extends ActionController
             $file = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $path, $file);
             $view = Pi::url($file);
         } else {
-            $file = sprintf('upload/%s/%s/%s/%s',  $this->config('file_path'), $type, $path, $file);
+            $file = sprintf('upload/%s/%s/%s/%s', $this->config('file_path'), $type, $path, $file);
             $view = Pi::url($file);
         }
         return $view;

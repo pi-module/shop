@@ -23,7 +23,7 @@ class Property extends ZendButton
     public function getAttributes()
     {
         $this->Attributes = array(
-            'class'        => sprintf('add_property_%s btn btn-success', $this->attributes['id']),
+            'class' => sprintf('add_property_%s btn btn-success', $this->attributes['id']),
         );
         return $this->Attributes;
     }

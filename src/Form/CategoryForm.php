@@ -16,10 +16,10 @@ namespace Module\Shop\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class CategoryForm  extends BaseForm
+class CategoryForm extends BaseForm
 {
     protected $thumbUrl = '';
-    
+
     public function __construct($name = null, $option = array())
     {
         $this->category = array(0 => '');
@@ -79,7 +79,7 @@ class CategoryForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                
+
             )
         ));
         // text_description
@@ -103,7 +103,7 @@ class CategoryForm  extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'required'  => false,
+                'required' => false,
             )
         ));
         // status
@@ -128,8 +128,7 @@ class CategoryForm  extends BaseForm
             $this->add(array(
                 'name' => 'imageview',
                 'type' => 'Module\Shop\Form\Element\Image',
-                'options' => array(
-                    //'label' => __('Image'),
+                'options' => array(//'label' => __('Image'),
                 ),
                 'attributes' => array(
                     'src' => $this->thumbUrl,

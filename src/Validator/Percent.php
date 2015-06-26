@@ -18,13 +18,13 @@ use Zend\Validator\AbstractValidator;
 
 class Percent extends AbstractValidator
 {
-    const TAKEN        = 'percentNotTrue';
+    const TAKEN = 'percentNotTrue';
 
     /**
      * @var array
      */
     protected $messageTemplates = array(
-        self::TAKEN     => 'Percent number should be between 1 to 99',
+        self::TAKEN => 'Percent number should be between 1 to 99',
     );
 
     /**

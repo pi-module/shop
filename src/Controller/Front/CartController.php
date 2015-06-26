@@ -21,7 +21,7 @@ class CartController extends ActionController
 {
     public function indexAction()
     {
-    	// Check user is login or not
+        // Check user is login or not
         Pi::service('authentication')->requireLogin();
         // Check order is active or inactive
         if (!$this->config('order_active')) {
@@ -32,14 +32,14 @@ class CartController extends ActionController
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
         // Check basket
-    	if (empty($basket['products'])) {
+        if (empty($basket['products'])) {
             $module = $this->params('module');
-        	$url = array('', 'module' => $module, 'controller' => 'index');
+            $url = array('', 'module' => $module, 'controller' => 'index');
             $this->jump($url, __('Your cart are empty.'), 'error');
-    	}
+        }
         // Set view
-    	$this->view()->setTemplate('checkout-cart');
-    	$this->view()->assign('basket', $basket);
+        $this->view()->setTemplate('checkout-cart');
+        $this->view()->assign('basket', $basket);
     }
 
     public function addAction()
@@ -120,34 +120,34 @@ class CartController extends ActionController
         $return['actionName'] = $process;
         // process
         switch ($process) {
-        	case 'remove':
+            case 'remove':
                 Pi::api('basket', 'shop')->removeProduct($product);
-        	    $return['message'] = __('Selected product removed from your cart');
+                $return['message'] = __('Selected product removed from your cart');
                 $return['ajaxStatus'] = 1;
                 $return['actionStatus'] = 1;
-        		break;
+                break;
 
-        	/* case 'number':
-        	    $number = $cart['product'][$product]['number'];
-        	    if ($number > 0) {
-        	    	$getNumber = $this->params('number');
-        	    	$newNumber = $number + $getNumber;
-        	    	if ($newNumber > 0) {
+            /* case 'number':
+                $number = $cart['product'][$product]['number'];
+                if ($number > 0) {
+                    $getNumber = $this->params('number');
+                    $newNumber = $number + $getNumber;
+                    if ($newNumber > 0) {
                         $newTotal = $newNumber * $cart['product'][$product]['price'];
-        	    		$cart['product'][$product]['number'] = $newNumber;
+                        $cart['product'][$product]['number'] = $newNumber;
                         $cart['product'][$product]['total'] = $newTotal;
-        	    		$return['message'] = __('Update number');
+                        $return['message'] = __('Update number');
                         $return['actionNumber'] = $newNumber;
                         $return['ajaxStatus'] = 1;
                         $return['actionStatus'] = 1;
                         $return['actionTotal'] = $newTotal;
-        	    	} else {
-        	    		$return['message'] = __('You can not set product number to 0');
+                    } else {
+                        $return['message'] = __('You can not set product number to 0');
                         $return['ajaxStatus'] = 1;
                         $return['actionStatus'] = 0;
-        	    	}
-        	    }
-        		break;
+                    }
+                }
+                break;
             */
         }
         // return
@@ -163,26 +163,26 @@ class CartController extends ActionController
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
         // Set order array
-    	$order = array();
-    	$order['module_name'] = $this->params('module');
+        $order = array();
+        $order['module_name'] = $this->params('module');
         $order['type_payment'] = $this->config('order_type');
         $order['type_commodity'] = 'product';
         // Set products to order
-    	foreach ($basket['products'] as $product) {
+        foreach ($basket['products'] as $product) {
             // Set single product
-    		$singelProduct =  array(
-    			'product'         => $product['id'],
-    			'product_price'   => $product['price'],
-    			'discount_price'  => 0,
-    			'shipping_price'  => 0,
-    			'packing_price'   => 0,
-    			'vat_price'       => 0,
-    			'number'          => $product['number'],
-                'title'           => '',
-                'extra'           => json::encode($product['property']),
-    		);
-    		$order['product'][$product['id']] = $singelProduct;
-    	}
+            $singelProduct = array(
+                'product' => $product['id'],
+                'product_price' => $product['price'],
+                'discount_price' => 0,
+                'shipping_price' => 0,
+                'packing_price' => 0,
+                'vat_price' => 0,
+                'number' => $product['number'],
+                'title' => '',
+                'extra' => json::encode($product['property']),
+            );
+            $order['product'][$product['id']] = $singelProduct;
+        }
         // Unset shop session
         Pi::api('basket', 'shop')->emptyBasket();
         // Set and go to order
@@ -227,20 +227,20 @@ class CartController extends ActionController
         }
         // Set links
         $order['order_link'] = Pi::url($this->url('order', array(
-            'module'      => 'order', 
-            'controller'  => 'detail', 
-            'action'      => 'index', 
-            'id'          => $order['id']
+            'module' => 'order',
+            'controller' => 'detail',
+            'action' => 'index',
+            'id' => $order['id']
         )));
         $order['user_link'] = Pi::url($this->url('order', array(
-            'module'      => 'order', 
-            'controller'  => 'index', 
-            'action'      => 'index', 
+            'module' => 'order',
+            'controller' => 'index',
+            'action' => 'index',
         )));
         $order['index_link'] = Pi::url($this->url('', array(
-            'module'      => $module, 
-            'controller'  => 'index',
-            'action'      => 'index',
+            'module' => $module,
+            'controller' => 'index',
+            'action' => 'index',
         )));
         // Get invoice information
         Pi::service('i18n')->load(array('module/order', 'default'));

@@ -19,7 +19,7 @@ use Pi\Paginator\Paginator;
 
 class LogController extends ActionController
 {
-	public function indexAction()
+    public function indexAction()
     {
         // Get page
         $page = $this->params('page', 1);
@@ -44,12 +44,12 @@ class LogController extends ActionController
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
         $paginator->setUrlOptions(array(
-            'router'    => $this->getEvent()->getRouter(),
-            'route'     => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params'    => array_filter(array(
-                'module'        => $this->getModule(),
-                'controller'    => 'log',
-                'action'        => 'index',
+            'router' => $this->getEvent()->getRouter(),
+            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter(array(
+                'module' => $this->getModule(),
+                'controller' => 'log',
+                'action' => 'index',
             )),
         ));
         // Set view

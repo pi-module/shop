@@ -21,9 +21,9 @@ class Shop extends Standard
      * @var array
      */
     protected $defaults = array(
-        'module'        => 'shop',
-        'controller'    => 'index',
-        'action'        => 'index'
+        'module' => 'shop',
+        'controller' => 'index',
+        'action' => 'index'
     );
 
     protected $sortList = array(
@@ -65,24 +65,25 @@ class Shop extends Standard
                     } else {
                         $matches['slug'] = $this->decode($parts[1]);
                         // Set sort and stock
-                        if (isset($parts[2]) && $parts[2] == 'sort' 
-                            && isset($parts[4]) && $parts[4] == 'stock') {
+                        if (isset($parts[2]) && $parts[2] == 'sort'
+                            && isset($parts[4]) && $parts[4] == 'stock'
+                        ) {
                             $matches['sort'] = $this->decode($parts[3]);
                             $matches['stock'] = $this->decode($parts[5]);
                         } elseif (isset($parts[2]) && $parts[2] == 'sort') {
                             $matches['sort'] = $this->decode($parts[3]);
                         } elseif (isset($parts[2]) && $parts[2] == 'stock') {
                             $matches['stock'] = $this->decode($parts[3]);
-                        } 
+                        }
                     }
                     break;
 
                 case 'cart':
-                    if ($parts[1] == 'complete') {    
+                    if ($parts[1] == 'complete') {
                         $matches['action'] = 'complete';
                     } elseif ($parts[1] == 'add') {
                         $matches['action'] = 'add';
-                    } elseif ($parts[1] == 'finish') {    
+                    } elseif ($parts[1] == 'finish') {
                         $matches['action'] = 'finish';
                         $matches['id'] = intval($parts[2]);
                     } elseif ($parts[1] == 'empty') {
@@ -99,20 +100,21 @@ class Shop extends Standard
                         }
                     } elseif ($parts[1] == 'basket') {
                         $matches['action'] = 'basket';
-                        if (isset($parts[2]) &&  in_array($parts[2], array('remove', 'number'))) {
+                        if (isset($parts[2]) && in_array($parts[2], array('remove', 'number'))) {
                             $matches['process'] = $this->decode($parts[2]);
                             $matches['product'] = intval($parts[3]);
                             if (isset($parts[4]) && in_array($parts[4], array(1, -1))) {
                                 $matches['number'] = $parts[4];
                             }
                         }
-                    }   
+                    }
                     break;
 
                 case 'index':
                     // Set sort and stock
-                    if (isset($parts[0]) && $parts[0] == 'sort' 
-                        && isset($parts[2]) && $parts[2] == 'stock') {
+                    if (isset($parts[0]) && $parts[0] == 'sort'
+                        && isset($parts[2]) && $parts[2] == 'stock'
+                    ) {
                         $matches['sort'] = $this->decode($parts[1]);
                         $matches['stock'] = $this->decode($parts[3]);
                     } elseif (isset($parts[0]) && $parts[0] == 'sort') {
@@ -124,7 +126,7 @@ class Shop extends Standard
 
                 case 'product':
                     $matches['slug'] = $this->decode($parts[1]);
-                    break; 
+                    break;
 
                 case 'search':
                     if ($parts[1] == 'result') {
@@ -140,38 +142,41 @@ class Shop extends Standard
                         $matches['action'] = 'term';
                         $matches['slug'] = urldecode($parts[2]);
                         // Set sort and stock
-                        if (isset($parts[3]) && $parts[3] == 'sort' 
-                            && isset($parts[5]) && $parts[5] == 'stock') {
+                        if (isset($parts[3]) && $parts[3] == 'sort'
+                            && isset($parts[5]) && $parts[5] == 'stock'
+                        ) {
                             $matches['sort'] = $this->decode($parts[4]);
                             $matches['stock'] = $this->decode($parts[6]);
                         } elseif (isset($parts[3]) && $parts[3] == 'sort') {
                             $matches['sort'] = $this->decode($parts[4]);
                         } elseif (isset($parts[3]) && $parts[3] == 'stock') {
                             $matches['stock'] = $this->decode($parts[4]);
-                        } 
+                        }
                     } elseif ($parts[1] == 'list') {
                         $matches['action'] = 'list';
                     }
-                    break;    
+                    break;
 
                 case 'json':
                     $matches['action'] = $this->decode($parts[1]);
                     if (isset($parts[2]) && $parts[2] == 'id') {
                         $matches['id'] = intval($parts[3]);
                     }
-                    break; 
-            }    
-        } 
+                    break;
+            }
+        }
 
         // Check sort
-        if (isset($matches['sort']) 
-            && !in_array($matches['sort'], $this->sortList)) {
+        if (isset($matches['sort'])
+            && !in_array($matches['sort'], $this->sortList)
+        ) {
             unset($matches['sort']);
         }
 
         // Check stock
-        if (isset($matches['stock']) 
-            && !in_array($matches['stock'], array(0,1))) {
+        if (isset($matches['stock'])
+            && !in_array($matches['stock'], array(0, 1))
+        ) {
             unset($matches['stock']);
         }
         return $matches;
@@ -188,35 +193,36 @@ class Shop extends Standard
     public function assemble(
         array $params = array(),
         array $options = array()
-    ) {
+    )
+    {
         $mergedParams = array_merge($this->defaults, $params);
         if (!$mergedParams) {
             return $this->prefix;
         }
-        
+
         // Set module
         if (!empty($mergedParams['module'])) {
             $url['module'] = $mergedParams['module'];
         }
 
         // Set controller
-        if (!empty($mergedParams['controller']) 
-                && $mergedParams['controller'] != 'index'
-                && in_array($mergedParams['controller'], $this->controllerList)) 
-        {
+        if (!empty($mergedParams['controller'])
+            && $mergedParams['controller'] != 'index'
+            && in_array($mergedParams['controller'], $this->controllerList)
+        ) {
             $url['controller'] = $mergedParams['controller'];
         }
 
         // Set action
-        if (!empty($mergedParams['action']) 
-                && $mergedParams['action'] != 'index') 
-        {
+        if (!empty($mergedParams['action'])
+            && $mergedParams['action'] != 'index'
+        ) {
             $url['action'] = $mergedParams['action'];
         }
 
         // Set if controller is checkou
         if ($mergedParams['controller'] == 'cart') {
-            if ($mergedParams['action'] == 'basket') {    
+            if ($mergedParams['action'] == 'basket') {
                 $url['process'] = $mergedParams['process'];
                 $url['product'] = $mergedParams['product'];
                 if (!empty($mergedParams['number'])) {
@@ -224,7 +230,7 @@ class Shop extends Standard
                 }
             }
         }
-        
+
         // Set slug
         if (!empty($mergedParams['slug'])) {
             $url['slug'] = $mergedParams['slug'];
@@ -237,33 +243,33 @@ class Shop extends Standard
 
         // Set page
         if (!empty($mergedParams['page'])) {
-            $url['page'] = sprintf('page%s%s', 
-                                   $this->paramDelimiter, 
-                                   $mergedParams['page']);
+            $url['page'] = sprintf('page%s%s',
+                $this->paramDelimiter,
+                $mergedParams['page']);
         }
 
         // Set step
         if (!empty($mergedParams['step'])) {
-            $url['step'] = sprintf('step%s%s', 
-                                   $this->paramDelimiter, 
-                                   $mergedParams['step']);
+            $url['step'] = sprintf('step%s%s',
+                $this->paramDelimiter,
+                $mergedParams['step']);
         }
-        
+
         // Set sort
-        if (!empty($mergedParams['sort']) 
-            && in_array($mergedParams['sort'], $this->sortList)) 
-        {
-            $url['sort'] = sprintf('sort%s%s', 
-                                   $this->paramDelimiter, 
-                                   $mergedParams['sort']);
+        if (!empty($mergedParams['sort'])
+            && in_array($mergedParams['sort'], $this->sortList)
+        ) {
+            $url['sort'] = sprintf('sort%s%s',
+                $this->paramDelimiter,
+                $mergedParams['sort']);
         }
 
         // Set stock
-        if (!empty($mergedParams['stock']) 
-            && in_array($mergedParams['stock'], array(0,1)))
-        {
-            $url['stock'] = sprintf('stock%s%s',                                    
-                $this->paramDelimiter,                                   
+        if (!empty($mergedParams['stock'])
+            && in_array($mergedParams['stock'], array(0, 1))
+        ) {
+            $url['stock'] = sprintf('stock%s%s',
+                $this->paramDelimiter,
                 $mergedParams['stock']);
         }
 

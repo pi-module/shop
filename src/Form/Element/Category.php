@@ -76,7 +76,7 @@ class Category extends Select
                 if ($children) {
                     $depth++;
                     foreach ($children as $key => $value) {
-                        $branch[$key] = sprintf('%s%s' , str_repeat('-', $depth), $value);
+                        $branch[$key] = sprintf('%s%s', str_repeat('-', $depth), $value);
                     }
                 }
                 unset($elements[$element['id']]);
