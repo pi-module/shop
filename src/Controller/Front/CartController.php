@@ -27,6 +27,7 @@ class CartController extends ActionController
         if (!$this->config('order_active')) {
             $this->getResponse()->setStatusCode(401);
             $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-404');
+            $this->view()->setLayout('layout-simple');
             return;
         }
         // Get basket
@@ -54,6 +55,7 @@ class CartController extends ActionController
         if (!$config['order_active']) {
             $this->getResponse()->setStatusCode(401);
             $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-404');
+            $this->view()->setLayout('layout-simple');
             return;
         }
         // Check post
@@ -69,6 +71,7 @@ class CartController extends ActionController
             if (!$product['marketable']) {
                 $this->getResponse()->setStatusCode(404);
                 $this->terminate(__('The product was not marketable.'), '', 'error-404');
+                $this->view()->setLayout('layout-simple');
                 return;
             } else {
                 // Check color

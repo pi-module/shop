@@ -33,6 +33,7 @@ class ProductController extends IndexController
         if (!$product || $product['status'] != 1) {
             $this->getResponse()->setStatusCode(404);
             $this->terminate(__('The product not found.'), '', 'error-404');
+            $this->view()->setLayout('layout-simple');
             return;
         }
         // Update Hits

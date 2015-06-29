@@ -33,6 +33,7 @@ class CategoryController extends IndexController
         if (!$category || $category['status'] != 1) {
             $this->getResponse()->setStatusCode(404);
             $this->terminate(__('The category not found.'), '', 'error-404');
+            $this->view()->setLayout('layout-simple');
             return;
         }
         // Set info
