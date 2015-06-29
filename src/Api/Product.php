@@ -380,6 +380,10 @@ class Product extends AbstractApi
             case 4:
                 $product['stock_type_view'] = __('Contact');
                 break;
+
+            case 5:
+                $product['stock_type_view'] = __('Variable stock');
+                break;
         }
         // Set marketable
         $product['marketable'] = $this->marketable($product);
@@ -617,6 +621,10 @@ class Product extends AbstractApi
 
             case 4:
                 $product['stock_type_view'] = __('Contact');
+                break;
+
+            case 5:
+                $product['stock_type_view'] = __('Variable stock');
                 break;
         }
         // Set marketable

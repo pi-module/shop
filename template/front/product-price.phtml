@@ -5,6 +5,12 @@
                 <div class="col-md-8 col-sm-6 col-xs-12">
                     <?php include $this->template('front/product-order'); ?>
                 </div>
+                <?php if (!empty($productItem['price_title'])) { ?>
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
+                    <span><?php echo $this->escape($productItem['price_title']); ?></span>
+                </div>
+                <?php } ?>
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <strong><?php _e('Price'); ?> : </strong>
                     <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
@@ -21,6 +27,12 @@
                     <div class="col-md-8 col-sm-6 col-xs-12">
                         <?php include $this->template('front/product-order'); ?>
                     </div>
+                    <?php if (!empty($productItem['price_title'])) { ?>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                            <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
+                            <span><?php echo $this->escape($productItem['price_title']); ?></span>
+                        </div>
+                    <?php } ?>
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="clearfix">
                             <strong><?php _e('Stock status'); ?> : </strong>
@@ -47,6 +59,12 @@
                     <div class="col-md-8 col-sm-6 col-xs-12">
                         <?php include $this->template('front/product-order'); ?>
                     </div>
+                    <?php if (!empty($productItem['price_title'])) { ?>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                            <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
+                            <span><?php echo $this->escape($productItem['price_title']); ?></span>
+                        </div>
+                    <?php } ?>
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="clearfix">
                             <strong><?php _e('Stock status'); ?> : </strong>

@@ -225,6 +225,7 @@ class ProductForm extends BaseForm
                         2 => __('Out of stock'),
                         3 => __('Coming soon'),
                         4 => __('Contact'),
+                        5 => __('Variable stock'),
                     ),
                 ),
                 'attributes' => array(
@@ -256,6 +257,18 @@ class ProductForm extends BaseForm
             'name' => 'price_discount',
             'options' => array(
                 'label' => __('Price Discount'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+
+            )
+        ));
+        // price_title
+        $this->add(array(
+            'name' => 'price_title',
+            'options' => array(
+                'label' => __('Price title'),
             ),
             'attributes' => array(
                 'type' => 'text',
