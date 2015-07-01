@@ -357,6 +357,7 @@ class Product extends AbstractApi
             if ($userDiscunt > 0) {
                 $product['price_discount'] = $product['price'];
                 $product['price'] = ($product['price'] - ($product['price'] * ($userDiscunt / 100)));
+                $product['price'] = Pi::api('api', 'order')->makePrice($product['price']);
             }
         }
         // Set price
@@ -464,6 +465,7 @@ class Product extends AbstractApi
             if ($userDiscunt > 0) {
                 $product['price_discount'] = $product['price'];
                 $product['price'] = ($product['price'] - ($product['price'] * ($userDiscunt / 100)));
+                $product['price'] = Pi::api('api', 'order')->makePrice($product['price']);
             }
         }
         // Set price
@@ -599,6 +601,7 @@ class Product extends AbstractApi
             if ($userDiscunt > 0) {
                 $product['price_discount'] = $product['price'];
                 $product['price'] = ($product['price'] - ($product['price'] * ($userDiscunt / 100)));
+                $product['price'] = Pi::api('api', 'order')->makePrice($product['price']);
             }
         }
         // Set price
