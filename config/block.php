@@ -33,21 +33,23 @@ return array(
                 'value' => 10,
             ),
             'list-type' => array(
-                'title' => _a('Item list type'),
+                'title' => _a('Product list type'),
                 'description' => '',
                 'edit' => array(
                     'type' => 'select',
                     'options' => array(
                         'options' => array(
-                            'vertical' => _a('Vertical'),
                             'horizontal' => _a('Horizontal'),
+                            'vertical' => _a('Vertical'),
+                            'box' => _a('Multi size Box'),
                             'list' => _a('List'),
                             'slide' => _a('Slide'),
+                            'slidehover' => _a('Slide by hover effect'),
                         ),
                     ),
                 ),
                 'filter' => 'text',
-                'value' => 'vertical',
+                'value' => 'horizontal',
             ),
             'show-price' => array(
                 'title' => _a('Show price'),
@@ -94,21 +96,23 @@ return array(
                 'value' => 10,
             ),
             'list-type' => array(
-                'title' => _a('Item list type'),
+                'title' => _a('Product list type'),
                 'description' => '',
                 'edit' => array(
                     'type' => 'select',
                     'options' => array(
                         'options' => array(
-                            'vertical' => _a('Vertical'),
                             'horizontal' => _a('Horizontal'),
+                            'vertical' => _a('Vertical'),
+                            'box' => _a('Multi size Box'),
                             'list' => _a('List'),
                             'slide' => _a('Slide'),
+                            'slidehover' => _a('Slide by hover effect'),
                         ),
                     ),
                 ),
                 'filter' => 'text',
-                'value' => 'vertical',
+                'value' => 'horizontal',
             ),
             'show-price' => array(
                 'title' => _a('Show price'),
@@ -155,21 +159,23 @@ return array(
                 'value' => 10,
             ),
             'list-type' => array(
-                'title' => _a('Item list type'),
+                'title' => _a('Product list type'),
                 'description' => '',
                 'edit' => array(
                     'type' => 'select',
                     'options' => array(
                         'options' => array(
-                            'vertical' => _a('Vertical'),
                             'horizontal' => _a('Horizontal'),
+                            'vertical' => _a('Vertical'),
+                            'box' => _a('Multi size Box'),
                             'list' => _a('List'),
                             'slide' => _a('Slide'),
+                            'slidehover' => _a('Slide by hover effect'),
                         ),
                     ),
                 ),
                 'filter' => 'text',
-                'value' => 'vertical',
+                'value' => 'horizontal',
             ),
             'show-price' => array(
                 'title' => _a('Show price'),
@@ -209,20 +215,22 @@ return array(
                 'value' => 0,
             ),
             'type' => array(
-                'title' => _a('Category show type'),
+                'title' => _a('Category list type'),
                 'description' => '',
                 'edit' => array(
                     'type' => 'select',
                     'options' => array(
                         'options' => array(
-                            'simple' => _a('Simple list'),
-                            'advanced' => _a('Advanced list'),
+                            'horizontal' => _a('Horizontal'),
+                            'vertical' => _a('Vertical'),
+                            'list' => _a('List'),
                             'slide' => _a('Slide'),
+                            'slidehover' => _a('Slide by hover effect'),
                         ),
                     ),
                 ),
                 'filter' => 'text',
-                'value' => 'simple',
+                'value' => 'horizontal',
             ),
         ),
     ),

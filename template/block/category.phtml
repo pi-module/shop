@@ -1,21 +1,21 @@
-<div class="shop-block">
-    <?php if ($block['type'] == 'simple') { ?>
+<div class="shop-block clearfix" itemscope itemtype="http://schema.org/ItemList">
+    <?php if ($block['type'] == 'horizontal') { ?>
         <?php $this->css($this->assetModule('css/block.css', 'shop')); ?>
-        <div class="shop-block-category clearfix">
+        <div class="shop-block-category clearfix row">
             <div class="thumbnails">
                 <?php foreach ($block['resources'] as $category) { ?>
-                    <div class="col-sm-6 col-md-3 h-review">
+                    <div class="col-sm-6 col-md-3 h-review" itemprop="itemListElement">
                         <div class="thumbnail p-item h-card">
                             <?php if ($category['image']) { ?>
-                                <a class="u-url" title="<?php echo $this->escape($category['title']); ?>"
+                                <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
                                    href="<?php echo $this->escape($category['categoryUrl']); ?>">
-                                    <img class="img-responsive u-photo"
+                                    <img itemprop="image" class="img-responsive u-photo"
                                          src="<?php echo $this->escape($category['mediumUrl']); ?>"
                                          alt="<?php echo $this->escape($category['title']); ?>"/>
                                 </a>
                             <?php } ?>
-                            <h3 class="p-name">
-                                <a class="u-url" title="<?php echo $this->escape($category['title']); ?>"
+                            <h3 class="p-name" itemprop="name">
+                                <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
                                    href="<?php echo $this->escape($category['categoryUrl']); ?>">
                                     <?php echo $this->escape($category['title']); ?>
                                 </a>
@@ -25,7 +25,77 @@
                 <?php } ?>
             </div>
         </div>
+    <?php } elseif ($block['type'] == 'vertical') { ?>
+        <?php $this->css($this->assetModule('css/block.css', 'shop')); ?>
+        <div class="shop-block-category clearfix row">
+            <div class="thumbnails">
+                <?php foreach ($block['resources'] as $category) { ?>
+                    <div class="col-sm-12 col-md-12 h-review" itemprop="itemListElement">
+                        <div class="thumbnail p-item h-card">
+                            <?php if ($category['image']) { ?>
+                                <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
+                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                    <img itemprop="image" class="img-responsive u-photo"
+                                         src="<?php echo $this->escape($category['mediumUrl']); ?>"
+                                         alt="<?php echo $this->escape($category['title']); ?>"/>
+                                </a>
+                            <?php } ?>
+                            <h3 class="p-name" itemprop="name">
+                                <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
+                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                    <?php echo $this->escape($category['title']); ?>
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    <?php } elseif ($block['type'] == 'list') { ?>
+        <ul class="list-group">
+            <?php foreach ($block['resources'] as $category) { ?>
+                <li class="p-name list-group-item" itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/Place">
+                    <a class="u-url" itemprop="url" title="<?php echo $this->escape($category['title']); ?>"
+                       href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                        <span itemprop="name"><?php echo $this->escape($category['title']); ?></span>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
     <?php } elseif ($block['type'] == 'slide') { ?>
+        <?php
+        $this->jQuery();
+        $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
+        $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
+        $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
+        $this->css($this->assetModule('css/block.css', 'shop'));
+        ?>
+        <div class="shop-block-category clearfix">
+            <div class="owl-carousel text-center clearfix hover-captions-container">
+                <?php foreach ($block['resources'] as $category) { ?>
+                    <div class="item h-review" itemprop="itemListElement">
+                        <div class="thumbnail p-item h-card">
+                            <?php if ($category['image']) { ?>
+                                <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
+                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                    <img itemprop="image" class="img-responsive u-photo"
+                                         src="<?php echo $this->escape($category['mediumUrl']); ?>"
+                                         alt="<?php echo $this->escape($category['title']); ?>"/>
+                                </a>
+                            <?php } ?>
+                            <h3 itemprop="name" class="p-name">
+                                <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
+                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                    <?php echo $this->escape($category['title']); ?>
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    <?php } elseif ($block['type'] == 'slidehover') { ?>
         <?php
         $this->jQuery();
         $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
@@ -39,51 +109,16 @@
                     <div class="item hover-captions hover-captions-slide">
                         <div class="hover-caption">
                             <h3><?php echo $this->escape($category['title']); ?></h3>
-
                             <p>
-                                <a class="u-url hover-caption-more"
-                                   title="<?php echo $this->escape($category['title']); ?>"
-                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                <a class="u-url hover-caption-more" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['categoryUrl']); ?>">
                                     <?php echo _b('View'); ?>
                                 </a>
                             </p>
                         </div>
-                        <img class="media-object img-responsive u-photo" src="<?php echo $category['largeUrl']; ?>"
-                             alt="<?php echo $this->escape($category['title']); ?>">
+                        <img class="media-object img-responsive u-photo" src="<?php echo $this->escape($category['mediumUrl']); ?>" alt="<?php echo $this->escape($category['title']); ?>">
                     </div>
                 <?php } ?>
             </div>
         </div>
-    <?php } elseif ($block['type'] == 'advanced') { ?>
-        <?php /*
-        <?php $this->css($this->assetModule('css/tree.css', 'shop')); ?>
-        <div class="shop-block-category-advanced">
-            <?php echo $block['treeHtml']; ?>
-        </div>
-        <?php
-        $script =<<<'EOT'
-        var MenuTree = {
-            collapse: function(element) {
-                element.slideToggle(600);
-            },
-            walk: function() {
-                $('a', '.shop-block-category-advanced').each(function() {
-                    var $a = $(this);
-                    var $li = $a.parent();
-                    if ($a.next().is('ul')) {
-                        var $ul = $a.next();
-                        $a.click(function(e) {
-                            e.preventDefault();
-                            MenuTree.collapse($ul);
-                            $a.toggleClass('active');
-                        });
-                    }
-                });
-            }
-        };
-        MenuTree.walk();
-EOT;
-        $this->footScript()->appendScript($script);
-        ?*/ ?>
     <?php } ?>
 </div>
