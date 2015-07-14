@@ -107,7 +107,7 @@ class ProductFilter extends InputFilter
         // stock_type
         $this->add(array(
             'name' => 'stock_type',
-            'required' => true,
+            'required' => false,
         ));
         // price
         $this->add(array(
