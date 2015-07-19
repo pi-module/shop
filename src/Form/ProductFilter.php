@@ -20,6 +20,8 @@ class ProductFilter extends InputFilter
 {
     public function __construct($attribute = null)
     {
+        // Get config
+        $config = Pi::service('registry')->config->read('shop');
         // id
         $this->add(array(
             'name' => 'id',
@@ -139,6 +141,22 @@ class ProductFilter extends InputFilter
                 ),
             ),
         ));
+        // order_discount_type
+        if ($config['order_discount_type'] == 'product') {
+            // Get role list
+            $roles = Pi::service('registry')->Role->read('front');
+            foreach ($roles as $name => $role) {
+                $this->add(array(
+                    'name' => $name,
+                    'required' => false,
+                    'filters' => array(
+                        array(
+                            'name' => 'StringTrim',
+                        ),
+                    ),
+                ));
+            }
+        }
         // seo_title
         $this->add(array(
             'name' => 'seo_title',

@@ -248,7 +248,7 @@ class ProductForm extends BaseForm
             ),
             'attributes' => array(
                 'type' => 'text',
-                'description' => '',
+                'description' => __('Real price'),
 
             )
         ));
@@ -260,7 +260,7 @@ class ProductForm extends BaseForm
             ),
             'attributes' => array(
                 'type' => 'text',
-                'description' => '',
+                'description' => __('Display prices'),
 
             )
         ));
@@ -276,6 +276,32 @@ class ProductForm extends BaseForm
 
             )
         ));
+        // order_discount_type
+        if ($this->config['order_discount_type'] == 'product') {
+            // extra_product
+            $this->add(array(
+                'name' => 'extra_discount',
+                'type' => 'fieldset',
+                'options' => array(
+                    'label' => __('Discount options'),
+                ),
+            ));
+            // Get role list
+            $roles = Pi::service('registry')->Role->read('front');
+            foreach ($roles as $name => $role) {
+                $this->add(array(
+                    'name' => $name,
+                    'options' => array(
+                        'label' => $role['title'],
+                    ),
+                    'attributes' => array(
+                        'type' => 'text',
+                        'description' => __('Number and between 1 to 99'),
+                        'required' => true,
+                    )
+                ));
+            }
+        }
         // extra_seo
         $this->add(array(
             'name' => 'extra_seo',
@@ -294,7 +320,7 @@ class ProductForm extends BaseForm
                 'type' => 'textarea',
                 'rows' => '2',
                 'cols' => '40',
-                'description' => '',
+                'description' => __('Between 10 to 70 character'),
             )
         ));
         // seo_keywords
@@ -307,7 +333,7 @@ class ProductForm extends BaseForm
                 'type' => 'textarea',
                 'rows' => '2',
                 'cols' => '40',
-                'description' => '',
+                'description' => __('Between 5 to 10 words'),
             )
         ));
         // seo_description
@@ -320,7 +346,7 @@ class ProductForm extends BaseForm
                 'type' => 'textarea',
                 'rows' => '3',
                 'cols' => '40',
-                'description' => '',
+                'description' => __('Between 80 to 160 character'),
             )
         ));
         // tag

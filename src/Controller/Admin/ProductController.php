@@ -177,11 +177,13 @@ class ProductController extends ActionController
         // Get id
         $id = $this->params('id');
         $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
         $option = array();
         // Find Product
         if ($id) {
             $product = $this->getModel('product')->find($id)->toArray();
-            $product['category'] = Json::decode($product['category']);
+            $product['category'] = Json::decode($product['category'], true);
             if ($product['image']) {
                 $thumbUrl = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $product['path'], $product['image']);
                 $option['thumbUrl'] = Pi::url($thumbUrl);
@@ -232,6 +234,16 @@ class ProductController extends ActionController
                 } elseif (!isset($values['image'])) {
                     $values['image'] = '';
                 }
+                // Set setting
+                $setting = array();
+                if ($config['order_discount_type'] == 'product') {
+                    // Get role list
+                    $roles = Pi::service('registry')->Role->read('front');
+                    foreach ($roles as $name => $role) {
+                        $setting['discount'][$name] = $values[$name];
+                    }
+                }
+                $values['setting'] = Json::encode($setting);
                 // Set just product fields
                 foreach (array_keys($values) as $key) {
                     if (!in_array($key, $this->productColumns)) {
@@ -306,6 +318,13 @@ class ProductController extends ActionController
                         $product['tag'] = implode('|', $tag);
                     }
                 }
+                // Make setting
+                if ($config['order_discount_type'] == 'product') {
+                    $setting = Json::decode($product['setting'], true);
+                    foreach ($setting['discount'] as $name => $value) {
+                        $product[$name] = $value;
+                    }
+                }
                 // Set data 
                 $form->setData($product);
             }
@@ -321,6 +340,8 @@ class ProductController extends ActionController
         // Get id
         $id = $this->params('id');
         $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
         // Find product
         if ($id) {
             $product = $this->getModel('product')->find($id)->toArray();

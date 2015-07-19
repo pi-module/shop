@@ -180,7 +180,7 @@ class CategoryForm extends BaseForm
                 'type' => 'textarea',
                 'rows' => '2',
                 'cols' => '40',
-                'description' => '',
+                'description' => __('Between 10 to 70 character'),
             )
         ));
         // seo_keywords
@@ -193,7 +193,7 @@ class CategoryForm extends BaseForm
                 'type' => 'textarea',
                 'rows' => '2',
                 'cols' => '40',
-                'description' => '',
+                'description' => __('Between 5 to 10 words'),
             )
         ));
         // seo_description
@@ -206,7 +206,7 @@ class CategoryForm extends BaseForm
                 'type' => 'textarea',
                 'rows' => '3',
                 'cols' => '40',
-                'description' => '',
+                'description' => __('Between 80 to 160 character'),
             )
         ));
         // Save
