@@ -299,7 +299,6 @@ class ProductForm extends BaseForm
                     'attributes' => array(
                         'type' => 'text',
                         'description' => __('Number and between 1 to 99'),
-                        'required' => true,
                     )
                 ));
             }
