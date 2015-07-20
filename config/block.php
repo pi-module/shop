@@ -200,6 +200,62 @@ return array(
             ),
         ),
     ),
+    'product-special' => array(
+        'name' => 'product-special',
+        'title' => _a('Special Product'),
+        'description' => _a('Special Product list'),
+        'render' => array('block', 'productSpecial'),
+        'template' => 'product-special',
+        'config' => array(
+            'number' => array(
+                'title' => _a('Number'),
+                'description' => '',
+                'edit' => 'text',
+                'filter' => 'number_int',
+                'value' => 10,
+            ),
+            'list-type' => array(
+                'title' => _a('Product list type'),
+                'description' => '',
+                'edit' => array(
+                    'type' => 'select',
+                    'options' => array(
+                        'options' => array(
+                            'horizontal' => _a('Horizontal'),
+                            'vertical' => _a('Vertical'),
+                            'box' => _a('Multi size Box'),
+                            'list' => _a('List'),
+                            'slide' => _a('Slide'),
+                            'slidehover' => _a('Slide by hover effect'),
+                        ),
+                    ),
+                ),
+                'filter' => 'text',
+                'value' => 'horizontal',
+            ),
+            'show-price' => array(
+                'title' => _a('Show price'),
+                'description' => '',
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 1,
+            ),
+            'more-show' => array(
+                'title' => _a('Show More link to module page'),
+                'description' => '',
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 0,
+            ),
+            'more-link' => array(
+                'title' => _a('Set More link to module page'),
+                'description' => '',
+                'edit' => 'text',
+                'filter' => 'string',
+                'value' => '',
+            ),
+        ),
+    ),
     'category' => array(
         'name' => 'category',
         'title' => _a('Category'),

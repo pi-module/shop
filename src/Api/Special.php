@@ -22,7 +22,7 @@ use Zend\Json\Json;
 
 class Special extends AbstractApi
 {
-    public function getAll()
+    public function getAll($limit = 0)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
@@ -31,7 +31,9 @@ class Special extends AbstractApi
         $where = array('status' => 1);
         $order = array('id DESC');
         $columns = array('product');
-        $limit = intval($config['view_special_number']);
+        if ($limit == 0) {
+            $limit = intval($config['view_special_number']);
+        }
         // Get ids
         $model = Pi::model('special', $this->getModule());
         $select = $model->select()->where($where)->columns($columns)->order($order)->limit($limit);
@@ -39,7 +41,6 @@ class Special extends AbstractApi
         foreach ($rowset as $row) {
             $specialId[] = $row->product;
         }
-        print_r($specialId);
         // Get list of products
         if (!empty($specialId)) {
             $special = Pi::api('product', 'shop')->getListFromId($specialId);

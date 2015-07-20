@@ -141,6 +141,18 @@ class Block
         return $block;
     }
 
+    public function productSpecial($options = array(), $module = null)
+    {
+        // Set options
+        $block = array();
+        $block = array_merge($block, $options);
+        $block['config'] = Pi::service('registry')->config->read('shop', 'order');
+        $limit = intval($block['number']);
+        // Set block array
+        $block['resources'] = Pi::api('special', 'shop')->getAll($limit);
+        return $block;
+    }
+
     public static function category($options = array(), $module = null)
     {
         // Set options
