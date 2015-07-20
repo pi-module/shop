@@ -145,6 +145,8 @@ class ProductFilter extends InputFilter
         if ($config['order_discount_type'] == 'product') {
             // Get role list
             $roles = Pi::service('registry')->Role->read('front');
+            unset($roles['webmaster']);
+            unset($roles['guest']);
             foreach ($roles as $name => $role) {
                 $this->add(array(
                     'name' => $name,

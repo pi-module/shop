@@ -239,6 +239,8 @@ class ProductController extends ActionController
                 if ($config['order_discount_type'] == 'product') {
                     // Get role list
                     $roles = Pi::service('registry')->Role->read('front');
+                    unset($roles['webmaster']);
+                    unset($roles['guest']);
                     foreach ($roles as $name => $role) {
                         $setting['discount'][$name] = $values[$name];
                     }

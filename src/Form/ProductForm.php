@@ -288,6 +288,8 @@ class ProductForm extends BaseForm
             ));
             // Get role list
             $roles = Pi::service('registry')->Role->read('front');
+            unset($roles['webmaster']);
+            unset($roles['guest']);
             foreach ($roles as $name => $role) {
                 $this->add(array(
                     'name' => $name,
