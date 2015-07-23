@@ -6,16 +6,18 @@
         <div class="clearfix">
             <ul class="list-group">
                 <?php foreach ($categories as $categorySingle) { ?>
-                    <li class="list-group-item">
-                        <a title="<?php echo $this->escape($categorySingle['title']); ?>"
+                    <li class="list-group-item" itemscope itemtype="https://schema.org/Brand">
+                        <a itemprop="url" title="<?php echo $this->escape($categorySingle['title']); ?>"
                            href="<?php echo $this->escape($categorySingle['url']); ?>">
                             <?php if ($categorySingle['image']) { ?>
                                 <span class="col-xs-3">
-                                <img class="img-responsive" src="<?php echo $categorySingle['thumbUrl']; ?>"
+                                <img itemprop="image" class="img-responsive" src="<?php echo $categorySingle['thumbUrl']; ?>"
                                      alt="<?php echo $this->escape($categorySingle['title']); ?>"/>
                                 </span>
                             <?php } ?>
-                            <?php echo $this->escape($categorySingle['title']); ?>
+                            <span class="p-name" itemprop="name">
+                                <?php echo $this->escape($categorySingle['title']); ?>
+                            </span>
                         </a>
                     </li>
                 <?php } ?>

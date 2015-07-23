@@ -20,7 +20,8 @@
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
                                 <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <div class="productPrice p-price" itemprop="price">
+                                    <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
+                                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
                                         <?php echo $this->escape($product['price_view']); ?>
                                     </div>
                                 </div>
@@ -49,7 +50,8 @@
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
                                 <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <div class="productPrice p-price" itemprop="price">
+                                    <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
+                                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
                                         <?php echo $this->escape($product['price_view']); ?>
                                     </div>
                                 </div>
@@ -84,7 +86,8 @@
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
                                 <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <div class="productPrice p-price" itemprop="price">
+                                    <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
+                                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
                                         <?php echo $this->escape($product['price_view']); ?>
                                     </div>
                                 </div>

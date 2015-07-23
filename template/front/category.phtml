@@ -1,9 +1,9 @@
 <?php if (isset($category) && !empty($category)) { ?>
-    <div class="clearfix categoryItem row">
+    <div class="clearfix categoryItem row" itemscope itemtype="https://schema.org/Brand">
         <?php if (!empty($category['text_description']) || !empty($category['image'])) { ?>
             <div class="clearfix">
                 <div class="col-md-12">
-                    <h1><?php echo $this->escape($category['title']); ?></h1>
+                    <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
                     <hr/>
                     <br/>
                 </div>
@@ -11,14 +11,16 @@
                     <?php include $this->template('front/gallery'); ?>
                 </div>
                 <div class="col-md-7">
-                    <?php echo $category['text_description']; ?>
+                    <div class="e-description clearfix" itemprop="description">
+                        <?php echo $category['text_description']; ?>
+                    </div>
                 </div>
             </div>
             <br/>
         <?php } else { ?>
             <div class="col-md-12">
                 <div class="page-header">
-                    <h1><?php echo $this->escape($category['title']); ?></h1>
+                    <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
                 </div>
             </div>
         <?php } ?>
@@ -27,9 +29,14 @@
 <?php if (isset($categoryItem) && !empty($categoryItem)) { ?>
     <div class="clearfix categoryItemList">
         <i class="fa fa-folder"></i> <?php _e('Category'); ?> :
-        <?php foreach ($categoryItem as $category) { ?>
-            <a title="<?php echo $this->escape($category['title']); ?>"
-               href="<?php echo $this->escape($category['url']); ?>"><?php echo $this->escape($category['title']); ?></a>
-        <?php } ?>
+        <ul>
+            <?php foreach ($categoryItem as $category) { ?>
+                <li itemscope itemtype="https://schema.org/Brand">
+                    <a itemprop="url" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>">
+                        <span class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></span>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
     </div>
 <?php } ?>

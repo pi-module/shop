@@ -6,18 +6,17 @@
     <?php if (isset($categories) && !empty($categories)) { ?>
         <div class="categories clearfix">
             <?php foreach ($categories as $category) { ?>
-                <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="col-xs-12 col-sm-6 col-md-3" itemscope itemtype="https://schema.org/Brand">
                     <div class="thumbnail">
-                        <a href="<?php echo $this->escape($category['categoryUrl']); ?>"
+                        <a itemprop="url" href="<?php echo $this->escape($category['categoryUrl']); ?>"
                            title="<?php echo $this->escape($category['title']); ?>">
-                            <img src="<?php echo $this->escape($category['mediumUrl']); ?>"
+                            <img itemprop="image" src="<?php echo $this->escape($category['mediumUrl']); ?>"
                                  alt="<?php echo $this->escape($category['title']); ?>">
                         </a>
-
                         <div class="caption">
                             <a href="<?php echo $this->escape($category['categoryUrl']); ?>"
                                title="<?php echo $this->escape($category['title']); ?>">
-                                <h3><?php echo $this->escape($category['title']); ?></h3>
+                                <h3 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h3>
                             </a>
                         </div>
                     </div>

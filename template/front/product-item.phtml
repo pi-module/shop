@@ -19,15 +19,21 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
     $this->headMeta($this->escape($productItem['largeUrl']), 'twitter:image');
 }
 ?>
-<div class="product-page clearfix">
-    <div class="productItem h-product">
+<div class="clearfix">
+    <div class="product-page h-product clearfix" itemscope itemtype="http://schema.org/Product">
         <div class="col-md-4">
             <?php include $this->template('front/gallery'); ?>
             <ul class="list-inline">
                 <?php if (!empty($vote)) { ?>
-                    <li><?php include $this->template('votebar.phtml', 'front', 'vote'); ?></li><?php } ?>
+                    <li>
+                        <?php include $this->template('votebar.phtml', 'front', 'vote'); ?>
+                    </li>
+                <?php } ?>
                 <?php if (!empty($favourite)) { ?>
-                    <li><?php include $this->template('favouritebar.phtml', 'front', 'favourite'); ?></li><?php } ?>
+                    <li>
+                        <?php include $this->template('favouritebar.phtml', 'front', 'favourite'); ?>
+                    </li>
+                <?php } ?>
             </ul>
             <?php if ($config['social_sharing']) { ?>
                 <div class="clearfix">
@@ -44,26 +50,26 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
         </div>
         <div class="col-md-8">
             <div class="productTitle clearfix">
-                <h1 class="p-name"><?php echo $this->escape($productItem['title']); ?></h1>
+                <h1 class="p-name" itemprop="name"><?php echo $this->escape($productItem['title']); ?></h1>
             </div>
             <div class="productInfoBox clearfix">
                 <div class="productPrice"><?php include $this->template('front/product-price'); ?></div>
                 <div class="productPrice"><?php include $this->template('front/product-question'); ?></div>
+            </div>
+            <div class="productInfoBox clearfix">
+                <div class="p-brand p-category" itemprop="brand category"><?php include $this->template('front/category'); ?></div>
+                <div class="p-category" itemprop="category"><?php include $this->template('front/tag'); ?></div>
             </div>
         </div>
         <div class="col-md-12">
             <div class="clearfix">
                 <?php include $this->template('front/attribute'); ?>
             </div>
-            <div class="productInfoBox productSummary e-description clearfix">
+            <div class="productInfoBox productSummary e-description clearfix" itemprop="description">
                 <?php echo $productItem['text_summary']; ?>
             </div>
-            <div class="productInfoBox productDescription p-review clearfix">
+            <div class="productInfoBox productDescription p-review clearfix" itemprop="description">
                 <?php echo $productItem['text_description']; ?>
-            </div>
-            <div class="productInfoBox clearfix">
-                <div class="p-brand"><?php include $this->template('front/category'); ?></div>
-                <div class="p-category"><?php include $this->template('front/tag'); ?></div>
             </div>
             <div class="productMedia">
                 <?php include $this->template('front/attach-audio'); ?>
@@ -74,8 +80,8 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
             <div class="productAttach">
                 <?php include $this->template('front/attach'); ?>
             </div>
-            <?php include $this->template('front/related'); ?>
-            <?php include $this->template('front/list'); ?>
         </div>
     </div>
+    <?php include $this->template('front/related'); ?>
+    <?php //include $this->template('front/list'); ?>
 </div>

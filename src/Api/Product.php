@@ -307,6 +307,7 @@ class Product extends AbstractApi
         }
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+        $configSystem = Pi::service('registry')->config->read('system');
         // Get category list
         $categoryList = (empty($categoryList)) ? Pi::registry('categoryList', 'shop')->read() : $categoryList;
         // boject to array
@@ -363,6 +364,7 @@ class Product extends AbstractApi
         // Set price
         $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
         $product['price_discount_view'] = Pi::api('api', 'shop')->viewPrice($product['price_discount']);
+        $product['price_currency'] = empty($configSystem['number_currency']) ? 'USD' : $configSystem['number_currency'];
         // Set stock
         switch ($product['stock_type']) {
             default:

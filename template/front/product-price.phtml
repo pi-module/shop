@@ -1,5 +1,5 @@
 <?php if (isset($productItem['price']) && $config['order_active']) { ?>
-    <div class="productPrice clearfix">
+    <div class="productPrice clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
         <?php if ($config['order_stock'] == 'never') { ?>
             <div class="clearfix">
                 <div class="col-md-8 col-sm-6 col-xs-12">
@@ -12,13 +12,18 @@
                 </div>
                 <?php } ?>
                 <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="clearfix">
+                        <strong><?php _e('Stock status'); ?> : </strong>
+                        <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
+                    </div>
                     <strong><?php _e('Price'); ?> : </strong>
                     <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
                         <div class="text-danger">
                             <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
                         </div>
                     <?php } ?>
-                    <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
+                    <span class="p-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                    <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
                 </div>
             </div>
         <?php } elseif ($config['order_stock'] == 'manual') { ?>
@@ -36,7 +41,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="clearfix">
                             <strong><?php _e('Stock status'); ?> : </strong>
-                            <span class="text-success"><?php _e('In stock'); ?></span>
+                            <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
                         </div>
                         <strong><?php _e('Price'); ?> : </strong>
                         <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
@@ -44,7 +49,8 @@
                                 <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
                             </div>
                         <?php } ?>
-                        <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
+                        <span class="p-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
                     </div>
                 </div>
             <?php } else { ?>
@@ -68,7 +74,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="clearfix">
                             <strong><?php _e('Stock status'); ?> : </strong>
-                            <span class="text-success"><?php _e('In stock'); ?></span>
+                            <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
                         </div>
                         <strong><?php _e('Price'); ?> : </strong>
                         <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
@@ -76,7 +82,8 @@
                                 <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
                             </div>
                         <?php } ?>
-                        <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
+                        <span class="p-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
                     </div>
                 </div>
             <?php } else { ?>
@@ -97,7 +104,8 @@
                             <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
                         </div>
                     <?php } ?>
-                    <span class="p-price"><?php echo $this->escape($productItem['price_view']); ?></span>
+                    <span class="p-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                    <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
                 </div>
             </div>
         <?php } ?>

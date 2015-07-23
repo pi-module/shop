@@ -45,17 +45,17 @@ $this->footScript()->appendScript($script2);
 <div class="itemGallery gallery clearfix thumbnail">
     <?php if (isset($productItem['image']) && !empty($productItem['image'])) { ?>
         <div class="itemImageMain text-center clearfix u-photo">
-            <a href="<?php echo $this->escape($productItem['largeUrl']); ?>"
+            <a class="u-photo" href="<?php echo $this->escape($productItem['largeUrl']); ?>"
                title="<?php echo $this->escape($productItem['title']); ?>">
-                <img class="img-responsive" src="<?php echo $this->escape($productItem['mediumUrl']); ?>"
+                <img class="img-responsive" itemprop="image" src="<?php echo $this->escape($productItem['mediumUrl']); ?>"
                      alt="<?php echo $this->escape($productItem['title']); ?>"/>
             </a>
         </div>
     <?php } elseif (isset($category['image']) && !empty($category['image'])) { ?>
         <div class="itemImageMain text-center clearfix u-photo">
-            <a href="<?php echo $this->escape($category['largeUrl']); ?>"
+            <a class="u-photo" href="<?php echo $this->escape($category['largeUrl']); ?>"
                title="<?php echo $this->escape($category['title']); ?>">
-                <img class="img-responsive" src="<?php echo $this->escape($category['mediumUrl']); ?>"
+                <img class="img-responsive" itemprop="image" src="<?php echo $this->escape($category['mediumUrl']); ?>"
                      alt="<?php echo $this->escape($category['title']); ?>"/>
             </a>
         </div>
@@ -65,7 +65,7 @@ $this->footScript()->appendScript($script2);
             <?php foreach ($attach['image'] as $image) { ?>
                 <a class="u-photo" href="<?php echo $this->escape($image['largeUrl']); ?>"
                    title="<?php echo $this->escape($image['title']); ?>">
-                    <img class="img-responsive" src="<?php echo $this->escape($image['mediumUrl']); ?>"
+                    <img class="img-responsive" itemprop="image" src="<?php echo $this->escape($image['mediumUrl']); ?>"
                          alt="<?php echo $this->escape($image['title']); ?>"/>
                 </a>
             <?php } ?>

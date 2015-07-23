@@ -52,6 +52,15 @@ class Breadcrumbs extends AbstractBreadcrumbs
                                 break;
 
                             case 'index':
+                                $result[] = array(
+                                    'label' => __('Category list'),
+                                    'href' => Pi::url(Pi::service('url')->assemble('shop', array(
+                                        'module' => $this->getModule(),
+                                        'controller' => 'category',
+                                        'action' => 'list',
+                                    ))),
+                                );
+
                                 $category = Pi::api('category', 'shop')->getCategory($params['slug'], 'slug');
                                 $result = $this->makeCategoryList($category['parent'], $result);
                                 $result[] = array(
