@@ -12,9 +12,9 @@ msgstr ""
 "X-Generator: Poedit 1.8.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _b\n"
-"X-Poedit-Basepath: .\n"
+"X-Poedit-Basepath: ../../\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/shop\n"
+"X-Poedit-SearchPath-0: .\n"
 
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/category.phtml:28
 #: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/block/product-new.phtml:80
