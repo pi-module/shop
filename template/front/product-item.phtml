@@ -55,10 +55,7 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
             <div class="productInfoBox clearfix">
                 <div class="productPrice"><?php include $this->template('front/product-price'); ?></div>
                 <div class="productPrice"><?php include $this->template('front/product-question'); ?></div>
-            </div>
-            <div class="productInfoBox clearfix">
-                <div class="p-brand p-category" itemprop="brand category"><?php include $this->template('front/category'); ?></div>
-                <div class="p-category" itemprop="category"><?php include $this->template('front/tag'); ?></div>
+                <div class="productPrice">کد محصول : <?php echo $productItem['id']; ?></div>
             </div>
         </div>
         <div class="col-md-12">
@@ -70,6 +67,10 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
             </div>
             <div class="productInfoBox productDescription p-review clearfix" itemprop="description">
                 <?php echo $productItem['text_description']; ?>
+            </div>
+            <div class="productInfoBox clearfix">
+                <div class="p-brand p-category" itemprop="brand category"><?php include $this->template('front/category'); ?></div>
+                <div class="p-category" itemprop="category"><?php include $this->template('front/tag'); ?></div>
             </div>
             <div class="productMedia">
                 <?php include $this->template('front/attach-audio'); ?>
