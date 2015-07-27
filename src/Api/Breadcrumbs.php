@@ -103,25 +103,6 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         );
                         break;
 
-                    case 'search':
-                        if ($params['action'] == 'result') {
-                            $result[] = array(
-                                'label' => __('Search'),
-                                'href' => Pi::url(Pi::service('url')->assemble('shop', array(
-                                    'controller' => 'search',
-                                    'action' => 'index',
-                                ))),
-                            );
-                            $result[] = array(
-                                'label' => __('Result'),
-                            );
-                        } else {
-                            $result[] = array(
-                                'label' => __('Search'),
-                            );
-                        }
-                        break;
-
                     case 'tag':
                         if (!empty($params['slug'])) {
                             $result[] = array(
@@ -142,11 +123,23 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         break;
                 }
             } else {
-                $result = array(
-                    array(
+                if (isset($params['q']) && !empty($params['q'])) {
+                    $result[] = array(
                         'label' => $moduleData['title'],
-                    ),
-                );
+                        'href' => Pi::url(Pi::service('url')->assemble('guide', array(
+                            'module' => $this->getModule(),
+                        ))),
+                    );
+                    $result[] = array(
+                        'label' => __('Search result'),
+                    );
+                } else {
+                    $result = array(
+                        array(
+                            'label' => $moduleData['title'],
+                        ),
+                    );
+                }
             }
             return $result;
         } else {

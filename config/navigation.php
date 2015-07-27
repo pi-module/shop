@@ -23,17 +23,6 @@ return array(
             'action' => 'index',
         ),
 
-        'search' => array(
-            'label' => _a('Search'),
-            'permission' => array(
-                'resource' => 'search',
-            ),
-            'route' => 'shop',
-            'module' => 'shop',
-            'controller' => 'search',
-            'action' => 'index',
-        ),
-
         'category' => array(
             'label' => _a('Category list'),
             'permission' => array(

@@ -20,19 +20,6 @@ return array(
                 'member',
             ),
         ),
-        'search' => array(
-            'title' => _a('Search'),
-            'access' => array(
-                'guest',
-                'member',
-            ),
-        ),
-        'user' => array(
-            'title' => _a('User'),
-            'access' => array(
-                'member',
-            ),
-        ),
         'checkout' => array(
             'title' => _a('Checkout'),
             'access' => array(

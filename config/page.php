@@ -92,18 +92,6 @@ return array(
             'block' => 1,
         ),
         array(
-            'label' => _a('User panel'),
-            'controller' => 'user',
-            'permission' => 'user',
-            'block' => 1,
-        ),
-        array(
-            'label' => _a('Search'),
-            'controller' => 'search',
-            'permission' => 'search',
-            'block' => 1,
-        ),
-        array(
             'label' => _a('Checkout'),
             'controller' => 'checkout',
             'permission' => 'checkout',
