@@ -26,14 +26,16 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
         </div>
         <div class="col-md-7">
             <div class="productTitle clearfix">
-                <h1 class="p-name" itemprop="name"><?php echo $this->escape($productItem['title']); ?></h1>
+                <h1 class="p-name" itemprop="name">
+                    <?php echo $this->escape($productItem['title']); ?>
+                </h1>
             </div>
             <div class="productInfoBox clearfix">
                 <div class="productPrice"><?php include $this->template('front/product-price'); ?></div>
-                <div class="productPrice"><?php include $this->template('front/product-question'); ?></div>
             </div>
             <div class="col-md-12">
                 <ul class="list-inline">
+                    <li><?php include $this->template('front/product-question'); ?></li>
                     <?php if (!empty($vote)) { ?>
                         <li>
                             <?php include $this->template('votebar.phtml', 'front', 'vote'); ?>
