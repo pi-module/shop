@@ -2,36 +2,10 @@
     <div class="productPrice clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
         <?php if ($config['order_stock'] == 'never') { ?>
             <div class="clearfix">
-                <div class="col-md-8 col-sm-6 col-xs-12">
+                <div class="col-md-6 col-sm-6 col-xs-12">
                     <?php include $this->template('front/product-order'); ?>
                 </div>
-                <?php if (!empty($productItem['price_title'])) { ?>
-                <div class="col-md-8 col-sm-6 col-xs-12">
-                    <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
-                    <span><?php echo $this->escape($productItem['price_title']); ?></span>
-                </div>
-                <?php } ?>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="clearfix">
-                        <strong><?php _e('Stock status'); ?> : </strong>
-                        <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
-                    </div>
-                    <strong><?php _e('Price'); ?> : </strong>
-                    <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
-                        <div class="text-danger">
-                            <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
-                        </div>
-                    <?php } ?>
-                    <span class="p-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
-                    <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
-                </div>
-            </div>
-        <?php } elseif ($config['order_stock'] == 'manual') { ?>
-            <?php if ($productItem['stock_type'] == 1) { ?>
-                <div class="clearfix">
-                    <div class="col-md-8 col-sm-6 col-xs-12">
-                        <?php include $this->template('front/product-order'); ?>
-                    </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
                     <?php if (!empty($productItem['price_title'])) { ?>
                         <div class="col-md-8 col-sm-6 col-xs-12">
                             <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
@@ -51,6 +25,38 @@
                         <?php } ?>
                         <span class="p-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
                         <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                        <div class="productPrice"><strong> کد محصول : </strong><?php echo $productItem['id']; ?></div>
+                    </div>
+                </div>
+            </div>
+        <?php } elseif ($config['order_stock'] == 'manual') { ?>
+            <?php if ($productItem['stock_type'] == 1) { ?>
+                <div class="clearfix">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php include $this->template('front/product-order'); ?>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php if (!empty($productItem['price_title'])) { ?>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
+                                <span><?php echo $this->escape($productItem['price_title']); ?></span>
+                            </div>
+                        <?php } ?>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="clearfix">
+                                <strong><?php _e('Stock status'); ?> : </strong>
+                                <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
+                            </div>
+                            <strong><?php _e('Price'); ?> : </strong>
+                            <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+                                <div class="text-danger">
+                                    <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+                                </div>
+                            <?php } ?>
+                            <span class="p-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                            <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                            <div class="productPrice"><strong> کد محصول : </strong><?php echo $productItem['id']; ?></div>
+                        </div>
                     </div>
                 </div>
             <?php } else { ?>
@@ -62,28 +68,31 @@
         <?php } elseif ($config['order_stock'] == 'product') { ?>
             <?php if ($productItem['stock'] > 0) { ?>
                 <div class="clearfix">
-                    <div class="col-md-8 col-sm-6 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
                         <?php include $this->template('front/product-order'); ?>
                     </div>
-                    <?php if (!empty($productItem['price_title'])) { ?>
-                        <div class="col-md-8 col-sm-6 col-xs-12">
-                            <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
-                            <span><?php echo $this->escape($productItem['price_title']); ?></span>
-                        </div>
-                    <?php } ?>
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="clearfix">
-                            <strong><?php _e('Stock status'); ?> : </strong>
-                            <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
-                        </div>
-                        <strong><?php _e('Price'); ?> : </strong>
-                        <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
-                            <div class="text-danger">
-                                <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php if (!empty($productItem['price_title'])) { ?>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
+                                <span><?php echo $this->escape($productItem['price_title']); ?></span>
                             </div>
                         <?php } ?>
-                        <span class="p-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
-                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="clearfix">
+                                <strong><?php _e('Stock status'); ?> : </strong>
+                                <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
+                            </div>
+                            <strong><?php _e('Price'); ?> : </strong>
+                            <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+                                <div class="text-danger">
+                                    <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+                                </div>
+                            <?php } ?>
+                            <span class="p-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                            <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                            <div class="productPrice"><strong> کد محصول : </strong><?php echo $productItem['id']; ?></div>
+                        </div>
                     </div>
                 </div>
             <?php } else { ?>
@@ -94,18 +103,21 @@
             <?php } ?>
         <?php } elseif ($config['order_stock'] == 'property') { ?>
             <div class="clearfix">
-                <div class="col-md-8 col-sm-6 col-xs-12">
+                <div class="col-md-6 col-sm-6 col-xs-12">
                     <?php include $this->template('front/product-order'); ?>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <strong><?php _e('Price'); ?> : </strong>
-                    <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
-                        <div class="text-danger">
-                            <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
-                        </div>
-                    <?php } ?>
-                    <span class="p-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
-                    <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <strong><?php _e('Price'); ?> : </strong>
+                        <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+                            <div class="text-danger">
+                                <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+                            </div>
+                        <?php } ?>
+                        <span class="p-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                        <div class="productPrice"><strong> کد محصول : </strong><?php echo $productItem['id']; ?></div>
+                    </div>
                 </div>
             </div>
         <?php } ?>

@@ -3,8 +3,8 @@
     <?php $shopBoxSize = 'col-sm-12 col-md-4'; ?>
     <div class="clearfix row">
         <div class="col-sm-12 col-md-3">
-            <?php include $this->template('front/category_side'); ?>
-            <?php include $this->template('front/search_form'); ?>
+            <?php include $this->template('front/category-side'); ?>
+            <?php include $this->template('front/search-form'); ?>
         </div>
         <div class="col-sm-12 col-md-9">
             <?php include $this->template('front/category'); ?>
@@ -31,10 +31,10 @@
                         <?php } ?>
                     </div>
                 <?php } ?>
+                <div class="paginator">
+                    <?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="paginator">
-        <?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?>
     </div>
 </div>

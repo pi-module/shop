@@ -22,7 +22,7 @@ use Zend\Json\Json;
 
 class SearchController extends IndexController
 {
-    public function indexAction()
+    /* public function indexAction()
     {
         $option = array();
         // Get info from url
@@ -44,9 +44,9 @@ class SearchController extends IndexController
         $this->view()->headKeywords($config['text_keywords_search'], 'set');
         $this->view()->setTemplate('search-form');
         $this->view()->assign('form', $form);
-    }
+    } */
 
-    public function filterAction()
+    /* public function filterAction()
     {
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -76,9 +76,9 @@ class SearchController extends IndexController
             }
             // Make url
             $url = $this->url('', array(
-                'controller' => 'search',
-                'action' => 'result',
-                'slug' => http_build_query($search),
+                'controller' => 'index',
+                'action' => 'index',
+                'q' => '?' . http_build_query($search),
             ));
             // jump
             return $this->jump($url);
@@ -87,7 +87,7 @@ class SearchController extends IndexController
             $url = array('action' => 'index');
             $this->jump($url, $message, 'error');
         }
-    }
+    } */
 
     public function resultAction()
     {

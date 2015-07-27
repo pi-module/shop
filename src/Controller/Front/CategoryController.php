@@ -36,10 +36,18 @@ class CategoryController extends IndexController
             $this->view()->setLayout('layout-simple');
             return;
         }
+        // category list
+        $categories = Pi::api('category', 'shop')->categoryList($category['id']);
+        // Get id list
+        $idList = array();
+        $idList[] = $category['id'];
+        foreach ($categories as $singleCategory) {
+            $idList[] = $singleCategory['id'];
+        }
         // Set info
         $where = array(
             'status' => 1,
-            'category' => $category['id']
+            'category' => $idList,
         );
         // Get product List
         $productList = $this->productList($where);
@@ -50,8 +58,6 @@ class CategoryController extends IndexController
         );
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
-        // category list
-        $categories = Pi::api('category', 'shop')->categoryList($category['id']);
         // Get special
         /* if ($config['view_special']) {
             $specialList = Pi::api('special', 'shop')->getAll();

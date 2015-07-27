@@ -14,11 +14,13 @@
 namespace Module\Shop\Controller\Front;
 
 use Pi;
+use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
 use Module\Shop\Form\SearchForm;
-use Zend\Db\Sql\Predicate\Expression;
+use Module\Shop\Form\SearchFilter;
 use Zend\Json\Json;
+use Zend\Db\Sql\Predicate\Expression;
 
 class IndexController extends ActionController
 {
@@ -26,43 +28,9 @@ class IndexController extends ActionController
     {
         // Get info from url
         $module = $this->params('module');
+        $search = $this->params('q');
         // Get config
         $config = Pi::service('registry')->config->read($module);
-        // Check homepage type
-        if ($config['homepage_type'] == 'list') {
-            // Get info from url
-            $page = $this->params('page', 1);
-            // Set product info
-            $where = array('status' => 1);
-            // Get product List
-            $productList = $this->productList($where);
-            // Set paginator info
-            $template = array(
-                'controller' => 'index',
-                'action' => 'index',
-            );
-            // Get paginator
-            $paginator = $this->productPaginator($template, $where);
-            // Set view
-            $this->view()->setTemplate('product-list');
-            $this->view()->assign('page', $page);
-            $this->view()->assign('paginator', $paginator);
-            $this->view()->assign('productList', $productList);
-            $this->view()->assign('productTitleH1', __('New products'));
-            $this->view()->assign('showIndexDesc', 1);
-        } elseif ($config['homepage_type'] == 'brand') {
-            $title = (!empty($config['homepage_title'])) ? $config['homepage_title'] : __('Shop index');
-            // Set view
-            $this->view()->setTemplate('homepage');
-            $this->view()->assign('productTitleH1', $title);
-        }
-        // category list
-        $category = Pi::api('category', 'shop')->categoryList(0);
-        // Get special
-        if ($config['view_special']) {
-            $specialList = Pi::api('special', 'shop')->getAll();
-            $this->view()->assign('specialList', $specialList);
-        }
         // Set search form
         $fields = Pi::api('attribute', 'shop')->Get();
         $option['field'] = $fields['attribute'];
@@ -72,10 +40,222 @@ class IndexController extends ActionController
             'controller' => 'search',
             'action' => 'filter',
         ))));
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form->setInputFilter(new SearchFilter($option));
+            $form->setData($data);
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $search = array();
+                foreach ($data as $key => $value) {
+                    if ($value && !empty($value)) {
+                        $search[$key] = $value;
+                    }
+                }
+                // Set log
+                Pi::api('log', 'guide')->addSearchLog($search);
+                // Make url
+                $url = $this->url('shop', array(
+                    'controller' => 'index',
+                    'action' => 'index',
+                    'q' => '?' . http_build_query($search),
+                ));
+                // jump
+                return $this->jump($url);
+            }
+        }
+        // Check set search
+        if (!empty($search)) {
+            // Get info from url
+            $page = $this->params('page', 1);
+            // Unset page
+            if (isset($search['page'])) {
+                unset($search['page']);
+            }
+            // Set product info from search
+            $where = array(
+                'status' => 1
+            );
+            // Set title
+            if (isset($search['title'])
+                && !empty($search['title'])
+            ) {
+                // check type
+                if (!isset($search['type']) || empty($search['type'])) {
+                    $search['type'] = 1;
+                }
+                // switch
+                switch ($search['type']) {
+                    default:
+                    case 1:
+                        $where['title LIKE ?'] = '%' . $search['title'] . '%';
+                        break;
+
+                    case 2:
+                        $where['title LIKE ?'] = $search['title'] . '%';
+                        break;
+
+                    case 3:
+                        $where['title LIKE ?'] = '%' . $search['title'];
+                        break;
+
+                    case 4:
+                        $where['title LIKE ?'] = $search['title'];
+                        break;
+                }
+            }
+            // Set price_from
+            if (isset($search['price_from'])
+                && intval($search['price_from']) > 0
+            ) {
+                $where['price >= ?'] = $search['price_from'];
+            }
+            // Set price_to
+            if (isset($search['price_to'])
+                && intval($search['price_to']) > 0
+            ) {
+                $where['price <= ?'] = $search['price_from'];
+            }
+            // Set category
+            if (isset($search['category'])
+                && intval($search['category']) > 0
+            ) {
+                $categoryId = Pi::api('category', 'shop')->findFromCategory(intval($search['category']));
+            }
+            // Set attribute
+            $attributeSearch = Pi::api('attribute', 'shop')->SearchForm($search);
+            if (!empty($attributeSearch)) {
+                $attributeId = Pi::api('attribute', 'shop')->findFromAttribute($attributeSearch);
+            }
+            // Set where id
+            if (!empty($categoryId) && !empty($attributeId)) {
+                $productId = array_merge($categoryId, $attributeId);
+                $productId = array_unique($productId);
+                $where['id'] = $productId;
+            } elseif (!empty($categoryId) && empty($attributeId)) {
+                $where['id'] = $categoryId;
+            } elseif (empty($categoryId) && !empty($attributeId)) {
+                $where['id'] = $attributeId;
+            }
+
+            // Get product List
+            $productList = $this->searchList($where);
+            // Set paginator info
+            $template = array(
+                'controller' => 'index',
+                'action' => 'index',
+                'q' => $search,
+            );
+            // Get paginator
+            $paginator = $this->searchPaginator($template, $where);
+            // Set header and title
+            if (isset($search['title'])
+                && !empty($search['title'])
+            ) {
+                $title = sprintf(__('Search result of %s'), $search['title']);
+            } else {
+                $title = __('Search result');
+            }
+            // Set seo_keywords
+            $filter = new Filter\HeadKeywords;
+            $filter->setOptions(array(
+                'force_replace_space' => true
+            ));
+            $seoKeywords = $filter($title);
+            // Set view
+            $this->view()->headTitle($title);
+            $this->view()->headDescription($title, 'set');
+            $this->view()->headKeywords($seoKeywords, 'set');
+            $this->view()->setTemplate('product-list');
+            $this->view()->assign('page', $page);
+            $this->view()->assign('paginator', $paginator);
+            $this->view()->assign('productList', $productList);
+            $this->view()->assign('productTitleH1', $title);
+            $this->view()->assign('showSearchDesc', 1);
+        } else {
+            // Check homepage type
+            if ($config['homepage_type'] == 'list') {
+                // Get info from url
+                $page = $this->params('page', 1);
+                // Set product info
+                $where = array('status' => 1);
+                // Get product List
+                $productList = $this->productList($where);
+                // Set paginator info
+                $template = array(
+                    'controller' => 'index',
+                    'action' => 'index',
+                );
+                // Get paginator
+                $paginator = $this->productPaginator($template, $where);
+                // Set view
+                $this->view()->setTemplate('product-list');
+                $this->view()->assign('page', $page);
+                $this->view()->assign('paginator', $paginator);
+                $this->view()->assign('productList', $productList);
+                $this->view()->assign('productTitleH1', __('New products'));
+                $this->view()->assign('showIndexDesc', 1);
+            } elseif ($config['homepage_type'] == 'brand') {
+                $title = (!empty($config['homepage_title'])) ? $config['homepage_title'] : __('Shop index');
+                // Set view
+                $this->view()->setTemplate('homepage');
+                $this->view()->assign('productTitleH1', $title);
+            }
+        }
+        // category list
+        $category = Pi::api('category', 'shop')->categoryList(0);
+        // Get special
+        if ($config['view_special']) {
+            $specialList = Pi::api('special', 'shop')->getAll();
+            $this->view()->assign('specialList', $specialList);
+        }
         // Set view
         $this->view()->assign('categories', $category);
         $this->view()->assign('config', $config);
         $this->view()->assign('form', $form);
+    }
+
+    public function filterAction()
+    {
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $data = $data->toArray();
+            // Set search session
+            $search = array();
+            // Set title
+            if (isset($data['title']) && !empty($data['title'])) {
+                $search['title'] = $data['title'];
+            }
+            // Set price_from
+            if (isset($data['price_from']) && intval($data['price_from']) > 0) {
+                $search['price_from'] = intval($data['price_from']);
+            }
+            // Set price_to
+            if (isset($data['price_to']) && intval($data['price_to']) > 0) {
+                $search['price_to'] = intval($data['price_to']);
+            }
+            // Set category
+            if (isset($data['category']) && intval($data['category']) > 0) {
+                $search['category'] = intval($data['category']);
+            }
+            // Set attribute
+            $attributeSearch = Pi::api('attribute', 'shop')->SearchForm($data);
+            foreach ($attributeSearch as $attribute) {
+                $search[$attribute['field']] = $attribute['data'];
+            }
+            // Make url
+            $url = $this->url('shop', array(
+                'controller' => 'index',
+                'action' => 'index',
+                'q' => '?' . http_build_query($search),
+            ));
+            // jump
+            return $this->jump($url);
+        } else {
+            $message = __('Search again');
+            $url = array('action' => 'index');
+            $this->jump($url, $message, 'error');
+        }
     }
 
     public function productList($where)
@@ -185,7 +365,7 @@ class IndexController extends ActionController
         $template['sort'] = $this->params('sort');
         $template['stock'] = $this->params('stock');
         $template['page'] = $this->params('page', 1);
-        // get count     
+        // get count
         $columns = array('count' => new Expression('count(DISTINCT `product`)'));
         $select = $this->getModel('link')->select()->where($where)->columns($columns);
         $template['count'] = $this->getModel('link')->selectWith($select)->current()->count;
@@ -200,7 +380,7 @@ class IndexController extends ActionController
         $template['sort'] = $this->params('sort');
         $template['stock'] = $this->params('stock');
         $template['page'] = $this->params('page', 1);
-        // get count     
+        // get count
         $columns = array('count' => new Expression('count(*)'));
         $select = $this->getModel('product')->select()->where($where)->columns($columns);
         $template['count'] = $this->getModel('product')->selectWith($select)->current()->count;
@@ -213,6 +393,14 @@ class IndexController extends ActionController
     {
         $template['slug'] = (isset($template['slug'])) ? $template['slug'] : '';
         $template['action'] = (isset($template['action'])) ? $template['action'] : 'index';
+
+        $options = array();
+        if (isset($template['q']) && !empty($template['q'])) {
+            foreach ($template['q'] as $key => $value) {
+                $options['query'][$key] = $value;
+            }
+        }
+
         // paginator
         $paginator = Paginator::factory(intval($template['count']));
         $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
@@ -225,9 +413,8 @@ class IndexController extends ActionController
                 'controller' => $template['controller'],
                 'action' => $template['action'],
                 'slug' => $template['slug'],
-                'sort' => $template['sort'],
-                'stock' => $template['stock'],
             )),
+            'options' => $options,
         ));
         return $paginator;
     }
