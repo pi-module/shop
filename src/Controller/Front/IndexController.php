@@ -53,7 +53,7 @@ class IndexController extends ActionController
                     }
                 }
                 // Set log
-                Pi::api('log', 'guide')->addSearchLog($search);
+                Pi::api('log', 'shop')->addSearchLog($search);
                 // Make url
                 $url = $this->url('shop', array(
                     'controller' => 'index',
@@ -213,6 +213,7 @@ class IndexController extends ActionController
         $this->view()->assign('categories', $category);
         $this->view()->assign('config', $config);
         $this->view()->assign('form', $form);
+        $this->view()->assign('isHomepage', 1);
     }
 
     public function filterAction()

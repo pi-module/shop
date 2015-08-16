@@ -6,7 +6,7 @@
         <div class="clearfix">
             <ul class="list-group">
                 <?php foreach ($categories as $categorySingle) { ?>
-                    <li class="list-group-item" itemscope itemtype="https://schema.org/Brand">
+                    <li class="clearfix list-group-item<?php if (isset($isHomepage) && $isHomepage == 1 && !$categorySingle['image']) { ?> col-md-2<?php } ?>" itemscope itemtype="https://schema.org/Brand">
                         <a itemprop="url" title="<?php echo $this->escape($categorySingle['title']); ?>"
                            href="<?php echo $this->escape($categorySingle['url']); ?>">
                             <?php if ($categorySingle['image']) { ?>
@@ -24,4 +24,7 @@
             </ul>
         </div>
     </div>
+    <?php if (isset($isHomepage) && $isHomepage == 1) { ?>
+        <br />
+    <?php } ?>
 <?php } ?>

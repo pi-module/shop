@@ -126,7 +126,7 @@ class Breadcrumbs extends AbstractBreadcrumbs
                 if (isset($params['q']) && !empty($params['q'])) {
                     $result[] = array(
                         'label' => $moduleData['title'],
-                        'href' => Pi::url(Pi::service('url')->assemble('guide', array(
+                        'href' => Pi::url(Pi::service('url')->assemble('shop', array(
                             'module' => $this->getModule(),
                         ))),
                     );
