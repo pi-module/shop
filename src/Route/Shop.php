@@ -31,7 +31,7 @@ class Shop extends Standard
     ); */
 
     protected $controllerList = array(
-        'cart', 'category', 'index', 'json', 'product',/* 'search' ,*/ 'tag'
+        'cart', 'category', 'index', 'json', 'product', 'tag'
     );
 
     /**
@@ -64,10 +64,11 @@ class Shop extends Standard
             switch ($matches['controller']) {
 
                 case 'category':
-                    if ($parts[1] == 'list') {
-                        $matches['action'] = 'list';
-                    } else {
+                    if (isset($parts[1]) && !empty($parts[1])) {
+                        $matches['action'] = 'index';
                         $matches['slug'] = $this->decode($parts[1]);
+                    } else {
+                        $matches['action'] = 'list';
                     }
                     break;
 
