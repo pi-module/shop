@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-06-15 20:21+0330\n"
+"POT-Creation-Date: 2015-08-16 11:40+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,1294 +9,1318 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.6\n"
+"X-Generator: Poedit 1.8.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: /var/www/html/local/pi/pi-2.5.0/usr/module/shop\n"
+"X-Poedit-Basepath: ../../\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:60
+#: src/Api/Attribute.php:60
 msgid "Text"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:64
+#: src/Api/Attribute.php:64
 msgid "Link"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:68
+#: src/Api/Attribute.php:68
 msgid "Video"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:72
+#: src/Api/Attribute.php:72
 msgid "Audio"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:76
+#: src/Api/Attribute.php:76
 msgid "File"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:80
+#: src/Api/Attribute.php:80
 msgid "Currency"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:84
+#: src/Api/Attribute.php:84
 msgid "Date"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:88
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:102
+#: src/Api/Attribute.php:88 template/front/checkout-cart.phtml:112
 msgid "Number"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:92
+#: src/Api/Attribute.php:92
 msgid "Select"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:96
+#: src/Api/Attribute.php:96
 msgid "Checkbox"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Attribute.php:253
+#: src/Api/Attribute.php:253
 msgid "Hidden"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:50
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:100
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/category_list.phtml:4
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/category_side.phtml:4
+#: src/Api/Breadcrumbs.php:50 src/Api/Breadcrumbs.php:56
+#: src/Controller/Front/CategoryController.php:109
+#: template/front/category-list.phtml:4 template/front/category-side.phtml:4
 msgid "Category list"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:68
+#: src/Api/Breadcrumbs.php:77
 msgid "Cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:74
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:29
+#: src/Api/Breadcrumbs.php:83 template/admin/attach-add.phtml:31
+#: template/admin/attach-add.phtml:32
 msgid "Finish"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:100
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:111
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AdminSearchForm.php:52
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:184
-msgid "Search"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:107
-msgid "Result"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:119
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Breadcrumbs.php:130
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/tag_list.phtml:4
+#: src/Api/Breadcrumbs.php:109 src/Api/Breadcrumbs.php:120
+#: template/front/tag-list.phtml:4
 msgid "Tag list"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:351
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:553
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:225
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:26
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:47
+#: src/Api/Breadcrumbs.php:134 src/Controller/Front/IndexController.php:157
+#: template/admin/product-related.phtml:36
+msgid "Search result"
+msgstr ""
+
+#: src/Api/Product.php:372 src/Api/Product.php:616
+#: src/Form/ProductForm.php:224 template/front/product-price.phtml:18
+#: template/front/product-price.phtml:48 template/front/product-price.phtml:84
 msgid "In stock"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:355
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:557
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:226
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/box.phtml:27
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:57
+#: src/Api/Product.php:376 src/Api/Product.php:620
+#: src/Form/ProductForm.php:225 template/front/product-box.phtml:32
+#: template/front/product-price.phtml:101
 msgid "Out of stock"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:359
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:561
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:227
+#: src/Api/Product.php:380 src/Api/Product.php:624
+#: src/Form/ProductForm.php:226
 msgid "Coming soon"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:363
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Api/Product.php:565
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:228
+#: src/Api/Product.php:384 src/Api/Product.php:628
+#: src/Form/ProductForm.php:227
 msgid "Contact"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:84
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:178
+#: src/Api/Product.php:388 src/Api/Product.php:632
+#: src/Form/ProductForm.php:228
+msgid "Variable stock"
+msgstr ""
+
+#: src/Controller/Admin/AttachController.php:84
+#: src/Controller/Admin/AttachController.php:178
 msgid "You must select product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:89
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:186
+#: src/Controller/Admin/AttachController.php:89
+#: src/Controller/Admin/AttachController.php:186
 msgid "Your selected product not exist"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:106
+#: src/Controller/Admin/AttachController.php:106
 #, php-format
 msgid "Attach files to %s"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:115
+#: src/Controller/Admin/AttachController.php:115
 msgid "You must select file"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:138
+#: src/Controller/Admin/AttachController.php:138
 msgid "All changes in file saved successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:141
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:501
+#: src/Controller/Admin/AttachController.php:141
+#: src/Controller/Admin/ProductController.php:523
 msgid "Invalid data, please check and re-submit."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:150
+#: src/Controller/Admin/AttachController.php:150
 msgid "Edit file"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:257
+#: src/Controller/Admin/AttachController.php:257
 msgid "Your attached file remove successfully"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttachController.php:262
+#: src/Controller/Admin/AttachController.php:262
 msgid "Please select file"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:115
+#: src/Controller/Admin/AttributeController.php:57
+msgid "Attribute field type not set."
+msgstr ""
+
+#: src/Controller/Admin/AttributeController.php:114
 msgid "Attribute field data saved successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:127
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:8
-msgid "Add attribute"
+#: src/Controller/Admin/AttributeController.php:126
+#, php-format
+msgid "Add attribute - type : %s"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:159
+#: src/Controller/Admin/AttributeController.php:158
 msgid "Selected field delete"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/AttributeController.php:161
+#: src/Controller/Admin/AttributeController.php:160
 msgid "Please select field"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:134
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:230
+#: src/Controller/Admin/CategoryController.php:134
+#: src/Controller/Admin/ProductController.php:232
 msgid "Problem in upload image. please try again"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:183
+#: src/Controller/Admin/CategoryController.php:183
 msgid "Category data saved successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:194
+#: src/Controller/Admin/CategoryController.php:194
 msgid "Add a category"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:219
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:624
+#: src/Controller/Admin/CategoryController.php:219
+#: src/Controller/Admin/ProductController.php:646
 #, php-format
 msgid "Image of %s removed"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:222
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:627
+#: src/Controller/Admin/CategoryController.php:222
+#: src/Controller/Admin/ProductController.php:649
 msgid "Image not remove"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/CategoryController.php:226
+#: src/Controller/Admin/CategoryController.php:226
 msgid "Please select category"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/PositionController.php:77
+#: src/Controller/Admin/DiscountController.php:67
+msgid "Discount data saved successfully."
+msgstr ""
+
+#: src/Controller/Admin/DiscountController.php:79
+#: template/admin/discount-index.phtml:4 template/admin/discount-index.phtml:6
+msgid "Add discount"
+msgstr ""
+
+#: src/Controller/Admin/PositionController.php:77
 msgid "Attribute position data saved successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/PositionController.php:89
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/position_index.phtml:4
+#: src/Controller/Admin/PositionController.php:89
+#: template/admin/position-index.phtml:4 template/admin/position-index.phtml:6
 msgid "Add position"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:144
+#: src/Controller/Admin/ProductController.php:144
 msgid "View filtered products"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:150
+#: src/Controller/Admin/ProductController.php:150
 msgid "Not valid"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:156
+#: src/Controller/Admin/ProductController.php:156
 msgid "Not set"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:297
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:379
+#: src/Controller/Admin/ProductController.php:311
+#: src/Controller/Admin/ProductController.php:402
 msgid "Product data saved successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:316
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:14
+#: src/Controller/Admin/ProductController.php:337
+#: template/admin/product-index.phtml:14 template/admin/product-index.phtml:16
 msgid "Add product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:328
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:464
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:522
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:631
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:113
+#: src/Controller/Admin/ProductController.php:351
+#: src/Controller/Admin/ProductController.php:486
+#: src/Controller/Admin/ProductController.php:544
+#: src/Controller/Admin/ProductController.php:653
+#: src/Controller/Front/CartController.php:119
 msgid "Please select product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:397
+#: src/Controller/Admin/ProductController.php:420
 msgid "Manage additional information"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:451
+#: src/Controller/Admin/ProductController.php:473
 #, php-format
 msgid "%s set recommended successfully"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:458
+#: src/Controller/Admin/ProductController.php:480
 #, php-format
 msgid "Error in set recommended for %s product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:506
+#: src/Controller/Admin/ProductController.php:528
 msgid "Add Related"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:548
+#: src/Controller/Admin/ProductController.php:570
 msgid "OK Add"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:554
+#: src/Controller/Admin/ProductController.php:576
 msgid "Error Add , It added before"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:561
+#: src/Controller/Admin/ProductController.php:583
 msgid "Error , Product and related is same"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:568
+#: src/Controller/Admin/ProductController.php:590
 msgid "OK Remove"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ProductController.php:599
+#: src/Controller/Admin/ProductController.php:621
 msgid "Product prices updated successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/PropertyController.php:76
+#: src/Controller/Admin/PropertyController.php:76
 msgid "Order property data saved successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/PropertyController.php:88
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/property_index.phtml:4
+#: src/Controller/Admin/PropertyController.php:88
+#: template/admin/property-index.phtml:4 template/admin/property-index.phtml:6
 msgid "Add property"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:99
+#: src/Controller/Admin/SpecialController.php:99
 msgid "Special data saved successfully."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:110
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:4
+#: src/Controller/Admin/SpecialController.php:110
+#: template/admin/special-index.phtml:4 template/admin/special-index.phtml:6
 msgid "Add Special"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:121
+#: src/Controller/Admin/SpecialController.php:121
 msgid "Selected special delete"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/SpecialController.php:123
+#: src/Controller/Admin/SpecialController.php:123
 msgid "Please select special"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ToolsController.php:30
+#: src/Controller/Admin/ToolsController.php:30
 msgid "Rebuild thie module links on sitemap module tabels"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ToolsController.php:48
+#: src/Controller/Admin/ToolsController.php:48
 msgid "Sitemap rebuild finished"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Admin/ToolsController.php:53
+#: src/Controller/Admin/ToolsController.php:53
 msgid "Rebuild sitemap links"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Feed/IndexController.php:24
+#: src/Controller/Feed/IndexController.php:24
 msgid "Shop feed"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Feed/IndexController.php:25
+#: src/Controller/Feed/IndexController.php:25
 msgid "Recent products."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:29
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:55
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:197
+#: src/Controller/Front/CartController.php:29
+#: src/Controller/Front/CartController.php:57
+#: src/Controller/Front/CartController.php:203
 msgid "So sorry, At this moment order is inactive"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:37
+#: src/Controller/Front/CartController.php:39
 msgid "Your cart are empty."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:69
+#: src/Controller/Front/CartController.php:73
 msgid "The product was not marketable."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:98
+#: src/Controller/Front/CartController.php:104
 msgid "Your cart are empty"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:122
+#: src/Controller/Front/CartController.php:128
 msgid "Selected product removed from your cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:207
+#: src/Controller/Front/CartController.php:213
 msgid "Order not set."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:212
+#: src/Controller/Front/CartController.php:218
 msgid "It not your order."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:217
+#: src/Controller/Front/CartController.php:223
 msgid "This order not pay"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CartController.php:223
+#: src/Controller/Front/CartController.php:229
 msgid "This is old order and you pay it before"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/CategoryController.php:34
+#: src/Controller/Front/CategoryController.php:35
 msgid "The category not found."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/IndexController.php:51
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/ProductController.php:58
-msgid "New products"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/IndexController.php:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_finish.phtml:15
-msgid "Shop index"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/ProductController.php:34
-msgid "The product not found."
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/SearchController.php:86
-msgid "Search again"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/SearchController.php:100
-msgid "Your search session is empty, please search again"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/SearchController.php:177
+#: src/Controller/Front/IndexController.php:155
 #, php-format
 msgid "Search result of %s"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/SearchController.php:179
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:30
-msgid "Search result"
+#: src/Controller/Front/IndexController.php:196
+#: src/Controller/Front/ProductController.php:61
+msgid "New products"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/TagController.php:29
+#: src/Controller/Front/IndexController.php:199
+#: template/front/checkout-finish.phtml:17
+#: template/front/checkout-finish.phtml:18
+msgid "Shop index"
+msgstr ""
+
+#: src/Controller/Front/IndexController.php:255
+msgid "Search again"
+msgstr ""
+
+#: src/Controller/Front/JsonController.php:145
+msgid "Your question send to admin"
+msgstr ""
+
+#: src/Controller/Front/ProductController.php:35
+msgid "The product not found."
+msgstr ""
+
+#: src/Controller/Front/TagController.php:29
 msgid "Tag module not installed."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/TagController.php:36
+#: src/Controller/Front/TagController.php:38
 msgid "The tag not set."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/TagController.php:47
+#: src/Controller/Front/TagController.php:51
 msgid "The tag not found."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/TagController.php:65
+#: src/Controller/Front/TagController.php:71
 #, php-format
 msgid "All products by %s tag"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Controller/Front/TagController.php:106
+#: src/Controller/Front/TagController.php:112
 msgid "List of all used tags on shop"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AdminSearchForm.php:39
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:55
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:65
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:47
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:61
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:47
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:45
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:21
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:10
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/position_index.phtml:10
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:34
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/property_index.phtml:10
+#: src/Form/AdminSearchForm.php:39 src/Form/AttachForm.php:55
+#: src/Form/AttributeForm.php:49 src/Form/CategoryForm.php:65
+#: src/Form/DiscountForm.php:47 src/Form/PositionForm.php:47
+#: src/Form/ProductForm.php:61 src/Form/PropertyForm.php:47
+#: src/Form/RelatedForm.php:41 src/Form/SearchForm.php:66
+#: template/admin/attach-add.phtml:53 template/admin/attach-index.phtml:29
+#: template/admin/attribute-index.phtml:57
+#: template/admin/category-index.phtml:13
+#: template/admin/discount-index.phtml:13
+#: template/admin/position-index.phtml:13
+#: template/admin/product-index.phtml:51
+#: template/admin/product-related.phtml:18
+#: template/admin/product-related.phtml:40
+#: template/admin/property-index.phtml:13
 msgid "Title"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:67
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:52
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:26
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:10
+#: src/Form/AdminSearchForm.php:52 src/Form/AttributeForm.php:186
+msgid "Search"
+msgstr ""
+
+#: src/Form/AttachForm.php:67 src/Form/SpecialForm.php:52
+#: template/admin/attach-index.phtml:31 template/admin/special-index.phtml:13
 msgid "Product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:81
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:88
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:114
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:73
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:109
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:73
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:66
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:58
+#: src/Form/AttachForm.php:81 src/Form/AttributeForm.php:88
+#: src/Form/CategoryForm.php:114 src/Form/DiscountForm.php:84
+#: src/Form/PositionForm.php:73 src/Form/ProductForm.php:109
+#: src/Form/PropertyForm.php:73 src/Form/SpecialForm.php:66
+#: template/admin/attach-add.phtml:68
 msgid "Status"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:83
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:90
+#: src/Form/AttachForm.php:83 src/Form/AttributeForm.php:90
 msgid "Online"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:84
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:91
+#: src/Form/AttachForm.php:84 src/Form/AttributeForm.php:91
 msgid "Offline"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttachForm.php:93
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:195
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:218
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:88
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:224
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:333
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:122
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:77
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:179
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SitemapForm.php:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:83
+#: src/Form/AttachForm.php:93 src/Form/AttributeForm.php:197
+#: src/Form/CategoryForm.php:217 src/Form/DiscountForm.php:102
+#: src/Form/PositionForm.php:88 src/Form/ProductAdditionalForm.php:224
+#: src/Form/ProductForm.php:372 src/Form/PropertyForm.php:122
+#: src/Form/RelatedForm.php:77 src/Form/SearchForm.php:179
+#: src/Form/SitemapForm.php:48 src/Form/SpecialForm.php:83
+#: template/front/product-question.phtml:46
 msgid "Submit"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:85
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:109
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:129
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:148
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:12
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:14
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:18
+#: src/Form/AttributeForm.php:61 src/Form/ProductAdditionalForm.php:85
+#: src/Form/ProductAdditionalForm.php:109
+#: src/Form/ProductAdditionalForm.php:129
+#: src/Form/ProductAdditionalForm.php:148
+#: template/admin/product-update.phtml:12
+#: template/admin/product-update.phtml:14
+#: template/admin/product-update.phtml:16
+#: template/admin/product-update.phtml:18
+#: template/front/product-question.phtml:24
+#: template/front/product-question.phtml:28
 msgid "Name"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:64
+#: src/Form/AttributeForm.php:65
 msgid "Set name for call anywhere"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:73
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:127
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:68
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:120
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/category.phtml:29
+#: src/Form/AttributeForm.php:74 src/Form/ProductForm.php:127
+#: src/Form/RelatedForm.php:68 src/Form/SearchForm.php:120
+#: template/front/category.phtml:31
 msgid "Category"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:103
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:27
+#: src/Form/AttributeForm.php:103 template/admin/attribute-index.phtml:65
 msgid "Set"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:115
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:110
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:24
-msgid "Type"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:117
-msgid "Text : type text content"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:118
-msgid "Link : add url for click"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:119
-msgid "Video : add flv or mp4 url for play on video player"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:120
-msgid "Audio : add mp3 url for play on audio player"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:121
-msgid "File : add file link for download"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:122
-msgid "Currency : add view price for anything"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:123
-msgid "Date : add date for view"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:124
-msgid "Number : add number"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:125
-msgid "Select : add select box for choose"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:126
-msgid "Checkbox : add check box for 0 or 1"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:137
+#: src/Form/AttributeForm.php:139
 msgid "General data"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:150
+#: src/Form/AttributeForm.php:145
+msgid "Use `|` as delimiter to separate select box elements"
+msgstr ""
+
+#: src/Form/AttributeForm.php:152
 msgid "Default data"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:161
+#: src/Form/AttributeForm.php:163
 msgid "Extra information"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:165
+#: src/Form/AttributeForm.php:167
 msgid "Put URL for click by user"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:172
+#: src/Form/AttributeForm.php:174
 msgid "Icon"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/AttributeForm.php:176
+#: src/Form/AttributeForm.php:178
 msgid "Use fontawesome.io icons, and set icon name like fa-home"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:53
+#: src/Form/CategoryForm.php:53
 msgid "Parent Category"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:77
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:73
+#: src/Form/CategoryForm.php:77 src/Form/ProductForm.php:73
 msgid "slug"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:89
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:96
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_item.phtml:55
+#: src/Form/CategoryForm.php:89 src/Form/ProductForm.php:96
 msgid "Description"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:101
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:11
+#: src/Form/CategoryForm.php:101 template/admin/category-index.phtml:14
 msgid "Display order"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:116
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:75
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:111
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:75
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:68
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:39
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:41
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:22
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:93
+#: src/Form/CategoryForm.php:116 src/Form/DiscountForm.php:86
+#: src/Form/PositionForm.php:75 src/Form/ProductForm.php:111
+#: src/Form/PropertyForm.php:75 src/Form/SpecialForm.php:68
+#: template/admin/attach-index.phtml:51 template/admin/category-index.phtml:49
+#: template/admin/product-index.phtml:26 template/admin/product-index.phtml:28
+#: template/admin/product-index.phtml:124
 msgid "Published"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:117
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:76
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:112
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:76
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:69
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:40
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:42
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:23
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:94
+#: src/Form/CategoryForm.php:117 src/Form/DiscountForm.php:87
+#: src/Form/PositionForm.php:76 src/Form/ProductForm.php:112
+#: src/Form/PropertyForm.php:76 src/Form/SpecialForm.php:69
+#: template/admin/attach-index.phtml:52 template/admin/category-index.phtml:50
+#: template/admin/product-index.phtml:29 template/admin/product-index.phtml:31
+#: template/admin/product-index.phtml:125
 msgid "Pending review"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:118
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:77
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:113
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:77
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:70
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:43
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:24
+#: src/Form/CategoryForm.php:118 src/Form/DiscountForm.php:88
+#: src/Form/PositionForm.php:77 src/Form/ProductForm.php:113
+#: src/Form/PropertyForm.php:77 src/Form/SpecialForm.php:70
+#: template/admin/category-index.phtml:51
+#: template/admin/product-index.phtml:32 template/admin/product-index.phtml:34
 msgid "Draft"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:119
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:78
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:114
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:78
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:71
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:44
+#: src/Form/CategoryForm.php:119 src/Form/DiscountForm.php:89
+#: src/Form/PositionForm.php:78 src/Form/ProductForm.php:114
+#: src/Form/PropertyForm.php:78 src/Form/SpecialForm.php:71
+#: template/admin/category-index.phtml:52
 msgid "Private"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:142
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:165
+#: src/Form/CategoryForm.php:141 src/Form/ProductForm.php:164
 msgid "Remove image"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:158
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:181
+#: src/Form/CategoryForm.php:157 src/Form/ProductForm.php:180
 msgid "Image"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:171
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:272
+#: src/Form/CategoryForm.php:170 src/Form/ProductForm.php:311
 msgid "SEO options"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:178
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:279
+#: src/Form/CategoryForm.php:177 src/Form/ProductForm.php:318
 msgid "SEO Title"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:191
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:292
+#: src/Form/CategoryForm.php:183 src/Form/ProductForm.php:324
+msgid "Between 10 to 70 character"
+msgstr ""
+
+#: src/Form/CategoryForm.php:190 src/Form/ProductForm.php:331
 msgid "SEO Keywords"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/CategoryForm.php:204
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:305
+#: src/Form/CategoryForm.php:196 src/Form/ProductForm.php:337
+msgid "Between 5 to 10 words"
+msgstr ""
+
+#: src/Form/CategoryForm.php:203 src/Form/ProductForm.php:344
 msgid "SEO Description"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/Element/Category.php:65
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:25
-msgid "All Category"
+#: src/Form/CategoryForm.php:209 src/Form/ProductForm.php:350
+msgid "Between 80 to 160 character"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:60
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:60
-msgid "Order"
+#: src/Form/DiscountForm.php:60
+msgid "User role"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PositionForm.php:79
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:115
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:79
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:38
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:19
+#: src/Form/DiscountForm.php:71
+msgid "Discount percent"
+msgstr ""
+
+#: src/Form/DiscountForm.php:75 src/Form/ProductForm.php:301
+msgid "Number and between 1 to 99"
+msgstr ""
+
+#: src/Form/DiscountForm.php:90 src/Form/PositionForm.php:79
+#: src/Form/ProductForm.php:115 src/Form/PropertyForm.php:79
+#: template/admin/attach-add.phtml:45 template/admin/attribute-index.phtml:72
+#: template/admin/special-index.phtml:24 template/admin/special-index.phtml:26
 msgid "Delete"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:53
+#: src/Form/Element/Category.php:65 src/Form/SpecialForm.php:25
+msgid "All Category"
+msgstr ""
+
+#: src/Form/PositionForm.php:60 src/Form/PropertyForm.php:60
+msgid "Order"
+msgstr ""
+
+#: src/Form/ProductAdditionalForm.php:53
 msgid "Order information"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:63
+#: src/Form/ProductAdditionalForm.php:63
 #, php-format
 msgid "Add %s"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:89
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:113
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:202
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:12
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:14
+#: src/Form/ProductAdditionalForm.php:89
+#: src/Form/ProductAdditionalForm.php:113 src/Form/ProductForm.php:201
+#: template/admin/product-update.phtml:12
+#: template/admin/product-update.phtml:14
 msgid "Stock"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:93
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:133
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:247
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:40
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:12
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:94
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:17
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:9
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:28
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:48
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:65
+#: src/Form/ProductAdditionalForm.php:93
+#: src/Form/ProductAdditionalForm.php:133 src/Form/ProductForm.php:247
+#: template/admin/product-index.phtml:53
+#: template/admin/product-update.phtml:12
+#: template/admin/product-update.phtml:16
+#: template/front/checkout-cart.phtml:100 template/front/installment.phtml:20
+#: template/front/product-price.phtml:20 template/front/product-price.phtml:50
+#: template/front/product-price.phtml:86
+#: template/front/product-price.phtml:111
 msgid "Price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductAdditionalForm.php:165
+#: src/Form/ProductAdditionalForm.php:165
 #, php-format
 msgid "%s list"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:47
+#: src/Form/ProductForm.php:47
 msgid "General options"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:84
+#: src/Form/ProductForm.php:84
 msgid "Summary"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:139
+#: src/Form/ProductForm.php:139
 msgid "Main category"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:145
+#: src/Form/ProductForm.php:145
 msgid "Use for breadcrumbs ,mobile app and attribute"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:194
+#: src/Form/ProductForm.php:193
 msgid "Product options"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:223
+#: src/Form/ProductForm.php:222
 msgid "Stock type"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:259
+#: src/Form/ProductForm.php:251
+msgid "Real price"
+msgstr ""
+
+#: src/Form/ProductForm.php:259
 msgid "Price Discount"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:320
+#: src/Form/ProductForm.php:263
+msgid "Display prices"
+msgstr ""
+
+#: src/Form/ProductForm.php:271
+msgid "Price title"
+msgstr ""
+
+#: src/Form/ProductForm.php:286
+msgid "Discount options"
+msgstr ""
+
+#: src/Form/ProductForm.php:359
 msgid "Tags"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/ProductForm.php:324
+#: src/Form/ProductForm.php:363
 msgid "Use `|` as delimiter to separate tag terms"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:88
+#: src/Form/PropertyForm.php:88
 msgid "Influence stock"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:99
+#: src/Form/PropertyForm.php:99
 msgid "Influence price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:112
+#: src/Form/PropertyForm.php:110 template/admin/attach-add.phtml:64
+#: template/admin/attribute-index.phtml:61
+msgid "Type"
+msgstr ""
+
+#: src/Form/PropertyForm.php:112
 msgid "CheckBox"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/PropertyForm.php:113
+#: src/Form/PropertyForm.php:113
 msgid "SelectBox"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:44
+#: src/Form/RelatedForm.php:54 src/Form/SearchForm.php:44
 msgid "Title search type"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:56
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:46
+#: src/Form/RelatedForm.php:56 src/Form/SearchForm.php:46
 msgid "Included"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:57
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:47
+#: src/Form/RelatedForm.php:57 src/Form/SearchForm.php:47
 msgid "Start with"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:58
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:48
+#: src/Form/RelatedForm.php:58 src/Form/SearchForm.php:48
 msgid "End with"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/RelatedForm.php:59
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:49
+#: src/Form/RelatedForm.php:59 src/Form/SearchForm.php:49
 msgid "According"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:80
+#: src/Form/SearchForm.php:80
 msgid "Price from"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SearchForm.php:92
+#: src/Form/SearchForm.php:92
 msgid "Price to"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SitemapForm.php:32
+#: src/Form/SitemapForm.php:32
 msgid "Select for rebuild"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SitemapForm.php:34
+#: src/Form/SitemapForm.php:34
 msgid "All of tables"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SitemapForm.php:35
+#: src/Form/SitemapForm.php:35
 msgid "Just product table"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SitemapForm.php:36
+#: src/Form/SitemapForm.php:36
 msgid "Just category table"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:24
+#: src/Form/SpecialForm.php:24
 msgid "Home Page"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Form/SpecialForm.php:55
+#: src/Form/SpecialForm.php:55
 msgid "Select product for add to Special"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:51
+#: src/Installer/Action/Install.php:51
 msgid "Default"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:52
+#: src/Installer/Action/Install.php:52
 msgid "default"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:53
+#: src/Installer/Action/Install.php:53
 msgid "This is a default category for shop module"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:54
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:56
+#: src/Installer/Action/Install.php:54 src/Installer/Action/Install.php:56
 msgid "default category"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:55
+#: src/Installer/Action/Install.php:55
 msgid "default,category"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:65
+#: src/Installer/Action/Install.php:65
 msgid "Demo product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:66
+#: src/Installer/Action/Install.php:66
 msgid "demo-product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:69
+#: src/Installer/Action/Install.php:69
 msgid "This is a summery for this demo product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:70
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:72
+#: src/Installer/Action/Install.php:70 src/Installer/Action/Install.php:72
 msgid "demo product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:71
+#: src/Installer/Action/Install.php:71
 msgid "demo,product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/src/Installer/Action/Install.php:96
+#: src/Installer/Action/Install.php:96
 msgid "Default information added."
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:28
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_edit.phtml:4
+#: template/admin/attach-add.phtml:29 template/admin/attach-add.phtml:30
+#: template/admin/attach-edit.phtml:4 template/admin/attach-edit.phtml:6
 msgid "Back"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:37
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:8
+#: template/admin/attach-add.phtml:42 template/admin/attach-index.phtml:8
 msgid "Preview"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:50
+#: template/admin/attach-add.phtml:60
 msgid "Create"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:62
+#: template/admin/attach-add.phtml:72
 msgid "Hits"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:66
+#: template/admin/attach-add.phtml:76
 msgid "Size"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:71
+#: template/admin/attach-add.phtml:81
 msgid "Close"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_add.phtml:114
+#: template/admin/attach-add.phtml:124
 msgid "In process"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_edit.phtml:40
+#: template/admin/attach-edit.phtml:54
 msgid "Get it"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_edit.phtml:43
+#: template/admin/attach-edit.phtml:57
 msgid "File title"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_edit.phtml:44
+#: template/admin/attach-edit.phtml:59
 msgid "Product title"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:3
+#: template/admin/attach-index.phtml:3
 msgid "List of attached files"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:7
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:9
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/log_index.phtml:6
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/position_index.phtml:9
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:16
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:33
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/property_index.phtml:9
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:9
+#: template/admin/attach-index.phtml:7 template/admin/category-index.phtml:12
+#: template/admin/discount-index.phtml:12 template/admin/log-index.phtml:6
+#: template/admin/position-index.phtml:12
+#: template/admin/product-related.phtml:17
+#: template/admin/product-related.phtml:39
+#: template/admin/property-index.phtml:12
+#: template/admin/special-index.phtml:12
 msgid "ID"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:9
+#: template/admin/attach-index.phtml:9
 msgid "Information"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:10
+#: template/admin/attach-index.phtml:10
 msgid "create"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:11
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:12
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/position_index.phtml:11
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:39
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:18
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:35
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/property_index.phtml:11
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:11
+#: template/admin/attach-index.phtml:11 template/admin/category-index.phtml:15
+#: template/admin/discount-index.phtml:16
+#: template/admin/position-index.phtml:14
+#: template/admin/product-index.phtml:52
+#: template/admin/product-related.phtml:19
+#: template/admin/product-related.phtml:41
+#: template/admin/property-index.phtml:14
+#: template/admin/special-index.phtml:14
 msgid "Action"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:30
+#: template/admin/attach-index.phtml:36 template/admin/attach-index.phtml:37
 msgid "Get"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:31
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:30
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:34
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/position_index.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/property_index.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:18
+#: template/admin/attach-index.phtml:39 template/admin/attach-index.phtml:41
+#: template/admin/attribute-index.phtml:69
+#: template/admin/category-index.phtml:40
+#: template/admin/category-index.phtml:42
+#: template/admin/discount-index.phtml:34
+#: template/admin/discount-index.phtml:36
+#: template/admin/position-index.phtml:30
+#: template/admin/position-index.phtml:32
+#: template/admin/property-index.phtml:30
+#: template/admin/property-index.phtml:32
+#: template/admin/special-index.phtml:21 template/admin/special-index.phtml:23
 msgid "Edit"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:32
+#: template/admin/attach-index.phtml:42 template/admin/attach-index.phtml:44
 msgid "Edit from product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:44
+#: template/admin/attach-index.phtml:56
 msgid "Error"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attach_index.phtml:45
+#: template/admin/attach-index.phtml:58
 msgid "No file upload yet"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/attribute_index.phtml:10
+#: template/admin/attribute-index.phtml:9
+msgid "Add attribute"
+msgstr ""
+
+#: template/admin/attribute-index.phtml:12
+#: template/admin/attribute-index.phtml:14
+msgid "Add text field"
+msgstr ""
+
+#: template/admin/attribute-index.phtml:15
+#: template/admin/attribute-index.phtml:17
+msgid "Add link field"
+msgstr ""
+
+#: template/admin/attribute-index.phtml:18
+#: template/admin/attribute-index.phtml:20
+msgid "Add video field"
+msgstr ""
+
+#: template/admin/attribute-index.phtml:21
+#: template/admin/attribute-index.phtml:23
+msgid "Add audio field"
+msgstr ""
+
+#: template/admin/attribute-index.phtml:24
+#: template/admin/attribute-index.phtml:26
+msgid "Add file field"
+msgstr ""
+
+#: template/admin/attribute-index.phtml:27
+#: template/admin/attribute-index.phtml:29
+msgid "Add currency field"
+msgstr ""
+
+#: template/admin/attribute-index.phtml:30
+#: template/admin/attribute-index.phtml:32
+msgid "Add date field"
+msgstr ""
+
+#: template/admin/attribute-index.phtml:33
+#: template/admin/attribute-index.phtml:35
+msgid "Add number field"
+msgstr ""
+
+#: template/admin/attribute-index.phtml:36
+#: template/admin/attribute-index.phtml:38
+msgid "Add select field"
+msgstr ""
+
+#: template/admin/attribute-index.phtml:39
+#: template/admin/attribute-index.phtml:41
+msgid "Add checkbox field"
+msgstr ""
+
+#: template/admin/attribute-index.phtml:45
 msgid "List of attributes"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:4
+#: template/admin/category-index.phtml:4 template/admin/category-index.phtml:6
 msgid "Add Category"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:6
+#: template/admin/category-index.phtml:9
 msgid "List of Categores"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:33
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:18
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:73
+#: template/admin/category-index.phtml:38
+#: template/admin/category-index.phtml:39
+#: template/admin/product-index.phtml:20
+#: template/admin/product-index.phtml:101
+#: template/admin/product-index.phtml:103
 msgid "View"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_index.phtml:45
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:95
+#: template/admin/category-index.phtml:53
+#: template/admin/product-index.phtml:35 template/admin/product-index.phtml:37
+#: template/admin/product-index.phtml:126
 msgid "Trash"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/category_update.phtml:16
+#: template/admin/category-update.phtml:16
 msgid "Remove image category in process"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/log_index.phtml:3
+#: template/admin/discount-index.phtml:9
+msgid "List of discounts"
+msgstr ""
+
+#: template/admin/discount-index.phtml:14
+msgid "Role"
+msgstr ""
+
+#: template/admin/discount-index.phtml:15
+msgid "Percent"
+msgstr ""
+
+#: template/admin/log-index.phtml:3
 msgid "List of user logs"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/log_index.phtml:7
+#: template/admin/log-index.phtml:7
 msgid "User"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/log_index.phtml:8
+#: template/admin/log-index.phtml:8
 msgid "Ip"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/log_index.phtml:9
+#: template/admin/log-index.phtml:9
 msgid "Time"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/log_index.phtml:10
+#: template/admin/log-index.phtml:10
 msgid "Section"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/log_index.phtml:11
+#: template/admin/log-index.phtml:11
 msgid "Item"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/log_index.phtml:12
+#: template/admin/log-index.phtml:12
 msgid "Operation"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/position_index.phtml:6
+#: template/admin/position-index.phtml:9
 msgid "List of positions"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:21
+#: template/admin/product-index.phtml:23 template/admin/product-index.phtml:25
 msgid "All products"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:34
+#: template/admin/product-index.phtml:46
 msgid "List of product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:63
+#: template/admin/product-index.phtml:83
 msgid "Manage"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:66
+#: template/admin/product-index.phtml:86 template/admin/product-index.phtml:88
 msgid "Edit basic information"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:67
+#: template/admin/product-index.phtml:89 template/admin/product-index.phtml:91
 msgid "Edit additional information"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:68
+#: template/admin/product-index.phtml:92 template/admin/product-index.phtml:94
 msgid "Attach files"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:69
+#: template/admin/product-index.phtml:95 template/admin/product-index.phtml:97
 msgid "Related products"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:88
+#: template/admin/product-index.phtml:119
 msgid "Update prices"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_index.phtml:101
+#: template/admin/product-index.phtml:132
 msgid "Recommended in process"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:11
+#: template/admin/product-related.phtml:12
 msgid ""
 "You can manage product related here, remove related productes or find new "
 "product by search system and add them to related"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:13
+#: template/admin/product-related.phtml:14
 msgid "List of related products"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:24
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:109
+#: template/admin/product-related.phtml:29
+#: template/front/checkout-cart.phtml:128
 msgid "Remove"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:41
+#: template/admin/product-related.phtml:51
 msgid "Add"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:46
+#: template/admin/product-related.phtml:57
 msgid "Search form"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_related.phtml:52
+#: template/admin/product-related.phtml:63
 msgid "Related product in process"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/product_update.phtml:50
+#: template/admin/product-update.phtml:50
 msgid "Remove image product in process"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/property_index.phtml:6
+#: template/admin/property-index.phtml:9
 msgid "List of properties"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/special_index.phtml:6
+#: template/admin/special-index.phtml:9
 msgid "List of specials"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/tools_index.phtml:4
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/tools_index.phtml:10
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/tools_sitemap.phtml:4
+#: template/admin/tools-index.phtml:4 template/admin/tools-index.phtml:6
+#: template/admin/tools-index.phtml:14 template/admin/tools-sitemap.phtml:4
+#: template/admin/tools-sitemap.phtml:6
 msgid "Sitemap"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/tools_index.phtml:7
+#: template/admin/tools-index.phtml:10
 msgid "How this part work?"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/tools_index.phtml:8
+#: template/admin/tools-index.phtml:12
 msgid ""
 "Tools system, help you to manage your module, Update database and remove "
 "unused information"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/admin/tools_index.phtml:10
+#: template/admin/tools-index.phtml:14
 msgid "Manage links on sitemap module"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/attach.phtml:5
+#: template/front/attach.phtml:5
 msgid "Attached archives"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/attach.phtml:17
+#: template/front/attach.phtml:18
 msgid "Attached docs"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/attach.phtml:29
+#: template/front/attach.phtml:31
 msgid "Attached pdfs"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/attach.phtml:41
+#: template/front/attach.phtml:44
 msgid "Attached files"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/category_list.phtml:25
+#: template/front/category-list.phtml:28
 msgid ""
 "No category has been made on this part yet. please check this page later"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:67
+#: template/front/checkout-cart.phtml:67
 msgid "Are you sure to delete this product from your cart?"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:77
+#: template/front/checkout-cart.phtml:77
 msgid "List of prodcuts on cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:100
+#: template/front/checkout-cart.phtml:110
 msgid "Discount"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:108
+#: template/front/checkout-cart.phtml:118
 msgid "Total"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:116
+#: template/front/checkout-cart.phtml:136
+#: template/front/checkout-cart.phtml:137
 msgid "Back to Shoping"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:117
+#: template/front/checkout-cart.phtml:138
+#: template/front/checkout-cart.phtml:139
 msgid "Empty cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:125
+#: template/front/checkout-cart.phtml:147
 msgid "Pre Invoice"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:127
+#: template/front/checkout-cart.phtml:149
 msgid "Total Price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:128
+#: template/front/checkout-cart.phtml:153
 msgid "Total Discount"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:129
+#: template/front/checkout-cart.phtml:157
 msgid "Total Number"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:130
+#: template/front/checkout-cart.phtml:161
 msgid "Total Shipping"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:131
+#: template/front/checkout-cart.phtml:165
 msgid "Final Price"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_cart.phtml:135
+#: template/front/checkout-cart.phtml:171
+#: template/front/checkout-cart.phtml:172
 msgid "Next"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_finish.phtml:4
+#: template/front/checkout-finish.phtml:4
 msgid "Finish order payment"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_finish.phtml:10
+#: template/front/checkout-finish.phtml:10
 #, php-format
 msgid ""
 "You pay your order at <strong>%s</strong> by <strong>%s</strong> gateway And "
 "your order id is <strong>%s</strong>"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_finish.phtml:13
+#: template/front/checkout-finish.phtml:13
+#: template/front/checkout-finish.phtml:14
 msgid "Order link"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/checkout_finish.phtml:14
+#: template/front/checkout-finish.phtml:15
+#: template/front/checkout-finish.phtml:16
 msgid "User panel"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:16
+#: template/front/installment.phtml:19
 msgid "Month"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:18
+#: template/front/installment.phtml:21
 msgid "Due time"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:24
+#: template/front/installment.phtml:27
 msgid "PerPayment"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:26
+#: template/front/installment.phtml:29
 #, php-format
 msgid "Month %s"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/installment.phtml:36
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_order.phtml:27
+#: template/front/installment.phtml:41 template/front/product-order.phtml:36
 msgid "Add to cart"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:25
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:36
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:46
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/price.phtml:56
+#: template/front/product-price.phtml:17 template/front/product-price.phtml:47
+#: template/front/product-price.phtml:64 template/front/product-price.phtml:83
+#: template/front/product-price.phtml:100
 msgid "Stock status"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_box.phtml:16
-msgid "Finished"
+#: template/front/product-question.phtml:5
+msgid "Ask question"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_box.phtml:19
-msgid "Add To cart"
+#: template/front/product-question.phtml:17
+msgid "Ask question about product"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_item.phtml:54
-msgid "Specifications"
+#: template/front/product-question.phtml:31
+#: template/front/product-question.phtml:35
+msgid "Email"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_item.phtml:56
-msgid "Media"
+#: template/front/product-question.phtml:38
+msgid "Question"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/product_item.phtml:57
-msgid "Related"
-msgstr ""
-
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/related.phtml:5
+#: template/front/related.phtml:4
 msgid "Related Products"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/special.phtml:4
+#: template/front/special.phtml:4
 msgid "Special products"
 msgstr ""
 
-#: /var/www/html/local/pi/pi-2.5.0/usr/module/shop/template/front/tag_list.phtml:18
+#: template/front/tag-list.phtml:20
 msgid ""
 "No keyword has been used as tag on this part yet. please check this page "
 "later"
