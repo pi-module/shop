@@ -133,10 +133,10 @@ class Shop extends Standard
                     break; */
 
                 case 'tag':
-                    if ($parts[1] == 'term') {
-                        $matches['action'] = 'term';
-                        $matches['slug'] = urldecode($parts[2]);
-                    } elseif ($parts[1] == 'list') {
+                    if (isset($parts[1]) && !empty($parts[1])) {
+                        $matches['action'] = 'index';
+                        $matches['slug'] = $this->decode($parts[1]);
+                    } else {
                         $matches['action'] = 'list';
                     }
                     break;

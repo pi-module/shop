@@ -108,7 +108,7 @@ class Breadcrumbs extends AbstractBreadcrumbs
                                 'label' => __('Tag list'),
                                 'href' => Pi::url(Pi::service('url')->assemble('shop', array(
                                     'controller' => 'tag',
-                                    'action' => 'list',
+                                    'action' => 'index',
                                 ))),
                             );
                             $result[] = array(

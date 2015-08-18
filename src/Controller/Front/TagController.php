@@ -15,10 +15,11 @@ namespace Module\Shop\Controller\Front;
 use Pi;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
+use Module\Shop\Form\SearchForm;
 
 class TagController extends IndexController
 {
-    public function termAction()
+    public function indexAction()
     {
         // Get info from url
         $module = $this->params('module');
@@ -67,6 +68,15 @@ class TagController extends IndexController
         );
         // Get paginator
         $paginator = $this->productPaginator($template, $where);
+        // Set search form
+        $fields = Pi::api('attribute', 'shop')->Get();
+        $option['field'] = $fields['attribute'];
+        $form = new SearchForm('search', $option);
+        $form->setAttribute('action', Pi::url($this->url('shop', array(
+            'module' => $module,
+            'controller' => 'search',
+            'action' => 'filter',
+        ))));
         // Set header and title
         $title = sprintf(__('All products by %s tag'), $slug);
         // Set seo_keywords
@@ -84,6 +94,7 @@ class TagController extends IndexController
         $this->view()->assign('productTitleH2', $title);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('config', $config);
+        $this->view()->assign('form', $form);
     }
 
     public function listAction()

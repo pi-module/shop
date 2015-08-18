@@ -31,7 +31,6 @@ return array(
             'route' => 'shop',
             'module' => 'shop',
             'controller' => 'category',
-            'action' => 'list',
         ),
 
         'tag' => array(
@@ -42,7 +41,6 @@ return array(
             'route' => 'shop',
             'module' => 'shop',
             'controller' => 'tag',
-            'action' => 'list',
         ),
     ),
     'admin' => array(
