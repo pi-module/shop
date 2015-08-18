@@ -22,6 +22,8 @@ use Zend\Json\Json;
  * Pi::api('basket', 'shop')->getBasket();
  * Pi::api('basket', 'shop')->emptyBasket();
  * Pi::api('basket', 'shop')->removeProduct($id);
+ * Pi::api('basket', 'shop')->basketBlockNumber();
+ * Pi::api('basket', 'shop')->basketBlockInfo();
  */
 
 class Basket extends AbstractApi
@@ -150,5 +152,60 @@ class Basket extends AbstractApi
         // Set basket
         $basket->data = json::encode($data);
         $basket->save();
+    }
+
+    public function basketBlockNumber() {
+        // Check user identity
+        if (Pi::user()->hasIdentity()) {
+            // Get uid
+            $uid = Pi::user()->getId();
+            // find backet
+            $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
+            // Check basket
+            if (empty($basket)) {
+                return 0;
+            } else {
+                $number = 0;
+                $data = json::decode($basket['data'], true);
+                foreach ($data['product'] as $product) {
+                    $number = $number + $product['number'];
+                }
+                return $number;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    public function basketBlockInfo() {
+        $list = array();
+        $number = 0;
+        // Check user identity
+        if (Pi::user()->hasIdentity()) {
+            // Get uid
+            $uid = Pi::user()->getId();
+            // find backet
+            $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
+            // Check basket
+            if (!empty($basket)) {
+                $data = json::decode($basket['data'], true);
+                foreach ($data['product'] as $product) {
+                    // Set list
+                    $productInfo = Pi::api('product', 'shop')->getProductLight($product['id']);
+                    $productInfo['number'] = $product['number'];
+                    $productInfo['number_view'] = _number($product['number']);
+                    $productInfo['property'] = $product['property'];
+                    $productInfo['total'] = $productInfo['price'] * $product['number'];
+                    $productInfo['total_view'] = Pi::api('api', 'shop')->viewPrice($productInfo['total']);
+                    $list[$product['id']] = $productInfo;
+                    // Set number
+                    $number = $number + $product['number'];
+                }
+            }
+        }
+        return array(
+            'list' => $list,
+            'number' => $number
+        );
     }
 }

@@ -296,5 +296,22 @@ return array(
         'description' => _a('basket'),
         'render' => array('block', 'basket'),
         'template' => 'basket',
+        'config' => array(
+            'type' => array(
+                'title' => _a('Basket type'),
+                'description' => '',
+                'edit' => array(
+                    'type' => 'select',
+                    'options' => array(
+                        'options' => array(
+                            'link' => _a('Link to basket'),
+                            'dialog' => _a('Dialog box'),
+                        ),
+                    ),
+                ),
+                'filter' => 'text',
+                'value' => 'link',
+            ),
+        ),
     ),
 );

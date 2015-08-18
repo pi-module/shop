@@ -180,7 +180,27 @@ class Block
         // Set options
         $block = array();
         $block = array_merge($block, $options);
+        // Set basket link
+        $block['link'] = Pi::url(Pi::service('url')->assemble('shop', array(
+            'module' => $module,
+            'controller' => 'cart',
+            'action' => 'index',
+        )));
+        // Check block type
+        switch($block['type']) {
+            case 'link':
+                // Set number
+                $block['number'] = Pi::api('basket', 'shop')->basketBlockNumber();
+                $block['number_view'] = _number($block['number']);
+                break;
 
+            case 'dialog':
+                $info = Pi::api('basket', 'shop')->basketBlockInfo();
+                $block['list'] = $info['list'];
+                $block['number'] = $info['number'];
+                $block['number_view'] = _number($block['number']);
+                break;
+        }
         // Set block array
         return $block;
     }
