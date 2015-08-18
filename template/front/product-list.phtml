@@ -1,6 +1,26 @@
 <?php $this->css($this->assetModule('css/front.css')); ?>
 <div class="clearfix">
-    <?php $shopBoxSize = 'col-sm-12 col-md-4'; ?>
+    <?php switch ($config['view_column']) {
+        case 1:
+            $shopBoxSize = 'col-xs-12 col-sm-12 col-md-12';
+            break;
+
+        case 2:
+            $shopBoxSize = 'col-xs-12 col-sm-12 col-md-6';
+            break;
+
+        case 3:
+            $shopBoxSize = 'col-xs-12 col-sm-12 col-md-4';
+            break;
+
+        case 4:
+            $shopBoxSize = 'col-xs-12 col-sm-12 col-md-3';
+            break;
+
+        case 5:
+            $shopBoxSize = 'col-xs-12 col-sm-12 col-md-2';
+            break;
+    } ?>
     <div class="clearfix row">
         <div class="col-sm-12 col-md-3">
             <?php include $this->template('front/category-side'); ?>

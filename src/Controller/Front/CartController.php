@@ -62,17 +62,15 @@ class CartController extends ActionController
         if ($this->request->isPost()) {
             // Get post
             $data = $this->request->getPost()->toArray();
-            $this->view()->assign('test', $data);
-            $this->view()->setTemplate('empty');
+            //$this->view()->assign('test', $data);
+            //$this->view()->setTemplate('empty');
             // Find product
             $product = $this->getModel('product')->find($data['id']);
             $product = Pi::api('product', 'shop')->canonizeProductLight($product);
             // Check product
             if (!$product['marketable']) {
-                $this->getResponse()->setStatusCode(404);
-                $this->terminate(__('The product was not marketable.'), '', 'error-404');
-                $this->view()->setLayout('layout-simple');
-                return;
+                $message = __('The product was not marketable.');
+                $this->jump($product['productUrl'], $message, 'error');
             } else {
                 // Check color
                 $property = array();

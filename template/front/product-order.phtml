@@ -11,7 +11,7 @@
                                 <label class="radio-inline input-sm">
                                     <input type="radio"
                                            name="property[<?php echo $this->escape($propertyList['id']); ?>]"
-                                           value="<?php echo $this->escape($propertyValue['name']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
+                                           value="<?php echo $this->escape($propertyValue['unique_key']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
                                 </label>
                             <?php } ?>
                         <?php } ?>
@@ -23,7 +23,7 @@
                             <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
                                 <?php if ($propertyValue['stock'] > 0) { ?>
                                     <option
-                                        value="<?php echo $this->escape($propertyValue['name']); ?>"><?php echo $this->escape($propertyValue['name']); ?></option>
+                                        value="<?php echo $this->escape($propertyValue['unique_key']); ?>"><?php echo $this->escape($propertyValue['name']); ?></option>
                                 <?php } ?>
                             <?php } ?>
                         </select>

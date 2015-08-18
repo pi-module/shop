@@ -55,9 +55,9 @@ class Update extends BasicUpdate
         $fieldAdapter = $fieldModel->getAdapter();
 
         // Set property model
-        $propertyModel = Pi::model('property', $this->module);
-        $propertyTable = $propertyModel->getTable();
-        $propertyAdapter = $propertyModel->getAdapter();
+        $propertyValueModel = Pi::model('property_value', $this->module);
+        $propertyValueTable = $propertyValueModel->getTable();
+        $propertyValueAdapter = $propertyValueModel->getAdapter();
 
         // Update to version 0.3.0
         if (version_compare($moduleVersion, '0.3.0', '<')) {
@@ -453,6 +453,31 @@ EOD;
                 ));
 
                 return false;
+            }
+        }
+
+        // Update to version 1.2.4
+        if (version_compare($moduleVersion, '1.2.4', '<')) {
+            // Alter table : ADD name
+            $sql = sprintf("ALTER TABLE %s ADD `unique_key` varchar(32) DEFAULT NULL , ADD UNIQUE `unique_key` (`unique_key`)", $propertyValueTable);
+            try {
+                $propertyValueAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            // Update value
+            $select = $propertyValueModel->select();
+            $rowset = $propertyValueModel->selectWith($select);
+            foreach ($rowset as $row) {
+                $key = md5($row->id);
+                // Save value
+                $row->unique_key = $key;
+                $row->save();
             }
         }
 

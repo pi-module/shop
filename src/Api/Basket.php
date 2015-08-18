@@ -36,11 +36,13 @@ class Basket extends AbstractApi
         $propertyList = Pi::api('property', 'shop')->getList();
         // Set product property
         $productProperty = array();
-        foreach ($properties as $key => $property) {
+        foreach ($properties as $key => $propertyKey) {
+            $property = Pi::api('property', 'shop')->getPropertyValue($propertyKey);
             $productProperty[$key] = array(
                 'id' => $propertyList[$key]['id'],
                 'title' => $propertyList[$key]['title'],
-                'value' => $property,
+                'value' => $property['name'],
+                'unique_key' => $property['unique_key'],
             );
         }
         // Set product

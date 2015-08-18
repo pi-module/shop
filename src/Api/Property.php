@@ -17,6 +17,7 @@ use Pi;
 use Pi\Application\Api\AbstractApi;
 
 /*
+ * Pi::api('property', 'shop')->getPropertyValue($parameter, $type = 'unique_key');
  * Pi::api('property', 'shop')->getList();
  * Pi::api('property', 'shop')->setValue($properties, $product);
  * Pi::api('property', 'shop')->getValue($product);
@@ -24,6 +25,14 @@ use Pi\Application\Api\AbstractApi;
 
 class Property extends AbstractApi
 {
+    public function getPropertyValue($parameter, $type = 'unique_key')
+    {
+        // Get product
+        $value = Pi::model('property_value', $this->getModule())->find($parameter, $type);
+        $value = $value->toArray();
+        return $value;
+    }
+
     public function getList()
     {
         // find
@@ -51,6 +60,7 @@ class Property extends AbstractApi
                     $values['product'] = $product;
                     $values['property'] = $propertyId;
                     $values['name'] = $propertyValue['name'];
+                    $values['unique_key'] = isset($propertyValue['unique_key']) ? $propertyValue['unique_key'] : md5(time() + rand(100,999));
                     $values['stock'] = isset($propertyValue['stock']) ? $propertyValue['stock'] : '';
                     $values['price'] = isset($propertyValue['price']) ? $propertyValue['price'] : '';
                     // Save

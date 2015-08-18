@@ -77,6 +77,7 @@ class ProductAdditionalForm extends BaseForm
     <span class="col-sm-4">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
     <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][stock]"/></span>
     <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][price]"/></span>
+    <input type="hidden" value="%s" name="property[%s][%s][unique_key]" />
     <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
 </div>
 EOT;
@@ -92,6 +93,9 @@ EOT;
                             $i,
                             __('Price'),
                             $propertyValue['price'],
+                            $property['id'],
+                            $i,
+                            $propertyValue['unique_key'],
                             $property['id'],
                             $i,
                             $property['id']
@@ -101,6 +105,7 @@ EOT;
 <div class="col-sm-12 js-form-element">
     <span class="col-sm-8">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
     <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][stock]"/></span>
+    <input type="hidden" value="%s" name="property[%s][%s][unique_key]" />
     <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
 </div>
 EOT;
@@ -114,6 +119,9 @@ EOT;
                             $propertyValue['stock'],
                             $property['id'],
                             $i,
+                            $propertyValue['unique_key'],
+                            $property['id'],
+                            $i,
                             $property['id']
                         );
                     } elseif ($property['influence_price']) {
@@ -121,6 +129,7 @@ EOT;
 <div class="col-sm-12 js-form-element">
     <span class="col-sm-8">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
     <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][price]"/></span>
+    <input type="hidden" value="%s" name="property[%s][%s][unique_key]" />
     <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
 </div>
 EOT;
@@ -134,12 +143,16 @@ EOT;
                             $propertyValue['price'],
                             $property['id'],
                             $i,
+                            $propertyValue['unique_key'],
+                            $property['id'],
+                            $i,
                             $property['id']
                         );
                     } else {
                         $htmlTemplate = <<<'EOT'
 <div class="col-sm-12 js-form-element">
     <span class="col-sm-11">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
+    <input type="hidden" value="%s" name="property[%s][%s][unique_key]" />
     <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
 </div>
 EOT;
@@ -147,6 +160,9 @@ EOT;
                             $htmlTemplate,
                             __('Name'),
                             $propertyValue['name'],
+                            $property['id'],
+                            $i,
+                            $propertyValue['unique_key'],
                             $property['id'],
                             $i,
                             $property['id']

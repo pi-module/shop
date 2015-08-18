@@ -21,21 +21,20 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
 ?>
 <div class="clearfix">
     <div class="product-page h-product clearfix" itemscope itemtype="http://schema.org/Product">
-        <div class="col-md-5">
+        <div class="col-md-4">
             <?php include $this->template('front/gallery'); ?>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             <div class="productTitle clearfix">
                 <h1 class="p-name" itemprop="name">
                     <?php echo $this->escape($productItem['title']); ?>
                 </h1>
             </div>
             <div class="productInfoBox clearfix">
-                <div class="productPrice"><?php include $this->template('front/product-price'); ?></div>
+                <div class="productPriceBox"><?php include $this->template('front/product-price'); ?></div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 clearfix">
                 <ul class="list-inline">
-                    <li><?php include $this->template('front/product-question'); ?></li>
                     <?php if (!empty($vote)) { ?>
                         <li>
                             <?php include $this->template('votebar.phtml', 'front', 'vote'); ?>
@@ -46,6 +45,7 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
                             <?php include $this->template('favouritebar.phtml', 'front', 'favourite'); ?>
                         </li>
                     <?php } ?>
+                    <li><?php include $this->template('front/product-question'); ?></li>
                 </ul>
                 <?php if ($config['social_sharing']) { ?>
                     <div class="clearfix">

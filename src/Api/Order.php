@@ -30,13 +30,51 @@ class Order extends AbstractApi
 
     public function postPaymentUpdate($order, $basket)
     {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
         // Update products
+        if (!empty($basket)) {
+            foreach ($basket as $single) {
+                // Get product
+                $product = Pi::api('product', 'shop')->getProductLight($single['product']);
+                // Update sales
+                Pi::model('product', $this->getModule())->update(
+                    array('sales' => ($product['sales'] + $single['number'])),
+                    array('id' => $product['id'])
+                );
+                // Stock method
+                switch ($config['order_stock']) {
+                    case 'never':
+                        break;
 
-        /* TODO */
+                    case 'manual':
+                        break;
 
-        // Send Mail
-        //$this->sendUserMail($order);
-        //$this->sendAdminMail($order);
+                    case 'product':
+                        // Update stock
+                        Pi::model('product', $this->getModule())->update(
+                            array('stock' => ($product['stock'] - $single['number'])),
+                            array('id' => $product['id'])
+                        );
+                        break;
+
+                    case 'property':
+                        // Check order extra
+                        if (isset($single['extra']['product']) && !empty($single['extra']['product'])) {
+                            foreach ($single['extra']['product'] as $property) {
+                                // Get property value
+                                $propertyValue = Pi::api('property', 'shop')->getPropertyValue($property['unique_key']);
+                                // Update stock
+                                Pi::model('property_value', $this->getModule())->update(
+                                    array('stock' => ($propertyValue['stock'] - $single['number'])),
+                                    array('unique_key' => $propertyValue['unique_key'])
+                                );
+                            }
+                        }
+                        break;
+                }
+            }
+        }
         // Set back url
         return Pi::url(Pi::service('url')->assemble('shop', array(
             'module' => $this->getModule(),
@@ -45,45 +83,4 @@ class Order extends AbstractApi
             'id' => $order['id'],
         )));
     }
-
-    /* public function sendUserMail($order)
-    {
-        // Set user mail
-        $to = array(
-            $order['email'] => sprintf('%s %s',$order['first_name'], $order['last_name']),
-        );
-        // Set template
-        $data = Pi::service('mail')->template('order-user', $order);
-        // Set message
-        $message = Pi::service('mail')->message($data['subject'], $data['body'], $data['format']);
-        $message->addTo($to);
-        $message->setEncoding("UTF-8");
-        // Send mail
-        Pi::service('mail')->send($message);
-    }
-
-    public function sendAdminMail($order)
-    {
-        // Set system mail
-        $to = array(
-            Pi::config('adminmail') => Pi::config('adminname'),
-        );
-        // Get config and set mail list
-        $config = Pi::service('registry')->config->read($this->getModule());
-        $mails = $config['order_mail'];
-        $mails = (empty($mails)) ? '' : explode('|', $mails);
-        if (!empty($mails)) {
-            foreach ($mails as $mail) {
-                $to[$mail] = $mail;
-            }
-        }
-        // Set template
-        $data = Pi::service('mail')->template('order-admin', $order);
-        // Set message
-        $message = Pi::service('mail')->message($data['subject'], $data['body'], $data['format']);
-        $message->addTo($to);
-        $message->setEncoding("UTF-8");
-        // Send mail
-        Pi::service('mail')->send($message);
-    } */
 }

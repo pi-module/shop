@@ -1,9 +1,7 @@
 <?php if ($config['view_question']) { ?>
     <div class="clearfix">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-primary btn-xl" data-toggle="modal"
-                    data-target="#questionModal"><?php _e('Ask question'); ?></button>
-        </div>
+        <button type="button" class="btn btn-primary btn-xl" data-toggle="modal"
+                data-target="#questionModal"><?php _e('Ask question'); ?></button>
         <?php if (Pi::user()->hasIdentity()) {
             $uid = Pi::user()->getId();
             $user = Pi::user()->get($uid, array('id', 'identity', 'name', 'email'));
