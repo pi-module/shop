@@ -290,4 +290,11 @@ return array(
             ),
         ),
     ),
+    'basket' => array(
+        'name' => 'basket',
+        'title' => _a('Basket'),
+        'description' => _a('basket'),
+        'render' => array('block', 'basket'),
+        'template' => 'basket',
+    ),
 );

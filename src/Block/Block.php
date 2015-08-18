@@ -174,4 +174,14 @@ class Block
         $block['resources'] = $category;
         return $block;
     }
+
+    public static function basket($options = array(), $module = null)
+    {
+        // Set options
+        $block = array();
+        $block = array_merge($block, $options);
+
+        // Set block array
+        return $block;
+    }
 }
