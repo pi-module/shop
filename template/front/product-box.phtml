@@ -24,8 +24,9 @@
                             <strong itemprop="price" content="<?php echo $this->escape($product['price']); ?>"><?php echo $this->escape($product['price_view']); ?></strong>
                         </div>
                     <?php } elseif ($product['stock_type'] != 1) { ?>
-                        <div class="label label-danger" itemprop="availability" href="http://schema.org/InStock">
-                            <strong><?php echo $this->escape($product['stock_type_view']); ?></strong>
+                        <div class="productPrice p-price">
+                            <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
+                            <strong itemprop="price" content="<?php echo $this->escape($product['price']); ?>"><?php echo $this->escape($product['price_view']); ?></strong>
                         </div>
                     <?php } else { ?>
                         <div class="label label-danger">
