@@ -83,7 +83,7 @@ class Category extends AbstractApi
         } else {
             $where = array('status' => 1, 'parent' => $parent);
         }
-        $order = array('display_order ASC', 'title ASC');
+        $order = array('display_order ASC');
         $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
         $rowset = Pi::model('category', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
