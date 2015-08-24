@@ -128,7 +128,6 @@ class CategoryController extends IndexController
     public function filterAction()
     {
         // Get info from url
-        $module = $this->params('module');
         $slug = $this->params('slug');
         // Get category information from model
         $category = $this->getModel('category')->find($slug, 'slug');
