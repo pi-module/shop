@@ -15,6 +15,7 @@ namespace Module\Shop\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
+use Zend\Json\Json;
 
 /*
  * Pi::api('attribute', 'shop')->Get($category);
@@ -27,6 +28,8 @@ use Pi\Application\Api\AbstractApi;
  * Pi::api('attribute', 'shop')->getCategory($field);
  * Pi::api('attribute', 'shop')->getField($business);
  * Pi::api('attribute', 'shop')->attributePositionForm();
+ * Pi::api('attribute', 'shop')->filterList($category = '');
+ * Pi::api('attribute', 'shop')->filterData($productId, $category = '');
  */
 
 class Attribute extends AbstractApi
@@ -302,5 +305,61 @@ class Attribute extends AbstractApi
             $field[] = $row->field;
         }
         return array_unique($field);
+    }
+
+
+
+
+    public function filterList($category = '')
+    {
+        // Set return
+        $return = array();
+        // Get position list
+        $position = $this->attributePositionForm();
+        // Get field id from business
+        $id = $this->getField($category);
+        if (empty($id)) {
+            return $return;
+        }
+        // find
+        $whereField = array('status' => 1, 'search' => 1, 'id' => $id);
+        $orderField = array('order ASC', 'position ASC', 'id DESC');
+        $select = Pi::model('field', $this->getModule())->select()->where($whereField)->order($orderField);
+        $rowset = Pi::model('field', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $return[$row->id] = $row->toArray();
+            $return[$row->id]['position_vew'] = $position[$row->position];
+            $return[$row->id]['value'] = Json::decode($row->value, true);
+            $return[$row->id]['value']['data'] = explode('|', $return[$row->id]['value']['data']);
+        }
+        return $return;
+    }
+
+    public function filterData($productId, $filterList = array(), $category = '') {
+        // Get filter list
+        if (empty($filterList)) {
+            $filterList = $this->filterList($category = '');
+        }
+        // Get data list
+        $where = array('product' => $productId);
+        $column = array('field', 'data');
+        $select = Pi::model('field_data', $this->getModule())->select()->where($where)->columns($column);
+        $rowset = Pi::model('field_data', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $data[$row->field] = $row->toArray();
+        }
+
+        $ret = array();
+
+        foreach ($filterList as $filterSingle) {
+            if (isset($data[$filterSingle['id']]['data']) && !empty($data[$filterSingle['id']]['data'])) {
+                $ret[$filterSingle['name']] = $data[$filterSingle['id']]['data'];
+            } else {
+                $ret[$filterSingle['name']] = '';
+            }
+        }
+
+        return $ret;
+
     }
 }

@@ -1,0 +1,145 @@
+<?php
+// Load angular custom js
+$script = <<<'EOT'
+var app = angular.module('shop', ['angularUtils.directives.dirPagination']);
+app.controller('listdata',function($scope, $http){
+    $scope.products = []; //declare an empty array
+    $http.get("%s").success(function(response){
+        $scope.products = response;  //ajax request to fetch data into $scope.data
+    });
+    $scope.sort = function(keyname){
+        $scope.sortKey = keyname;   //set the sortKey to the param passed
+        //$scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    }
+});
+EOT;
+$script = sprintf(
+    $script,
+    $this->url('', array('action' => 'json'))
+);
+// Load header files
+$this->jQuery();
+$this->angular(array());
+$this->js($this->assetModule('js/dirPagination.js'));
+$this->css($this->assetModule('css/front.css'));
+$this->footScript()->appendScript($script);
+// Set box site
+switch ($config['view_column']) {
+    case 1:
+        $shopBoxSize = 'col-xs-12 col-sm-12 col-md-12';
+        break;
+
+    case 2:
+        $shopBoxSize = 'col-xs-12 col-sm-12 col-md-6';
+        break;
+
+    case 3:
+        $shopBoxSize = 'col-xs-12 col-sm-12 col-md-4';
+        break;
+
+    case 4:
+        $shopBoxSize = 'col-xs-12 col-sm-12 col-md-3';
+        break;
+
+    case 5:
+        $shopBoxSize = 'col-xs-12 col-sm-12 col-md-2';
+        break;
+}
+?>
+<div class="clearfix row"  ng-controller="listdata">
+    <div class="col-sm-12 col-md-3">
+        <?php include $this->template('front/category-side'); ?>
+        <div class="shop-search-form clearfix">
+            <form>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" ng-model="filterTitle" class="form-control" placeholder="filterTitle">
+                </div>
+                <div class="form-group">
+                    <label>Marketable</label>
+                    <select ng-model="filterMarketable" class="form-control">
+                        <option value="">All</option>
+                        <option value="1">Marketable</option>
+                        <option value="0">Not marketable</option>
+                    </select>
+                </div>
+                <?php $filterNameArray = array(); ?>
+                <?php foreach ($listFilter as $singleFilter) { ?>
+                    <?php if ($singleFilter['type'] == 'select') { ?>
+                        <?php
+                        $filterName = 'filter' . $singleFilter['name'];
+                        $filterNameArray[] = array(
+                            'fieldName' => $singleFilter['name'],
+                            'filterName' => $filterName
+                        );
+                        ?>
+                        <div class="form-group">
+                            <label><?php echo $singleFilter['title']; ?></label>
+                            <select ng-model="<?php echo $filterName; ?>" class="form-control">
+                                <option value="">All</option>
+                                <?php foreach ($singleFilter['value']['data'] as $valueData) { ?>
+                                    <option ng-click="sort('<?php echo $valueData; ?>')"><?php echo $valueData; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+                <div class="form-group">
+                    <label>Sort</label>
+                    <select class="form-control">
+                        <option ng-click="sort('-id')">ID</option>
+                        <option ng-click="sort('title')">Title</option>
+                        <option ng-click="sort('-price')">Price</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-9" ng-controller="listdata">
+        <?php include $this->template('front/category'); ?>
+        <?php include $this->template('front/special'); ?>
+        <div class="clearfix">
+            <div class="productList clearfix">
+                <?php if (isset($productTitleH1) && !empty($productTitleH1)) { ?>
+                    <div class="page-header">
+                        <h1><?php echo $productTitleH1; ?></h1>
+                    </div>
+                <?php } elseif (isset($productTitleH2) && !empty($productTitleH2)) { ?>
+                    <div class="page-header">
+                        <h2><?php echo $productTitleH2; ?></h2>
+                    </div>
+                <?php } ?>
+                <?php if (!empty($config['text_description_index']) && isset($showIndexDesc) && $showIndexDesc == 1 && isset($page) && $page == 1) { ?>
+                    <div class="well shopIndexDescription">
+                        <?php echo $config['text_description_index']; ?>
+                    </div>
+                <?php } ?>
+                <div dir-paginate="product in products|orderBy:sortKey|filter: {<?php if (!empty($filterNameArray)) { ?><?php foreach ($filterNameArray as $filterNameSingle) { ?><?php echo $filterNameSingle['fieldName'] ?> : <?php echo $filterNameSingle['filterName'] ?>,<?php } ?><?php } ?> title : filterTitle, marketable : filterMarketable } |itemsPerPage:<?php echo $config['view_perpage']; ?>"
+                     class="<?php echo $shopBoxSize; ?> productBox h-product" itemscope itemtype="http://schema.org/Product">
+                    <div class="thumbnail">
+                        <a itemprop="url" class="u-photo" title="{{product.title}}"
+                           href="{{product.productUrl}}"><img
+                                itemprop="image" src="{{product.thumbUrl}}"
+                                alt="{{product.title}}"/></a>
+                        <div class="caption">
+                            <h3 class="p-name" itemprop="name">
+                                <a title="{{product.title}}"
+                                   href="{{product.productUrl}}">
+                                    {{product.title}}
+                                </a>
+                            </h3>
+                            <p>{{product.price_view}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="paginator">
+                <dir-pagination-controls
+                    max-size="<?php echo $config['view_perpage']; ?>"
+                    direction-links="true"
+                    boundary-links="true">
+                </dir-pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

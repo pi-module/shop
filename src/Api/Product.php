@@ -515,8 +515,8 @@ class Product extends AbstractApi
         }
         // unset
         unset($product['category']);
-        unset($product['summary']);
-        unset($product['description']);
+        unset($product['text_summary']);
+        unset($product['text_description']);
         unset($product['seo_title']);
         unset($product['seo_keywords']);
         unset($product['seo_description']);
@@ -719,6 +719,170 @@ class Product extends AbstractApi
                 $product['attribute-' . $attribute['id']] = $attribute['data'];
             }
         }
+        // return product
+        return $product;
+    }
+
+    public function canonizeProductFilter($product, $categoryList = array(), $filterList = array())
+    {
+        // Check
+        if (empty($product)) {
+            return '';
+        }
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        $configSystem = Pi::service('registry')->config->read('system');
+        // Get category list
+        $categoryList = (empty($categoryList)) ? Pi::registry('categoryList', 'shop')->read() : $categoryList;
+        // boject to array
+        $product = $product->toArray();
+        // Make setting
+        $product['setting'] = json::decode($product['setting'], true);
+        // Set text_summary
+        $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'html', 'html');
+        // Set text_description
+        $product['text_description'] = Pi::service('markup')->render($product['text_description'], 'html', 'html');
+        // Set times
+        //$product['time_create_view'] = _date($product['time_create']);
+        //$product['time_update_view'] = _date($product['time_update']);
+        // Set product url
+        $product['productUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
+            'module' => $this->getModule(),
+            'controller' => 'product',
+            'slug' => $product['slug'],
+        )));
+        // Set cart url
+        $product['cartUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
+            'module' => $this->getModule(),
+            'controller' => 'cart',
+            'action' => 'add',
+            //'slug'          => $product['slug'],
+        )));
+        // Set category information
+        $product['category'] = Json::decode($product['category']);
+        foreach ($product['category'] as $category) {
+            $product['categories'][$category]['title'] = $categoryList[$category]['title'];
+            $product['categories'][$category]['url'] = Pi::url(Pi::service('url')->assemble('shop', array(
+                'module' => $this->getModule(),
+                'controller' => 'category',
+                'slug' => $categoryList[$category]['slug'],
+            )));
+        }
+        // Set discount
+        if ($config['order_discount']) {
+            $userDiscount = 0;
+            $uid = Pi::user()->getId();
+            $roles = Pi::user()->getRole($uid);
+            // Get discount percent
+            if ($config['order_discount_type'] == 'general') {
+                $discounts = Pi::api('discount', 'shop')->getList();
+                if (!empty($discounts)) {
+                    foreach ($discounts as $discount) {
+                        if (in_array($discount['role'], $roles)) {
+                            $userDiscount = $discount['percent'];
+                        }
+                    }
+                }
+            } elseif ($config['order_discount_type'] == 'product') {
+                if (!empty($product['setting']['discount'])) {
+                    foreach ($product['setting']['discount'] as $role => $percent) {
+                        if (in_array($role, $roles)) {
+                            $userDiscount = $percent;
+                        }
+                    }
+                }
+            }
+            // Make discount price
+            if ($userDiscount > 0) {
+                $product['price_discount'] = $product['price'];
+                $product['price'] = ($product['price'] - ($product['price'] * ($userDiscount / 100)));
+                $product['price'] = Pi::api('api', 'order')->makePrice($product['price']);
+            }
+        }
+        // Set price
+        $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
+        $product['price_discount_view'] = Pi::api('api', 'shop')->viewPrice($product['price_discount']);
+        $product['price_currency'] = empty($configSystem['number_currency']) ? 'USD' : $configSystem['number_currency'];
+        // Set stock
+        switch ($product['stock_type']) {
+            default:
+            case 1:
+                $product['stock_type_view'] = __('In stock');
+                break;
+
+            case 2:
+                $product['stock_type_view'] = __('Out of stock');
+                break;
+
+            case 3:
+                $product['stock_type_view'] = __('Coming soon');
+                break;
+
+            case 4:
+                $product['stock_type_view'] = __('Contact');
+                break;
+
+            case 5:
+                $product['stock_type_view'] = __('Variable stock');
+                break;
+        }
+        // Set marketable
+        $product['marketable'] = $this->marketable($product);
+        // Set image url
+        if ($product['image']) {
+            // Set image original url
+            /* $product['originalUrl'] = Pi::url(
+                sprintf('upload/%s/original/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
+                    $product['image']
+                ));
+            // Set image large url
+            $product['largeUrl'] = Pi::url(
+                sprintf('upload/%s/large/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
+                    $product['image']
+                )); */
+            // Set image medium url
+            $product['mediumUrl'] = Pi::url(
+                sprintf('upload/%s/medium/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
+                    $product['image']
+                ));
+            // Set image thumb url
+            $product['thumbUrl'] = Pi::url(
+                sprintf('upload/%s/thumb/%s/%s',
+                    $config['image_path'],
+                    $product['path'],
+                    $product['image']
+                ));
+        }
+        // Set attribute
+        $filterList = isset($filterList) ? $filterList : Pi::api('attribute', 'shop')->filterList();
+        $attribute = Pi::api('attribute', 'shop')->filterData($product['id'], $filterList);
+        $product = array_merge($product, $attribute);
+
+        // unset
+        unset($product['text_summary']);
+        unset($product['text_description']);
+        unset($product['seo_title']);
+        unset($product['seo_keywords']);
+        unset($product['seo_description']);
+        unset($product['comment']);
+        unset($product['point']);
+        unset($product['count']);
+        unset($product['favorite']);
+        unset($product['attach']);
+        unset($product['attribute']);
+        unset($product['related']);
+        unset($product['recommended']);
+        unset($product['stock']);
+        unset($product['stock_alert']);
+        unset($product['uid']);
+        unset($product['hits']);
+        unset($product['setting']);
         // return product
         return $product;
     }

@@ -111,5 +111,11 @@ return array(
             'permission' => 'public',
             'block' => 1,
         ),
+        array(
+            'label' => _a('Angular'),
+            'controller' => 'angular',
+            'permission' => 'public',
+            'block' => 1,
+        ),
     ),
 );
