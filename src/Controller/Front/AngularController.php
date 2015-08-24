@@ -22,9 +22,8 @@ class AngularController extends ActionController
 {
     public function indexAction()
     {
-        // Show it just to site admins
-        $role = Pi::user()->getRole(Pi::user()->getId(), 'admin');
-        if (!in_array('admin', $role)) {
+        // Show it just to login users
+        if (Pi::user()->getId() == 0) {
             $this->getResponse()->setStatusCode(401);
             $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-404');
             $this->view()->setLayout('layout-simple');
@@ -48,6 +47,7 @@ class AngularController extends ActionController
         $product = array();
         // Get search form
         $filterList = Pi::api('attribute', 'shop')->filterList();
+        $categoryList = Pi::registry('categoryList', 'shop')->read();
         // Set info
         $where = array('status' => 1);
         $order = array('time_create DESC', 'id DESC');
@@ -68,7 +68,7 @@ class AngularController extends ActionController
         $select = $this->getModel('product')->select()->where($where)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
         foreach ($rowset as $row) {
-            $product[] = Pi::api('product', 'shop')->canonizeProductFilter($row, array(), $filterList);
+            $product[] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
         }
         // Set view
         return $product;

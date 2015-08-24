@@ -64,7 +64,10 @@ class Shop extends Standard
             switch ($matches['controller']) {
 
                 case 'category':
-                    if (isset($parts[1]) && !empty($parts[1])) {
+                    if (isset($parts[1]) && $parts[1] == 'filter') {
+                        $matches['action'] = 'filter';
+                        $matches['slug'] = $this->decode($parts[2]);
+                    } elseif (isset($parts[1]) && !empty($parts[1])) {
                         $matches['action'] = 'index';
                         $matches['slug'] = $this->decode($parts[1]);
                     } else {

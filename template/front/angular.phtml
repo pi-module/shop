@@ -15,7 +15,7 @@ app.controller('listdata',function($scope, $http){
 EOT;
 $script = sprintf(
     $script,
-    $this->url('', array('action' => 'json'))
+    $this->url('', array('action' => 'filter', 'slug' => $category['slug']))
 );
 // Load header files
 $this->jQuery();
@@ -46,21 +46,24 @@ switch ($config['view_column']) {
         break;
 }
 ?>
-<div class="clearfix row"  ng-controller="listdata">
+<div class="clearfix row" ng-controller="listdata">
     <div class="col-sm-12 col-md-3">
         <?php include $this->template('front/category-side'); ?>
         <div class="shop-search-form clearfix">
+            <div class="page-header">
+                <h4><?php _e('Search'); ?></h4>
+            </div>
             <form>
                 <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" ng-model="filterTitle" class="form-control" placeholder="filterTitle">
+                    <label><?php _e('Title'); ?></label>
+                    <input type="text" ng-model="filterTitle" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Marketable</label>
+                    <label><?php _e('Marketable'); ?></label>
                     <select ng-model="filterMarketable" class="form-control">
-                        <option value="">All</option>
-                        <option value="1">Marketable</option>
-                        <option value="0">Not marketable</option>
+                        <option value=""><?php _e('All'); ?></option>
+                        <option value="1"><?php _e('Marketable'); ?></option>
+                        <option value="0"><?php _e('Not marketable'); ?></option>
                     </select>
                 </div>
                 <?php $filterNameArray = array(); ?>
@@ -76,22 +79,36 @@ switch ($config['view_column']) {
                         <div class="form-group">
                             <label><?php echo $singleFilter['title']; ?></label>
                             <select ng-model="<?php echo $filterName; ?>" class="form-control">
-                                <option value="">All</option>
+                                <option value=""><?php _e('All'); ?></option>
                                 <?php foreach ($singleFilter['value']['data'] as $valueData) { ?>
-                                    <option ng-click="sort('<?php echo $valueData; ?>')"><?php echo $valueData; ?></option>
+                                    <?php if (!empty($valueData)) { ?>
+                                        <option ng-click="sort('<?php echo $valueData; ?>')"><?php echo $valueData; ?></option>
+                                    <?php } ?>
                                 <?php } ?>
                             </select>
                         </div>
+                    <?php } elseif ($singleFilter['type'] == 'text') { ?>
+                        <div class="form-group">
+                            <?php
+                            $filterName = 'filter' . $singleFilter['name'];
+                            $filterNameArray[] = array(
+                                'fieldName' => $singleFilter['name'],
+                                'filterName' => $filterName
+                            );
+                            ?>
+                            <label><?php echo $singleFilter['title']; ?></label>
+                            <input type="text" ng-model="<?php echo $filterName; ?>" class="form-control">
+                        </div>
                     <?php } ?>
                 <?php } ?>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>Sort</label>
                     <select class="form-control">
                         <option ng-click="sort('-id')">ID</option>
                         <option ng-click="sort('title')">Title</option>
                         <option ng-click="sort('-price')">Price</option>
                     </select>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>
