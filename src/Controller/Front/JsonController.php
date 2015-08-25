@@ -187,13 +187,14 @@ class JsonController extends IndexController
         // Get info from url
         $module = $this->params('module');
         $slug = $this->params('slug');
+
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get category information from model
         $category = $this->getModel('category')->find($slug, 'slug');
         $category = Pi::api('category', 'shop')->canonizeCategory($category);
         // Check category
-        if (!$category || $category['status'] != 1 || $config['view_type'] != 'angular') {
+        if (!$category || $category['status'] != 1) {
             $this->getResponse()->setStatusCode(404);
             $this->terminate(__('The category not found.'), '', 'error-404');
             $this->view()->setLayout('layout-simple');
