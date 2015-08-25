@@ -15,11 +15,11 @@ app.controller('listdata',function($scope, $http){
 EOT;
 $script = sprintf(
     $script,
-    $this->url('', array('action' => 'filter', 'slug' => $category['slug']))
+    $filterUrl
 );
 // Load header files
 $this->jQuery();
-$this->angular(array());
+$this->angular();
 $this->js($this->assetModule('js/dirPagination.js'));
 $this->css($this->assetModule('css/front.css'));
 $this->footScript()->appendScript($script);

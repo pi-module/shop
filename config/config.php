@@ -91,6 +91,22 @@ return array(
             'edit' => 'text',
             'filter' => 'string',
         ),
+        'view_type' => array(
+            'title' => _a('Layout view type'),
+            'description' => '',
+            'edit' => array(
+                'type' => 'select',
+                'options' => array(
+                    'options' => array(
+                        'normal' => _a('Normal list'),
+                        'angular' => _a('Ajax list by angular JS'),
+                    ),
+                ),
+            ),
+            'filter' => 'text',
+            'value' => 'normal',
+            'category' => 'view',
+        ),
         'view_perpage' => array(
             'category' => 'view',
             'title' => _a('Perpage'),

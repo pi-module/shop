@@ -1,0 +1,47 @@
+<?php
+if ($block['blockEffect']) {
+    $script = <<<'EOT'
+(function($){
+    var MIN_LENGTH = 2;
+    $("#keyword").keyup(function () {
+        var keyword = $("#keyword").val();
+        if (keyword.length >= MIN_LENGTH) {
+            $.get("%s", {keyword: keyword})
+                .done(function (data) {
+                    $('.shopsearchresults').html('');
+                    var results = jQuery.parseJSON(data);
+                    $(results).each(function (key, value) {
+                        $('.shopsearchresults').append('<a class="list-group-item" title="' + value.title + '" href="' + value.url + '"><img src="' + value.image + '" alt="' + value.title + '">' + value.title + '</a>');
+                    })
+                });
+        } else {
+            $('.shopsearchresults').html('');
+        }
+    });
+    $("#keyword").blur(function () {
+        $(".shopsearchresults").fadeOut(500);
+    }).focus(function () {
+        $(".shopsearchresults").show();
+    });
+})(jQuery)
+EOT;
+    $script = sprintf(
+        $script,
+        $block['link']
+    );
+    $this->jQuery();
+    $this->footScript()->appendScript($script);
+    $this->css($this->assetModule('css/block.css', 'shop'));
+}
+?>
+<div class="shop-block-search clearfix">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="text" value="" placeholder="<?php echo _b('Search'); ?>" id="keyword" class="form-control">
+            <div class="input-group-addon">
+                <i class="fa fa-search"></i>
+            </div>
+        </div>
+    </div>
+    <div class="shopsearchresults list-group"></div>
+</div>

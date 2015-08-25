@@ -17,14 +17,14 @@ use Pi;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Module\Shop\Form\SearchForm;
-use Module\Shop\Form\SearchFilter;
+//use Module\Shop\Form\SearchForm;
+//use Module\Shop\Form\SearchFilter;
 use Zend\Json\Json;
 use Zend\Db\Sql\Predicate\Expression;
 
 class IndexController extends ActionController
 {
-    public function indexAction()
+    /* public function indexAction()
     {
         // Get info from url
         $module = $this->params('module');
@@ -214,9 +214,9 @@ class IndexController extends ActionController
         $this->view()->assign('config', $config);
         $this->view()->assign('form', $form);
         $this->view()->assign('isHomepage', 1);
-    }
+    } */
 
-    public function filterAction()
+    /* public function filterAction()
     {
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -257,12 +257,91 @@ class IndexController extends ActionController
             $url = array('action' => 'index');
             $this->jump($url, $message, 'error');
         }
+    } */
+
+    public function indexAction()
+    {
+        // Get info from url
+        $module = $this->params('module');
+        $search = $this->params('q');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // category list
+        $categories = Pi::api('category', 'shop')->categoryList(0);
+        // Get special
+        if ($config['view_special']) {
+            $specialList = Pi::api('special', 'shop')->getAll();
+            $this->view()->assign('specialList', $specialList);
+        }
+        // Check homepage type
+        switch ($config['homepage_type']) {
+            default:
+            case 'list':
+                // Set layout type
+                switch ($config['view_type']) {
+                    /* default:
+                    case 'normal':
+                        // Get info from url
+                        $page = $this->params('page', 1);
+                        // Set product info
+                        $where = array('status' => 1);
+                        // Get product List
+                        $productList = $this->productList($where);
+                        // Set paginator info
+                        $template = array(
+                            'controller' => 'index',
+                            'action' => 'index',
+                        );
+                        // Get paginator
+                        $paginator = $this->productPaginator($template, $where);
+                        // Set view
+                        $this->view()->setTemplate('product-list');
+                        $this->view()->assign('config', $config);
+                        $this->view()->assign('categories', $categories);
+                        $this->view()->assign('page', $page);
+                        $this->view()->assign('paginator', $paginator);
+                        $this->view()->assign('productList', $productList);
+                        $this->view()->assign('productTitleH1', __('New products'));
+                        $this->view()->assign('showIndexDesc', 1);
+                        $this->view()->assign('isHomepage', 1);
+                        break; */
+
+                    default:
+                    case 'normal':
+                    case 'angular':
+                        // Set filter url
+                        $filterUrl = Pi::url($this->url('', array(
+                            'controller' => 'json',
+                            'action' => 'filterIndex'
+                        )));
+                        // Set view
+                        $this->view()->setTemplate('product-angular');
+                        $this->view()->assign('config', $config);
+                        $this->view()->assign('categories', $categories);
+                        $this->view()->assign('filterUrl', $filterUrl);
+                        $this->view()->assign('productTitleH1', __('New products'));
+                        $this->view()->assign('showIndexDesc', 1);
+                        $this->view()->assign('isHomepage', 1);
+                        break;
+                }
+                break;
+
+            case 'brand':
+                // Set title
+                $title = (!empty($config['homepage_title'])) ? $config['homepage_title'] : __('Shop index');
+                // Set view
+                $this->view()->setTemplate('homepage');
+                $this->view()->assign('config', $config);
+                $this->view()->assign('categories', $categories);
+                $this->view()->assign('productTitleH1', $title);
+                $this->view()->assign('isHomepage', 1);
+                break;
+        }
     }
 
     public function productList($where)
     {
         // Set info
-        $id = array();
         $product = array();
         $productId = array();
         $page = $this->params('page', 1);
@@ -300,10 +379,9 @@ class IndexController extends ActionController
         return $product;
     }
 
-    public function searchList($where)
+    /* public function searchList($where)
     {
         // Set info
-        $id = array();
         $product = array();
         $page = $this->params('page', 1);
         $module = $this->params('module');
@@ -325,7 +403,7 @@ class IndexController extends ActionController
         }
         // return product
         return $product;
-    }
+    } */
 
     public function productJsonList($where)
     {
@@ -375,7 +453,7 @@ class IndexController extends ActionController
         return $paginator;
     }
 
-    public function searchPaginator($template, $where)
+    /* public function searchPaginator($template, $where)
     {
         $template['module'] = $this->params('module');
         $template['sort'] = $this->params('sort');
@@ -388,20 +466,18 @@ class IndexController extends ActionController
         // paginator
         $paginator = $this->canonizePaginator($template);
         return $paginator;
-    }
+    } */
 
     public function canonizePaginator($template)
     {
         $template['slug'] = (isset($template['slug'])) ? $template['slug'] : '';
         $template['action'] = (isset($template['action'])) ? $template['action'] : 'index';
-
-        $options = array();
+        /* $options = array();
         if (isset($template['q']) && !empty($template['q'])) {
             foreach ($template['q'] as $key => $value) {
                 $options['query'][$key] = $value;
             }
-        }
-
+        } */
         // paginator
         $paginator = Paginator::factory(intval($template['count']));
         $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
@@ -415,7 +491,7 @@ class IndexController extends ActionController
                 'action' => $template['action'],
                 'slug' => $template['slug'],
             )),
-            'options' => $options,
+            //'options' => $options,
         ));
         return $paginator;
     }

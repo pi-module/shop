@@ -108,7 +108,7 @@ class Shop extends Standard
                     break;
 
                 case 'index':
-                    if (isset($parts[0]) && $parts[0] == 'filter') {
+                    /* if (isset($parts[0]) && $parts[0] == 'filter') {
                         $matches['action'] = 'filter';
                     } else {
                         $matches['action'] = 'index';
@@ -119,7 +119,8 @@ class Shop extends Standard
                                 }
                             }
                         }
-                    }
+                    } */
+                    $matches['action'] = 'index';
                     break;
 
                 case 'product':
@@ -148,6 +149,13 @@ class Shop extends Standard
                     $matches['action'] = $this->decode($parts[1]);
                     if (isset($parts[2]) && $parts[2] == 'id') {
                         $matches['id'] = intval($parts[3]);
+                    } elseif ($parts[1] == 'filterCategory') {
+                        $matches['slug'] = $this->decode($parts[2]);
+                    } elseif ($parts[1] == 'filterSearch') {
+                        $keyword = _get('keyword');
+                        if (isset($keyword) && !empty($keyword)) {
+                            $matches['keyword'] = $keyword;
+                        }
                     }
                     break;
             }

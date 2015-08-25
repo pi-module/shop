@@ -204,4 +204,19 @@ class Block
         // Set block array
         return $block;
     }
+
+    public static function search($options = array(), $module = null)
+    {
+        // Set options
+        $block = array();
+        $block = array_merge($block, $options);
+        // Set basket link
+        $block['link'] = Pi::url(Pi::service('url')->assemble('shop', array(
+            'module' => $module,
+            'controller' => 'json',
+            'action' => 'filterSearch',
+        )));
+        // Set block array
+        return $block;
+    }
 }

@@ -135,6 +135,13 @@ return array(
                 'filter' => 'string',
                 'value' => '',
             ),
+            'blockEffect' => array(
+                'title' => _a('Use block effects'),
+                'description' => _a('Use block effects or set custom effect on theme'),
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 1,
+            ),
         ),
     ),
     'product-tag' => array(
@@ -198,6 +205,13 @@ return array(
                 'filter' => 'string',
                 'value' => '',
             ),
+            'blockEffect' => array(
+                'title' => _a('Use block effects'),
+                'description' => _a('Use block effects or set custom effect on theme'),
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 1,
+            ),
         ),
     ),
     'product-special' => array(
@@ -254,6 +268,13 @@ return array(
                 'filter' => 'string',
                 'value' => '',
             ),
+            'blockEffect' => array(
+                'title' => _a('Use block effects'),
+                'description' => _a('Use block effects or set custom effect on theme'),
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 1,
+            ),
         ),
     ),
     'category' => array(
@@ -288,6 +309,13 @@ return array(
                 'filter' => 'text',
                 'value' => 'horizontal',
             ),
+            'blockEffect' => array(
+                'title' => _a('Use block effects'),
+                'description' => _a('Use block effects or set custom effect on theme'),
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 1,
+            ),
         ),
     ),
     'basket' => array(
@@ -311,6 +339,22 @@ return array(
                 ),
                 'filter' => 'text',
                 'value' => 'link',
+            ),
+        ),
+    ),
+    'search' => array(
+        'name' => 'search',
+        'title' => _a('Search'),
+        'description' => _a('Ajax search block'),
+        'render' => array('block', 'search'),
+        'template' => 'search',
+        'config' => array(
+            'blockEffect' => array(
+                'title' => _a('Use block effects'),
+                'description' => _a('Use block effects or set custom effect on theme'),
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 1,
             ),
         ),
     ),

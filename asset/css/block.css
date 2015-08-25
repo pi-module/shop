@@ -1,3 +1,4 @@
+/* Category */
 .shop-block-category .thumbnail h3 {
     top: 60px;
     position: absolute;
@@ -15,4 +16,16 @@
 
 .shop-block-category .thumbnail h3 a:hover {
     text-decoration: none;
+}
+
+/* Search */
+.shopsearchresults {
+    display: none;
+    width: 100%;
+    z-index: 1000;
+}
+
+.shop-block-search .list-group-item img {
+    margin: 0 5px;
+    height: 40px;
 }
