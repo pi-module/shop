@@ -803,6 +803,11 @@ class Product extends AbstractApi
         $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
         $product['price_discount_view'] = Pi::api('api', 'shop')->viewPrice($product['price_discount']);
         $product['price_currency'] = empty($configSystem['number_currency']) ? 'USD' : $configSystem['number_currency'];
+        // Set has discount
+        $product['price_discount_has'] = 0;
+        if ($product['price_discount'] && ($product['price_discount'] > $product['price'])) {
+            $product['price_discount_has'] = 1;
+        }
         // Set stock
         switch ($product['stock_type']) {
             default:

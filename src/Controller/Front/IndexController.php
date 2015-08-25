@@ -314,11 +314,14 @@ class IndexController extends ActionController
                             'controller' => 'json',
                             'action' => 'filterIndex'
                         )));
+                        // Set filter list
+                        $filterList = Pi::api('attribute', 'shop')->filterList();
                         // Set view
                         $this->view()->setTemplate('product-angular');
                         $this->view()->assign('config', $config);
                         $this->view()->assign('categories', $categories);
                         $this->view()->assign('filterUrl', $filterUrl);
+                        $this->view()->assign('filterList', $filterList);
                         $this->view()->assign('productTitleH1', __('New products'));
                         $this->view()->assign('showIndexDesc', 1);
                         $this->view()->assign('isHomepage', 1);

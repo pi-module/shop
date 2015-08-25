@@ -112,8 +112,8 @@ return array(
             'block' => 1,
         ),
         array(
-            'label' => _a('Angular'),
-            'controller' => 'angular',
+            'label' => _a('Json output'),
+            'controller' => 'json',
             'permission' => 'public',
             'block' => 1,
         ),

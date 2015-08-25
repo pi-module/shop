@@ -102,6 +102,8 @@ class CategoryController extends IndexController
                     'action' => 'filterCategory',
                     'slug' => $category['slug']
                 )));
+                // Set filter list
+                $filterList = Pi::api('attribute', 'shop')->filterList();
                 // Set view
                 $this->view()->headTitle($category['seo_title']);
                 $this->view()->headDescription($category['seo_description'], 'set');
@@ -111,6 +113,7 @@ class CategoryController extends IndexController
                 $this->view()->assign('category', $category);
                 $this->view()->assign('categories', $categories);
                 $this->view()->assign('filterUrl', $filterUrl);
+                $this->view()->assign('filterList', $filterList);
                 break;
         }
     }
