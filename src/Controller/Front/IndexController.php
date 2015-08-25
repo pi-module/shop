@@ -277,56 +277,22 @@ class IndexController extends ActionController
         switch ($config['homepage_type']) {
             default:
             case 'list':
-                // Set layout type
-                switch ($config['view_type']) {
-                    /* default:
-                    case 'normal':
-                        // Get info from url
-                        $page = $this->params('page', 1);
-                        // Set product info
-                        $where = array('status' => 1);
-                        // Get product List
-                        $productList = $this->productList($where);
-                        // Set paginator info
-                        $template = array(
-                            'controller' => 'index',
-                            'action' => 'index',
-                        );
-                        // Get paginator
-                        $paginator = $this->productPaginator($template, $where);
-                        // Set view
-                        $this->view()->setTemplate('product-list');
-                        $this->view()->assign('config', $config);
-                        $this->view()->assign('categories', $categories);
-                        $this->view()->assign('page', $page);
-                        $this->view()->assign('paginator', $paginator);
-                        $this->view()->assign('productList', $productList);
-                        $this->view()->assign('productTitleH1', __('New products'));
-                        $this->view()->assign('showIndexDesc', 1);
-                        $this->view()->assign('isHomepage', 1);
-                        break; */
-
-                    default:
-                    case 'normal':
-                    case 'angular':
-                        // Set filter url
-                        $filterUrl = Pi::url($this->url('', array(
-                            'controller' => 'json',
-                            'action' => 'filterIndex'
-                        )));
-                        // Set filter list
-                        $filterList = Pi::api('attribute', 'shop')->filterList();
-                        // Set view
-                        $this->view()->setTemplate('product-angular');
-                        $this->view()->assign('config', $config);
-                        $this->view()->assign('categories', $categories);
-                        $this->view()->assign('filterUrl', $filterUrl);
-                        $this->view()->assign('filterList', $filterList);
-                        $this->view()->assign('productTitleH1', __('New products'));
-                        $this->view()->assign('showIndexDesc', 1);
-                        $this->view()->assign('isHomepage', 1);
-                        break;
-                }
+                // Set filter url
+                $filterUrl = Pi::url($this->url('', array(
+                    'controller' => 'json',
+                    'action' => 'filterIndex'
+                )));
+                // Set filter list
+                $filterList = Pi::api('attribute', 'shop')->filterList();
+                // Set view
+                $this->view()->setTemplate('product-angular');
+                $this->view()->assign('config', $config);
+                $this->view()->assign('categories', $categories);
+                $this->view()->assign('filterUrl', $filterUrl);
+                $this->view()->assign('filterList', $filterList);
+                $this->view()->assign('productTitleH1', __('New products'));
+                $this->view()->assign('showIndexDesc', 1);
+                $this->view()->assign('isHomepage', 1);
                 break;
 
             case 'brand':

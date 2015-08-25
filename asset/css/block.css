@@ -21,11 +21,27 @@
 /* Search */
 .shopsearchresults {
     display: none;
-    width: 100%;
-    z-index: 1000;
 }
 
-.shop-block-search .list-group-item img {
+.shop-block-search .dropdown-menu {
+    width: 90%;
+    margin: -50px 30px 0 30px;
+}
+
+.shop-block-search .dropdown-menu li {
+    text-align: right;
+    border-bottom: 1px solid #ddd ;
+}
+
+.shop-block-search .dropdown-menu li img {
     margin: 0 5px;
     height: 40px;
+}
+
+.shop-block-search .input-group-addon:last-child {
+    border-left: 1px solid #ccc;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
