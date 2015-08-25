@@ -596,6 +596,10 @@ class Product extends AbstractApi
         $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'html', 'html');
         // Set text_description
         $product['text_description'] = Pi::service('markup')->render($product['text_description'], 'html', 'html');
+        // Set body
+        $product['body'] = $product['text_summary'] . $product['text_description'];
+        unset($product['text_summary']);
+        unset($product['text_description']);
         // Set times
         $product['time_create_view'] = _date($product['time_create']);
         $product['time_update_view'] = _date($product['time_update']);
