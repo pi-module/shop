@@ -74,3 +74,11 @@
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
 }
+
+.categoryList .list-group-item {
+    background-color: #f0f0f0;
+}
+
+.categoryList .list-group-item-depth {
+    background-color: #fcfcfc;
+}

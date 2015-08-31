@@ -20,7 +20,7 @@ use Zend\Json\Json;
  * Pi::api('category', 'shop')->getCategory($parameter, $type = 'id');
  * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status);
  * Pi::api('category', 'shop')->findFromCategory($category);
- * Pi::api('category', 'shop')->categoryList($parent);
+ * Pi::api('category', 'shop')->categoryList($parent, $makeTree);
  * Pi::api('category', 'shop')->categoryCount();
  * Pi::api('category', 'shop')->canonizeCategory($category);
  * Pi::api('category', 'shop')->sitemap();
@@ -73,12 +73,12 @@ class Category extends AbstractApi
         return array_unique($list);
     }
 
-    public function categoryList($parent = null)
+    public function categoryList($parent = null, $makeTree = true)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         $return = array();
-        if (is_null($parent)) {
+        if (is_null($parent) || $makeTree) {
             $where = array('status' => 1);
         } else {
             $where = array('status' => 1, 'parent' => $parent);
@@ -93,12 +93,19 @@ class Category extends AbstractApi
                 'controller' => 'category',
                 'slug' => $return[$row->id]['slug'],
             )));
-            $return[$row->id]['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s',
-                    $config['image_path'],
-                    $return[$row->id]['path'],
-                    $return[$row->id]['image']
-                ));
+            if ($row->image) {
+                $return[$row->id]['thumbUrl'] = Pi::url(
+                    sprintf('upload/%s/thumb/%s/%s',
+                        $config['image_path'],
+                        $return[$row->id]['path'],
+                        $return[$row->id]['image']
+                    ));
+            }
+
+        }
+
+        if ($makeTree) {
+            $return = $this->makeTree($return);
         }
         return $return;
     }
@@ -187,5 +194,29 @@ class Category extends AbstractApi
                 Pi::api('sitemap', 'sitemap')->groupLink($loc, $row->status, $this->getModule(), 'category', $row->id);
             }
         }
+    }
+
+    public function makeTree($elements, $parentId = 0)
+    {
+        $branch = array();
+        // Set category list as tree
+        foreach ($elements as $element) {
+            if ($element['parent'] == $parentId) {
+                $depth = 0;
+                $branch[$element['id']] = $element;
+                $branch[$element['id']]['depth'] = $depth;
+                $children = $this->makeTree($elements, $element['id']);
+                if ($children) {
+                    $depth++;
+                    foreach ($children as $key => $value) {
+                        $branch[$key] = $value;
+                        $branch[$key]['depth'] = $depth;
+                    }
+                }
+                unset($elements[$element['id']]);
+                unset($depth);
+            }
+        }
+        return $branch;
     }
 }
