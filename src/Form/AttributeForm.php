@@ -21,7 +21,7 @@ class AttributeForm extends BaseForm
     {
         $this->options = $options;
         $this->module = Pi::service('module')->current();
-        $this->position = Pi::api('attribute', 'news')->attributePositionForm();
+        $this->position = Pi::api('attribute', 'shop')->attributePositionForm();
         parent::__construct($name);
     }
 
@@ -62,7 +62,7 @@ class AttributeForm extends BaseForm
             ),
             'attributes' => array(
                 'type' => 'text',
-                'description' => __('Set name for call anywhere'),
+                'description' => __('Set name for call anywhere, a-z 0-9 allowed'),
                 'required' => true,
             )
         ));
