@@ -73,7 +73,7 @@ class Category extends AbstractApi
         return array_unique($list);
     }
 
-    public function categoryList($parent = null, $makeTree = true)
+    public function categoryList($parent = null, $makeTree = false)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
