@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-08-16 11:42+0330\n"
+"POT-Creation-Date: 2015-09-01 19:26+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,12 +9,37 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _b\n"
-"X-Poedit-Basepath: ../../\n"
+"X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: template/block/basket.phtml:3 template/block/basket.phtml:4
+#: template/block/basket.phtml:8
+msgid "Basket"
+msgstr "سبد خرید"
+
+#: template/block/basket.phtml:18
+msgid "List of products on your basket"
+msgstr "فهرست محصولات در سبد خرید شما"
+
+#: template/block/basket.phtml:34
+msgid "Number"
+msgstr "تعداد"
+
+#: template/block/basket.phtml:35
+msgid "Total price"
+msgstr "قیمت مجموع"
+
+#: template/block/basket.phtml:41
+msgid "Your basket is empty"
+msgstr "سبد خرید شما خالی است"
+
+#: template/block/basket.phtml:46 template/block/basket.phtml:47
+msgid "Go to basket"
+msgstr "برو به سبد خرید"
 
 #: template/block/category.phtml:114 template/block/product-new.phtml:162
 #: template/block/product-random.phtml:162
@@ -32,6 +57,10 @@ msgstr "نمایش"
 msgid "More products"
 msgstr "محصولات بیشتر"
 
+#: template/block/search.phtml:40
+msgid "Search"
+msgstr "جستجو"
+
 #~ msgid "Out of stock"
 #~ msgstr "نا موجود"
 
@@ -40,9 +69,6 @@ msgstr "محصولات بیشتر"
 
 #~ msgid "New Product list"
 #~ msgstr "فهرست محصولات جدید"
-
-#~ msgid "Number"
-#~ msgstr "تعداد"
 
 #~ msgid "Show price"
 #~ msgstr "نمایش قیمت"
