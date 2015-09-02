@@ -2,7 +2,7 @@
     <div class="shop-block-product clearfix">
         <?php if ($block['list-type'] == 'horizontal') { ?>
             <?php foreach ($block['resources'] as $product) { ?>
-                <div class="col-sm-4 col-md-3 productBox h-product" itemscope itemtype="http://schema.org/Product">
+                <div class="col-sm-6 col-md-4 productBox h-product" itemscope itemtype="http://schema.org/Product">
                     <div class="thumbnail">
                         <?php if ($product['image']) { ?>
                             <a itemprop="url" class="u-photo" title="<?php echo $this->escape($product['title']); ?>"
