@@ -3,7 +3,7 @@
 $script = <<<'EOT'
 var app = angular.module('shop', ['angularUtils.directives.dirPagination']);
 app.controller('listdata',function($scope, $http){
-    $scope.products = []; //declare an empty array
+    $scope.products = [];
     $http.get("%s").success(function(response){
         $scope.products = response;
     });
@@ -19,11 +19,7 @@ $script = sprintf(
 );
 // Load header files
 $this->jQuery();
-$this->angular(array(
-    'angular-route.js',
-    'pi.js',
-    'i18n'
-));
+$this->angular();
 $this->js($this->assetModule('js/dirPagination.js'));
 $this->css($this->assetModule('css/front.css'));
 $this->footScript()->appendScript($script);
