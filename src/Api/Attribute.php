@@ -307,9 +307,6 @@ class Attribute extends AbstractApi
         return array_unique($field);
     }
 
-
-
-
     public function filterList($category = '')
     {
         // Set return
@@ -360,6 +357,5 @@ class Attribute extends AbstractApi
         }
 
         return $ret;
-
     }
 }
