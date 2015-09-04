@@ -5,11 +5,11 @@ var app = angular.module('shop', ['angularUtils.directives.dirPagination']);
 app.controller('listdata',function($scope, $http){
     $scope.products = []; //declare an empty array
     $http.get("%s").success(function(response){
-        $scope.products = response;  //ajax request to fetch data into $scope.data
+        $scope.products = response;
     });
     $scope.sort = function(keyname){
-        $scope.sortKey = keyname;   //set the sortKey to the param passed
-        //$scope.reverse = !$scope.reverse; //if true make it false and vice versa
+        $scope.sortKey = keyname;
+        //$scope.reverse = !$scope.reverse;
     }
 });
 EOT;
@@ -19,7 +19,11 @@ $script = sprintf(
 );
 // Load header files
 $this->jQuery();
-$this->angular();
+$this->angular(array(
+    'angular-route.js',
+    'pi.js',
+    'i18n'
+));
 $this->js($this->assetModule('js/dirPagination.js'));
 $this->css($this->assetModule('css/front.css'));
 $this->footScript()->appendScript($script);
