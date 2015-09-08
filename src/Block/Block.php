@@ -210,7 +210,7 @@ class Block
         // Set options
         $block = array();
         $block = array_merge($block, $options);
-        // Set basket link
+        // Set ajax search link
         $block['link'] = Pi::url(Pi::service('url')->assemble('shop', array(
             'module' => $module,
             'controller' => 'json',
