@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-08-16 11:40+0330\n"
+"POT-Creation-Date: 2015-09-08 12:43+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,11 +9,36 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _b\n"
-"X-Poedit-Basepath: ../../\n"
+"X-Poedit-Basepath: ../..\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: template/block/basket.phtml:3 template/block/basket.phtml:4
+#: template/block/basket.phtml:8
+msgid "Basket"
+msgstr ""
+
+#: template/block/basket.phtml:18
+msgid "List of products on your basket"
+msgstr ""
+
+#: template/block/basket.phtml:34
+msgid "Number"
+msgstr ""
+
+#: template/block/basket.phtml:35
+msgid "Total price"
+msgstr ""
+
+#: template/block/basket.phtml:41
+msgid "Your basket is empty"
+msgstr ""
+
+#: template/block/basket.phtml:46 template/block/basket.phtml:47
+msgid "Go to basket"
+msgstr ""
 
 #: template/block/category.phtml:114 template/block/product-new.phtml:162
 #: template/block/product-random.phtml:162
@@ -29,4 +54,8 @@ msgstr ""
 #: template/block/product-special.phtml:176
 #: template/block/product-tag.phtml:175 template/block/product-tag.phtml:176
 msgid "More products"
+msgstr ""
+
+#: template/block/search.phtml:40
+msgid "Search"
 msgstr ""

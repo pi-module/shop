@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-08-16 11:40+0330\n"
+"POT-Creation-Date: 2015-09-08 12:44+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,104 +9,108 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-Basepath: ../../\n"
+"X-Poedit-Basepath: ../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: src/Api/Attribute.php:60
+#: src/Api/Attribute.php:63
 msgid "Text"
 msgstr ""
 
-#: src/Api/Attribute.php:64
+#: src/Api/Attribute.php:67
 msgid "Link"
 msgstr ""
 
-#: src/Api/Attribute.php:68
+#: src/Api/Attribute.php:71
 msgid "Video"
 msgstr ""
 
-#: src/Api/Attribute.php:72
+#: src/Api/Attribute.php:75
 msgid "Audio"
 msgstr ""
 
-#: src/Api/Attribute.php:76
+#: src/Api/Attribute.php:79
 msgid "File"
 msgstr ""
 
-#: src/Api/Attribute.php:80
+#: src/Api/Attribute.php:83
 msgid "Currency"
 msgstr ""
 
-#: src/Api/Attribute.php:84
+#: src/Api/Attribute.php:87
 msgid "Date"
 msgstr ""
 
-#: src/Api/Attribute.php:88 template/front/checkout-cart.phtml:112
+#: src/Api/Attribute.php:91 template/front/checkout-cart.phtml:112
 msgid "Number"
 msgstr ""
 
-#: src/Api/Attribute.php:92
+#: src/Api/Attribute.php:95
 msgid "Select"
 msgstr ""
 
-#: src/Api/Attribute.php:96
+#: src/Api/Attribute.php:99
 msgid "Checkbox"
 msgstr ""
 
-#: src/Api/Attribute.php:253
+#: src/Api/Attribute.php:256
 msgid "Hidden"
 msgstr ""
 
 #: src/Api/Breadcrumbs.php:50 src/Api/Breadcrumbs.php:56
-#: src/Controller/Front/CategoryController.php:109
+#: src/Controller/Front/CategoryController.php:55
 #: template/front/category-list.phtml:4 template/front/category-side.phtml:4
 msgid "Category list"
 msgstr ""
 
-#: src/Api/Breadcrumbs.php:77
+#: src/Api/Breadcrumbs.php:76
 msgid "Cart"
 msgstr ""
 
-#: src/Api/Breadcrumbs.php:83 template/admin/attach-add.phtml:31
+#: src/Api/Breadcrumbs.php:82 template/admin/attach-add.phtml:31
 #: template/admin/attach-add.phtml:32
 msgid "Finish"
 msgstr ""
 
-#: src/Api/Breadcrumbs.php:109 src/Api/Breadcrumbs.php:120
+#: src/Api/Breadcrumbs.php:108 src/Api/Breadcrumbs.php:119
 #: template/front/tag-list.phtml:4
 msgid "Tag list"
 msgstr ""
 
-#: src/Api/Breadcrumbs.php:134 src/Controller/Front/IndexController.php:157
+#: src/Api/Breadcrumbs.php:133 src/Controller/Front/IndexController.php:214
 #: template/admin/product-related.phtml:36
 msgid "Search result"
 msgstr ""
 
-#: src/Api/Product.php:372 src/Api/Product.php:616
-#: src/Form/ProductForm.php:224 template/front/product-price.phtml:18
-#: template/front/product-price.phtml:48 template/front/product-price.phtml:84
+#: src/Api/Product.php:386 src/Api/Product.php:664 src/Api/Product.php:819
+#: src/Form/ProductForm.php:224 template/front/product-angular.phtml:154
+#: template/front/product-angular.phtml:170
+#: template/front/product-angular.phtml:193
+#: template/front/product-box.phtml:29 template/front/product-box.phtml:49
+#: template/front/product-box.phtml:75 template/front/product-price.phtml:15
+#: template/front/product-price.phtml:41 template/front/product-price.phtml:73
 msgid "In stock"
 msgstr ""
 
-#: src/Api/Product.php:376 src/Api/Product.php:620
-#: src/Form/ProductForm.php:225 template/front/product-box.phtml:32
-#: template/front/product-price.phtml:101
+#: src/Api/Product.php:390 src/Api/Product.php:668 src/Api/Product.php:823
+#: src/Form/ProductForm.php:225 template/front/product-angular.phtml:208
+#: template/front/product-box.phtml:89 template/front/product-price.phtml:89
 msgid "Out of stock"
 msgstr ""
 
-#: src/Api/Product.php:380 src/Api/Product.php:624
+#: src/Api/Product.php:394 src/Api/Product.php:672 src/Api/Product.php:827
 #: src/Form/ProductForm.php:226
 msgid "Coming soon"
 msgstr ""
 
-#: src/Api/Product.php:384 src/Api/Product.php:628
+#: src/Api/Product.php:398 src/Api/Product.php:676 src/Api/Product.php:831
 #: src/Form/ProductForm.php:227
 msgid "Contact"
 msgstr ""
 
-#: src/Api/Product.php:388 src/Api/Product.php:632
+#: src/Api/Product.php:402 src/Api/Product.php:680 src/Api/Product.php:835
 #: src/Form/ProductForm.php:228
 msgid "Variable stock"
 msgstr ""
@@ -151,24 +155,24 @@ msgstr ""
 msgid "Please select file"
 msgstr ""
 
-#: src/Controller/Admin/AttributeController.php:57
+#: src/Controller/Admin/AttributeController.php:53
 msgid "Attribute field type not set."
 msgstr ""
 
-#: src/Controller/Admin/AttributeController.php:114
+#: src/Controller/Admin/AttributeController.php:110
 msgid "Attribute field data saved successfully."
 msgstr ""
 
-#: src/Controller/Admin/AttributeController.php:126
+#: src/Controller/Admin/AttributeController.php:122
 #, php-format
 msgid "Add attribute - type : %s"
 msgstr ""
 
-#: src/Controller/Admin/AttributeController.php:158
+#: src/Controller/Admin/AttributeController.php:154
 msgid "Selected field delete"
 msgstr ""
 
-#: src/Controller/Admin/AttributeController.php:160
+#: src/Controller/Admin/AttributeController.php:156
 msgid "Please select field"
 msgstr ""
 
@@ -244,7 +248,7 @@ msgstr ""
 #: src/Controller/Admin/ProductController.php:486
 #: src/Controller/Admin/ProductController.php:544
 #: src/Controller/Admin/ProductController.php:653
-#: src/Controller/Front/CartController.php:119
+#: src/Controller/Front/CartController.php:117
 msgid "Please select product"
 msgstr ""
 
@@ -334,7 +338,7 @@ msgstr ""
 
 #: src/Controller/Front/CartController.php:29
 #: src/Controller/Front/CartController.php:57
-#: src/Controller/Front/CartController.php:203
+#: src/Controller/Front/CartController.php:201
 msgid "So sorry, At this moment order is inactive"
 msgstr ""
 
@@ -342,84 +346,92 @@ msgstr ""
 msgid "Your cart are empty."
 msgstr ""
 
-#: src/Controller/Front/CartController.php:73
+#: src/Controller/Front/CartController.php:72
 msgid "The product was not marketable."
 msgstr ""
 
-#: src/Controller/Front/CartController.php:104
+#: src/Controller/Front/CartController.php:102
 msgid "Your cart are empty"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:128
+#: src/Controller/Front/CartController.php:126
 msgid "Selected product removed from your cart"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:213
+#: src/Controller/Front/CartController.php:211
 msgid "Order not set."
 msgstr ""
 
-#: src/Controller/Front/CartController.php:218
+#: src/Controller/Front/CartController.php:216
 msgid "It not your order."
 msgstr ""
 
-#: src/Controller/Front/CartController.php:223
+#: src/Controller/Front/CartController.php:221
 msgid "This order not pay"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:229
+#: src/Controller/Front/CartController.php:227
 msgid "This is old order and you pay it before"
 msgstr ""
 
-#: src/Controller/Front/CategoryController.php:35
+#: src/Controller/Front/CategoryController.php:84
+#: src/Controller/Front/CategoryController.php:154
+#: src/Controller/Front/JsonController.php:199
 msgid "The category not found."
 msgstr ""
 
-#: src/Controller/Front/IndexController.php:155
+#: src/Controller/Front/IndexController.php:78
+msgid "Search again"
+msgstr ""
+
+#: src/Controller/Front/IndexController.php:212
 #, php-format
 msgid "Search result of %s"
 msgstr ""
 
-#: src/Controller/Front/IndexController.php:196
+#: src/Controller/Front/IndexController.php:253
+#: src/Controller/Front/IndexController.php:307
 #: src/Controller/Front/ProductController.php:61
 msgid "New products"
 msgstr ""
 
-#: src/Controller/Front/IndexController.php:199
+#: src/Controller/Front/IndexController.php:256
+#: src/Controller/Front/IndexController.php:314
 #: template/front/checkout-finish.phtml:17
 #: template/front/checkout-finish.phtml:18
 msgid "Shop index"
 msgstr ""
 
-#: src/Controller/Front/IndexController.php:255
-msgid "Search again"
+#: src/Controller/Front/JsonController.php:142
+msgid "Your question send to admin"
 msgstr ""
 
-#: src/Controller/Front/JsonController.php:145
-msgid "Your question send to admin"
+#: src/Controller/Front/JsonController.php:253
+msgid "The keyword not found."
 msgstr ""
 
 #: src/Controller/Front/ProductController.php:35
 msgid "The product not found."
 msgstr ""
 
-#: src/Controller/Front/TagController.php:29
+#: src/Controller/Front/TagController.php:30
 msgid "Tag module not installed."
 msgstr ""
 
-#: src/Controller/Front/TagController.php:38
+#: src/Controller/Front/TagController.php:39
 msgid "The tag not set."
 msgstr ""
 
-#: src/Controller/Front/TagController.php:51
+#: src/Controller/Front/TagController.php:52
 msgid "The tag not found."
 msgstr ""
 
-#: src/Controller/Front/TagController.php:71
+#: src/Controller/Front/TagController.php:81
 #, php-format
 msgid "All products by %s tag"
 msgstr ""
 
-#: src/Controller/Front/TagController.php:112
+#: src/Controller/Front/TagController.php:123
 msgid "List of all used tags on shop"
 msgstr ""
 
@@ -437,10 +449,12 @@ msgstr ""
 #: template/admin/product-related.phtml:18
 #: template/admin/product-related.phtml:40
 #: template/admin/property-index.phtml:13
+#: template/front/product-angular.phtml:58
 msgid "Title"
 msgstr ""
 
 #: src/Form/AdminSearchForm.php:52 src/Form/AttributeForm.php:186
+#: template/front/product-angular.phtml:54
 msgid "Search"
 msgstr ""
 
@@ -467,34 +481,34 @@ msgstr ""
 
 #: src/Form/AttachForm.php:93 src/Form/AttributeForm.php:197
 #: src/Form/CategoryForm.php:217 src/Form/DiscountForm.php:102
-#: src/Form/PositionForm.php:88 src/Form/ProductAdditionalForm.php:224
+#: src/Form/PositionForm.php:88 src/Form/ProductAdditionalForm.php:240
 #: src/Form/ProductForm.php:372 src/Form/PropertyForm.php:122
 #: src/Form/RelatedForm.php:77 src/Form/SearchForm.php:179
 #: src/Form/SitemapForm.php:48 src/Form/SpecialForm.php:83
-#: template/front/product-question.phtml:46
+#: template/front/product-question.phtml:44
 msgid "Submit"
 msgstr ""
 
-#: src/Form/AttributeForm.php:61 src/Form/ProductAdditionalForm.php:85
-#: src/Form/ProductAdditionalForm.php:109
-#: src/Form/ProductAdditionalForm.php:129
-#: src/Form/ProductAdditionalForm.php:148
+#: src/Form/AttributeForm.php:61 src/Form/ProductAdditionalForm.php:86
+#: src/Form/ProductAdditionalForm.php:114
+#: src/Form/ProductAdditionalForm.php:138
+#: src/Form/ProductAdditionalForm.php:161
 #: template/admin/product-update.phtml:12
 #: template/admin/product-update.phtml:14
 #: template/admin/product-update.phtml:16
 #: template/admin/product-update.phtml:18
-#: template/front/product-question.phtml:24
-#: template/front/product-question.phtml:28
+#: template/front/product-question.phtml:22
+#: template/front/product-question.phtml:26
 msgid "Name"
 msgstr ""
 
 #: src/Form/AttributeForm.php:65
-msgid "Set name for call anywhere"
+msgid "Set name for call anywhere, a-z 0-9 allowed"
 msgstr ""
 
 #: src/Form/AttributeForm.php:74 src/Form/ProductForm.php:127
 #: src/Form/RelatedForm.php:68 src/Form/SearchForm.php:120
-#: template/front/category.phtml:31
+#: template/front/category.phtml:32
 msgid "Category"
 msgstr ""
 
@@ -651,26 +665,31 @@ msgstr ""
 msgid "Add %s"
 msgstr ""
 
-#: src/Form/ProductAdditionalForm.php:89
-#: src/Form/ProductAdditionalForm.php:113 src/Form/ProductForm.php:201
+#: src/Form/ProductAdditionalForm.php:90
+#: src/Form/ProductAdditionalForm.php:118 src/Form/ProductForm.php:201
 #: template/admin/product-update.phtml:12
 #: template/admin/product-update.phtml:14
 msgid "Stock"
 msgstr ""
 
-#: src/Form/ProductAdditionalForm.php:93
-#: src/Form/ProductAdditionalForm.php:133 src/Form/ProductForm.php:247
+#: src/Form/ProductAdditionalForm.php:94
+#: src/Form/ProductAdditionalForm.php:142 src/Form/ProductForm.php:247
 #: template/admin/product-index.phtml:53
 #: template/admin/product-update.phtml:12
 #: template/admin/product-update.phtml:16
 #: template/front/checkout-cart.phtml:100 template/front/installment.phtml:20
-#: template/front/product-price.phtml:20 template/front/product-price.phtml:50
-#: template/front/product-price.phtml:86
-#: template/front/product-price.phtml:111
+#: template/front/product-angular.phtml:156
+#: template/front/product-angular.phtml:172
+#: template/front/product-angular.phtml:195
+#: template/front/product-angular.phtml:213
+#: template/front/product-box.phtml:31 template/front/product-box.phtml:51
+#: template/front/product-box.phtml:77 template/front/product-box.phtml:94
+#: template/front/product-price.phtml:17 template/front/product-price.phtml:43
+#: template/front/product-price.phtml:75 template/front/product-price.phtml:98
 msgid "Price"
 msgstr ""
 
-#: src/Form/ProductAdditionalForm.php:165
+#: src/Form/ProductAdditionalForm.php:181
 #, php-format
 msgid "%s list"
 msgstr ""
@@ -1289,26 +1308,47 @@ msgstr ""
 msgid "Add to cart"
 msgstr ""
 
-#: template/front/product-price.phtml:17 template/front/product-price.phtml:47
-#: template/front/product-price.phtml:64 template/front/product-price.phtml:83
-#: template/front/product-price.phtml:100
+#: template/front/product-angular.phtml:62
+#: template/front/product-angular.phtml:65
+msgid "Marketable"
+msgstr ""
+
+#: template/front/product-angular.phtml:64
+#: template/front/product-angular.phtml:82
+msgid "All"
+msgstr ""
+
+#: template/front/product-angular.phtml:66
+msgid "Not marketable"
+msgstr ""
+
+#: template/front/product-angular.phtml:153
+#: template/front/product-angular.phtml:169
+#: template/front/product-angular.phtml:184
+#: template/front/product-angular.phtml:192
+#: template/front/product-angular.phtml:207
+#: template/front/product-box.phtml:28 template/front/product-box.phtml:48
+#: template/front/product-box.phtml:62 template/front/product-box.phtml:74
+#: template/front/product-box.phtml:88 template/front/product-price.phtml:14
+#: template/front/product-price.phtml:40 template/front/product-price.phtml:56
+#: template/front/product-price.phtml:72 template/front/product-price.phtml:88
 msgid "Stock status"
 msgstr ""
 
-#: template/front/product-question.phtml:5
+#: template/front/product-question.phtml:4
 msgid "Ask question"
 msgstr ""
 
-#: template/front/product-question.phtml:17
+#: template/front/product-question.phtml:15
 msgid "Ask question about product"
 msgstr ""
 
-#: template/front/product-question.phtml:31
-#: template/front/product-question.phtml:35
+#: template/front/product-question.phtml:29
+#: template/front/product-question.phtml:33
 msgid "Email"
 msgstr ""
 
-#: template/front/product-question.phtml:38
+#: template/front/product-question.phtml:36
 msgid "Question"
 msgstr ""
 
