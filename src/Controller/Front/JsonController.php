@@ -271,7 +271,7 @@ class JsonController extends IndexController
                 'image' =>  $product['thumbUrl'],
             );
         }
-        // Get list of product
+        // Get list of categories
         $select = $this->getModel('category')->select()->where($where)->order($order)->limit(5);
         $rowset = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
