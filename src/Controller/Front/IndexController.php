@@ -24,7 +24,64 @@ use Zend\Db\Sql\Predicate\Expression;
 
 class IndexController extends ActionController
 {
-    /* public function indexAction()
+    public function indexAction()
+    {
+        // Get info from url
+        $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+
+        if (isset($config['view_type']) && $config['view_type'] == 'ajax') {
+            $this->ajaxView();
+        } else {
+            $this->normalView();
+        }
+    }
+
+    public function filterAction()
+    {
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $data = $data->toArray();
+            // Set search session
+            $search = array();
+            // Set title
+            if (isset($data['title']) && !empty($data['title'])) {
+                $search['title'] = $data['title'];
+            }
+            // Set price_from
+            if (isset($data['price_from']) && intval($data['price_from']) > 0) {
+                $search['price_from'] = intval($data['price_from']);
+            }
+            // Set price_to
+            if (isset($data['price_to']) && intval($data['price_to']) > 0) {
+                $search['price_to'] = intval($data['price_to']);
+            }
+            // Set category
+            if (isset($data['category']) && intval($data['category']) > 0) {
+                $search['category'] = intval($data['category']);
+            }
+            // Set attribute
+            $attributeSearch = Pi::api('attribute', 'shop')->SearchForm($data);
+            foreach ($attributeSearch as $attribute) {
+                $search[$attribute['field']] = $attribute['data'];
+            }
+            // Make url
+            $url = $this->url('shop', array(
+                'controller' => 'index',
+                'action' => 'index',
+                'q' => '?' . http_build_query($search),
+            ));
+            // jump
+            return $this->jump($url);
+        } else {
+            $message = __('Search again');
+            $url = array('action' => 'index');
+            $this->jump($url, $message, 'error');
+        }
+    }
+
+    public function normalView()
     {
         // Get info from url
         $module = $this->params('module');
@@ -214,52 +271,9 @@ class IndexController extends ActionController
         $this->view()->assign('config', $config);
         $this->view()->assign('form', $form);
         $this->view()->assign('isHomepage', 1);
-    } */
+    }
 
-    /* public function filterAction()
-    {
-        if ($this->request->isPost()) {
-            $data = $this->request->getPost();
-            $data = $data->toArray();
-            // Set search session
-            $search = array();
-            // Set title
-            if (isset($data['title']) && !empty($data['title'])) {
-                $search['title'] = $data['title'];
-            }
-            // Set price_from
-            if (isset($data['price_from']) && intval($data['price_from']) > 0) {
-                $search['price_from'] = intval($data['price_from']);
-            }
-            // Set price_to
-            if (isset($data['price_to']) && intval($data['price_to']) > 0) {
-                $search['price_to'] = intval($data['price_to']);
-            }
-            // Set category
-            if (isset($data['category']) && intval($data['category']) > 0) {
-                $search['category'] = intval($data['category']);
-            }
-            // Set attribute
-            $attributeSearch = Pi::api('attribute', 'shop')->SearchForm($data);
-            foreach ($attributeSearch as $attribute) {
-                $search[$attribute['field']] = $attribute['data'];
-            }
-            // Make url
-            $url = $this->url('shop', array(
-                'controller' => 'index',
-                'action' => 'index',
-                'q' => '?' . http_build_query($search),
-            ));
-            // jump
-            return $this->jump($url);
-        } else {
-            $message = __('Search again');
-            $url = array('action' => 'index');
-            $this->jump($url, $message, 'error');
-        }
-    } */
-
-    public function indexAction()
+    public function ajaxView()
     {
         // Get info from url
         $module = $this->params('module');

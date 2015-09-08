@@ -91,6 +91,22 @@ return array(
             'edit' => 'text',
             'filter' => 'string',
         ),
+        'view_type' => array(
+            'title' => _a('View type'),
+            'description' => _a('Item list view type'),
+            'edit' => array(
+                'type' => 'select',
+                'options' => array(
+                    'options' => array(
+                        'normal' => _a('Normal'),
+                        'ajax' => _a('Ajax'),
+                    ),
+                ),
+            ),
+            'filter' => 'text',
+            'value' => 'normal',
+            'category' => 'view',
+        ),
         'view_perpage' => array(
             'category' => 'view',
             'title' => _a('Perpage'),
