@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2015-09-08 12:44+0430\n"
+"POT-Creation-Date: 2015-09-08 14:23+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -408,6 +408,16 @@ msgstr ""
 
 #: src/Controller/Front/JsonController.php:253
 msgid "The keyword not found."
+msgstr ""
+
+#: src/Controller/Front/JsonController.php:266
+#, php-format
+msgid "Products related to %s"
+msgstr ""
+
+#: src/Controller/Front/JsonController.php:285
+#, php-format
+msgid "Categories related to %s"
 msgstr ""
 
 #: src/Controller/Front/ProductController.php:35
