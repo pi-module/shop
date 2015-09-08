@@ -11,7 +11,7 @@ if ($block['blockEffect']) {
                     $('.shopsearchresults').html('');
                     var results = jQuery.parseJSON(data);
                     $(results).each(function (key, value) {
-                        $('.shopsearchresults').append('<li><a title="' + value.title + '" href="' + value.url + '"><img src="' + value.image + '" alt="' + value.title + '">' + value.title + '</a></li>');
+                        $('.shopsearchresults').append('<li' + value.class + '><a title="' + value.title + '" href="' + value.url + '"><img src="' + value.image + '" alt="' + value.title + '">' + value.title + '</a></li>');
                     })
                 });
         } else {

@@ -260,26 +260,42 @@ class JsonController extends IndexController
         $where = array('status' => 1);
         $where['title LIKE ?'] = '%' . $keyword . '%';
         $order = array('time_create DESC', 'id DESC');
+        // Item list header
+        $list[] = array(
+            'class' => ' class="dropdown-header"',
+            'title' => sprintf(__('Products related to %s'), $keyword),
+            'url' => '#',
+            'image' => Pi::service('asset')->logo(),
+        );
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)->order($order)->limit(10);
         $rowset = $this->getModel('product')->selectWith($select);
         foreach ($rowset as $row) {
             $product = Pi::api('product', 'shop')->canonizeProductLight($row);
             $list[] = array(
+                'class' => '',
                 'title' => $product['title'],
                 'url' => $product['productUrl'],
                 'image' =>  $product['thumbUrl'],
             );
         }
+        // Location list header
+        $list[] = array(
+            'class' => ' class="dropdown-header"',
+            'title' => sprintf(__('Categories related to %s'), $keyword),
+            'url' => '#',
+            'image' => Pi::service('asset')->logo(),
+        );
         // Get list of categories
         $select = $this->getModel('category')->select()->where($where)->order($order)->limit(5);
         $rowset = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
             $category = Pi::api('category', 'shop')->canonizeCategory($row);
             $list[] = array(
+                'class' => '',
                 'title' => $category['title'],
                 'url' => $category['categoryUrl'],
-                'image' =>  $category['thumbUrl'],
+                'image' => isset($category['thumbUrl']) ? $category['thumbUrl'] : Pi::service('asset')->logo(),
             );
         }
         // Set view

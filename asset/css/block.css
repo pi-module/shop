@@ -45,3 +45,12 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
+
+.shop-block-search .dropdown-menu .dropdown-header {
+    background-color: #cccccc;
+    padding: 3px 0;
+}
+
+.shop-block-search .dropdown-menu .dropdown-header a:hover {
+    background-color: #cccccc;
+}
