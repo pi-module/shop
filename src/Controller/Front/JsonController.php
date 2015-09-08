@@ -275,11 +275,11 @@ class JsonController extends IndexController
         $select = $this->getModel('category')->select()->where($where)->order($order)->limit(5);
         $rowset = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
-            $product = Pi::api('category', 'shop')->canonizeCategory($row);
+            $category = Pi::api('category', 'shop')->canonizeCategory($row);
             $list[] = array(
-                'title' => $product['title'],
-                'url' => $product['categoryUrl'],
-                'image' =>  $product['thumbUrl'],
+                'title' => $category['title'],
+                'url' => $category['categoryUrl'],
+                'image' =>  $category['thumbUrl'],
             );
         }
         // Set view
