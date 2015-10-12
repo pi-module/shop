@@ -17,8 +17,8 @@ use Pi;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-//use Module\Shop\Form\SearchForm;
-//use Module\Shop\Form\SearchFilter;
+use Module\Shop\Form\SearchForm;
+use Module\Shop\Form\SearchFilter;
 use Zend\Json\Json;
 use Zend\Db\Sql\Predicate\Expression;
 
