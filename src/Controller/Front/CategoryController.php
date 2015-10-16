@@ -156,7 +156,7 @@ class CategoryController extends IndexController
             return;
         }
         // category list
-        $categories = Pi::api('category', 'shop')->categoryList($category['id']);
+        $categories = Pi::api('category', 'shop')->categoryList(null, true);
         // Set filter url
         $filterUrl = Pi::url($this->url('', array(
             'controller' => 'json',
