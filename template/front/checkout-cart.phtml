@@ -51,10 +51,10 @@ $script = <<<'EOT'
             var url = "%s";
             $.getJSON(url).done(function(result){
                 if (result.status == 1) {
-                    $('#cart-total-price').html(result.data.price);
-                    $('#cart-total-discount').html(result.data.discount);
-                    $('#cart-total-number').html(result.data.number);
-                    $('#cart-total-total').html(result.data.total);
+                    $('#cart-total-price').html(result.price);
+                    $('#cart-total-discount').html(result.discount);
+                    $('#cart-total-number').html(result.number);
+                    $('#cart-total-total').html(result.total);
                 }
             });
         },
@@ -75,62 +75,47 @@ $this->footScript()->appendScript($script);
             <div id="cart-list" class="col-md-8 cartProduct">
                 <div class="panel panel-default">
                     <div class="panel-heading"><?php _e('List of prodcuts on cart'); ?></div>
-                    <table class="table">
-                        <thead></thead>
-                        <?php foreach ($basket['products'] as $product) { ?>
-                            <tr data-id="<?php echo $product['id']; ?>"
-                                id="cart-product-<?php echo $this->escape($product['id']); ?>">
-                                <td class="col-md-4 cartProductTitle">
-                                    <h4 class="media-heading">
-                                        <a title="<?php echo $this->escape($product['title']); ?>"
-                                           href="<?php echo $this->escape($product['productUrl']); ?>"
-                                           target="_blank"><?php echo $this->escape($product['title']); ?>
-                                        </a>
-                                    </h4>
-                                    <?php if (!empty($product['image'])) { ?>
-                                        <a title="<?php echo $this->escape($product['title']); ?>"
-                                           href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank">
-                                            <img src="<?php echo $product['thumbUrl']; ?>"
-                                                 alt="<?php echo $this->escape($product['title']); ?>"
-                                                 class="media-object"/>
-                                        </a>
-                                    <?php } ?>
-                                </td>
-                                <td class="col-md-8 cartProductInfo">
-                                    <p><strong><?php _e('Price'); ?></strong> : <span
-                                            class="cart-product-price"><?php echo $this->escape($product['price_view']); ?></span>
-                                    </p>
+                    <?php foreach ($basket['products'] as $product) { ?>
+                        <div data-id="<?php echo $product['id']; ?>" id="cart-product-<?php echo $this->escape($product['id']); ?>" class="clearfix">
+                            <div class="col-md-4 cartProductTitle">
+                                <?php if (!empty($product['image'])) { ?>
+                                    <a title="<?php echo $this->escape($product['title']); ?>"
+                                       href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank">
+                                        <img src="<?php echo $product['thumbUrl']; ?>"
+                                             alt="<?php echo $this->escape($product['title']); ?>"
+                                             class="media-object"/>
+                                    </a>
+                                <?php } ?>
+                                <h4 class="media-heading">
+                                    <a title="<?php echo $this->escape($product['title']); ?>"
+                                       href="<?php echo $this->escape($product['productUrl']); ?>"
+                                       target="_blank"><?php echo $this->escape($product['title']); ?>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="col-md-8 cartProductInfo">
+                                <ul class="list-unstyled">
+                                    <li><strong><?php _e('Price'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['price_view']); ?></span></li>
                                     <?php if (!empty($product['property'])) { ?>
                                         <?php foreach ($product['property'] as $property) { ?>
-                                            <p><strong><?php echo $this->escape($property['title']); ?></strong> : <span
-                                                    class="cart-product-price"><?php echo $this->escape($property['value']); ?></span>
-                                            </p>
+                                            <li><strong><?php echo $this->escape($property['title']); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($property['value']); ?></span></li>
                                         <?php } ?>
                                     <?php } ?>
-                                    <!-- <p><strong><?php _e('Discount'); ?></strong> : <span class="cart-product-discount">0</span></p> -->
-                                    <!-- <p>
-                                    <strong><?php _e('Number'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-number"><?php echo $this->escape($product['number']); ?> </span>
-                                    <span>
-                                        <button id="button-numberplus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-default btn-sm js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => 1))); ?>"><i class="fa fa-plus"></i></button>
-                                        <button id="button-numberminus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-default btn-sm js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => -1))); ?>"><i class="fa fa-minus"></i></button>
-                                    </span>
-                                </p> -->
-                                    <p><strong><?php _e('Total'); ?></strong> : <span
-                                            id="cart-product-<?php echo $this->escape($product['id']); ?>-total"
-                                            class="label label-success"><?php echo $this->escape($product['total_view']); ?></span>
-                                    </p>
-
-                                    <p>
-                                        <button id="button-remove-<?php echo $this->escape($product['id']); ?>"
-                                                type="button" class="btn btn-danger btn-xs js-remove"
-                                                data-toggle="button"
-                                                data-remove-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'remove', 'product' => $product['id']))); ?>">
-                                            <i class="fa fa-ok fa fa-white"></i> <?php _e('Remove'); ?></button>
-                                    </p>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </table>
+                                    <!-- <li><strong><?php _e('Discount'); ?></strong> : <span class="cart-product-discount">0</span></li> -->
+                                    <li>
+                                        <ul class="list-inline">
+                                            <li><strong><?php _e('Number'); ?></strong> : </li>
+                                            <li><button id="button-numberplus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-default btn-sm js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => 1))); ?>"><i class="fa fa-plus"></i></button></li>
+                                            <li id="cart-product-<?php echo $this->escape($product['id']); ?>-number"><?php echo $this->escape($product['number']); ?></li>
+                                            <li><button id="button-numberminus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-default btn-sm js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => -1))); ?>"><i class="fa fa-minus"></i></button></li>
+                                        </ul>
+                                    </li>
+                                    <li><strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total" class="label label-success"><?php echo $this->escape($product['total_view']); ?></span></li>
+                                    <li><button id="button-remove-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-danger btn-xs js-remove" data-toggle="button" data-remove-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'remove', 'product' => $product['id']))); ?>"><i class="fa fa-ok fa fa-white"></i> <?php _e('Remove'); ?></button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    <?php } ?>
                     <div class="panel-footer clearfix">
                         <div class="pull-left">
                             <a class="btn btn-primary btn-xs" title="<?php _e('Back to Shoping'); ?>"
@@ -146,25 +131,13 @@ $this->footScript()->appendScript($script);
                     <div class="panel panel-default">
                         <div class="panel-heading"><?php _e('Pre Invoice'); ?></div>
                         <div class="panel-body">
-                            <p><strong><?php _e('Total Price'); ?></strong> : <span
-                                    id="cart-total-price"><?php echo $this->escape($basket['total']['price_view']); ?></span>
-                            </p>
-
-                            <p><strong><?php _e('Total Discount'); ?></strong> : <span
-                                    id="cart-total-discount"><?php echo $this->escape($basket['total']['discount_view']); ?></span>
-                            </p>
-
-                            <p><strong><?php _e('Total Number'); ?></strong> : <span
-                                    id="cart-total-number"><?php echo $this->escape($basket['total']['number_view']); ?></span>
-                            </p>
-
-                            <p><strong><?php _e('Total Shipping'); ?></strong> : <span
-                                    id="cart-total-shipping"><?php echo $this->escape($basket['total']['shipping_view']); ?></span>
-                            </p>
-
-                            <p><strong><?php _e('Final Price'); ?></strong> : <span id="cart-total-total"
-                                                                                    class="label label-success"><?php echo $this->escape($basket['total']['total_price_view']); ?></span>
-                            </p>
+                            <ul class="list-unstyled">
+                                <li><strong><?php _e('Total Price'); ?></strong> : <span id="cart-total-price"><?php echo $this->escape($basket['total']['price_view']); ?></span></li>
+                                <li><strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php echo $this->escape($basket['total']['discount_view']); ?></span></li>
+                                <li><strong><?php _e('Total Number'); ?></strong> : <span id="cart-total-number"><?php echo $this->escape($basket['total']['number_view']); ?></span></li>
+                                <li><strong><?php _e('Total Shipping'); ?></strong> : <span id="cart-total-shipping"><?php echo $this->escape($basket['total']['shipping_view']); ?></span></li>
+                                <li><strong><?php _e('Final Price'); ?></strong> : <span id="cart-total-total" class="label label-success"><?php echo $this->escape($basket['total']['total_price_view']); ?></span></li>
+                            </ul>
                         </div>
                     </div>
                     <div class="clearfix text-center">

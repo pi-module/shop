@@ -90,6 +90,22 @@ class CartController extends ActionController
         }
     }
 
+    public function updateAction()
+    {
+        // Check user is login or not
+        Pi::service('authentication')->requireLogin();
+        // Get basket
+        $basket = Pi::api('basket', 'shop')->getBasket();
+
+        return array(
+            'status' => 1,
+            'price' => $basket['total']['price_view'],
+            'discount' => $basket['total']['discount_view'],
+            'number' => $basket['total']['number_view'],
+            'total' => $basket['total']['total_price_view'],
+        );
+    }
+
     public function emptyAction()
     {
         // Check user is login or not
@@ -128,20 +144,21 @@ class CartController extends ActionController
                 $return['actionStatus'] = 1;
                 break;
 
-            /* case 'number':
-                $number = $cart['product'][$product]['number'];
+            case 'number':
+                $number = $basket['products'][$product]['number'];
                 if ($number > 0) {
                     $getNumber = $this->params('number');
                     $newNumber = $number + $getNumber;
                     if ($newNumber > 0) {
-                        $newTotal = $newNumber * $cart['product'][$product]['price'];
-                        $cart['product'][$product]['number'] = $newNumber;
-                        $cart['product'][$product]['total'] = $newTotal;
+                        // Update number
+                        $newTotal = $newNumber * $basket['products'][$product]['price'];
+                        Pi::api('basket', 'shop')->updateBasket($product, $newNumber);
+                        // Set return
                         $return['message'] = __('Update number');
                         $return['actionNumber'] = $newNumber;
                         $return['ajaxStatus'] = 1;
                         $return['actionStatus'] = 1;
-                        $return['actionTotal'] = $newTotal;
+                        $return['actionTotal'] = Pi::api('api', 'shop')->viewPrice($newTotal);
                     } else {
                         $return['message'] = __('You can not set product number to 0');
                         $return['ajaxStatus'] = 1;
@@ -149,7 +166,6 @@ class CartController extends ActionController
                     }
                 }
                 break;
-            */
         }
         // return
         return $return;

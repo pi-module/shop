@@ -82,3 +82,8 @@
 .categoryList .list-group-item-depth {
     background-color: #fcfcfc;
 }
+
+#shop-cart-page .list-unstyled li {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}

@@ -20,6 +20,7 @@ use Zend\Json\Json;
 /*
  * Pi::api('basket', 'shop')->setBasket($id, $number, $properties);
  * Pi::api('basket', 'shop')->getBasket();
+ * Pi::api('basket', 'shop')->updateBasket($id, $number);
  * Pi::api('basket', 'shop')->emptyBasket();
  * Pi::api('basket', 'shop')->removeProduct($id);
  * Pi::api('basket', 'shop')->basketBlockNumber();
@@ -86,47 +87,25 @@ class Basket extends AbstractApi
         if (empty($basket)) {
             return '';
         }
-        // to array
-        $basket = $basket->toArray();
-        // Set data
-        $basket['data'] = json::decode($basket['data'], true);
-        // Set total empty
-        $total = array(
-            'price' => 0,
-            'discount' => 0,
-            'number' => 0,
-            'shipping' => 0,
-            'total_price' => 0,
-        );
-        // Set products
-        $basket['products'] = array();
-        foreach ($basket['data']['product'] as $product) {
-            $productInfo = Pi::api('product', 'shop')->getProductLight($product['id']);
-            $productInfo['number'] = $product['number'];
-            $productInfo['property'] = $product['property'];
-            $productInfo['total'] = $productInfo['price'] * $product['number'];
-            $productInfo['total_view'] = Pi::api('api', 'shop')->viewPrice($productInfo['total']);
-            $basket['products'][$product['id']] = $productInfo;
-            // Set total
-            $total['price'] = $total['price'] + $productInfo['price'];
-            $total['number'] = $total['number'] + $product['number'];
-            $total['total_price'] = $total['total_price'] + $productInfo['total'];
+        return $this->canonizeBasket($basket);
+    }
+
+    public function updateBasket($id, $number)
+    {
+        // Get uid
+        $uid = Pi::user()->getId();
+        // find backet
+        $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
+        // Check basket
+        if (empty($basket)) {
+            return '';
         }
-        // Set total
-        $basket['total'] = array(
-            'price' => $total['price'],
-            'price_view' => Pi::api('api', 'shop')->viewPrice($total['price']),
-            'discount' => $total['discount'],
-            'discount_view' => Pi::api('api', 'shop')->viewPrice($total['discount']),
-            'number' => $total['number'],
-            'number_view' => _number($total['number']),
-            'shipping' => $total['shipping'],
-            'shipping_view' => Pi::api('api', 'shop')->viewPrice($total['shipping']),
-            'total_price' => $total['total_price'],
-            'total_price_view' => Pi::api('api', 'shop')->viewPrice($total['total_price']),
-        );
-        // return
-        return $basket;
+        // Update data
+        $data = json::decode($basket->data, true);
+        $data['product'][$id]['number'] = $number;
+        $basket->data = json::encode($data);
+        // Save
+        $basket->save();
     }
 
     public function emptyBasket()
@@ -207,5 +186,50 @@ class Basket extends AbstractApi
             'list' => $list,
             'number' => $number
         );
+    }
+
+    public function canonizeBasket($basket)
+    {
+        // to array
+        $basket = $basket->toArray();
+        // Set data
+        $basket['data'] = json::decode($basket['data'], true);
+        // Set total empty
+        $total = array(
+            'price' => 0,
+            'discount' => 0,
+            'number' => 0,
+            'shipping' => 0,
+            'total_price' => 0,
+        );
+        // Set products
+        $basket['products'] = array();
+        foreach ($basket['data']['product'] as $product) {
+            $productInfo = Pi::api('product', 'shop')->getProductLight($product['id']);
+            $productInfo['number'] = $product['number'];
+            $productInfo['property'] = $product['property'];
+            $productInfo['total'] = $productInfo['price'] * $product['number'];
+            $productInfo['total_view'] = Pi::api('api', 'shop')->viewPrice($productInfo['total']);
+            $basket['products'][$product['id']] = $productInfo;
+            // Set total
+            $total['price'] = $total['price'] + $productInfo['price'];
+            $total['number'] = $total['number'] + $product['number'];
+            $total['total_price'] = $total['total_price'] + $productInfo['total'];
+        }
+        // Set total
+        $basket['total'] = array(
+            'price' => $total['price'],
+            'price_view' => Pi::api('api', 'shop')->viewPrice($total['price']),
+            'discount' => $total['discount'],
+            'discount_view' => Pi::api('api', 'shop')->viewPrice($total['discount']),
+            'number' => $total['number'],
+            'number_view' => _number($total['number']),
+            'shipping' => $total['shipping'],
+            'shipping_view' => Pi::api('api', 'shop')->viewPrice($total['shipping']),
+            'total_price' => $total['total_price'],
+            'total_price_view' => Pi::api('api', 'shop')->viewPrice($total['total_price']),
+        );
+        // return
+        return $basket;
     }
 }

@@ -80,6 +80,8 @@ class Shop extends Standard
                         $matches['action'] = 'complete';
                     } elseif ($parts[1] == 'add') {
                         $matches['action'] = 'add';
+                    } elseif ($parts[1] == 'update') {
+                        $matches['action'] = 'update';
                     } elseif ($parts[1] == 'finish') {
                         $matches['action'] = 'finish';
                         $matches['id'] = intval($parts[2]);
