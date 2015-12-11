@@ -15,7 +15,7 @@ return array(
     'meta' => array(
         'title' => _a('Shop'),
         'description' => _a('Shop system.'),
-        'version' => '1.3.1',
+        'version' => '1.3.2',
         'license' => 'New BSD',
         'logo' => 'image/logo.png',
         'readme' => 'docs/readme.txt',

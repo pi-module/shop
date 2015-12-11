@@ -79,5 +79,10 @@ return array(
             'access' => array(//'admin',
             ),
         ),
+        'json' => array(
+            'title' => _a('Json'),
+            'access' => array(//'admin',
+            ),
+        ),
     ),
 );

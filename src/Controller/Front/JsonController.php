@@ -34,11 +34,20 @@ class JsonController extends IndexController
     public function productAllAction()
     {
         // Get info from url
-        $module = $this->params('module');
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
-        // Set story info
-        $where = array('status' => 1);
+        $id = $this->params('id', 0);
+        $update = $this->params('update', 0);
+        // Check password
+        if (!$this->checkPassword()) {
+            $this->getResponse()->setStatusCode(401);
+            $this->terminate(__('Password not set or wrong'), '', 'error-denied');
+            $this->view()->setLayout('layout-simple');
+            return;
+        }
+        // Check
+        $where = array(
+            'status' => 1,
+            'time_update > ?' => $update,
+        );
         // Get story List
         $productList = $this->productJsonList($where);
         // Set view
@@ -49,9 +58,14 @@ class JsonController extends IndexController
     {
         // Get info from url
         $categoryMain = $this->params('id');
-        $module = $this->params('module');
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
+        $update = $this->params('update', 0);
+        // Check password
+        if (!$this->checkPassword()) {
+            $this->getResponse()->setStatusCode(401);
+            $this->terminate(__('Password not set or wrong'), '', 'error-denied');
+            $this->view()->setLayout('layout-simple');
+            return;
+        }
         // Get category information from model by category_main id
         $categoryMain = $this->getModel('category')->find($categoryMain);
         $categoryMain = Pi::api('category', 'shop')->canonizeCategory($categoryMain);
@@ -60,7 +74,11 @@ class JsonController extends IndexController
             $productList = array();
         } else {
             // Set story info
-            $where = array('status' => 1, 'category' => $categoryMain['id']);
+            $where = array(
+                'status' => 1,
+                'category' => $categoryMain['id'],
+                'time_update > ?' => $update,
+            );
             // Get story List
             $productList = $this->productJsonList($where);
         }
@@ -73,6 +91,13 @@ class JsonController extends IndexController
         // Get info from url
         $id = $this->params('id');
         $module = $this->params('module');
+        // Check password
+        if (!$this->checkPassword()) {
+            $this->getResponse()->setStatusCode(401);
+            $this->terminate(__('Password not set or wrong'), '', 'error-denied');
+            $this->view()->setLayout('layout-simple');
+            return;
+        }
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Find product
@@ -300,5 +325,23 @@ class JsonController extends IndexController
         }
         // Set view
         return $list;
+    }
+
+    public function checkPassword() {
+        // Get info from url
+        $module = $this->params('module');
+        $password = $this->params('password');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Check password
+        if ($config['json_check_password']) {
+            if ($config['json_password'] == $password) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 }

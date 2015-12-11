@@ -149,9 +149,8 @@ class Shop extends Standard
 
                 case 'json':
                     $matches['action'] = $this->decode($parts[1]);
-                    if (isset($parts[2]) && $parts[2] == 'id') {
-                        $matches['id'] = intval($parts[3]);
-                    } elseif ($parts[1] == 'filterCategory') {
+
+                    if ($parts[1] == 'filterCategory') {
                         $matches['slug'] = $this->decode($parts[2]);
                     } elseif ($parts[1] == 'filterSearch') {
                         $keyword = _get('keyword');
@@ -159,9 +158,32 @@ class Shop extends Standard
                             $matches['keyword'] = $keyword;
                         }
                     }
+
+                    if (isset($parts[2]) && $parts[2] == 'id') {
+                        $matches['id'] = intval($parts[3]);
+                    }
+
+                    if (isset($parts[2]) && $parts[2] == 'update') {
+                        $matches['update'] = intval($parts[3]);
+                    } elseif (isset($parts[4]) && $parts[4] == 'update') {
+                        $matches['update'] = intval($parts[5]);
+                    }
+
+                    if (isset($parts[4]) && $parts[4] == 'password') {
+                        $matches['password'] = $this->decode($parts[5]);
+                    } elseif (isset($parts[6]) && $parts[6] == 'password') {
+                        $matches['password'] = $this->decode($parts[7]);
+                    }
+
                     break;
             }
         }
+
+        echo '<pre>';
+        print_r($matches);
+        print_r($parts);
+        echo '</pre>';
+
         return $matches;
     }
 
@@ -220,8 +242,15 @@ class Shop extends Standard
         }
 
         // Set id
-        if (!empty($mergedParams['id'])) {
+        if (!empty($mergedParams['id']) && $mergedParams['controller'] == 'json') {
+            $url['id'] = 'id' . $this->paramDelimiter . $mergedParams['id'];
+        } elseif (!empty($mergedParams['id'])) {
             $url['id'] = $mergedParams['id'];
+        }
+
+        // Set update
+        if (!empty($mergedParams['update'])) {
+            $url['update'] = 'update' . $this->paramDelimiter . $mergedParams['update'];
         }
 
         // Set slug
@@ -234,6 +263,11 @@ class Shop extends Standard
             $url['step'] = sprintf('step%s%s',
                 $this->paramDelimiter,
                 $mergedParams['step']);
+        }
+
+        // Set password
+        if (!empty($mergedParams['password'])) {
+            $url['password'] = 'password' . $this->paramDelimiter . $mergedParams['password'];
         }
 
         // Make url

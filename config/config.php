@@ -18,6 +18,10 @@ return array(
             'name' => 'admin'
         ),
         array(
+            'title' => _a('Json output'),
+            'name' => 'json'
+        ),
+        array(
             'title' => _a('View'),
             'name' => 'view'
         ),
@@ -59,6 +63,31 @@ return array(
             'edit' => 'text',
             'filter' => 'number_int',
             'value' => 10
+        ),
+        // Json
+        'json_perpage' => array(
+            'category' => 'json',
+            'title' => _a('Perpage on json output'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 100
+        ),
+        'json_check_password' => array(
+            'category' => 'json',
+            'title' => _a('Check password for json output'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 0
+        ),
+        'json_password' => array(
+            'category' => 'json',
+            'title' => _a('Password for json output'),
+            'description' => _a('After use on mobile device , do not change it'),
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => md5(rand(1,99999)),
         ),
         // View
         'homepage_type' => array(

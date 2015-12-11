@@ -63,6 +63,11 @@ return array(
             'controller' => 'tools',
             'permission' => 'tools',
         ),
+        array(
+            'title' => _a('Json'),
+            'controller' => 'json',
+            'permission' => 'json',
+        ),
     ),
     // Front section
     'front' => array(

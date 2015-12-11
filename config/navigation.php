@@ -153,5 +153,15 @@ return array(
             'controller' => 'tools',
             'action' => 'index',
         ),
+        'json' => array(
+            'label' => _a('Json'),
+            'permission' => array(
+                'resource' => 'json',
+            ),
+            'route' => 'admin',
+            'module' => 'shop',
+            'controller' => 'json',
+            'action' => 'index',
+        ),
     ),
 );

@@ -396,7 +396,7 @@ class IndexController extends ActionController
         $page = $this->params('page', 1);
         $module = $this->params('module');
         $offset = (int)($page - 1) * $limit;
-        $order = array('time_create DESC', 'id DESC');
+        $order = array('time_update ASC');
         // Set info
         $columns = array('product' => new Expression('DISTINCT product'));
         // Get info from link table
