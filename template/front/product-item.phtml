@@ -34,9 +34,10 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
                 <?php echo $productItem['text_summary']; ?>
             </div>
             <div class="productInfoBox clearfix">
-                <div class="productPriceBox">
-                    <?php include $this->template('front/product-price'); ?>
-                </div>
+                <?php include $this->template('front/product-price'); ?>
+            </div>
+            <div class="productInfoBox clearfix">
+                <?php include $this->template('front/attribute'); ?>
             </div>
             <div class="clearfix productInfoList">
                 <ul class="list-inline">
@@ -71,11 +72,7 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
             </div>
         </div>
         <div class="col-md-12">
-            <div class="productInfoBox clearfix">
-                <?php include $this->template('front/attribute'); ?>
-            </div>
             <div class="productInfoBox productDescription p-review clearfix" itemprop="description">
-                <h2><?php _e('Description'); ?></h2>
                 <?php echo $productItem['text_description']; ?>
             </div>
             <div class="productInfoBox clearfix">
