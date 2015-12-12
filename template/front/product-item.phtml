@@ -30,50 +30,61 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
                     <?php echo $this->escape($productItem['title']); ?>
                 </h1>
             </div>
-            <div class="productInfoBox clearfix">
-                <div class="productPriceBox"><?php include $this->template('front/product-price'); ?></div>
+            <div class="productInfoBox productSummary e-description clearfix" itemprop="description">
+                <?php echo $productItem['text_summary']; ?>
             </div>
-            <div class="col-md-12 clearfix">
+            <div class="productInfoBox clearfix">
+                <div class="productPriceBox">
+                    <?php include $this->template('front/product-price'); ?>
+                </div>
+            </div>
+            <div class="clearfix productInfoList">
                 <ul class="list-inline">
                     <?php if (!empty($vote)) { ?>
-                        <li>
+                        <li class="col-md-2">
                             <?php include $this->template('votebar.phtml', 'front', 'vote'); ?>
                         </li>
                     <?php } ?>
                     <?php if (!empty($favourite)) { ?>
-                        <li>
+                        <li class="col-md-2">
                             <?php include $this->template('favouritebar.phtml', 'front', 'favourite'); ?>
                         </li>
                     <?php } ?>
-                    <li><?php include $this->template('front/product-question'); ?></li>
+                    <?php if ($config['view_question']) { ?>
+                        <li class="col-md-2">
+                            <?php include $this->template('front/product-question'); ?>
+                        </li>
+                    <?php } ?>
+                    <?php if ($config['social_sharing']) { ?>
+                        <li class="col-md-6">
+                            <div class="socialSharing">
+                                <?php echo $this->socialSharing(
+                                    $config['social_sharing'],
+                                    $this->escape($productItem['title']),
+                                    $this->escape($productItem['productUrl']),
+                                    $this->escape($productItem['largeUrl'])
+                                ); ?>
+                            </div>
+                        </li>
+                    <?php } ?>
                 </ul>
-                <?php if ($config['social_sharing']) { ?>
-                    <div class="clearfix col-md-6">
-                        <div class="socialSharing">
-                            <?php echo $this->socialSharing(
-                                $config['social_sharing'],
-                                $this->escape($productItem['title']),
-                                $this->escape($productItem['productUrl']),
-                                $this->escape($productItem['largeUrl'])
-                            ); ?>
-                        </div>
-                    </div>
-                <?php } ?>
             </div>
         </div>
         <div class="col-md-12">
-            <div class="clearfix">
+            <div class="productInfoBox clearfix">
                 <?php include $this->template('front/attribute'); ?>
             </div>
-            <div class="productInfoBox productSummary e-description clearfix" itemprop="description">
-                <?php echo $productItem['text_summary']; ?>
-            </div>
             <div class="productInfoBox productDescription p-review clearfix" itemprop="description">
+                <h2><?php _e('Description'); ?></h2>
                 <?php echo $productItem['text_description']; ?>
             </div>
             <div class="productInfoBox clearfix">
-                <div class="p-brand p-category" itemprop="brand category"><?php include $this->template('front/category'); ?></div>
-                <div class="p-category" itemprop="category"><?php include $this->template('front/tag'); ?></div>
+                <div class="p-brand p-category" itemprop="brand category">
+                    <?php include $this->template('front/category'); ?>
+                </div>
+                <div class="p-category" itemprop="category">
+                    <?php include $this->template('front/tag'); ?>
+                </div>
             </div>
             <div class="productMedia">
                 <?php include $this->template('front/attach-audio'); ?>

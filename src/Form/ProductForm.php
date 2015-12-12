@@ -82,11 +82,12 @@ class ProductForm extends BaseForm
             'name' => 'text_summary',
             'options' => array(
                 'label' => __('Summary'),
-                'editor' => 'html',
             ),
             'attributes' => array(
-                'type' => 'editor',
-                'description' => '',
+                'type' => 'textarea',
+                'rows' => '5',
+                'cols' => '40',
+                'description' => __('Keep summery short, 2 or 3 lines'),
             )
         ));
         // text_description

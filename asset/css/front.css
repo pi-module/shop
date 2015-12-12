@@ -32,12 +32,26 @@
 }
 
 .socialSharing {
-    margin: 10px;
+    margin: 0;
+    padding: 0;
 }
 
 .productInfoBox {
-    padding: 5px;
-    margin: 5px;
+    padding: 5px 0;
+    margin: 5px 0;
+}
+
+.productInfoList ul {
+    padding: 0;
+    margin: 0;
+}
+
+.productInfoList ul li {
+
+}
+
+.productInfoList ul li .socialSharing {
+
 }
 
 .shopWidgetSingle {
