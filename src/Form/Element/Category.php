@@ -25,7 +25,9 @@ class Category extends Select
     {
         if (empty($this->valueOptions)) {
             // Get topic list
-            $select = Pi::model('category', 'shop')->select()->columns(array('id', 'parent', 'title'));
+            $columns = array('id', 'parent', 'title');
+            $where = array('status' => 1);
+            $select = Pi::model('category', 'shop')->select()->columns($columns)->where($where);
             $rowset = Pi::model('category', 'shop')->selectWith($select);
             foreach ($rowset as $row) {
                 $list[$row->id] = $row->toArray();
