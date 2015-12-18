@@ -115,9 +115,11 @@
             <?php
             $this->jQuery();
             $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
-            $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
             $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
-            $this->css($this->assetModule('css/block.css', 'shop'));
+            if ($block['blockEffect']) {
+                $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
+                $this->css($this->assetModule('css/block.css', 'shop'));
+            }
             ?>
             <div class="owl-carousel itemImageAttach text-center clearfix hover-captions-container">
                 <?php foreach ($block['resources'] as $product) { ?>
@@ -145,9 +147,11 @@
             <?php
             $this->jQuery();
             $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
-            $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
-            $this->js($this->assetModule('js/caption.hover.js', 'shop'));
             $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
+            if ($block['blockEffect']) {
+                $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
+                $this->js($this->assetModule('js/caption.hover.js', 'shop'));
+            }
             ?>
             <div class="owl-carousel itemImageAttach text-center clearfix hover-captions-container">
                 <?php foreach ($block['resources'] as $product) { ?>
