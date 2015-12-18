@@ -112,15 +112,13 @@
                 <?php } ?>
             </ul>
         <?php } elseif ($block['list-type'] == 'slide') { ?>
-            <?php
-            $this->jQuery();
-            $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
-            $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
-            if ($block['blockEffect']) {
+            <?php if ($block['blockEffect']) {
+                $this->jQuery();
+                $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
+                $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
                 $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
                 $this->css($this->assetModule('css/block.css', 'shop'));
-            }
-            ?>
+            } ?>
             <div class="owl-carousel itemImageAttach text-center clearfix hover-captions-container">
                 <?php foreach ($block['resources'] as $product) { ?>
                     <div class="item h-review" itemscope itemtype="http://schema.org/Product">
@@ -144,15 +142,13 @@
                 <?php } ?>
             </div>
         <?php } elseif ($block['list-type'] == 'slidehover') { ?>
-            <?php
-            $this->jQuery();
-            $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
-            $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
-            if ($block['blockEffect']) {
+            <?php if ($block['blockEffect']) {
+                $this->jQuery();
+                $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
+                $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
                 $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
                 $this->js($this->assetModule('js/caption.hover.js', 'shop'));
-            }
-            ?>
+            } ?>
             <div class="owl-carousel itemImageAttach text-center clearfix hover-captions-container">
                 <?php foreach ($block['resources'] as $product) { ?>
                     <div class="item hover-captions hover-captions-slide" itemscope itemtype="http://schema.org/Product">
@@ -167,7 +163,7 @@
                                 </a>
                             </p>
                         </div>
-                        <img itemprop="image" class="media-object img-responsive u-photo" src="<?php echo $product['largeUrl']; ?>"
+                        <img itemprop="image" class="media-object img-responsive u-photo" src="<?php echo $product['mediumUrl']; ?>"
                              alt="<?php echo $this->escape($product['title']); ?>">
                     </div>
                 <?php } ?>
