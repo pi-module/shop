@@ -259,6 +259,22 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
+        'view_side_category' => array(
+            'title' => _a('Side category type'),
+            'description' => '',
+            'edit' => array(
+                'type' => 'select',
+                'options' => array(
+                    'options' => array(
+                        'compact' => _a('Compact'),
+                        'full' => _a('Full'),
+                    ),
+                ),
+            ),
+            'filter' => 'text',
+            'value' => 'compact',
+            'category' => 'view',
+        ),
         // Image
         'image_size' => array(
             'category' => 'image',

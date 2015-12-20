@@ -73,17 +73,21 @@ class Category extends AbstractApi
         return array_unique($list);
     }
 
-    public function categoryList($parent = null, $makeTree = false)
+    public function categoryList($parent = 0, $type = '')
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
-        $return = array();
-        if (is_null($parent) || $makeTree) {
+
+        // Check type
+        $type = (empty($type)) ? $config['view_side_category'] : $type;
+        if ($parent == 0 || $type == 'full') {
             $where = array('status' => 1);
         } else {
             $where = array('status' => 1, 'parent' => $parent);
         }
+        $return = array();
         $order = array('display_order ASC');
+        // Make list
         $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
         $rowset = Pi::model('category', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
@@ -104,9 +108,10 @@ class Category extends AbstractApi
 
         }
 
-        if ($makeTree) {
+        if ($type == 'full') {
             $return = $this->makeTree($return);
         }
+
         return $return;
     }
 

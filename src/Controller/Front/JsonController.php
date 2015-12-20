@@ -217,7 +217,7 @@ class JsonController extends IndexController
         $config = Pi::service('registry')->config->read($module);
         // Get category information from model
         $category = $this->getModel('category')->find($slug, 'slug');
-        $category = Pi::api('category', 'shop')->canonizeCategory($category);
+        $category = Pi::api('category', 'shop')->canonizeCategory($category, 'compact');
         // Check category
         if (!$category || $category['status'] != 1) {
             $this->getResponse()->setStatusCode(404);
