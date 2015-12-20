@@ -73,14 +73,14 @@ class Category extends AbstractApi
         return array_unique($list);
     }
 
-    public function categoryList($parent = 0, $type = '')
+    public function categoryList($parent = null, $type = '')
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Check type
         $type = (empty($type)) ? $config['view_side_category'] : $type;
-        if ($parent == 0 || $type == 'full') {
+        if (is_null($parent)|| $type == 'full') {
             $where = array('status' => 1);
         } else {
             $where = array('status' => 1, 'parent' => $parent);

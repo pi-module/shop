@@ -260,7 +260,7 @@ class IndexController extends ActionController
             }
         }
         // category list
-        $category = Pi::api('category', 'shop')->categoryList();
+        $category = Pi::api('category', 'shop')->categoryList(0);
         // Get special
         if ($config['view_special']) {
             $specialList = Pi::api('special', 'shop')->getAll();
@@ -281,7 +281,7 @@ class IndexController extends ActionController
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // category list
-        $categories = Pi::api('category', 'shop')->categoryList();
+        $categories = Pi::api('category', 'shop')->categoryList(0);
         // Get special
         if ($config['view_special']) {
             $specialList = Pi::api('special', 'shop')->getAll();
