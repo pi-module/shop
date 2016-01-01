@@ -35,17 +35,6 @@ class ProductController extends ActionController
     protected $ImageProductPrefix = 'product_';
 
     /**
-     * Product Columns
-     */
-    protected $productColumns = array(
-        'id', 'title', 'slug', 'category', 'text_summary', 'text_description', 'seo_title',
-        'seo_keywords', 'seo_description', 'status', 'time_create', 'time_update',
-        'uid', 'hits', 'sales', 'image', 'path', 'comment', 'point', 'count',
-        'favorite', 'attach', 'attribute', 'related', 'recommended', 'category_main',
-        'stock', 'stock_alert', 'stock_type', 'price', 'price_discount', 'price_title', 'setting'
-    );
-
-    /**
      * index Action
      */
     public function indexAction()
@@ -246,12 +235,6 @@ class ProductController extends ActionController
                     }
                 }
                 $values['setting'] = Json::encode($setting);
-                // Set just product fields
-                foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->productColumns)) {
-                        unset($values[$key]);
-                    }
-                }
                 // Category
                 $values['category'] = Json::encode(array_unique($values['category']));
                 // Set seo_title
@@ -372,12 +355,6 @@ class ProductController extends ActionController
                     foreach ($fields['field'] as $field) {
                         $attribute[$field]['field'] = $field;
                         $attribute[$field]['data'] = $values[$field];
-                    }
-                }
-                // Set just product fields
-                foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->productColumns)) {
-                        unset($values[$key]);
                     }
                 }
                 // Set time

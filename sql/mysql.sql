@@ -1,6 +1,7 @@
 CREATE TABLE `{product}` (
   `id`               INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `title`            VARCHAR(255)        NOT NULL DEFAULT '',
+  `subtitle`         VARCHAR(255)        NOT NULL DEFAULT '',
   `slug`             VARCHAR(255)        NOT NULL DEFAULT '',
   `category`         VARCHAR(255)        NOT NULL DEFAULT '',
   `category_main`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',

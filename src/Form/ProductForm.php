@@ -66,6 +66,17 @@ class ProductForm extends BaseForm
                 'required' => true,
             )
         ));
+        // subtitle
+        $this->add(array(
+            'name' => 'subtitle',
+            'options' => array(
+                'label' => __('Second title'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
         // slug
         $this->add(array(
             'name' => 'slug',

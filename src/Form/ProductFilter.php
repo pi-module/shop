@@ -37,6 +37,16 @@ class ProductFilter extends InputFilter
                 ),
             ),
         ));
+        // subtitle
+        $this->add(array(
+            'name' => 'subtitle',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // slug
         $this->add(array(
             'name' => 'slug',

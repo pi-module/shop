@@ -458,7 +458,7 @@ EOD;
 
         // Update to version 1.2.4
         if (version_compare($moduleVersion, '1.2.4', '<')) {
-            // Alter table : ADD name
+            // Alter table : ADD unique_key
             $sql = sprintf("ALTER TABLE %s ADD `unique_key` varchar(32) DEFAULT NULL , ADD UNIQUE `unique_key` (`unique_key`)", $propertyValueTable);
             try {
                 $propertyValueAdapter->query($sql, 'execute');
@@ -478,6 +478,22 @@ EOD;
                 // Save value
                 $row->unique_key = $key;
                 $row->save();
+            }
+        }
+
+        // Update to version 1.3.5
+        if (version_compare($moduleVersion, '1.3.5', '<')) {
+            // Alter table : ADD subtitle
+            $sql = sprintf("ALTER TABLE %s ADD `subtitle` VARCHAR(255) NOT NULL DEFAULT ''", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
             }
         }
 

@@ -26,9 +26,14 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
         </div>
         <div class="col-md-8">
             <div class="productTitle clearfix">
-                <h1 class="p-name" itemprop="name">
+                <h1 class="p-name pull-left" itemprop="name">
                     <?php echo $this->escape($productItem['title']); ?>
                 </h1>
+                <?php if (!empty($productItem['subtitle'])) { ?>
+                <h2 class="pull-right">
+                    <?php echo $this->escape($productItem['subtitle']); ?>
+                </h2>
+                <?php } ?>
             </div>
             <div class="productInfoBox productSummary e-description clearfix" itemprop="description">
                 <?php echo $productItem['text_summary']; ?>
