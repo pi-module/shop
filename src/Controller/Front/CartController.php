@@ -33,10 +33,13 @@ class CartController extends ActionController
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
         // Check basket
-        if (empty($basket['products'])) {
-            $module = $this->params('module');
-            $url = array('', 'module' => $module, 'controller' => 'index');
-            $this->jump($url, __('Your cart are empty.'), 'error');
+        if (empty($basket) || empty($basket['products'])) {
+            $basket = Pi::api('basket', 'shop')->getBasketSession();
+            if (empty($basket) || empty($basket['products'])) {
+                $module = $this->params('module');
+                $url = array('', 'module' => $module, 'controller' => 'index');
+                $this->jump($url, __('Your cart are empty.'), 'error');
+            }
         }
         // Set view
         $this->view()->setTemplate('checkout-cart');
@@ -45,8 +48,6 @@ class CartController extends ActionController
 
     public function addAction()
     {
-        // Check user is login or not
-        Pi::service('authentication')->requireLogin();
         // Get module
         $module = $this->params('module');
         // Get config
@@ -77,8 +78,16 @@ class CartController extends ActionController
                 if (isset($data['property']) && !empty($data['property'])) {
                     $property = $data['property'];
                 }
-                // Set basket
-                Pi::api('basket', 'shop')->setBasket($product['id'], 1, $property);
+                // Check identity
+                if (Pi::service('authentication')->hasIdentity()) {
+                    // Set basket
+                    Pi::api('basket', 'shop')->setBasket($product['id'], 1, $property);
+                } else {
+                    // Set basket
+                    Pi::api('basket', 'shop')->setBasketSession($product['id'], 1, $property);
+                    // Check user is login or not
+                    Pi::service('authentication')->requireLogin();
+                }
                 // Go to cart
                 $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
                 return $this->redirect()->toRoute('', $url);

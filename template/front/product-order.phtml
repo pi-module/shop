@@ -8,6 +8,15 @@
                     <div class="col-sm-9">
                         <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
                             <?php if ($propertyValue['stock'] > 0) { ?>
+
+                            <?php } ?>
+                            <?php if ($config['order_stock'] != 'property') { ?>
+                                <label class="radio-inline input-sm">
+                                    <input type="radio"
+                                           name="property[<?php echo $this->escape($propertyList['id']); ?>]"
+                                           value="<?php echo $this->escape($propertyValue['unique_key']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
+                                </label>
+                            <?php } elseif ($config['order_stock'] == 'property' && $propertyValue['stock'] > 0) { ?>
                                 <label class="radio-inline input-sm">
                                     <input type="radio"
                                            name="property[<?php echo $this->escape($propertyList['id']); ?>]"
@@ -21,9 +30,14 @@
                         <select name="property[<?php echo $this->escape($propertyList['id']); ?>]"
                                 class="form-control input-sm">
                             <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
-                                <?php if ($propertyValue['stock'] > 0) { ?>
-                                    <option
-                                        value="<?php echo $this->escape($propertyValue['unique_key']); ?>"><?php echo $this->escape($propertyValue['name']); ?></option>
+                                <?php if ($config['order_stock'] != 'property') { ?>
+                                    <option value="<?php echo $this->escape($propertyValue['unique_key']); ?>">
+                                        <?php echo $this->escape($propertyValue['name']); ?>
+                                    </option>
+                                <?php } elseif ($config['order_stock'] == 'property' && $propertyValue['stock'] > 0) { ?>
+                                    <option value="<?php echo $this->escape($propertyValue['unique_key']); ?>">
+                                        <?php echo $this->escape($propertyValue['name']); ?>
+                                    </option>
                                 <?php } ?>
                             <?php } ?>
                         </select>

@@ -76,20 +76,20 @@ class Shop extends Standard
                     break;
 
                 case 'cart':
-                    if ($parts[1] == 'complete') {
+                    if (isset($parts[1]) && $parts[1] == 'complete') {
                         $matches['action'] = 'complete';
-                    } elseif ($parts[1] == 'add') {
+                    } elseif (isset($parts[1]) && $parts[1] == 'add') {
                         $matches['action'] = 'add';
-                    } elseif ($parts[1] == 'update') {
+                    } elseif (isset($parts[1]) && $parts[1] == 'update') {
                         $matches['action'] = 'update';
-                    } elseif ($parts[1] == 'finish') {
+                    } elseif (isset($parts[1]) && $parts[1] == 'finish') {
                         $matches['action'] = 'finish';
                         $matches['id'] = intval($parts[2]);
-                    } elseif ($parts[1] == 'empty') {
+                    } elseif (isset($parts[1]) && $parts[1] == 'empty') {
                         $matches['action'] = 'empty';
-                    } elseif ($parts[1] == 'index') {
+                    } elseif (isset($parts[1]) && $parts[1] == 'index') {
                         $matches['action'] = 'index';
-                    } elseif ($parts[1] == 'levelAjax') {
+                    } elseif (isset($parts[1]) && $parts[1] == 'levelAjax') {
                         $matches['action'] = 'levelAjax';
                         $matches['process'] = $this->decode($parts[2]);
                         if (is_numeric($parts[3])) {
@@ -97,7 +97,7 @@ class Shop extends Standard
                         } elseif ($parts[2] == 'payment') {
                             $matches['id'] = $this->decode($parts[3]);
                         }
-                    } elseif ($parts[1] == 'basket') {
+                    } elseif (isset($parts[1]) && $parts[1] == 'basket') {
                         $matches['action'] = 'basket';
                         if (isset($parts[2]) && in_array($parts[2], array('remove', 'number'))) {
                             $matches['process'] = $this->decode($parts[2]);

@@ -99,11 +99,17 @@ class AttachController extends ActionController
             $content[$row->id]['preview'] = $this->filePreview($content[$row->id]['type'], $content[$row->id]['path'], $content[$row->id]['file']);
             $contents[] = $content[$row->id];
         }
+        // set nav
+        $nav = array(
+            'page' => 'attach',
+            'type' => 'edit',
+        );
         // Set view
         $this->view()->setTemplate('attach-add');
         $this->view()->assign('content', Json::encode($contents));
         $this->view()->assign('product', $product);
         $this->view()->assign('title', sprintf(__('Attach files to %s'), $product['title']));
+        $this->view()->assign('nav', $nav);
     }
 
     public function editAction()

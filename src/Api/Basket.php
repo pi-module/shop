@@ -20,6 +20,8 @@ use Zend\Json\Json;
 /*
  * Pi::api('basket', 'shop')->setBasket($id, $number, $properties);
  * Pi::api('basket', 'shop')->getBasket();
+ * Pi::api('basket', 'shop')->setBasketSession($id, $number, $properties);
+ * Pi::api('basket', 'shop')->getBasketSession();
  * Pi::api('basket', 'shop')->updateBasket($id, $number);
  * Pi::api('basket', 'shop')->emptyBasket();
  * Pi::api('basket', 'shop')->removeProduct($id);
@@ -88,6 +90,30 @@ class Basket extends AbstractApi
             return '';
         }
         return $this->canonizeBasket($basket);
+    }
+
+    public function setBasketSession($id, $number = 1, $properties = array())
+    {
+        $_SESSION['shop-basket'] = array(
+            'id' => $id,
+            'number' => $number,
+            'properties' => $properties
+        );
+    }
+
+    public function getBasketSession()
+    {
+        if (isset($_SESSION['shop-basket']) && !empty($_SESSION['shop-basket'])) {
+            $this->setBasket(
+                $_SESSION['shop-basket']['id'],
+                $_SESSION['shop-basket']['number'],
+                $_SESSION['shop-basket']['properties']
+            );
+            unset($_SESSION['shop-basket']);
+            return $this->getBasket();
+        } else {
+            return '';
+        }
     }
 
     public function updateBasket($id, $number)

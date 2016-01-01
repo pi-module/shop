@@ -83,10 +83,10 @@ $this->footScript()->appendScript($script);
                                        href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank">
                                         <img src="<?php echo $product['thumbUrl']; ?>"
                                              alt="<?php echo $this->escape($product['title']); ?>"
-                                             class="media-object"/>
+                                             class="img-responsive img-rounded" />
                                     </a>
                                 <?php } ?>
-                                <h4 class="media-heading">
+                                <h4>
                                     <a title="<?php echo $this->escape($product['title']); ?>"
                                        href="<?php echo $this->escape($product['productUrl']); ?>"
                                        target="_blank"><?php echo $this->escape($product['title']); ?>
@@ -120,7 +120,7 @@ $this->footScript()->appendScript($script);
                         <div class="pull-left">
                             <a class="btn btn-primary btn-xs" title="<?php _e('Back to Shoping'); ?>"
                                href="<?php echo Pi::url($this->url('', array('controller' => 'index'))); ?>"><?php _e('Back to Shoping'); ?></a>
-                            <a class="btn btn-primary btn-xs" title="<?php _e('Empty cart'); ?>"
+                            <a class="btn btn-danger btn-xs" title="<?php _e('Empty cart'); ?>"
                                href="<?php echo Pi::url($this->url('', array('action' => 'empty'))); ?>"><?php _e('Empty cart'); ?></a>
                         </div>
                     </div>

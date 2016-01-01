@@ -312,12 +312,24 @@ class ProductController extends ActionController
                 }
                 // Set data 
                 $form->setData($product);
+                // set nav
+                $nav = array(
+                    'page' => 'update',
+                    'type' => 'edit',
+                );
+                // Set view
+                $this->view()->assign('product', $product);
+            } else {
+                $nav = array(
+                    'page' => 'update',
+                    'type' => 'add',
+                );
             }
         }
         // Set view
         $this->view()->setTemplate('product-update');
         $this->view()->assign('form', $form);
-        $this->view()->assign('title', __('Add product'));
+        $this->view()->assign('nav', $nav);
     }
 
     public function additionalAction()
@@ -390,11 +402,17 @@ class ProductController extends ActionController
             $form->setAttribute('enctype', 'multipart/form-data');
             $form->setData($product);
         }
+        // set nav
+        $nav = array(
+            'page' => 'additional',
+            'type' => 'edit',
+        );
         // Set view
         $this->view()->setTemplate('product-update');
         $this->view()->assign('form', $form);
         $this->view()->assign('properties', $property);
-        $this->view()->assign('title', __('Manage additional information'));
+        $this->view()->assign('product', $product);
+        $this->view()->assign('nav', $nav);
     }
 
     /* public function deleteAction()
@@ -500,6 +518,11 @@ class ProductController extends ActionController
                 $message = __('Invalid data, please check and re-submit.');
             }
         }
+        // set nav
+        $nav = array(
+            'page' => 'related',
+            'type' => 'edit',
+        );
         // Set view
         $this->view()->setTemplate('product-related');
         $this->view()->assign('title', __('Add Related'));
@@ -507,6 +530,7 @@ class ProductController extends ActionController
         $this->view()->assign('product', $product);
         $this->view()->assign('related_list', $related_list);
         $this->view()->assign('product_list', $product_list);
+        $this->view()->assign('nav', $nav);
     }
 
     public function relatedAjaxAction()

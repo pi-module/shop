@@ -15,8 +15,17 @@
     margin: 10px 0;
 }
 
+.cartProductTitle {
+    margin-top: 10px;
+}
+
+.productTitle h2 {
+    font-size: 1.2em;
+    color: #9FA0A0;
+}
+
 .cartProductInfo {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .cartInfo {
