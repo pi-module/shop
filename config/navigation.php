@@ -12,17 +12,6 @@
  */
 return array(
     'front' => array(
-        'index' => array(
-            'label' => _a('Index'),
-            'permission' => array(
-                'resource' => 'public',
-            ),
-            'route' => 'shop',
-            'module' => 'shop',
-            'controller' => 'index',
-            'action' => 'index',
-        ),
-
         'category' => array(
             'label' => _a('Category list'),
             'permission' => array(

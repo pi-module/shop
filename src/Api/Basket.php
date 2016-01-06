@@ -77,6 +77,10 @@ class Basket extends AbstractApi
             $basket->data = json::encode($data);
             $basket->save();
         }
+
+        if ($uid == 0) {
+            $_SESSION['session_order'] = $basket->value;
+        }
     }
 
     public function getBasket()
@@ -84,17 +88,21 @@ class Basket extends AbstractApi
         // Get uid
         $uid = Pi::user()->getId();
         // find backet
-        $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
+        if ($uid > 0) {
+            $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order'], 'value');
+        }
         // Check basket
-        if (empty($basket)) {
+        if (!isset($basket) || empty($basket)) {
             return '';
         }
         return $this->canonizeBasket($basket);
     }
 
-    public function setBasketSession($id, $number = 1, $properties = array())
+    /* public function setBasketSession($id, $number = 1, $properties = array())
     {
-        $_SESSION['shop-basket'] = array(
+        $_SESSION['session_order'] = array(
             'id' => $id,
             'number' => $number,
             'properties' => $properties
@@ -103,27 +111,31 @@ class Basket extends AbstractApi
 
     public function getBasketSession()
     {
-        if (isset($_SESSION['shop-basket']) && !empty($_SESSION['shop-basket'])) {
+        if (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
             $this->setBasket(
-                $_SESSION['shop-basket']['id'],
-                $_SESSION['shop-basket']['number'],
-                $_SESSION['shop-basket']['properties']
+                $_SESSION['session_order']['id'],
+                $_SESSION['session_order']['number'],
+                $_SESSION['session_order']['properties']
             );
-            unset($_SESSION['shop-basket']);
+            unset($_SESSION['session_order']);
             return $this->getBasket();
         } else {
             return '';
         }
-    }
+    } */
 
     public function updateBasket($id, $number)
     {
         // Get uid
         $uid = Pi::user()->getId();
         // find backet
-        $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
+        if ($uid > 0) {
+            $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order'], 'value');
+        }
         // Check basket
-        if (empty($basket)) {
+        if (!isset($basket) || empty($basket)) {
             return '';
         }
         // Update data
@@ -139,9 +151,15 @@ class Basket extends AbstractApi
         // Get uid
         $uid = Pi::user()->getId();
         // delete
-        Pi::model('basket', $this->getModule())->delete(
-            array('uid' => $uid)
-        );
+        if ($uid > 0) {
+            Pi::model('basket', $this->getModule())->delete(
+                array('uid' => $uid)
+            );
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+            Pi::model('basket', $this->getModule())->delete(
+                array('value' => $_SESSION['session_order'])
+            );
+        }
     }
 
     public function removeProduct($id)
@@ -149,7 +167,15 @@ class Basket extends AbstractApi
         // Get uid
         $uid = Pi::user()->getId();
         // find backet
-        $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
+        if ($uid > 0) {
+            $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order'], 'value');
+        }
+        // Check basket
+        if (!isset($basket) || empty($basket)) {
+            return '';
+        }
         // Set data
         $data = json::decode($basket->data, true);
         $data['time'] = time();
@@ -160,52 +186,52 @@ class Basket extends AbstractApi
     }
 
     public function basketBlockNumber() {
-        // Check user identity
-        if (Pi::user()->hasIdentity()) {
-            // Get uid
-            $uid = Pi::user()->getId();
-            // find backet
+        // Get uid
+        $uid = Pi::user()->getId();
+        // find backet
+        if ($uid > 0) {
             $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
-            // Check basket
-            if (empty($basket)) {
-                return 0;
-            } else {
-                $number = 0;
-                $data = json::decode($basket['data'], true);
-                foreach ($data['product'] as $product) {
-                    $number = $number + $product['number'];
-                }
-                return $number;
-            }
-        } else {
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order'], 'value');
+        }
+        // Check basket
+        if (!isset($basket) || empty($basket)) {
             return 0;
+        } else {
+            $number = 0;
+            $data = json::decode($basket['data'], true);
+            foreach ($data['product'] as $product) {
+                $number = $number + $product['number'];
+            }
+            return $number;
         }
     }
 
     public function basketBlockInfo() {
         $list = array();
         $number = 0;
-        // Check user identity
-        if (Pi::user()->hasIdentity()) {
-            // Get uid
-            $uid = Pi::user()->getId();
-            // find backet
+        // Get uid
+        $uid = Pi::user()->getId();
+        // find backet
+        if ($uid > 0) {
             $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
-            // Check basket
-            if (!empty($basket)) {
-                $data = json::decode($basket['data'], true);
-                foreach ($data['product'] as $product) {
-                    // Set list
-                    $productInfo = Pi::api('product', 'shop')->getProductLight($product['id']);
-                    $productInfo['number'] = $product['number'];
-                    $productInfo['number_view'] = _number($product['number']);
-                    $productInfo['property'] = $product['property'];
-                    $productInfo['total'] = $productInfo['price'] * $product['number'];
-                    $productInfo['total_view'] = Pi::api('api', 'shop')->viewPrice($productInfo['total']);
-                    $list[$product['id']] = $productInfo;
-                    // Set number
-                    $number = $number + $product['number'];
-                }
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order'], 'value');
+        }
+        // Check basket
+        if (isset($basket) && !empty($basket)) {
+            $data = json::decode($basket['data'], true);
+            foreach ($data['product'] as $product) {
+                // Set list
+                $productInfo = Pi::api('product', 'shop')->getProductLight($product['id']);
+                $productInfo['number'] = $product['number'];
+                $productInfo['number_view'] = _number($product['number']);
+                $productInfo['property'] = $product['property'];
+                $productInfo['total'] = $productInfo['price'] * $product['number'];
+                $productInfo['total_view'] = Pi::api('api', 'shop')->viewPrice($productInfo['total']);
+                $list[$product['id']] = $productInfo;
+                // Set number
+                $number = $number + $product['number'];
             }
         }
         return array(

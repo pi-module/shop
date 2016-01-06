@@ -22,7 +22,7 @@ class CartController extends ActionController
     public function indexAction()
     {
         // Check user is login or not
-        Pi::service('authentication')->requireLogin();
+        //Pi::service('authentication')->requireLogin();
         // Check order is active or inactive
         if (!$this->config('order_active')) {
             $this->getResponse()->setStatusCode(401);
@@ -78,16 +78,8 @@ class CartController extends ActionController
                 if (isset($data['property']) && !empty($data['property'])) {
                     $property = $data['property'];
                 }
-                // Check identity
-                if (Pi::service('authentication')->hasIdentity()) {
-                    // Set basket
-                    Pi::api('basket', 'shop')->setBasket($product['id'], 1, $property);
-                } else {
-                    // Set basket
-                    Pi::api('basket', 'shop')->setBasketSession($product['id'], 1, $property);
-                    // Check user is login or not
-                    Pi::service('authentication')->requireLogin();
-                }
+                // Set basket
+                Pi::api('basket', 'shop')->setBasket($product['id'], 1, $property);
                 // Go to cart
                 $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
                 return $this->redirect()->toRoute('', $url);
@@ -101,11 +93,8 @@ class CartController extends ActionController
 
     public function updateAction()
     {
-        // Check user is login or not
-        Pi::service('authentication')->requireLogin();
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
-
         return array(
             'status' => 1,
             'price' => $basket['total']['price_view'],
@@ -117,20 +106,16 @@ class CartController extends ActionController
 
     public function emptyAction()
     {
-        // Check user is login or not
-        Pi::service('authentication')->requireLogin();
         // Set empty
         Pi::api('basket', 'shop')->emptyBasket();
         // Back
         $module = $this->params('module');
-        $url = array('', 'module' => $module, 'controller' => 'index');
+        $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
         $this->jump($url, __('Your cart are empty'), 'success');
     }
 
     public function basketAction()
     {
-        // Check user is login or not
-        Pi::service('authentication')->requireLogin();
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
         // Get info from url
@@ -182,8 +167,6 @@ class CartController extends ActionController
 
     public function completeAction()
     {
-        // Check user is login or not
-        Pi::service('authentication')->requireLogin();
         // Set template
         $this->view()->setTemplate(false);
         // Get basket
@@ -210,7 +193,7 @@ class CartController extends ActionController
             $order['product'][$product['id']] = $singelProduct;
         }
         // Unset shop session
-        Pi::api('basket', 'shop')->emptyBasket();
+        // Pi::api('basket', 'shop')->emptyBasket();
         // Set and go to order
         $url = Pi::api('order', 'order')->setOrderInfo($order);
         Pi::service('url')->redirect($url);
