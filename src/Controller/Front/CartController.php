@@ -193,7 +193,7 @@ class CartController extends ActionController
             $order['product'][$product['id']] = $singelProduct;
         }
         // Unset shop session
-        // Pi::api('basket', 'shop')->emptyBasket();
+        Pi::api('basket', 'shop')->emptyBasket();
         // Set and go to order
         $url = Pi::api('order', 'order')->setOrderInfo($order);
         Pi::service('url')->redirect($url);
