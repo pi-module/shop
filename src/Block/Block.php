@@ -59,6 +59,8 @@ class Block
         }
         // Set block array
         $block['resources'] = $product;
+        // Load language
+        Pi::service('i18n')->load(array('module/shop', 'default'));
         return $block;
     }
 
@@ -104,6 +106,8 @@ class Block
         }
         // Set block array
         $block['resources'] = $product;
+        // Load language
+        Pi::service('i18n')->load(array('module/shop', 'default'));
         return $block;
     }
 
@@ -138,6 +142,8 @@ class Block
         }
         // Set block array
         $block['resources'] = $product;
+        // Load language
+        Pi::service('i18n')->load(array('module/shop', 'default'));
         return $block;
     }
 
@@ -150,6 +156,8 @@ class Block
         $limit = intval($block['number']);
         // Set block array
         $block['resources'] = Pi::api('special', 'shop')->getAll($limit);
+        // Load language
+        Pi::service('i18n')->load(array('module/shop', 'default'));
         return $block;
     }
 

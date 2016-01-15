@@ -1,5 +1,5 @@
 <div class="shop-block">
-    <div class="shop-block-special clearfix">
+    <div class="shop-block-product clearfix">
         <?php if ($block['list-type'] == 'horizontal') { ?>
             <?php foreach ($block['resources'] as $product) { ?>
                 <div class="col-sm-6 col-md-4 productBox h-product" itemscope itemtype="http://schema.org/Product">
@@ -19,12 +19,16 @@
                                 </a>
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
-                                <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
-                                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
-                                        <?php echo $this->escape($product['price_view']); ?>
+                                <?php if ($product['stock_type'] == 1) { ?>
+                                    <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                        <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
+                                            <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
+                                            <?php echo $this->escape($product['price_view']); ?>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php } else {?>
+                                    <span class="text-danger"><?php echo $this->escape($product['stock_type_view']); ?></span>
+                                <?php } ?>
                             <?php } ?>
                         </div>
                     </div>
@@ -49,12 +53,16 @@
                                 </a>
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
-                                <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
-                                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
-                                        <?php echo $this->escape($product['price_view']); ?>
+                                <?php if ($product['stock_type'] == 1) { ?>
+                                    <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                        <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
+                                            <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
+                                            <?php echo $this->escape($product['price_view']); ?>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php } else {?>
+                                    <span class="text-danger"><?php echo $this->escape($product['stock_type_view']); ?></span>
+                                <?php } ?>
                             <?php } ?>
                         </div>
                     </div>
@@ -85,12 +93,16 @@
                                 <a itemprop="url" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
-                                <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
-                                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
-                                        <?php echo $this->escape($product['price_view']); ?>
+                                <?php if ($product['stock_type'] == 1) { ?>
+                                    <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                        <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
+                                            <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
+                                            <?php echo $this->escape($product['price_view']); ?>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php } else {?>
+                                    <span class="text-danger"><?php echo $this->escape($product['stock_type_view']); ?></span>
+                                <?php } ?>
                             <?php } ?>
                         </div>
                     </div>
