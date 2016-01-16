@@ -56,6 +56,7 @@
                     <strong><?php _e('Stock status'); ?> : </strong>
                     <span class="text-danger"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
                 </div>
+                <div class="productPrice"><strong> کد محصول : </strong><?php echo $productItem['id']; ?></div>
             <?php } ?>
         <?php } elseif ($config['order_stock'] == 'product') { ?>
             <?php if ($productItem['stock'] > 0) { ?>
@@ -87,6 +88,7 @@
                 <div class="clearfix">
                     <strong><?php _e('Stock status'); ?> : </strong>
                     <span class="text-danger"><?php _e('Out of stock'); ?></span>
+                    <div class="productPrice"><strong> کد محصول : </strong><?php echo $productItem['id']; ?></div>
                 </div>
             <?php } ?>
         <?php } elseif ($config['order_stock'] == 'property') { ?>
