@@ -31,7 +31,7 @@ class Shop extends Standard
     ); */
 
     protected $controllerList = array(
-        'cart', 'category', 'index', 'json', 'product', 'tag'
+        'cart', 'category', 'index', 'json', 'product', 'tag', 'compare'
     );
 
     /**
@@ -175,6 +175,31 @@ class Shop extends Standard
                         $matches['password'] = $this->decode($parts[7]);
                     }
 
+                    break;
+
+                case 'compare':
+                    if (isset($parts[1]) && $parts[1] == 'ajax') {
+
+                    } else {
+                        $parts = array_unique($parts);
+                        $parts = array_values($parts);
+                        $matches['product'] = array();
+                        if (isset($parts[1]) && !empty($parts[1])) {
+                            $matches['product'][1] = $this->decode($parts[1]);
+                        }
+                        if (isset($parts[2]) && !empty($parts[2])) {
+                            $matches['product'][2] = $this->decode($parts[2]);
+                        }
+                        if (isset($parts[3]) && !empty($parts[3])) {
+                            $matches['product'][3] = $this->decode($parts[3]);
+                        }
+                        if (isset($parts[4]) && !empty($parts[4])) {
+                            $matches['product'][4] = $this->decode($parts[4]);
+                        }
+                        if (isset($parts[5]) && !empty($parts[5])) {
+                            $matches['product'][5] = $this->decode($parts[5]);
+                        }
+                    }
                     break;
             }
         }

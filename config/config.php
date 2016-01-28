@@ -120,22 +120,6 @@ return array(
             'edit' => 'text',
             'filter' => 'string',
         ),
-        'view_type' => array(
-            'title' => _a('View type'),
-            'description' => _a('Item list view type'),
-            'edit' => array(
-                'type' => 'select',
-                'options' => array(
-                    'options' => array(
-                        'normal' => _a('Normal'),
-                        'ajax' => _a('Ajax'),
-                    ),
-                ),
-            ),
-            'filter' => 'text',
-            'value' => 'normal',
-            'category' => 'view',
-        ),
         'view_perpage' => array(
             'category' => 'view',
             'title' => _a('Perpage'),
@@ -181,7 +165,7 @@ return array(
         ),
         'view_attach' => array(
             'category' => 'view',
-            'title' => _a('Show product attacehed files'),
+            'title' => _a('Show product attached files'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
@@ -529,7 +513,7 @@ return array(
                 ),
             ),
             'filter' => 'text',
-            'value' => 'never',
+            'value' => 'manual',
         ),
         'order_discount' => array(
             'category' => 'order',

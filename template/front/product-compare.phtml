@@ -1,0 +1,100 @@
+<?php
+$this->css($this->assetModule('css/front.css'));
+// Set Open Graph tags for meta
+$this->doctype('HTML5');
+$this->headMeta(__('Compare products'), 'og:title', 'property');
+$this->headMeta($this->escape($productItem['productUrl']), 'og:url', 'property');
+$this->headMeta(_strip($title), 'og:description', 'property');
+$this->headMeta($this->escape($mainProduct['largeUrl']), 'og:image', 'property');
+// Set twitter for meta
+$this->headMeta(__('Compare products'), 'twitter:title');
+$this->headMeta(_strip($title), 'twitter:description');
+$this->headMeta($this->escape($mainProduct['largeUrl']), 'twitter:image');
+// Set class
+switch (count($products)) {
+    case 1:
+        $widthClass = 'product-compare-width-1 pull-left';
+        break;
+
+    case 2:
+        $widthClass = 'product-compare-width-2 pull-left';
+        break;
+
+    case 3:
+        $widthClass = 'product-compare-width-3 pull-left';
+        break;
+
+    case 4:
+        $widthClass = 'product-compare-width-4 pull-left';
+        break;
+
+    case 5:
+        $widthClass = 'product-compare-width-5 pull-left';
+        break;
+}
+?>
+<div class="product-compare clearfix">
+    <h1><?php _e('Compare products'); ?></h1>
+    <?php if (isset($products) && !empty($products)) { ?>
+    <div class="product-compare-header clearfix">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+            <div class="row">
+                <?php foreach ($products as $product) { ?>
+                    <div class="<?php echo $widthClass ;?>">
+                        <div class="col-md-12">
+                            <div class="thumbnail text-center">
+                                <i class="fa fa-times-circle"></i>
+                                <a target="_blank" href="<?php echo $this->escape($product['productUrl']); ?>" title="<?php echo $this->escape($product['title']); ?>">
+                                    <img class="img-responsive" src="<?php echo $this->escape($product['thumbUrl']); ?>" alt="<?php echo $this->escape($product['title']); ?>">
+                                </a>
+                                <div class="caption">
+                                    <h2>
+                                        <a target="_blank" href="<?php echo $this->escape($product['productUrl']); ?>" title="<?php echo $this->escape($product['title']); ?>">
+                                            <?php echo $this->escape($product['title']); ?>
+                                        </a>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <div class="product-compare-box clearfix">
+        <div class="col-md-2 product-compare-box-title">
+            <ul class="list-unstyled row">
+                <li><?php _e('Stock'); ?></li>
+                <li><?php _e('Price'); ?></li>
+                <?php foreach ($product['attribute'] as $attribute) { ?>
+                    <li class="product-compare-box-category"><?php echo $this->escape($attribute['title']); ?></li>
+                    <?php foreach ($attribute['info'] as $attributeSingle) { ?>
+                        <li><?php echo $this->escape($attributeSingle['title']); ?></li>
+                    <?php } ?>
+                <?php } ?>
+            </ul>
+        </div>
+        <div class="col-md-10 product-compare-box-info">
+            <div class="row">
+                <?php foreach ($products as $product) { ?>
+                    <div class="<?php echo $widthClass ;?>">
+                        <ul class="list-unstyled row">
+                            <li><?php echo $this->escape($product['stock_type_view']); ?></li>
+                            <li><?php echo $this->escape($product['price_view']); ?></li>
+                            <?php foreach ($product['attribute'] as $attribute) { ?>
+                                <li class="product-compare-box-category"></li>
+                                <?php foreach ($attribute['info'] as $attributeSingle) { ?>
+                                    <li><?php echo $this->escape($attributeSingle['data']); ?></li>
+                                <?php } ?>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <?php } else { ?>
+
+    <?php } ?>
+</div>

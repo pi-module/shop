@@ -87,6 +87,14 @@ class Breadcrumbs extends AbstractBreadcrumbs
 
                     case 'product':
                         $product = Pi::api('product', 'shop')->getProductLight($params['slug'], 'slug');
+                        // Category list
+                        $result[] = array(
+                            'label' => __('Category list'),
+                            'href' => Pi::url(Pi::service('url')->assemble('shop', array(
+                                'module' => $this->getModule(),
+                                'controller' => 'category',
+                            ))),
+                        );
                         // Check have category_main
                         if ($product['category_main'] > 0) {
                             $category = Pi::api('category', 'shop')->getCategory($product['category_main']);
@@ -122,23 +130,11 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         break;
                 }
             } else {
-                if (isset($params['q']) && !empty($params['q'])) {
-                    $result[] = array(
+                $result = array(
+                    array(
                         'label' => $moduleData['title'],
-                        'href' => Pi::url(Pi::service('url')->assemble('shop', array(
-                            'module' => $this->getModule(),
-                        ))),
-                    );
-                    $result[] = array(
-                        'label' => __('Search result'),
-                    );
-                } else {
-                    $result = array(
-                        array(
-                            'label' => $moduleData['title'],
-                        ),
-                    );
-                }
+                    ),
+                );
             }
             return $result;
         } else {

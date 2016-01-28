@@ -22,6 +22,7 @@ use Zend\Json\Json;
  * Pi::api('product', 'shop')->getProductOrder($id);
  * Pi::api('product', 'shop')->getListFromId($id);
  * Pi::api('product', 'shop')->getListFromIdLight($id);
+ * Pi::api('product', 'shop')->getCompareList($slugList, $mainProduct);
  * Pi::api('product', 'shop')->searchRelated($title, $type);
  * Pi::api('product', 'shop')->attributeCount($id);
  * Pi::api('product', 'shop')->attachCount($id);
@@ -110,6 +111,25 @@ class Product extends AbstractApi
         $rowset = Pi::model('product', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $list[$row->id] = $this->canonizeProductLight($row);
+        }
+        return $list;
+    }
+
+    public function getCompareList($slugList, $mainProduct)
+    {
+        $list = array();
+        $where = array('slug' => $slugList, 'status' => 1, 'category_main' => $mainProduct['category_main']);
+        $select = Pi::model('product', $this->getModule())->select()->where($where);
+        $rowset = Pi::model('product', $this->getModule())->selectWith($select);
+        foreach ($rowset as $key => $row) {
+            $product = $this->canonizeProduct($row);
+            // Set attribute
+            if ($row->attribute) {
+                $attributes = Pi::api('attribute', 'shop')->Product($row->id);
+                $product['attribute'] = $attributes['all'];
+            }
+            $key = array_search($product['slug'], $slugList);
+            $list[$key] = $product;
         }
         return $list;
     }

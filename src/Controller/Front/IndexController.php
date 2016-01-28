@@ -24,7 +24,7 @@ use Zend\Db\Sql\Predicate\Expression;
 
 class IndexController extends ActionController
 {
-    public function indexAction()
+    /* public function indexAction()
     {
         // Get info from url
         $module = $this->params('module');
@@ -36,9 +36,9 @@ class IndexController extends ActionController
         } else {
             $this->normalView();
         }
-    }
+    } */
 
-    public function filterAction()
+    /* public function filterAction()
     {
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
@@ -79,9 +79,9 @@ class IndexController extends ActionController
             $url = array('action' => 'index');
             $this->jump($url, $message, 'error');
         }
-    }
+    } */
 
-    public function normalView()
+    /* public function normalView()
     {
         // Get info from url
         $module = $this->params('module');
@@ -271,13 +271,12 @@ class IndexController extends ActionController
         $this->view()->assign('config', $config);
         $this->view()->assign('form', $form);
         $this->view()->assign('isHomepage', 1);
-    }
+    } */
 
-    public function ajaxView()
+    public function indexAction()
     {
         // Get info from url
         $module = $this->params('module');
-        //$search = $this->params('q');
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // category list
@@ -455,12 +454,6 @@ class IndexController extends ActionController
     {
         $template['slug'] = (isset($template['slug'])) ? $template['slug'] : '';
         $template['action'] = (isset($template['action'])) ? $template['action'] : 'index';
-        /* $options = array();
-        if (isset($template['q']) && !empty($template['q'])) {
-            foreach ($template['q'] as $key => $value) {
-                $options['query'][$key] = $value;
-            }
-        } */
         // paginator
         $paginator = Paginator::factory(intval($template['count']));
         $paginator->setItemCountPerPage(intval($this->config('view_perpage')));
