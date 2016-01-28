@@ -21,14 +21,20 @@ class CompareController extends ActionController
 {
     public function indexAction()
     {
-        $products = $this->params('product');
-
-        $mainProduct = Pi::api('product', 'shop')->getProductLight($products[1], 'slug');
-        $products = Pi::api('product', 'shop')->getCompareList($products, $mainProduct);
-
-
+        // Get info from url
+        $slugList = $this->params('product');
+        $mainProduct = array();
+        $products = array();
+        // Check product list
+        if (!empty($slugList)) {
+            $mainProduct = Pi::api('product', 'shop')->getProductLight($slugList[1], 'slug');
+            $products = Pi::api('product', 'shop')->getCompareList($slugList, $mainProduct);
+        }
         // Set url
-        $url = Pi::url();
+        $url = Pi::url($this->url('', array('controller' => 'compare')));
+        foreach ($slugList as $slug) {
+            $url = sprintf('%s/%s', $url, $slug);
+        }
         // Set header and title
         $title = __('Compare products');
         if (!empty($products)) {

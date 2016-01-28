@@ -128,6 +128,12 @@ class Breadcrumbs extends AbstractBreadcrumbs
                             );
                         }
                         break;
+
+                    case 'compare':
+                        $result[] = array(
+                            'label' => __('Compare products'),
+                        );
+                        break;
                 }
             } else {
                 $result = array(

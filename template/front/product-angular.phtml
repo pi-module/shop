@@ -11,6 +11,11 @@ app.controller('listdata',function($scope, $http){
         $scope.sortKey = keyname;
         //$scope.reverse = !$scope.reverse;
     }
+    $(document).on("click", ".product-compare-add", function() {
+        $(".product-compare-list").removeClass("hide");
+        $(".product-compare-list").append("<div class='col-md-2'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
+        $("#product-" + $(this).attr("data-key")).remove(".product-compare-add");
+    });
 });
 EOT;
 $script = sprintf(
@@ -115,6 +120,9 @@ switch ($config['view_column']) {
     <div class="col-sm-12 col-md-9" ng-controller="listdata">
         <?php include $this->template('front/category'); ?>
         <?php include $this->template('front/special'); ?>
+        <div class="product-compare-list clearfix row hide">
+
+        </div>
         <div class="clearfix">
             <div class="productList clearfix">
                 <?php if (isset($productTitleH1) && !empty($productTitleH1)) { ?>
@@ -133,15 +141,22 @@ switch ($config['view_column']) {
                 <?php } ?>
                 <div dir-paginate="product in products|orderBy:sortKey|filter: {<?php if (!empty($filterNameArray)) { ?><?php foreach ($filterNameArray as $filterNameSingle) { ?><?php echo $filterNameSingle['fieldName'] ?> : <?php echo $filterNameSingle['filterName'] ?>,<?php } ?><?php } ?> title : filterTitle, marketable : filterMarketable } |itemsPerPage:<?php echo $config['view_perpage']; ?>"
                      class="<?php echo $shopBoxSize; ?> productBox h-product" itemscope itemtype="http://schema.org/Product">
-                    <div class="thumbnail">
-                        <a itemprop="url" class="u-photo" title="{{product.title}}"
-                           href="{{product.productUrl}}"><img
-                                itemprop="image" src="{{product.thumbUrl}}"
-                                alt="{{product.title}}"/></a>
+                    <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
+                        <div ng-show="hoverCompare"
+                             id="#product-{{product.id}}"
+                             data-key="{{product.id}}"
+                             data-title="{{product.title}}"
+                             data-slug="{{product.slug}}"
+                             data-image="{{product.thumbUrl}}"
+                             class="product-compare-add">
+                            <i class="fa fa-plus"></i> <?php _e('Compare'); ?>
+                        </div>
+                        <a itemprop="url" class="u-photo" title="{{product.title}}" href="{{product.productUrl}}">
+                            <img itemprop="image" src="{{product.thumbUrl}}" alt="{{product.title}}"/>
+                        </a>
                         <div class="caption">
                             <h3 class="p-name" itemprop="name">
-                                <a title="{{product.title}}"
-                                   href="{{product.productUrl}}">
+                                <a title="{{product.title}}" href="{{product.productUrl}}">
                                     {{product.title}}
                                 </a>
                             </h3>
