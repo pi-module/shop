@@ -211,4 +211,26 @@
 
 .product-compare-list {
     background: #f5f5f5;
+    padding-top: 10px;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+    margin-bottom: 15px;
+}
+
+.product-compare-list .col-md-2 {
+    padding: 0 3px;
+}
+
+.product-compare-list .thumbnail {
+    text-align: center;
+}
+
+.product-compare-list .thumbnail h4 {
+    font-size: 0.9em;
+    padding: 1px;
+    margin: 1px;
+}
+
+.product-compare-list .product-compare-button {
+    margin-top: 50px;
 }

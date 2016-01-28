@@ -2,6 +2,7 @@
 // Load angular custom js
 $script = <<<'EOT'
 var app = angular.module('shop', ['angularUtils.directives.dirPagination']);
+var compareCount = 0;
 app.controller('listdata',function($scope, $http){
     $scope.products = [];
     $http.get("%s").success(function(response){
@@ -11,10 +12,22 @@ app.controller('listdata',function($scope, $http){
         $scope.sortKey = keyname;
         //$scope.reverse = !$scope.reverse;
     }
+    // compare products
     $(document).on("click", ".product-compare-add", function() {
-        $(".product-compare-list").removeClass("hide");
-        $(".product-compare-list").append("<div class='col-md-2'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
-        $("#product-" + $(this).attr("data-key")).remove(".product-compare-add");
+        if (compareCount < 5) {
+            compareCount = compareCount + 1;
+            var url = $('.product-compare-button a').attr('href');
+            url = url + '/' + $(this).attr("data-slug");
+            $('.product-compare-button a').attr("href", url);
+            $(".product-compare-list").removeClass("hide");
+            $(".product-compare-list .clearfix").append("<div class='col-md-2'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
+            //$scope.class = "product-compare-add";
+            //$scope.changeClass = function() {
+            //    $scope.class = "hide";
+            //}
+        } else {
+            $('#compareModal').modal('show');
+        }
     });
 });
 EOT;
@@ -120,8 +133,32 @@ switch ($config['view_column']) {
     <div class="col-sm-12 col-md-9" ng-controller="listdata">
         <?php include $this->template('front/category'); ?>
         <?php include $this->template('front/special'); ?>
-        <div class="product-compare-list clearfix row hide">
+        <div class="product-compare-list hide">
+            <div class="clearfix">
+                <div class="col-md-2">
+                    <div class="product-compare-button text-center">
+                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'compare'))); ?>" title="<?php _e("Compare products"); ?>" class="btn btn-success btn-xs">
+                            <?php _e("Compare products"); ?>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
+            <div class="modal fade" id="compareModal" tabindex="-1" role="dialog" aria-labelledby="compareModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="compareModalLabel"><?php _e('Compare products'); ?></h4>
+                        </div>
+                        <div class="modal-body">
+                            <?php _e('You can add just 5 products on compare list'); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="clearfix">
             <div class="productList clearfix">
@@ -143,8 +180,8 @@ switch ($config['view_column']) {
                      class="<?php echo $shopBoxSize; ?> productBox h-product" itemscope itemtype="http://schema.org/Product">
                     <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
                         <div ng-show="hoverCompare"
-                             id="#product-{{product.id}}"
-                             data-key="{{product.id}}"
+                             ng-click="changeClass()"
+                             ng-class="class"
                              data-title="{{product.title}}"
                              data-slug="{{product.slug}}"
                              data-image="{{product.thumbUrl}}"
