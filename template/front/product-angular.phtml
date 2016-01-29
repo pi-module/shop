@@ -3,6 +3,7 @@
 $script = <<<'EOT'
 var app = angular.module('shop', ['angularUtils.directives.dirPagination']);
 var compareCount = 0;
+var compareList = [];
 app.controller('listdata',function($scope, $http){
     $scope.products = [];
     $http.get("%s").success(function(response){
@@ -15,17 +16,22 @@ app.controller('listdata',function($scope, $http){
     // compare products
     $(document).on("click", ".product-compare-add", function() {
         if (compareCount < 5) {
-            compareCount = compareCount + 1;
-            var url = $('.product-compare-button a').attr('href');
-            url = url + '/' + $(this).attr("data-slug");
-            $('.product-compare-button a').attr("href", url);
-            $(".product-compare-list").removeClass("hide");
-            $(".product-compare-list .clearfix").append("<div class='col-md-2'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
-            //$scope.class = "product-compare-add";
-            //$scope.changeClass = function() {
-            //    $scope.class = "hide";
-            //}
+            if(jQuery.inArray($(this).attr("data-slug"), compareList) !== -1) {
+                $('#compareModal .modal-body').html('%s');
+                $('#compareModal').modal('show');
+            } else {
+                compareList.push($(this).attr("data-slug"));
+                compareCount = compareCount + 1;
+
+                var url = $('.product-compare-button a').attr('href');
+                url = url + '/' + $(this).attr("data-slug");
+
+                $('.product-compare-button a').attr("href", url);
+                $(".product-compare-list").removeClass("hide");
+                $(".product-compare-list .clearfix").append("<div class='col-md-2'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
+            }
         } else {
+            $('#compareModal .modal-body').html('%s');
             $('#compareModal').modal('show');
         }
     });
@@ -33,7 +39,9 @@ app.controller('listdata',function($scope, $http){
 EOT;
 $script = sprintf(
     $script,
-    $filterUrl
+    $filterUrl,
+    __('You put this product on compare list before'),
+    __('You can add just 5 products on compare list')
 );
 // Load header files
 $this->jQuery();
@@ -143,7 +151,6 @@ switch ($config['view_column']) {
                     </div>
                 </div>
             </div>
-
             <div class="modal fade" id="compareModal" tabindex="-1" role="dialog" aria-labelledby="compareModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -153,9 +160,7 @@ switch ($config['view_column']) {
                             </button>
                             <h4 class="modal-title" id="compareModalLabel"><?php _e('Compare products'); ?></h4>
                         </div>
-                        <div class="modal-body">
-                            <?php _e('You can add just 5 products on compare list'); ?>
-                        </div>
+                        <div class="modal-body"></div>
                     </div>
                 </div>
             </div>
