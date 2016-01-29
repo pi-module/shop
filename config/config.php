@@ -46,10 +46,6 @@ return array(
             'name' => 'favourite'
         ),
         array(
-            'title' => _a('Search'),
-            'name' => 'search'
-        ),
-        array(
             'title' => _a('Order'),
             'name' => 'order'
         ),
@@ -62,7 +58,7 @@ return array(
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
-            'value' => 10
+            'value' => 25
         ),
         // Json
         'json_perpage' => array(
@@ -126,7 +122,7 @@ return array(
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
-            'value' => 20
+            'value' => 18
         ),
         'view_column' => array(
             'title' => _a('Columns'),
@@ -242,22 +238,6 @@ return array(
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
-        ),
-        'view_side_category' => array(
-            'title' => _a('Side category type'),
-            'description' => '',
-            'edit' => array(
-                'type' => 'select',
-                'options' => array(
-                    'options' => array(
-                        'compact' => _a('Compact'),
-                        'full' => _a('Full'),
-                    ),
-                ),
-            ),
-            'filter' => 'text',
-            'value' => 'compact',
-            'category' => 'view',
         ),
         // Image
         'image_size' => array(
@@ -438,31 +418,6 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
-        // Search 
-        'search_type' => array(
-            'category' => 'search',
-            'title' => _a('Show search type'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
-        ),
-        'search_price' => array(
-            'category' => 'search',
-            'title' => _a('Show search price'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
-        ),
-        'search_category' => array(
-            'category' => 'search',
-            'title' => _a('Show search category'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
-        ),
         // Order
         'order_active' => array(
             'category' => 'order',
@@ -471,14 +426,6 @@ return array(
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
-        ),
-        'order_anonymous' => array(
-            'category' => 'order',
-            'title' => _a('Anonymous users can set order'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 0
         ),
         'order_type' => array(
             'category' => 'order',
@@ -540,30 +487,6 @@ return array(
             'value' => 'general',
         ),
         // Texts
-        'text_title_search' => array(
-            'category' => 'head_meta',
-            'title' => _a('Module search page title'),
-            'description' => '',
-            'edit' => 'text',
-            'filter' => 'string',
-            'value' => _a('Search')
-        ),
-        'text_description_search' => array(
-            'category' => 'head_meta',
-            'title' => _a('Module search page description'),
-            'description' => '',
-            'edit' => 'text',
-            'filter' => 'string',
-            'value' => _a('Search on website products')
-        ),
-        'text_keywords_search' => array(
-            'category' => 'head_meta',
-            'title' => _a('Module search page keywords'),
-            'description' => '',
-            'edit' => 'text',
-            'filter' => 'string',
-            'value' => _a('search,product,shop,online,website')
-        ),
         'text_description_index' => array(
             'category' => 'head_meta',
             'title' => _a('Description for index page'),
