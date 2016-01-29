@@ -110,33 +110,12 @@ class Shop extends Standard
                     break;
 
                 case 'index':
-                    /* if (isset($parts[0]) && $parts[0] == 'filter') {
-                        $matches['action'] = 'filter';
-                    } else {
-                        $matches['action'] = 'index';
-                        if (isset($_GET) && !empty($_GET)) {
-                            foreach ($_GET as $key => $value) {
-                                if ($key != 'page') {
-                                    $matches['q'][$key] = $value;
-                                }
-                            }
-                        }
-                    } */
                     $matches['action'] = 'index';
                     break;
 
                 case 'product':
                     $matches['slug'] = $this->decode($parts[1]);
                     break;
-
-               /*  case 'search':
-                    if ($parts[1] == 'result') {
-                        $matches['action'] = 'result';
-                        $matches['slug'] = $this->decode($parts[2]);
-                    } elseif ($parts[1] == 'filter') {
-                        $matches['action'] = 'filter';
-                    }
-                    break; */
 
                 case 'tag':
                     if (isset($parts[1]) && !empty($parts[1])) {
@@ -283,13 +262,6 @@ class Shop extends Standard
         // Set slug
         if (!empty($mergedParams['q'])) {
             $url['q'] = $mergedParams['q'];
-        }
-
-        // Set step
-        if (!empty($mergedParams['step'])) {
-            $url['step'] = sprintf('step%s%s',
-                $this->paramDelimiter,
-                $mergedParams['step']);
         }
 
         // Set password
