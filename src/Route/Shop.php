@@ -152,6 +152,8 @@ class Shop extends Standard
 
                     if ($parts[1] == 'filterCategory') {
                         $matches['slug'] = $this->decode($parts[2]);
+                    } elseif ($parts[1] == 'filterTag') {
+                        $matches['slug'] = $this->decode($parts[2]);
                     } elseif ($parts[1] == 'filterSearch') {
                         $keyword = _get('keyword');
                         if (isset($keyword) && !empty($keyword)) {

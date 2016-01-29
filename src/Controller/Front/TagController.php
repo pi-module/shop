@@ -21,9 +21,6 @@ class TagController extends IndexController
 {
     public function indexAction()
     {
-        // Get info from url
-        $module = $this->params('module');
-        $slug = $this->params('slug');
         // Check tag
         if (!Pi::service('module')->isActive('tag')) {
             $this->getResponse()->setStatusCode(404);
@@ -31,6 +28,9 @@ class TagController extends IndexController
             $this->view()->setLayout('layout-simple');
             return;
         }
+        // Get info from url
+        $module = $this->params('module');
+        $slug = $this->params('slug');
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Check slug
@@ -40,43 +40,16 @@ class TagController extends IndexController
             $this->view()->setLayout('layout-simple');
             return;
         }
-        // Get id from tag module
-        $tagId = array();
-        $tags = Pi::service('tag')->getList($slug, $module);
-        foreach ($tags as $tag) {
-            $tagId[] = $tag['item'];
-        }
-        // Check slug
-        if (empty($tagId)) {
-            $this->getResponse()->setStatusCode(404);
-            $this->terminate(__('The tag not found.'), '', 'error-404');
-            $this->view()->setLayout('layout-simple');
-            return;
-        }
-        // Set info
-        $where = array(
-            'status' => 1,
-            'product' => $tagId
-        );
-        // Get product List
-        $productList = $this->productList($where);
-        // Set paginator info
-        $template = array(
-            'controller' => 'tag',
-            'action' => 'term',
-            'slug' => urlencode($slug),
-        );
-        // Get paginator
-        $paginator = $this->productPaginator($template, $where);
-        // Set search form
-        $fields = Pi::api('attribute', 'shop')->Get();
-        $option['field'] = $fields['attribute'];
-        $form = new SearchForm('search', $option);
-        $form->setAttribute('action', Pi::url($this->url('shop', array(
-            'module' => $module,
-            'controller' => 'search',
-            'action' => 'filter',
-        ))));
+        // category list
+        $categories = Pi::api('category', 'shop')->categoryList(0);
+        // Set filter url
+        $filterUrl = Pi::url($this->url('', array(
+            'controller' => 'json',
+            'action' => 'filterTag',
+            'slug' => $slug
+        )));
+        // Set filter list
+        $filterList = Pi::api('attribute', 'shop')->filterList();
         // Set header and title
         $title = sprintf(__('All products by %s tag'), $slug);
         // Set seo_keywords
@@ -89,12 +62,12 @@ class TagController extends IndexController
         $this->view()->headTitle($title);
         $this->view()->headDescription($title, 'set');
         $this->view()->headKeywords($seoKeywords, 'set');
-        $this->view()->setTemplate('product-list');
-        $this->view()->assign('productList', $productList);
-        $this->view()->assign('productTitleH2', $title);
-        $this->view()->assign('paginator', $paginator);
+        $this->view()->setTemplate('product-angular');
         $this->view()->assign('config', $config);
-        $this->view()->assign('form', $form);
+        $this->view()->assign('categories', $categories);
+        $this->view()->assign('filterUrl', $filterUrl);
+        $this->view()->assign('filterList', $filterList);
+        $this->view()->assign('productTitleH1', $title);
     }
 
     public function listAction()
@@ -114,7 +87,7 @@ class TagController extends IndexController
                 $tagList[$row->id]['term'] = $tag['term'];
                 $tagList[$row->id]['url'] = Pi::url($this->url('', array(
                     'controller' => 'tag',
-                    'action' => 'term',
+                    'action' => 'index',
                     'slug' => urldecode($tag['term'])
                 )));
             }

@@ -212,7 +212,6 @@ class JsonController extends IndexController
         // Get info from url
         $module = $this->params('module');
         $slug = $this->params('slug');
-
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get category information from model
@@ -256,6 +255,56 @@ class JsonController extends IndexController
         }
         // Set info
         $where = array('status' => 1, 'id' => $productId);
+        // Get list of product
+        $select = $this->getModel('product')->select()->where($where)->order($order);
+        $rowset = $this->getModel('product')->selectWith($select);
+        foreach ($rowset as $row) {
+            $product[] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
+        }
+        // Set view
+        return $product;
+    }
+
+    public function filterTagAction()
+    {
+        // Check tag
+        if (!Pi::service('module')->isActive('tag')) {
+            $this->getResponse()->setStatusCode(404);
+            $this->terminate(__('Tag module not installed.'), '', 'error-404');
+            $this->view()->setLayout('layout-simple');
+            return;
+        }
+        // Get info from url
+        $module = $this->params('module');
+        $slug = $this->params('slug');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Check slug
+        if (!isset($slug) || empty($slug)) {
+            $this->getResponse()->setStatusCode(404);
+            $this->terminate(__('The tag not set.'), '', 'error-404');
+            $this->view()->setLayout('layout-simple');
+            return;
+        }
+        // Get id from tag module
+        $tagId = array();
+        $tags = Pi::service('tag')->getList($slug, $module);
+        foreach ($tags as $tag) {
+            $tagId[] = $tag['item'];
+        }
+        // Check slug
+        if (empty($tagId)) {
+            $this->getResponse()->setStatusCode(404);
+            $this->terminate(__('The tag not found.'), '', 'error-404');
+            $this->view()->setLayout('layout-simple');
+            return;
+        }
+        // Get search form
+        $filterList = Pi::api('attribute', 'shop')->filterList();
+        $categoryList = Pi::registry('categoryList', 'shop')->read();
+        // Set info
+        $where = array('status' => 1, 'id' => $tagId);
+        $order = array('time_create DESC', 'id DESC');
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
