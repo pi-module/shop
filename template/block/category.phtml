@@ -65,9 +65,10 @@
         </ul>
     <?php } elseif ($block['type'] == 'slide') { ?>
         <?php
-        $this->jQuery();
-        $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
-        $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
+        $this->jQuery(array(
+            'extension/owl.carousel.min.js',
+            'extension/owl.carousel.css',
+        ));
         $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
         $this->css($this->assetModule('css/block.css', 'shop'));
         ?>
@@ -97,9 +98,10 @@
         </div>
     <?php } elseif ($block['type'] == 'slidehover') { ?>
         <?php
-        $this->jQuery();
-        $this->js($this->assetModule('js/owl.carousel.min.js', 'shop'));
-        $this->js($this->assetModule('js/owl.carousel.config.js', 'shop'));
+        $this->jQuery(array(
+            'extension/owl.carousel.min.js',
+            'extension/owl.carousel.css',
+        ));
         $this->js($this->assetModule('js/caption.hover.js', 'shop'));
         $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
         ?>

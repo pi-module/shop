@@ -54,3 +54,36 @@
 .shop-block-search .dropdown-menu .dropdown-header a:hover {
     background-color: #cccccc;
 }
+
+/* Customize */
+.owl-carousel {
+    height: 163px;
+}
+
+.owl-carousel .owl-stage {
+    height: 160px;
+}
+
+.owl-carousel .owl-stage-outer {
+    height: 160px;
+    z-index: -10;
+}
+
+.owl-carousel .owl-item {
+    max-height: 160px;
+}
+
+.owl-carousel .owl-item img {
+    max-height: 100px;
+    width: auto;
+}
+
+.owl-carousel .owl-item h3 {
+    font-size: 1em;
+    margin: 3px 1px;
+    padding: 1px;
+}
+
+.owl-carousel .owl-controls .owl-nav {
+    margin-top: -120px;
+}

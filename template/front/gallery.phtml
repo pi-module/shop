@@ -36,9 +36,9 @@ $script2 = sprintf($script2, $iconOwlLeft, $iconOwlRight);
 $this->jQuery(array(
     'extension/jquery.magnific-popup.min.js',
     'extension/magnific-popup.css',
+    'extension/owl.carousel.min.js',
+    'extension/owl.carousel.css',
 ));
-$this->js($this->assetModule('js/owl.carousel.min.js'));
-$this->css($this->assetModule('css/owl.carousel.css'));
 $this->footScript()->appendScript($script1);
 $this->footScript()->appendScript($script2);
 ?>
