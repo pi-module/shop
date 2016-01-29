@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-01-01 17:26+0330\n"
+"POT-Creation-Date: 2016-01-29 11:12+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -60,7 +60,7 @@ msgid "Hidden"
 msgstr "مخفی"
 
 #: src/Api/Breadcrumbs.php:50 src/Api/Breadcrumbs.php:56
-#: src/Controller/Front/CategoryController.php:55
+#: src/Api/Breadcrumbs.php:92 src/Controller/Front/CategoryController.php:80
 #: template/front/category-list.phtml:4 template/front/category-side.phtml:4
 msgid "Category list"
 msgstr "فهرست شاخه ها"
@@ -74,43 +74,48 @@ msgstr "سبد خرید"
 msgid "Finish"
 msgstr "پایان"
 
-#: src/Api/Breadcrumbs.php:108 src/Api/Breadcrumbs.php:119
+#: src/Api/Breadcrumbs.php:116 src/Api/Breadcrumbs.php:127
 #: template/front/tag-list.phtml:4
 msgid "Tag list"
 msgstr "فهرست برچسب ها"
 
-#: src/Api/Breadcrumbs.php:133 src/Controller/Front/IndexController.php:214
-#: template/admin/product-related.phtml:45
-msgid "Search result"
-msgstr "نتایج جستجو"
+#: src/Api/Breadcrumbs.php:134 src/Controller/Front/CompareController.php:39
+#: template/front/product-angular.phtml:148
+#: template/front/product-angular.phtml:149
+#: template/front/product-angular.phtml:161
+#: template/front/product-compare.phtml:6
+#: template/front/product-compare.phtml:13
+#: template/front/product-compare.phtml:54
+msgid "Compare products"
+msgstr "مقایسه محصولات"
 
-#: src/Api/Product.php:386 src/Api/Product.php:664 src/Api/Product.php:819
-#: src/Form/ProductForm.php:236 template/front/product-angular.phtml:154
-#: template/front/product-angular.phtml:170
-#: template/front/product-angular.phtml:193 template/front/product-box.phtml:29
+#: src/Api/Product.php:406 src/Api/Product.php:684 src/Api/Product.php:839
+#: src/Form/ProductForm.php:236 template/front/product-angular.phtml:211
+#: template/front/product-angular.phtml:227
+#: template/front/product-angular.phtml:250 template/front/product-box.phtml:29
 #: template/front/product-box.phtml:49 template/front/product-box.phtml:75
 #: template/front/product-price.phtml:15 template/front/product-price.phtml:41
-#: template/front/product-price.phtml:73
+#: template/front/product-price.phtml:74
 msgid "In stock"
 msgstr "موجود"
 
-#: src/Api/Product.php:390 src/Api/Product.php:668 src/Api/Product.php:823
-#: src/Form/ProductForm.php:237 template/front/product-angular.phtml:208
-#: template/front/product-box.phtml:89 template/front/product-price.phtml:89
+#: src/Api/Product.php:410 src/Api/Product.php:688 src/Api/Product.php:843
+#: src/Form/ProductForm.php:237 template/front/product-angular.phtml:265
+#: template/front/product-box.phtml:89 template/front/product-price.phtml:90
 msgid "Out of stock"
 msgstr "نا موجود"
 
-#: src/Api/Product.php:394 src/Api/Product.php:672 src/Api/Product.php:827
+#: src/Api/Product.php:414 src/Api/Product.php:692 src/Api/Product.php:847
 #: src/Form/ProductForm.php:238
 msgid "Coming soon"
 msgstr "به زودی"
 
-#: src/Api/Product.php:398 src/Api/Product.php:676 src/Api/Product.php:831
+#: src/Api/Product.php:418 src/Api/Product.php:696 src/Api/Product.php:851
 #: src/Form/ProductForm.php:239
 msgid "Contact"
 msgstr "تماس بگیرید"
 
-#: src/Api/Product.php:402 src/Api/Product.php:680 src/Api/Product.php:835
+#: src/Api/Product.php:422 src/Api/Product.php:700 src/Api/Product.php:855
 #: src/Form/ProductForm.php:240
 msgid "Variable stock"
 msgstr "موجودی متغیر"
@@ -243,7 +248,7 @@ msgstr "اطلاعات محصول با موفقیت ذخیره شد"
 #: src/Controller/Admin/ProductController.php:481
 #: src/Controller/Admin/ProductController.php:545
 #: src/Controller/Admin/ProductController.php:654
-#: src/Controller/Front/CartController.php:142
+#: src/Controller/Front/CartController.php:127
 msgid "Please select product"
 msgstr "لطفا یک محصول انتخاب کنید"
 
@@ -332,7 +337,7 @@ msgstr "آخرین محصولات اضافه شده"
 
 #: src/Controller/Front/CartController.php:29
 #: src/Controller/Front/CartController.php:58
-#: src/Controller/Front/CartController.php:226
+#: src/Controller/Front/CartController.php:209
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
@@ -344,61 +349,49 @@ msgstr "سبد خرید شما خالی است"
 msgid "The product was not marketable."
 msgstr "این محصول قابل فروش نیست"
 
-#: src/Controller/Front/CartController.php:127
+#: src/Controller/Front/CartController.php:114
 msgid "Your cart are empty"
 msgstr "سبد خرید شما خالی است"
 
-#: src/Controller/Front/CartController.php:151
+#: src/Controller/Front/CartController.php:136
 msgid "Selected product removed from your cart"
 msgstr "محصول انتخاب شده از سبد خرید شما حذف شد"
 
-#: src/Controller/Front/CartController.php:166
+#: src/Controller/Front/CartController.php:151
 msgid "Update number"
 msgstr "تغییر تعداد"
 
-#: src/Controller/Front/CartController.php:172
+#: src/Controller/Front/CartController.php:157
 msgid "You can not set product number to 0"
 msgstr "شما نمی توانید تعداد یک محصول را ۰ تنظیم کنید"
 
-#: src/Controller/Front/CartController.php:236
+#: src/Controller/Front/CartController.php:219
 msgid "Order not set."
 msgstr "سفارشی انتخاب نشده"
 
-#: src/Controller/Front/CartController.php:241
+#: src/Controller/Front/CartController.php:224
 msgid "It not your order."
 msgstr "این سفارش مربوط به شما نیست"
 
-#: src/Controller/Front/CartController.php:246
+#: src/Controller/Front/CartController.php:229
 msgid "This order not pay"
 msgstr "این سفارش پرداخت نشده"
 
-#: src/Controller/Front/CartController.php:252
+#: src/Controller/Front/CartController.php:235
 msgid "This is old order and you pay it before"
 msgstr "این یک سفارش قدیمی است و شما قبلا آن را پرداخت کرده اید"
 
-#: src/Controller/Front/CategoryController.php:84
-#: src/Controller/Front/CategoryController.php:154
-#: src/Controller/Front/JsonController.php:224
+#: src/Controller/Front/CategoryController.php:37
+#: src/Controller/Front/JsonController.php:223
 msgid "The category not found."
 msgstr "شاخه یافت نشد"
 
-#: src/Controller/Front/IndexController.php:78
-msgid "Search again"
-msgstr "جستجوی مجدد"
-
-#: src/Controller/Front/IndexController.php:212
-#, php-format
-msgid "Search result of %s"
-msgstr "نتایج جستجوی %s"
-
-#: src/Controller/Front/IndexController.php:253
-#: src/Controller/Front/IndexController.php:307
+#: src/Controller/Front/IndexController.php:57
 #: src/Controller/Front/ProductController.php:61
 msgid "New products"
 msgstr "آخرین محصولات"
 
-#: src/Controller/Front/IndexController.php:256
-#: src/Controller/Front/IndexController.php:314
+#: src/Controller/Front/IndexController.php:64
 #: template/front/checkout-finish.phtml:17
 #: template/front/checkout-finish.phtml:18
 msgid "Shop index"
@@ -414,16 +407,30 @@ msgstr "واژه رمز تنظیم نشده یا اشتباه است"
 msgid "Your question send to admin"
 msgstr "سوال شما برای مدیر ارسال شد"
 
-#: src/Controller/Front/JsonController.php:278
+#: src/Controller/Front/JsonController.php:273
+#: src/Controller/Front/TagController.php:27
+msgid "Tag module not installed."
+msgstr "ماژول برچسب نصب نشده است."
+
+#: src/Controller/Front/JsonController.php:285
+#: src/Controller/Front/TagController.php:39
+msgid "The tag not set."
+msgstr "برچسب تنظیم نشده"
+
+#: src/Controller/Front/JsonController.php:298
+msgid "The tag not found."
+msgstr "برچسب یافت نشد"
+
+#: src/Controller/Front/JsonController.php:327
 msgid "The keyword not found."
 msgstr "کلمه مورد جستجو یافت نشد"
 
-#: src/Controller/Front/JsonController.php:291
+#: src/Controller/Front/JsonController.php:340
 #, php-format
 msgid "Products related to %s"
 msgstr "محصولات مرتبط با %s"
 
-#: src/Controller/Front/JsonController.php:310
+#: src/Controller/Front/JsonController.php:359
 #, php-format
 msgid "Categories related to %s"
 msgstr "شاخه ها و برند های مرتبط با %s"
@@ -432,24 +439,12 @@ msgstr "شاخه ها و برند های مرتبط با %s"
 msgid "The product not found."
 msgstr "این محصول یافت نشد"
 
-#: src/Controller/Front/TagController.php:30
-msgid "Tag module not installed."
-msgstr "ماژول برچسب نصب نشده است."
-
-#: src/Controller/Front/TagController.php:39
-msgid "The tag not set."
-msgstr "برچسب تنظیم نشده"
-
-#: src/Controller/Front/TagController.php:52
-msgid "The tag not found."
-msgstr "برچسب یافت نشد"
-
-#: src/Controller/Front/TagController.php:81
+#: src/Controller/Front/TagController.php:54
 #, php-format
 msgid "All products by %s tag"
 msgstr "همه محصولات برچسب %s"
 
-#: src/Controller/Front/TagController.php:123
+#: src/Controller/Front/TagController.php:96
 msgid "List of all used tags on shop"
 msgstr "فهرست تمام برچسب های استفاده شده در فروشگاه"
 
@@ -466,12 +461,12 @@ msgstr "فهرست تمام برچسب های استفاده شده در فرو�
 #: template/admin/product-related.phtml:27
 #: template/admin/product-related.phtml:49
 #: template/admin/property-index.phtml:13
-#: template/front/product-angular.phtml:58
+#: template/front/product-angular.phtml:84
 msgid "Title"
 msgstr "عنوان"
 
 #: src/Form/AdminSearchForm.php:52 src/Form/AttributeForm.php:186
-#: template/front/product-angular.phtml:54
+#: template/front/product-angular.phtml:80
 msgid "Search"
 msgstr "جستجو"
 
@@ -686,6 +681,7 @@ msgstr "%s جدید"
 #: src/Form/ProductAdditionalForm.php:90 src/Form/ProductAdditionalForm.php:118
 #: src/Form/ProductForm.php:213 template/admin/product-update.phtml:12
 #: template/admin/product-update.phtml:14
+#: template/front/product-compare.phtml:85
 msgid "Stock"
 msgstr "موجودی"
 
@@ -693,14 +689,14 @@ msgstr "موجودی"
 #: src/Form/ProductForm.php:259 template/admin/product-index.phtml:53
 #: template/admin/product-update.phtml:12
 #: template/admin/product-update.phtml:16 template/front/checkout-cart.phtml:98
-#: template/front/installment.phtml:20 template/front/product-angular.phtml:156
-#: template/front/product-angular.phtml:172
-#: template/front/product-angular.phtml:195
-#: template/front/product-angular.phtml:213 template/front/product-box.phtml:31
+#: template/front/installment.phtml:20 template/front/product-angular.phtml:213
+#: template/front/product-angular.phtml:229
+#: template/front/product-angular.phtml:252
+#: template/front/product-angular.phtml:270 template/front/product-box.phtml:31
 #: template/front/product-box.phtml:51 template/front/product-box.phtml:77
-#: template/front/product-box.phtml:94 template/front/product-price.phtml:17
-#: template/front/product-price.phtml:43 template/front/product-price.phtml:75
-#: template/front/product-price.phtml:98
+#: template/front/product-box.phtml:94 template/front/product-compare.phtml:86
+#: template/front/product-price.phtml:17 template/front/product-price.phtml:43
+#: template/front/product-price.phtml:76 template/front/product-price.phtml:100
 msgid "Price"
 msgstr "قیمت"
 
@@ -935,7 +931,7 @@ msgstr "تاریخ"
 msgid "Size"
 msgstr "اندازه"
 
-#: template/admin/attach-add.phtml:91
+#: template/admin/attach-add.phtml:91 template/front/product-angular.phtml:158
 msgid "Close"
 msgstr "بستن"
 
@@ -1186,6 +1182,10 @@ msgstr "فهرست محصولات مشابه"
 msgid "Remove"
 msgstr "حذف"
 
+#: template/admin/product-related.phtml:45
+msgid "Search result"
+msgstr "نتایج جستجو"
+
 #: template/admin/product-related.phtml:60
 msgid "Add"
 msgstr "اضافه کردن"
@@ -1355,32 +1355,52 @@ msgstr "ماه %s ام"
 msgid "Add to cart"
 msgstr "اضافه به سبد خرید"
 
-#: template/front/product-angular.phtml:62
-#: template/front/product-angular.phtml:65
+#: template/front/product-angular.phtml:43
+msgid "You put this product on compare list before"
+msgstr "شما قبلا این محصول را فهرست مقایسه درج کرده اید"
+
+#: template/front/product-angular.phtml:44
+msgid "You can add just 5 products on compare list"
+msgstr "شما فقط می توانید ۵ محصول به فهرست مقایسه اضافه کنید"
+
+#: template/front/product-angular.phtml:88
+#: template/front/product-angular.phtml:91
 msgid "Marketable"
 msgstr "آماده برای فروش"
 
-#: template/front/product-angular.phtml:64
-#: template/front/product-angular.phtml:82
+#: template/front/product-angular.phtml:90
+#: template/front/product-angular.phtml:108
 msgid "All"
 msgstr "همه"
 
-#: template/front/product-angular.phtml:66
+#: template/front/product-angular.phtml:92
 msgid "Not marketable"
 msgstr "غیر قابل فروش"
 
-#: template/front/product-angular.phtml:153
-#: template/front/product-angular.phtml:169
-#: template/front/product-angular.phtml:184
-#: template/front/product-angular.phtml:192
-#: template/front/product-angular.phtml:207 template/front/product-box.phtml:28
+#: template/front/product-angular.phtml:194
+msgid "Compare"
+msgstr "مقایسه"
+
+#: template/front/product-angular.phtml:210
+#: template/front/product-angular.phtml:226
+#: template/front/product-angular.phtml:241
+#: template/front/product-angular.phtml:249
+#: template/front/product-angular.phtml:264 template/front/product-box.phtml:28
 #: template/front/product-box.phtml:48 template/front/product-box.phtml:62
 #: template/front/product-box.phtml:74 template/front/product-box.phtml:88
 #: template/front/product-price.phtml:14 template/front/product-price.phtml:40
-#: template/front/product-price.phtml:56 template/front/product-price.phtml:72
-#: template/front/product-price.phtml:88
+#: template/front/product-price.phtml:56 template/front/product-price.phtml:73
+#: template/front/product-price.phtml:89
 msgid "Stock status"
 msgstr "وضعیت"
+
+#: template/front/product-compare.phtml:116
+msgid ""
+"Your compare list is empty, back to product list and select products to "
+"compare"
+msgstr ""
+"فهرست محصولات انتخابی برای مقایسه خالی است، به صفحه فهرست محصولات برگردید و "
+"چند محصول را برای مقایسه انتخاب کنید"
 
 #: template/front/product-question.phtml:4
 msgid "Ask question"
@@ -1414,6 +1434,16 @@ msgid ""
 msgstr ""
 "هنوز هیچ کلمه کلیدی برای این بخش ساخته نشده است. لطفا بعدا این صفحه را بررسی "
 "نمایید"
+
+#: template/front/tag.phtml:4
+msgid "Tag"
+msgstr "برچسب"
+
+#~ msgid "Search again"
+#~ msgstr "جستجوی مجدد"
+
+#~ msgid "Search result of %s"
+#~ msgstr "نتایج جستجوی %s"
 
 #~ msgid "Manage additional information"
 #~ msgstr "مدیریت اطلاعات تکمیلی"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-01-01 17:29+0330\n"
+"POT-Creation-Date: 2016-01-29 11:06+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -24,7 +24,7 @@ msgid "New Product list"
 msgstr "فهرست محوصلات جدید"
 
 #: config/block.php:22 config/block.php:92 config/block.php:289
-#: config/block.php:295 config/navigation.php:59 config/page.php:22
+#: config/block.php:295 config/navigation.php:48 config/page.php:22
 #: config/page.php:81 config/permission.php:38
 msgid "Category"
 msgstr "شاخه"
@@ -122,7 +122,7 @@ msgstr "محصولات منتخب"
 msgid "Special Product list"
 msgstr "فهرست محصولات منتخب"
 
-#: config/block.php:290 config/navigation.php:27 config/page.php:106
+#: config/block.php:290 config/navigation.php:16 config/page.php:106
 msgid "Category list"
 msgstr "فهرست شاخه ها"
 
@@ -150,7 +150,7 @@ msgstr "لینک به صفحه سبد خرید"
 msgid "Dialog box"
 msgstr "باکس پاپ آپ"
 
-#: config/block.php:354 config/config.php:49 config/config.php:565
+#: config/block.php:354 config/config.php:49 config/config.php:549
 msgid "Search"
 msgstr "جستجو"
 
@@ -198,7 +198,7 @@ msgstr "علاقه مندی"
 msgid "Order"
 msgstr "سفارش"
 
-#: config/config.php:61 config/config.php:141
+#: config/config.php:61 config/config.php:125
 msgid "Perpage"
 msgstr "تعداد در هر صفحه"
 
@@ -244,307 +244,291 @@ msgstr ""
 msgid "Homepage title"
 msgstr "عنوان صفحه اول"
 
-#: config/config.php:124
-msgid "View type"
-msgstr "نوع نمایش"
-
-#: config/config.php:125
-msgid "Item list view type"
-msgstr "نوع نمایش فهرست آیتم ها"
-
-#: config/config.php:130
-msgid "Normal"
-msgstr "معمولی"
-
-#: config/config.php:131
-msgid "Ajax"
-msgstr "ای‌جکس"
-
-#: config/config.php:148
+#: config/config.php:132
 msgid "Columns"
 msgstr "تعداد ستون"
 
-#: config/config.php:154
+#: config/config.php:138
 msgid "One columns"
 msgstr "تک ستون"
 
-#: config/config.php:155
+#: config/config.php:139
 msgid "Two columns"
 msgstr "دو ستون"
 
-#: config/config.php:156
+#: config/config.php:140
 msgid "Three columns"
 msgstr "سه ستون"
 
-#: config/config.php:157
+#: config/config.php:141
 msgid "Four columns"
 msgstr "چهار ستون"
 
-#: config/config.php:158
+#: config/config.php:142
 msgid "Six columns"
 msgstr "شش ستون"
 
-#: config/config.php:168
+#: config/config.php:152
 msgid "Show related products"
 msgstr "نمایش محصولات مرتبط"
 
-#: config/config.php:176
+#: config/config.php:160
 msgid "Show attribute fields"
 msgstr "نمایش خواص"
 
-#: config/config.php:184
-msgid "Show product attacehed files"
-msgstr "نمایش فایل های پیوست"
+#: config/config.php:168
+msgid "Show product attached files"
+msgstr "نمایش فایل های پیوست شده به محصول"
 
-#: config/config.php:192
+#: config/config.php:176
 msgid "Show other products from this category"
 msgstr "نمایش محصولات دیگر این شاخه"
 
-#: config/config.php:200
+#: config/config.php:184
 msgid "Show product price"
 msgstr "نمایش قیمت محصول"
 
-#: config/config.php:208
+#: config/config.php:192
 msgid "Show special"
 msgstr "نمایش محصولات ویژه"
 
-#: config/config.php:216
+#: config/config.php:200
 msgid "Number of products on special"
 msgstr "تعداد محصولات ویژه"
 
-#: config/config.php:224
+#: config/config.php:208
 msgid "Price title"
 msgstr "عنوان برای قیمت"
 
-#: config/config.php:228
+#: config/config.php:212
 msgid "Volume"
 msgstr "مقدار"
 
-#: config/config.php:232
+#: config/config.php:216
 msgid "Show Tags"
 msgstr "نمایش برچسب ها"
 
-#: config/config.php:240
+#: config/config.php:224
 msgid "Show breadcrumbs"
 msgstr "نمایش ناوبری"
 
-#: config/config.php:248
+#: config/config.php:232
 msgid "Show category list"
 msgstr "نمایش فهرست شاخه ها"
 
-#: config/config.php:256
+#: config/config.php:240
 msgid "Show fast question form"
 msgstr "نمایش فرم ارسال سوال"
 
-#: config/config.php:263
+#: config/config.php:247
 msgid "Side category type"
 msgstr "نوع نمایش شاخه در کنار صفحه"
 
-#: config/config.php:269
+#: config/config.php:253
 msgid "Compact"
 msgstr "فشرده"
 
-#: config/config.php:270
+#: config/config.php:254
 msgid "Full"
 msgstr "کامل"
 
-#: config/config.php:281
+#: config/config.php:265
 msgid "Image Size"
 msgstr "حجم تصویر"
 
-#: config/config.php:289
+#: config/config.php:273
 msgid "Image quality"
 msgstr "کیفیت تصویر "
 
-#: config/config.php:290
+#: config/config.php:274
 msgid "Between 0 to 100 and support both of JPG and PNG, default is 75"
 msgstr "بین ۰ تا ۱۰۰ تنظیم شود و برای هر دو فرمت PNG و JPG ، مقدار پیش فرض ۷۵"
 
-#: config/config.php:297
+#: config/config.php:281
 msgid "Image path"
 msgstr "مسیر ذخیره تصویر"
 
-#: config/config.php:305
+#: config/config.php:289
 msgid "Image Extension"
 msgstr "پسوند های مجار برای تصویر"
 
-#: config/config.php:313
+#: config/config.php:297
 msgid "Large Image height"
 msgstr "ارتفاع تصویر بزرگ"
 
-#: config/config.php:321
+#: config/config.php:305
 msgid "Large Image width"
 msgstr "عرض تصویر بزرگ"
 
-#: config/config.php:329
+#: config/config.php:313
 msgid "Medium Image height"
 msgstr "ارتفاع تصویر متوسط"
 
-#: config/config.php:337
+#: config/config.php:321
 msgid "Medium Image width"
 msgstr "عرض تصویر متوسط"
 
-#: config/config.php:345
+#: config/config.php:329
 msgid "Thumb Image height"
 msgstr "ارتفاع تصویر بندانگشتی"
 
-#: config/config.php:353
+#: config/config.php:337
 msgid "Thumb Image width"
 msgstr "عرض تصویر بندانگشتی"
 
-#: config/config.php:361
+#: config/config.php:345
 msgid "Use lightbox"
 msgstr "استفاده از لایت باکس"
 
-#: config/config.php:369
+#: config/config.php:353
 msgid "Add Watermark"
 msgstr "اضافه کردن واترمارک به تصویر"
 
-#: config/config.php:377
+#: config/config.php:361
 msgid "Watermark Image"
 msgstr "تصویر واترمارک"
 
-#: config/config.php:384
+#: config/config.php:368
 msgid "Watermark Positio"
 msgstr "موقعیت واترمارک"
 
-#: config/config.php:390
+#: config/config.php:374
 msgid "Top Left"
 msgstr "بالا چپ"
 
-#: config/config.php:391
+#: config/config.php:375
 msgid "Top Right"
 msgstr "بالا راست"
 
-#: config/config.php:392
+#: config/config.php:376
 msgid "Bottom Left"
 msgstr "پایین چپ"
 
-#: config/config.php:393
+#: config/config.php:377
 msgid "Bottom Right"
 msgstr "پایین راست"
 
-#: config/config.php:403
+#: config/config.php:387
 msgid "Social sharing items"
 msgstr "اشتراک گذاری در شبکه های اجتماعی"
 
-#: config/config.php:417
+#: config/config.php:401
 msgid "File Size"
 msgstr "حجم فایل"
 
-#: config/config.php:425
+#: config/config.php:409
 msgid "File path"
 msgstr "مسیر ذخیره فایل"
 
-#: config/config.php:433
+#: config/config.php:417
 msgid "File Extension"
 msgstr "سوند های مجار برای فایل"
 
-#: config/config.php:442
+#: config/config.php:426
 msgid "Use vote system"
 msgstr "استفاده از سیستم رای"
 
-#: config/config.php:451
+#: config/config.php:435
 msgid "Use favourite system"
 msgstr "استفاده از سیستم مورد علاقه"
 
-#: config/config.php:460
+#: config/config.php:444
 msgid "Show search type"
 msgstr "نمایش نوع جستجوی عنوان"
 
-#: config/config.php:468
+#: config/config.php:452
 msgid "Show search price"
 msgstr "نمایش قیمت در جستجو"
 
-#: config/config.php:476
+#: config/config.php:460
 msgid "Show search category"
 msgstr "نمایش شاخه در جستجو"
 
-#: config/config.php:485
+#: config/config.php:469
 msgid "Order is active ?"
 msgstr "ثبت سفارش فعال باشد؟"
 
-#: config/config.php:493
+#: config/config.php:477
 msgid "Anonymous users can set order"
 msgstr "کاربر مهمان بتواند سفارش ثبت کند"
 
-#: config/config.php:501
+#: config/config.php:485
 msgid "Order type"
 msgstr "نوع سفارش"
 
-#: config/config.php:507
+#: config/config.php:491
 msgid "One time"
 msgstr "خرید یک باره"
 
-#: config/config.php:508
+#: config/config.php:492
 msgid "Recurring"
 msgstr "خرید دوره ای"
 
-#: config/config.php:509
+#: config/config.php:493
 msgid "Installment"
 msgstr "خرید قسطی"
 
-#: config/config.php:518
+#: config/config.php:502
 msgid "Order stock"
 msgstr "وضعیت موجودی برای سفارش"
 
-#: config/config.php:524
+#: config/config.php:508
 msgid "Never check stock"
 msgstr "هرگز موجودی بررسی نشود"
 
-#: config/config.php:525
+#: config/config.php:509
 msgid "Manual setting"
 msgstr "تنظیمات دستی"
 
-#: config/config.php:526
+#: config/config.php:510
 msgid "Use product stock"
 msgstr "استفاده از سیستم موجودی محصول"
 
-#: config/config.php:527
+#: config/config.php:511
 msgid "Use property stock"
 msgstr "استفاده از سیستم موجودی ویژگی های محصول"
 
-#: config/config.php:536
+#: config/config.php:520
 msgid "Active discount system"
 msgstr "فعال سازی سیستم تخفیف"
 
-#: config/config.php:544
+#: config/config.php:528
 msgid "Order discount type"
 msgstr "نوع سیستم تخفیف سفارش"
 
-#: config/config.php:550
+#: config/config.php:534
 msgid "General value for all products"
 msgstr "مقدار پیشفرض برای همه محصولات"
 
-#: config/config.php:551
+#: config/config.php:535
 msgid "Set for each product"
 msgstr "تنظیم برای هر محصول"
 
-#: config/config.php:561
+#: config/config.php:545
 msgid "Module search page title"
 msgstr "عنوان صفحه جستجو ماژول"
 
-#: config/config.php:569
+#: config/config.php:553
 msgid "Module search page description"
 msgstr "توضیحات صفحه جستجو ماژول"
 
-#: config/config.php:573
+#: config/config.php:557
 msgid "Search on website products"
 msgstr "جستجو در بین محصولات وب سایت"
 
-#: config/config.php:577
+#: config/config.php:561
 msgid "Module search page keywords"
 msgstr "کلمات کلیدی صفحه جستجو ماژول"
 
-#: config/config.php:581
+#: config/config.php:565
 msgid "search,product,shop,online,website"
 msgstr "جستجو,محصول,فروشگاه,آنلاین,وب سایت"
 
-#: config/config.php:585
+#: config/config.php:569
 msgid "Description for index page"
 msgstr "توضیحات برای صفحه اصلی"
 
-#: config/config.php:593
+#: config/config.php:577
 msgid "Force replace space by comma(,)"
 msgstr " جایگزینی اسپیس با کاما"
 
@@ -556,52 +540,48 @@ msgstr "فروشگاه"
 msgid "Shop system."
 msgstr "سیستم فروشگاه اینترنتی"
 
-#: config/navigation.php:16
-msgid "Index"
-msgstr "صفحه اصلی"
-
-#: config/navigation.php:37 config/page.php:113
+#: config/navigation.php:26 config/page.php:113
 msgid "Tag list"
 msgstr "فهرست برچسب ها"
 
-#: config/navigation.php:48 config/page.php:17 config/page.php:87
+#: config/navigation.php:37 config/page.php:17 config/page.php:87
 #: config/permission.php:33
 msgid "Product"
 msgstr "محصول"
 
-#: config/navigation.php:70 config/page.php:27 config/permission.php:43
+#: config/navigation.php:59 config/page.php:27 config/permission.php:43
 msgid "Attribute"
 msgstr "خواص"
 
-#: config/navigation.php:81 config/page.php:32 config/permission.php:48
+#: config/navigation.php:70 config/page.php:32 config/permission.php:48
 msgid "Attribute position"
 msgstr "موقعیت خواص"
 
-#: config/navigation.php:92 config/page.php:37 config/permission.php:53
+#: config/navigation.php:81 config/page.php:37 config/permission.php:53
 msgid "Order property"
 msgstr "ویژگی سفارش"
 
-#: config/navigation.php:103 config/page.php:42 config/permission.php:58
+#: config/navigation.php:92 config/page.php:42 config/permission.php:58
 msgid "Discount"
 msgstr "تخفیف"
 
-#: config/navigation.php:114 config/page.php:47 config/permission.php:63
+#: config/navigation.php:103 config/page.php:47 config/permission.php:63
 msgid "Attach"
 msgstr "پیوست"
 
-#: config/navigation.php:125 config/page.php:52 config/permission.php:68
+#: config/navigation.php:114 config/page.php:52 config/permission.php:68
 msgid "Special products"
 msgstr "محصولات ویژه"
 
-#: config/navigation.php:136 config/page.php:57 config/permission.php:73
+#: config/navigation.php:125 config/page.php:57 config/permission.php:73
 msgid "Logs"
 msgstr "گزارش ها"
 
-#: config/navigation.php:147 config/page.php:62 config/permission.php:78
+#: config/navigation.php:136 config/page.php:62 config/permission.php:78
 msgid "Tools"
 msgstr "ابزار ها"
 
-#: config/navigation.php:157 config/page.php:67 config/permission.php:83
+#: config/navigation.php:146 config/page.php:67 config/permission.php:83
 msgid "Json"
 msgstr "جیسون"
 
@@ -620,6 +600,24 @@ msgstr "پرداخت"
 #: config/permission.php:17
 msgid "Global public resource"
 msgstr "دسترسی های عمومی"
+
+#~ msgid "View type"
+#~ msgstr "نوع نمایش"
+
+#~ msgid "Item list view type"
+#~ msgstr "نوع نمایش فهرست آیتم ها"
+
+#~ msgid "Normal"
+#~ msgstr "معمولی"
+
+#~ msgid "Ajax"
+#~ msgstr "ای‌جکس"
+
+#~ msgid "Show product attacehed files"
+#~ msgstr "نمایش فایل های پیوست"
+
+#~ msgid "Index"
+#~ msgstr "صفحه اصلی"
 
 #~ msgid "Item list type"
 #~ msgstr "نوع فهرست"

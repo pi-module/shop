@@ -118,7 +118,7 @@ class Product extends AbstractApi
     public function getCompareList($slugList, $mainProduct)
     {
         $list = array();
-        $where = array('slug' => $slugList, 'status' => 1, 'category_main' => $mainProduct['category_main']);
+        $where = array('slug' => $slugList, 'status' => 1, /*'category_main' => $mainProduct['category_main']*/);
         $select = Pi::model('product', $this->getModule())->select()->where($where);
         $rowset = Pi::model('product', $this->getModule())->selectWith($select);
         foreach ($rowset as $key => $row) {

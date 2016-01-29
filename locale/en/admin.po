@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2015-12-12 16:12+0330\n"
+"POT-Creation-Date: 2016-01-29 11:05+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,138 +23,138 @@ msgstr ""
 msgid "New Product list"
 msgstr ""
 
-#: config/block.php:22 config/block.php:85 config/block.php:282
-#: config/block.php:288 config/navigation.php:59 config/page.php:22
+#: config/block.php:22 config/block.php:92 config/block.php:289
+#: config/block.php:295 config/navigation.php:48 config/page.php:22
 #: config/page.php:81 config/permission.php:38
 msgid "Category"
 msgstr ""
 
-#: config/block.php:29 config/block.php:92 config/block.php:162
-#: config/block.php:225
+#: config/block.php:29 config/block.php:99 config/block.php:169
+#: config/block.php:232
 msgid "Number"
 msgstr ""
 
-#: config/block.php:36 config/block.php:99 config/block.php:169
-#: config/block.php:232
+#: config/block.php:36 config/block.php:106 config/block.php:176
+#: config/block.php:239
 msgid "Product list type"
 msgstr ""
 
-#: config/block.php:42 config/block.php:105 config/block.php:175
-#: config/block.php:238 config/block.php:301
+#: config/block.php:42 config/block.php:112 config/block.php:182
+#: config/block.php:245 config/block.php:308
 msgid "Horizontal"
 msgstr ""
 
-#: config/block.php:43 config/block.php:106 config/block.php:176
-#: config/block.php:239 config/block.php:302
+#: config/block.php:43 config/block.php:113 config/block.php:183
+#: config/block.php:246 config/block.php:309
 msgid "Vertical"
 msgstr ""
 
-#: config/block.php:44 config/block.php:107 config/block.php:177
-#: config/block.php:240
+#: config/block.php:44 config/block.php:114 config/block.php:184
+#: config/block.php:247
 msgid "Multi size Box"
 msgstr ""
 
-#: config/block.php:45 config/block.php:108 config/block.php:178
-#: config/block.php:241 config/block.php:303
+#: config/block.php:45 config/block.php:115 config/block.php:185
+#: config/block.php:248 config/block.php:310
 msgid "List"
 msgstr ""
 
-#: config/block.php:46 config/block.php:109 config/block.php:179
-#: config/block.php:242 config/block.php:304
+#: config/block.php:46 config/block.php:116 config/block.php:186
+#: config/block.php:249 config/block.php:311
 msgid "Slide"
 msgstr ""
 
-#: config/block.php:47 config/block.php:110 config/block.php:180
-#: config/block.php:243 config/block.php:305
+#: config/block.php:47 config/block.php:117 config/block.php:187
+#: config/block.php:250 config/block.php:312
 msgid "Slide by hover effect"
 msgstr ""
 
-#: config/block.php:55 config/block.php:118 config/block.php:188
-#: config/block.php:251
+#: config/block.php:55 config/block.php:125 config/block.php:195
+#: config/block.php:258
 msgid "Show price"
 msgstr ""
 
-#: config/block.php:62 config/block.php:125 config/block.php:195
-#: config/block.php:258
-msgid "Show More link to module page"
-msgstr ""
-
-#: config/block.php:69 config/block.php:132 config/block.php:202
-#: config/block.php:265
-msgid "Set More link to module page"
-msgstr ""
-
-#: config/block.php:79
-msgid "Random Product"
-msgstr ""
-
-#: config/block.php:80
-msgid "Random Product list"
-msgstr ""
-
-#: config/block.php:139 config/block.php:209 config/block.php:272
-#: config/block.php:313 config/block.php:353
+#: config/block.php:62 config/block.php:132 config/block.php:202
+#: config/block.php:265 config/block.php:320 config/block.php:360
 msgid "Use block effects"
 msgstr ""
 
-#: config/block.php:140 config/block.php:210 config/block.php:273
-#: config/block.php:314 config/block.php:354
+#: config/block.php:63 config/block.php:133 config/block.php:203
+#: config/block.php:266 config/block.php:321 config/block.php:361
 msgid "Use block effects or set custom effect on theme"
 msgstr ""
 
-#: config/block.php:149
+#: config/block.php:69 config/block.php:139 config/block.php:209
+#: config/block.php:272
+msgid "Show More link to module page"
+msgstr ""
+
+#: config/block.php:76 config/block.php:146 config/block.php:216
+#: config/block.php:279
+msgid "Set More link to module page"
+msgstr ""
+
+#: config/block.php:86
+msgid "Random Product"
+msgstr ""
+
+#: config/block.php:87
+msgid "Random Product list"
+msgstr ""
+
+#: config/block.php:156
 msgid "Tag Product"
 msgstr ""
 
-#: config/block.php:150
+#: config/block.php:157
 msgid "Products from selected tag"
 msgstr ""
 
-#: config/block.php:155
+#: config/block.php:162
 msgid "Tag term"
 msgstr ""
 
-#: config/block.php:219
+#: config/block.php:226
 msgid "Special Product"
 msgstr ""
 
-#: config/block.php:220
+#: config/block.php:227
 msgid "Special Product list"
 msgstr ""
 
-#: config/block.php:283 config/navigation.php:27 config/page.php:106
+#: config/block.php:290 config/navigation.php:16 config/page.php:106
 msgid "Category list"
 msgstr ""
 
-#: config/block.php:295
+#: config/block.php:302
 msgid "Category list type"
 msgstr ""
 
-#: config/block.php:323
+#: config/block.php:330
 msgid "Basket"
 msgstr ""
 
-#: config/block.php:324
+#: config/block.php:331
 msgid "basket"
 msgstr ""
 
-#: config/block.php:329
+#: config/block.php:336
 msgid "Basket type"
 msgstr ""
 
-#: config/block.php:335
+#: config/block.php:342
 msgid "Link to basket"
 msgstr ""
 
-#: config/block.php:336
+#: config/block.php:343
 msgid "Dialog box"
 msgstr ""
 
-#: config/block.php:347 config/config.php:49 config/config.php:549
+#: config/block.php:354 config/config.php:49 config/config.php:549
 msgid "Search"
 msgstr ""
 
-#: config/block.php:348
+#: config/block.php:355
 msgid "Ajax search block"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: config/config.php:61 config/config.php:141
+#: config/config.php:61 config/config.php:125
 msgid "Perpage"
 msgstr ""
 
@@ -242,96 +242,92 @@ msgstr ""
 msgid "Homepage title"
 msgstr ""
 
-#: config/config.php:124
-msgid "View type"
-msgstr ""
-
-#: config/config.php:125
-msgid "Item list view type"
-msgstr ""
-
-#: config/config.php:130
-msgid "Normal"
-msgstr ""
-
-#: config/config.php:131
-msgid "Ajax"
-msgstr ""
-
-#: config/config.php:148
+#: config/config.php:132
 msgid "Columns"
 msgstr ""
 
-#: config/config.php:154
+#: config/config.php:138
 msgid "One columns"
 msgstr ""
 
-#: config/config.php:155
+#: config/config.php:139
 msgid "Two columns"
 msgstr ""
 
-#: config/config.php:156
+#: config/config.php:140
 msgid "Three columns"
 msgstr ""
 
-#: config/config.php:157
+#: config/config.php:141
 msgid "Four columns"
 msgstr ""
 
-#: config/config.php:158
+#: config/config.php:142
 msgid "Six columns"
 msgstr ""
 
-#: config/config.php:168
+#: config/config.php:152
 msgid "Show related products"
 msgstr ""
 
-#: config/config.php:176
+#: config/config.php:160
 msgid "Show attribute fields"
 msgstr ""
 
-#: config/config.php:184
-msgid "Show product attacehed files"
+#: config/config.php:168
+msgid "Show product attached files"
 msgstr ""
 
-#: config/config.php:192
+#: config/config.php:176
 msgid "Show other products from this category"
 msgstr ""
 
-#: config/config.php:200
+#: config/config.php:184
 msgid "Show product price"
 msgstr ""
 
-#: config/config.php:208
+#: config/config.php:192
 msgid "Show special"
 msgstr ""
 
-#: config/config.php:216
+#: config/config.php:200
 msgid "Number of products on special"
 msgstr ""
 
-#: config/config.php:224
+#: config/config.php:208
 msgid "Price title"
 msgstr ""
 
-#: config/config.php:228
+#: config/config.php:212
 msgid "Volume"
 msgstr ""
 
-#: config/config.php:232
+#: config/config.php:216
 msgid "Show Tags"
 msgstr ""
 
-#: config/config.php:240
+#: config/config.php:224
 msgid "Show breadcrumbs"
 msgstr ""
 
-#: config/config.php:248
+#: config/config.php:232
 msgid "Show category list"
 msgstr ""
 
-#: config/config.php:256
+#: config/config.php:240
 msgid "Show fast question form"
+msgstr ""
+
+#: config/config.php:247
+msgid "Side category type"
+msgstr ""
+
+#: config/config.php:253
+msgid "Compact"
+msgstr ""
+
+#: config/config.php:254
+msgid "Full"
 msgstr ""
 
 #: config/config.php:265
@@ -542,52 +538,48 @@ msgstr ""
 msgid "Shop system."
 msgstr ""
 
-#: config/navigation.php:16
-msgid "Index"
-msgstr ""
-
-#: config/navigation.php:37 config/page.php:113
+#: config/navigation.php:26 config/page.php:113
 msgid "Tag list"
 msgstr ""
 
-#: config/navigation.php:48 config/page.php:17 config/page.php:87
+#: config/navigation.php:37 config/page.php:17 config/page.php:87
 #: config/permission.php:33
 msgid "Product"
 msgstr ""
 
-#: config/navigation.php:70 config/page.php:27 config/permission.php:43
+#: config/navigation.php:59 config/page.php:27 config/permission.php:43
 msgid "Attribute"
 msgstr ""
 
-#: config/navigation.php:81 config/page.php:32 config/permission.php:48
+#: config/navigation.php:70 config/page.php:32 config/permission.php:48
 msgid "Attribute position"
 msgstr ""
 
-#: config/navigation.php:92 config/page.php:37 config/permission.php:53
+#: config/navigation.php:81 config/page.php:37 config/permission.php:53
 msgid "Order property"
 msgstr ""
 
-#: config/navigation.php:103 config/page.php:42 config/permission.php:58
+#: config/navigation.php:92 config/page.php:42 config/permission.php:58
 msgid "Discount"
 msgstr ""
 
-#: config/navigation.php:114 config/page.php:47 config/permission.php:63
+#: config/navigation.php:103 config/page.php:47 config/permission.php:63
 msgid "Attach"
 msgstr ""
 
-#: config/navigation.php:125 config/page.php:52 config/permission.php:68
+#: config/navigation.php:114 config/page.php:52 config/permission.php:68
 msgid "Special products"
 msgstr ""
 
-#: config/navigation.php:136 config/page.php:57 config/permission.php:73
+#: config/navigation.php:125 config/page.php:57 config/permission.php:73
 msgid "Logs"
 msgstr ""
 
-#: config/navigation.php:147 config/page.php:62 config/permission.php:78
+#: config/navigation.php:136 config/page.php:62 config/permission.php:78
 msgid "Tools"
 msgstr ""
 
-#: config/navigation.php:157 config/page.php:67 config/permission.php:83
+#: config/navigation.php:146 config/page.php:67 config/permission.php:83
 msgid "Json"
 msgstr ""
 
