@@ -43,12 +43,37 @@ $script = sprintf(
     __('You put this product on compare list before'),
     __('You can add just 5 products on compare list')
 );
+
+$scriptMenu = <<<'EOT'
+$(function() {
+    var json = '%s';
+    $('#categoryTreeView').treeview({
+        levels: 1,
+        data: json,
+        enableLinks: true,
+        expandIcon: 'fa fa-plus',
+		collapseIcon: 'fa fa-minus',
+		emptyIcon: 'fa',
+		checkedIcon: 'fa fa-check-square-o',
+		uncheckedIcon: 'fa fa-square-o',
+    });
+});
+EOT;
+$scriptMenu = sprintf(
+    $scriptMenu,
+    $categoriesJson
+);
+
 // Load header files
 $this->jQuery();
 $this->angular();
-$this->js($this->assetModule('js/dirPagination.js'));
+$this->js(array(
+    $this->assetModule('js/dirPagination.js'),
+    $this->assetModule('js/bootstrap-treeview.min.js')
+));
 $this->css($this->assetModule('css/front.css'));
 $this->footScript()->appendScript($script);
+$this->footScript()->appendScript($scriptMenu);
 // Set box site
 switch ($config['view_column']) {
     case 1:
@@ -74,7 +99,6 @@ switch ($config['view_column']) {
 ?>
 <div class="clearfix row">
     <div class="col-sm-12 col-md-3">
-        <?php include $this->template('front/category-side'); ?>
         <div class="shop-search-form clearfix">
             <div class="page-header">
                 <h4><?php _e('Search'); ?></h4>
@@ -136,6 +160,14 @@ switch ($config['view_column']) {
                     </select>
                 </div> -->
             </form>
+        </div>
+        <div class="clearfix categoryList">
+            <div class="page-header">
+                <h4><?php _e('Category list'); ?></h4>
+            </div>
+            <div class="clearfix">
+                <div id="categoryTreeView"></div>
+            </div>
         </div>
     </div>
     <div class="col-sm-12 col-md-9" ng-controller="listdata">

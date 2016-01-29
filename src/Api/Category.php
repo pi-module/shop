@@ -20,7 +20,8 @@ use Zend\Json\Json;
  * Pi::api('category', 'shop')->getCategory($parameter, $type = 'id');
  * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status);
  * Pi::api('category', 'shop')->findFromCategory($category);
- * Pi::api('category', 'shop')->categoryList($parent, $makeTree);
+ * Pi::api('category', 'shop')->categoryList($parent);
+ * Pi::api('category', 'shop')->categoryListJson();
  * Pi::api('category', 'shop')->categoryCount();
  * Pi::api('category', 'shop')->canonizeCategory($category);
  * Pi::api('category', 'shop')->sitemap();
@@ -73,14 +74,13 @@ class Category extends AbstractApi
         return array_unique($list);
     }
 
-    public function categoryList($parent = null, $type = '')
+    public function categoryList($parent = null)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
 
         // Check type
-        $type = (empty($type)) ? $config['view_side_category'] : $type;
-        if (is_null($parent)|| $type == 'full') {
+        if (is_null($parent)) {
             $where = array('status' => 1);
         } else {
             $where = array('status' => 1, 'parent' => $parent);
@@ -107,11 +107,31 @@ class Category extends AbstractApi
             }
 
         }
+        return $return;
+    }
 
-        if ($type == 'full') {
-            $return = $this->makeTree($return);
+    public function categoryListJson()
+    {
+        $return = array();
+        $where = array('status' => 1);
+        $order = array('display_order ASC');
+        // Make list
+        $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
+        $rowset = Pi::model('category', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $return[] = array(
+                'id' => $row->id,
+                'parent' => $row->parent,
+                'text' => $row->title,
+                'href' => Pi::url(Pi::service('url')->assemble('shop', array(
+                    'module' => $this->getModule(),
+                    'controller' => 'category',
+                    'slug' => $row->slug,
+                ))),
+            );
         }
-
+        $return = $this->makeTree($return);
+        $return =  Json::encode($return);
         return $return;
     }
 
@@ -204,20 +224,13 @@ class Category extends AbstractApi
     public function makeTree($elements, $parentId = 0)
     {
         $branch = array();
-        // Set category list as tree
         foreach ($elements as $element) {
             if ($element['parent'] == $parentId) {
-                $depth = 0;
-                $branch[$element['id']] = $element;
-                $branch[$element['id']]['depth'] = $depth;
                 $children = $this->makeTree($elements, $element['id']);
                 if ($children) {
-                    $depth++;
-                    foreach ($children as $key => $value) {
-                        $branch[$key] = $value;
-                        $branch[$key]['depth'] = $depth;
-                    }
+                    $element['nodes'] = $children;
                 }
+                $branch[] = $element;
                 unset($elements[$element['id']]);
                 unset($depth);
             }

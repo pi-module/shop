@@ -17,8 +17,6 @@ use Pi;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Module\Shop\Form\SearchForm;
-use Module\Shop\Form\SearchFilter;
 use Zend\Json\Json;
 use Zend\Db\Sql\Predicate\Expression;
 
@@ -31,7 +29,7 @@ class IndexController extends ActionController
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // category list
-        $categories = Pi::api('category', 'shop')->categoryList(0);
+        $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
         // Get special
         if ($config['view_special']) {
             $specialList = Pi::api('special', 'shop')->getAll();
@@ -51,7 +49,7 @@ class IndexController extends ActionController
                 // Set view
                 $this->view()->setTemplate('product-angular');
                 $this->view()->assign('config', $config);
-                $this->view()->assign('categories', $categories);
+                $this->view()->assign('categoriesJson', $categoriesJson);
                 $this->view()->assign('filterUrl', $filterUrl);
                 $this->view()->assign('filterList', $filterList);
                 $this->view()->assign('productTitleH1', __('New products'));
@@ -65,7 +63,7 @@ class IndexController extends ActionController
                 // Set view
                 $this->view()->setTemplate('homepage');
                 $this->view()->assign('config', $config);
-                $this->view()->assign('categories', $categories);
+                $this->view()->assign('categoriesJson', $categoriesJson);
                 $this->view()->assign('productTitleH1', $title);
                 $this->view()->assign('isHomepage', 1);
                 break;

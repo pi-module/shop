@@ -1,9 +1,39 @@
-<?php $this->css($this->assetModule('css/front.css')); ?>
+<?php
+$scriptMenu = <<<'EOT'
+$(function() {
+    var json = '%s';
+    $('#categoryTreeView').treeview({
+        levels: 1,
+        data: json,
+        enableLinks: true,
+        expandIcon: 'fa fa-plus',
+		collapseIcon: 'fa fa-minus',
+		emptyIcon: 'fa',
+		checkedIcon: 'fa fa-check-square-o',
+		uncheckedIcon: 'fa fa-square-o',
+    });
+});
+EOT;
+$scriptMenu = sprintf(
+    $scriptMenu,
+    $categoriesJson
+);
+
+$this->jQuery();
+$this->js($this->assetModule('js/bootstrap-treeview.min.js'));
+$this->css($this->assetModule('css/front.css'));
+?>
 <div class="clearfix">
     <div class="clearfix row">
         <div class="col-sm-12 col-md-3">
-            <?php include $this->template('front/category-side'); ?>
-            <?php include $this->template('front/search-form'); ?>
+            <div class="clearfix categoryList">
+                <div class="page-header">
+                    <h4><?php _e('Category list'); ?></h4>
+                </div>
+                <div class="clearfix">
+                    <div id="categoryTreeView"></div>
+                </div>
+            </div>
         </div>
         <div class="col-sm-12 col-md-9">
             <div class="page-header">

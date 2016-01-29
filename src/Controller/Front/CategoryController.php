@@ -15,7 +15,6 @@ namespace Module\Shop\Controller\Front;
 use Pi;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\SearchForm;
 use Zend\Json\Json;
 use Zend\Db\Sql\Predicate\Expression;
 
@@ -39,7 +38,7 @@ class CategoryController extends IndexController
             return;
         }
         // category list
-        $categories = Pi::api('category', 'shop')->categoryList($category['id']);
+        $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
         // Set filter url
         $filterUrl = Pi::url($this->url('', array(
             'controller' => 'json',
@@ -55,7 +54,7 @@ class CategoryController extends IndexController
         $this->view()->setTemplate('product-angular');
         $this->view()->assign('config', $config);
         $this->view()->assign('category', $category);
-        $this->view()->assign('categories', $categories);
+        $this->view()->assign('categoriesJson', $categoriesJson);
         $this->view()->assign('filterUrl', $filterUrl);
         $this->view()->assign('filterList', $filterList);
     }

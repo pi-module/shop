@@ -607,7 +607,7 @@ class Product extends AbstractApi
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Get category list
-        $categoryList = (empty($categoryList)) ? Pi::api('category', 'shop')->categoryList() : $categoryList;
+        $categoryList = (empty($categoryList)) ? Pi::registry('categoryList', 'shop')->read() : $categoryList;
         // boject to array
         $product = $product->toArray();
         // Make setting

@@ -15,7 +15,6 @@ namespace Module\Shop\Controller\Front;
 use Pi;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\SearchForm;
 
 class TagController extends IndexController
 {
@@ -41,7 +40,7 @@ class TagController extends IndexController
             return;
         }
         // category list
-        $categories = Pi::api('category', 'shop')->categoryList(0);
+        $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
         // Set filter url
         $filterUrl = Pi::url($this->url('', array(
             'controller' => 'json',
@@ -64,7 +63,7 @@ class TagController extends IndexController
         $this->view()->headKeywords($seoKeywords, 'set');
         $this->view()->setTemplate('product-angular');
         $this->view()->assign('config', $config);
-        $this->view()->assign('categories', $categories);
+        $this->view()->assign('categoriesJson', $categoriesJson);
         $this->view()->assign('filterUrl', $filterUrl);
         $this->view()->assign('filterList', $filterList);
         $this->view()->assign('productTitleH1', $title);
