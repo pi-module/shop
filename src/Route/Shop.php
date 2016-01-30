@@ -120,7 +120,7 @@ class Shop extends Standard
                 case 'tag':
                     if (isset($parts[1]) && !empty($parts[1])) {
                         $matches['action'] = 'index';
-                        $matches['slug'] = $this->decode($parts[1]);
+                        $matches['slug'] = urldecode($parts[1]);
                     } else {
                         $matches['action'] = 'list';
                     }
