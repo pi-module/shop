@@ -114,7 +114,13 @@ class Shop extends Standard
                     break;
 
                 case 'product':
-                    $matches['slug'] = $this->decode($parts[1]);
+                    if (isset($parts[1]) && $parts[1]== 'question') {
+                        $matches['action'] = 'question';
+                    } else {
+                        $matches['action'] = 'index';
+                        $matches['slug'] = $this->decode($parts[1]);
+                    }
+
                     break;
 
                 case 'tag':

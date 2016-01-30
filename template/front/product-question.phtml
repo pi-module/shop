@@ -1,48 +1,23 @@
-<?php if ($config['view_question']) { ?>
+<?php if (isset($questionValid) && $questionValid == 'notValid') { ?>
+<?php $this->css($this->assetModule('css/front.css')); ?>
+    <div class="page-header">
+        <h1><?php _e('Ask question about product'); ?></h1>
+    </div>
+    <p><?php echo $this->escape($questionMessage); ?></p>
+    <?php echo $this->form($questionForm, 'vertical');?>
+<?php } elseif (isset($config['view_question']) && $config['view_question']) { ?>
     <div class="clearfix">
-        <button type="button" class="btn btn-primary btn-xl" data-toggle="modal"
-                data-target="#questionModal"><?php _e('Ask question'); ?></button>
-        <?php if (Pi::user()->hasIdentity()) {
-            $uid = Pi::user()->getId();
-            $user = Pi::user()->get($uid, array('id', 'identity', 'name', 'email'));
-        } ?>
+        <button type="button" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#questionModal"><?php _e('Ask question'); ?></button>
         <div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="questionModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="questionModalLabel"><?php _e('Ask question about product'); ?></h4>
                     </div>
                     <div class="modal-body">
-                        <form
-                            action="<?php echo Pi::url($this->url('', array('controller' => 'json', 'action' => 'question'))); ?>"
-                            method="POST" name="productq" id="productq">
-                            <div class="form-group">
-                                <label for="questionInputText"><?php _e('Name'); ?></label>
-                                <input name="name" type="text" required="required" class="form-control"
-                                       id="questionInputText"
-                                       <?php if (isset($user["name"])) { ?>value="<?php echo $this->escape($user["name"]); ?>"<?php } ?>
-                                       placeholder="<?php _e('Name'); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="questionInputEmail"><?php _e('Email'); ?></label>
-                                <input name="email" type="email" required="required" class="form-control"
-                                       id="questionInputEmail"
-                                       <?php if (isset($user["email"])) { ?>value="<?php echo $this->escape($user["email"]); ?>"<?php } ?>
-                                       placeholder="<?php _e('Email'); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="questionInputQ"><?php _e('Question'); ?></label>
-                                <textarea name="question" required="required" class="form-control" rows="5"></textarea>
-                            </div>
-                            <input name="id" type="hidden" value="<?php echo $this->escape($productItem['id']); ?>">
-                            <input name="title" type="hidden"
-                                   value="<?php echo $this->escape($productItem['title']); ?>">
-                            <input name="back" type="hidden"
-                                   value="<?php echo $this->escape($productItem['productUrl']); ?>">
-                            <button type="submit" class="btn btn-default"><?php _e('Submit'); ?></button>
-                        </form>
+                        <p><?php echo $this->escape($questionMessage); ?></p>
+                        <?php echo $this->form($questionForm, 'vertical');?>
                     </div>
                 </div>
             </div>

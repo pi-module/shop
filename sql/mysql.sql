@@ -252,3 +252,23 @@ CREATE TABLE `{discount}` (
   UNIQUE KEY `role` (`role`),
   KEY `status` (`status`)
 );
+
+CREATE TABLE `{question}` (
+  `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
+  `ip`          CHAR(15)            NOT NULL DEFAULT '',
+  `product`     INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `name`        VARCHAR(255)        NOT NULL DEFAULT '',
+  `email`       VARCHAR(255)        NOT NULL DEFAULT '',
+  `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+  `uid_ask`     INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `uid_answer`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `text_ask`    TEXT,
+  `text_answer` TEXT,
+  `time_ask`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `time_answer` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `uid_ask` (`uid_ask`),
+  KEY `uid_answer` (`uid_answer`),
+  KEY `product` (`product`),
+  KEY `status` (`status`)
+);

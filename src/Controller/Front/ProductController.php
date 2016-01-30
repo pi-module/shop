@@ -15,6 +15,8 @@ namespace Module\Shop\Controller\Front;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+use Module\Shop\Form\QuestionForm;
+use Module\Shop\Form\QuestionFilter;
 use Zend\Json\Json;
 
 class ProductController extends IndexController
@@ -38,6 +40,11 @@ class ProductController extends IndexController
         }
         // Update Hits
         $this->getModel('product')->update(array('hits' => $product['hits'] + 1), array('id' => $product['id']));
+        // Get user information
+        $uid = Pi::user()->getId();
+        if ($uid > 0) {
+            $user = Pi::api('customer', 'shop')->getCustomer($uid);
+        }
         // Get attribute
         if ($product['attribute'] && $config['view_attribute']) {
             $attribute = Pi::api('attribute', 'shop')->Product($product['id'], $product['category_main']);
@@ -83,6 +90,30 @@ class ProductController extends IndexController
             $favourite['module'] = $module;
             $this->view()->assign('favourite', $favourite);
         }
+        // Set question
+        if ($config['view_question']) {
+            $question = array();
+            $question['product'] = $product['id'];
+            if ($uid > 0) {
+                $question['uid'] = $user['id'];
+                $question['email'] = $user['email'];
+                $question['name'] = $user['display'];
+            }
+            // Set action url
+            $url = Pi::url($this->url('', array(
+                'module' => $module,
+                'controller' => 'product',
+                'action' => 'question',
+            )));
+            // Set form
+            $form = new QuestionForm('question');
+            $form->setAttribute('enctype', 'multipart/form-data');
+            $form->setAttribute('action', $url);
+            $form->setData($question);
+            // Set view
+            $this->view()->assign('questionForm', $form);
+            $this->view()->assign('questionMessage', __('You can any question about this product from us, we read your question and answer you as soon as possible'));
+        }
         // Set property
         $property = array();
         $property['list'] = Pi::api('property', 'shop')->getList();
@@ -96,5 +127,77 @@ class ProductController extends IndexController
         $this->view()->assign('productItem', $product);
         $this->view()->assign('categoryItem', $product['categories']);
         $this->view()->assign('config', $config);
+    }
+
+    public function questionAction()
+    {
+        // Check post
+        if ($this->request->isPost()) {
+            // Get user and item
+            $uid = Pi::user()->getId();
+            $product = Pi::api('product', 'shop')->getProductLight(_post('product', 'int'));
+            // Check item
+            if (!$product || $product['status'] != 1) {
+                $this->getResponse()->setStatusCode(404);
+                $this->terminate(__('The product not found.'), '', 'error-404');
+                $this->view()->setLayout('layout-simple');
+                return;
+            }
+            // Set values
+            $data = $this->request->getPost();
+            $form = new QuestionForm('question');
+            $form->setInputFilter(new QuestionFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Set
+                $values['time_ask'] = time();
+                $values['status'] = 0;
+                $values['product'] = $product['id'];
+                $values['uid_ask'] = Pi::user()->getId();
+                $values['ip'] = Pi::user()->getIp();
+                // Save
+                $row = $this->getModel('question')->createRow();
+                $row->assign($values);
+                $row->save();
+                $question = $row->toArray();
+                // Check notification module
+                if (Pi::service('module')->isActive('notification')) {
+                    // Set mail information
+                    $information = array(
+                        'name' => $question['name'],
+                        'email' => $question['email'],
+                        'question' => $question['question'],
+                        'product' => $question['product'],
+                        'title' => $product['title'],
+                    );
+                    // Set toAdmin
+                    $toAdmin = array(
+                        Pi::config('adminmail') => Pi::config('adminname'),
+                    );
+                    // Send mail to admin
+                    Pi::api('mail', 'notification')->send(
+                        $toAdmin,
+                        'user_question',
+                        $information,
+                        Pi::service('module')->current()
+                    );
+                }
+                // Jump
+                $message = __('Your question was send successfully to admin.');
+                $this->jump($product['productUrl'], $message);
+            } else {
+                // Set view
+                $this->view()->setTemplate('product-question');
+                $this->view()->assign('questionForm', $form);
+                $this->view()->assign('questionMessage', __('You can any question about this product from us, we read your question and answer you as soon as possible'));
+                $this->view()->assign('questionValid', 'notValid');
+            }
+        } else {
+            $this->getResponse()->setStatusCode(404);
+            $this->terminate(__('Nothing set'), '', 'error-404');
+            $this->view()->setLayout('layout-simple');
+            return;
+        }
     }
 }

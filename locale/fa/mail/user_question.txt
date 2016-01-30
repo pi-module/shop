@@ -13,7 +13,7 @@
         <p><strong>ایمیل کاربر</strong> : <span>%email%</span></p>
         <p><strong>سوال کاربر</strong> : <span>%question%</span></p>
         <p><strong>نام محصول</strong> : <span>%title%</span></p>
-        <p><strong>شناسه محصول</strong> : <span>%id%</span></p>
+        <p><strong>شناسه محصول</strong> : <span>%product%</span></p>
 	</div>
 	<div style="padding: 3px; margin: 2px;">Dont reply to this email</div>
 	<div style="margin-top: 10px">
