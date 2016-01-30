@@ -153,6 +153,7 @@
 }
 
 .product-compare-box-title li {
+    height: 35px;
     padding: 5px 20px;
     background-color: #666;
     color: #fff;
@@ -170,6 +171,7 @@
 }
 
 .product-compare-box-info li {
+    height: 35px;
     padding: 5px 20px;
     border-bottom: 1px solid #fff;
     border-right: 1px solid #fff;
