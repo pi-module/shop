@@ -288,8 +288,8 @@ class ProductForm extends BaseForm
 
             )
         ));
-        // order_discount_type
-        if ($this->config['order_discount_type'] == 'product') {
+        // order_discount
+        if ($this->config['order_discount']) {
             // extra_product
             $this->add(array(
                 'name' => 'extra_discount',

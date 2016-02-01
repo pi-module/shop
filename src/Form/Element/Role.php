@@ -26,6 +26,8 @@ class Role extends Select
         if (empty($this->valueOptions)) {
             // Get role list
             $roles = Pi::service('registry')->Role->read('front');
+            unset($roles['guest']);
+            unset($roles['webmaster']);
             foreach ($roles as $name => $role) {
                 $this->valueOptions[$name] = $role['title'];
             }

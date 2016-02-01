@@ -59,6 +59,11 @@ class Update extends BasicUpdate
         $propertyValueTable = $propertyValueModel->getTable();
         $propertyValueAdapter = $propertyValueModel->getAdapter();
 
+        // Set property model
+        $discountModel = Pi::model('discount', $this->module);
+        $discountTable = $discountModel->getTable();
+        $discountAdapter = $discountModel->getAdapter();
+
         // Update to version 0.3.0
         if (version_compare($moduleVersion, '0.3.0', '<')) {
             // Alter table field `type`
@@ -532,6 +537,36 @@ EOD;
                         . $exception->getMessage(),
                 ));
 
+                return false;
+            }
+        }
+
+        // Update to version 1.3.8
+        if (version_compare($moduleVersion, '1.3.8', '<')) {
+
+            // Alter table : Update index
+            $sql = sprintf("ALTER TABLE %s DROP INDEX `role`, ADD INDEX `role` (`role`) USING BTREE", $discountTable);
+            try {
+                $discountAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Alter table : ADD category
+            $sql = sprintf("ALTER TABLE %s ADD `category` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX (`category`)", $discountTable);
+            try {
+                $discountAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
                 return false;
             }
         }

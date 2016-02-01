@@ -151,8 +151,8 @@ class ProductFilter extends InputFilter
                 ),
             ),
         ));
-        // order_discount_type
-        if ($config['order_discount_type'] == 'product') {
+        // order_discount
+        if ($config['order_discount']) {
             // Get role list
             $roles = Pi::service('registry')->Role->read('front');
             unset($roles['webmaster']);

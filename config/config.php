@@ -470,22 +470,6 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
-        'order_discount_type' => array(
-            'category' => 'order',
-            'title' => _a('Order discount type'),
-            'description' => '',
-            'edit' => array(
-                'type' => 'select',
-                'options' => array(
-                    'options' => array(
-                        'general' => _a('General value for all products'),
-                        'product' => _a('Set for each product'),
-                    ),
-                ),
-            ),
-            'filter' => 'text',
-            'value' => 'general',
-        ),
         // Texts
         'text_description_index' => array(
             'category' => 'head_meta',

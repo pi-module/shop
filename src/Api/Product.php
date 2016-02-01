@@ -29,6 +29,7 @@ use Zend\Json\Json;
  * Pi::api('product', 'shop')->relatedCount($id);
  * Pi::api('product', 'shop')->AttachList($id);
  * Pi::api('product', 'shop')->FavoriteList();
+ * Pi::api('product', 'shop')->canonizeDiscount($product);
  * Pi::api('product', 'shop')->canonizeProduct($product, $categoryList);
  * Pi::api('product', 'shop')->canonizeProductLight($product);
  * Pi::api('product', 'shop')->canonizeProductOrder($product);
@@ -319,6 +320,42 @@ class Product extends AbstractApi
         }
     }
 
+    public function canonizeDiscount($product)
+    {
+        // Get discount percent
+        $userDiscount = array();
+        $uid = Pi::user()->getId();
+        $roles = Pi::user()->getRole($uid);
+
+        // Set discounts
+        if (!empty($product['setting']['discount'])) {
+            foreach ($product['setting']['discount'] as $role => $percent) {
+                if (in_array($role, $roles)) {
+                    $userDiscount[] = $percent;
+                }
+            }
+        } else {
+            $discounts = Pi::api('discount', 'shop')->getList();
+            if (!empty($discounts)) {
+                foreach ($discounts as $discount) {
+                    if (in_array($discount['role'], $roles) && in_array($discount['category'], $product['category'])) {
+                        $userDiscount[] = $discount['percent'];
+                    }
+                }
+            }
+        }
+
+        // Make discount price
+        if (!empty($userDiscount)) {
+            $userDiscount = max($userDiscount);
+            $product['price_discount'] = $product['price'];
+            $product['price'] = ($product['price'] - ($product['price'] * ($userDiscount / 100)));
+            $product['price'] = Pi::api('api', 'order')->makePrice($product['price']);
+        }
+
+        return $product;
+    }
+
     public function canonizeProduct($product, $categoryList = array())
     {
         // Check
@@ -357,6 +394,7 @@ class Product extends AbstractApi
         // Set category information
         $product['category'] = Json::decode($product['category']);
         foreach ($product['category'] as $category) {
+            $product['categories'][$category]['id'] = $categoryList[$category]['id'];
             $product['categories'][$category]['title'] = $categoryList[$category]['title'];
             $product['categories'][$category]['url'] = Pi::url(Pi::service('url')->assemble('shop', array(
                 'module' => $this->getModule(),
@@ -366,34 +404,7 @@ class Product extends AbstractApi
         }
         // Set discount
         if ($config['order_discount']) {
-            $userDiscount = 0;
-            $uid = Pi::user()->getId();
-            $roles = Pi::user()->getRole($uid);
-            // Get discount percent
-            if ($config['order_discount_type'] == 'general') {
-                $discounts = Pi::api('discount', 'shop')->getList();
-                if (!empty($discounts)) {
-                    foreach ($discounts as $discount) {
-                        if (in_array($discount['role'], $roles)) {
-                            $userDiscount = $discount['percent'];
-                        }
-                    }
-                }
-            } elseif ($config['order_discount_type'] == 'product') {
-                if (!empty($product['setting']['discount'])) {
-                    foreach ($product['setting']['discount'] as $role => $percent) {
-                        if (in_array($role, $roles)) {
-                            $userDiscount = $percent;
-                        }
-                    }
-                }
-            }
-            // Make discount price
-            if ($userDiscount > 0) {
-                $product['price_discount'] = $product['price'];
-                $product['price'] = ($product['price'] - ($product['price'] * ($userDiscount / 100)));
-                $product['price'] = Pi::api('api', 'order')->makePrice($product['price']);
-            }
+            $product = $this->canonizeDiscount($product);
         }
         // Set price
         $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
@@ -487,36 +498,11 @@ class Product extends AbstractApi
             'action' => 'add',
             //'slug'          => $product['slug'],
         )));
+        // Set category information
+        $product['category'] = Json::decode($product['category']);
         // Set discount
         if ($config['order_discount']) {
-            $userDiscount = 0;
-            $uid = Pi::user()->getId();
-            $roles = Pi::user()->getRole($uid);
-            // Get discount percent
-            if ($config['order_discount_type'] == 'general') {
-                $discounts = Pi::api('discount', 'shop')->getList();
-                if (!empty($discounts)) {
-                    foreach ($discounts as $discount) {
-                        if (in_array($discount['role'], $roles)) {
-                            $userDiscount = $discount['percent'];
-                        }
-                    }
-                }
-            } elseif ($config['order_discount_type'] == 'product') {
-                if (!empty($product['setting']['discount'])) {
-                    foreach ($product['setting']['discount'] as $role => $percent) {
-                        if (in_array($role, $roles)) {
-                            $userDiscount = $percent;
-                        }
-                    }
-                }
-            }
-            // Make discount price
-            if ($userDiscount > 0) {
-                $product['price_discount'] = $product['price'];
-                $product['price'] = ($product['price'] - ($product['price'] * ($userDiscount / 100)));
-                $product['price'] = Pi::api('api', 'order')->makePrice($product['price']);
-            }
+            $product = $this->canonizeDiscount($product);
         }
         // Set price
         $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
@@ -534,7 +520,6 @@ class Product extends AbstractApi
                 ));
         }
         // unset
-        unset($product['category']);
         unset($product['text_summary']);
         unset($product['text_description']);
         unset($product['seo_title']);
@@ -643,36 +628,11 @@ class Product extends AbstractApi
             'action' => 'add',
             'id' => $product['id'],
         )));
+        // Set category information
+        $product['category'] = Json::decode($product['category']);
         // Set discount
         if ($config['order_discount']) {
-            $userDiscount = 0;
-            $uid = Pi::user()->getId();
-            $roles = Pi::user()->getRole($uid);
-            // Get discount percent
-            if ($config['order_discount_type'] == 'general') {
-                $discounts = Pi::api('discount', 'shop')->getList();
-                if (!empty($discounts)) {
-                    foreach ($discounts as $discount) {
-                        if (in_array($discount['role'], $roles)) {
-                            $userDiscount = $discount['percent'];
-                        }
-                    }
-                }
-            } elseif ($config['order_discount_type'] == 'product') {
-                if (!empty($product['setting']['discount'])) {
-                    foreach ($product['setting']['discount'] as $role => $percent) {
-                        if (in_array($role, $roles)) {
-                            $userDiscount = $percent;
-                        }
-                    }
-                }
-            }
-            // Make discount price
-            if ($userDiscount > 0) {
-                $product['price_discount'] = $product['price'];
-                $product['price'] = ($product['price'] - ($product['price'] * ($userDiscount / 100)));
-                $product['price'] = Pi::api('api', 'order')->makePrice($product['price']);
-            }
+            $product = $this->canonizeDiscount($product);
         }
         // Set price
         $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
@@ -785,6 +745,7 @@ class Product extends AbstractApi
         // Set category information
         $product['category'] = Json::decode($product['category']);
         foreach ($product['category'] as $category) {
+            $product['categories'][$category]['id'] = $categoryList[$category]['id'];
             $product['categories'][$category]['title'] = $categoryList[$category]['title'];
             $product['categories'][$category]['url'] = Pi::url(Pi::service('url')->assemble('shop', array(
                 'module' => $this->getModule(),
@@ -794,34 +755,7 @@ class Product extends AbstractApi
         }
         // Set discount
         if ($config['order_discount']) {
-            $userDiscount = 0;
-            $uid = Pi::user()->getId();
-            $roles = Pi::user()->getRole($uid);
-            // Get discount percent
-            if ($config['order_discount_type'] == 'general') {
-                $discounts = Pi::api('discount', 'shop')->getList();
-                if (!empty($discounts)) {
-                    foreach ($discounts as $discount) {
-                        if (in_array($discount['role'], $roles)) {
-                            $userDiscount = $discount['percent'];
-                        }
-                    }
-                }
-            } elseif ($config['order_discount_type'] == 'product') {
-                if (!empty($product['setting']['discount'])) {
-                    foreach ($product['setting']['discount'] as $role => $percent) {
-                        if (in_array($role, $roles)) {
-                            $userDiscount = $percent;
-                        }
-                    }
-                }
-            }
-            // Make discount price
-            if ($userDiscount > 0) {
-                $product['price_discount'] = $product['price'];
-                $product['price'] = ($product['price'] - ($product['price'] * ($userDiscount / 100)));
-                $product['price'] = Pi::api('api', 'order')->makePrice($product['price']);
-            }
+            $product = $this->canonizeDiscount($product);
         }
         // Set price
         $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);

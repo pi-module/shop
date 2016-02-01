@@ -64,6 +64,20 @@ class DiscountForm extends BaseForm
                 'required' => true,
             )
         ));
+        // category
+        $this->add(array(
+            'name' => 'category',
+            'type' => 'Module\Shop\Form\Element\Category',
+            'options' => array(
+                'label' => __('Category'),
+                'category' => array(0 => ''),
+            ),
+            'attributes' => array(
+                'size' => 1,
+                'multiple' => 0,
+                'required' => true,
+            ),
+        ));
         // percent
         $this->add(array(
             'name' => 'percent',

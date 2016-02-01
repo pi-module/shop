@@ -225,7 +225,7 @@ class ProductController extends ActionController
                 }
                 // Set setting
                 $setting = array();
-                if ($config['order_discount_type'] == 'product') {
+                if ($config['order_discount']) {
                     // Get role list
                     $roles = Pi::service('registry')->Role->read('front');
                     unset($roles['webmaster']);
@@ -304,7 +304,7 @@ class ProductController extends ActionController
                     }
                 }
                 // Make setting
-                if ($config['order_discount_type'] == 'product') {
+                if ($config['order_discount']) {
                     $setting = Json::decode($product['setting'], true);
                     foreach ($setting['discount'] as $name => $value) {
                         $product[$name] = $value;

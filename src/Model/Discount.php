@@ -20,6 +20,6 @@ class Discount extends Model
      * {@inheritDoc}
      */
     protected $columns = array(
-        'id', 'title', 'role', 'percent', 'status',
+        'id', 'title', 'role', 'percent', 'status', 'category'
     );
 }

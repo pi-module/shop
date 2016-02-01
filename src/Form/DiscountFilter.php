@@ -40,6 +40,14 @@ class DiscountFilter extends InputFilter
             'name' => 'role',
             'required' => true,
         ));
+        // category
+        $this->add(array(
+            'name' => 'category',
+            'required' => true,
+            'validators' => array(
+                new \Module\Shop\Validator\SetValue,
+            ),
+        ));
         // percent
         $this->add(array(
             'name' => 'percent',
