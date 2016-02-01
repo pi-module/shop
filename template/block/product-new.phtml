@@ -19,7 +19,7 @@
                                 </a>
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
-                                <?php if ($product['stock_type'] == 1) { ?>
+                                <?php if ($product['stock_type'] == 1 || $product['stock_type'] == 5) { ?>
                                     <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                         <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
                                             <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
@@ -53,7 +53,7 @@
                                 </a>
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
-                                <?php if ($product['stock_type'] == 1) { ?>
+                                <?php if ($product['stock_type'] == 1 || $product['stock_type'] == 5) { ?>
                                     <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                         <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
                                             <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
@@ -93,7 +93,7 @@
                                 <a itemprop="url" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
-                                <?php if ($product['stock_type'] == 1) { ?>
+                                <?php if ($product['stock_type'] == 1 || $product['stock_type'] == 5) { ?>
                                     <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                         <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
                                             <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">

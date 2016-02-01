@@ -237,7 +237,7 @@ class ProductForm extends BaseForm
                         2 => __('Out of stock'),
                         3 => __('Coming soon'),
                         4 => __('Contact'),
-                        5 => __('Variable stock'),
+                        5 => __('Variable stock (make order without active payment)'),
                     ),
                 ),
                 'attributes' => array(

@@ -31,7 +31,7 @@ use Zend\Json\Json;
 
 class Basket extends AbstractApi
 {
-    public function setBasket($id, $number = 1, $properties = array())
+    public function setBasket($id, $number = 1, $properties = array(), $canPay = 1)
     {
         // Get uid
         $uid = Pi::user()->getId();
@@ -55,6 +55,7 @@ class Basket extends AbstractApi
             'id' => $id,
             'number' => $number,
             'property' => $productProperty,
+            'can_pay' => $canPay,
         );
         // Check basket
         if (empty($basket)) {
@@ -253,11 +254,13 @@ class Basket extends AbstractApi
             'number' => 0,
             'shipping' => 0,
             'total_price' => 0,
+            'can_pay' => 1,
         );
         // Set products
         $basket['products'] = array();
         foreach ($basket['data']['product'] as $product) {
             $productInfo = Pi::api('product', 'shop')->getProductLight($product['id']);
+            $productInfo['can_pay'] = $product['can_pay'];
             $productInfo['number'] = $product['number'];
             $productInfo['property'] = $product['property'];
             $productInfo['total'] = $productInfo['price'] * $product['number'];

@@ -297,6 +297,8 @@ class Product extends AbstractApi
             case 'manual':
                 if ($product['price'] > 0 && $product['stock_type'] == 1) {
                     return 1;
+                } elseif ($product['price'] > 0 && $product['stock_type'] == 5) {
+                    return 2;
                 } else {
                     return 0;
                 }

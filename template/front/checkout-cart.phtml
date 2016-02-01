@@ -77,7 +77,15 @@ $this->footScript()->appendScript($script);
                     <div class="panel-heading"><?php _e('List of prodcuts on cart'); ?></div>
                     <?php foreach ($basket['products'] as $product) { ?>
                         <div data-id="<?php echo $product['id']; ?>" id="cart-product-<?php echo $this->escape($product['id']); ?>" class="clearfix">
-                            <div class="col-md-4 cartProductTitle">
+                            <div class="col-md-12 cartProductTitle">
+                                <h4>
+                                    <a title="<?php echo $this->escape($product['title']); ?>"
+                                       href="<?php echo $this->escape($product['productUrl']); ?>"
+                                       target="_blank"><?php echo $this->escape($product['title']); ?>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="col-md-4 cartProductImage">
                                 <?php if (!empty($product['image'])) { ?>
                                     <a title="<?php echo $this->escape($product['title']); ?>"
                                        href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank">
@@ -86,12 +94,6 @@ $this->footScript()->appendScript($script);
                                              class="img-responsive img-rounded" />
                                     </a>
                                 <?php } ?>
-                                <h4>
-                                    <a title="<?php echo $this->escape($product['title']); ?>"
-                                       href="<?php echo $this->escape($product['productUrl']); ?>"
-                                       target="_blank"><?php echo $this->escape($product['title']); ?>
-                                    </a>
-                                </h4>
                             </div>
                             <div class="col-md-8 cartProductInfo">
                                 <ul class="list-unstyled">
@@ -110,7 +112,11 @@ $this->footScript()->appendScript($script);
                                             <li><button id="button-numberminus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-default btn-sm js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => -1))); ?>"><i class="fa fa-minus"></i></button></li>
                                         </ul>
                                     </li>
-                                    <li><strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total" class="label label-success"><?php echo $this->escape($product['total_view']); ?></span></li>
+                                    <?php if ($product['can_pay'] == 2) { ?>
+                                        <li><strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total" class="label label-danger"><?php echo $this->escape($product['total_view']); ?></span> <?php _e('Payment after admin validation'); ?></li>
+                                    <?php } else { ?>
+                                        <li><strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total" class="label label-success"><?php echo $this->escape($product['total_view']); ?></span></li>
+                                    <?php } ?>
                                     <li><button id="button-remove-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-danger btn-xs js-remove" data-toggle="button" data-remove-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'remove', 'product' => $product['id']))); ?>"><i class="fa fa-ok fa fa-white"></i> <?php _e('Remove'); ?></button></li>
                                 </ul>
                             </div>

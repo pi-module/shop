@@ -26,7 +26,7 @@
                 </div>
             </div>
         <?php } elseif ($config['order_stock'] == 'manual') { ?>
-            <?php if ($productItem['stock_type'] == 1) { ?>
+            <?php if ($productItem['stock_type'] == 1 || $productItem['stock_type'] == 5) { ?>
                 <div class="clearfix">
                     <div class="col-md-7 col-sm-7 col-xs-12">
                         <?php include $this->template('front/product-order'); ?>
@@ -38,7 +38,11 @@
                         <?php } ?>
                         <div class="clearfix">
                             <strong><?php _e('Stock status'); ?> : </strong>
-                            <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
+                            <?php if ($productItem['stock_type'] == 1) { ?>
+                                <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                            <?php } elseif ($productItem['stock_type'] == 5) { ?>
+                                <span class="text-danger" itemprop="availability" href="http://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                            <?php } ?>
                         </div>
                         <strong><?php _e('Price'); ?> : </strong>
                         <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>

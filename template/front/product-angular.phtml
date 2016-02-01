@@ -252,26 +252,56 @@ switch ($config['view_column']) {
                                             <meta itemprop="priceCurrency" content="{{product.price_currency}}">
                                         </div>
                                     <?php } elseif ($config['order_stock'] == 'manual') { ?>
-                                        <div ng-if="product.stock_type == 1">
-                                            <div class="clearfix">
+                                        <div ng-switch on="product.stock_type">
+                                            <div ng-switch-when="1">
                                                 <div class="clearfix">
-                                                    <strong><?php _e('Stock status'); ?> : </strong>
-                                                    <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
-                                                </div>
-                                                <strong><?php _e('Price'); ?> : </strong>
-                                                <div ng-if="product.price_discount_has == 1">
+                                                    <div class="clearfix">
+                                                        <strong><?php _e('Stock status'); ?> : </strong>
+                                                        <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                                    </div>
+                                                    <strong><?php _e('Price'); ?> : </strong>
+                                                    <div ng-if="product.price_discount_has == 1">
                                                     <span class="text-danger">
                                                         <del>{{product.price_discount_view}}</del>
                                                     </span>
+                                                    </div>
+                                                    <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
+                                                    <meta itemprop="priceCurrency" content="{{product.price_currency}}">
                                                 </div>
-                                                <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
-                                                <meta itemprop="priceCurrency" content="{{product.price_currency}}">
                                             </div>
-                                        </div>
-                                        <div ng-if="product.stock_type != 1">
-                                            <div class="clearfix">
-                                                <strong><?php _e('Stock status'); ?> : </strong>
-                                                <span class="text-danger">{{product.stock_type_view}}</span>
+                                            <div ng-switch-when="2">
+                                                <div class="clearfix">
+                                                    <strong><?php _e('Stock status'); ?> : </strong>
+                                                    <span class="text-danger">{{product.stock_type_view}}</span>
+                                                </div>
+                                            </div>
+                                            <div ng-switch-when="3">
+                                                <div class="clearfix">
+                                                    <strong><?php _e('Stock status'); ?> : </strong>
+                                                    <span class="text-danger">{{product.stock_type_view}}</span>
+                                                </div>
+                                            </div>
+                                            <div ng-switch-when="4">
+                                                <div class="clearfix">
+                                                    <strong><?php _e('Stock status'); ?> : </strong>
+                                                    <span class="text-danger">{{product.stock_type_view}}</span>
+                                                </div>
+                                            </div>
+                                            <div ng-switch-when="5">
+                                                <div class="clearfix">
+                                                    <div class="clearfix">
+                                                        <strong><?php _e('Stock status'); ?> : </strong>
+                                                        <span class="text-danger" itemprop="availability" href="http://schema.org/InStock">{{product.stock_type_view}}</span>
+                                                    </div>
+                                                    <strong><?php _e('Price'); ?> : </strong>
+                                                    <span ng-if="product.price_discount_has == 1">
+                                                        <span class="text-danger small">
+                                                            <del>{{product.price_discount_view}}</del>
+                                                        </span>
+                                                    </span>
+                                                    <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
+                                                    <meta itemprop="priceCurrency" content="{{product.price_currency}}">
+                                                </div>
                                             </div>
                                         </div>
                                     <?php } elseif ($config['order_stock'] == 'product') { ?>

@@ -66,10 +66,9 @@ class CartController extends ActionController
             //$this->view()->assign('test', $data);
             //$this->view()->setTemplate('empty');
             // Find product
-            $product = $this->getModel('product')->find($data['id']);
-            $product = Pi::api('product', 'shop')->canonizeProductLight($product);
+            $product = Pi::api('product', 'shop')->getProductLight($data['id']);
             // Check product
-            if (!$product['marketable']) {
+            if (!in_array($product['marketable'], array(1, 2))) {
                 $message = __('The product was not marketable.');
                 $this->jump($product['productUrl'], $message, 'error');
             } else {
@@ -79,7 +78,7 @@ class CartController extends ActionController
                     $property = $data['property'];
                 }
                 // Set basket
-                Pi::api('basket', 'shop')->setBasket($product['id'], 1, $property);
+                Pi::api('basket', 'shop')->setBasket($product['id'], 1, $property, $product['marketable']);
                 // Go to cart
                 $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
                 return $this->redirect()->toRoute('', $url);
@@ -171,6 +170,8 @@ class CartController extends ActionController
         $this->view()->setTemplate(false);
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
+        // Set can pay array
+        $canPay = array();
         // Set order array
         $order = array();
         $order['module_name'] = $this->params('module');
@@ -191,7 +192,10 @@ class CartController extends ActionController
                 'extra' => json::encode($product['property']),
             );
             $order['product'][$product['id']] = $singelProduct;
+            $canPay[$product['id']] = $product['can_pay'];
         }
+        // Check can pay or not
+        $order['can_pay'] = (in_array(2, $canPay)) ? 2 : 1;
         // Unset shop session
         Pi::api('basket', 'shop')->emptyBasket();
         // Set and go to order
