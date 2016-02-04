@@ -19,10 +19,6 @@ use Module\Shop\Form\PropertyFilter;
 
 class PropertyController extends ActionController
 {
-    protected $propertyColumns = array(
-        'id', 'title', 'order', 'status', 'influence_stock', 'influence_price', 'type'
-    );
-
     public function indexAction()
     {
         // Get info
@@ -56,12 +52,6 @@ class PropertyController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                // Set just category fields
-                foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->propertyColumns)) {
-                        unset($values[$key]);
-                    }
-                }
                 // Save values
                 if (!empty($values['id'])) {
                     $row = $this->getModel('property')->find($values['id']);
