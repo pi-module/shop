@@ -62,22 +62,27 @@ class SpecialController extends ActionController
     {
         // Get id
         $id = $this->params('id');
-        $form = new SpecialForm('special');
+        // Set option
+        $option = array();
+        $option['type'] = $id ? 'edit' : 'add';
+        // Set form
+        $form = new SpecialForm('special', $option);
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form->setInputFilter(new SpecialFilter);
+            $form->setInputFilter(new SpecialFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Set time
-                $values['time_publish'] = strtotime($values['time_publish']);
-                $values['time_expire'] = strtotime($values['time_expire']);
+                //$values['time_publish'] = strtotime($values['time_publish']);
+                //$values['time_expire'] = strtotime($values['time_expire']);
                 // Save values
                 if (!empty($values['id'])) {
                     $row = $this->getModel('special')->find($values['id']);
                 } else {
                     $row = $this->getModel('special')->createRow();
                 }
+                print_r($values);
                 $row->assign($values);
                 $row->save();
                 // Add log
@@ -93,9 +98,12 @@ class SpecialController extends ActionController
                 $form->setData($values);
             }
         }
+        // Set title
+        $title = $id ? __('Edit Special') : __('Add Special');
+        // Set view
         $this->view()->setTemplate('special-update');
         $this->view()->assign('form', $form);
-        $this->view()->assign('title', __('Add Special'));
+        $this->view()->assign('title', $title);
     }
 
     public function deleteAction()

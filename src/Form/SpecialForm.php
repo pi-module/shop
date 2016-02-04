@@ -18,19 +18,16 @@ use Pi\Form\Form as BaseForm;
 
 class SpecialForm extends BaseForm
 {
-    public function __construct($name = null)
+    public function __construct($name = null, $option = array())
     {
-        $this->category = array(
-            -1 => __('Home Page'),
-            0 => __('All Category'),
-        );
+        $this->option = $option;
         parent::__construct($name);
     }
 
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new SpecialFilter;
+            $this->filter = new SpecialFilter($this->option);
         }
         return $this->filter;
     }
@@ -45,21 +42,23 @@ class SpecialForm extends BaseForm
             ),
         ));
         // product
-        $this->add(array(
-            'name' => 'product',
-            'type' => 'Module\Shop\Form\Element\Product',
-            'options' => array(
-                'label' => __('Product'),
-                'limit' => 500,
-                'type' => 'special',
-            ),
-            'attributes' => array(
-                'description' => __('Select product for add to Special'),
-                'size' => 1,
-                'multiple' => 0,
-                'required' => true,
-            ),
-        ));
+        if ($this->option['type'] == 'add') {
+            $this->add(array(
+                'name' => 'product',
+                'type' => 'Module\Shop\Form\Element\Product',
+                'options' => array(
+                    'label' => __('Product'),
+                    'limit' => 500,
+                    'type' => 'special',
+                ),
+                'attributes' => array(
+                    'description' => __('Select product for add to Special'),
+                    'size' => 1,
+                    'multiple' => 0,
+                    'required' => true,
+                ),
+            ));
+        }
         // status
         $this->add(array(
             'name' => 'status',

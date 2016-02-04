@@ -18,7 +18,7 @@ use Zend\InputFilter\InputFilter;
 
 class SpecialFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option)
     {
         // id
         $this->add(array(
@@ -26,21 +26,23 @@ class SpecialFilter extends InputFilter
             'required' => false,
         ));
         // product
-        $this->add(array(
-            'name' => 'product',
-            'required' => true,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
+        if ($option['type'] == 'add') {
+            $this->add(array(
+                'name' => 'product',
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
                 ),
-            ),
-            'validators' => array(
-                new \Module\Shop\Validator\SpecialDuplicate(array(
-                    'module' => Pi::service('module')->current(),
-                    'table' => 'special',
-                )),
-            ),
-        ));
+                'validators' => array(
+                    new \Module\Shop\Validator\SpecialDuplicate(array(
+                        'module' => Pi::service('module')->current(),
+                        'table' => 'special',
+                    )),
+                ),
+            ));
+        }
         // status
         $this->add(array(
             'name' => 'status',

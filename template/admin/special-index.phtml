@@ -14,18 +14,42 @@
             <th><?php _e('Action'); ?></th>
         </tr>
         <?php foreach ($specials as $special) { ?>
+            <?php
+            if ($special['status'] == 1) {
+                $labelIdClass = 'label-success';
+            } elseif ($special['status'] == 2) {
+                $labelIdClass = 'label-warning';
+            } elseif ($special['status'] == 3) {
+                $labelIdClass = 'label-warning';
+            } elseif ($special['status'] == 4) {
+                $labelIdClass = 'label-warning';
+            } elseif ($special['status'] == 5) {
+                $labelIdClass = 'label-danger';
+            }
+            ?>
             <tr>
-                <td><?php echo $this->escape($special['id']); ?></td>
-                <td><?php echo $this->escape($special['productTitle']); ?></a></td>
                 <td>
-                    <a class="btn btn-primary" title="<?php _e('Edit'); ?>"
+                    <span class="label <?php echo $labelIdClass; ?>">
+                        <?php echo $this->escape($special['id']); ?>
+                    </span>
+                </td>
+                <td><?php echo $this->escape($special['productTitle']); ?> (<?php echo $this->escape($special['product']); ?>)</td>
+                <td>
+                    <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
                        href="<?php echo $this->url('', array('action' => 'update', 'id' => $special['id'])); ?>"><i
                             class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
-                    <a class="btn btn-danger" title="<?php _e('Delete'); ?>"
+                    <a class="btn btn-danger btn-xs" title="<?php _e('Delete'); ?>"
                        href="<?php echo $this->url('', array('action' => 'delete', 'id' => $special['id'])); ?>"><i
                             class="fa fa-trash"></i> <?php _e('Delete'); ?></a>
                 </td>
             </tr>
         <?php } ?>
     </table>
+    <p>
+        <span class="label label-success"><?php _e('Published'); ?></span>
+        <span class="label label-warning"><?php _e('Pending review'); ?></span>
+        <span class="label label-warning"><?php _e('Draft'); ?></span>
+        <span class="label label-warning"><?php _e('Private'); ?></span>
+        <span class="label label-danger"><?php _e('Trash'); ?></span>
+    </p>
 </div>

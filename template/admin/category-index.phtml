@@ -29,15 +29,17 @@
             }
             ?>
             <tr>
-                <td><span
-                        class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($category['id']); ?></span>
+                <td>
+                    <span class="label <?php echo $labelIdClass; ?>">
+                        <?php echo $this->escape($category['id']); ?>
+                    </span>
                 </td>
                 <td><?php echo $this->escape($category['title']); ?></td>
                 <td><?php echo $this->escape($category['display_order']); ?></td>
                 <td>
-                    <a class="btn btn-primary" title="<?php _e('View'); ?>" href="<?php echo $category['url']; ?>"><i
+                    <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $category['url']; ?>"><i
                             class="fa fa-edit"></i> <?php _e('View'); ?></a>
-                    <a class="btn btn-primary" title="<?php _e('Edit'); ?>"
+                    <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
                        href="<?php echo $this->url('', array('action' => 'update', 'id' => $category['id'])); ?>"><i
                             class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
                 </td>
