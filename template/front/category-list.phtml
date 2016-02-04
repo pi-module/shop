@@ -4,15 +4,21 @@
         <h1><?php _e('Category list'); ?></h1>
     </div>
     <?php if (isset($categories) && !empty($categories)) { ?>
-        <div class="categories clearfix">
+        <div class="category-list clearfix">
             <?php foreach ($categories as $category) { ?>
                 <div class="col-xs-12 col-sm-6 col-md-3" itemscope itemtype="https://schema.org/Brand">
                     <div class="thumbnail">
+                        <?php if ($category['image']) { ?>
                         <a itemprop="url" href="<?php echo $this->escape($category['categoryUrl']); ?>"
                            title="<?php echo $this->escape($category['title']); ?>">
                             <img itemprop="image" src="<?php echo $this->escape($category['mediumUrl']); ?>"
                                  alt="<?php echo $this->escape($category['title']); ?>">
                         </a>
+                        <?php } else { ?>
+                            <div class="thumbnail-bg">
+                                <?php echo $this->escape($category['title']); ?>
+                            </div>
+                        <?php } ?>
                         <div class="caption">
                             <a href="<?php echo $this->escape($category['categoryUrl']); ?>"
                                title="<?php echo $this->escape($category['title']); ?>">
