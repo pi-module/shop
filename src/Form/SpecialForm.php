@@ -50,6 +50,8 @@ class SpecialForm extends BaseForm
             'type' => 'Module\Shop\Form\Element\Product',
             'options' => array(
                 'label' => __('Product'),
+                'limit' => 500,
+                'type' => 'special',
             ),
             'attributes' => array(
                 'description' => __('Select product for add to Special'),

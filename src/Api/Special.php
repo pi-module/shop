@@ -18,6 +18,7 @@ use Zend\Json\Json;
 
 /*
  * Pi::api('special', 'shop')->getAll();
+ * Pi::api('special', 'shop')->getIds();
  */
 
 class Special extends AbstractApi
@@ -47,4 +48,21 @@ class Special extends AbstractApi
         }
         return $special;
     }
-}	
+
+    public function getIds()
+    {
+        // Set options
+        $special = array();
+        $where = array('status' => 1);
+        $order = array('id DESC');
+        $columns = array('product');
+        // Get ids
+        $model = Pi::model('special', $this->getModule());
+        $select = $model->select()->where($where)->columns($columns)->order($order);
+        $rowset = $model->selectWith($select);
+        foreach ($rowset as $row) {
+            $special[] = $row->product;
+        }
+        return $special;
+    }
+}

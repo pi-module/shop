@@ -19,13 +19,6 @@ use Module\Shop\Form\SpecialFilter;
 
 class SpecialController extends ActionController
 {
-    /**
-     * Special Columns
-     */
-    protected $specialColumns = array(
-        'id', 'product', 'price', 'time_publish', 'time_expire', 'status'
-    );
-
     public function indexAction()
     {
         // Get product and category
@@ -76,11 +69,6 @@ class SpecialController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                foreach (array_keys($values) as $key) {
-                    if (!in_array($key, $this->specialColumns)) {
-                        unset($values[$key]);
-                    }
-                }
                 // Set time
                 $values['time_publish'] = strtotime($values['time_publish']);
                 $values['time_expire'] = strtotime($values['time_expire']);

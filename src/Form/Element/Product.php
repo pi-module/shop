@@ -14,6 +14,7 @@ namespace Module\Shop\Form\Element;
 
 use Pi;
 use Zend\Form\Element\Select;
+use Zend\Db\Sql\Predicate\Expression;
 
 class Product extends Select
 {
@@ -24,13 +25,23 @@ class Product extends Select
     public function getValueOptions()
     {
         if (empty($this->valueOptions)) {
+            $options = array();
+            // Add product over the list
             if (isset($this->options['product'])) {
                 $options = $this->options['product'];
             }
+            // Set query info
             $limit = (isset($this->options['limit'])) ? $this->options['limit'] : 50;
             $columns = array('id', 'title');
-            $order = array('time_create DESC', 'id DESC');
-            $select = Pi::model('product', 'shop')->select()->columns($columns)->order($order)->limit($limit);
+            $order = array('title ASC', 'time_create DESC', 'id DESC');
+            $where = array('status' => 1);
+            // Check for special
+            if (isset($this->options['type']) && $this->options['type'] == 'special') {
+                $ids = Pi::api('special', 'shop')->getIds();
+                $where[] = new Expression('id NOT IN (' . implode(",", $ids) . ')');
+            }
+            // Select
+            $select = Pi::model('product', 'shop')->select()->columns($columns)->where($where)->order($order)->limit($limit);
             $rowset = Pi::model('product', 'shop')->selectWith($select);
             foreach ($rowset as $row) {
                 $list[$row->id] = $row->toArray();
@@ -62,3 +73,4 @@ class Product extends Select
         return $this->Attributes;
     }
 }
+

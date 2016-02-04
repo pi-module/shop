@@ -29,6 +29,17 @@ class SpecialFilter extends InputFilter
         $this->add(array(
             'name' => 'product',
             'required' => true,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+            'validators' => array(
+                new \Module\Shop\Validator\SpecialDuplicate(array(
+                    'module' => Pi::service('module')->current(),
+                    'table' => 'special',
+                )),
+            ),
         ));
         // status
         $this->add(array(
