@@ -1,7 +1,7 @@
 <?php if (!isset($shopBoxSize) || empty($shopBoxSize)) {
-    $shopBoxSize = 'col-sm-12 col-md-4';
+    $shopListBoxSize = 'col-sm-12 col-md-4';
 } ?>
-<div class="<?php echo $shopBoxSize; ?> productBox h-product" itemscope itemtype="http://schema.org/Product">
+<div class="<?php echo $shopListBoxSize; ?> product-box h-product" itemscope itemtype="http://schema.org/Product">
     <div class="thumbnail">
         <?php if ($product['image']) { ?>
             <a itemprop="url" class="u-photo" title="<?php echo $this->escape($product['title']); ?>"

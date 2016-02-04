@@ -25,7 +25,7 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
             <?php include $this->template('front/gallery'); ?>
         </div>
         <div class="col-md-8">
-            <div class="productTitle clearfix">
+            <div class="product-title clearfix">
                 <h1 class="p-name pull-left" itemprop="name">
                     <?php echo $this->escape($productItem['title']); ?>
                 </h1>
@@ -35,16 +35,16 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
                 </h2>
                 <?php } ?>
             </div>
-            <div class="productInfoBox productSummary e-description clearfix" itemprop="description">
+            <div class="product-info-box productSummary e-description clearfix" itemprop="description">
                 <?php echo $productItem['text_summary']; ?>
             </div>
-            <div class="productPriceBox clearfix">
+            <div class="product-price-box clearfix">
                 <?php include $this->template('front/product-price'); ?>
             </div>
-            <div class="productInfoBox clearfix">
+            <div class="product-info-box clearfix">
                 <?php include $this->template('front/attribute'); ?>
             </div>
-            <div class="clearfix productInfoList">
+            <div class="clearfix product-info-list">
                 <ul class="list-inline">
                     <?php if (!empty($vote)) { ?>
                         <li class="col-md-2">
@@ -77,10 +77,10 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
             </div>
         </div>
         <div class="col-md-12">
-            <div class="productInfoBox productDescription p-review clearfix" itemprop="description">
+            <div class="product-info-box productDescription p-review clearfix" itemprop="description">
                 <?php echo $productItem['text_description']; ?>
             </div>
-            <div class="productInfoBox clearfix">
+            <div class="product-info-box clearfix">
                 <div class="p-brand p-category" itemprop="brand category">
                     <?php include $this->template('front/category'); ?>
                 </div>
@@ -99,6 +99,6 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
             </div>
         </div>
     </div>
-    <?php include $this->template('front/related'); ?>
-    <?php //include $this->template('front/list'); ?>
+    <?php include $this->template('front/product-list-related'); ?>
+    <?php include $this->template('front/product-list-category'); ?>
 </div>

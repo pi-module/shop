@@ -52,8 +52,8 @@ class ProductController extends IndexController
         }
         // Get related
         if ($product['related'] && $config['view_related']) {
-            $related = Pi::api('related', 'shop')->getListAll($product['id']);
-            $this->view()->assign('related', $related);
+            $productRelated = Pi::api('related', 'shop')->getListAll($product['id']);
+            $this->view()->assign('productRelated', $productRelated);
         }
         // Get attached files
         if ($product['attach'] && $config['view_attach']) {
@@ -63,9 +63,8 @@ class ProductController extends IndexController
         // Get new products in category
         if ($config['view_incategory']) {
             $where = array('status' => 1, 'category' => $product['category']);
-            $productList = $this->productList($where);
-            $this->view()->assign('productList', $productList);
-            $this->view()->assign('productTitleH2', __('New products'));
+            $productCategory = $this->productList($where);
+            $this->view()->assign('productCategory', $productCategory);
         }
         // Set tag
         if ($config['view_tag']) {

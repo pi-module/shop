@@ -1,79 +1,93 @@
-.productBox {
-    text-align: center;
-}
-
-/* .caption {
-	background-color: #E5E5E5;
-	margin-top: 5px;
-} */
-
-#cart-list {
-    min-height: 250px;
-}
-
-.cartBox {
-    margin: 10px 0;
-}
-
-.cartProductTitle {
+/* image gallery */
+.product-image .product-image-attach {
     margin-top: 10px;
 }
 
-.productTitle h2 {
+/* homepage widget */
+.shop-widget .shop-widget-single {
+    margin-bottom: 5px;
+}
+
+/* product list */
+.product-list .product-box {
+    text-align: center;
+}
+
+.product-list .product-box .caption {
+    min-height: 100px;
+}
+
+.product-list .product-box:hover .caption {
+    transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.product-list .product-box h3 {
+    margin: 1px;
+    padding: 1px;
+    font-size: 1.1em;
+}
+
+/* product page */
+.product-page .product-title h1 {
+    font-size: 1.6em;
+}
+
+.product-page .product-title h2 {
     font-size: 1.2em;
     color: #9FA0A0;
 }
 
-.cartProductInfo {
-    margin-top: 10px;
+.product-page .product-price-box {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
 }
 
-.cartInfo {
-    min-width: 300px;
-}
-
-.player-media {
-    margin: 5px 0;
-}
-
-.itemImageAttach {
-    margin-top: 10px;
-}
-
-.socialSharing {
-    margin: 0;
-    padding: 0;
-}
-
-.productInfoBox {
+.product-page .product-info-box {
     padding: 5px 0;
     margin: 5px 0;
 }
 
-.productInfoList ul {
+.product-page .product-info-list ul {
     padding: 0;
     margin: 0;
 }
 
-.productInfoList ul li {
-
+.product-page .socialSharing {
+    margin: 0;
+    padding: 0;
 }
 
-.productInfoList ul li .socialSharing {
-
+/* product-attribute */
+.product-attribute .product-attribute-head h2 {
+    font-size: 1.3em;
 }
 
-.shopWidgetSingle {
-    margin-bottom: 5px;
+/* checkout cart */
+.product-cart-box {
+    min-height: 250px;
+    margin: 10px 0;
+}
+
+.product-cart-box .cart-product-title {
+    margin-top: 10px;
+}
+
+.product-cart-box .cart-product-info {
+    margin-top: 10px;
+}
+
+.product-cart-box .list-unstyled li {
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 /* related products */
-.productRelated .thumbnail {
-
-}
-
-.productRelated .thumbnail h3 {
-    padding: 0;
+/* .product-related .thumbnail h3 {
     top: 100px;
     position: absolute;
     font-size: 1em;
@@ -84,34 +98,15 @@
     margin-left: 1px;
 }
 
-.productRelated .thumbnail h3 a {
+.product-related .thumbnail h3 a {
     color: #fff;
 }
 
-.productRelated .thumbnail h3 a:hover {
+.product-related .thumbnail h3 a:hover {
     text-decoration: none;
-}
+} */
 
-.productPriceBox {
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-    border-bottom: 1px solid #ddd;
-}
-
-.categoryList .list-group-item {
-    background-color: #f0f0f0;
-}
-
-.categoryList .list-group-item-depth {
-    background-color: #fcfcfc;
-}
-
-#shop-cart-page .list-unstyled li {
-    padding-top: 4px;
-    padding-bottom: 4px;
-}
-
-/* compare */
+/* compare page */
 .product-compare {
     margin: 0 15px 15px 15px;
 }
@@ -122,37 +117,37 @@
     margin: 1px;
 }
 
-.product-compare-width-1 {
+.product-compare .product-compare-width-1 {
     width: 100%;
     padding: 0;
     margin: 0;
 }
 
-.product-compare-width-2 {
+.product-compare .product-compare-width-2 {
     width: 50%;
     padding: 0;
     margin: 0;
 }
 
-.product-compare-width-3 {
+.product-compare .product-compare-width-3 {
     width: 33.33333332%;
     padding: 0;
     margin: 0;
 }
 
-.product-compare-width-4 {
+.product-compare .product-compare-width-4 {
     width: 25%;
     padding: 0;
     margin: 0;
 }
 
-.product-compare-width-5 {
+.product-compare .product-compare-width-5 {
     width: 20%;
     padding: 0;
     margin: 0;
 }
 
-.product-compare-box-title li {
+.product-compare .product-compare-box-title li {
     height: 35px;
     padding: 5px 20px;
     background-color: #666;
@@ -161,7 +156,7 @@
     border-right: 1px solid #fff;
 }
 
-.product-compare-box-title li.product-compare-box-category  {
+.product-compare .product-compare-box-title li.product-compare-box-category  {
     height: 35px;
     padding: 5px 20px;
     background-color: #fff;
@@ -170,22 +165,22 @@
     font-size: 16px;
 }
 
-.product-compare-box-info li {
+.product-compare .product-compare-box-info li {
     height: 35px;
     padding: 5px 20px;
     border-bottom: 1px solid #fff;
     border-right: 1px solid #fff;
 }
 
-.product-compare-box-info li:nth-child(odd) {
+.product-compare .product-compare-box-info li:nth-child(odd) {
     background-color: #eaeaea;
 }
 
-.product-compare-box-info li:nth-child(even) {
+.product-compare .product-compare-box-info li:nth-child(even) {
     background-color: #f0f0f0;
 }
 
-.product-compare-box-info li.product-compare-box-category  {
+.product-compare .product-compare-box-info li.product-compare-box-category  {
     height: 35px;
     padding: 5px 20px;
     background-color: #fff;
@@ -203,6 +198,7 @@
     cursor: pointer;
 }
 
+/* compare button on product */
 .product-compare-add {
     position: absolute;
     cursor: pointer;
@@ -211,6 +207,7 @@
     color: #fff;
 }
 
+/* compare on product list */
 .product-compare-list {
     background: #f5f5f5;
     padding-top: 10px;
@@ -235,4 +232,54 @@
 
 .product-compare-list .product-compare-button {
     margin-top: 50px;
+}
+
+/* owl carousel list */
+.owl-carousel-list {
+    height: 303px !important;
+}
+
+.owl-carousel-list .owl-stage {
+    height: 300px !important;
+}
+
+.owl-carousel-list .owl-stage-outer {
+    height: 300px !important;
+}
+
+.owl-carousel-list .owl-item {
+    max-height: 300px !important;
+}
+
+.owl-carousel-list .owl-item img {
+    max-height: 200px !important;
+}
+
+.owl-carousel-list .owl-controls .owl-nav {
+    margin-top: -200px !important;
+}
+
+/* owl carousel list for special products */
+.product-special .owl-carousel-list {
+    height: 253px !important;
+}
+
+.product-special .owl-carousel-list .owl-stage {
+    height: 250px !important;
+}
+
+.product-special .owl-carousel-list .owl-stage-outer {
+    height: 250px !important;
+}
+
+.product-special .owl-carousel-list .owl-item {
+    max-height: 250px !important;
+}
+
+.product-special .owl-carousel-list .owl-item img {
+    max-height: 140px !important;
+}
+
+.product-special .owl-carousel-list .owl-controls .owl-nav {
+    margin-top: -160px !important;
 }

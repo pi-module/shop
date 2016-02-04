@@ -2,7 +2,7 @@
 $scriptMenu = <<<'EOT'
 $(function() {
     var json = '%s';
-    $('#categoryTreeView').treeview({
+    $('#category-tree-view').treeview({
         levels: 1,
         data: json,
         enableLinks: true,
@@ -26,30 +26,30 @@ $this->css($this->assetModule('css/front.css'));
 <div class="clearfix">
     <div class="clearfix row">
         <div class="col-sm-12 col-md-3">
-            <div class="clearfix categoryList">
+            <div class="clearfix category-list">
                 <div class="page-header">
                     <h4><?php _e('Category list'); ?></h4>
                 </div>
                 <div class="clearfix">
-                    <div id="categoryTreeView"></div>
+                    <div id="category-tree-view"></div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-9">
+        <div class="shop-widget col-sm-12 col-md-9">
             <div class="page-header">
                 <h1><?php echo $productTitleH1; ?></h1>
             </div>
             <?php if (!empty($config['homepage_widget'])) { ?>
                 <?php $widgets = explode("|", $config['homepage_widget']); ?>
-                <div class="clearfix shopWidgetList">
+                <div class="clearfix shop-widget-list">
                     <?php foreach ($widgets as $widget) { ?>
-                        <div class="shopWidgetSingle">
+                        <div class="shop-widget-single">
                             <?php echo $this->widget($widget); ?>
                         </div>
                     <?php } ?>
                 </div>
             <?php } ?>
-            <?php include $this->template('front/special'); ?>
+            <?php include $this->template('front/product-list-special'); ?>
             <?php if (!empty($config['text_description_index'])) { ?>
                 <div class="well shopIndexDescription">
                     <?php echo $config['text_description_index']; ?>

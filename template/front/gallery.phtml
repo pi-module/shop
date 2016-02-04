@@ -42,9 +42,9 @@ $this->jQuery(array(
 $this->footScript()->appendScript($script1);
 $this->footScript()->appendScript($script2);
 ?>
-<div class="itemGallery gallery clearfix thumbnail">
+<div class="product-image gallery clearfix thumbnail">
     <?php if (isset($productItem['image']) && !empty($productItem['image'])) { ?>
-        <div class="itemImageMain text-center clearfix u-photo">
+        <div class="product-image-main text-center clearfix u-photo">
             <a class="u-photo" href="<?php echo $this->escape($productItem['largeUrl']); ?>"
                title="<?php echo $this->escape($productItem['title']); ?>">
                 <img class="img-responsive" itemprop="image" src="<?php echo $this->escape($productItem['mediumUrl']); ?>"
@@ -52,7 +52,7 @@ $this->footScript()->appendScript($script2);
             </a>
         </div>
     <?php } elseif (isset($category['image']) && !empty($category['image'])) { ?>
-        <div class="itemImageMain text-center clearfix u-photo">
+        <div class="product-image-main text-center clearfix u-photo">
             <a class="u-photo" href="<?php echo $this->escape($category['largeUrl']); ?>"
                title="<?php echo $this->escape($category['title']); ?>">
                 <img class="img-responsive" itemprop="image" src="<?php echo $this->escape($category['mediumUrl']); ?>"
@@ -61,7 +61,7 @@ $this->footScript()->appendScript($script2);
         </div>
     <?php } ?>
     <?php if (isset($attach['image']) && !empty($attach['image'])) { ?>
-        <div class="owl-carousel itemImageAttach text-center clearfix">
+        <div class="owl-carousel product-image-attach text-center clearfix">
             <?php foreach ($attach['image'] as $image) { ?>
                 <a class="u-photo" href="<?php echo $this->escape($image['largeUrl']); ?>"
                    title="<?php echo $this->escape($image['title']); ?>">
