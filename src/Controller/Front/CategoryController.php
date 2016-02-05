@@ -68,15 +68,18 @@ class CategoryController extends IndexController
         // Set info
         $categories = array();
         $where = array('status' => 1);
-        $order = array('display_order DESC', 'id DESC');
+        $order = array('display_order DESC', 'title ASC', 'id DESC');
         $select = $this->getModel('category')->select()->where($where)->order($order);
         $rowset = $this->getModel('category')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
             $categories[$row->id] = Pi::api('category', 'shop')->canonizeCategory($row);
         }
-        //
-        $categoryTree = Pi::api('category', 'shop')->makeTree2($categories);
+        // Set category tree
+        $categoryTree = array();
+        if (!empty($categories)) {
+            $categoryTree = Pi::api('category', 'shop')->makeTreeOrder($categories);
+        }
         // Set header and title
         $title = __('Category list');
         // Set seo_keywords
