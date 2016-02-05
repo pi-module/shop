@@ -143,14 +143,6 @@ return array(
             'value' => 3,
             'category' => 'view',
         ),
-        'view_related' => array(
-            'category' => 'view',
-            'title' => _a('Show related products'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
-        ),
         'view_attribute' => array(
             'category' => 'view',
             'title' => _a('Show attribute fields'),
@@ -167,14 +159,6 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
-        'view_incategory' => array(
-            'category' => 'view',
-            'title' => _a('Show other products from this category'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
-        ),
         'view_price' => array(
             'category' => 'view',
             'title' => _a('Show product price'),
@@ -182,22 +166,6 @@ return array(
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
-        ),
-        'view_special' => array(
-            'category' => 'view',
-            'title' => _a('Show special'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
-        ),
-        'view_special_number' => array(
-            'category' => 'view',
-            'title' => _a('Number of products on special'),
-            'description' => '',
-            'edit' => 'text',
-            'filter' => 'number_int',
-            'value' => 6
         ),
         'view_price_title' => array(
             'category' => 'view',
@@ -238,6 +206,38 @@ return array(
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
+        ),
+        'view_related' => array(
+            'category' => 'view',
+            'title' => _a('Show related products'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_incategory' => array(
+            'category' => 'view',
+            'title' => _a('Show other products from this category'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_special' => array(
+            'category' => 'view',
+            'title' => _a('Show special'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_special_number' => array(
+            'category' => 'view',
+            'title' => _a('Number of products on special'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 6
         ),
         // Image
         'image_size' => array(
