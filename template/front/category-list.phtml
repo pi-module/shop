@@ -5,7 +5,7 @@
     </div>
     <?php if (isset($categories) && !empty($categories)) { ?>
         <div class="category-list clearfix">
-            <?php foreach ($categories as $category) { ?>
+            <?php foreach ($categoryTree as $category) { ?>
                 <div class="col-xs-12 col-sm-6 col-md-3" itemscope itemtype="https://schema.org/Brand">
                     <div class="thumbnail">
                         <?php if ($category['image']) { ?>

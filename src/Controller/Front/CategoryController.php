@@ -75,6 +75,8 @@ class CategoryController extends IndexController
         foreach ($rowset as $row) {
             $categories[$row->id] = Pi::api('category', 'shop')->canonizeCategory($row);
         }
+        //
+        $categoryTree = Pi::api('category', 'shop')->makeTree2($categories);
         // Set header and title
         $title = __('Category list');
         // Set seo_keywords
@@ -89,6 +91,7 @@ class CategoryController extends IndexController
         $this->view()->headKeywords($seoKeywords, 'set');
         $this->view()->setTemplate('category-list');
         $this->view()->assign('categories', $categories);
+        $this->view()->assign('categoryTree', $categoryTree);
         $this->view()->assign('config', $config);
     }
 }

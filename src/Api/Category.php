@@ -25,6 +25,8 @@ use Zend\Json\Json;
  * Pi::api('category', 'shop')->categoryCount();
  * Pi::api('category', 'shop')->canonizeCategory($category);
  * Pi::api('category', 'shop')->sitemap();
+ * Pi::api('category', 'shop')->makeTree($elements, $parentId);
+ * Pi::api('category', 'shop')->makeTreeOrder($elements, $parentId = 0);
  */
 
 class Category extends AbstractApi
@@ -231,6 +233,28 @@ class Category extends AbstractApi
                     $element['nodes'] = $children;
                 }
                 $branch[] = $element;
+                unset($elements[$element['id']]);
+                unset($depth);
+            }
+        }
+        return $branch;
+    }
+
+    public function makeTreeOrder($elements, $parentId = 0)
+    {
+        $branch = array();
+        // Set category list as tree
+        foreach ($elements as $element) {
+            if ($element['parent'] == $parentId) {
+                $depth = 0;
+                $branch[$element['id']] = $element;
+                $children = $this->makeTreeOrder($elements, $element['id']);
+                if ($children) {
+                    $depth++;
+                    foreach ($children as $key => $value) {
+                        $branch[$key] = $value;
+                    }
+                }
                 unset($elements[$element['id']]);
                 unset($depth);
             }
