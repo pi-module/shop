@@ -34,12 +34,9 @@ class CartController extends ActionController
         $basket = Pi::api('basket', 'shop')->getBasket();
         // Check basket
         if (empty($basket) || empty($basket['products'])) {
-            $basket = Pi::api('basket', 'shop')->getBasketSession();
-            if (empty($basket) || empty($basket['products'])) {
-                $module = $this->params('module');
-                $url = array('', 'module' => $module, 'controller' => 'index');
-                $this->jump($url, __('Your cart are empty.'), 'error');
-            }
+            $module = $this->params('module');
+            $url = array('', 'module' => $module, 'controller' => 'index');
+            $this->jump($url, __('Your cart are empty.'), 'error');
         }
         // Set view
         $this->view()->setTemplate('checkout-cart');
@@ -203,7 +200,7 @@ class CartController extends ActionController
         Pi::service('url')->redirect($url);
     }
 
-    public function finishAction()
+    /* public function finishAction()
     {
         // Check user is login or not
         Pi::service('authentication')->requireLogin();
@@ -262,7 +259,7 @@ class CartController extends ActionController
         $this->view()->setTemplate('checkout-finish');
         $this->view()->assign('order', $order);
         $this->view()->assign('invoices', $invoices);
-    }
+    } */
 
     /* protected function setEmpty()
     {

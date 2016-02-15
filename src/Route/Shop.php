@@ -83,8 +83,8 @@ class Shop extends Standard
                     } elseif (isset($parts[1]) && $parts[1] == 'update') {
                         $matches['action'] = 'update';
                     } elseif (isset($parts[1]) && $parts[1] == 'finish') {
-                        $matches['action'] = 'finish';
-                        $matches['id'] = intval($parts[2]);
+                        //$matches['action'] = 'finish';
+                        //$matches['id'] = intval($parts[2]);
                     } elseif (isset($parts[1]) && $parts[1] == 'empty') {
                         $matches['action'] = 'empty';
                     } elseif (isset($parts[1]) && $parts[1] == 'index') {

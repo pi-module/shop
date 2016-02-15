@@ -76,11 +76,20 @@ class Order extends AbstractApi
             }
         }
         // Set back url
-        return Pi::url(Pi::service('url')->assemble('shop', array(
+        /* $url = Pi::url(Pi::service('url')->assemble('shop', array(
             'module' => $this->getModule(),
             'controller' => 'cart',
             'action' => 'finish',
             'id' => $order['id'],
+        ))); */
+
+        $url = Pi::url(Pi::service('url')->assemble('order', array(
+            'module' => 'order',
+            'controller' => 'detail',
+            'action' => 'index',
+            'id' => $order['id'],
         )));
+
+        return $url;
     }
 }
