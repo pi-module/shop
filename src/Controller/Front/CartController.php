@@ -188,7 +188,7 @@ class CartController extends ActionController
                 'packing_price' => 0,
                 'vat_price' => 0,
                 'number' => $product['number'],
-                'title' => '',
+                'title' => $product['title'],
                 'extra' => json::encode($product['property']),
             );
             $order['product'][$product['id']] = $singelProduct;
