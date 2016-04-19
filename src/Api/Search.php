@@ -41,6 +41,8 @@ class Search extends AbstractSearch
         'time_create' => 'time',
         'uid' => 'uid',
         'slug' => 'slug',
+        'image' => 'image',
+        'path' => 'path',
     );
 
     /**
@@ -62,5 +64,23 @@ class Search extends AbstractSearch
         )));
 
         return $link;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function buildImage(array $item)
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+
+        $image = Pi::url(
+            sprintf('upload/%s/thumb/%s/%s',
+                $config['image_path'],
+                $item['path'],
+                $item['image']
+            ));;
+
+        return $image;
     }
 }
