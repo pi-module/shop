@@ -6,8 +6,10 @@ var compareCount = 0;
 var compareList = [];
 app.controller('listdata',function($scope, $http){
     $scope.products = [];
+    $('.shop-spinner').show();
     $http.get("%s").success(function(response){
         $scope.products = response;
+        $('.ajax-spinner').hide();
     });
     $scope.sort = function(keyname){
         $scope.sortKey = keyname;
@@ -98,6 +100,9 @@ switch ($config['view_column']) {
 }
 ?>
 <div class="clearfix row">
+    <div class="ajax-spinner">
+        <img src="<?php echo $this->assetModule('image/spinner.gif'); ?>" class="ajax-spinner-loader"/>
+    </div>
     <div class="col-sm-12 col-md-3">
         <div class="shop-search-form clearfix">
             <div class="page-header">
