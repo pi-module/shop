@@ -24,10 +24,11 @@ class Category extends Select
     public function getValueOptions()
     {
         if (empty($this->valueOptions)) {
-            // Get topic list
+            $list = array();
             $columns = array('id', 'parent', 'title');
             $where = array('status' => 1);
-            $select = Pi::model('category', 'shop')->select()->columns($columns)->where($where);
+            $order = array('title ASC', 'id DESC');
+            $select = Pi::model('category', 'shop')->select()->columns($columns)->where($where)->order($order);
             $rowset = Pi::model('category', 'shop')->selectWith($select);
             foreach ($rowset as $row) {
                 $list[$row->id] = $row->toArray();
@@ -58,6 +59,9 @@ class Category extends Select
         return $this->Attributes;
     }
 
+    /**
+     * @return array
+     */
     public function getTree($elements, $parentId = 0)
     {
         $branch = array();
