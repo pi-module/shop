@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-02-05 14:37+0330\n"
+"POT-Creation-Date: 2016-04-25 12:05+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: ../..\n"
@@ -269,56 +269,56 @@ msgid "Six columns"
 msgstr "شش ستون"
 
 #: config/config.php:148
-msgid "Show related products"
-msgstr "نمایش محصولات مرتبط"
-
-#: config/config.php:156
 msgid "Show attribute fields"
 msgstr "نمایش خواص"
 
-#: config/config.php:164
+#: config/config.php:156
 msgid "Show product attached files"
 msgstr "نمایش فایل های پیوست شده به محصول"
 
-#: config/config.php:172
-msgid "Show other products from this category"
-msgstr "نمایش محصولات دیگر این شاخه"
-
-#: config/config.php:180
+#: config/config.php:164
 msgid "Show product price"
 msgstr "نمایش قیمت محصول"
 
-#: config/config.php:188
-msgid "Show special"
-msgstr "نمایش محصولات ویژه"
-
-#: config/config.php:196
-msgid "Number of products on special"
-msgstr "تعداد محصولات ویژه"
-
-#: config/config.php:204
+#: config/config.php:172
 msgid "Price title"
 msgstr "عنوان برای قیمت"
 
-#: config/config.php:208
+#: config/config.php:176
 msgid "Volume"
 msgstr "مقدار"
 
-#: config/config.php:212
+#: config/config.php:180
 msgid "Show Tags"
 msgstr "نمایش برچسب ها"
 
-#: config/config.php:220
+#: config/config.php:188
 msgid "Show breadcrumbs"
 msgstr "نمایش ناوبری"
 
-#: config/config.php:228
+#: config/config.php:196
 msgid "Show category list"
 msgstr "نمایش فهرست شاخه ها"
 
-#: config/config.php:236
+#: config/config.php:204
 msgid "Show fast question form"
 msgstr "نمایش فرم ارسال سوال"
+
+#: config/config.php:212
+msgid "Show related products"
+msgstr "نمایش محصولات مرتبط"
+
+#: config/config.php:220
+msgid "Show other products from this category"
+msgstr "نمایش محصولات دیگر این شاخه"
+
+#: config/config.php:228
+msgid "Show special"
+msgstr "نمایش محصولات ویژه"
+
+#: config/config.php:236
+msgid "Number of products on special"
+msgstr "تعداد محصولات ویژه"
 
 #: config/config.php:245
 msgid "Image Size"

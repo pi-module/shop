@@ -846,7 +846,6 @@ class Product extends AbstractApi
         unset($product['stock']);
         unset($product['stock_alert']);
         unset($product['uid']);
-        unset($product['hits']);
         unset($product['setting']);
         // return product
         return $product;

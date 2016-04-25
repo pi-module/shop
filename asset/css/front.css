@@ -307,3 +307,14 @@
     margin-top: -32px;  /* -1 * image height / 2 */
     display: block;
 }
+
+/* Sort */
+.product-sort {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background: #ddd;
+}
+
+.product-sort-type {
+    cursor: pointer;
+}

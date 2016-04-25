@@ -11,9 +11,11 @@ app.controller('listdata',function($scope, $http){
         $scope.products = response;
         $('.ajax-spinner').hide();
     });
+    $scope.sortKey = "%s";
+    $scope.reverse = true;
     $scope.sort = function(keyname){
         $scope.sortKey = keyname;
-        //$scope.reverse = !$scope.reverse;
+        $scope.reverse = !$scope.reverse;
     }
     // compare products
     $(document).on("click", ".product-compare-add", function() {
@@ -42,6 +44,7 @@ EOT;
 $script = sprintf(
     $script,
     $filterUrl,
+    'time_create',
     __('You put this product on compare list before'),
     __('You can add just 5 products on compare list')
 );
@@ -156,14 +159,6 @@ switch ($config['view_column']) {
                         </div>
                     <?php } ?>
                 <?php } ?>
-                <!-- <div class="form-group">
-                    <label>Sort</label>
-                    <select class="form-control">
-                        <option ng-click="sort('-id')">ID</option>
-                        <option ng-click="sort('title')">Title</option>
-                        <option ng-click="sort('-price')">Price</option>
-                    </select>
-                </div> -->
             </form>
         </div>
         <div class="clearfix category-list">
@@ -218,47 +213,111 @@ switch ($config['view_column']) {
                         <?php echo $config['text_description_index']; ?>
                     </div>
                 <?php } ?>
-                <div dir-paginate="product in products|orderBy:sortKey|filter: {<?php if (!empty($filterNameArray)) { ?><?php foreach ($filterNameArray as $filterNameSingle) { ?><?php echo $filterNameSingle['fieldName'] ?> : <?php echo $filterNameSingle['filterName'] ?>,<?php } ?><?php } ?> title : filterTitle, marketable : filterMarketable } |itemsPerPage:<?php echo $config['view_perpage']; ?>"
-                     class="<?php echo $shopBoxSize; ?> product-box h-product" itemscope itemtype="http://schema.org/Product">
-                    <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
-                        <div ng-show="hoverCompare"
-                             ng-click="changeClass()"
-                             ng-class="class"
-                             data-title="{{product.title}}"
-                             data-slug="{{product.slug}}"
-                             data-image="{{product.thumbUrl}}"
-                             class="product-compare-add">
-                            <i class="fa fa-plus"></i> <?php _e('Compare'); ?>
-                        </div>
-                        <a itemprop="url" class="u-photo" title="{{product.title}}" href="{{product.productUrl}}">
-                            <img itemprop="image" src="{{product.thumbUrl}}" alt="{{product.title}}"/>
-                        </a>
-                        <div class="caption">
-                            <h3 class="p-name" itemprop="name">
-                                <a title="{{product.title}}" href="{{product.productUrl}}">
-                                    {{product.title}}
-                                </a>
-                            </h3>
-                            <?php if ($config['order_active']) { ?>
-                                <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <?php if ($config['order_stock'] == 'never') { ?>
-                                        <div class="clearfix">
+                <div class="clearfix product-sort">
+                       <ul class="list-inline">
+                        <li><?php _e('Sort type'); ?> :</li>
+                        <li class="product-sort-type" ng-click="sort('time_create')"><?php _e('Sort time'); ?> <i class="fa sort-icon" ng-show="sortKey=='time_create'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sort('hits')"><?php _e('Sort hits'); ?> <i class="fa sort-icon" ng-show="sortKey=='hits'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sort('sales')"><?php _e('Sort sales'); ?> <i class="fa sort-icon" ng-show="sortKey=='sales'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sort('price')"><?php _e('Sort price'); ?> <i class="fa sort-icon" ng-show="sortKey=='price'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sort('title')"><?php _e('Sort title'); ?>  <i class="fa sort-icon" ng-show="sortKey=='title'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sortKey=''"><?php _e('Sort default'); ?></li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div dir-paginate="product in products|orderBy:sortKey:reverse|filter: {<?php if (!empty($filterNameArray)) { ?><?php foreach ($filterNameArray as $filterNameSingle) { ?><?php echo $filterNameSingle['fieldName'] ?> : <?php echo $filterNameSingle['filterName'] ?>,<?php } ?><?php } ?> title : filterTitle, marketable : filterMarketable } |itemsPerPage:<?php echo $config['view_perpage']; ?>"
+                         class="<?php echo $shopBoxSize; ?> product-box h-product" itemscope itemtype="http://schema.org/Product">
+                        <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
+                            <div ng-show="hoverCompare"
+                                 ng-click="changeClass()"
+                                 ng-class="class"
+                                 data-title="{{product.title}}"
+                                 data-slug="{{product.slug}}"
+                                 data-image="{{product.thumbUrl}}"
+                                 class="product-compare-add">
+                                <i class="fa fa-plus"></i> <?php _e('Compare'); ?>
+                            </div>
+                            <a itemprop="url" class="u-photo" title="{{product.title}}" href="{{product.productUrl}}">
+                                <img itemprop="image" src="{{product.thumbUrl}}" alt="{{product.title}}"/>
+                            </a>
+                            <div class="caption">
+                                <h3 class="p-name" itemprop="name">
+                                    <a title="{{product.title}}" href="{{product.productUrl}}">
+                                        {{product.title}}
+                                    </a>
+                                </h3>
+                                <?php if ($config['order_active']) { ?>
+                                    <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                        <?php if ($config['order_stock'] == 'never') { ?>
                                             <div class="clearfix">
-                                                <strong><?php _e('Stock status'); ?> : </strong>
-                                                <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
-                                            </div>
-                                            <strong><?php _e('Price'); ?> : </strong>
-                                            <div ng-if="{{product.price_discount_has}} == 1">
+                                                <div class="clearfix">
+                                                    <strong><?php _e('Stock status'); ?> : </strong>
+                                                    <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                                </div>
+                                                <strong><?php _e('Price'); ?> : </strong>
+                                                <div ng-if="{{product.price_discount_has}} == 1">
                                                 <span class="text-danger">
                                                     <del>{{product.price_discount_view}}</del>
                                                 </span>
+                                                </div>
+                                                <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
+                                                <meta itemprop="priceCurrency" content="{{product.price_currency}}">
                                             </div>
-                                            <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
-                                            <meta itemprop="priceCurrency" content="{{product.price_currency}}">
-                                        </div>
-                                    <?php } elseif ($config['order_stock'] == 'manual') { ?>
-                                        <div ng-switch on="product.stock_type">
-                                            <div ng-switch-when="1">
+                                        <?php } elseif ($config['order_stock'] == 'manual') { ?>
+                                            <div ng-switch on="product.stock_type">
+                                                <div ng-switch-when="1">
+                                                    <div class="clearfix">
+                                                        <div class="clearfix">
+                                                            <strong><?php _e('Stock status'); ?> : </strong>
+                                                            <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                                        </div>
+                                                        <strong><?php _e('Price'); ?> : </strong>
+                                                        <div ng-if="product.price_discount_has == 1">
+                                                    <span class="text-danger">
+                                                        <del>{{product.price_discount_view}}</del>
+                                                    </span>
+                                                        </div>
+                                                        <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
+                                                        <meta itemprop="priceCurrency" content="{{product.price_currency}}">
+                                                    </div>
+                                                </div>
+                                                <div ng-switch-when="2">
+                                                    <div class="clearfix">
+                                                        <strong><?php _e('Stock status'); ?> : </strong>
+                                                        <span class="text-danger">{{product.stock_type_view}}</span>
+                                                    </div>
+                                                </div>
+                                                <div ng-switch-when="3">
+                                                    <div class="clearfix">
+                                                        <strong><?php _e('Stock status'); ?> : </strong>
+                                                        <span class="text-danger">{{product.stock_type_view}}</span>
+                                                    </div>
+                                                </div>
+                                                <div ng-switch-when="4">
+                                                    <div class="clearfix">
+                                                        <strong><?php _e('Stock status'); ?> : </strong>
+                                                        <span class="text-danger">{{product.stock_type_view}}</span>
+                                                    </div>
+                                                </div>
+                                                <div ng-switch-when="5">
+                                                    <div class="clearfix">
+                                                        <div class="clearfix">
+                                                            <strong><?php _e('Stock status'); ?> : </strong>
+                                                            <span class="text-danger" itemprop="availability" href="http://schema.org/InStock">{{product.stock_type_view}}</span>
+                                                        </div>
+                                                        <strong><?php _e('Price'); ?> : </strong>
+                                                    <span ng-if="product.price_discount_has == 1">
+                                                        <span class="text-danger small">
+                                                            <del>{{product.price_discount_view}}</del>
+                                                        </span>
+                                                    </span>
+                                                        <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
+                                                        <meta itemprop="priceCurrency" content="{{product.price_currency}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } elseif ($config['order_stock'] == 'product') { ?>
+                                            <div ng-if="product.stock > 0">
                                                 <div class="clearfix">
                                                     <div class="clearfix">
                                                         <strong><?php _e('Stock status'); ?> : </strong>
@@ -274,78 +333,27 @@ switch ($config['view_column']) {
                                                     <meta itemprop="priceCurrency" content="{{product.price_currency}}">
                                                 </div>
                                             </div>
-                                            <div ng-switch-when="2">
+                                            <div ng-if="product.stock == 0">
                                                 <div class="clearfix">
                                                     <strong><?php _e('Stock status'); ?> : </strong>
-                                                    <span class="text-danger">{{product.stock_type_view}}</span>
+                                                    <span class="text-danger"><?php _e('Out of stock'); ?></span>
                                                 </div>
                                             </div>
-                                            <div ng-switch-when="3">
-                                                <div class="clearfix">
-                                                    <strong><?php _e('Stock status'); ?> : </strong>
-                                                    <span class="text-danger">{{product.stock_type_view}}</span>
-                                                </div>
-                                            </div>
-                                            <div ng-switch-when="4">
-                                                <div class="clearfix">
-                                                    <strong><?php _e('Stock status'); ?> : </strong>
-                                                    <span class="text-danger">{{product.stock_type_view}}</span>
-                                                </div>
-                                            </div>
-                                            <div ng-switch-when="5">
-                                                <div class="clearfix">
-                                                    <div class="clearfix">
-                                                        <strong><?php _e('Stock status'); ?> : </strong>
-                                                        <span class="text-danger" itemprop="availability" href="http://schema.org/InStock">{{product.stock_type_view}}</span>
-                                                    </div>
-                                                    <strong><?php _e('Price'); ?> : </strong>
-                                                    <span ng-if="product.price_discount_has == 1">
-                                                        <span class="text-danger small">
-                                                            <del>{{product.price_discount_view}}</del>
-                                                        </span>
-                                                    </span>
-                                                    <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
-                                                    <meta itemprop="priceCurrency" content="{{product.price_currency}}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php } elseif ($config['order_stock'] == 'product') { ?>
-                                        <div ng-if="product.stock > 0">
+                                        <?php } elseif ($config['order_stock'] == 'property') { ?>
                                             <div class="clearfix">
-                                                <div class="clearfix">
-                                                    <strong><?php _e('Stock status'); ?> : </strong>
-                                                    <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
-                                                </div>
                                                 <strong><?php _e('Price'); ?> : </strong>
                                                 <div ng-if="product.price_discount_has == 1">
-                                                    <span class="text-danger">
-                                                        <del>{{product.price_discount_view}}</del>
-                                                    </span>
+                                                <span class="text-danger">
+                                                    <del>{{product.price_discount_view}}</del>
+                                                </span>
                                                 </div>
                                                 <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
                                                 <meta itemprop="priceCurrency" content="{{product.price_currency}}">
                                             </div>
-                                        </div>
-                                        <div ng-if="product.stock == 0">
-                                            <div class="clearfix">
-                                                <strong><?php _e('Stock status'); ?> : </strong>
-                                                <span class="text-danger"><?php _e('Out of stock'); ?></span>
-                                            </div>
-                                        </div>
-                                    <?php } elseif ($config['order_stock'] == 'property') { ?>
-                                        <div class="clearfix">
-                                            <strong><?php _e('Price'); ?> : </strong>
-                                            <div ng-if="product.price_discount_has == 1">
-                                                <span class="text-danger">
-                                                    <del>{{product.price_discount_view}}</del>
-                                                </span>
-                                            </div>
-                                            <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
-                                            <meta itemprop="priceCurrency" content="{{product.price_currency}}">
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                            <?php } ?>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </div>
