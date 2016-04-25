@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-04-25 12:05+0430\n"
+"POT-Creation-Date: 2016-04-25 12:41+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -91,16 +91,16 @@ msgid "Compare products"
 msgstr ""
 
 #: src/Api/Product.php:419 src/Api/Product.php:646 src/Api/Product.php:775
-#: src/Form/ProductForm.php:236 template/front/product-angular.phtml:255
-#: template/front/product-angular.phtml:272
-#: template/front/product-angular.phtml:324 template/front/product-box.phtml:29
+#: src/Form/ProductForm.php:236 template/front/product-angular.phtml:256
+#: template/front/product-angular.phtml:273
+#: template/front/product-angular.phtml:325 template/front/product-box.phtml:29
 #: template/front/product-box.phtml:49 template/front/product-box.phtml:75
 #: template/front/product-price.phtml:15 template/front/product-price.phtml:78
 msgid "In stock"
 msgstr ""
 
 #: src/Api/Product.php:423 src/Api/Product.php:650 src/Api/Product.php:779
-#: src/Form/ProductForm.php:237 template/front/product-angular.phtml:339
+#: src/Form/ProductForm.php:237 template/front/product-angular.phtml:340
 #: template/front/product-box.phtml:89 template/front/product-price.phtml:94
 msgid "Out of stock"
 msgstr ""
@@ -653,7 +653,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: src/Form/Element/Category.php:67
+#: src/Form/Element/Category.php:71
 msgid "All Category"
 msgstr ""
 
@@ -681,11 +681,11 @@ msgstr ""
 #: src/Form/ProductForm.php:259 template/admin/product-index.phtml:56
 #: template/admin/product-update.phtml:12
 #: template/admin/product-update.phtml:16 template/front/checkout-cart.phtml:98
-#: template/front/product-angular.phtml:257
-#: template/front/product-angular.phtml:274
-#: template/front/product-angular.phtml:308
-#: template/front/product-angular.phtml:326
-#: template/front/product-angular.phtml:344 template/front/product-box.phtml:31
+#: template/front/product-angular.phtml:258
+#: template/front/product-angular.phtml:275
+#: template/front/product-angular.phtml:309
+#: template/front/product-angular.phtml:327
+#: template/front/product-angular.phtml:345 template/front/product-box.phtml:31
 #: template/front/product-box.phtml:51 template/front/product-box.phtml:77
 #: template/front/product-box.phtml:94 template/front/product-compare.phtml:86
 #: template/front/product-price.phtml:17 template/front/product-price.phtml:47
@@ -1342,33 +1342,37 @@ msgid "Sort hits"
 msgstr ""
 
 #: template/front/product-angular.phtml:221
-msgid "Sort sales"
+msgid "Sort favourite"
 msgstr ""
 
 #: template/front/product-angular.phtml:222
-msgid "Sort price"
+msgid "Sort sales"
 msgstr ""
 
 #: template/front/product-angular.phtml:223
-msgid "Sort title"
+msgid "Sort price"
 msgstr ""
 
 #: template/front/product-angular.phtml:224
+msgid "Sort title"
+msgstr ""
+
+#: template/front/product-angular.phtml:225
 msgid "Sort default"
 msgstr ""
 
-#: template/front/product-angular.phtml:238
+#: template/front/product-angular.phtml:239
 msgid "Compare"
 msgstr ""
 
-#: template/front/product-angular.phtml:254
-#: template/front/product-angular.phtml:271
-#: template/front/product-angular.phtml:286
-#: template/front/product-angular.phtml:292
-#: template/front/product-angular.phtml:298
-#: template/front/product-angular.phtml:305
-#: template/front/product-angular.phtml:323
-#: template/front/product-angular.phtml:338 template/front/product-box.phtml:28
+#: template/front/product-angular.phtml:255
+#: template/front/product-angular.phtml:272
+#: template/front/product-angular.phtml:287
+#: template/front/product-angular.phtml:293
+#: template/front/product-angular.phtml:299
+#: template/front/product-angular.phtml:306
+#: template/front/product-angular.phtml:324
+#: template/front/product-angular.phtml:339 template/front/product-box.phtml:28
 #: template/front/product-box.phtml:48 template/front/product-box.phtml:62
 #: template/front/product-box.phtml:74 template/front/product-box.phtml:88
 #: template/front/product-price.phtml:14 template/front/product-price.phtml:40

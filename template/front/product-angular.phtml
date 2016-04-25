@@ -214,10 +214,11 @@ switch ($config['view_column']) {
                     </div>
                 <?php } ?>
                 <div class="clearfix product-sort">
-                       <ul class="list-inline">
+                    <ul class="list-inline">
                         <li><?php _e('Sort type'); ?> :</li>
                         <li class="product-sort-type" ng-click="sort('time_create')"><?php _e('Sort time'); ?> <i class="fa sort-icon" ng-show="sortKey=='time_create'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
                         <li class="product-sort-type" ng-click="sort('hits')"><?php _e('Sort hits'); ?> <i class="fa sort-icon" ng-show="sortKey=='hits'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sort('favourite')"><?php _e('Sort favourite'); ?> <i class="fa sort-icon" ng-show="sortKey=='favourite'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
                         <li class="product-sort-type" ng-click="sort('sales')"><?php _e('Sort sales'); ?> <i class="fa sort-icon" ng-show="sortKey=='sales'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
                         <li class="product-sort-type" ng-click="sort('price')"><?php _e('Sort price'); ?> <i class="fa sort-icon" ng-show="sortKey=='price'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
                         <li class="product-sort-type" ng-click="sort('title')"><?php _e('Sort title'); ?>  <i class="fa sort-icon" ng-show="sortKey=='title'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
