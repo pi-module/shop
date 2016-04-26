@@ -793,6 +793,7 @@ class Product extends AbstractApi
         }
         // Set marketable
         $product['marketable'] = $this->marketable($product);
+        $product['marketable'] = ($product['marketable'] == 2) ? 1 : $product['marketable'];
         // Set image url
         if ($product['image']) {
             // Set image original url
