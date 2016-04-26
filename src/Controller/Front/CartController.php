@@ -181,7 +181,7 @@ class CartController extends ActionController
                 'product' => $product['id'],
                 'product_price' => $product['price'],
                 'discount_price' => 0,
-                'shipping_price' => 0,
+                'shipping_price' => $product['price_shipping'],
                 'packing_price' => 0,
                 'vat_price' => 0,
                 'number' => $product['number'],

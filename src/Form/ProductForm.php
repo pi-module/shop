@@ -261,7 +261,6 @@ class ProductForm extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => __('Real price'),
-
             )
         ));
         // price_discount
@@ -273,7 +272,17 @@ class ProductForm extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => __('Display prices'),
-
+            )
+        ));
+        // price_shipping
+        $this->add(array(
+            'name' => 'price_shipping',
+            'options' => array(
+                'label' => __('Extra shipping price'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('If your product have special shipping price, you can add it here and this price collected to general order shipping price'),
             )
         ));
         // price_title
@@ -285,7 +294,6 @@ class ProductForm extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-
             )
         ));
         // order_discount

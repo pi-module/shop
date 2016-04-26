@@ -571,6 +571,21 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.3.9', '<')) {
+            // Alter table : ADD price_shipping
+            $sql = sprintf("ALTER TABLE %s ADD `price_shipping`   DECIMAL(16, 2)      NOT NULL DEFAULT '0.00'", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }
