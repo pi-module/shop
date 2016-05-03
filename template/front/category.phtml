@@ -1,4 +1,27 @@
 <?php if (isset($category) && !empty($category)) { ?>
+    <?php
+    // Set Open Graph tags for meta
+    $this->doctype('HTML5');
+    $this->headMeta($this->escape($categorySingle['title']), 'og:title', 'property');
+    $this->headMeta($this->escape($categorySingle['categoryUrl']), 'og:url', 'property');
+    if (isset($categorySingle['text_summary']) && !empty($categorySingle['text_summary'])) {
+        $this->headMeta(_strip($categorySingle['text_summary']), 'og:description', 'property');
+    }
+    if (!empty($categorySingle['largeUrl'])) {
+        $this->headMeta($this->escape($categorySingle['largeUrl']), 'og:image', 'property');
+    }
+    // Set twitter for meta
+    $this->headMeta($this->escape($categorySingle['title']), 'og:title', 'property');
+    if (isset($categorySingle['text_summary']) && !empty($categorySingle['text_summary'])) {
+        $this->headMeta($this->escape($categorySingle['text_summary']), 'twitter:description');
+    }
+    if (isset($categorySingle['largeUrl']) && !empty($categorySingle['largeUrl'])) {
+        $this->headMeta($this->escape($categorySingle['largeUrl']), 'twitter:image');
+    }
+    if (isset($location['largeUrl']) && !empty($location['largeUrl'])) {
+        $this->headMeta($this->escape($location['largeUrl']), 'twitter:url');
+    }
+    ?>
     <div class="clearfix categoryItem row" itemscope itemtype="https://schema.org/Brand">
         <?php if (!empty($category['text_description']) || !empty($category['image'])) { ?>
             <div class="clearfix">
