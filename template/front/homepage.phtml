@@ -19,11 +19,13 @@ $scriptMenu = sprintf(
     $categoriesJson
 );
 
+// Load header files
 $this->jQuery();
 $this->js($this->assetModule('js/bootstrap-treeview.min.js'));
 $this->css($this->assetModule('css/front.css'));
+$this->footScript()->appendScript($scriptMenu);
 ?>
-<div class="clearfix">
+<div class="clearfix shop-homepage-widget">
     <div class="clearfix row">
         <div class="col-sm-12 col-md-3">
             <div class="clearfix category-list">
@@ -40,16 +42,24 @@ $this->css($this->assetModule('css/front.css'));
                 <h1><?php echo $productTitleH1; ?></h1>
             </div>
             <?php if (!empty($config['homepage_widget'])) { ?>
-                <?php $widgets = explode("|", $config['homepage_widget']); ?>
+                <?php $blocks = explode("|", $config['homepage_widget']); ?>
                 <div class="clearfix shop-widget-list">
-                    <?php foreach ($widgets as $widget) { ?>
+                    <?php foreach ($blocks as $block) { ?>
+                        <?php $block = $this->block($block); ?>
                         <div class="shop-widget-single">
-                            <?php echo $this->widget($widget); ?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><?php echo $block['title']; ?></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <?php echo $block['content']; ?>
+                                </div>
+                            </div>
                         </div>
                     <?php } ?>
                 </div>
             <?php } ?>
-            <?php include $this->template('front/product-list-special'); ?>
+            <?php // include $this->template('front/product-list-special'); ?>
             <?php if (!empty($config['text_description_index'])) { ?>
                 <div class="well shopIndexDescription">
                     <?php echo $config['text_description_index']; ?>
