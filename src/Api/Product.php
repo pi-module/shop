@@ -332,7 +332,7 @@ class Product extends AbstractApi
         // Set discounts
         if (!empty($product['setting']['discount'])) {
             foreach ($product['setting']['discount'] as $role => $percent) {
-                if (in_array($role, $roles)) {
+                if (isset($percent) && $percent > 0 && in_array($role, $roles)) {
                     $userDiscount[] = $percent;
                 }
             }

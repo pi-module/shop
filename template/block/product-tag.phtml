@@ -23,6 +23,9 @@
                                     <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                         <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
                                             <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
+                                            <?php if ($product['price_discount'] && ($product['price_discount'] > $product['price'])) { ?>
+                                                <del class="text-danger"><?php echo $this->escape($product['price_discount_view']); ?></del>
+                                            <?php } ?>
                                             <?php echo $this->escape($product['price_view']); ?>
                                         </div>
                                     </div>
@@ -57,6 +60,9 @@
                                     <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                         <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
                                             <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
+                                            <?php if ($product['price_discount'] && ($product['price_discount'] > $product['price'])) { ?>
+                                                <del class="text-danger"><?php echo $this->escape($product['price_discount_view']); ?></del>
+                                            <?php } ?>
                                             <?php echo $this->escape($product['price_view']); ?>
                                         </div>
                                     </div>
@@ -97,6 +103,9 @@
                                     <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                         <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
                                             <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
+                                            <?php if ($product['price_discount'] && ($product['price_discount'] > $product['price'])) { ?>
+                                                <del class="text-danger"><?php echo $this->escape($product['price_discount_view']); ?></del>
+                                            <?php } ?>
                                             <?php echo $this->escape($product['price_view']); ?>
                                         </div>
                                     </div>
@@ -155,6 +164,11 @@
                                     <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                         <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
                                             <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
+                                            <?php if ($product['price_discount'] && ($product['price_discount'] > $product['price'])) { ?>
+                                                <div class="text-danger">
+                                                    <del><?php echo $this->escape($product['price_discount_view']); ?></del>
+                                                </div>
+                                            <?php } ?>
                                             <?php echo $this->escape($product['price_view']); ?>
                                         </div>
                                     </div>
