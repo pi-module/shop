@@ -78,7 +78,7 @@ class ProductController extends IndexController
             $vote['item'] = $product['id'];
             $vote['table'] = 'product';
             $vote['module'] = $module;
-            $vote['type'] = 'plus';
+            $vote['type'] = 'star';
             $this->view()->assign('vote', $vote);
         }
         // Set favourite

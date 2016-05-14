@@ -28,7 +28,6 @@
                                 <strong><?php _e('Stock status'); ?> : </strong>
                                 <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
                             </div>
-                            <strong><?php _e('Price'); ?> : </strong>
                             <?php if ($product['price_discount'] && ($product['price_discount'] > $product['price'])) { ?>
                                 <span class="text-danger">
                                     <del><?php echo $this->escape($product['price_discount_view']); ?></del>

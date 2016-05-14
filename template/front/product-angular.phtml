@@ -109,7 +109,7 @@ switch ($config['view_column']) {
     <div class="col-sm-12 col-md-3">
         <div class="shop-search-form clearfix">
             <div class="page-header">
-                <h4><?php _e('Search'); ?></h4>
+                <h4><?php _e('Search on this group'); ?></h4>
             </div>
             <form>
                 <div class="form-group">
@@ -255,7 +255,6 @@ switch ($config['view_column']) {
                                                     <strong><?php _e('Stock status'); ?> : </strong>
                                                     <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
                                                 </div>
-                                                <strong><?php _e('Price'); ?> : </strong>
                                                 <div ng-if="{{product.price_discount_has}} == 1">
                                                 <span class="text-danger">
                                                     <del>{{product.price_discount_view}}</del>
