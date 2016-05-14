@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-04-25 12:05+0430\n"
+"POT-Creation-Date: 2016-05-14 11:42+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -320,155 +320,167 @@ msgstr "نمایش محصولات ویژه"
 msgid "Number of products on special"
 msgstr "تعداد محصولات ویژه"
 
+#: config/config.php:244
+msgid "Product ribbon type"
+msgstr "فهرست روبان های مورد استفاده در محصول"
+
 #: config/config.php:245
+msgid "Use `|` as delimiter to separate terms"
+msgstr "با استفاده از جدا کننده `|` ویجت ها را از هم جدا کنید."
+
+#: config/config.php:248
+msgid "|Professional|Best offer|For you"
+msgstr "|حرفه ای|بهترین پیشنهاد|بهترین قیمت|مخصوص شما|پیشنهاد ما"
+
+#: config/config.php:253
 msgid "Image Size"
 msgstr "حجم تصویر"
 
-#: config/config.php:253
+#: config/config.php:261
 msgid "Image quality"
 msgstr "کیفیت تصویر "
 
-#: config/config.php:254
+#: config/config.php:262
 msgid "Between 0 to 100 and support both of JPG and PNG, default is 75"
 msgstr "بین ۰ تا ۱۰۰ تنظیم شود و برای هر دو فرمت PNG و JPG ، مقدار پیش فرض ۷۵"
 
-#: config/config.php:261
+#: config/config.php:269
 msgid "Image path"
 msgstr "مسیر ذخیره تصویر"
 
-#: config/config.php:269
+#: config/config.php:277
 msgid "Image Extension"
 msgstr "پسوند های مجار برای تصویر"
 
-#: config/config.php:277
+#: config/config.php:285
 msgid "Large Image height"
 msgstr "ارتفاع تصویر بزرگ"
 
-#: config/config.php:285
+#: config/config.php:293
 msgid "Large Image width"
 msgstr "عرض تصویر بزرگ"
 
-#: config/config.php:293
+#: config/config.php:301
 msgid "Medium Image height"
 msgstr "ارتفاع تصویر متوسط"
 
-#: config/config.php:301
+#: config/config.php:309
 msgid "Medium Image width"
 msgstr "عرض تصویر متوسط"
 
-#: config/config.php:309
+#: config/config.php:317
 msgid "Thumb Image height"
 msgstr "ارتفاع تصویر بندانگشتی"
 
-#: config/config.php:317
+#: config/config.php:325
 msgid "Thumb Image width"
 msgstr "عرض تصویر بندانگشتی"
 
-#: config/config.php:325
+#: config/config.php:333
 msgid "Use lightbox"
 msgstr "استفاده از لایت باکس"
 
-#: config/config.php:333
+#: config/config.php:341
 msgid "Add Watermark"
 msgstr "اضافه کردن واترمارک به تصویر"
 
-#: config/config.php:341
+#: config/config.php:349
 msgid "Watermark Image"
 msgstr "تصویر واترمارک"
 
-#: config/config.php:348
+#: config/config.php:356
 msgid "Watermark Positio"
 msgstr "موقعیت واترمارک"
 
-#: config/config.php:354
+#: config/config.php:362
 msgid "Top Left"
 msgstr "بالا چپ"
 
-#: config/config.php:355
+#: config/config.php:363
 msgid "Top Right"
 msgstr "بالا راست"
 
-#: config/config.php:356
+#: config/config.php:364
 msgid "Bottom Left"
 msgstr "پایین چپ"
 
-#: config/config.php:357
+#: config/config.php:365
 msgid "Bottom Right"
 msgstr "پایین راست"
 
-#: config/config.php:367
+#: config/config.php:375
 msgid "Social sharing items"
 msgstr "اشتراک گذاری در شبکه های اجتماعی"
 
-#: config/config.php:381
+#: config/config.php:389
 msgid "File Size"
 msgstr "حجم فایل"
 
-#: config/config.php:389
+#: config/config.php:397
 msgid "File path"
 msgstr "مسیر ذخیره فایل"
 
-#: config/config.php:397
+#: config/config.php:405
 msgid "File Extension"
 msgstr "سوند های مجار برای فایل"
 
-#: config/config.php:406
+#: config/config.php:414
 msgid "Use vote system"
 msgstr "استفاده از سیستم رای"
 
-#: config/config.php:415
+#: config/config.php:423
 msgid "Use favourite system"
 msgstr "استفاده از سیستم مورد علاقه"
 
-#: config/config.php:424
+#: config/config.php:432
 msgid "Order is active ?"
 msgstr "ثبت سفارش فعال باشد؟"
 
-#: config/config.php:432
+#: config/config.php:440
 msgid "Order type"
 msgstr "نوع سفارش"
 
-#: config/config.php:438
+#: config/config.php:446
 msgid "One time"
 msgstr "خرید یک باره"
 
-#: config/config.php:439
+#: config/config.php:447
 msgid "Recurring"
 msgstr "خرید دوره ای"
 
-#: config/config.php:440
+#: config/config.php:448
 msgid "Installment"
 msgstr "خرید قسطی"
 
-#: config/config.php:449
+#: config/config.php:457
 msgid "Order stock"
 msgstr "وضعیت موجودی برای سفارش"
 
-#: config/config.php:455
+#: config/config.php:463
 msgid "Never check stock"
 msgstr "هرگز موجودی بررسی نشود"
 
-#: config/config.php:456
+#: config/config.php:464
 msgid "Manual setting"
 msgstr "تنظیمات دستی"
 
-#: config/config.php:457
+#: config/config.php:465
 msgid "Use product stock"
 msgstr "استفاده از سیستم موجودی محصول"
 
-#: config/config.php:458
+#: config/config.php:466
 msgid "Use property stock"
 msgstr "استفاده از سیستم موجودی ویژگی های محصول"
 
-#: config/config.php:467
+#: config/config.php:475
 msgid "Active discount system"
 msgstr "فعال سازی سیستم تخفیف"
 
-#: config/config.php:476
+#: config/config.php:484
 msgid "Description for index page"
 msgstr "توضیحات برای صفحه اصلی"
 
-#: config/config.php:484
+#: config/config.php:492
 msgid "Force replace space by comma(,)"
 msgstr " جایگزینی اسپیس با کاما"
 

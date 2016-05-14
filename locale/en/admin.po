@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-04-25 12:05+0430\n"
+"POT-Creation-Date: 2016-05-14 11:42+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -318,155 +318,167 @@ msgstr ""
 msgid "Number of products on special"
 msgstr ""
 
+#: config/config.php:244
+msgid "Product ribbon type"
+msgstr ""
+
 #: config/config.php:245
-msgid "Image Size"
+msgid "Use `|` as delimiter to separate terms"
+msgstr ""
+
+#: config/config.php:248
+msgid "|Professional|Best offer|For you"
 msgstr ""
 
 #: config/config.php:253
-msgid "Image quality"
-msgstr ""
-
-#: config/config.php:254
-msgid "Between 0 to 100 and support both of JPG and PNG, default is 75"
+msgid "Image Size"
 msgstr ""
 
 #: config/config.php:261
-msgid "Image path"
+msgid "Image quality"
+msgstr ""
+
+#: config/config.php:262
+msgid "Between 0 to 100 and support both of JPG and PNG, default is 75"
 msgstr ""
 
 #: config/config.php:269
-msgid "Image Extension"
+msgid "Image path"
 msgstr ""
 
 #: config/config.php:277
-msgid "Large Image height"
+msgid "Image Extension"
 msgstr ""
 
 #: config/config.php:285
-msgid "Large Image width"
+msgid "Large Image height"
 msgstr ""
 
 #: config/config.php:293
-msgid "Medium Image height"
+msgid "Large Image width"
 msgstr ""
 
 #: config/config.php:301
-msgid "Medium Image width"
+msgid "Medium Image height"
 msgstr ""
 
 #: config/config.php:309
-msgid "Thumb Image height"
+msgid "Medium Image width"
 msgstr ""
 
 #: config/config.php:317
-msgid "Thumb Image width"
+msgid "Thumb Image height"
 msgstr ""
 
 #: config/config.php:325
-msgid "Use lightbox"
+msgid "Thumb Image width"
 msgstr ""
 
 #: config/config.php:333
-msgid "Add Watermark"
+msgid "Use lightbox"
 msgstr ""
 
 #: config/config.php:341
+msgid "Add Watermark"
+msgstr ""
+
+#: config/config.php:349
 msgid "Watermark Image"
 msgstr ""
 
-#: config/config.php:348
+#: config/config.php:356
 msgid "Watermark Positio"
 msgstr ""
 
-#: config/config.php:354
+#: config/config.php:362
 msgid "Top Left"
 msgstr ""
 
-#: config/config.php:355
+#: config/config.php:363
 msgid "Top Right"
 msgstr ""
 
-#: config/config.php:356
+#: config/config.php:364
 msgid "Bottom Left"
 msgstr ""
 
-#: config/config.php:357
+#: config/config.php:365
 msgid "Bottom Right"
 msgstr ""
 
-#: config/config.php:367
+#: config/config.php:375
 msgid "Social sharing items"
 msgstr ""
 
-#: config/config.php:381
+#: config/config.php:389
 msgid "File Size"
 msgstr ""
 
-#: config/config.php:389
+#: config/config.php:397
 msgid "File path"
 msgstr ""
 
-#: config/config.php:397
+#: config/config.php:405
 msgid "File Extension"
 msgstr ""
 
-#: config/config.php:406
+#: config/config.php:414
 msgid "Use vote system"
 msgstr ""
 
-#: config/config.php:415
+#: config/config.php:423
 msgid "Use favourite system"
 msgstr ""
 
-#: config/config.php:424
+#: config/config.php:432
 msgid "Order is active ?"
 msgstr ""
 
-#: config/config.php:432
+#: config/config.php:440
 msgid "Order type"
 msgstr ""
 
-#: config/config.php:438
+#: config/config.php:446
 msgid "One time"
 msgstr ""
 
-#: config/config.php:439
+#: config/config.php:447
 msgid "Recurring"
 msgstr ""
 
-#: config/config.php:440
+#: config/config.php:448
 msgid "Installment"
 msgstr ""
 
-#: config/config.php:449
+#: config/config.php:457
 msgid "Order stock"
 msgstr ""
 
-#: config/config.php:455
+#: config/config.php:463
 msgid "Never check stock"
 msgstr ""
 
-#: config/config.php:456
+#: config/config.php:464
 msgid "Manual setting"
 msgstr ""
 
-#: config/config.php:457
+#: config/config.php:465
 msgid "Use product stock"
 msgstr ""
 
-#: config/config.php:458
+#: config/config.php:466
 msgid "Use property stock"
 msgstr ""
 
-#: config/config.php:467
+#: config/config.php:475
 msgid "Active discount system"
 msgstr ""
 
-#: config/config.php:476
+#: config/config.php:484
 msgid "Description for index page"
 msgstr ""
 
-#: config/config.php:484
+#: config/config.php:492
 msgid "Force replace space by comma(,)"
 msgstr ""
 
