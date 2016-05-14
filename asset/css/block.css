@@ -87,3 +87,38 @@
 .owl-carousel .owl-controls .owl-nav {
     margin-top: -120px;
 }
+
+/* ribbon */
+.product-ribbon {
+    position: relative;
+    display: block;
+    color: #434443;
+    padding: 0;
+    overflow: hidden;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+a.product-ribbon:hover {
+    color: #434443;
+}
+
+.product-ribbon p {
+    display: inline;
+}
+
+.product-ribbon p span {
+    position: absolute;
+    display: inline-block;
+    right: -50px;
+    text-align: center;
+    text-transform: none;
+    top: 35px;
+    background: #FFC107;
+    width: 200px;
+    padding: 5px 10px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+}

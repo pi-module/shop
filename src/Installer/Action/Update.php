@@ -573,7 +573,22 @@ EOD;
 
         if (version_compare($moduleVersion, '1.3.9', '<')) {
             // Alter table : ADD price_shipping
-            $sql = sprintf("ALTER TABLE %s ADD `price_shipping`   DECIMAL(16, 2)      NOT NULL DEFAULT '0.00'", $productTable);
+            $sql = sprintf("ALTER TABLE %s ADD `price_shipping` DECIMAL(16, 2) NOT NULL DEFAULT '0.00'", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
+        if (version_compare($moduleVersion, '1.4.0', '<')) {
+            // Alter table : ADD price_shipping
+            $sql = sprintf("ALTER TABLE %s ADD `ribbon` VARCHAR(64) NOT NULL DEFAULT ''", $productTable);
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {

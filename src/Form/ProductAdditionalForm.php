@@ -24,6 +24,7 @@ class ProductAdditionalForm extends BaseForm
         $this->position = Pi::api('attribute', 'shop')->attributePositionForm();
         $this->property = $option['property'];
         $this->propertyValue = $option['propertyValue'];
+        $this->product_ribbon = $option['product_ribbon'];
         $this->module = Pi::service('module')->current();
         parent::__construct($name);
     }
@@ -43,6 +44,15 @@ class ProductAdditionalForm extends BaseForm
             'name' => 'id',
             'attributes' => array(
                 'type' => 'hidden',
+            ),
+        ));
+        // ribbon
+        $this->add(array(
+            'name' => 'ribbon',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Ribbon'),
+                'value_options' => $this->makeArray($this->product_ribbon),
             ),
         ));
         // Set fieldset
@@ -205,7 +215,7 @@ EOT;
                                 'type' => 'select',
                                 'options' => array(
                                     'label' => $field['title'],
-                                    'value_options' => $this->makeArray($field['value']),
+                                    'value_options' => $this->makeArrayJson($field['value']),
                                 ),
                             ));
                         } elseif ($field['type'] == 'checkbox') {
@@ -243,7 +253,17 @@ EOT;
         ));
     }
 
-    public function makeArray($values)
+    public function makeArray($string)
+    {
+        $list = array();
+        $variable = explode('|', $string);
+        foreach ($variable as $value) {
+            $list[$value] = $value;
+        }
+        return $list;
+    }
+
+    public function makeArrayJson($values)
     {
         $list = array();
         $values = json_decode($values, true);

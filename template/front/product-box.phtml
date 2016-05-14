@@ -4,10 +4,13 @@
 <div class="<?php echo $shopListBoxSize; ?> product-box h-product" itemscope itemtype="http://schema.org/Product">
     <div class="thumbnail">
         <?php if ($product['image']) { ?>
-            <a itemprop="url" class="u-photo" title="<?php echo $this->escape($product['title']); ?>"
+            <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>" title="<?php echo $this->escape($product['title']); ?>"
                href="<?php echo $this->escape($product['productUrl']); ?>"><img
-                    itemprop="image" src="<?php echo $product['thumbUrl']; ?>"
+                    itemprop="image" class="img-responsive u-photo" src="<?php echo $product['thumbUrl']; ?>"
                     alt="<?php echo $this->escape($product['title']); ?>"/></a>
+            <?php if ($product['ribbon']) { ?>
+                <p><span><?php echo $this->escape($product['ribbon']); ?></span></p>
+            <?php } ?>
         <?php } ?>
         <div class="caption">
             <h3 class="p-name" itemprop="name">

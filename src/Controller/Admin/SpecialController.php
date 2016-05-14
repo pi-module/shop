@@ -82,9 +82,10 @@ class SpecialController extends ActionController
                 } else {
                     $row = $this->getModel('special')->createRow();
                 }
-                print_r($values);
                 $row->assign($values);
                 $row->save();
+                // update registry
+                Pi::registry('specialListId', 'shop')->clear();
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('special', $row->id, $operation);

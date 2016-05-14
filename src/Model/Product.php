@@ -53,6 +53,7 @@ class Product extends Model
         'price_discount',
         'price_shipping',
         'price_title',
+        'ribbon',
         'setting'
     );
 }

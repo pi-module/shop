@@ -337,6 +337,7 @@ class ProductController extends ActionController
         // Get id
         $id = $this->params('id');
         $module = $this->params('module');
+        $option = array();
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Find product
@@ -348,6 +349,7 @@ class ProductController extends ActionController
         // Get attribute field
         $fields = Pi::api('attribute', 'shop')->Get($product['category_main']);
         $option['field'] = $fields['attribute'];
+        $option['product_ribbon'] = $config['product_ribbon'];
         // Get property
         $property = Pi::api('property', 'shop')->getList();
         $option['property'] = $property;

@@ -468,6 +468,20 @@ class Product extends AbstractApi
                     $product['image']
                 ));
         }
+        // Set ribbon
+        $product['ribbon_class'] = '';
+        if (in_array($product['id'], Pi::registry('SpecialListId', 'shop')->read())) {
+            $product['ribbon'] = __('Have discount');
+            $product['ribbon_class'] = 'product-ribbon';
+        } elseif ($product['price_discount'] && ($product['price_discount'] > $product['price'])) {
+            $product['ribbon'] = __('On sale');
+            $product['ribbon_class'] = 'product-ribbon';
+        } elseif (!empty($product['ribbon'])) {
+            $product['ribbon_class'] = 'product-ribbon';
+        } elseif ($product['recommended']) {
+            $product['ribbon'] = __('Recommended');
+            $product['ribbon_class'] = 'product-ribbon';
+        }
         // return product
         return $product;
     }
@@ -825,6 +839,22 @@ class Product extends AbstractApi
                     $product['image']
                 ));
         }
+
+        // Set ribbon
+        $product['ribbon_class'] = '';
+        if (in_array($product['id'], Pi::registry('SpecialListId', 'shop')->read())) {
+            $product['ribbon'] = __('Have discount');
+            $product['ribbon_class'] = 'product-ribbon';
+        } elseif ($product['price_discount'] && ($product['price_discount'] > $product['price'])) {
+            $product['ribbon'] = __('On sale');
+            $product['ribbon_class'] = 'product-ribbon';
+        } elseif (!empty($product['ribbon'])) {
+            $product['ribbon_class'] = 'product-ribbon';
+        } elseif ($product['recommended']) {
+            $product['ribbon'] = __('Recommended');
+            $product['ribbon_class'] = 'product-ribbon';
+        }
+        
         // Set attribute
         $filterList = isset($filterList) ? $filterList : Pi::api('attribute', 'shop')->filterList();
         $attribute = Pi::api('attribute', 'shop')->filterData($product['id'], $filterList);

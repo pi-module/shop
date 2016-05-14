@@ -26,6 +26,16 @@ class ProductAdditionalFilter extends InputFilter
             'name' => 'id',
             'required' => false,
         ));
+        // ribbon
+        $this->add(array(
+            'name' => 'ribbon',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // Set attribute
         if (!empty($option['field'])) {
             foreach ($position as $key => $value) {

@@ -239,6 +239,14 @@ return array(
             'filter' => 'number_int',
             'value' => 6
         ),
+        'product_ribbon' => array(
+            'category' => 'view',
+            'title' => _a('Product ribbon type'),
+            'description' => _a('Use `|` as delimiter to separate terms'),
+            'edit' => 'textarea',
+            'filter' => 'string',
+            'value' => _a('|Professional|Best offer|For you'),
+        ),
         // Image
         'image_size' => array(
             'category' => 'image',

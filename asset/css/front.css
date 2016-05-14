@@ -31,6 +31,10 @@
     font-size: 1.1em;
 }
 
+.product-list .thumbnail img {
+    padding: 0;
+}
+
 /* product page */
 .product-page .product-title h1 {
     font-size: 1.6em;
@@ -185,6 +189,9 @@
     padding: 5px 15px;
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
+    left: 21px;
+    top: 6px;
+    z-index: 10000;
 }
 
 /* compare on product list */
@@ -317,4 +324,39 @@
 
 .product-sort-type {
     cursor: pointer;
+}
+
+/* ribbon */
+.product-ribbon {
+    position: relative;
+    display: block;
+    color: #434443;
+    padding: 0;
+    overflow: hidden;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+a.product-ribbon:hover {
+    color: #434443;
+}
+
+.product-ribbon p {
+    display: inline;
+}
+
+.product-ribbon p span {
+    position: absolute;
+    display: inline-block;
+    right: -50px;
+    text-align: center;
+    text-transform: none;
+    top: 35px;
+    background: #FFC107;
+    width: 200px;
+    padding: 5px 10px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
 }

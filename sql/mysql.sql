@@ -33,6 +33,7 @@ CREATE TABLE `{product}` (
   `price_discount`   DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
   `price_shipping`   DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
   `price_title`      VARCHAR(255)        NOT NULL DEFAULT '',
+  `ribbon`           VARCHAR(64)         NOT NULL DEFAULT '',
   `setting`          TEXT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),

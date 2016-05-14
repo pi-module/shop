@@ -45,10 +45,13 @@ $this->footScript()->appendScript($script2);
 <div class="product-image gallery clearfix thumbnail">
     <?php if (isset($productItem['image']) && !empty($productItem['image'])) { ?>
         <div class="product-image-main text-center clearfix u-photo">
-            <a class="u-photo" href="<?php echo $this->escape($productItem['largeUrl']); ?>"
+            <a class="u-photo <?php echo $this->escape($productItem['ribbon_class']); ?>" href="<?php echo $this->escape($productItem['largeUrl']); ?>"
                title="<?php echo $this->escape($productItem['title']); ?>">
                 <img class="img-responsive" itemprop="image" src="<?php echo $this->escape($productItem['mediumUrl']); ?>"
                      alt="<?php echo $this->escape($productItem['title']); ?>"/>
+                <?php if ($productItem['ribbon']) { ?>
+                    <p><span><?php echo $this->escape($productItem['ribbon']); ?></span></p>
+                <?php } ?>
             </a>
         </div>
     <?php } elseif (isset($category['image']) && !empty($category['image'])) { ?>

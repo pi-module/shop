@@ -37,8 +37,10 @@ class Product extends Select
             $where = array('status' => 1);
             // Check for special
             if (isset($this->options['type']) && $this->options['type'] == 'special') {
-                $ids = Pi::api('special', 'shop')->getIds();
-                $where[] = new Expression('id NOT IN (' . implode(",", $ids) . ')');
+                $ids = Pi::registry('specialListId', 'shop')->read();
+                if (!empty($ids)) {
+                    $where[] = new Expression('id NOT IN (' . implode(",", $ids) . ')');
+                }
             }
             // Select
             $select = Pi::model('product', 'shop')->select()->columns($columns)->where($where)->order($order)->limit($limit);
