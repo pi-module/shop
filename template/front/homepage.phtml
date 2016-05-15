@@ -47,11 +47,11 @@ $this->footScript()->appendScript($scriptMenu);
                     <?php foreach ($blocks as $block) { ?>
                         <?php $block = $this->block($block); ?>
                         <div class="shop-widget-single">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><?php echo $block['title']; ?></h3>
+                            <div class="pi-block">
+                                <div class="pi-block-title">
+                                    <h3><?php echo $block['title']; ?></h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="pi-block-content">
                                     <?php echo $block['content']; ?>
                                 </div>
                             </div>
