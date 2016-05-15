@@ -41,12 +41,22 @@ $this->footScript()->appendScript($scriptMenu);
             <div class="page-header">
                 <h1><?php echo $productTitleH1; ?></h1>
             </div>
+            <?php if (!empty($config['text_description_index'])) { ?>
+                <div class="well shopIndexDescription">
+                    <?php echo $config['text_description_index']; ?>
+                </div>
+            <?php } ?>
+            <div class="clearfix shop-widget-list">
+                <div class="shop-widget-single">
+                    <?php echo $this->widget('search-search'); ?>
+                </div>
+            </div>
             <?php if (!empty($config['homepage_widget'])) { ?>
                 <?php $blocks = explode("|", $config['homepage_widget']); ?>
-                <div class="clearfix shop-widget-list">
+                <div class="clearfix shop-block-list">
                     <?php foreach ($blocks as $block) { ?>
                         <?php $block = $this->block($block); ?>
-                        <div class="shop-widget-single">
+                        <div class="shop-block-single">
                             <div class="pi-block">
                                 <div class="pi-block-title">
                                     <h3><?php echo $block['title']; ?></h3>
@@ -57,12 +67,6 @@ $this->footScript()->appendScript($scriptMenu);
                             </div>
                         </div>
                     <?php } ?>
-                </div>
-            <?php } ?>
-            <?php // include $this->template('front/product-list-special'); ?>
-            <?php if (!empty($config['text_description_index'])) { ?>
-                <div class="well shopIndexDescription">
-                    <?php echo $config['text_description_index']; ?>
                 </div>
             <?php } ?>
         </div>
