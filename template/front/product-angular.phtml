@@ -274,7 +274,6 @@ switch ($config['view_column']) {
                                                             <strong><?php _e('Stock status'); ?> : </strong>
                                                             <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
                                                         </div>
-                                                        <strong><?php _e('Price'); ?> : </strong>
                                                         <div ng-if="product.price_discount_has == 1">
                                                     <span class="text-danger">
                                                         <del>{{product.price_discount_view}}</del>
@@ -308,7 +307,6 @@ switch ($config['view_column']) {
                                                             <strong><?php _e('Stock status'); ?> : </strong>
                                                             <span class="text-danger" itemprop="availability" href="http://schema.org/InStock">{{product.stock_type_view}}</span>
                                                         </div>
-                                                        <strong><?php _e('Price'); ?> : </strong>
                                                     <span ng-if="product.price_discount_has == 1">
                                                         <span class="text-danger small">
                                                             <del>{{product.price_discount_view}}</del>
@@ -326,7 +324,6 @@ switch ($config['view_column']) {
                                                         <strong><?php _e('Stock status'); ?> : </strong>
                                                         <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
                                                     </div>
-                                                    <strong><?php _e('Price'); ?> : </strong>
                                                     <div ng-if="product.price_discount_has == 1">
                                                     <span class="text-danger">
                                                         <del>{{product.price_discount_view}}</del>
@@ -344,7 +341,6 @@ switch ($config['view_column']) {
                                             </div>
                                         <?php } elseif ($config['order_stock'] == 'property') { ?>
                                             <div class="clearfix">
-                                                <strong><?php _e('Price'); ?> : </strong>
                                                 <div ng-if="product.price_discount_has == 1">
                                                 <span class="text-danger">
                                                     <del>{{product.price_discount_view}}</del>
