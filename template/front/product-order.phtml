@@ -7,18 +7,25 @@
                 <?php if ($propertyList['type'] == 'checkbox') { ?>
                     <div class="col-sm-9">
                         <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
-                            <?php if ($propertyValue['stock'] > 0) { ?>
-
-                            <?php } ?>
                             <?php if ($config['order_stock'] != 'property') { ?>
                                 <label class="radio-inline input-sm">
-                                    <input type="radio"
+                                    <input type="radio" class="property-value"
+                                           <?php if ($propertyList['influence_price']) { ?>
+                                           data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
+                                           data-price="<?php echo $this->escape($propertyValue['price']); ?>"
+                                           data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                           <?php } ?>
                                            name="property[<?php echo $this->escape($propertyList['id']); ?>]"
                                            value="<?php echo $this->escape($propertyValue['unique_key']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
                                 </label>
                             <?php } elseif ($config['order_stock'] == 'property' && $propertyValue['stock'] > 0) { ?>
                                 <label class="radio-inline input-sm">
-                                    <input type="radio"
+                                    <input type="radio" class="property-value"
+                                        <?php if ($propertyList['influence_price']) { ?>
+                                            data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
+                                            data-price="<?php echo $this->escape($propertyValue['price']); ?>"
+                                            data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                        <?php } ?>
                                            name="property[<?php echo $this->escape($propertyList['id']); ?>]"
                                            value="<?php echo $this->escape($propertyValue['unique_key']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
                                 </label>
@@ -31,11 +38,21 @@
                                 class="form-control input-sm">
                             <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
                                 <?php if ($config['order_stock'] != 'property') { ?>
-                                    <option value="<?php echo $this->escape($propertyValue['unique_key']); ?>">
+                                    <option value="<?php echo $this->escape($propertyValue['unique_key']); ?>" class="property-value"
+                                        <?php if ($propertyList['influence_price']) { ?>
+                                            data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
+                                            data-price="<?php echo $this->escape($propertyValue['price']); ?>"
+                                            data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                        <?php } ?>>
                                         <?php echo $this->escape($propertyValue['name']); ?>
                                     </option>
                                 <?php } elseif ($config['order_stock'] == 'property' && $propertyValue['stock'] > 0) { ?>
-                                    <option value="<?php echo $this->escape($propertyValue['unique_key']); ?>">
+                                    <option value="<?php echo $this->escape($propertyValue['unique_key']); ?>" class="property-value"
+                                        <?php if ($propertyList['influence_price']) { ?>
+                                            data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
+                                            data-price="<?php echo $this->escape($propertyValue['price']); ?>"
+                                            data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                        <?php } ?>>
                                         <?php echo $this->escape($propertyValue['name']); ?>
                                     </option>
                                 <?php } ?>
@@ -50,3 +67,8 @@
         <i class="fa fa-shopping-cart"></i> <?php _e('Add to cart'); ?>
     </button>
 </form>
+<script>
+    $(".property-value").change(function() {
+        $(".product-price").html($(this).attr("data-price-view"));
+    });
+</script>

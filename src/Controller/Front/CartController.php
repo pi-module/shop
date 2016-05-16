@@ -33,11 +33,11 @@ class CartController extends ActionController
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
         // Check basket
-        if (empty($basket) || empty($basket['products'])) {
+        /* if (empty($basket) || empty($basket['products'])) {
             $module = $this->params('module');
             $url = array('', 'module' => $module, 'controller' => 'index');
             $this->jump($url, __('Your cart are empty.'), 'error');
-        }
+        } */
         // Set view
         $this->view()->setTemplate('checkout-cart');
         $this->view()->assign('basket', $basket);
@@ -60,10 +60,8 @@ class CartController extends ActionController
         if ($this->request->isPost()) {
             // Get post
             $data = $this->request->getPost()->toArray();
-            //$this->view()->assign('test', $data);
-            //$this->view()->setTemplate('empty');
             // Find product
-            $product = Pi::api('product', 'shop')->getProductLight($data['id']);
+            $product = Pi::api('product', 'shop')->getProductLight(intval($data['id']));
             // Check product
             if (!in_array($product['marketable'], array(1, 2))) {
                 $message = __('The product was not marketable.');
@@ -80,6 +78,8 @@ class CartController extends ActionController
                 $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
                 return $this->redirect()->toRoute('', $url);
             }
+            //$this->view()->assign('test', $data);
+            //$this->view()->setTemplate('empty');
         } else {
             // Go to cart
             $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
@@ -115,8 +115,8 @@ class CartController extends ActionController
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
         // Get info from url
-        $process = $this->params('process');
-        $product = $this->params('product');
+        $process = $this->params('process', 'number');
+        $product = $this->params('product', 1);
         $module = $this->params('module');
         // Set return
         $return = array();
@@ -140,8 +140,20 @@ class CartController extends ActionController
                     $getNumber = $this->params('number');
                     $newNumber = $number + $getNumber;
                     if ($newNumber > 0) {
+                        // Set price
+                        $price = $basket['products'][$product]['price'];
+                        // Get property info
+                        if (isset($basket['products'][$product]['property']) && !empty($basket['products'][$product]['property'])) {
+                            $propertyList = Pi::api('property', 'shop')->getList();
+                            foreach ($basket['products'][$product]['property'] as $property) {
+                                $propertyInfoSingle = Pi::api('property', 'shop')->getPropertyValue($property['unique_key']);
+                                if ($propertyList[$propertyInfoSingle['property']]['influence_price']) {
+                                    $price = $propertyInfoSingle['price'];
+                                }
+                            }
+                        }
                         // Update number
-                        $newTotal = $newNumber * $basket['products'][$product]['price'];
+                        $newTotal = $newNumber * $price;
                         Pi::api('basket', 'shop')->updateBasket($product, $newNumber);
                         // Set return
                         $return['message'] = __('Update number');
@@ -176,10 +188,22 @@ class CartController extends ActionController
         $order['type_commodity'] = 'product';
         // Set products to order
         foreach ($basket['products'] as $product) {
+            // Set price
+            $price = $product['price'];
+            // Get property info
+            if (isset($product['property']) && !empty($product['property'])) {
+                $propertyList = Pi::api('property', 'shop')->getList();
+                foreach ($product['property'] as $property) {
+                    $propertyInfoSingle = Pi::api('property', 'shop')->getPropertyValue($property['unique_key']);
+                    if ($propertyList[$propertyInfoSingle['property']]['influence_price']) {
+                        $price = $propertyInfoSingle['price'];
+                    }
+                }
+            }
             // Set single product
             $singelProduct = array(
                 'product' => $product['id'],
-                'product_price' => $product['price'],
+                'product_price' => $price,
                 'discount_price' => 0,
                 'shipping_price' => $product['price_shipping'],
                 'packing_price' => 0,

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-05-14 11:43+0430\n"
+"POT-Creation-Date: 2016-05-16 12:58+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -93,14 +93,14 @@ msgstr "مقایسه محصولات"
 #: src/Api/Product.php:419 src/Api/Product.php:660 src/Api/Product.php:789
 #: src/Form/ProductForm.php:236 template/front/product-angular.phtml:259
 #: template/front/product-angular.phtml:275
-#: template/front/product-angular.phtml:327 template/front/product-box.phtml:32
+#: template/front/product-angular.phtml:325 template/front/product-box.phtml:32
 #: template/front/product-box.phtml:51 template/front/product-box.phtml:77
 #: template/front/product-price.phtml:15 template/front/product-price.phtml:78
 msgid "In stock"
 msgstr "موجود"
 
 #: src/Api/Product.php:423 src/Api/Product.php:664 src/Api/Product.php:793
-#: src/Form/ProductForm.php:237 template/front/product-angular.phtml:342
+#: src/Form/ProductForm.php:237 template/front/product-angular.phtml:339
 #: template/front/product-box.phtml:91 template/front/product-price.phtml:94
 msgid "Out of stock"
 msgstr "نا موجود"
@@ -355,11 +355,7 @@ msgstr "آخرین محصولات اضافه شده"
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
-#: src/Controller/Front/CartController.php:39
-msgid "Your cart are empty."
-msgstr "سبد خرید شما خالی است"
-
-#: src/Controller/Front/CartController.php:69
+#: src/Controller/Front/CartController.php:67
 msgid "The product was not marketable."
 msgstr "این محصول قابل فروش نیست"
 
@@ -371,11 +367,11 @@ msgstr "سبد خرید شما خالی است"
 msgid "Selected product removed from your cart"
 msgstr "محصول انتخاب شده از سبد خرید شما حذف شد"
 
-#: src/Controller/Front/CartController.php:147
+#: src/Controller/Front/CartController.php:159
 msgid "Update number"
 msgstr "تغییر تعداد"
 
-#: src/Controller/Front/CartController.php:153
+#: src/Controller/Front/CartController.php:165
 msgid "You can not set product number to 0"
 msgstr "شما نمی توانید تعداد یک محصول را ۰ تنظیم کنید"
 
@@ -528,7 +524,7 @@ msgstr "تنظیم نام برای فراخوانی در تمام بخش‌ها�
 
 #: src/Form/AttributeForm.php:74 src/Form/DiscountForm.php:72
 #: src/Form/ProductForm.php:139 src/Form/RelatedForm.php:68
-#: template/front/category.phtml:55
+#: template/front/category.phtml:60
 msgid "Category"
 msgstr "شاخه"
 
@@ -703,12 +699,8 @@ msgstr "موجودی"
 #: src/Form/ProductAdditionalForm.php:152 src/Form/ProductForm.php:259
 #: template/admin/product-index.phtml:56 template/admin/product-update.phtml:12
 #: template/admin/product-update.phtml:16 template/front/checkout-cart.phtml:98
-#: template/front/product-angular.phtml:277
-#: template/front/product-angular.phtml:311
-#: template/front/product-angular.phtml:329
-#: template/front/product-angular.phtml:347 template/front/product-box.phtml:53
-#: template/front/product-box.phtml:79 template/front/product-box.phtml:96
-#: template/front/product-compare.phtml:86
+#: template/front/product-box.phtml:53 template/front/product-box.phtml:79
+#: template/front/product-box.phtml:96 template/front/product-compare.phtml:86
 #: template/front/product-price.phtml:17 template/front/product-price.phtml:47
 #: template/front/product-price.phtml:80 template/front/product-price.phtml:104
 msgid "Price"
@@ -1411,12 +1403,12 @@ msgstr "مقایسه"
 
 #: template/front/product-angular.phtml:258
 #: template/front/product-angular.phtml:274
-#: template/front/product-angular.phtml:289
-#: template/front/product-angular.phtml:295
-#: template/front/product-angular.phtml:301
-#: template/front/product-angular.phtml:308
-#: template/front/product-angular.phtml:326
-#: template/front/product-angular.phtml:341 template/front/product-box.phtml:31
+#: template/front/product-angular.phtml:288
+#: template/front/product-angular.phtml:294
+#: template/front/product-angular.phtml:300
+#: template/front/product-angular.phtml:307
+#: template/front/product-angular.phtml:324
+#: template/front/product-angular.phtml:338 template/front/product-box.phtml:31
 #: template/front/product-box.phtml:50 template/front/product-box.phtml:64
 #: template/front/product-box.phtml:76 template/front/product-box.phtml:90
 #: template/front/product-price.phtml:14 template/front/product-price.phtml:40
@@ -1445,9 +1437,15 @@ msgstr "محصولات مشابه"
 msgid "Special products"
 msgstr "محصولات ویژه"
 
-#: template/front/product-order.phtml:50
+#: template/front/product-order.phtml:67
 msgid "Add to cart"
 msgstr "اضافه به سبد خرید"
+
+#: template/front/product-price.phtml:25 template/front/product-price.phtml:55
+#: template/front/product-price.phtml:63 template/front/product-price.phtml:88
+#: template/front/product-price.phtml:95 template/front/product-price.phtml:112
+msgid "Product code"
+msgstr "کد محصول"
 
 #: template/front/product-question.phtml:4
 #: template/front/product-question.phtml:16
@@ -1469,6 +1467,9 @@ msgstr ""
 #: template/front/tag.phtml:4
 msgid "Tag"
 msgstr "برچسب"
+
+#~ msgid "Your cart are empty."
+#~ msgstr "سبد خرید شما خالی است"
 
 #~ msgid "Time Create"
 #~ msgstr "جدیدترین"

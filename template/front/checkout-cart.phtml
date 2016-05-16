@@ -95,7 +95,7 @@ $this->footScript()->appendScript($script);
                     </div>
                     <div class="col-md-8 cart-product-info">
                         <ul class="list-unstyled">
-                            <li><strong><?php _e('Price'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['price_view']); ?></span></li>
+                            <li><strong><?php _e('Price'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['price_single_view']); ?></span></li>
                             <?php if (!empty($product['property'])) { ?>
                                 <?php foreach ($product['property'] as $property) { ?>
                                     <li><strong><?php echo $this->escape($property['title']); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($property['value']); ?></span></li>

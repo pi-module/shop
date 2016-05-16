@@ -259,15 +259,31 @@ class Basket extends AbstractApi
         // Set products
         $basket['products'] = array();
         foreach ($basket['data']['product'] as $product) {
+            // Get product info
             $productInfo = Pi::api('product', 'shop')->getProductLight($product['id']);
+            // Set price
+            $price = $productInfo['price'];
+            // Get property info
+            if (isset($product['property']) && !empty($product['property'])) {
+                $propertyList = Pi::api('property', 'shop')->getList();
+                foreach ($product['property'] as $property) {
+                    $propertyInfoSingle = Pi::api('property', 'shop')->getPropertyValue($property['unique_key']);
+                    if ($propertyList[$propertyInfoSingle['property']]['influence_price']) {
+                        $price = $propertyInfoSingle['price'];
+                    }
+                }
+            }
+            // Set product info
             $productInfo['can_pay'] = $product['can_pay'];
             $productInfo['number'] = $product['number'];
             $productInfo['property'] = $product['property'];
-            $productInfo['total'] = $productInfo['price'] * $product['number'];
+            $productInfo['price_single'] = $price;
+            $productInfo['price_single_view'] = Pi::api('api', 'shop')->viewPrice($price);
+            $productInfo['total'] = $price * $product['number'];
             $productInfo['total_view'] = Pi::api('api', 'shop')->viewPrice($productInfo['total']);
             $basket['products'][$product['id']] = $productInfo;
             // Set total
-            $total['price'] = $total['price'] + $productInfo['price'];
+            $total['price'] = $total['price'] + $price;
             $total['number'] = $total['number'] + $product['number'];
             $total['total_price'] = $total['total_price'] + $productInfo['total'];
         }

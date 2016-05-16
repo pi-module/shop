@@ -30,6 +30,7 @@ class Property extends AbstractApi
         // Get product
         $value = Pi::model('property_value', $this->getModule())->find($parameter, $type);
         $value = $value->toArray();
+        $value['price_view'] = Pi::api('api', 'shop')->viewPrice($value['price']);
         return $value;
     }
 
@@ -80,6 +81,7 @@ class Property extends AbstractApi
         $rowset = Pi::model('property_value', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $values[$row->property][$row->id] = $row->toArray();
+            $values[$row->property][$row->id]['price_view'] = Pi::api('api', 'shop')->viewPrice($row->price);
         }
         return $values;
     }
