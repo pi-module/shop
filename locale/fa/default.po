@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-05-16 12:58+0430\n"
+"POT-Creation-Date: 2016-05-16 15:46+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -125,7 +125,7 @@ msgstr "با تخفیف"
 
 #: src/Api/Product.php:477 src/Api/Product.php:849
 msgid "On sale"
-msgstr "حراج"
+msgstr "تخفیف ویژه"
 
 #: src/Api/Product.php:482 src/Api/Product.php:854
 msgid "Recommended"
@@ -1437,7 +1437,7 @@ msgstr "محصولات مشابه"
 msgid "Special products"
 msgstr "محصولات ویژه"
 
-#: template/front/product-order.phtml:67
+#: template/front/product-order.phtml:80
 msgid "Add to cart"
 msgstr "اضافه به سبد خرید"
 
