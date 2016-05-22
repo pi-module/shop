@@ -63,6 +63,8 @@ class DiscountController extends ActionController
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('discount', $row->id, $operation);
+                // Clear registry
+                Pi::registry('discountList', 'shop')->clear();
                 // Check it save or not
                 $message = __('Discount data saved successfully.');
                 $this->jump(array('action' => 'index'), $message);

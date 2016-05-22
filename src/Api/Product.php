@@ -328,21 +328,22 @@ class Product extends AbstractApi
         $userDiscount = array();
         $uid = Pi::user()->getId();
         $roles = Pi::user()->getRole($uid);
+        $discounts = Pi::registry('discountList', 'shop')->read();
 
-        // Set discounts
+        // Check product discounts
         if (!empty($product['setting']['discount'])) {
             foreach ($product['setting']['discount'] as $role => $percent) {
                 if (isset($percent) && $percent > 0 && in_array($role, $roles)) {
                     $userDiscount[] = $percent;
                 }
             }
-        } else {
-            $discounts = Pi::api('discount', 'shop')->getList();
-            if (!empty($discounts)) {
-                foreach ($discounts as $discount) {
-                    if (in_array($discount['role'], $roles) && in_array($discount['category'], $product['category'])) {
-                        $userDiscount[] = $discount['percent'];
-                    }
+        }
+
+        // Check module discounts
+        if (!empty($discounts)) {
+            foreach ($discounts as $discount) {
+                if (in_array($discount['role'], $roles) && in_array($discount['category'], $product['category'])) {
+                    $userDiscount[] = $discount['percent'];
                 }
             }
         }
