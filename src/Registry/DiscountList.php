@@ -31,8 +31,8 @@ class DiscountList extends AbstractRegistry
     {
         $return = array();
         $where = array('status' => 1);
-        $select = Pi::model('discount', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('discount', $this->getModule())->selectWith($select);
+        $select = Pi::model('discount', $this->module)->select()->where($where);
+        $rowset = Pi::model('discount', $this->module)->selectWith($select);
         foreach ($rowset as $row) {
             $return[$row->id] = $row->toArray();
         }
