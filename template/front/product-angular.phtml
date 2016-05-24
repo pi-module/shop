@@ -238,7 +238,7 @@ switch ($config['view_column']) {
                                  class="product-compare-add">
                                 <i class="fa fa-plus"></i> <?php _e('Compare'); ?>
                             </div>
-                            <a class="u-url {{product.ribbon_class}}" itemprop="url" title="{{product.title}}" href="{{product.productUrl}}">
+                            <a class="u-url {{product.ribbon_class}}" itemprop="url" title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
                                 <img itemprop="image" class="img-responsive u-photo" src="{{product.thumbUrl}}" alt="{{product.title}}"/>
                                 <p ng-if="product.ribbon">
                                     <span>{{product.ribbon}}</span>
@@ -246,7 +246,7 @@ switch ($config['view_column']) {
                             </a>
                             <div class="caption">
                                 <h3 class="p-name" itemprop="name">
-                                    <a title="{{product.title}}" href="{{product.productUrl}}">
+                                    <a title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
                                         {{product.title}}
                                     </a>
                                 </h3>
