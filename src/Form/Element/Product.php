@@ -37,7 +37,7 @@ class Product extends Select
             $where = array('status' => 1);
             // Check for sale
             if (isset($this->options['type']) && $this->options['type'] == 'sale') {
-                $ids = Pi::registry('saleId', 'shop')->read();
+                $ids = Pi::api('sale', 'shop')->getId('all');
                 if (!empty($ids)) {
                     $where[] = new Expression('id NOT IN (' . implode(",", $ids) . ')');
                 }

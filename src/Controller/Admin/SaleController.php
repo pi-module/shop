@@ -24,7 +24,7 @@ class SaleController extends ActionController
         // Set array
         $saleList = array();
         // Get product ides
-        $productId = Pi::registry('saleId', 'shop')->read();
+        $productId = Pi::api('sale', 'shop')->getId('all');
         if (!empty($productId)) {
             // Get products
             $productList = Pi::api('product', 'shop')->getListFromIdLight($productId);

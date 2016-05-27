@@ -26,16 +26,32 @@ class SaleId extends AbstractRegistry
      */
     protected function loadDynamic($options = array())
     {
-        $return = array();
+        // Set return
+        $return = array(
+            'idAll' => array(),
+            'idActive' => array(),
+            'timeCheck' => time(),
+            'timeExpire' => time(),
+        );
+        $timeExpire = array();
+        // Get ids
         $where = array('status' => 1);
         $columns = array('product');
-        // Get ids
         $model = Pi::model('sale', $this->module);
         $select = $model->select()->where($where)->columns($columns);
         $rowset = $model->selectWith($select);
         foreach ($rowset as $row) {
-            $return[$row->product] = $row->product;
+            $return['idAll'][$row->product] = $row->product;
+            if ($row->time_expire > time()) {
+                $return['idActive'][$row->product] = $row->product;
+                $timeExpire[$row->time_expire] = $row->time_expire;
+            }
         }
+        // Set time expire
+        if (!empty($timeExpire)) {
+            $return['timeExpire'] = min($timeExpire);
+        }
+        // return
         return $return;
     }
 

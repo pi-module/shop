@@ -18,7 +18,7 @@ use Zend\Json\Json;
 
 /*
  * Pi::api('sale', 'shop')->getAll();
- * Pi::api('sale', 'shop')->getIds();
+ * Pi::api('sale', 'shop')->getId();
  */
 
 class Sale extends AbstractApi
@@ -49,20 +49,25 @@ class Sale extends AbstractApi
         return $sale;
     }
 
-    public function getIds()
+    public function getId($type = 'active')
     {
-        // Set options
-        $sale = array();
-        $where = array('status' => 1);
-        $order = array('id DESC');
-        $columns = array('product');
-        // Get ids
-        $model = Pi::model('sale', $this->getModule());
-        $select = $model->select()->where($where)->columns($columns)->order($order);
-        $rowset = $model->selectWith($select);
-        foreach ($rowset as $row) {
-            $sale[] = $row->product;
+        // Get
+        $saleId = Pi::registry('saleId', 'shop')->read();
+        // Check time
+        if (time() > $saleId['timeExpire']) {
+            Pi::registry('saleId', 'shop')->clear();
+            $saleId = Pi::registry('saleId', 'shop')->read();
         }
-        return $sale;
+        // Set result
+        switch ($type) {
+            case 'active':
+                $id = $saleId['idActive'];
+                break;
+
+            case 'all':
+                $id = $saleId['idAll'];
+                break;
+        }
+        return $id;
     }
 }
