@@ -49,7 +49,7 @@ return array(
             'permission' => 'attach',
         ),
         array(
-            'label' => _a('Sale products'),
+            'label' => _a('Sale'),
             'controller' => 'sale',
             'permission' => 'sale',
         ),

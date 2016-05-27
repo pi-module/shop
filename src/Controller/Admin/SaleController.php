@@ -21,37 +21,26 @@ class SaleController extends ActionController
 {
     public function indexAction()
     {
-        // Get product and category
-        $columns = array('product');
-        $select = $this->getModel('sale')->select()->columns($columns);
-        $idSet = $this->getModel('sale')->selectWith($select)->toArray();
-        if (empty($idSet)) {
-            return $this->redirect()->toRoute('', array('action' => 'update'));
-        }
-        // Set topics and stores
-        foreach ($idSet as $sale) {
-            $productArr[] = $sale['product'];
-        }
-        // Get products
-        $where = array('id' => array_unique($productArr));
-        $columns = array('id', 'title', 'slug');
-        $select = $this->getModel('product')->select()->where($where)->columns($columns);
-        $productSet = $this->getModel('product')->selectWith($select);
-        // Make product list
-        foreach ($productSet as $row) {
-            $productList[$row->id] = $row->toArray();
-        }
-        // Get sale
-        $order = array('id DESC', 'time_publish DESC');
-        $select = $this->getModel('sale')->select()->order($order);
-        $saleSet = $this->getModel('sale')->selectWith($select);
-        // Make sale list
-        foreach ($saleSet as $row) {
-            $saleList[$row->id] = $row->toArray();
-            $saleList[$row->id]['productTitle'] = $productList[$row->product]['title'];
-            $saleList[$row->id]['productSlug'] = $productList[$row->product]['slug'];
-            $saleList[$row->id]['time_publish'] = _date($saleList[$row->id]['time_publish']);
-            $saleList[$row->id]['time_expire'] = _date($saleList[$row->id]['time_expire']);
+        // Set array
+        $saleList = array();
+        // Get product ides
+        $productId = Pi::registry('saleId', 'shop')->read();
+        if (!empty($productId)) {
+            // Get products
+            $productList = Pi::api('product', 'shop')->getListFromIdLight($productId);
+            // Get sale
+            $order = array('id DESC', 'time_publish DESC');
+            $select = $this->getModel('sale')->select()->order($order);
+            $saleSet = $this->getModel('sale')->selectWith($select);
+            // Make sale list
+            foreach ($saleSet as $sale) {
+                $saleList[$sale->id] = $sale->toArray();
+                $saleList[$sale->id]['productInfo'] = $productList[$sale->product];
+                $saleList[$sale->id]['time'] = sprintf(__('From %s to %s'),
+                    _date($sale->time_publish, array('pattern' => 'yyyy-MM-dd HH:mm')),
+                    _date($sale->time_expire, array('pattern' => 'yyyy-MM-dd HH:mm')));
+                $saleList[$sale->id]['isExpire'] = (time() > $sale->time_expire) ? 1 : 0;
+            }
         }
         // Set view
         $this->view()->setTemplate('sale-index');
@@ -74,8 +63,8 @@ class SaleController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Set time
-                //$values['time_publish'] = strtotime($values['time_publish']);
-                //$values['time_expire'] = strtotime($values['time_expire']);
+                $values['time_publish'] = strtotime($values['time_publish']);
+                $values['time_expire'] = strtotime($values['time_expire']);
                 // Save values
                 if (!empty($values['id'])) {
                     $row = $this->getModel('sale')->find($values['id']);
@@ -85,7 +74,7 @@ class SaleController extends ActionController
                 $row->assign($values);
                 $row->save();
                 // update registry
-                Pi::registry('saleListId', 'shop')->clear();
+                Pi::registry('saleId', 'shop')->clear();
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('sale', $row->id, $operation);
@@ -96,8 +85,15 @@ class SaleController extends ActionController
         } else {
             if ($id) {
                 $values = $this->getModel('sale')->find($id)->toArray();
-                $form->setData($values);
+                $values['time_publish'] = date("Y-m-d H:i:s", $values['time_publish']);
+                $values['time_expire'] = date("Y-m-d H:i:s", $values['time_expire']);
+
+            } else {
+                $values = array();
+                $values['time_publish'] = date("Y-m-d H:i:s", time());
+                $values['time_expire'] = date("Y-m-d H:i:s", strtotime("+1 week"));
             }
+            $form->setData($values);
         }
         // Set title
         $title = $id ? __('Edit sale') : __('Add sale');
@@ -115,6 +111,9 @@ class SaleController extends ActionController
         $row = $this->getModel('sale')->find($id);
         if ($row) {
             $row->delete();
+            // update registry
+            Pi::registry('saleId', 'shop')->clear();
+            // jump
             $this->jump(array('action' => 'index'), __('Selected sale delete'));
         }
         $this->jump(array('action' => 'index'), __('Please select sale'));

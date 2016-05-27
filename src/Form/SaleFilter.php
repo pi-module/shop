@@ -43,6 +43,32 @@ class SaleFilter extends InputFilter
                 ),
             ));
         }
+        // time_publish
+        $this->add(array(
+            'name' => 'time_publish',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+            'validators' => array(
+                new \Module\Shop\Validator\TimeSelect,
+            ),
+        ));
+        // time_expire
+        $this->add(array(
+            'name' => 'time_expire',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+            'validators' => array(
+                new \Module\Shop\Validator\TimeSelect,
+            ),
+        ));
         // status
         $this->add(array(
             'name' => 'status',

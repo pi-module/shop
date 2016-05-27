@@ -16,7 +16,7 @@ namespace Module\Shop\Registry;
 use Pi;
 use Pi\Application\Registry\AbstractRegistry;
 
-class SaleListId extends AbstractRegistry
+class SaleId extends AbstractRegistry
 {
     /** @var string Module name */
     protected $module = 'shop';

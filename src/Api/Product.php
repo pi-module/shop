@@ -471,7 +471,7 @@ class Product extends AbstractApi
         }
         // Set ribbon
         $product['ribbon_class'] = '';
-        if (in_array($product['id'], Pi::registry('SaleListId', 'shop')->read())) {
+        if (in_array($product['id'], Pi::registry('saleId', 'shop')->read())) {
             $product['ribbon'] = __('On sale');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif ($product['price_discount'] && ($product['price_discount'] > $product['price'])) {
@@ -843,7 +843,7 @@ class Product extends AbstractApi
 
         // Set ribbon
         $product['ribbon_class'] = '';
-        if (in_array($product['id'], Pi::registry('SaleListId', 'shop')->read())) {
+        if (in_array($product['id'], Pi::registry('saleId', 'shop')->read())) {
             $product['ribbon'] = __('On sale');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif ($product['price_discount'] && ($product['price_discount'] > $product['price'])) {

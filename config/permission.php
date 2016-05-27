@@ -65,7 +65,7 @@ return array(
             ),
         ),
         'sale' => array(
-            'title' => _a('Sale products'),
+            'title' => _a('Sale'),
             'access' => array(//'admin',
             ),
         ),

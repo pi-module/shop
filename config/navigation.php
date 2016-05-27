@@ -111,7 +111,7 @@ return array(
         ),
 
         'sale' => array(
-            'label' => _a('Sale products'),
+            'label' => _a('Sale'),
             'permission' => array(
                 'resource' => 'sale',
             ),

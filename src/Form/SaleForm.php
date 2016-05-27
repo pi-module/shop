@@ -76,6 +76,28 @@ class SaleForm extends BaseForm
                 'required' => true,
             )
         ));
+        // time_publish
+        $this->add(array(
+            'name' => 'time_publish',
+            'option' => array(
+                'label' => __('Sale publish time'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
+        // time_expire
+        $this->add(array(
+            'name' => 'time_expire',
+            'option' => array(
+                'label' => __('Sale expire time'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
         // Save
         $this->add(array(
             'name' => 'submit',
