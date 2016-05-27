@@ -17,52 +17,52 @@ use Pi\Application\Api\AbstractApi;
 use Zend\Json\Json;
 
 /*
- * Pi::api('special', 'shop')->getAll();
- * Pi::api('special', 'shop')->getIds();
+ * Pi::api('sale', 'shop')->getAll();
+ * Pi::api('sale', 'shop')->getIds();
  */
 
-class Special extends AbstractApi
+class Sale extends AbstractApi
 {
     public function getAll($limit = 0)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
-        $special = array();
+        $sale = array();
         // Set options
         $where = array('status' => 1);
         $order = array('id DESC');
         $columns = array('product');
         if ($limit == 0) {
-            $limit = intval($config['view_special_number']);
+            $limit = intval($config['view_sale_number']);
         }
         // Get ids
-        $model = Pi::model('special', $this->getModule());
+        $model = Pi::model('sale', $this->getModule());
         $select = $model->select()->where($where)->columns($columns)->order($order)->limit($limit);
         $rowset = $model->selectWith($select);
         foreach ($rowset as $row) {
-            $specialId[] = $row->product;
+            $saleId[] = $row->product;
         }
         // Get list of products
-        if (!empty($specialId)) {
-            $special = Pi::api('product', 'shop')->getListFromId($specialId);
+        if (!empty($saleId)) {
+            $sale = Pi::api('product', 'shop')->getListFromId($saleId);
         }
-        return $special;
+        return $sale;
     }
 
     public function getIds()
     {
         // Set options
-        $special = array();
+        $sale = array();
         $where = array('status' => 1);
         $order = array('id DESC');
         $columns = array('product');
         // Get ids
-        $model = Pi::model('special', $this->getModule());
+        $model = Pi::model('sale', $this->getModule());
         $select = $model->select()->where($where)->columns($columns)->order($order);
         $rowset = $model->selectWith($select);
         foreach ($rowset as $row) {
-            $special[] = $row->product;
+            $sale[] = $row->product;
         }
-        return $special;
+        return $sale;
     }
 }

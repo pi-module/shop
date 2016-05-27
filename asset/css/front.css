@@ -246,28 +246,28 @@
     margin-top: -200px !important;
 }
 
-/* owl carousel list for special products */
-.product-special .owl-carousel-list {
+/* owl carousel list for sale products */
+.product-sale .owl-carousel-list {
     height: 253px !important;
 }
 
-.product-special .owl-carousel-list .owl-stage {
+.product-sale .owl-carousel-list .owl-stage {
     height: 250px !important;
 }
 
-.product-special .owl-carousel-list .owl-stage-outer {
+.product-sale .owl-carousel-list .owl-stage-outer {
     height: 250px !important;
 }
 
-.product-special .owl-carousel-list .owl-item {
+.product-sale .owl-carousel-list .owl-item {
     max-height: 250px !important;
 }
 
-.product-special .owl-carousel-list .owl-item img {
+.product-sale .owl-carousel-list .owl-item img {
     max-height: 140px !important;
 }
 
-.product-special .owl-carousel-list .owl-controls .owl-nav {
+.product-sale .owl-carousel-list .owl-controls .owl-nav {
     margin-top: -160px !important;
 }
 

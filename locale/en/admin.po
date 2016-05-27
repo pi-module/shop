@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-05-16 12:58+0430\n"
+"POT-Creation-Date: 2016-05-27 19:08+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -115,11 +115,11 @@ msgid "Tag term"
 msgstr ""
 
 #: config/block.php:226
-msgid "Special Product"
+msgid "Sale Product"
 msgstr ""
 
 #: config/block.php:227
-msgid "Special Product list"
+msgid "Sale Product list"
 msgstr ""
 
 #: config/block.php:290 config/navigation.php:16 config/page.php:106
@@ -311,11 +311,11 @@ msgid "Show other products from this category"
 msgstr ""
 
 #: config/config.php:228
-msgid "Show special"
+msgid "Show sale"
 msgstr ""
 
 #: config/config.php:236
-msgid "Number of products on special"
+msgid "Number of products on sale"
 msgstr ""
 
 #: config/config.php:244
@@ -520,7 +520,7 @@ msgid "Attach"
 msgstr ""
 
 #: config/navigation.php:114 config/page.php:52 config/permission.php:68
-msgid "Special products"
+msgid "Sale products"
 msgstr ""
 
 #: config/navigation.php:125 config/page.php:57 config/permission.php:73

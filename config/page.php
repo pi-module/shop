@@ -49,9 +49,9 @@ return array(
             'permission' => 'attach',
         ),
         array(
-            'label' => _a('Special products'),
-            'controller' => 'special',
-            'permission' => 'special',
+            'label' => _a('Sale products'),
+            'controller' => 'sale',
+            'permission' => 'sale',
         ),
         array(
             'label' => _a('Logs'),

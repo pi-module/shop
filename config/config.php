@@ -223,17 +223,17 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
-        'view_special' => array(
+        'view_sale' => array(
             'category' => 'view',
-            'title' => _a('Show special'),
+            'title' => _a('Show sale'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
         ),
-        'view_special_number' => array(
+        'view_sale_number' => array(
             'category' => 'view',
-            'title' => _a('Number of products on special'),
+            'title' => _a('Number of products on sale'),
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',

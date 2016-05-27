@@ -147,7 +147,7 @@ class Block
         return $block;
     }
 
-    public function productSpecial($options = array(), $module = null)
+    public function productSale($options = array(), $module = null)
     {
         // Set options
         $block = array();
@@ -155,7 +155,7 @@ class Block
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
         $limit = intval($block['number']);
         // Set block array
-        $block['resources'] = Pi::api('special', 'shop')->getAll($limit);
+        $block['resources'] = Pi::api('sale', 'shop')->getAll($limit);
         // Load language
         Pi::service('i18n')->load(array('module/shop', 'default'));
         return $block;

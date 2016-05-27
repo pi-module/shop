@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-05-16 12:58+0430\n"
+"POT-Creation-Date: 2016-05-27 19:08+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -115,12 +115,12 @@ msgid "Tag term"
 msgstr "واژه برچسب"
 
 #: config/block.php:226
-msgid "Special Product"
-msgstr "محصولات منتخب"
+msgid "Sale Product"
+msgstr ""
 
 #: config/block.php:227
-msgid "Special Product list"
-msgstr "فهرست محصولات منتخب"
+msgid "Sale Product list"
+msgstr ""
 
 #: config/block.php:290 config/navigation.php:16 config/page.php:106
 msgid "Category list"
@@ -313,12 +313,12 @@ msgid "Show other products from this category"
 msgstr "نمایش محصولات دیگر این شاخه"
 
 #: config/config.php:228
-msgid "Show special"
-msgstr "نمایش محصولات ویژه"
+msgid "Show sale"
+msgstr ""
 
 #: config/config.php:236
-msgid "Number of products on special"
-msgstr "تعداد محصولات ویژه"
+msgid "Number of products on sale"
+msgstr ""
 
 #: config/config.php:244
 msgid "Product ribbon type"
@@ -522,8 +522,8 @@ msgid "Attach"
 msgstr "پیوست"
 
 #: config/navigation.php:114 config/page.php:52 config/permission.php:68
-msgid "Special products"
-msgstr "محصولات ویژه"
+msgid "Sale products"
+msgstr ""
 
 #: config/navigation.php:125 config/page.php:57 config/permission.php:73
 msgid "Logs"
@@ -552,6 +552,21 @@ msgstr "پرداخت"
 #: config/permission.php:17
 msgid "Global public resource"
 msgstr "دسترسی های عمومی"
+
+#~ msgid "Special Product"
+#~ msgstr "محصولات منتخب"
+
+#~ msgid "Special Product list"
+#~ msgstr "فهرست محصولات منتخب"
+
+#~ msgid "Show special"
+#~ msgstr "نمایش محصولات ویژه"
+
+#~ msgid "Number of products on special"
+#~ msgstr "تعداد محصولات ویژه"
+
+#~ msgid "Special products"
+#~ msgstr "محصولات ویژه"
 
 #~ msgid "Side category type"
 #~ msgstr "نوع نمایش شاخه در کنار صفحه"

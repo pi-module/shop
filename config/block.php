@@ -223,10 +223,10 @@ return array(
     ),
     'product-special' => array(
         'name' => 'product-special',
-        'title' => _a('Special Product'),
-        'description' => _a('Special Product list'),
-        'render' => array('block', 'productSpecial'),
-        'template' => 'product-special',
+        'title' => _a('Sale Product'),
+        'description' => _a('Sale Product list'),
+        'render' => array('block', 'productSale'),
+        'template' => 'product-sale',
         'config' => array(
             'number' => array(
                 'title' => _a('Number'),

@@ -110,14 +110,14 @@ return array(
             'action' => 'index',
         ),
 
-        'special' => array(
-            'label' => _a('Special products'),
+        'sale' => array(
+            'label' => _a('Sale products'),
             'permission' => array(
-                'resource' => 'special',
+                'resource' => 'sale',
             ),
             'route' => 'admin',
             'module' => 'shop',
-            'controller' => 'special',
+            'controller' => 'sale',
             'action' => 'index',
         ),
 

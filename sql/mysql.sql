@@ -15,7 +15,7 @@ CREATE TABLE `{product}` (
   `time_update`      INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `uid`              INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `hits`             INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `sales`            INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `sold`            INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `image`            VARCHAR(255)        NOT NULL DEFAULT '',
   `path`             VARCHAR(16)         NOT NULL DEFAULT '',
   `comment`          INT(10) UNSIGNED    NOT NULL DEFAULT '0',
@@ -207,7 +207,7 @@ CREATE TABLE `{property_value}` (
   KEY `property_product` (`property`, `product`)
 );
 
-CREATE TABLE `{special}` (
+CREATE TABLE `{sale}` (
   `id`           INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `product`      INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `price`        DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
@@ -215,7 +215,7 @@ CREATE TABLE `{special}` (
   `time_expire`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `status`       TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  KEY `special_select` (`status`, `time_publish`, `time_expire`),
+  KEY `sale_select` (`status`, `time_publish`, `time_expire`),
   KEY `product` (`product`),
   KEY `time_publish` (`time_publish`),
   KEY `status` (`status`)

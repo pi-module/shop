@@ -30,10 +30,10 @@ class IndexController extends ActionController
         $config = Pi::service('registry')->config->read($module);
         // category list
         $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
-        // Get special
-        if ($config['view_special']) {
-            $specialList = Pi::api('special', 'shop')->getAll();
-            $this->view()->assign('specialList', $specialList);
+        // Get sale
+        if ($config['view_sale']) {
+            $saleList = Pi::api('sale', 'shop')->getAll();
+            $this->view()->assign('saleList', $saleList);
         }
         // Check homepage type
         switch ($config['homepage_type']) {

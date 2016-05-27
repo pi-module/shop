@@ -64,8 +64,8 @@ return array(
             'access' => array(//'admin',
             ),
         ),
-        'special' => array(
-            'title' => _a('Special products'),
+        'sale' => array(
+            'title' => _a('Sale products'),
             'access' => array(//'admin',
             ),
         ),

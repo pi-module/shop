@@ -432,8 +432,8 @@ class ProductController extends ActionController
             $this->getModel('attach')->delete(array('product' => $row->id));
             // attribute Field Data
             $this->getModel('field_data')->delete(array('product' => $row->id));
-            // Special
-            $this->getModel('special')->delete(array('product' => $row->id));
+            // Sale
+            $this->getModel('sale')->delete(array('product' => $row->id));
             // Remove sitemap
             if (Pi::service('module')->isActive('sitemap')) {
                 $loc = Pi::url($this->url('shop', array(

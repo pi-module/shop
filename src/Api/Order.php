@@ -37,9 +37,9 @@ class Order extends AbstractApi
             foreach ($basket as $single) {
                 // Get product
                 $product = Pi::api('product', 'shop')->getProductLight($single['product']);
-                // Update sales
+                // Update sold
                 Pi::model('product', $this->getModule())->update(
-                    array('sales' => ($product['sales'] + $single['number'])),
+                    array('sold' => ($product['sold'] + $single['number'])),
                     array('id' => $product['id'])
                 );
                 // Stock method

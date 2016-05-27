@@ -80,7 +80,7 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                         <?php } ?>
                         <?php echo $this->escape($product['title']); ?>
                         <?php if (!empty($product['subtitle'])) { ?> ( <?php echo $this->escape($product['subtitle']); ?> )<?php } ?>
-                        <?php if ($product['sales'] > 0) { ?> ( <?php _e('Sales'); ?> : <?php echo $this->escape(_number($product['sales'])); ?> )<?php } ?>
+                        <?php if ($product['sold'] > 0) { ?> ( <?php _e('Sold'); ?> : <?php echo $this->escape(_number($product['sold'])); ?> )<?php } ?>
                     </td>
                     <td>
                         <div class="btn-group">

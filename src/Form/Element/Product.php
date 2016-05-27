@@ -35,9 +35,9 @@ class Product extends Select
             $columns = array('id', 'title');
             $order = array('title ASC', 'time_create DESC', 'id DESC');
             $where = array('status' => 1);
-            // Check for special
-            if (isset($this->options['type']) && $this->options['type'] == 'special') {
-                $ids = Pi::registry('specialListId', 'shop')->read();
+            // Check for sale
+            if (isset($this->options['type']) && $this->options['type'] == 'sale') {
+                $ids = Pi::registry('saleListId', 'shop')->read();
                 if (!empty($ids)) {
                     $where[] = new Expression('id NOT IN (' . implode(",", $ids) . ')');
                 }

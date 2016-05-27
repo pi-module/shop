@@ -14,12 +14,17 @@ namespace Module\Shop\Model;
 
 use Pi\Application\Model\Model;
 
-class Special extends Model
+class Sale extends Model
 {
     /**
      * {@inheritDoc}
      */
     protected $columns = array(
-        'id', 'product', 'price', 'time_publish', 'time_expire', 'status'
+        'id', 
+        'product', 
+        'price', 
+        'time_publish', 
+        'time_expire', 
+        'status'
     );
 }

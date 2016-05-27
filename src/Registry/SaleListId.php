@@ -16,7 +16,7 @@ namespace Module\Shop\Registry;
 use Pi;
 use Pi\Application\Registry\AbstractRegistry;
 
-class SpecialListId extends AbstractRegistry
+class SaleListId extends AbstractRegistry
 {
     /** @var string Module name */
     protected $module = 'shop';
@@ -30,7 +30,7 @@ class SpecialListId extends AbstractRegistry
         $where = array('status' => 1);
         $columns = array('product');
         // Get ids
-        $model = Pi::model('special', $this->module);
+        $model = Pi::model('sale', $this->module);
         $select = $model->select()->where($where)->columns($columns);
         $rowset = $model->selectWith($select);
         foreach ($rowset as $row) {

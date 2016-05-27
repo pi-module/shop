@@ -16,7 +16,7 @@ namespace Module\Shop\Validator;
 use Pi;
 use Zend\Validator\AbstractValidator;
 
-class SpecialDuplicate extends AbstractValidator
+class SaleDuplicate extends AbstractValidator
 {
     const TAKEN = 'nameExists';
 
@@ -24,7 +24,7 @@ class SpecialDuplicate extends AbstractValidator
      * @var array
      */
     protected $messageTemplates = array(
-        self::TAKEN => 'This product added on special list before',
+        self::TAKEN => 'This product added on sale list before',
     );
 
     protected $options = array(

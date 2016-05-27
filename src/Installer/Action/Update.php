@@ -601,6 +601,37 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.4.1', '<')) {
+            // Alter table : Update sold
+            $sql = sprintf("ALTER TABLE %s CHANGE `sales` `sold` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Rename special table
+            $sql = "RENAME TABLE {special} TO {sale}";
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+        }
+
         return true;
     }
 }

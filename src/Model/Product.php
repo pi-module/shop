@@ -35,7 +35,7 @@ class Product extends Model
         'time_update',
         'uid',
         'hits',
-        'sales',
+        'sold',
         'image',
         'path',
         'comment',
