@@ -59,6 +59,17 @@ class SaleForm extends BaseForm
                 ),
             ));
         }
+        // price
+        $this->add(array(
+            'name' => 'price',
+            'options' => array(
+                'label' => __('Price'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('Real price'),
+            )
+        ));
         // status
         $this->add(array(
             'name' => 'status',

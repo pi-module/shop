@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-05-27 19:08+0430\n"
+"POT-Creation-Date: 2016-05-30 16:14+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -116,11 +116,11 @@ msgstr "واژه برچسب"
 
 #: config/block.php:226
 msgid "Sale Product"
-msgstr ""
+msgstr "محصولات حراجی"
 
 #: config/block.php:227
 msgid "Sale Product list"
-msgstr ""
+msgstr "فهرست محصولات حراجی"
 
 #: config/block.php:290 config/navigation.php:16 config/page.php:106
 msgid "Category list"
@@ -314,11 +314,11 @@ msgstr "نمایش محصولات دیگر این شاخه"
 
 #: config/config.php:228
 msgid "Show sale"
-msgstr ""
+msgstr "نمایش محصولات حراجی"
 
 #: config/config.php:236
 msgid "Number of products on sale"
-msgstr ""
+msgstr "تعداد محصولات حراجی برای نمایش"
 
 #: config/config.php:244
 msgid "Product ribbon type"
@@ -522,8 +522,8 @@ msgid "Attach"
 msgstr "پیوست"
 
 #: config/navigation.php:114 config/page.php:52 config/permission.php:68
-msgid "Sale products"
-msgstr ""
+msgid "Sale"
+msgstr "حراج"
 
 #: config/navigation.php:125 config/page.php:57 config/permission.php:73
 msgid "Logs"

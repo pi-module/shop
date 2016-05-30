@@ -43,6 +43,16 @@ class SaleFilter extends InputFilter
                 ),
             ));
         }
+        // price
+        $this->add(array(
+            'name' => 'price',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // time_publish
         $this->add(array(
             'name' => 'time_publish',

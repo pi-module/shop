@@ -360,3 +360,11 @@ a.product-ribbon:hover {
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
 }
+
+/* */
+.product-countdown {
+    padding: 15px;
+    margin-right: 1px;
+    margin-left: 1px;
+    margin-bottom: 10px;
+}

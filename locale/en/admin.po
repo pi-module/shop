@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-05-27 19:08+0430\n"
+"POT-Creation-Date: 2016-05-30 16:14+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -520,7 +520,7 @@ msgid "Attach"
 msgstr ""
 
 #: config/navigation.php:114 config/page.php:52 config/permission.php:68
-msgid "Sale products"
+msgid "Sale"
 msgstr ""
 
 #: config/navigation.php:125 config/page.php:57 config/permission.php:73

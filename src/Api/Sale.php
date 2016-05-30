@@ -17,8 +17,8 @@ use Pi\Application\Api\AbstractApi;
 use Zend\Json\Json;
 
 /*
- * Pi::api('sale', 'shop')->getAll();
- * Pi::api('sale', 'shop')->getId();
+ * Pi::api('sale', 'shop')->getAll($limit);
+ * Pi::api('sale', 'shop')->getInformation($type);
  */
 
 class Sale extends AbstractApi
@@ -29,43 +29,40 @@ class Sale extends AbstractApi
         $config = Pi::service('registry')->config->read($this->getModule());
         $sale = array();
         // Set options
-        $where = array('status' => 1);
-        $order = array('id DESC');
-        $columns = array('product');
         if ($limit == 0) {
             $limit = intval($config['view_sale_number']);
         }
-        // Get ids
-        $model = Pi::model('sale', $this->getModule());
-        $select = $model->select()->where($where)->columns($columns)->order($order)->limit($limit);
-        $rowset = $model->selectWith($select);
-        foreach ($rowset as $row) {
-            $saleId[] = $row->product;
-        }
+        $saleInformation = Pi::registry('saleInformation', 'shop')->read();
         // Get list of products
-        if (!empty($saleId)) {
-            $sale = Pi::api('product', 'shop')->getListFromId($saleId);
+        if (!empty($saleInformation['idActive'])) {
+            $products = Pi::api('product', 'shop')->getListFromIdLight($saleInformation['idActive'], $limit);
+            foreach ($products as $product) {
+                $sale[$product['id']] = $product;
+                $sale[$product['id']]['time_expire'] = $saleInformation['infoAll'][$product['id']]['time_expire'];
+                $sale[$product['id']]['time_expire_view'] = _date($saleInformation['infoAll'][$product['id']]['time_expire']);
+            }
         }
         return $sale;
     }
 
-    public function getId($type = 'active')
+    public function getInformation($type = 'active')
     {
         // Get
-        $saleId = Pi::registry('saleId', 'shop')->read();
-        // Check time
-        if (time() > $saleId['timeExpire']) {
-            Pi::registry('saleId', 'shop')->clear();
-            $saleId = Pi::registry('saleId', 'shop')->read();
-        }
+        $saleInformation = Pi::registry('saleInformation', 'shop')->read();
         // Set result
         switch ($type) {
             case 'active':
-                $id = $saleId['idActive'];
+                // Check time
+                if (isset($saleInformation['timeExpire']) && time() > $saleInformation['timeExpire']) {
+                    Pi::registry('saleInformation', 'shop')->clear();
+                    $saleInformation = Pi::registry('saleInformation', 'shop')->read();
+                }
+                // Set id
+                $id = $saleInformation['idActive'];
                 break;
 
             case 'all':
-                $id = $saleId['idAll'];
+                $id = $saleInformation['idAll'];
                 break;
         }
         return $id;

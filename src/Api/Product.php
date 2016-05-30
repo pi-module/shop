@@ -92,11 +92,14 @@ class Product extends AbstractApi
         return $list;
     }
 
-    public function getListFromId($id)
+    public function getListFromId($id, $limit = 0)
     {
         $list = array();
         $where = array('id' => $id, 'status' => 1);
         $select = Pi::model('product', $this->getModule())->select()->where($where);
+        if ($limit > 0) {
+            $select->limit($limit);
+        }
         $rowset = Pi::model('product', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $list[$row->id] = $this->canonizeProduct($row);
@@ -104,11 +107,14 @@ class Product extends AbstractApi
         return $list;
     }
 
-    public function getListFromIdLight($id)
+    public function getListFromIdLight($id, $limit = 0)
     {
         $list = array();
         $where = array('id' => $id, 'status' => 1);
         $select = Pi::model('product', $this->getModule())->select()->where($where);
+        if ($limit > 0) {
+            $select->limit($limit);
+        }
         $rowset = Pi::model('product', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $list[$row->id] = $this->canonizeProductLight($row);
@@ -326,9 +332,11 @@ class Product extends AbstractApi
     {
         // Get discount percent
         $userDiscount = array();
+        $saleDiscount = array();
         $uid = Pi::user()->getId();
         $roles = Pi::user()->getRole($uid);
         $discounts = Pi::registry('discountList', 'shop')->read();
+        $saleInformation = Pi::registry('saleInformation', 'shop')->read();
 
         // Check product discounts
         if (!empty($product['setting']['discount'])) {
@@ -348,12 +356,25 @@ class Product extends AbstractApi
             }
         }
 
+        // Check sale
+        if (!empty($saleInformation) && in_array($product['id'], $saleInformation['idActive'])) {
+            if ($saleInformation['infoAll'][$product['id']]['time_publish'] < time() && $saleInformation['infoAll'][$product['id']]['time_expire'] > time()) {
+                $userDiscount = array();
+                $saleDiscount = $saleInformation['infoAll'][$product['id']];
+            }
+        }
+
         // Make discount price
         if (!empty($userDiscount)) {
             $userDiscount = max($userDiscount);
             $product['price_discount'] = $product['price'];
             $product['price'] = ($product['price'] - ($product['price'] * ($userDiscount / 100)));
             $product['price'] = Pi::api('api', 'order')->makePrice($product['price']);
+        } elseif (!empty($saleDiscount)) {
+            $product['price_discount'] = $product['price'];
+            $product['price'] = $saleDiscount['price'];
+            $product['price_sale'] = 1;
+            $product['price_time'] = date("Y-m-d H:i:s", $saleDiscount['time_expire']);
         }
 
         return $product;
@@ -471,10 +492,10 @@ class Product extends AbstractApi
         }
         // Set ribbon
         $product['ribbon_class'] = '';
-        if (in_array($product['id'], Pi::api('sale', 'shop')->getId())) {
+        if (in_array($product['id'], Pi::api('sale', 'shop')->getInformation())) {
             $product['ribbon'] = __('On sale');
             $product['ribbon_class'] = 'product-ribbon';
-        } elseif ($product['price_discount'] && ($product['price_discount'] > $product['price'])) {
+        } elseif (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) {
             $product['ribbon'] = __('Have discount');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif (!empty($product['ribbon'])) {
@@ -535,6 +556,20 @@ class Product extends AbstractApi
                     $product['path'],
                     $product['image']
                 ));
+        }
+        // Set ribbon
+        $product['ribbon_class'] = '';
+        if (in_array($product['id'], Pi::api('sale', 'shop')->getInformation())) {
+            $product['ribbon'] = __('On sale');
+            $product['ribbon_class'] = 'product-ribbon';
+        } elseif (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) {
+            $product['ribbon'] = __('Have discount');
+            $product['ribbon_class'] = 'product-ribbon';
+        } elseif (!empty($product['ribbon'])) {
+            $product['ribbon_class'] = 'product-ribbon';
+        } elseif ($product['recommended']) {
+            $product['ribbon'] = __('Recommended');
+            $product['ribbon_class'] = 'product-ribbon';
         }
         // unset
         unset($product['text_summary']);
@@ -843,10 +878,10 @@ class Product extends AbstractApi
 
         // Set ribbon
         $product['ribbon_class'] = '';
-        if (in_array($product['id'], Pi::api('sale', 'shop')->getId())) {
+        if (in_array($product['id'], Pi::api('sale', 'shop')->getInformation())) {
             $product['ribbon'] = __('On sale');
             $product['ribbon_class'] = 'product-ribbon';
-        } elseif ($product['price_discount'] && ($product['price_discount'] > $product['price'])) {
+        } elseif (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) {
             $product['ribbon'] = __('Have discount');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif (!empty($product['ribbon'])) {

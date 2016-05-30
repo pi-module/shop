@@ -16,7 +16,7 @@ namespace Module\Shop\Registry;
 use Pi;
 use Pi\Application\Registry\AbstractRegistry;
 
-class SaleId extends AbstractRegistry
+class SaleInformation extends AbstractRegistry
 {
     /** @var string Module name */
     protected $module = 'shop';
@@ -28,6 +28,7 @@ class SaleId extends AbstractRegistry
     {
         // Set return
         $return = array(
+            'infoAll' => array(),
             'idAll' => array(),
             'idActive' => array(),
             'timeCheck' => time(),
@@ -36,13 +37,13 @@ class SaleId extends AbstractRegistry
         $timeExpire = array();
         // Get ids
         $where = array('status' => 1);
-        $columns = array('product');
         $model = Pi::model('sale', $this->module);
-        $select = $model->select()->where($where)->columns($columns);
+        $select = $model->select()->where($where);
         $rowset = $model->selectWith($select);
         foreach ($rowset as $row) {
+            $return['infoAll'][$row->product] = $row->toArray();
             $return['idAll'][$row->product] = $row->product;
-            if ($row->time_expire > time()) {
+            if ($row->time_publish < time() && $row->time_expire > time()) {
                 $return['idActive'][$row->product] = $row->product;
                 $timeExpire[$row->time_expire] = $row->time_expire;
             }

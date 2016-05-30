@@ -24,7 +24,7 @@ class SaleController extends ActionController
         // Set array
         $saleList = array();
         // Get product ides
-        $productId = Pi::api('sale', 'shop')->getId('all');
+        $productId = Pi::api('sale', 'shop')->getInformation('all');
         if (!empty($productId)) {
             // Get products
             $productList = Pi::api('product', 'shop')->getListFromIdLight($productId);
@@ -74,7 +74,7 @@ class SaleController extends ActionController
                 $row->assign($values);
                 $row->save();
                 // update registry
-                Pi::registry('saleId', 'shop')->clear();
+                Pi::registry('saleInformation', 'shop')->clear();
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('sale', $row->id, $operation);
@@ -112,7 +112,7 @@ class SaleController extends ActionController
         if ($row) {
             $row->delete();
             // update registry
-            Pi::registry('saleId', 'shop')->clear();
+            Pi::registry('saleInformation', 'shop')->clear();
             // jump
             $this->jump(array('action' => 'index'), __('Selected sale delete'));
         }

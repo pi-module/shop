@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-05-27 19:08+0430\n"
+"POT-Creation-Date: 2016-05-30 16:15+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -90,44 +90,44 @@ msgstr ""
 msgid "Compare products"
 msgstr ""
 
-#: src/Api/Product.php:420 src/Api/Product.php:661 src/Api/Product.php:790
+#: src/Api/Product.php:441 src/Api/Product.php:696 src/Api/Product.php:825
 #: src/Form/ProductForm.php:236 template/front/product-angular.phtml:259
 #: template/front/product-angular.phtml:275
-#: template/front/product-angular.phtml:325 template/front/product-box.phtml:32
-#: template/front/product-box.phtml:51 template/front/product-box.phtml:77
-#: template/front/product-price.phtml:15 template/front/product-price.phtml:78
+#: template/front/product-angular.phtml:325 template/front/product-box.phtml:33
+#: template/front/product-box.phtml:54 template/front/product-box.phtml:81
+#: template/front/product-price.phtml:33 template/front/product-price.phtml:96
 msgid "In stock"
 msgstr ""
 
-#: src/Api/Product.php:424 src/Api/Product.php:665 src/Api/Product.php:794
+#: src/Api/Product.php:445 src/Api/Product.php:700 src/Api/Product.php:829
 #: src/Form/ProductForm.php:237 template/front/product-angular.phtml:339
-#: template/front/product-box.phtml:91 template/front/product-price.phtml:94
+#: template/front/product-box.phtml:96 template/front/product-price.phtml:112
 msgid "Out of stock"
 msgstr ""
 
-#: src/Api/Product.php:428 src/Api/Product.php:669 src/Api/Product.php:798
+#: src/Api/Product.php:449 src/Api/Product.php:704 src/Api/Product.php:833
 #: src/Form/ProductForm.php:238
 msgid "Coming soon"
 msgstr ""
 
-#: src/Api/Product.php:432 src/Api/Product.php:673 src/Api/Product.php:802
+#: src/Api/Product.php:453 src/Api/Product.php:708 src/Api/Product.php:837
 #: src/Form/ProductForm.php:239
 msgid "Contact"
 msgstr ""
 
-#: src/Api/Product.php:436 src/Api/Product.php:677 src/Api/Product.php:806
+#: src/Api/Product.php:457 src/Api/Product.php:712 src/Api/Product.php:841
 msgid "Variable stock"
 msgstr ""
 
-#: src/Api/Product.php:475 src/Api/Product.php:847
+#: src/Api/Product.php:496 src/Api/Product.php:563 src/Api/Product.php:882
 msgid "On sale"
 msgstr ""
 
-#: src/Api/Product.php:478 src/Api/Product.php:850
+#: src/Api/Product.php:499 src/Api/Product.php:566 src/Api/Product.php:885
 msgid "Have discount"
 msgstr ""
 
-#: src/Api/Product.php:483 src/Api/Product.php:855
+#: src/Api/Product.php:504 src/Api/Product.php:571 src/Api/Product.php:890
 msgid "Recommended"
 msgstr ""
 
@@ -306,24 +306,29 @@ msgstr ""
 msgid "Add property"
 msgstr ""
 
-#: src/Controller/Admin/SaleController.php:93
+#: src/Controller/Admin/SaleController.php:39
+#, php-format
+msgid "From %s to %s"
+msgstr ""
+
+#: src/Controller/Admin/SaleController.php:82
 msgid "Sale data saved successfully."
 msgstr ""
 
-#: src/Controller/Admin/SaleController.php:103
+#: src/Controller/Admin/SaleController.php:99
 msgid "Edit sale"
 msgstr ""
 
-#: src/Controller/Admin/SaleController.php:103
-#: template/admin/sale-index.phtml:4 template/admin/sale-index.phtml:6
+#: src/Controller/Admin/SaleController.php:99 template/admin/sale-index.phtml:4
+#: template/admin/sale-index.phtml:6
 msgid "Add sale"
 msgstr ""
 
-#: src/Controller/Admin/SaleController.php:118
+#: src/Controller/Admin/SaleController.php:117
 msgid "Selected sale delete"
 msgstr ""
 
-#: src/Controller/Admin/SaleController.php:120
+#: src/Controller/Admin/SaleController.php:119
 msgid "Please select sale"
 msgstr ""
 
@@ -481,7 +486,7 @@ msgstr ""
 #: src/Form/AttachForm.php:81 src/Form/AttributeForm.php:88
 #: src/Form/CategoryForm.php:114 src/Form/DiscountForm.php:98
 #: src/Form/PositionForm.php:73 src/Form/ProductForm.php:121
-#: src/Form/PropertyForm.php:73 src/Form/SaleForm.php:67
+#: src/Form/PropertyForm.php:73 src/Form/SaleForm.php:78
 #: template/admin/attach-add.phtml:78
 msgid "Status"
 msgstr ""
@@ -499,7 +504,7 @@ msgstr ""
 #: src/Form/PositionForm.php:88 src/Form/ProductAdditionalForm.php:250
 #: src/Form/ProductForm.php:392 src/Form/PropertyForm.php:122
 #: src/Form/QuestionForm.php:86 src/Form/RelatedForm.php:77
-#: src/Form/SaleForm.php:84 src/Form/SitemapForm.php:48
+#: src/Form/SaleForm.php:117 src/Form/SitemapForm.php:48
 msgid "Submit"
 msgstr ""
 
@@ -574,35 +579,35 @@ msgstr ""
 
 #: src/Form/CategoryForm.php:116 src/Form/DiscountForm.php:100
 #: src/Form/PositionForm.php:75 src/Form/ProductForm.php:123
-#: src/Form/PropertyForm.php:75 src/Form/SaleForm.php:69
+#: src/Form/PropertyForm.php:75 src/Form/SaleForm.php:80
 #: template/admin/attach-index.phtml:51 template/admin/category-index.phtml:51
 #: template/admin/product-index.phtml:26 template/admin/product-index.phtml:28
-#: template/admin/product-index.phtml:129 template/admin/sale-index.phtml:49
+#: template/admin/product-index.phtml:129 template/admin/sale-index.phtml:52
 msgid "Published"
 msgstr ""
 
 #: src/Form/CategoryForm.php:117 src/Form/DiscountForm.php:101
 #: src/Form/PositionForm.php:76 src/Form/ProductForm.php:124
-#: src/Form/PropertyForm.php:76 src/Form/SaleForm.php:70
+#: src/Form/PropertyForm.php:76 src/Form/SaleForm.php:81
 #: template/admin/attach-index.phtml:52 template/admin/category-index.phtml:52
 #: template/admin/product-index.phtml:29 template/admin/product-index.phtml:31
-#: template/admin/product-index.phtml:130 template/admin/sale-index.phtml:50
+#: template/admin/product-index.phtml:130 template/admin/sale-index.phtml:53
 msgid "Pending review"
 msgstr ""
 
 #: src/Form/CategoryForm.php:118 src/Form/DiscountForm.php:102
 #: src/Form/PositionForm.php:77 src/Form/ProductForm.php:125
-#: src/Form/PropertyForm.php:77 src/Form/SaleForm.php:71
+#: src/Form/PropertyForm.php:77 src/Form/SaleForm.php:82
 #: template/admin/category-index.phtml:53 template/admin/product-index.phtml:32
-#: template/admin/product-index.phtml:34 template/admin/sale-index.phtml:51
+#: template/admin/product-index.phtml:34 template/admin/sale-index.phtml:54
 msgid "Draft"
 msgstr ""
 
 #: src/Form/CategoryForm.php:119 src/Form/DiscountForm.php:103
 #: src/Form/PositionForm.php:78 src/Form/ProductForm.php:126
-#: src/Form/PropertyForm.php:78 src/Form/SaleForm.php:72
+#: src/Form/PropertyForm.php:78 src/Form/SaleForm.php:83
 #: template/admin/category-index.phtml:54 template/admin/product-index.phtml:35
-#: template/admin/product-index.phtml:37 template/admin/sale-index.phtml:52
+#: template/admin/product-index.phtml:37 template/admin/sale-index.phtml:55
 msgid "Private"
 msgstr ""
 
@@ -657,7 +662,7 @@ msgstr ""
 #: src/Form/DiscountForm.php:104 src/Form/PositionForm.php:79
 #: src/Form/ProductForm.php:127 src/Form/PropertyForm.php:79
 #: template/admin/attach-add.phtml:55 template/admin/attribute-index.phtml:72
-#: template/admin/sale-index.phtml:41 template/admin/sale-index.phtml:43
+#: template/admin/sale-index.phtml:44 template/admin/sale-index.phtml:46
 msgid "Delete"
 msgstr ""
 
@@ -692,13 +697,13 @@ msgstr ""
 
 #: src/Form/ProductAdditionalForm.php:104
 #: src/Form/ProductAdditionalForm.php:152 src/Form/ProductForm.php:259
-#: template/admin/product-index.phtml:56 template/admin/product-update.phtml:12
+#: src/Form/SaleForm.php:66 template/admin/product-index.phtml:56
+#: template/admin/product-update.phtml:12
 #: template/admin/product-update.phtml:16 template/front/checkout-cart.phtml:98
-#: template/front/product-angular.phtml:223 template/front/product-box.phtml:53
-#: template/front/product-box.phtml:79 template/front/product-box.phtml:96
+#: template/front/product-angular.phtml:223
 #: template/front/product-compare.phtml:86
-#: template/front/product-price.phtml:17 template/front/product-price.phtml:47
-#: template/front/product-price.phtml:80 template/front/product-price.phtml:104
+#: template/front/product-price.phtml:35 template/front/product-price.phtml:65
+#: template/front/product-price.phtml:98 template/front/product-price.phtml:122
 msgid "Price"
 msgstr ""
 
@@ -743,7 +748,7 @@ msgstr ""
 msgid "Variable stock (make order without active payment)"
 msgstr ""
 
-#: src/Form/ProductForm.php:263
+#: src/Form/ProductForm.php:263 src/Form/SaleForm.php:70
 msgid "Real price"
 msgstr ""
 
@@ -832,6 +837,14 @@ msgstr ""
 
 #: src/Form/SaleForm.php:55
 msgid "Select product for add to sale"
+msgstr ""
+
+#: src/Form/SaleForm.php:94
+msgid "Sale publish time"
+msgstr ""
+
+#: src/Form/SaleForm.php:105
+msgid "Sale expire time"
 msgstr ""
 
 #: src/Form/SitemapForm.php:32
@@ -989,7 +1002,7 @@ msgstr ""
 #: template/admin/position-index.phtml:14 template/admin/product-index.phtml:55
 #: template/admin/product-related.phtml:28
 #: template/admin/product-related.phtml:50
-#: template/admin/property-index.phtml:14 template/admin/sale-index.phtml:14
+#: template/admin/property-index.phtml:14 template/admin/sale-index.phtml:15
 msgid "Action"
 msgstr ""
 
@@ -1006,8 +1019,8 @@ msgstr ""
 #: template/admin/position-index.phtml:30
 #: template/admin/position-index.phtml:32
 #: template/admin/property-index.phtml:30
-#: template/admin/property-index.phtml:32 template/admin/sale-index.phtml:38
-#: template/admin/sale-index.phtml:40
+#: template/admin/property-index.phtml:32 template/admin/sale-index.phtml:41
+#: template/admin/sale-index.phtml:43
 msgid "Edit"
 msgstr ""
 
@@ -1092,13 +1105,14 @@ msgstr ""
 #: template/admin/category-index.phtml:40
 #: template/admin/category-index.phtml:41 template/admin/product-index.phtml:20
 #: template/admin/product-index.phtml:106
-#: template/admin/product-index.phtml:108
+#: template/admin/product-index.phtml:108 template/admin/sale-index.phtml:37
+#: template/admin/sale-index.phtml:39
 msgid "View"
 msgstr ""
 
 #: template/admin/category-index.phtml:55 template/admin/product-index.phtml:38
 #: template/admin/product-index.phtml:40 template/admin/product-index.phtml:131
-#: template/admin/sale-index.phtml:53
+#: template/admin/sale-index.phtml:56
 msgid "Trash"
 msgstr ""
 
@@ -1134,7 +1148,8 @@ msgstr ""
 msgid "Ip"
 msgstr ""
 
-#: template/admin/log-index.phtml:9 template/front/product-angular.phtml:219
+#: template/admin/log-index.phtml:9 template/admin/sale-index.phtml:14
+#: template/front/product-angular.phtml:219
 msgid "Time"
 msgstr ""
 
@@ -1224,6 +1239,12 @@ msgstr ""
 
 #: template/admin/sale-index.phtml:9
 msgid "List of sales products"
+msgstr ""
+
+#: template/admin/sale-index.phtml:60
+msgid ""
+"You still do not add any product to sale system, use add sale button for add "
+"new product"
 msgstr ""
 
 #: template/admin/tools-index.phtml:4 template/admin/tools-index.phtml:6
@@ -1372,12 +1393,12 @@ msgstr ""
 #: template/front/product-angular.phtml:300
 #: template/front/product-angular.phtml:307
 #: template/front/product-angular.phtml:324
-#: template/front/product-angular.phtml:338 template/front/product-box.phtml:31
-#: template/front/product-box.phtml:50 template/front/product-box.phtml:64
-#: template/front/product-box.phtml:76 template/front/product-box.phtml:90
-#: template/front/product-price.phtml:14 template/front/product-price.phtml:40
-#: template/front/product-price.phtml:60 template/front/product-price.phtml:77
-#: template/front/product-price.phtml:93
+#: template/front/product-angular.phtml:338 template/front/product-box.phtml:32
+#: template/front/product-box.phtml:53 template/front/product-box.phtml:68
+#: template/front/product-box.phtml:80 template/front/product-box.phtml:95
+#: template/front/product-price.phtml:32 template/front/product-price.phtml:58
+#: template/front/product-price.phtml:78 template/front/product-price.phtml:95
+#: template/front/product-price.phtml:111
 msgid "Stock status"
 msgstr ""
 
@@ -1403,9 +1424,26 @@ msgstr ""
 msgid "Add to cart"
 msgstr ""
 
-#: template/front/product-price.phtml:25 template/front/product-price.phtml:55
-#: template/front/product-price.phtml:63 template/front/product-price.phtml:88
-#: template/front/product-price.phtml:95 template/front/product-price.phtml:112
+#: template/front/product-price.phtml:7
+msgid "The time remaining until the end of the offer : "
+msgstr ""
+
+#: template/front/product-price.phtml:15
+msgid "hour"
+msgstr ""
+
+#: template/front/product-price.phtml:16
+msgid "minute"
+msgstr ""
+
+#: template/front/product-price.phtml:17
+msgid "second"
+msgstr ""
+
+#: template/front/product-price.phtml:43 template/front/product-price.phtml:73
+#: template/front/product-price.phtml:81 template/front/product-price.phtml:106
+#: template/front/product-price.phtml:113
+#: template/front/product-price.phtml:130
 msgid "Product code"
 msgstr ""
 
