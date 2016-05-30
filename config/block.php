@@ -235,25 +235,6 @@ return array(
                 'filter' => 'number_int',
                 'value' => 10,
             ),
-            'list-type' => array(
-                'title' => _a('Product list type'),
-                'description' => '',
-                'edit' => array(
-                    'type' => 'select',
-                    'options' => array(
-                        'options' => array(
-                            'horizontal' => _a('Horizontal'),
-                            'vertical' => _a('Vertical'),
-                            'box' => _a('Multi size Box'),
-                            'list' => _a('List'),
-                            'slide' => _a('Slide'),
-                            'slidehover' => _a('Slide by hover effect'),
-                        ),
-                    ),
-                ),
-                'filter' => 'text',
-                'value' => 'horizontal',
-            ),
             'show-price' => array(
                 'title' => _a('Show price'),
                 'description' => '',

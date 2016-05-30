@@ -35,12 +35,7 @@ class Sale extends AbstractApi
         $saleInformation = Pi::registry('saleInformation', 'shop')->read();
         // Get list of products
         if (!empty($saleInformation['idActive'])) {
-            $products = Pi::api('product', 'shop')->getListFromIdLight($saleInformation['idActive'], $limit);
-            foreach ($products as $product) {
-                $sale[$product['id']] = $product;
-                $sale[$product['id']]['time_expire'] = $saleInformation['infoAll'][$product['id']]['time_expire'];
-                $sale[$product['id']]['time_expire_view'] = _date($saleInformation['infoAll'][$product['id']]['time_expire']);
-            }
+            $sale = Pi::api('product', 'shop')->getListFromId($saleInformation['idActive'], $limit);
         }
         return $sale;
     }
