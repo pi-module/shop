@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-05-30 16:14+0430\n"
+"POT-Creation-Date: 2016-06-01 16:01+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,9 +23,9 @@ msgstr "محصولات جدید"
 msgid "New Product list"
 msgstr "فهرست محوصلات جدید"
 
-#: config/block.php:22 config/block.php:92 config/block.php:289
-#: config/block.php:295 config/navigation.php:48 config/page.php:22
-#: config/page.php:81 config/permission.php:38
+#: config/block.php:22 config/block.php:92 config/block.php:270
+#: config/block.php:276 config/navigation.php:48 config/page.php:22
+#: config/page.php:86 config/permission.php:38
 msgid "Category"
 msgstr "شاخه"
 
@@ -35,62 +35,60 @@ msgid "Number"
 msgstr "تعداد"
 
 #: config/block.php:36 config/block.php:106 config/block.php:176
-#: config/block.php:239
 msgid "Product list type"
 msgstr "نوع فهرست محصولات"
 
 #: config/block.php:42 config/block.php:112 config/block.php:182
-#: config/block.php:245 config/block.php:308
+#: config/block.php:289
 msgid "Horizontal"
 msgstr "افقی"
 
 #: config/block.php:43 config/block.php:113 config/block.php:183
-#: config/block.php:246 config/block.php:309
+#: config/block.php:290
 msgid "Vertical"
 msgstr "عمودی"
 
 #: config/block.php:44 config/block.php:114 config/block.php:184
-#: config/block.php:247
 msgid "Multi size Box"
 msgstr "باکس با ابعاد متغیر"
 
 #: config/block.php:45 config/block.php:115 config/block.php:185
-#: config/block.php:248 config/block.php:310
+#: config/block.php:291
 msgid "List"
 msgstr "فهرست"
 
 #: config/block.php:46 config/block.php:116 config/block.php:186
-#: config/block.php:249 config/block.php:311
+#: config/block.php:292
 msgid "Slide"
 msgstr "اسلاید"
 
 #: config/block.php:47 config/block.php:117 config/block.php:187
-#: config/block.php:250 config/block.php:312
+#: config/block.php:293
 msgid "Slide by hover effect"
 msgstr "اسلاید با افکت هاور"
 
 #: config/block.php:55 config/block.php:125 config/block.php:195
-#: config/block.php:258
+#: config/block.php:239
 msgid "Show price"
 msgstr "نمایش قیمت"
 
 #: config/block.php:62 config/block.php:132 config/block.php:202
-#: config/block.php:265 config/block.php:320 config/block.php:360
+#: config/block.php:246 config/block.php:301 config/block.php:341
 msgid "Use block effects"
 msgstr "استفاده از افکت های بلاک"
 
 #: config/block.php:63 config/block.php:133 config/block.php:203
-#: config/block.php:266 config/block.php:321 config/block.php:361
+#: config/block.php:247 config/block.php:302 config/block.php:342
 msgid "Use block effects or set custom effect on theme"
 msgstr "استفاده از افکت های جاوا اسکریپت بلاک یا شخصی سازی آن در قالب"
 
 #: config/block.php:69 config/block.php:139 config/block.php:209
-#: config/block.php:272
+#: config/block.php:253
 msgid "Show More link to module page"
 msgstr "نمایش لینک ادامه به ماژول"
 
 #: config/block.php:76 config/block.php:146 config/block.php:216
-#: config/block.php:279
+#: config/block.php:260
 msgid "Set More link to module page"
 msgstr "درج لینک ادامه به ماژول"
 
@@ -122,39 +120,39 @@ msgstr "محصولات حراجی"
 msgid "Sale Product list"
 msgstr "فهرست محصولات حراجی"
 
-#: config/block.php:290 config/navigation.php:16 config/page.php:106
+#: config/block.php:271 config/navigation.php:16 config/page.php:111
 msgid "Category list"
 msgstr "فهرست شاخه ها"
 
-#: config/block.php:302
+#: config/block.php:283
 msgid "Category list type"
 msgstr "نوع فهرست شاخه"
 
-#: config/block.php:330
+#: config/block.php:311
 msgid "Basket"
 msgstr "سبد خرید"
 
-#: config/block.php:331
+#: config/block.php:312
 msgid "basket"
 msgstr "سبد خرید"
 
-#: config/block.php:336
+#: config/block.php:317
 msgid "Basket type"
 msgstr "نوع سبد خرید"
 
-#: config/block.php:342
+#: config/block.php:323
 msgid "Link to basket"
 msgstr "لینک به صفحه سبد خرید"
 
-#: config/block.php:343
+#: config/block.php:324
 msgid "Dialog box"
 msgstr "باکس پاپ آپ"
 
-#: config/block.php:354
+#: config/block.php:335
 msgid "Search"
 msgstr "جستجو"
 
-#: config/block.php:355
+#: config/block.php:336
 msgid "Ajax search block"
 msgstr "بلاک جستجوی ای‌جکس"
 
@@ -166,7 +164,7 @@ msgstr "نمایش نظرات"
 msgid "Admin"
 msgstr "بخش مدیر"
 
-#: config/config.php:21 config/page.php:120
+#: config/config.php:21 config/page.php:125
 msgid "Json output"
 msgstr "خروجی جیسون"
 
@@ -492,11 +490,11 @@ msgstr "فروشگاه"
 msgid "Shop system."
 msgstr "سیستم فروشگاه اینترنتی"
 
-#: config/navigation.php:26 config/page.php:113
+#: config/navigation.php:26 config/page.php:118
 msgid "Tag list"
 msgstr "فهرست برچسب ها"
 
-#: config/navigation.php:37 config/page.php:17 config/page.php:87
+#: config/navigation.php:37 config/page.php:17 config/page.php:92
 #: config/permission.php:33
 msgid "Product"
 msgstr "محصول"
@@ -514,38 +512,42 @@ msgid "Order property"
 msgstr "ویژگی سفارش"
 
 #: config/navigation.php:92 config/page.php:42 config/permission.php:58
-msgid "Discount"
-msgstr "تخفیف"
-
-#: config/navigation.php:103 config/page.php:47 config/permission.php:63
 msgid "Attach"
 msgstr "پیوست"
+
+#: config/navigation.php:103 config/page.php:47 config/permission.php:63
+msgid "Discount"
+msgstr "تخفیف گروهی"
 
 #: config/navigation.php:114 config/page.php:52 config/permission.php:68
 msgid "Sale"
 msgstr "حراج"
 
 #: config/navigation.php:125 config/page.php:57 config/permission.php:73
+msgid "Promotion"
+msgstr "کد تخفیف"
+
+#: config/navigation.php:136 config/page.php:62 config/permission.php:78
 msgid "Logs"
 msgstr "گزارش ها"
 
-#: config/navigation.php:136 config/page.php:62 config/permission.php:78
+#: config/navigation.php:147 config/page.php:67 config/permission.php:83
 msgid "Tools"
 msgstr "ابزار ها"
 
-#: config/navigation.php:146 config/page.php:67 config/permission.php:83
+#: config/navigation.php:157 config/page.php:72 config/permission.php:88
 msgid "Json"
 msgstr "جیسون"
 
-#: config/page.php:75
+#: config/page.php:80
 msgid "Index page"
 msgstr "صفحه اصلی"
 
-#: config/page.php:94
+#: config/page.php:99
 msgid "Tags"
 msgstr "برچسب ها"
 
-#: config/page.php:100 config/permission.php:24
+#: config/page.php:105 config/permission.php:24
 msgid "Checkout"
 msgstr "پرداخت"
 

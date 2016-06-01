@@ -632,6 +632,42 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.4.2', '<')) {
+            // Add table of discount
+            $sql = <<<'EOD'
+CREATE TABLE `{promotion}` (
+  `id`           INT(10) UNSIGNED          NOT NULL AUTO_INCREMENT,
+  `title`        VARCHAR(255)              NOT NULL DEFAULT '',
+  `code`         VARCHAR(16)               NOT NULL DEFAULT '',
+  `type`         ENUM ('percent', 'price') NOT NULL DEFAULT 'percent',
+  `percent`      TINYINT(3) UNSIGNED       NOT NULL DEFAULT '0',
+  `price`        DECIMAL(16, 2)            NOT NULL DEFAULT '0.00',
+  `time_publish` INT(10) UNSIGNED          NOT NULL DEFAULT '0',
+  `time_expire`  INT(10) UNSIGNED          NOT NULL DEFAULT '0',
+  `status`       TINYINT(1) UNSIGNED       NOT NULL DEFAULT '1',
+  `used`         INT(10) UNSIGNED          NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`),
+  KEY `promotion_select` (`status`, `time_publish`, `time_expire`),
+  KEY `time_publish` (`time_publish`),
+  KEY `status` (`status`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'SQL schema query for author table failed: '
+                        . $exception->getMessage(),
+                ));
+
+                return false;
+            }
+        }
+
         return true;
     }
 }

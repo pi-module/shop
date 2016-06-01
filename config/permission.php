@@ -54,18 +54,23 @@ return array(
             'access' => array(//'admin',
             ),
         ),
-        'discount' => array(
-            'title' => _a('Discount'),
-            'access' => array(//'admin',
-            ),
-        ),
         'attach' => array(
             'title' => _a('Attach'),
             'access' => array(//'admin',
             ),
         ),
+        'discount' => array(
+            'title' => _a('Discount'),
+            'access' => array(//'admin',
+            ),
+        ),
         'sale' => array(
             'title' => _a('Sale'),
+            'access' => array(//'admin',
+            ),
+        ),
+        'promotion' => array(
+            'title' => _a('Promotion'),
             'access' => array(//'admin',
             ),
         ),

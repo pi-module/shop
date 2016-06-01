@@ -15,7 +15,7 @@ CREATE TABLE `{product}` (
   `time_update`      INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `uid`              INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `hits`             INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `sold`            INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `sold`             INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `image`            VARCHAR(255)        NOT NULL DEFAULT '',
   `path`             VARCHAR(16)         NOT NULL DEFAULT '',
   `comment`          INT(10) UNSIGNED    NOT NULL DEFAULT '0',
@@ -207,34 +207,6 @@ CREATE TABLE `{property_value}` (
   KEY `property_product` (`property`, `product`)
 );
 
-CREATE TABLE `{sale}` (
-  `id`           INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
-  `product`      INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `price`        DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `time_publish` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_expire`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `status`       TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `sale_select` (`status`, `time_publish`, `time_expire`),
-  KEY `product` (`product`),
-  KEY `time_publish` (`time_publish`),
-  KEY `status` (`status`)
-);
-
-CREATE TABLE `{log}` (
-  `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uid`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
-  `ip`          CHAR(15)         NOT NULL DEFAULT '',
-  `time_create` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-  `section`     VARCHAR(32)      NOT NULL DEFAULT '',
-  `item`        INT(10) UNSIGNED NOT NULL DEFAULT '0',
-  `operation`   VARCHAR(32)      NOT NULL DEFAULT '',
-  `description` TEXT,
-  PRIMARY KEY (`id`),
-  KEY `uid` (`uid`),
-  KEY `time_create` (`time_create`)
-);
-
 CREATE TABLE `{basket}` (
   `id`    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `uid`   INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -257,6 +229,38 @@ CREATE TABLE `{discount}` (
   KEY `status` (`status`)
 );
 
+CREATE TABLE `{sale}` (
+  `id`           INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
+  `product`      INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `price`        DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
+  `time_publish` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `time_expire`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `status`       TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `sale_select` (`status`, `time_publish`, `time_expire`),
+  KEY `product` (`product`),
+  KEY `time_publish` (`time_publish`),
+  KEY `status` (`status`)
+);
+
+CREATE TABLE `{promotion}` (
+  `id`           INT(10) UNSIGNED          NOT NULL AUTO_INCREMENT,
+  `title`        VARCHAR(255)              NOT NULL DEFAULT '',
+  `code`         VARCHAR(16)               NOT NULL DEFAULT '',
+  `type`         ENUM ('percent', 'price') NOT NULL DEFAULT 'percent',
+  `percent`      TINYINT(3) UNSIGNED       NOT NULL DEFAULT '0',
+  `price`        DECIMAL(16, 2)            NOT NULL DEFAULT '0.00',
+  `time_publish` INT(10) UNSIGNED          NOT NULL DEFAULT '0',
+  `time_expire`  INT(10) UNSIGNED          NOT NULL DEFAULT '0',
+  `status`       TINYINT(1) UNSIGNED       NOT NULL DEFAULT '1',
+  `Pi::api('api', 'shop')->viewPrice(`         INT(10) UNSIGNED          NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`),
+  KEY `promotion_select` (`status`, `time_publish`, `time_expire`),
+  KEY `time_publish` (`time_publish`),
+  KEY `status` (`status`)
+);
+
 CREATE TABLE `{question}` (
   `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `ip`          CHAR(15)            NOT NULL DEFAULT '',
@@ -275,4 +279,18 @@ CREATE TABLE `{question}` (
   KEY `uid_answer` (`uid_answer`),
   KEY `product` (`product`),
   KEY `status` (`status`)
+);
+
+CREATE TABLE `{log}` (
+  `id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uid`         INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `ip`          CHAR(15)         NOT NULL DEFAULT '',
+  `time_create` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `section`     VARCHAR(32)      NOT NULL DEFAULT '',
+  `item`        INT(10) UNSIGNED NOT NULL DEFAULT '0',
+  `operation`   VARCHAR(32)      NOT NULL DEFAULT '',
+  `description` TEXT,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `time_create` (`time_create`)
 );

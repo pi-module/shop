@@ -88,17 +88,6 @@ return array(
             'action' => 'index',
         ),
 
-        'discount' => array(
-            'label' => _a('Discount'),
-            'permission' => array(
-                'resource' => 'discount',
-            ),
-            'route' => 'admin',
-            'module' => 'shop',
-            'controller' => 'discount',
-            'action' => 'index',
-        ),
-
         'attach' => array(
             'label' => _a('Attach'),
             'permission' => array(
@@ -110,6 +99,17 @@ return array(
             'action' => 'index',
         ),
 
+        'discount' => array(
+            'label' => _a('Discount'),
+            'permission' => array(
+                'resource' => 'discount',
+            ),
+            'route' => 'admin',
+            'module' => 'shop',
+            'controller' => 'discount',
+            'action' => 'index',
+        ),
+
         'sale' => array(
             'label' => _a('Sale'),
             'permission' => array(
@@ -118,6 +118,17 @@ return array(
             'route' => 'admin',
             'module' => 'shop',
             'controller' => 'sale',
+            'action' => 'index',
+        ),
+
+        'promotion' => array(
+            'label' => _a('Promotion'),
+            'permission' => array(
+                'resource' => 'promotion',
+            ),
+            'route' => 'admin',
+            'module' => 'shop',
+            'controller' => 'promotion',
             'action' => 'index',
         ),
 

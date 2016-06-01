@@ -39,19 +39,24 @@ return array(
             'permission' => 'property',
         ),
         array(
-            'label' => _a('Discount'),
-            'controller' => 'discount',
-            'permission' => 'discount',
-        ),
-        array(
             'label' => _a('Attach'),
             'controller' => 'attach',
             'permission' => 'attach',
         ),
         array(
+            'label' => _a('Discount'),
+            'controller' => 'discount',
+            'permission' => 'discount',
+        ),
+        array(
             'label' => _a('Sale'),
             'controller' => 'sale',
             'permission' => 'sale',
+        ),
+        array(
+            'label' => _a('Promotion'),
+            'controller' => 'promotion',
+            'permission' => 'promotion',
         ),
         array(
             'label' => _a('Logs'),

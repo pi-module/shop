@@ -20,9 +20,7 @@ use Zend\Json\Json;
 /*
  * Pi::api('basket', 'shop')->setBasket($id, $number, $properties);
  * Pi::api('basket', 'shop')->getBasket();
- * Pi::api('basket', 'shop')->setBasketSession($id, $number, $properties);
- * Pi::api('basket', 'shop')->getBasketSession();
- * Pi::api('basket', 'shop')->updateBasket($id, $number);
+ * Pi::api('basket', 'shop')->updateBasket($type, $value, $number);
  * Pi::api('basket', 'shop')->emptyBasket();
  * Pi::api('basket', 'shop')->removeProduct($id);
  * Pi::api('basket', 'shop')->basketBlockNumber();
@@ -62,6 +60,7 @@ class Basket extends AbstractApi
             // Set data
             $data = array();
             $data['time'] = time();
+            $data['promotion'] = '';
             $data['product'][$id] = $product;
             // Set basket
             $basket = Pi::model('basket', $this->getModule())->createRow();
@@ -74,6 +73,9 @@ class Basket extends AbstractApi
             $data = json::decode($basket->data, true);
             $data['time'] = time();
             $data['product'][$id] = $product;
+            if (!isset($data['promotion']) || empty($data['promotion'])) {
+                $data['promotion'] = '';
+            }
             // Set basket
             $basket->data = json::encode($data);
             $basket->save();
@@ -101,31 +103,7 @@ class Basket extends AbstractApi
         return $this->canonizeBasket($basket);
     }
 
-    /* public function setBasketSession($id, $number = 1, $properties = array())
-    {
-        $_SESSION['session_order'] = array(
-            'id' => $id,
-            'number' => $number,
-            'properties' => $properties
-        );
-    }
-
-    public function getBasketSession()
-    {
-        if (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
-            $this->setBasket(
-                $_SESSION['session_order']['id'],
-                $_SESSION['session_order']['number'],
-                $_SESSION['session_order']['properties']
-            );
-            unset($_SESSION['session_order']);
-            return $this->getBasket();
-        } else {
-            return '';
-        }
-    } */
-
-    public function updateBasket($id, $number)
+    public function updateBasket($type, $value, $number = '')
     {
         // Get uid
         $uid = Pi::user()->getId();
@@ -141,7 +119,15 @@ class Basket extends AbstractApi
         }
         // Update data
         $data = json::decode($basket->data, true);
-        $data['product'][$id]['number'] = $number;
+        switch ($type) {
+            case 'number':
+                $data['product'][$value]['number'] = $number;
+                break;
+            
+            case 'promotion':
+                $data['promotion'] = $value;
+                break;
+        }
         $basket->data = json::encode($data);
         // Save
         $basket->save();
@@ -287,6 +273,24 @@ class Basket extends AbstractApi
             $total['number'] = $total['number'] + $product['number'];
             $total['total_price'] = $total['total_price'] + $productInfo['total'];
         }
+        // Set promotion
+        if (isset($basket['data']['promotion']) && !empty($basket['data']['promotion'])) {
+            $promotion = Pi::model('promotion', $this->getModule())->find($basket['data']['promotion'], 'code');
+            if (!empty($promotion)) {
+                $promotion = $promotion->toArray();
+                switch ($promotion['type']) {
+                    case 'percent':
+                        $total['discount'] = ($total['total_price'] * $promotion['percent']) / 100;
+                        break;
+
+                    case 'price':
+                        $total['discount'] = $promotion['price'];
+                        break;
+                }
+            }
+        }
+        // Set total price
+        $total['total_price'] = $total['total_price'] - $total['discount'];
         // Set total
         $basket['total'] = array(
             'price' => $total['price'],

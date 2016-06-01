@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-05-30 16:14+0430\n"
+"POT-Creation-Date: 2016-06-01 16:02+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -42,16 +42,15 @@ msgid "Go to basket"
 msgstr "برو به سبد خرید"
 
 #: template/block/category.phtml:116 template/block/product-new.phtml:214
-#: template/block/product-random.phtml:214
-#: template/block/product-sale.phtml:214 template/block/product-tag.phtml:214
+#: template/block/product-random.phtml:214 template/block/product-tag.phtml:214
 msgid "View"
 msgstr "نمایش"
 
 #: template/block/product-new.phtml:227 template/block/product-new.phtml:228
 #: template/block/product-random.phtml:227
-#: template/block/product-random.phtml:228
-#: template/block/product-sale.phtml:227 template/block/product-sale.phtml:228
-#: template/block/product-tag.phtml:227 template/block/product-tag.phtml:228
+#: template/block/product-random.phtml:228 template/block/product-sale.phtml:64
+#: template/block/product-sale.phtml:65 template/block/product-tag.phtml:227
+#: template/block/product-tag.phtml:228
 msgid "More products"
 msgstr "محصولات بیشتر"
 

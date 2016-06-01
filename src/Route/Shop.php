@@ -101,6 +101,8 @@ class Shop extends Standard
                                     $matches['number'] = $parts[4];
                                 }
                             }
+                        } elseif (isset($parts[1]) && $parts[1] == 'promotion') {
+                            $matches['action'] = 'promotion';
                         }
                         break;
 

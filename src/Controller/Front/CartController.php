@@ -16,13 +16,13 @@ namespace Module\Shop\Controller\Front;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Zend\Json\Json;
+use Module\Shop\Form\PromotionCheckForm;
+use Module\Shop\Form\PromotionCheckFilter;
 
 class CartController extends ActionController
 {
     public function indexAction()
     {
-        // Check user is login or not
-        //Pi::service('authentication')->requireLogin();
         // Check order is active or inactive
         if (!$this->config('order_active')) {
             $this->getResponse()->setStatusCode(401);
@@ -32,15 +32,79 @@ class CartController extends ActionController
         }
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
-        // Check basket
-        /* if (empty($basket) || empty($basket['products'])) {
-            $module = $this->params('module');
-            $url = array('', 'module' => $module, 'controller' => 'index');
-            $this->jump($url, __('Your cart are empty.'), 'error');
-        } */
+        // Set promotion form
+        $form = new PromotionCheckForm('promotion');
+        $form->setAttribute('enctype', 'multipart/form-data');
+        $form->setAttribute('action', $this->url('', array('action' => 'promotion')));
+        if (isset($basket['data']['promotion']) && !empty($basket['data']['promotion'])) {
+            $data = array(
+                'code' => $basket['data']['promotion'],
+            );
+            $form->setData($data);
+        }
         // Set view
         $this->view()->setTemplate('checkout-cart');
         $this->view()->assign('basket', $basket);
+        $this->view()->assign('form', $form);
+    }
+
+    public function promotionAction()
+    {
+        // Set template
+        $this->view()->setTemplate(false);
+        // Check post
+        if ($this->request->isPost()) {
+            // Get post
+            $data = $this->request->getPost();
+            // Get basket
+            $basket = Pi::api('basket', 'shop')->getBasket();
+            if (empty($basket)) {
+                $message = __('Your basket is empty');
+                $this->jump(array('action' => 'index'), $message, 'error');
+            } elseif (isset($basket['data']['promotion']) && !empty($basket['data']['promotion'])) {
+                $message = sprintf(__('Your already use %s promotion code'), $basket['data']['promotion']);
+                $this->jump(array('action' => 'index'), $message, 'success');
+            }
+            // Set promotion form and action
+            $form = new PromotionCheckForm('promotion');
+            $form->setAttribute('enctype', 'multipart/form-data');
+            $form->setInputFilter(new PromotionCheckFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Get promotion
+                $where = array(
+                    'code' => _strip($values['code']),
+                    'status' => 1,
+                    'time_publish < ?' => time(),
+                    'time_expire > ?' => time(),
+                );
+                $select = $this->getModel('promotion')->select()->where($where)->limit(1);
+                $promotion = $this->getModel('promotion')->selectWith($select)->current();
+                if (!empty($promotion)) {
+                    $promotion = $promotion->toArray();
+                    // Update basket
+                    Pi::api('basket', 'shop')->updateBasket('promotion', $promotion['code']);
+                    // Update used number
+                    $this->getModel('promotion')->update(
+                        array('used' => $promotion['used'] + 1),
+                        array('id' => $promotion['id'])
+                    );
+                    // jump
+                    $message = __('Promotion code add successfully to your basket');
+                    $this->jump(array('action' => 'index'), $message, 'success');
+                } else {
+                    $message = __('Promotion code is not valid');
+                    $this->jump(array('action' => 'index'), $message, 'error');
+                }
+            } else {
+                $message = __('Promotion code is not valid');
+                $this->jump(array('action' => 'index'), $message, 'error');
+            }
+        } else {
+            $message = __('Promotion code is not valid');
+            $this->jump(array('action' => 'index'), $message, 'error');
+        }
     }
 
     public function addAction()
@@ -78,8 +142,6 @@ class CartController extends ActionController
                 $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
                 return $this->redirect()->toRoute('', $url);
             }
-            //$this->view()->assign('test', $data);
-            //$this->view()->setTemplate('empty');
         } else {
             // Go to cart
             $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
@@ -154,7 +216,7 @@ class CartController extends ActionController
                         }
                         // Update number
                         $newTotal = $newNumber * $price;
-                        Pi::api('basket', 'shop')->updateBasket($product, $newNumber);
+                        Pi::api('basket', 'shop')->updateBasket('number', $product, $newNumber);
                         // Set return
                         $return['message'] = __('Update number');
                         $return['actionNumber'] = $newNumber;
@@ -186,6 +248,13 @@ class CartController extends ActionController
         $order['module_name'] = $this->params('module');
         $order['type_payment'] = $this->config('order_type');
         $order['type_commodity'] = 'product';
+        
+        $order['total_discount'] = $basket['total']['discount'];
+        $order['total_shipping'] = $basket['total']['shipping'];
+        $order['total_packing'] = 0;
+        $order['total_setup'] = 0;
+        $order['total_vat'] = 0;
+        
         // Set products to order
         foreach ($basket['products'] as $product) {
             // Set price
