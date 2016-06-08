@@ -82,7 +82,10 @@ class Basket extends AbstractApi
         }
 
         if ($uid == 0) {
-            $_SESSION['session_order'] = $basket->value;
+            $_SESSION['session_order'] = array(
+                'module' => 'shop',
+                'value' => $basket->value,
+            );
         }
     }
 
@@ -93,8 +96,8 @@ class Basket extends AbstractApi
         // find backet
         if ($uid > 0) {
             $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
-        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
-            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order'], 'value');
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order']) && $_SESSION['session_order']['module'] == 'shop') {
+            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order']['value'], 'value');
         }
         // Check basket
         if (!isset($basket) || empty($basket)) {
@@ -110,8 +113,8 @@ class Basket extends AbstractApi
         // find backet
         if ($uid > 0) {
             $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
-        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
-            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order'], 'value');
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order']) && $_SESSION['session_order']['module'] == 'shop') {
+            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order']['value'], 'value');
         }
         // Check basket
         if (!isset($basket) || empty($basket)) {
@@ -142,9 +145,9 @@ class Basket extends AbstractApi
             Pi::model('basket', $this->getModule())->delete(
                 array('uid' => $uid)
             );
-        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order']) && $_SESSION['session_order']['module'] == 'shop') {
             Pi::model('basket', $this->getModule())->delete(
-                array('value' => $_SESSION['session_order'])
+                array('value' => $_SESSION['session_order']['value'])
             );
         }
     }
@@ -156,8 +159,8 @@ class Basket extends AbstractApi
         // find backet
         if ($uid > 0) {
             $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
-        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
-            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order'], 'value');
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order']) && $_SESSION['session_order']['module'] == 'shop') {
+            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order']['value'], 'value');
         }
         // Check basket
         if (!isset($basket) || empty($basket)) {
@@ -178,8 +181,8 @@ class Basket extends AbstractApi
         // find backet
         if ($uid > 0) {
             $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
-        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
-            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order'], 'value');
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order']) && $_SESSION['session_order']['module'] == 'shop') {
+            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order']['value'], 'value');
         }
         // Check basket
         if (!isset($basket) || empty($basket)) {
@@ -202,8 +205,8 @@ class Basket extends AbstractApi
         // find backet
         if ($uid > 0) {
             $basket = Pi::model('basket', $this->getModule())->find($uid, 'uid');
-        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order'])) {
-            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order'], 'value');
+        } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order']) && $_SESSION['session_order']['module'] == 'shop') {
+            $basket = Pi::model('basket', $this->getModule())->find($_SESSION['session_order']['value'], 'value');
         }
         // Check basket
         if (isset($basket) && !empty($basket)) {
