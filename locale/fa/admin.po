@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-06-01 16:01+0430\n"
+"POT-Creation-Date: 2016-06-13 12:55+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -164,7 +164,7 @@ msgstr "نمایش نظرات"
 msgid "Admin"
 msgstr "بخش مدیر"
 
-#: config/config.php:21 config/page.php:125
+#: config/config.php:21 config/page.php:72 config/page.php:125
 msgid "Json output"
 msgstr "خروجی جیسون"
 
@@ -535,7 +535,7 @@ msgstr "گزارش ها"
 msgid "Tools"
 msgstr "ابزار ها"
 
-#: config/navigation.php:157 config/page.php:72 config/permission.php:88
+#: config/navigation.php:157 config/permission.php:88
 msgid "Json"
 msgstr "جیسون"
 

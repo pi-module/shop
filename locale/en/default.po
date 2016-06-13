@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-05-30 16:15+0430\n"
+"POT-Creation-Date: 2016-06-13 12:55+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -259,7 +259,7 @@ msgstr ""
 #: src/Controller/Admin/ProductController.php:483
 #: src/Controller/Admin/ProductController.php:547
 #: src/Controller/Admin/ProductController.php:656
-#: src/Controller/Front/CartController.php:123
+#: src/Controller/Front/CartController.php:185
 msgid "Please select product"
 msgstr ""
 
@@ -297,6 +297,22 @@ msgstr ""
 msgid "Product prices updated successfully."
 msgstr ""
 
+#: src/Controller/Admin/PromotionController.php:33
+#: src/Controller/Admin/SaleController.php:39
+#, php-format
+msgid "From %s to %s"
+msgstr ""
+
+#: src/Controller/Admin/PromotionController.php:74
+msgid "Promotion data saved successfully."
+msgstr ""
+
+#: src/Controller/Admin/PromotionController.php:93
+#: template/admin/promotion-index.phtml:4
+#: template/admin/promotion-index.phtml:6
+msgid "Add promotion"
+msgstr ""
+
 #: src/Controller/Admin/PropertyController.php:66
 msgid "Order property data saved successfully."
 msgstr ""
@@ -304,11 +320,6 @@ msgstr ""
 #: src/Controller/Admin/PropertyController.php:78
 #: template/admin/property-index.phtml:4 template/admin/property-index.phtml:6
 msgid "Add property"
-msgstr ""
-
-#: src/Controller/Admin/SaleController.php:39
-#, php-format
-msgid "From %s to %s"
 msgstr ""
 
 #: src/Controller/Admin/SaleController.php:82
@@ -353,27 +364,46 @@ msgid "Recent products."
 msgstr ""
 
 #: src/Controller/Front/CartController.php:29
-#: src/Controller/Front/CartController.php:55
+#: src/Controller/Front/CartController.php:119
 msgid "So sorry, At this moment order is inactive"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:67
+#: src/Controller/Front/CartController.php:62
+msgid "Your basket is empty"
+msgstr ""
+
+#: src/Controller/Front/CartController.php:65
+#, php-format
+msgid "Your already use %s promotion code"
+msgstr ""
+
+#: src/Controller/Front/CartController.php:94
+msgid "Promotion code add successfully to your basket"
+msgstr ""
+
+#: src/Controller/Front/CartController.php:97
+#: src/Controller/Front/CartController.php:101
+#: src/Controller/Front/CartController.php:105
+msgid "Promotion code is not valid"
+msgstr ""
+
+#: src/Controller/Front/CartController.php:131
 msgid "The product was not marketable."
 msgstr ""
 
-#: src/Controller/Front/CartController.php:110
+#: src/Controller/Front/CartController.php:172
 msgid "Your cart are empty"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:132
+#: src/Controller/Front/CartController.php:194
 msgid "Selected product removed from your cart"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:159
+#: src/Controller/Front/CartController.php:221
 msgid "Update number"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:165
+#: src/Controller/Front/CartController.php:227
 msgid "You can not set product number to 0"
 msgstr ""
 
@@ -460,14 +490,16 @@ msgstr ""
 #: src/Form/AdminSearchForm.php:39 src/Form/AttachForm.php:55
 #: src/Form/AttributeForm.php:49 src/Form/CategoryForm.php:65
 #: src/Form/DiscountForm.php:47 src/Form/PositionForm.php:47
-#: src/Form/ProductForm.php:61 src/Form/PropertyForm.php:47
-#: src/Form/RelatedForm.php:41 template/admin/attach-add.phtml:63
-#: template/admin/attach-index.phtml:29 template/admin/attribute-index.phtml:57
+#: src/Form/ProductForm.php:61 src/Form/PromotionForm.php:47
+#: src/Form/PropertyForm.php:47 src/Form/RelatedForm.php:41
+#: template/admin/attach-add.phtml:63 template/admin/attach-index.phtml:29
+#: template/admin/attribute-index.phtml:57
 #: template/admin/category-index.phtml:13
 #: template/admin/discount-index.phtml:13
 #: template/admin/position-index.phtml:13 template/admin/product-index.phtml:54
 #: template/admin/product-related.phtml:27
 #: template/admin/product-related.phtml:49
+#: template/admin/promotion-index.phtml:13
 #: template/admin/property-index.phtml:13
 #: template/front/product-angular.phtml:116
 #: template/front/product-angular.phtml:224
@@ -486,8 +518,8 @@ msgstr ""
 #: src/Form/AttachForm.php:81 src/Form/AttributeForm.php:88
 #: src/Form/CategoryForm.php:114 src/Form/DiscountForm.php:98
 #: src/Form/PositionForm.php:73 src/Form/ProductForm.php:121
-#: src/Form/PropertyForm.php:73 src/Form/SaleForm.php:78
-#: template/admin/attach-add.phtml:78
+#: src/Form/PromotionForm.php:131 src/Form/PropertyForm.php:73
+#: src/Form/SaleForm.php:78 template/admin/attach-add.phtml:78
 msgid "Status"
 msgstr ""
 
@@ -502,9 +534,10 @@ msgstr ""
 #: src/Form/AttachForm.php:93 src/Form/AttributeForm.php:197
 #: src/Form/CategoryForm.php:217 src/Form/DiscountForm.php:116
 #: src/Form/PositionForm.php:88 src/Form/ProductAdditionalForm.php:250
-#: src/Form/ProductForm.php:392 src/Form/PropertyForm.php:122
-#: src/Form/QuestionForm.php:86 src/Form/RelatedForm.php:77
-#: src/Form/SaleForm.php:117 src/Form/SitemapForm.php:48
+#: src/Form/ProductForm.php:392 src/Form/PromotionForm.php:149
+#: src/Form/PropertyForm.php:122 src/Form/QuestionForm.php:86
+#: src/Form/RelatedForm.php:77 src/Form/SaleForm.php:117
+#: src/Form/SitemapForm.php:48
 msgid "Submit"
 msgstr ""
 
@@ -579,35 +612,39 @@ msgstr ""
 
 #: src/Form/CategoryForm.php:116 src/Form/DiscountForm.php:100
 #: src/Form/PositionForm.php:75 src/Form/ProductForm.php:123
-#: src/Form/PropertyForm.php:75 src/Form/SaleForm.php:80
-#: template/admin/attach-index.phtml:51 template/admin/category-index.phtml:51
-#: template/admin/product-index.phtml:26 template/admin/product-index.phtml:28
-#: template/admin/product-index.phtml:129 template/admin/sale-index.phtml:52
+#: src/Form/PromotionForm.php:133 src/Form/PropertyForm.php:75
+#: src/Form/SaleForm.php:80 template/admin/attach-index.phtml:51
+#: template/admin/category-index.phtml:51 template/admin/product-index.phtml:26
+#: template/admin/product-index.phtml:28 template/admin/product-index.phtml:129
+#: template/admin/sale-index.phtml:52
 msgid "Published"
 msgstr ""
 
 #: src/Form/CategoryForm.php:117 src/Form/DiscountForm.php:101
 #: src/Form/PositionForm.php:76 src/Form/ProductForm.php:124
-#: src/Form/PropertyForm.php:76 src/Form/SaleForm.php:81
-#: template/admin/attach-index.phtml:52 template/admin/category-index.phtml:52
-#: template/admin/product-index.phtml:29 template/admin/product-index.phtml:31
-#: template/admin/product-index.phtml:130 template/admin/sale-index.phtml:53
+#: src/Form/PromotionForm.php:134 src/Form/PropertyForm.php:76
+#: src/Form/SaleForm.php:81 template/admin/attach-index.phtml:52
+#: template/admin/category-index.phtml:52 template/admin/product-index.phtml:29
+#: template/admin/product-index.phtml:31 template/admin/product-index.phtml:130
+#: template/admin/sale-index.phtml:53
 msgid "Pending review"
 msgstr ""
 
 #: src/Form/CategoryForm.php:118 src/Form/DiscountForm.php:102
 #: src/Form/PositionForm.php:77 src/Form/ProductForm.php:125
-#: src/Form/PropertyForm.php:77 src/Form/SaleForm.php:82
-#: template/admin/category-index.phtml:53 template/admin/product-index.phtml:32
-#: template/admin/product-index.phtml:34 template/admin/sale-index.phtml:54
+#: src/Form/PromotionForm.php:135 src/Form/PropertyForm.php:77
+#: src/Form/SaleForm.php:82 template/admin/category-index.phtml:53
+#: template/admin/product-index.phtml:32 template/admin/product-index.phtml:34
+#: template/admin/sale-index.phtml:54
 msgid "Draft"
 msgstr ""
 
 #: src/Form/CategoryForm.php:119 src/Form/DiscountForm.php:103
 #: src/Form/PositionForm.php:78 src/Form/ProductForm.php:126
-#: src/Form/PropertyForm.php:78 src/Form/SaleForm.php:83
-#: template/admin/category-index.phtml:54 template/admin/product-index.phtml:35
-#: template/admin/product-index.phtml:37 template/admin/sale-index.phtml:55
+#: src/Form/PromotionForm.php:136 src/Form/PropertyForm.php:78
+#: src/Form/SaleForm.php:83 template/admin/category-index.phtml:54
+#: template/admin/product-index.phtml:35 template/admin/product-index.phtml:37
+#: template/admin/sale-index.phtml:55
 msgid "Private"
 msgstr ""
 
@@ -656,13 +693,15 @@ msgid "Discount percent"
 msgstr ""
 
 #: src/Form/DiscountForm.php:89 src/Form/ProductForm.php:321
+#: src/Form/PromotionForm.php:103
 msgid "Number and between 1 to 99"
 msgstr ""
 
 #: src/Form/DiscountForm.php:104 src/Form/PositionForm.php:79
-#: src/Form/ProductForm.php:127 src/Form/PropertyForm.php:79
-#: template/admin/attach-add.phtml:55 template/admin/attribute-index.phtml:72
-#: template/admin/sale-index.phtml:44 template/admin/sale-index.phtml:46
+#: src/Form/ProductForm.php:127 src/Form/PromotionForm.php:137
+#: src/Form/PropertyForm.php:79 template/admin/attach-add.phtml:55
+#: template/admin/attribute-index.phtml:72 template/admin/sale-index.phtml:44
+#: template/admin/sale-index.phtml:46
 msgid "Delete"
 msgstr ""
 
@@ -697,9 +736,12 @@ msgstr ""
 
 #: src/Form/ProductAdditionalForm.php:104
 #: src/Form/ProductAdditionalForm.php:152 src/Form/ProductForm.php:259
+#: src/Form/PromotionForm.php:76 src/Form/PromotionForm.php:88
 #: src/Form/SaleForm.php:66 template/admin/product-index.phtml:56
 #: template/admin/product-update.phtml:12
-#: template/admin/product-update.phtml:16 template/front/checkout-cart.phtml:98
+#: template/admin/product-update.phtml:16
+#: template/admin/promotion-index.phtml:47
+#: template/front/checkout-cart.phtml:98
 #: template/front/product-angular.phtml:223
 #: template/front/product-compare.phtml:86
 #: template/front/product-price.phtml:35 template/front/product-price.phtml:65
@@ -786,17 +828,52 @@ msgstr ""
 msgid "Use `|` as delimiter to separate tag terms"
 msgstr ""
 
+#: src/Form/PromotionCheckForm.php:40
+msgid "Promotion code"
+msgstr ""
+
+#: src/Form/PromotionCheckForm.php:47
+msgid "Input promotion code"
+msgstr ""
+
+#: src/Form/PromotionCheckForm.php:55
+msgid "Proceeding code"
+msgstr ""
+
+#: src/Form/PromotionForm.php:59 template/admin/promotion-index.phtml:14
+msgid "Code"
+msgstr ""
+
+#: src/Form/PromotionForm.php:72 src/Form/PropertyForm.php:110
+#: template/admin/attach-add.phtml:74 template/admin/attribute-index.phtml:61
+#: template/admin/promotion-index.phtml:16
+msgid "Type"
+msgstr ""
+
+#: src/Form/PromotionForm.php:75 src/Form/PromotionForm.php:99
+#: template/admin/discount-index.phtml:15
+#: template/admin/promotion-index.phtml:43
+msgid "Percent"
+msgstr ""
+
+#: src/Form/PromotionForm.php:92
+msgid "Basket price will be charged"
+msgstr ""
+
+#: src/Form/PromotionForm.php:110
+msgid "Time publish"
+msgstr ""
+
+#: src/Form/PromotionForm.php:120
+msgid "Time expire"
+msgstr ""
+
 #: src/Form/PropertyForm.php:88
 msgid "Influence stock"
 msgstr ""
 
 #: src/Form/PropertyForm.php:99
 msgid "Influence price"
-msgstr ""
-
-#: src/Form/PropertyForm.php:110 template/admin/attach-add.phtml:74
-#: template/admin/attribute-index.phtml:61
-msgid "Type"
 msgstr ""
 
 #: src/Form/PropertyForm.php:112
@@ -985,6 +1062,7 @@ msgstr ""
 #: template/admin/position-index.phtml:12
 #: template/admin/product-related.phtml:26
 #: template/admin/product-related.phtml:48
+#: template/admin/promotion-index.phtml:12
 #: template/admin/property-index.phtml:12 template/admin/sale-index.phtml:12
 msgid "ID"
 msgstr ""
@@ -1002,6 +1080,7 @@ msgstr ""
 #: template/admin/position-index.phtml:14 template/admin/product-index.phtml:55
 #: template/admin/product-related.phtml:28
 #: template/admin/product-related.phtml:50
+#: template/admin/promotion-index.phtml:18
 #: template/admin/property-index.phtml:14 template/admin/sale-index.phtml:15
 msgid "Action"
 msgstr ""
@@ -1018,6 +1097,8 @@ msgstr ""
 #: template/admin/discount-index.phtml:36
 #: template/admin/position-index.phtml:30
 #: template/admin/position-index.phtml:32
+#: template/admin/promotion-index.phtml:52
+#: template/admin/promotion-index.phtml:54
 #: template/admin/property-index.phtml:30
 #: template/admin/property-index.phtml:32 template/admin/sale-index.phtml:41
 #: template/admin/sale-index.phtml:43
@@ -1128,10 +1209,6 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
-#: template/admin/discount-index.phtml:15
-msgid "Percent"
-msgstr ""
-
 #: template/admin/json-index.phtml:3
 msgid "List of json output links"
 msgstr ""
@@ -1148,8 +1225,8 @@ msgstr ""
 msgid "Ip"
 msgstr ""
 
-#: template/admin/log-index.phtml:9 template/admin/sale-index.phtml:14
-#: template/front/product-angular.phtml:219
+#: template/admin/log-index.phtml:9 template/admin/promotion-index.phtml:17
+#: template/admin/sale-index.phtml:14 template/front/product-angular.phtml:219
 msgid "Time"
 msgstr ""
 
@@ -1233,6 +1310,14 @@ msgstr ""
 msgid "Remove image product in process"
 msgstr ""
 
+#: template/admin/promotion-index.phtml:9
+msgid "List of promotions"
+msgstr ""
+
+#: template/admin/promotion-index.phtml:15
+msgid "Used"
+msgstr ""
+
 #: template/admin/property-index.phtml:9
 msgid "List of properties"
 msgstr ""
@@ -1265,6 +1350,22 @@ msgstr ""
 
 #: template/admin/tools-index.phtml:14
 msgid "Manage links on sitemap module"
+msgstr ""
+
+#: template/block/product-sale.phtml:30 template/front/product-price.phtml:7
+msgid "The time remaining until the end of the offer : "
+msgstr ""
+
+#: template/block/product-sale.phtml:38 template/front/product-price.phtml:15
+msgid "hour"
+msgstr ""
+
+#: template/block/product-sale.phtml:39 template/front/product-price.phtml:16
+msgid "minute"
+msgstr ""
+
+#: template/block/product-sale.phtml:40 template/front/product-price.phtml:17
+msgid "second"
 msgstr ""
 
 #: template/front/attach.phtml:5
@@ -1319,32 +1420,32 @@ msgstr ""
 msgid "Empty cart"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:136
+#: template/front/checkout-cart.phtml:139
 msgid "Pre Invoice"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:139
+#: template/front/checkout-cart.phtml:142
 msgid "Total Price"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:140
+#: template/front/checkout-cart.phtml:143
 msgid "Total Discount"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:141
+#: template/front/checkout-cart.phtml:144
 msgid "Total Number"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:142
+#: template/front/checkout-cart.phtml:145
 msgid "Total Shipping"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:143
+#: template/front/checkout-cart.phtml:146
 msgid "Final Price"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:148
-#: template/front/checkout-cart.phtml:149
+#: template/front/checkout-cart.phtml:151
+#: template/front/checkout-cart.phtml:152
 msgid "Next"
 msgstr ""
 
@@ -1422,22 +1523,6 @@ msgstr ""
 
 #: template/front/product-order.phtml:80
 msgid "Add to cart"
-msgstr ""
-
-#: template/front/product-price.phtml:7
-msgid "The time remaining until the end of the offer : "
-msgstr ""
-
-#: template/front/product-price.phtml:15
-msgid "hour"
-msgstr ""
-
-#: template/front/product-price.phtml:16
-msgid "minute"
-msgstr ""
-
-#: template/front/product-price.phtml:17
-msgid "second"
 msgstr ""
 
 #: template/front/product-price.phtml:43 template/front/product-price.phtml:73
