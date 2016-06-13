@@ -69,7 +69,7 @@ return array(
             'permission' => 'tools',
         ),
         array(
-            'title' => _a('Json'),
+            'title' => _a('Json output'),
             'controller' => 'json',
             'permission' => 'json',
         ),
@@ -125,7 +125,7 @@ return array(
             'label' => _a('Json output'),
             'controller' => 'json',
             'permission' => 'public',
-            'block' => 1,
+            'block' => 0,
         ),
     ),
 );
