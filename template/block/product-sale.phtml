@@ -22,11 +22,8 @@
                             <?php echo $this->escape($product['title']); ?>
                         </a>
                     </h4>
-                    <div class="e-description clearfix" itemprop="description">
-                        <?php echo $product['text_summary']; ?>
-                    </div>
-                    <div class="clearfix">
-                        <ul class="list-unstyled bg-danger product-countdown">
+                    <div class="clearfix alert alert-danger">
+                        <ul class="list-inline product-countdown">
                             <li><?php _e('The time remaining until the end of the offer : '); ?></li>
                             <li><div class="product-countdown-timer-<?php echo $this->escape($product['id']); ?>"></div></li>
                         </ul>
@@ -40,15 +37,18 @@
                                 + '<span>%S</span> <?php _e('second'); ?>'));
                         });
                     </script>
+                    <div class="e-description clearfix" itemprop="description">
+                        <?php echo $product['text_summary']; ?>
+                    </div>
                     <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
                         <?php if ($product['stock_type'] == 1 || $product['stock_type'] == 5) { ?>
                             <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
+                                <div class="productPrice p-price text-right" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
                                     <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
                                     <?php if ($product['price_discount'] && ($product['price_discount'] > $product['price'])) { ?>
                                         <del class="text-danger"><?php echo $this->escape($product['price_discount_view']); ?></del>
                                     <?php } ?>
-                                    <?php echo $this->escape($product['price_view']); ?>
+                                    <a class="btn btn-success" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['price_view']); ?></a>
                                 </div>
                             </div>
                         <?php } else {?>

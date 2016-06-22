@@ -43,12 +43,12 @@ class SaleForm extends BaseForm
         ));
         // product
         if ($this->option['type'] == 'add') {
-            $this->add(array(
+            /* $this->add(array(
                 'name' => 'product',
                 'type' => 'Module\Shop\Form\Element\Product',
                 'options' => array(
                     'label' => __('Product'),
-                    'limit' => 500,
+                    'limit' => 2000,
                     'type' => 'sale',
                 ),
                 'attributes' => array(
@@ -57,6 +57,17 @@ class SaleForm extends BaseForm
                     'multiple' => 0,
                     'required' => true,
                 ),
+            )); */
+            $this->add(array(
+                'name' => 'product',
+                'options' => array(
+                    'label' => __('Product id'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => __('Select product for add to sale'),
+                    'required' => true,
+                )
             ));
         }
         // price

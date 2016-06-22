@@ -50,6 +50,9 @@ class Block
         } else {
             $where = array('status' => 1);
         }
+        if ($block['recommended']) {
+            $where['recommended'] = 1;
+        }
         // Get list of product
         $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
         $rowset = Pi::model('product', $module)->selectWith($select);
@@ -97,6 +100,9 @@ class Block
         } else {
             $where = array('status' => 1);
         }
+        if ($block['recommended']) {
+            $where['recommended'] = 1;
+        }
         // Get list of product
         $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
         $rowset = Pi::model('product', $module)->selectWith($select);
@@ -129,6 +135,9 @@ class Block
             if (!empty($tagId)) {
                 // Set info
                 $where = array('status' => 1, 'id' => $tagId);
+                if ($block['recommended']) {
+                    $where['recommended'] = 1;
+                }
                 $order = array(new Expression('RAND()'));
                 $limit = intval($block['number']);
                 // Get list of product

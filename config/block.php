@@ -32,6 +32,13 @@ return array(
                 'filter' => 'number_int',
                 'value' => 10,
             ),
+            'recommended' => array(
+                'title' => _a('Show just recommended'),
+                'description' => '',
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 0,
+            ),
             'list-type' => array(
                 'title' => _a('Product list type'),
                 'description' => '',
@@ -102,6 +109,13 @@ return array(
                 'filter' => 'number_int',
                 'value' => 10,
             ),
+            'recommended' => array(
+                'title' => _a('Show just recommended'),
+                'description' => '',
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 0,
+            ),
             'list-type' => array(
                 'title' => _a('Product list type'),
                 'description' => '',
@@ -171,6 +185,13 @@ return array(
                 'edit' => 'text',
                 'filter' => 'number_int',
                 'value' => 10,
+            ),
+            'recommended' => array(
+                'title' => _a('Show just recommended'),
+                'description' => '',
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 0,
             ),
             'list-type' => array(
                 'title' => _a('Product list type'),
