@@ -43,44 +43,66 @@ class SaleForm extends BaseForm
         ));
         // product
         if ($this->option['type'] == 'add') {
-            /* $this->add(array(
-                'name' => 'product',
-                'type' => 'Module\Shop\Form\Element\Product',
-                'options' => array(
-                    'label' => __('Product'),
-                    'limit' => 2000,
-                    'type' => 'sale',
-                ),
-                'attributes' => array(
-                    'description' => __('Select product for add to sale'),
-                    'size' => 1,
-                    'multiple' => 0,
-                    'required' => true,
-                ),
-            )); */
-            $this->add(array(
-                'name' => 'product',
-                'options' => array(
-                    'label' => __('Product id'),
-                ),
-                'attributes' => array(
-                    'type' => 'text',
-                    'description' => __('Select product for add to sale'),
-                    'required' => true,
-                )
-            ));
+            switch ($this->option['part']) {
+                case 'product':
+                    $this->add(array(
+                        'name' => 'product',
+                        'options' => array(
+                            'label' => __('Product id'),
+                        ),
+                        'attributes' => array(
+                            'type' => 'text',
+                            'description' => __('Select product for add to sale'),
+                            'required' => true,
+                        )
+                    ));
+                    break;
+
+                case 'category':
+                    $this->add(array(
+                        'name' => 'category',
+                        'options' => array(
+                            'label' => __('Category id'),
+                        ),
+                        'attributes' => array(
+                            'type' => 'text',
+                            'description' => __('Select category for add to sale'),
+                            'required' => true,
+                        )
+                    ));
+                    break;
+            }
         }
-        // price
-        $this->add(array(
-            'name' => 'price',
-            'options' => array(
-                'label' => __('Price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => __('Real price'),
-            )
-        ));
+        // Check part
+        switch ($this->option['part']) {
+            case 'product':
+                // price
+                $this->add(array(
+                    'name' => 'price',
+                    'options' => array(
+                        'label' => __('Price'),
+                    ),
+                    'attributes' => array(
+                        'type' => 'text',
+                        'description' => __('Real price'),
+                    )
+                ));
+                break;
+
+            case 'category':
+                // percent
+                $this->add(array(
+                    'name' => 'percent',
+                    'options' => array(
+                        'label' => __('Percent'),
+                    ),
+                    'attributes' => array(
+                        'type' => 'text',
+                        'description' => __('Discount percent'),
+                    )
+                ));
+                break;
+        }
         // status
         $this->add(array(
             'name' => 'status',

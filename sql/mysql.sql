@@ -232,15 +232,20 @@ CREATE TABLE `{discount}` (
 );
 
 CREATE TABLE `{sale}` (
-  `id`           INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
-  `product`      INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `price`        DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
-  `time_publish` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `time_expire`  INT(10) UNSIGNED    NOT NULL DEFAULT '0',
-  `status`       TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+  `id`           INT(10) UNSIGNED             NOT NULL AUTO_INCREMENT,
+  `type`         ENUM ('product', 'category') NOT NULL DEFAULT 'product',
+  `product`      INT(10) UNSIGNED             NOT NULL DEFAULT '0',
+  `category`     INT(10) UNSIGNED             NOT NULL DEFAULT '0',
+  `percent`      TINYINT(3) UNSIGNED          NOT NULL DEFAULT '0',
+  `price`        DECIMAL(16, 2)               NOT NULL DEFAULT '0.00',
+  `time_publish` INT(10) UNSIGNED             NOT NULL DEFAULT '0',
+  `time_expire`  INT(10) UNSIGNED             NOT NULL DEFAULT '0',
+  `status`       TINYINT(1) UNSIGNED          NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  KEY `sale_select` (`status`, `time_publish`, `time_expire`),
+  KEY `sale_select` (`status`, `type`, `time_publish`, `time_expire`),
   KEY `product` (`product`),
+  KEY `category` (`category`),
+  KEY `type` (`type`),
   KEY `time_publish` (`time_publish`),
   KEY `status` (`status`)
 );

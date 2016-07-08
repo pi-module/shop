@@ -27,32 +27,75 @@ class SaleFilter extends InputFilter
         ));
         // product
         if ($option['type'] == 'add') {
-            $this->add(array(
-                'name' => 'product',
-                'required' => true,
-                'filters' => array(
-                    array(
-                        'name' => 'StringTrim',
-                    ),
-                ),
-                'validators' => array(
-                    new \Module\Shop\Validator\SaleDuplicate(array(
-                        'module' => Pi::service('module')->current(),
-                        'table' => 'sale',
-                    )),
-                ),
-            ));
+            switch ($option['part']) {
+                case 'product':
+                    $this->add(array(
+                        'name' => 'product',
+                        'required' => true,
+                        'filters' => array(
+                            array(
+                                'name' => 'StringTrim',
+                            ),
+                        ),
+                        'validators' => array(
+                            new \Module\Shop\Validator\SaleDuplicate(array(
+                                'module' => Pi::service('module')->current(),
+                                'table' => 'sale',
+                                'type' => 'product',
+                            )),
+                        ),
+                    ));
+                    break;
+
+                case 'category':
+                    $this->add(array(
+                        'name' => 'category',
+                        'required' => true,
+                        'filters' => array(
+                            array(
+                                'name' => 'StringTrim',
+                            ),
+                        ),
+                        'validators' => array(
+                            new \Module\Shop\Validator\SaleDuplicate(array(
+                                'module' => Pi::service('module')->current(),
+                                'table' => 'sale',
+                                'type' => 'category',
+                            )),
+                        ),
+                    ));
+                    break;
+            }
         }
-        // price
-        $this->add(array(
-            'name' => 'price',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
+
+        // Check part
+        switch ($option['part']) {
+            case 'product':
+                // price
+                $this->add(array(
+                    'name' => 'price',
+                    'required' => false,
+                    'filters' => array(
+                        array(
+                            'name' => 'StringTrim',
+                        ),
+                    ),
+                ));
+                break;
+
+            case 'category':
+                // percent
+                $this->add(array(
+                    'name' => 'percent',
+                    'required' => false,
+                    'filters' => array(
+                        array(
+                            'name' => 'StringTrim',
+                        ),
+                    ),
+                ));
+                break;
+        }
         // time_publish
         $this->add(array(
             'name' => 'time_publish',

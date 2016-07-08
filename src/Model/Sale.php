@@ -21,7 +21,10 @@ class Sale extends Model
      */
     protected $columns = array(
         'id', 
-        'product', 
+        'type',
+        'product',
+        'category',
+        'percent',
         'price', 
         'time_publish', 
         'time_expire', 

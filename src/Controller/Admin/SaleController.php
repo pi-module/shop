@@ -51,9 +51,11 @@ class SaleController extends ActionController
     {
         // Get id
         $id = $this->params('id');
+        $part = $this->params('part');
         // Set option
         $option = array();
         $option['type'] = $id ? 'edit' : 'add';
+        $option['part'] = $part;
         // Set form
         $form = new SaleForm('sale', $option);
         if ($this->request->isPost()) {
@@ -69,6 +71,7 @@ class SaleController extends ActionController
                 if (!empty($values['id'])) {
                     $row = $this->getModel('sale')->find($values['id']);
                 } else {
+                    $values['part'] = $part;
                     $row = $this->getModel('sale')->createRow();
                 }
                 $row->assign($values);
@@ -87,7 +90,6 @@ class SaleController extends ActionController
                 $values = $this->getModel('sale')->find($id)->toArray();
                 $values['time_publish'] = date("Y-m-d H:i:s", $values['time_publish']);
                 $values['time_expire'] = date("Y-m-d H:i:s", $values['time_expire']);
-
             } else {
                 $values = array();
                 $values['time_publish'] = date("Y-m-d H:i:s", time());

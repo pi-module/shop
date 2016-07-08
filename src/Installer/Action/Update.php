@@ -64,6 +64,11 @@ class Update extends BasicUpdate
         $discountTable = $discountModel->getTable();
         $discountAdapter = $discountModel->getAdapter();
 
+        // Set sale model
+        $saleModel = Pi::model('sale', $this->module);
+        $saleTable = $saleModel->getTable();
+        $saleAdapter = $saleModel->getAdapter();
+
         // Update to version 0.3.0
         if (version_compare($moduleVersion, '0.3.0', '<')) {
             // Alter table field `type`
@@ -688,6 +693,47 @@ EOD;
             $sql = sprintf("ALTER TABLE %s ADD `display_type` ENUM ('product', 'subcategory') NOT NULL DEFAULT 'product'", $categoryTable);
             try {
                 $categoryAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
+        if (version_compare($moduleVersion, '1.4.8', '<')) {
+            // Alter table field `type`
+            $sql = sprintf("ALTER TABLE %s ADD `type` ENUM ('product', 'category') NOT NULL DEFAULT 'product'", $saleTable);
+            try {
+                $saleAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Alter table field `category`
+            $sql = sprintf("ALTER TABLE %s ADD `category` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $saleTable);
+            try {
+                $saleAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+
+            // Alter table field `percent`
+            $sql = sprintf("ALTER TABLE %s ADD `percent` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0'", $saleTable);
+            try {
+                $saleAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
                     'status' => false,

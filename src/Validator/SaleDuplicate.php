@@ -28,7 +28,7 @@ class SaleDuplicate extends AbstractValidator
     );
 
     protected $options = array(
-        'module', 'table'
+        'module', 'table', 'type'
     );
 
     /**
@@ -42,7 +42,15 @@ class SaleDuplicate extends AbstractValidator
     {
         $this->setValue($value);
         if (null !== $value) {
-            $where = array('product' => $value);
+            switch ($this->options['type']) {
+                case 'product';
+                    $where = array('product' => $value);
+                    break;
+
+                case 'category';
+                    $where = array('category' => $value);
+                    break;
+            }
             if (!empty($context['id'])) {
                 $where['id <> ?'] = $context['id'];
             }
