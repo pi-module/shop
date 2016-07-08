@@ -683,6 +683,21 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.4.7', '<')) {
+            // Alter table field `type`
+            $sql = sprintf("ALTER TABLE %s ADD `display_type` ENUM ('product', 'subcategory') NOT NULL DEFAULT 'product'", $categoryTable);
+            try {
+                $categoryAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }

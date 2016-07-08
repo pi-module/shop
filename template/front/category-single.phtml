@@ -1,0 +1,67 @@
+<?php
+$this->css($this->assetModule('css/front.css'));
+// Set Open Graph tags for meta
+$this->doctype('HTML5');
+$this->headMeta($this->escape($category['title']), 'og:title', 'property');
+$this->headMeta($this->escape($category['categoryUrl']), 'og:url', 'property');
+if (isset($category['text_summary']) && !empty($category['text_summary'])) {
+    $this->headMeta(_strip($category['text_summary']), 'og:description', 'property');
+}
+if (!empty($category['largeUrl'])) {
+    $this->headMeta($this->escape($category['largeUrl']), 'og:image', 'property');
+}
+// Set twitter for meta
+$this->headMeta($this->escape($category['title']), 'og:title', 'property');
+if (isset($category['text_summary']) && !empty($category['text_summary'])) {
+    $this->headMeta($this->escape($category['text_summary']), 'twitter:description');
+}
+if (isset($category['largeUrl']) && !empty($category['largeUrl'])) {
+    $this->headMeta($this->escape($category['largeUrl']), 'twitter:image');
+}
+?>
+<div class="clearfix">
+    <div itemscope itemtype="https://schema.org/Brand">
+        <?php if (!empty($category['largeUrl'])) { ?>
+            <div class="category-width-description">
+                <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
+                <?php if (!empty($category['text_summary'])) { ?>
+                    <div class="clearfix"><?php echo $category['text_summary']; ?></div>
+                <?php } ?>
+            </div>
+            <div class="category-width-image">
+                <img class="img-responsive" itemprop="image" src="<?php echo $this->escape($category['largeUrl']); ?>"
+                     alt="<?php echo $this->escape($category['title']); ?>">
+            </div>
+        <?php } else { ?>
+            <div class="page-header">
+                <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
+            </div>
+        <?php } ?>
+        <?php if (!empty($category['text_summary'])) { ?>
+            <div class="e-description clearfix well" itemprop="description"><?php echo $category['text_summary']; ?></div>
+        <?php } ?>
+    </div>
+    <div class="clearfix">
+        <h2><?php _e('List of sub categories'); ?></h2>
+        <div class="category-list row">
+            <?php foreach ($list as $categorySingle) { ?>
+                <div class="category-single" itemscope itemtype="https://schema.org/Brand">
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <a itemprop="url" title="<?php echo $this->escape($categorySingle['title']); ?>" href="<?php echo $this->escape($categorySingle['categoryUrl']); ?>">
+                                <img class="img-responsive" itemprop="image" src="<?php echo $categorySingle['mediumUrl']; ?>" alt="<?php echo $this->escape($categorySingle['title']); ?>">
+                            </a>
+                            <div class="caption">
+                                <h3 class="p-name" itemprop="name">
+                                    <a itemprop="url" title="<?php echo $this->escape($categorySingle['title']); ?>" href="<?php echo $this->escape($categorySingle['categoryUrl']); ?>">
+                                        <?php echo $this->escape($categorySingle['title']); ?>
+                                    </a>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>

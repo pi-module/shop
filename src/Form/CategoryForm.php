@@ -119,6 +119,21 @@ class CategoryForm extends BaseForm
                 'required' => false,
             )
         ));
+        // display_type
+        $this->add(array(
+            'name' => 'display_type',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Display type'),
+                'value_options' => array(
+                    'product' => __('List of products'),
+                    'subcategory' => __('List of sub category'),
+                ),
+            ),
+            'attributes' => array(
+                'required' => true,
+            )
+        ));
         // status
         $this->add(array(
             'name' => 'status',

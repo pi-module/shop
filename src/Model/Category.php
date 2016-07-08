@@ -34,7 +34,8 @@ class Category extends Model
         'time_create', 
         'time_update',
         'setting',
-        'status', 
-        'display_order'
+        'status',
+        'display_order',
+        'display_type'
     );
 }
