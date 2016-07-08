@@ -82,6 +82,19 @@ class CategoryForm extends BaseForm
 
             )
         ));
+        // text_summary
+        $this->add(array(
+            'name' => 'text_summary',
+            'options' => array(
+                'label' => __('Summary'),
+            ),
+            'attributes' => array(
+                'type' => 'textarea',
+                'rows' => '5',
+                'cols' => '40',
+                'description' => __('Keep summery short, 2 or 3 lines'),
+            )
+        ));
         // text_description
         $this->add(array(
             'name' => 'text_description',

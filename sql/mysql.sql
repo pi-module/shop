@@ -52,6 +52,7 @@ CREATE TABLE `{category}` (
   `slug`             VARCHAR(255)        NOT NULL DEFAULT '',
   `image`            VARCHAR(255)        NOT NULL DEFAULT '',
   `path`             VARCHAR(16)         NOT NULL DEFAULT '',
+  `text_summary`     TEXT,
   `text_description` TEXT,
   `seo_title`        VARCHAR(255)        NOT NULL DEFAULT '',
   `seo_keywords`     VARCHAR(255)        NOT NULL DEFAULT '',

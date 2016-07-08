@@ -106,6 +106,9 @@ switch ($config['view_column']) {
     <div class="ajax-spinner">
         <img src="<?php echo $this->assetModule('image/spinner.gif'); ?>" class="ajax-spinner-loader"/>
     </div>
+    <div class="col-sm-12 col-md-12">
+        <?php include $this->template('front/category'); ?>
+    </div>
     <div class="col-sm-12 col-md-3">
         <div class="shop-search-form clearfix">
             <div class="page-header">
@@ -171,7 +174,6 @@ switch ($config['view_column']) {
         </div>
     </div>
     <div class="col-sm-12 col-md-9" ng-controller="listdata">
-        <?php include $this->template('front/category'); ?>
         <?php include $this->template('front/product-list-sale'); ?>
         <div class="product-compare-list hide">
             <div class="clearfix">

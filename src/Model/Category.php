@@ -20,8 +20,21 @@ class Category extends Model
      * {@inheritDoc}
      */
     protected $columns = array(
-        'id', 'parent', 'title', 'slug', 'image', 'path', 'text_description',
-        'seo_title', 'seo_keywords', 'seo_description', 'time_create', 'time_update',
-        'setting', 'status', 'display_order'
+        'id',
+        'parent',
+        'title', 
+        'slug', 
+        'image', 
+        'path',
+        'text_summary',
+        'text_description',
+        'seo_title', 
+        'seo_keywords', 
+        'seo_description', 
+        'time_create', 
+        'time_update',
+        'setting',
+        'status', 
+        'display_order'
     );
 }

@@ -56,6 +56,16 @@ class CategoryFilter extends InputFilter
                 )),
             ),
         ));
+        // text_summary
+        $this->add(array(
+            'name' => 'text_summary',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // text_description
         $this->add(array(
             'name' => 'text_description',
