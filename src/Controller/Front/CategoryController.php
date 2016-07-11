@@ -41,7 +41,7 @@ class CategoryController extends IndexController
         $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
         // Check display type
         switch ($category['display_type']) {
-            case 'video':
+            case 'product':
                 // Set filter url
                 $filterUrl = Pi::url($this->url('', array(
                     'controller' => 'json',

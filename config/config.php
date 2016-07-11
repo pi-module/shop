@@ -286,7 +286,7 @@ return array(
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
-            'value' => 900
+            'value' => 1200
         ),
         'image_largew' => array(
             'category' => 'image',
@@ -294,7 +294,7 @@ return array(
             'description' => '',
             'edit' => 'text',
             'filter' => 'number_int',
-            'value' => 900
+            'value' => 1200
         ),
         'image_mediumh' => array(
             'category' => 'image',
