@@ -9,7 +9,7 @@
                            href="<?php echo $this->escape($product['productUrl']); ?>">
                             <img itemprop="image" class="img-responsive u-photo" src="<?php echo $product['thumbUrl']; ?>"
                                  alt="<?php echo $this->escape($product['title']); ?>"/>
-                            <?php if ($product['ribbon']) { ?>
+                            <?php if ($block['show-ribbon'] && $product['ribbon']) { ?>
                                 <p><span><?php echo $this->escape($product['ribbon']); ?></span></p>
                             <?php } ?>
                         </a>

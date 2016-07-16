@@ -1,15 +1,36 @@
+<?php switch ($block['column']) {
+    case 1:
+        $shopBoxSize = 'col-xs-12 col-sm-12 col-md-12';
+        break;
+
+    case 2:
+        $shopBoxSize = 'col-xs-12 col-sm-6 col-md-6';
+        break;
+
+    case 3:
+        $shopBoxSize = 'col-xs-12 col-sm-4 col-md-4';
+        break;
+
+    case 4:
+        $shopBoxSize = 'col-xs-12 col-sm-3 col-md-3';
+        break;
+
+    case 5:
+        $shopBoxSize = 'col-xs-12 col-sm-2 col-md-2';
+        break;
+} ?>
 <div class="shop-block">
     <div class="shop-block-product clearfix">
         <?php if ($block['list-type'] == 'horizontal') { ?>
             <?php foreach ($block['resources'] as $product) { ?>
-                <div class="col-sm-6 col-md-4 productBox h-product" itemscope itemtype="http://schema.org/Product">
+                <div class="<?php echo $shopBoxSize; ?> productBox h-product" itemscope itemtype="http://schema.org/Product">
                     <div class="thumbnail">
                         <?php if ($product['image']) { ?>
                             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>" title="<?php echo $this->escape($product['title']); ?>"
                                href="<?php echo $this->escape($product['productUrl']); ?>">
                                 <img itemprop="image" class="img-responsive u-photo" src="<?php echo $product['thumbUrl']; ?>"
                                      alt="<?php echo $this->escape($product['title']); ?>"/>
-                                <?php if ($product['ribbon']) { ?>
+                                <?php if ($block['show-ribbon'] && $product['ribbon']) { ?>
                                     <p><span><?php echo $this->escape($product['ribbon']); ?></span></p>
                                 <?php } ?>
                             </a>
@@ -49,7 +70,7 @@
                                href="<?php echo $this->escape($product['productUrl']); ?>">
                                 <img itemprop="image" class="img-responsive u-photo" src="<?php echo $product['thumbUrl']; ?>"
                                      alt="<?php echo $this->escape($product['title']); ?>"/>
-                                <?php if ($product['ribbon']) { ?>
+                                <?php if ($block['show-ribbon'] && $product['ribbon']) { ?>
                                     <p><span><?php echo $this->escape($product['ribbon']); ?></span></p>
                                 <?php } ?>
                             </a>
@@ -98,7 +119,7 @@
                         <?php if($product['image']) { ?>
                             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>" title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>">
                                 <img itemprop="image" class="img-responsive u-photo" src="<?php echo $img; ?>" alt="<?php echo $this->escape($product['title']); ?>" />
-                                <?php if ($product['ribbon']) { ?>
+                                <?php if ($block['show-ribbon'] && $product['ribbon']) { ?>
                                     <p><span><?php echo $this->escape($product['ribbon']); ?></span></p>
                                 <?php } ?>
                             </a>
@@ -160,7 +181,7 @@
                                     <img itemprop="image" class="img-responsive u-photo"
                                          src="<?php echo $this->escape($product['mediumUrl']); ?>"
                                          alt="<?php echo $this->escape($product['title']); ?>"/>
-                                    <?php /* if ($product['ribbon']) { ?>
+                                    <?php /* if ($block['show-ribbon'] && $product['ribbon']) { ?>
                                         <p><span><?php echo $this->escape($product['ribbon']); ?></span></p>
                                     <?php } */ ?>
                                 </a>
