@@ -1,29 +1,29 @@
 <?php switch ($block['column']) {
     case 1:
-        $shopBoxSize = 'col-xs-12 col-sm-12 col-md-12';
+        $shopBlockBoxSize = 'col-xs-12 col-sm-12 col-md-12';
         break;
 
     case 2:
-        $shopBoxSize = 'col-xs-12 col-sm-6 col-md-6';
+        $shopBlockBoxSize = 'col-xs-12 col-sm-6 col-md-6';
         break;
 
     case 3:
-        $shopBoxSize = 'col-xs-12 col-sm-4 col-md-4';
+        $shopBlockBoxSize = 'col-xs-12 col-sm-4 col-md-4';
         break;
 
     case 4:
-        $shopBoxSize = 'col-xs-12 col-sm-3 col-md-3';
+        $shopBlockBoxSize = 'col-xs-12 col-sm-3 col-md-3';
         break;
 
     case 5:
-        $shopBoxSize = 'col-xs-12 col-sm-2 col-md-2';
+        $shopBlockBoxSize = 'col-xs-12 col-sm-2 col-md-2';
         break;
 } ?>
 <div class="shop-block">
     <div class="shop-block-random clearfix">
         <?php if ($block['list-type'] == 'horizontal') { ?>
             <?php foreach ($block['resources'] as $product) { ?>
-                <div class="<?php echo $shopBoxSize; ?> productBox h-product" itemscope itemtype="http://schema.org/Product">
+                <div class="<?php echo $shopBlockBoxSize; ?> productBox h-product" itemscope itemtype="http://schema.org/Product">
                     <div class="thumbnail">
                         <?php if ($product['image']) { ?>
                             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>" title="<?php echo $this->escape($product['title']); ?>"

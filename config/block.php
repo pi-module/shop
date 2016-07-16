@@ -75,7 +75,6 @@ return array(
                 ),
                 'filter' => 'text',
                 'value' => 3,
-                'category' => 'view',
             ),
             'show-ribbon' => array(
                 'title' => _a('Show ribbon'),
@@ -178,7 +177,6 @@ return array(
                 ),
                 'filter' => 'text',
                 'value' => 3,
-                'category' => 'view',
             ),
             'show-ribbon' => array(
                 'title' => _a('Show ribbon'),
@@ -281,7 +279,6 @@ return array(
                 ),
                 'filter' => 'text',
                 'value' => 3,
-                'category' => 'view',
             ),
             'show-ribbon' => array(
                 'title' => _a('Show ribbon'),
