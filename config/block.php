@@ -58,6 +58,31 @@ return array(
                 'filter' => 'text',
                 'value' => 'horizontal',
             ),
+            'column' => array(
+                'title' => _a('Columns'),
+                'description' => '',
+                'edit' => array(
+                    'type' => 'select',
+                    'options' => array(
+                        'options' => array(
+                            1 => _a('One columns'),
+                            2 => _a('Two columns'),
+                            3 => _a('Three columns'),
+                            4 => _a('Four columns'),
+                            6 => _a('Six columns'),
+                        ),
+                    ),
+                ),
+                'filter' => 'text',
+                'value' => 3,
+            ),
+            'show-ribbon' => array(
+                'title' => _a('Show ribbon'),
+                'description' => '',
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 1,
+            ),
             'show-price' => array(
                 'title' => _a('Show price'),
                 'description' => '',
@@ -134,6 +159,31 @@ return array(
                 ),
                 'filter' => 'text',
                 'value' => 'horizontal',
+            ),
+            'column' => array(
+                'title' => _a('Columns'),
+                'description' => '',
+                'edit' => array(
+                    'type' => 'select',
+                    'options' => array(
+                        'options' => array(
+                            1 => _a('One columns'),
+                            2 => _a('Two columns'),
+                            3 => _a('Three columns'),
+                            4 => _a('Four columns'),
+                            6 => _a('Six columns'),
+                        ),
+                    ),
+                ),
+                'filter' => 'text',
+                'value' => 3,
+            ),
+            'show-ribbon' => array(
+                'title' => _a('Show ribbon'),
+                'description' => '',
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 1,
             ),
             'show-price' => array(
                 'title' => _a('Show price'),
@@ -212,6 +262,31 @@ return array(
                 'filter' => 'text',
                 'value' => 'horizontal',
             ),
+            'column' => array(
+                'title' => _a('Columns'),
+                'description' => '',
+                'edit' => array(
+                    'type' => 'select',
+                    'options' => array(
+                        'options' => array(
+                            1 => _a('One columns'),
+                            2 => _a('Two columns'),
+                            3 => _a('Three columns'),
+                            4 => _a('Four columns'),
+                            6 => _a('Six columns'),
+                        ),
+                    ),
+                ),
+                'filter' => 'text',
+                'value' => 3,
+            ),
+            'show-ribbon' => array(
+                'title' => _a('Show ribbon'),
+                'description' => '',
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 1,
+            ),
             'show-price' => array(
                 'title' => _a('Show price'),
                 'description' => '',
@@ -255,6 +330,13 @@ return array(
                 'edit' => 'text',
                 'filter' => 'number_int',
                 'value' => 10,
+            ),
+            'show-ribbon' => array(
+                'title' => _a('Show ribbon'),
+                'description' => '',
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 1,
             ),
             'show-price' => array(
                 'title' => _a('Show price'),
