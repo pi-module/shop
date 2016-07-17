@@ -46,6 +46,10 @@ return array(
             'name' => 'favourite'
         ),
         array(
+            'title' => _a('Video'),
+            'name' => 'video'
+        ),
+        array(
             'title' => _a('Order'),
             'name' => 'order'
         ),
@@ -421,6 +425,15 @@ return array(
         'favourite_bar' => array(
             'category' => 'favourite',
             'title' => _a('Use favourite system'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        // video
+        'video_service' => array(
+            'category' => 'video',
+            'title' => _a('Use video service'),
             'description' => '',
             'edit' => 'checkbox',
             'filter' => 'number_int',

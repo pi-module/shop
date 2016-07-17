@@ -350,6 +350,7 @@ class ProductController extends ActionController
         $fields = Pi::api('attribute', 'shop')->Get($product['category_main']);
         $option['field'] = $fields['attribute'];
         $option['product_ribbon'] = $config['product_ribbon'];
+        $option['video_service'] = $config['video_service'];
         // Get property
         $property = Pi::api('property', 'shop')->getList();
         $option['property'] = $property;
@@ -385,6 +386,10 @@ class ProductController extends ActionController
                 if (isset($data['property']) && !empty($data['property'])) {
                     Pi::api('property', 'shop')->setValue($data['property'], $row->id);
                 }
+                // Set video
+                if ($config['video_service'] && isset($values['video_list']) && Pi::service('module')->isActive('video')) {
+                    Pi::api('service', 'video')->setVideo($values['video_list'], $module, 'product', $product['id']);
+                }
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('product', $row->id, $operation);
@@ -399,6 +404,13 @@ class ProductController extends ActionController
             $product = Pi::api('attribute', 'shop')->Form($product);
             // Get property Value
             $option['propertyValue'] = Pi::api('property', 'shop')->getValue($product['id']);
+            // Set video
+            if ($config['video_service'] && Pi::service('module')->isActive('video')) {
+                $videos = Pi::api('service', 'video')->getVideo($module, 'product', $product['id'], false);
+                foreach ($videos as $video) {
+                    $product['video_list'] = $video['id'];
+                }
+            }
             // Set form
             $form = new ProductAdditionalForm('product', $option);
             $form->setAttribute('enctype', 'multipart/form-data');

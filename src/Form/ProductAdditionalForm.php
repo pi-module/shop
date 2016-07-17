@@ -25,6 +25,7 @@ class ProductAdditionalForm extends BaseForm
         $this->property = $option['property'];
         $this->propertyValue = $option['propertyValue'];
         $this->product_ribbon = $option['product_ribbon'];
+        $this->video_service = $option['video_service'];
         $this->module = Pi::service('module')->current();
         parent::__construct($name);
     }
@@ -241,6 +242,22 @@ EOT;
                     }
                 }
             }
+        }
+        // Set video service
+        if ($this->video_service && Pi::service('module')->isActive('video')) {
+            $this->add(array(
+                'name' => 'video_list',
+                'type' => 'Module\Video\Form\Element\Service',
+                'options' => array(
+                    'label' => __('Product video'),
+                ),
+                'attributes' => array(
+                    'size' => 1,
+                    'multiple' => 0,
+                    'description' => __('Select related video form video system'),
+                    'required' => false,
+                ),
+            ));
         }
         // Save
         $this->add(array(

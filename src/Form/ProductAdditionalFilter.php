@@ -49,5 +49,17 @@ class ProductAdditionalFilter extends InputFilter
                 }
             }
         }
+        // Set video service
+        if ($option['video_service'] && Pi::service('module')->isActive('video')) {
+            $this->add(array(
+                'name' => 'video_list',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+        }
     }
-}    	
+}

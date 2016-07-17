@@ -88,6 +88,11 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
                     <?php include $this->template('front/tag'); ?>
                 </div>
             </div>
+            <?php if (isset($videoServiceList) && !empty($videoServiceList)) { ?>
+                <div class="productMedia">
+                    <?php include $this->template('video-service.phtml', 'front', 'video'); ?>
+                </div>
+            <?php } ?>
             <div class="productMedia">
                 <?php include $this->template('front/attach-audio'); ?>
                 <?php include $this->template('front/attribute-audio'); ?>

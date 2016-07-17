@@ -384,3 +384,9 @@ a.product-ribbon:hover {
 .category-width-image {
     margin-bottom: 15px;
 }
+
+/* Video service */
+.video-service-list .video-information {
+    margin: 5px 0;
+    padding: 10px 0;
+}

@@ -89,6 +89,11 @@ class ProductController extends IndexController
             $favourite['module'] = $module;
             $this->view()->assign('favourite', $favourite);
         }
+        // Set video service
+        if ($config['video_service'] && Pi::service('module')->isActive('video')) {
+            $videoServiceList = Pi::api('service', 'video')->getVideo($module, 'product', $product['id']);
+            $this->view()->assign('videoServiceList', $videoServiceList);
+        }
         // Set question
         if ($config['view_question']) {
             $question = array();
