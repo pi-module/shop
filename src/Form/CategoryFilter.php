@@ -18,7 +18,7 @@ use Zend\InputFilter\InputFilter;
 
 class CategoryFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option)
     {
         // id
         $this->add(array(
@@ -96,6 +96,45 @@ class CategoryFilter extends InputFilter
             'name' => 'image',
             'required' => false,
         ));
+        // Check is new
+        if ($option['isNew']) {
+            // percent
+            $this->add(array(
+                'name' => 'sale_percent',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+            ));
+            // time_publish
+            $this->add(array(
+                'name' => 'sale_time_publish',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+                'validators' => array(
+                    new \Module\Shop\Validator\TimeSelect,
+                ),
+            ));
+            // time_expire
+            $this->add(array(
+                'name' => 'sale_time_expire',
+                'required' => false,
+                'filters' => array(
+                    array(
+                        'name' => 'StringTrim',
+                    ),
+                ),
+                'validators' => array(
+                    new \Module\Shop\Validator\TimeSelect,
+                ),
+            ));
+        }
         // seo_title
         $this->add(array(
             'name' => 'seo_title',

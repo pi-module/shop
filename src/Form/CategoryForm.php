@@ -22,6 +22,7 @@ class CategoryForm extends BaseForm
 
     public function __construct($name = null, $option = array())
     {
+        $this->option = $option;
         $this->category = array(0 => '');
         $this->thumbUrl = $option['thumbUrl'];
         $this->removeUrl = empty($option['removeUrl']) ? '' : $option['removeUrl'];
@@ -31,7 +32,7 @@ class CategoryForm extends BaseForm
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new CategoryFilter;
+            $this->filter = new CategoryFilter($this->option);
         }
         return $this->filter;
     }
@@ -186,6 +187,50 @@ class CategoryForm extends BaseForm
                 ),
                 'attributes' => array(
                     'type' => 'file',
+                    'description' => '',
+                )
+            ));
+        }
+        // Check is new
+        if ($this->option['isNew']) {
+            // extra
+            $this->add(array(
+                'name' => 'extra_sale',
+                'type' => 'fieldset',
+                'options' => array(
+                    'label' => __('Sale options'),
+                ),
+            ));
+            // sale_percent
+            $this->add(array(
+                'name' => 'sale_percent',
+                'options' => array(
+                    'label' => __('Percent'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => __('Discount percent'),
+                )
+            ));
+            // sale_time_publish
+            $this->add(array(
+                'name' => 'sale_time_publish',
+                'option' => array(
+                    'label' => __('Sale publish time'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
+                    'description' => '',
+                )
+            ));
+            // sale_time_expire
+            $this->add(array(
+                'name' => 'sale_time_expire',
+                'option' => array(
+                    'label' => __('Sale expire time'),
+                ),
+                'attributes' => array(
+                    'type' => 'text',
                     'description' => '',
                 )
             ));

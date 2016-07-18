@@ -86,7 +86,9 @@ class CategoryController extends ActionController
         // Get id
         $id = $this->params('id');
         $module = $this->params('module');
-        $option = array();
+        $option = array(
+            'isNew' => true,
+        );
         // Find category
         if ($id) {
             $category = $this->getModel('category')->find($id)->toArray();
@@ -95,6 +97,7 @@ class CategoryController extends ActionController
                 $option['thumbUrl'] = Pi::url($category['thumbUrl']);
                 $option['removeUrl'] = $this->url('', array('action' => 'remove', 'id' => $category['id']));
             }
+            $option['isNew'] = false;
         }
         // Set form
         $form = new CategoryForm('category', $option);
@@ -107,7 +110,7 @@ class CategoryController extends ActionController
             $filter = new Filter\Slug;
             $data['slug'] = $filter($slug);
             // Form filter
-            $form->setInputFilter(new CategoryFilter);
+            $form->setInputFilter(new CategoryFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
@@ -178,6 +181,18 @@ class CategoryController extends ActionController
                 // Clear registry
                 Pi::registry('categoryList', 'shop')->clear();
                 Pi::registry('categoryRoute', 'shop')->clear();
+                // Set sale
+                if (isset($values['sale_percent']) && intval($values['sale_percent']) > 0) {
+                    $sale = array();
+                    $sale['percent'] = intval($values['sale_percent']);
+                    $sale['time_publish'] = strtotime($values['sale_time_publish']);
+                    $sale['time_expire'] = strtotime($values['sale_time_expire']);
+                    $sale['type'] = 'category';
+                    $sale['status'] = 1;
+                    $row = $this->getModel('sale')->createRow();
+                    $row->assign($sale);
+                    $row->save();
+                }
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('category', $row->id, $operation);
@@ -186,6 +201,11 @@ class CategoryController extends ActionController
             }
         } else {
             if ($id) {
+                $form->setData($category);
+            } else {
+                $category = array();
+                $category['sale_time_publish'] = date("Y-m-d H:i:s", time());
+                $category['sale_time_expire'] = date("Y-m-d H:i:s", strtotime("+1 month"));
                 $form->setData($category);
             }
         }
