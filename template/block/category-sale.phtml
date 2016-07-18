@@ -1,0 +1,47 @@
+<?php if ($block['blockEffect']) {
+    $this->jQuery();
+    $this->js($this->assetModule('js/jquery.countdown.min.js', 'shop'));
+    $this->css($this->assetModule('css/block.css', 'shop'));
+} ?>
+<div class="shop-block">
+    <div class="shop-block-sale-category clearfix">
+        <?php foreach ($block['resources'] as $category) { ?>
+            <div class="category-sale h-category row" itemscope itemtype="http://schema.org/Brand">
+                <div class="col-md-12">
+                    <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                        <img itemprop="logo" class="img-responsive u-photo" src="<?php echo $this->escape($category['largeUrl']); ?>" alt="<?php echo $this->escape($category['title']); ?>">
+                    </a>
+                    <div class="category-sale-information">
+                        <ul class="list-inline category-countdown">
+                            <li class="text-left" itemprop="title"><?php echo $this->escape($category['title']); ?></li>
+                            <li class="text-right"><div class="category-countdown-timer-<?php echo $this->escape($category['id']); ?>"></div></li>
+                        </ul>
+                        <script>
+                            $('.category-countdown-timer-<?php echo $this->escape($category['id']); ?>')
+                                .countdown('<?php echo $this->escape($category['saleInformation']['time_expire_view']); ?>', function(event) {
+                                    $(this).html(
+                                        event.strftime('<ul class="list-inline">'
+                                            + '<li>%D <?php echo _b('days'); ?></li>'
+                                            + '<li><?php echo _b('and'); ?> %H:%M:%S</li></ul>')
+                                    );
+                                });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        <?php
+$script = <<<'EOT'
+    var width = $('.shop-block-sale-category').width();
+    $('.category-sale-information').css({"width":width});
+EOT;
+        $this->footScript()->appendScript($script);
+        ?>
+    </div>
+    <?php if ($block['more-show'] && !empty($block['more-link'])) { ?>
+        <div class="shop-block-more clearfix">
+            <a title="<?php echo _b('More categories'); ?>"
+               href="<?php echo $block['more-link']; ?>"><?php echo _b('More categories'); ?></a>
+        </div>
+    <?php } ?>
+</div>

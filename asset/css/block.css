@@ -122,3 +122,14 @@ a.product-ribbon:hover {
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
 }
+
+/* category sale */
+.category-sale-information {
+    bottom: 0;
+    position: absolute;
+    font-size: 1em;
+    padding: 10px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+}

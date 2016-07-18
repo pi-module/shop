@@ -164,9 +164,18 @@ class Block
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
         $limit = intval($block['number']);
         // Set block array
-        $block['resources'] = Pi::api('sale', 'shop')->getAll($limit);
-        // Load language
-        Pi::service('i18n')->load(array('module/shop', 'default'));
+        $block['resources'] = Pi::api('sale', 'shop')->getAll($limit, 'product');
+        return $block;
+    }
+
+    public function categorySale($options = array(), $module = null)
+    {
+        // Set options
+        $block = array();
+        $block = array_merge($block, $options);
+        $limit = intval($block['number']);
+        // Set block array
+        $block['resources'] = Pi::api('sale', 'shop')->getAll($limit, 'category');
         return $block;
     }
 

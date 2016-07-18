@@ -31,8 +31,8 @@ class IndexController extends ActionController
         // category list
         $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
         // Get sale
-        if ($config['view_sale']) {
-            $saleList = Pi::api('sale', 'shop')->getAll();
+        if ($config['sale_view']) {
+            $saleList = Pi::api('sale', 'shop')->getAll(0, 'product');
             $this->view()->assign('saleList', $saleList);
         }
         // Check homepage type

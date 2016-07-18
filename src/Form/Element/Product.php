@@ -38,8 +38,8 @@ class Product extends Select
             // Check for sale
             if (isset($this->options['type']) && $this->options['type'] == 'sale') {
                 $ids = Pi::api('sale', 'shop')->getInformation('all');
-                if (!empty($ids)) {
-                    $where[] = new Expression('id NOT IN (' . implode(",", $ids) . ')');
+                if (!empty($ids['product'])) {
+                    $where[] = new Expression('id NOT IN (' . implode(",", $ids['product']) . ')');
                 }
             }
             // Select

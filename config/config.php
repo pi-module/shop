@@ -50,6 +50,10 @@ return array(
             'name' => 'video'
         ),
         array(
+            'title' => _a('Sale'),
+            'name' => 'sale',
+        ),
+        array(
             'title' => _a('Order'),
             'name' => 'order'
         ),
@@ -226,22 +230,6 @@ return array(
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
-        ),
-        'view_sale' => array(
-            'category' => 'view',
-            'title' => _a('Show sale'),
-            'description' => '',
-            'edit' => 'checkbox',
-            'filter' => 'number_int',
-            'value' => 1
-        ),
-        'view_sale_number' => array(
-            'category' => 'view',
-            'title' => _a('Number of products on sale'),
-            'description' => '',
-            'edit' => 'text',
-            'filter' => 'number_int',
-            'value' => 6
         ),
         'product_ribbon' => array(
             'category' => 'view',
@@ -438,6 +426,39 @@ return array(
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
+        ),
+        // Sale
+        'sale_view' => array(
+            'category' => 'sale',
+            'title' => _a('Show sale on index page'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'sale_view_number' => array(
+            'category' => 'sale',
+            'title' => _a('Number of products on sale for index page'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 6
+        ),
+        'sale_category' => array(
+            'title' => _a('Sale category status'),
+            'description' => _a('Product status after finish sale on category'),
+            'edit' => array(
+                'type' => 'select',
+                'options' => array(
+                    'options' => array(
+                        'marketable' => _a('Marketable'),
+                        'non-marketable' => _a('Non-marketable'),
+                    ),
+                ),
+            ),
+            'filter' => 'text',
+            'value' => 'marketable',
+            'category' => 'sale',
         ),
         // Order
         'order_active' => array(

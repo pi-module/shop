@@ -76,6 +76,21 @@ class Category extends AbstractApi
         return array_unique($list);
     }
 
+    public function getListFromId($id, $limit = 0)
+    {
+        $list = array();
+        $where = array('id' => $id, 'status' => 1);
+        $select = Pi::model('category', $this->getModule())->select()->where($where);
+        if ($limit > 0) {
+            $select->limit($limit);
+        }
+        $rowset = Pi::model('category', $this->getModule())->selectWith($select);
+        foreach ($rowset as $row) {
+            $list[$row->id] = $this->canonizeCategory($row);
+        }
+        return $list;
+    }
+
     public function categoryList($parent = null)
     {
         // Get config

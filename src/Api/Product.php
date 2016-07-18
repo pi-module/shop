@@ -290,6 +290,14 @@ class Product extends AbstractApi
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+        // Get sale id
+        $saleExpireId = Pi::api('sale', 'shop')->getInformation('expire');
+        // Check sale
+        if (in_array($product['category_main'], $saleExpireId['category'])
+            && $config['sale_category'] == 'non-marketable'
+        ) {
+            return 0;
+        }
         // check
         switch ($config['order_stock']) {
             case 'never':
@@ -357,22 +365,36 @@ class Product extends AbstractApi
         }
 
         // Check sale
-        if (!empty($saleInformation) && in_array($product['id'], $saleInformation['idActive'])) {
-            if ($saleInformation['infoAll'][$product['id']]['time_publish'] < time() && $saleInformation['infoAll'][$product['id']]['time_expire'] > time()) {
+        if (!empty($saleInformation) && in_array($product['id'], $saleInformation['idActive']['product'])) {
+            if ($saleInformation['infoAll']['product'][$product['id']]['time_publish'] < time() && $saleInformation['infoAll']['product'][$product['id']]['time_expire'] > time()) {
                 $userDiscount = array();
-                $saleDiscount = $saleInformation['infoAll'][$product['id']];
+                $saleDiscount = $saleInformation['infoAll']['product'][$product['id']];
             }
+        } elseif (!empty($saleInformation) && in_array($product['category_main'], $saleInformation['idActive']['category'])) {
+            $userDiscount = array();
+            $saleDiscount = $saleInformation['infoAll']['category'][$product['category_main']];
         }
 
         // Make discount price
         if (!empty($userDiscount)) {
             $userDiscount = max($userDiscount);
+            $price = ($product['price'] - ($product['price'] * ($userDiscount / 100)));
+            $price = Pi::api('api', 'order')->makePrice($price);
             $product['price_discount'] = $product['price'];
-            $product['price'] = ($product['price'] - ($product['price'] * ($userDiscount / 100)));
-            $product['price'] = Pi::api('api', 'order')->makePrice($product['price']);
+            $product['price'] = $price;
         } elseif (!empty($saleDiscount)) {
+            switch ($saleDiscount['type']) {
+                case 'product':
+                    $price = Pi::api('api', 'order')->makePrice($saleDiscount['price']);
+                    break;
+
+                case 'category':
+                    $price = ($product['price'] - ($product['price'] * ($saleDiscount['percent'] / 100)));
+                    $price = Pi::api('api', 'order')->makePrice($price);
+                    break;
+            }
             $product['price_discount'] = $product['price'];
-            $product['price'] = $saleDiscount['price'];
+            $product['price'] = $price;
             $product['price_sale'] = 1;
             $product['price_time'] = date("Y-m-d H:i:s", $saleDiscount['time_expire']);
         }
@@ -492,7 +514,8 @@ class Product extends AbstractApi
         }
         // Set ribbon
         $product['ribbon_class'] = '';
-        if (in_array($product['id'], Pi::api('sale', 'shop')->getInformation())) {
+        $saleId = Pi::api('sale', 'shop')->getInformation();
+        if (in_array($product['id'], $saleId['product'])) {
             $product['ribbon'] = __('On sale');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) {
@@ -559,7 +582,8 @@ class Product extends AbstractApi
         }
         // Set ribbon
         $product['ribbon_class'] = '';
-        if (in_array($product['id'], Pi::api('sale', 'shop')->getInformation())) {
+        $saleId = Pi::api('sale', 'shop')->getInformation();
+        if (in_array($product['id'], $saleId['product'])) {
             $product['ribbon'] = __('On sale');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) {
@@ -878,7 +902,8 @@ class Product extends AbstractApi
 
         // Set ribbon
         $product['ribbon_class'] = '';
-        if (in_array($product['id'], Pi::api('sale', 'shop')->getInformation())) {
+        $saleId = Pi::api('sale', 'shop')->getInformation();
+        if (in_array($product['id'], $saleId['product'])) {
             $product['ribbon'] = __('On sale');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) {

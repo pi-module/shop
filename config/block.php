@@ -368,6 +368,43 @@ return array(
             ),
         ),
     ),
+    'category-sale' => array(
+        'name' => 'category-sale',
+        'title' => _a('Sale category'),
+        'description' => _a('Sale category list'),
+        'render' => array('block', 'categorySale'),
+        'template' => 'category-sale',
+        'config' => array(
+            'number' => array(
+                'title' => _a('Number'),
+                'description' => '',
+                'edit' => 'text',
+                'filter' => 'number_int',
+                'value' => 10,
+            ),
+            'blockEffect' => array(
+                'title' => _a('Use block effects'),
+                'description' => _a('Use block effects or set custom effect on theme'),
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 1,
+            ),
+            'more-show' => array(
+                'title' => _a('Show More link to module page'),
+                'description' => '',
+                'edit' => 'checkbox',
+                'filter' => 'number_int',
+                'value' => 0,
+            ),
+            'more-link' => array(
+                'title' => _a('Set More link to module page'),
+                'description' => '',
+                'edit' => 'text',
+                'filter' => 'string',
+                'value' => '',
+            ),
+        ),
+    ),
     'category' => array(
         'name' => 'category',
         'title' => _a('Category'),

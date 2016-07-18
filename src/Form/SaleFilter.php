@@ -67,7 +67,6 @@ class SaleFilter extends InputFilter
                     break;
             }
         }
-
         // Check part
         switch ($option['part']) {
             case 'product':

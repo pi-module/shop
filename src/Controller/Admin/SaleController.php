@@ -24,22 +24,27 @@ class SaleController extends ActionController
         // Set array
         $saleList = array();
         // Get product ides
-        $productId = Pi::api('sale', 'shop')->getInformation('all');
-        if (!empty($productId)) {
+        $saleId = Pi::api('sale', 'shop')->getInformation('all');
+        if (!empty($saleId)) {
             // Get products
-            $productList = Pi::api('product', 'shop')->getListFromIdLight($productId);
+            $productList = Pi::api('product', 'shop')->getListFromIdLight($saleId['product']);
+            $categoryList = Pi::api('category', 'shop')->getListFromId($saleId['category']);
             // Get sale
             $order = array('id DESC', 'time_publish DESC');
             $select = $this->getModel('sale')->select()->order($order);
             $saleSet = $this->getModel('sale')->selectWith($select);
             // Make sale list
             foreach ($saleSet as $sale) {
-                $saleList[$sale->id] = $sale->toArray();
-                $saleList[$sale->id]['productInfo'] = $productList[$sale->product];
-                $saleList[$sale->id]['time'] = sprintf(__('From %s to %s'),
+                $saleList[$sale->type][$sale->id] = $sale->toArray();
+                if ($sale->type == 'product') {
+                    $saleList[$sale->type][$sale->id]['productInfo'] = $productList[$sale->product];
+                } elseif ($sale->type == 'category') {
+                    $saleList[$sale->type][$sale->id]['categoryInfo'] = $categoryList[$sale->category];
+                }
+                $saleList[$sale->type][$sale->id]['time'] = sprintf(__('From %s to %s'),
                     _date($sale->time_publish, array('pattern' => 'yyyy-MM-dd HH:mm')),
                     _date($sale->time_expire, array('pattern' => 'yyyy-MM-dd HH:mm')));
-                $saleList[$sale->id]['isExpire'] = (time() > $sale->time_expire) ? 1 : 0;
+                $saleList[$sale->type][$sale->id]['isExpire'] = (time() > $sale->time_expire) ? 1 : 0;
             }
         }
         // Set view
@@ -71,7 +76,7 @@ class SaleController extends ActionController
                 if (!empty($values['id'])) {
                     $row = $this->getModel('sale')->find($values['id']);
                 } else {
-                    $values['part'] = $part;
+                    $values['type'] = $part;
                     $row = $this->getModel('sale')->createRow();
                 }
                 $row->assign($values);

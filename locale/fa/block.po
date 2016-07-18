@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-06-13 12:55+0430\n"
+"POT-Creation-Date: 2016-07-18 12:04+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -41,18 +41,46 @@ msgstr "سبد خرید شما خالی است"
 msgid "Go to basket"
 msgstr "برو به سبد خرید"
 
-#: template/block/category.phtml:116 template/block/product-new.phtml:214
-#: template/block/product-random.phtml:214 template/block/product-tag.phtml:214
+#: template/block/category-sale.phtml:24
+msgid "days"
+msgstr "روز"
+
+#: template/block/category-sale.phtml:25
+msgid "and"
+msgstr "و"
+
+#: template/block/category-sale.phtml:43 template/block/category-sale.phtml:44
+msgid "More categories"
+msgstr "شاخه های بیشتر"
+
+#: template/block/category.phtml:116 template/block/product-new.phtml:236
+#: template/block/product-random.phtml:235 template/block/product-tag.phtml:235
 msgid "View"
 msgstr "نمایش"
 
-#: template/block/product-new.phtml:227 template/block/product-new.phtml:228
-#: template/block/product-random.phtml:227
-#: template/block/product-random.phtml:228 template/block/product-sale.phtml:64
-#: template/block/product-sale.phtml:65 template/block/product-tag.phtml:227
-#: template/block/product-tag.phtml:228
+#: template/block/product-new.phtml:249 template/block/product-new.phtml:250
+#: template/block/product-random.phtml:248
+#: template/block/product-random.phtml:249 template/block/product-sale.phtml:64
+#: template/block/product-sale.phtml:65 template/block/product-tag.phtml:248
+#: template/block/product-tag.phtml:249
 msgid "More products"
 msgstr "محصولات بیشتر"
+
+#: template/block/product-sale.phtml:30
+msgid "The time remaining until the end of the offer : "
+msgstr "فرصت باقی مانده تا پایان این پیشنهاد :"
+
+#: template/block/product-sale.phtml:38
+msgid "hour"
+msgstr "ساعت"
+
+#: template/block/product-sale.phtml:39
+msgid "minute"
+msgstr "دقیقه"
+
+#: template/block/product-sale.phtml:40
+msgid "second"
+msgstr "ثانیه"
 
 #: template/block/search.phtml:40
 msgid "Search"
