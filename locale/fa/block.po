@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-07-18 12:04+0430\n"
+"POT-Creation-Date: 2016-07-18 12:23+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -42,14 +42,26 @@ msgid "Go to basket"
 msgstr "برو به سبد خرید"
 
 #: template/block/category-sale.phtml:24
+msgid "Sale to"
+msgstr "حراج تا"
+
+#: template/block/category-sale.phtml:25
 msgid "days"
 msgstr "روز"
 
-#: template/block/category-sale.phtml:25
-msgid "and"
-msgstr "و"
+#: template/block/category-sale.phtml:26 template/block/product-sale.phtml:38
+msgid "hour"
+msgstr "ساعت"
 
-#: template/block/category-sale.phtml:43 template/block/category-sale.phtml:44
+#: template/block/category-sale.phtml:27 template/block/product-sale.phtml:39
+msgid "minute"
+msgstr "دقیقه"
+
+#: template/block/category-sale.phtml:28 template/block/product-sale.phtml:40
+msgid "second"
+msgstr "ثانیه"
+
+#: template/block/category-sale.phtml:47 template/block/category-sale.phtml:48
 msgid "More categories"
 msgstr "شاخه های بیشتر"
 
@@ -70,21 +82,12 @@ msgstr "محصولات بیشتر"
 msgid "The time remaining until the end of the offer : "
 msgstr "فرصت باقی مانده تا پایان این پیشنهاد :"
 
-#: template/block/product-sale.phtml:38
-msgid "hour"
-msgstr "ساعت"
-
-#: template/block/product-sale.phtml:39
-msgid "minute"
-msgstr "دقیقه"
-
-#: template/block/product-sale.phtml:40
-msgid "second"
-msgstr "ثانیه"
-
 #: template/block/search.phtml:40
 msgid "Search"
 msgstr "جستجو"
+
+#~ msgid "and"
+#~ msgstr "و"
 
 #~ msgid "Out of stock"
 #~ msgstr "نا موجود"

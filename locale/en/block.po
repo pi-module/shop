@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-07-18 12:02+0430\n"
+"POT-Creation-Date: 2016-07-18 12:23+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -41,14 +41,26 @@ msgid "Go to basket"
 msgstr ""
 
 #: template/block/category-sale.phtml:24
-msgid "days"
+msgid "Sale to"
 msgstr ""
 
 #: template/block/category-sale.phtml:25
-msgid "and"
+msgid "days"
 msgstr ""
 
-#: template/block/category-sale.phtml:43 template/block/category-sale.phtml:44
+#: template/block/category-sale.phtml:26 template/block/product-sale.phtml:38
+msgid "hour"
+msgstr ""
+
+#: template/block/category-sale.phtml:27 template/block/product-sale.phtml:39
+msgid "minute"
+msgstr ""
+
+#: template/block/category-sale.phtml:28 template/block/product-sale.phtml:40
+msgid "second"
+msgstr ""
+
+#: template/block/category-sale.phtml:47 template/block/category-sale.phtml:48
 msgid "More categories"
 msgstr ""
 
@@ -67,18 +79,6 @@ msgstr ""
 
 #: template/block/product-sale.phtml:30
 msgid "The time remaining until the end of the offer : "
-msgstr ""
-
-#: template/block/product-sale.phtml:38
-msgid "hour"
-msgstr ""
-
-#: template/block/product-sale.phtml:39
-msgid "minute"
-msgstr ""
-
-#: template/block/product-sale.phtml:40
-msgid "second"
 msgstr ""
 
 #: template/block/search.phtml:40

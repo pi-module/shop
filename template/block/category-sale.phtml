@@ -21,8 +21,12 @@
                                 .countdown('<?php echo $this->escape($category['saleInformation']['time_expire_view']); ?>', function(event) {
                                     $(this).html(
                                         event.strftime('<ul class="list-inline">'
+                                            + '<li><?php echo _b('Sale to'); ?></li>'
                                             + '<li>%D <?php echo _b('days'); ?></li>'
-                                            + '<li><?php echo _b('and'); ?> %H:%M:%S</li></ul>')
+                                            + '<li>%H <?php echo _b('hour'); ?></li>'
+                                            + '<li>%M <?php echo _b('minute'); ?></li>'
+                                            + '<li>%S <?php echo _b('second'); ?></li>'
+                                            + '</ul>')
                                     );
                                 });
                         </script>
