@@ -23,12 +23,19 @@ class SaleController extends ActionController
     {
         // Set array
         $saleList = array();
+        $productList = array();
+        $categoryList = array();
         // Get product ides
         $saleId = Pi::api('sale', 'shop')->getInformation('all');
-        if (!empty($saleId)) {
-            // Get products
+        // Get products
+        if (!empty($saleId['product'])) {
             $productList = Pi::api('product', 'shop')->getListFromIdLight($saleId['product']);
+        }
+        // Get category
+        if (!empty($saleId['category'])) {
             $categoryList = Pi::api('category', 'shop')->getListFromId($saleId['category']);
+        }
+        if (!empty($productList) || !empty($categoryList)) {
             // Get sale
             $order = array('id DESC', 'time_publish DESC');
             $select = $this->getModel('sale')->select()->order($order);

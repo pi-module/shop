@@ -245,6 +245,15 @@ EOT;
         }
         // Set video service
         if ($this->video_service && Pi::service('module')->isActive('video')) {
+            // extra_video
+            $this->add(array(
+                'name' => 'extra_video',
+                'type' => 'fieldset',
+                'options' => array(
+                    'label' => __('Video options'),
+                ),
+            ));
+            // Set video service
             $this->add(array(
                 'name' => 'video_list',
                 'type' => 'Module\Video\Form\Element\Service',
