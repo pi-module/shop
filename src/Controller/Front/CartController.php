@@ -86,10 +86,10 @@ class CartController extends ActionController
                     // Update basket
                     Pi::api('basket', 'shop')->updateBasket('promotion', $promotion['code']);
                     // Update used number
-                    $this->getModel('promotion')->update(
+                    /* $this->getModel('promotion')->update(
                         array('used' => $promotion['used'] + 1),
                         array('id' => $promotion['id'])
-                    );
+                    ); */
                     // jump
                     $message = __('Promotion code add successfully to your basket');
                     $this->jump(array('action' => 'index'), $message, 'success');
@@ -286,6 +286,28 @@ class CartController extends ActionController
         }
         // Check can pay or not
         $order['can_pay'] = (in_array(2, $canPay)) ? 2 : 1;
+        // Check promotion
+        if (isset($basket['data']['promotion']) && !empty($basket['data']['promotion'])) {
+            $where = array(
+                'code' => _strip($basket['data']['promotion']),
+                'status' => 1,
+                'time_publish < ?' => time(),
+                'time_expire > ?' => time(),
+            );
+            $select = $this->getModel('promotion')->select()->where($where)->limit(1);
+            $promotion = $this->getModel('promotion')->selectWith($select)->current();
+            if (!empty($promotion)) {
+                $promotion = $promotion->toArray();
+                // Update used number
+                $this->getModel('promotion')->update(
+                    array('used' => $promotion['used'] + 1),
+                    array('id' => $promotion['id'])
+                );
+                // Use
+                $order['promo_type'] = 'shop-promotion';
+                $order['promo_value'] = _strip($basket['data']['promotion']);
+            }
+        }
         // Unset shop session
         Pi::api('basket', 'shop')->emptyBasket();
         // Set and go to order
