@@ -88,7 +88,7 @@ class SaleController extends ActionController
                 }
                 $row->assign($values);
                 $row->save();
-                // update registry
+                // Clear registry
                 Pi::registry('saleInformation', 'shop')->clear();
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';

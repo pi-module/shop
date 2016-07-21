@@ -178,9 +178,6 @@ class CategoryController extends ActionController
                     // Update sitemap
                     Pi::api('sitemap', 'sitemap')->singleLink($loc, $row->status, $module, 'category', $row->id);
                 }
-                // Clear registry
-                Pi::registry('categoryList', 'shop')->clear();
-                Pi::registry('categoryRoute', 'shop')->clear();
                 // Set sale
                 if (isset($values['sale_percent']) && intval($values['sale_percent']) > 0) {
                     $sale = array();
@@ -188,11 +185,17 @@ class CategoryController extends ActionController
                     $sale['time_publish'] = strtotime($values['sale_time_publish']);
                     $sale['time_expire'] = strtotime($values['sale_time_expire']);
                     $sale['type'] = 'category';
+                    $sale['category'] = $row->id;
                     $sale['status'] = 1;
                     $row = $this->getModel('sale')->createRow();
                     $row->assign($sale);
                     $row->save();
+                    // Clear registry
+                    Pi::registry('saleInformation', 'shop')->clear();
                 }
+                // Clear registry
+                Pi::registry('categoryList', 'shop')->clear();
+                Pi::registry('categoryRoute', 'shop')->clear();
                 // Add log
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('category', $row->id, $operation);
