@@ -110,5 +110,10 @@ class PromotionFilter extends InputFilter
             'name' => 'status',
             'required' => true,
         ));
+        // uid
+        $this->add(array(
+            'name' => 'uid',
+            'required' => false,
+        ));
     }
 }

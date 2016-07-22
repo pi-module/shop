@@ -69,6 +69,11 @@ class Update extends BasicUpdate
         $saleTable = $saleModel->getTable();
         $saleAdapter = $saleModel->getAdapter();
 
+        // Set promotion model
+        $promotionModel = Pi::model('promotion', $this->module);
+        $promotionTable = $promotionModel->getTable();
+        $promotionAdapter = $promotionModel->getAdapter();
+
         // Update to version 0.3.0
         if (version_compare($moduleVersion, '0.3.0', '<')) {
             // Alter table field `type`
@@ -734,6 +739,21 @@ EOD;
             $sql = sprintf("ALTER TABLE %s ADD `percent` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0'", $saleTable);
             try {
                 $saleAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
+        if (version_compare($moduleVersion, '1.5.2', '<')) {
+            // Alter table field `uid`
+            $sql = sprintf("ALTER TABLE %s ADD `uid` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX (`uid`)", $promotionTable);
+            try {
+                $promotionAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult('db', array(
                     'status' => false,

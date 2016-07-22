@@ -141,6 +141,17 @@ class PromotionForm extends BaseForm
                 'required' => true,
             )
         ));
+        // uid
+        $this->add(array(
+            'name' => 'uid',
+            'options' => array(
+                'label' => __('User id'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('Join user id for this promotion to save information of this promotion and user action'),
+            )
+        ));
         // Save
         $this->add(array(
             'name' => 'submit',

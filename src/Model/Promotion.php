@@ -30,5 +30,6 @@ class Promotion extends Model
         'time_expire',
         'status',
         'used',
+        'uid',
     );
 }
