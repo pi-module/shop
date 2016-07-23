@@ -749,9 +749,33 @@ EOD;
             }
         }
 
-        if (version_compare($moduleVersion, '1.5.2', '<')) {
-            // Alter table field `uid`
-            $sql = sprintf("ALTER TABLE %s ADD `uid` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX (`uid`)", $promotionTable);
+        if (version_compare($moduleVersion, '1.5.3', '<')) {
+            // Alter table field `percent_partner`
+            $sql = sprintf("ALTER TABLE %s ADD `percent_partner` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0'", $promotionTable);
+            try {
+                $promotionAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            // Alter table field `price_partner`
+            $sql = sprintf("ALTER TABLE %s ADD `price_partner` DECIMAL(16, 2) NOT NULL DEFAULT '0.00'", $promotionTable);
+            try {
+                $promotionAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+            // Alter table field `partner`
+            $sql = sprintf("ALTER TABLE %s ADD `partner` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX (`uid`)", $promotionTable);
             try {
                 $promotionAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {

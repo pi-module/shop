@@ -20,6 +20,15 @@ class Field extends Model
      * {@inheritDoc}
      */
     protected $columns = array(
-        'id', 'title', 'icon', 'type', 'order', 'status', 'search', 'value', 'position', 'name'
+        'id',
+        'title',
+        'icon',
+        'type',
+        'order',
+        'status',
+        'search',
+        'value',
+        'position',
+        'name'
     );
 }

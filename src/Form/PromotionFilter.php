@@ -66,9 +66,32 @@ class PromotionFilter extends InputFilter
                 ),
             ),
         ));
+        // price_partner
+        $this->add(array(
+            'name' => 'price_partner',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // percent
         $this->add(array(
             'name' => 'percent',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+            'validators' => array(
+                new \Module\Shop\Validator\Percent,
+            ),
+        ));
+        // percent_partner
+        $this->add(array(
+            'name' => 'percent_partner',
             'required' => false,
             'filters' => array(
                 array(
@@ -110,9 +133,9 @@ class PromotionFilter extends InputFilter
             'name' => 'status',
             'required' => true,
         ));
-        // uid
+        // partner
         $this->add(array(
-            'name' => 'uid',
+            'name' => 'partner',
             'required' => false,
         ));
     }

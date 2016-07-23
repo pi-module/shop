@@ -20,6 +20,17 @@ class Question extends Model
      * {@inheritDoc}
      */
     protected $columns = array(
-        'id', 'ip', 'product', 'name', 'email', 'status', 'uid_ask', 'uid_answer', 'text_ask', 'text_answer', 'time_ask', 'time_answer',
+        'id',
+        'ip',
+        'product',
+        'name',
+        'email',
+        'status',
+        'uid_ask',
+        'uid_answer',
+        'text_ask',
+        'text_answer',
+        'time_ask',
+        'time_answer',
     );
 }

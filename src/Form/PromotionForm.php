@@ -85,7 +85,18 @@ class PromotionForm extends BaseForm
         $this->add(array(
             'name' => 'price',
             'options' => array(
-                'label' => __('Price'),
+                'label' => __('Customer price'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('Basket price will be charged'),
+            )
+        ));
+        // price_partner
+        $this->add(array(
+            'name' => 'price_partner',
+            'options' => array(
+                'label' => __('Partner price'),
             ),
             'attributes' => array(
                 'type' => 'text',
@@ -96,7 +107,18 @@ class PromotionForm extends BaseForm
         $this->add(array(
             'name' => 'percent',
             'options' => array(
-                'label' => __('Percent'),
+                'label' => __('Customer percent'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('Number and between 1 to 99'),
+            )
+        ));
+        // percent_partner
+        $this->add(array(
+            'name' => 'percent_partner',
+            'options' => array(
+                'label' => __('Partner percent'),
             ),
             'attributes' => array(
                 'type' => 'text',
@@ -141,15 +163,15 @@ class PromotionForm extends BaseForm
                 'required' => true,
             )
         ));
-        // uid
+        // partner
         $this->add(array(
             'name' => 'uid',
             'options' => array(
-                'label' => __('User id'),
+                'label' => __('Partner uid'),
             ),
             'attributes' => array(
                 'type' => 'text',
-                'description' => __('Join user id for this promotion to save information of this promotion and user action'),
+                'description' => __('Join partner user id for this promotion to save information of this promotion and user action'),
             )
         ));
         // Save

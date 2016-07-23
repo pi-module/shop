@@ -20,6 +20,12 @@ class Property extends Model
      * {@inheritDoc}
      */
     protected $columns = array(
-        'id', 'title', 'order', 'status', 'influence_stock', 'influence_price', 'type'
+        'id',
+        'title',
+        'order',
+        'status',
+        'influence_stock',
+        'influence_price',
+        'type'
     );
 }

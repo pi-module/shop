@@ -25,11 +25,13 @@ class Promotion extends Model
         'code',
         'type',
         'percent',
+        'percent_partner',
         'price',
+        'price_partner',
         'time_publish',
         'time_expire',
         'status',
         'used',
-        'uid',
+        'partner',
     );
 }
