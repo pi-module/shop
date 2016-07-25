@@ -304,8 +304,8 @@ class CartController extends ActionController
                     array('id' => $promotion['id'])
                 );
                 // Use
-                $order['promo_type'] = 'shop-promotion';
-                $order['promo_value'] = _strip($basket['data']['promotion']);
+                $order['promotion_type'] = 'shop-promotion';
+                $order['promotion_value'] = _strip($basket['data']['promotion']);
             }
         }
         // Unset shop session
