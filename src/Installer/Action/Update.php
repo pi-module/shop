@@ -775,7 +775,7 @@ EOD;
                 return false;
             }
             // Alter table field `partner`
-            $sql = sprintf("ALTER TABLE %s ADD `partner` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX (`uid`)", $promotionTable);
+            $sql = sprintf("ALTER TABLE %s ADD `partner` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX (`partner`)", $promotionTable);
             try {
                 $promotionAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
