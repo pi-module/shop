@@ -241,6 +241,8 @@ class CartController extends ActionController
         $this->view()->setTemplate(false);
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
+        // Set total product price
+        $total = 0.00;
         // Set can pay array
         $canPay = array();
         // Set order array
@@ -248,13 +250,11 @@ class CartController extends ActionController
         $order['module_name'] = $this->params('module');
         $order['type_payment'] = $this->config('order_type');
         $order['type_commodity'] = 'product';
-        
         $order['total_discount'] = $basket['total']['discount'];
         $order['total_shipping'] = $basket['total']['shipping'];
         $order['total_packing'] = 0;
         $order['total_setup'] = 0;
         $order['total_vat'] = 0;
-        
         // Set products to order
         foreach ($basket['products'] as $product) {
             // Set price
@@ -281,13 +281,18 @@ class CartController extends ActionController
                 'title' => $product['title'],
                 'extra' => json::encode($product['property']),
             );
+            // Set order product
             $order['product'][$product['id']] = $singelProduct;
+            // Set can check array
             $canPay[$product['id']] = $product['can_pay'];
+            // Update total price
+            $total = $price + $total;
         }
         // Check can pay or not
         $order['can_pay'] = (in_array(2, $canPay)) ? 2 : 1;
         // Check promotion
         if (isset($basket['data']['promotion']) && !empty($basket['data']['promotion'])) {
+            // Get promotion
             $where = array(
                 'code' => _strip($basket['data']['promotion']),
                 'status' => 1,
@@ -296,6 +301,7 @@ class CartController extends ActionController
             );
             $select = $this->getModel('promotion')->select()->where($where)->limit(1);
             $promotion = $this->getModel('promotion')->selectWith($select)->current();
+            // Check promotion
             if (!empty($promotion)) {
                 $promotion = $promotion->toArray();
                 // Update used number
@@ -305,7 +311,38 @@ class CartController extends ActionController
                 );
                 // Use
                 $order['promotion_type'] = 'shop-promotion';
-                $order['promotion_value'] = _strip($basket['data']['promotion']);
+                $order['promotion_value'] = _strip($promotion['code']);
+                // Set credit
+                if ($promotion['partner'] > 0) {
+                    $credit = 0;
+                    switch ($promotion['type']) {
+                        case 'percent':
+                            if ($promotion['percent_partner'] > 0) {
+                                $credit = ($total * $promotion['percent_partner']) / 100;
+                            }
+                            break;
+
+                        case 'price':
+                            if ($promotion['price_partner'] > 0) {
+                                if ($promotion['price_partner'] > $total) {
+                                    $credit = $promotion['price_partner'] - $total;
+                                } else {
+                                    $credit = $total;
+                                }
+                            }
+                            break;
+                    }
+                    if ($credit > 0) {
+                        $order['credit'] = array(
+                            'uid' => $promotion['partner'],
+                            'amount' => $credit,
+                            'status_fluctuation' => 'increase',
+                            'status_action' => 'automatic',
+                            'message_user' => sprintf(__('Increase credit from shop module by use <strong>%s</strong> code'), _strip($promotion['code'])),
+                            'message_admin' => sprintf(__('Increase credit from shop module by use <strong>%s</strong> code'), _strip($promotion['code'])),
+                        );
+                    }
+                }
             }
         }
         // Unset shop session

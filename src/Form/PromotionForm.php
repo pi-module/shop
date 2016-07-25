@@ -165,7 +165,7 @@ class PromotionForm extends BaseForm
         ));
         // partner
         $this->add(array(
-            'name' => 'uid',
+            'name' => 'partner',
             'options' => array(
                 'label' => __('Partner uid'),
             ),

@@ -263,7 +263,7 @@ CREATE TABLE `{promotion}` (
   `time_expire`     INT(10) UNSIGNED          NOT NULL DEFAULT '0',
   `status`          TINYINT(1) UNSIGNED       NOT NULL DEFAULT '1',
   `used`            INT(10) UNSIGNED          NOT NULL DEFAULT '0',
-  `partner`             INT(10) UNSIGNED          NOT NULL DEFAULT '0',
+  `partner`         INT(10) UNSIGNED          NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`),
   KEY `promotion_select` (`status`, `time_publish`, `time_expire`),
