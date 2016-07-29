@@ -22,7 +22,17 @@ class AdminSearchFilter extends InputFilter
         // title
         $this->add(array(
             'name' => 'title',
-            'required' => true,
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // category
+        $this->add(array(
+            'name' => 'category',
+            'required' => false,
             'filters' => array(
                 array(
                     'name' => 'StringTrim',

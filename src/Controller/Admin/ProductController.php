@@ -25,6 +25,7 @@ use Module\Shop\Form\RelatedForm;
 use Module\Shop\Form\RelatedFilter;
 use Module\Shop\Form\AdminSearchForm;
 use Module\Shop\Form\AdminSearchFilter;
+use Zend\Db\Sql\Predicate\Expression;
 use Zend\Json\Json;
 
 class ProductController extends ActionController
@@ -41,7 +42,6 @@ class ProductController extends ActionController
     {
         // Get page
         $page = $this->params('page', 1);
-        $module = $this->params('module');
         $status = $this->params('status');
         $category = $this->params('category');
         $title = $this->params('title');
@@ -50,28 +50,26 @@ class ProductController extends ActionController
         $order = array('time_create DESC', 'id DESC');
         $limit = intval($this->config('admin_perpage'));
         $product = array();
-        // Get
-        if (empty($title)) {
-            // Set where
-            $whereLink = array();
-            if (!empty($status)) {
-                $whereLink['status'] = $status;
-            }
-            if (!empty($category)) {
-                $whereLink['category'] = $category;
-            }
-            $columnsLink = array('product' => new \Zend\Db\Sql\Predicate\Expression('DISTINCT product'));
-            // Get info from link table
-            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order)->offset($offset)->limit($limit);
-            $rowset = $this->getModel('link')->selectWith($select)->toArray();
-            // Make list
-            foreach ($rowset as $id) {
-                $productId[] = $id['product'];
-            }
-            // Set info
-            $whereProduct = array('id' => $productId);
-        } else {
-            $whereProduct = array();
+        // Set where
+        $whereLink = array();
+        if (!empty($status)) {
+            $whereLink['status'] = $status;
+        }
+        if (!empty($category)) {
+            $whereLink['category'] = $category;
+        }
+        $columnsLink = array('product' => new Expression('DISTINCT product'));
+        // Get info from link table
+        $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order)->offset($offset)->limit($limit);
+        $rowset = $this->getModel('link')->selectWith($select)->toArray();
+        // Make list
+        foreach ($rowset as $id) {
+            $productId[] = $id['product'];
+        }
+        // Set info
+        $whereProduct = array('id' => $productId);
+        // Set title
+        if (!empty($title)) {
             $whereProduct['title LIKE ?'] = '%' . $title . '%';
         }
         // Get list of product
@@ -83,11 +81,11 @@ class ProductController extends ActionController
         }
         // Set count
         if (empty($title)) {
-            $columnsLink = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(DISTINCT `product`)'));
+            $columnsLink = array('count' => new Expression('count(DISTINCT `product`)'));
             $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink);
             $count = $this->getModel('link')->selectWith($select)->current()->count;
         } else {
-            $columnsLink = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+            $columnsLink = array('count' => new Expression('count(*)'));
             $select = $this->getModel('product')->select()->where($whereProduct)->columns($columnsLink);
             $count = $this->getModel('product')->selectWith($select)->current()->count;
         }
@@ -110,6 +108,7 @@ class ProductController extends ActionController
         // Set form
         $values = array(
             'title' => $title,
+            'category' => $category,
         );
         $form = new AdminSearchForm('search');
         $form->setAttribute('action', $this->url('', array('action' => 'process')));
@@ -134,6 +133,7 @@ class ProductController extends ActionController
                 $url = array(
                     'action' => 'index',
                     'title' => $values['title'],
+                    'category' => $values['category'],
                 );
             } else {
                 $message = __('Not valid');

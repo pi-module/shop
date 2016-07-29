@@ -14,6 +14,7 @@ namespace Module\Shop\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
+use Zend\Db\Sql\Predicate\Expression;
 use Zend\Json\Json;
 
 /*
@@ -147,7 +148,7 @@ class Product extends AbstractApi
     public function attributeCount($id)
     {
         // Get attach count
-        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $columns = array('count' => new Expression('count(*)'));
         $select = Pi::model('field_data', $this->getModule())->select()->columns($columns);
         $count = Pi::model('field_data', $this->getModule())->selectWith($select)->current()->count;
         // Set attach count
@@ -161,7 +162,7 @@ class Product extends AbstractApi
     {
         // Get attach count
         $where = array('product' => $id);
-        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $columns = array('count' => new Expression('count(*)'));
         $select = Pi::model('attach', $this->getModule())->select()->columns($columns)->where($where);
         $count = Pi::model('attach', $this->getModule())->selectWith($select)->current()->count;
         // Set attach count
@@ -175,7 +176,7 @@ class Product extends AbstractApi
     {
         // Get attach count
         $where = array('product_id' => $id);
-        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $columns = array('count' => new Expression('count(*)'));
         $select = Pi::model('related', $this->getModule())->select()->columns($columns)->where($where);
         $count = Pi::model('related', $this->getModule())->selectWith($select)->current()->count;
         // Set attach count

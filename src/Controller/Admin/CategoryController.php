@@ -19,6 +19,7 @@ use Pi\Paginator\Paginator;
 use Pi\File\Transfer\Upload;
 use Module\Shop\Form\CategoryForm;
 use Module\Shop\Form\CategoryFilter;
+use Zend\Db\Sql\Predicate\Expression;
 
 class CategoryController extends ActionController
 {
@@ -57,7 +58,7 @@ class CategoryController extends ActionController
             return $this->redirect()->toRoute('', array('action' => 'update'));
         }
         // Set paginator
-        $count = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $count = array('count' => new Expression('count(*)'));
         $select = $this->getModel('category')->select()->columns($count);
         $count = $this->getModel('category')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));

@@ -14,6 +14,7 @@ namespace Module\Shop\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
+use Zend\Db\Sql\Predicate\Expression;
 use Zend\Json\Json;
 
 /*
@@ -154,7 +155,7 @@ class Category extends AbstractApi
 
     public function categoryCount()
     {
-        $columns = array('count' => new \Zend\Db\Sql\Predicate\Expression('count(*)'));
+        $columns = array('count' => new Expression('count(*)'));
         $select = Pi::model('category', $this->getModule())->select()->columns($columns);
         $count = Pi::model('category', $this->getModule())->selectWith($select)->current()->count;
         return $count;
