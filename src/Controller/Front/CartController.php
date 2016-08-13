@@ -245,10 +245,32 @@ class CartController extends ActionController
         $total = 0.00;
         // Set can pay array
         $canPay = array();
+        // Get module
+        $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Check order type
+        $orderType = $config['order_type'];
+        if ($config['order_type'] == 'installment' && !empty($config['order_installment_role'])) {
+            // Get uid
+            $uid = Pi::user()->getId();
+            // Get role list
+            $roles = Pi::service('registry')->role->read('front');
+            $roles = array_keys($roles);
+            // Check role
+            if (in_array($config['order_installment_role'], $roles) && $uid > 0) {
+                $userRoles = Pi::user()->getRole($uid, 'front');
+                if (!in_array($config['order_installment_role'], $userRoles)) {
+                    $orderType = 'onetime';
+                }
+            } else {
+                $orderType = 'onetime';
+            }
+        }
         // Set order array
         $order = array();
-        $order['module_name'] = $this->params('module');
-        $order['type_payment'] = $this->config('order_type');
+        $order['module_name'] = $module;
+        $order['type_payment'] = $orderType;
         $order['type_commodity'] = 'product';
         $order['total_discount'] = $basket['total']['discount'];
         $order['total_shipping'] = $basket['total']['shipping'];

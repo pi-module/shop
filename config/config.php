@@ -486,6 +486,14 @@ return array(
             'filter' => 'text',
             'value' => 'onetime',
         ),
+        'order_installment_role' => array(
+            'category' => 'order',
+            'title' => _a('Installment role'),
+            'description' => _a('If your order type is installment, when you set role name here, just users of this role can make installment order, if set it empty all users can make installment order'),
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => ''
+        ),
         'order_stock' => array(
             'category' => 'order',
             'title' => _a('Order stock'),
