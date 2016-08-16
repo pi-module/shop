@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-07-19 11:26+0430\n"
+"POT-Creation-Date: 2016-08-16 16:44+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.8\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _a;_t\n"
 "X-Poedit-Basepath: ../..\n"
@@ -505,34 +505,48 @@ msgid "Installment"
 msgstr "خرید قسطی"
 
 #: config/config.php:491
+msgid "Installment role"
+msgstr "نقش با امکان خرید قسطی"
+
+#: config/config.php:492
+msgid ""
+"If your order type is installment, when you set role name here, just users "
+"of this role can make installment order, if set it empty all users can make "
+"installment order"
+msgstr ""
+"اگر روش خرید شما قسطی باشد، وقتی نام یک نقش را در اینجا وارد کنیدفقط کاربران "
+"دارای آن نقش می توانند خرید قسطی انجام دهند، اگر این گزینه خالی رها شود تمام "
+"کاربران می توانند خرید قسطی انجام دهند."
+
+#: config/config.php:499
 msgid "Order stock"
 msgstr "وضعیت موجودی برای سفارش"
 
-#: config/config.php:497
+#: config/config.php:505
 msgid "Never check stock"
 msgstr "هرگز موجودی بررسی نشود"
 
-#: config/config.php:498
+#: config/config.php:506
 msgid "Manual setting"
 msgstr "تنظیمات دستی"
 
-#: config/config.php:499
+#: config/config.php:507
 msgid "Use product stock"
 msgstr "استفاده از سیستم موجودی محصول"
 
-#: config/config.php:500
+#: config/config.php:508
 msgid "Use property stock"
 msgstr "استفاده از سیستم موجودی ویژگی های محصول"
 
-#: config/config.php:509
+#: config/config.php:517
 msgid "Active discount system"
 msgstr "فعال سازی سیستم تخفیف"
 
-#: config/config.php:518
+#: config/config.php:526
 msgid "Description for index page"
 msgstr "توضیحات برای صفحه اصلی"
 
-#: config/config.php:526
+#: config/config.php:534
 msgid "Force replace space by comma(,)"
 msgstr " جایگزینی اسپیس با کاما"
 

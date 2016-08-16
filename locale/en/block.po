@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-07-19 11:26+0430\n"
+"POT-Creation-Date: 2016-08-16 16:50+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.8\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _b\n"
 "X-Poedit-Basepath: ../..\n"
@@ -40,27 +40,31 @@ msgstr ""
 msgid "Go to basket"
 msgstr ""
 
-#: template/block/category-sale.phtml:24
-msgid "Sale to"
+#: template/block/category-sale.phtml:62 template/block/product-sale.phtml:88
+msgid "Second"
 msgstr ""
 
-#: template/block/category-sale.phtml:25
-msgid "days"
+#: template/block/category-sale.phtml:63 template/block/product-sale.phtml:89
+msgid "Minute"
 msgstr ""
 
-#: template/block/category-sale.phtml:26 template/block/product-sale.phtml:38
-msgid "hour"
+#: template/block/category-sale.phtml:64 template/block/product-sale.phtml:90
+msgid "Hour"
 msgstr ""
 
-#: template/block/category-sale.phtml:27 template/block/product-sale.phtml:39
-msgid "minute"
+#: template/block/category-sale.phtml:65 template/block/product-sale.phtml:91
+msgid "Day"
 msgstr ""
 
-#: template/block/category-sale.phtml:28 template/block/product-sale.phtml:40
-msgid "second"
+#: template/block/category-sale.phtml:66 template/block/product-sale.phtml:92
+msgid "Month"
 msgstr ""
 
-#: template/block/category-sale.phtml:47 template/block/category-sale.phtml:48
+#: template/block/category-sale.phtml:67 template/block/product-sale.phtml:93
+msgid "Year"
+msgstr ""
+
+#: template/block/category-sale.phtml:85 template/block/category-sale.phtml:86
 msgid "More categories"
 msgstr ""
 
@@ -71,14 +75,10 @@ msgstr ""
 
 #: template/block/product-new.phtml:249 template/block/product-new.phtml:250
 #: template/block/product-random.phtml:248
-#: template/block/product-random.phtml:249 template/block/product-sale.phtml:64
-#: template/block/product-sale.phtml:65 template/block/product-tag.phtml:248
-#: template/block/product-tag.phtml:249
+#: template/block/product-random.phtml:249
+#: template/block/product-sale.phtml:103 template/block/product-sale.phtml:104
+#: template/block/product-tag.phtml:248 template/block/product-tag.phtml:249
 msgid "More products"
-msgstr ""
-
-#: template/block/product-sale.phtml:30
-msgid "The time remaining until the end of the offer : "
 msgstr ""
 
 #: template/block/search.phtml:40

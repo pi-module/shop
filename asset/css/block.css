@@ -124,12 +124,20 @@ a.product-ribbon:hover {
 }
 
 /* category sale */
+.category-sale {
+    margin-bottom: 15px;
+}
+
+.category-sale:last-child {
+    margin-bottom: 0;
+}
+
 .category-sale-information {
     bottom: 0;
     position: absolute;
     font-size: 1em;
     padding: 10px;
-    height: 40px;
+    height: 60px;
     background: rgba(0, 0, 0, 0.75);
     color: #fff;
 }

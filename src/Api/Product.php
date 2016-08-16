@@ -405,7 +405,14 @@ class Product extends AbstractApi
                 $product['price_discount'] = $product['price'];
                 $product['price'] = $price;
                 $product['price_sale'] = 1;
-                $product['price_time'] = date("Y-m-d H:i:s", $saleDiscount['time_expire']);
+                $product['price_time'] = array(
+                    'year' => date("Y", $saleDiscount['time_expire']),
+                    'month' => date("m", $saleDiscount['time_expire']),
+                    'day' => date("d", $saleDiscount['time_expire']),
+                    'hour' => date("H", $saleDiscount['time_expire']),
+                    'minute' => date("i", $saleDiscount['time_expire']),
+                    'second' => date("s", $saleDiscount['time_expire']),
+                );
             }
         }
 

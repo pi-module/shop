@@ -45,9 +45,18 @@ class Sale extends AbstractApi
                 if (!empty($saleInformation['idActive']['category'])) {
                     $saleCategoryList = Pi::api('category', 'shop')->getListFromId($saleInformation['idActive']['category'], $limit);
                     foreach ($saleCategoryList as $saleCategory) {
+                        $time = $saleInformation['infoAll']['category'][$saleCategory['id']]['time_expire'];
+                        
                         $sale[$saleCategory['id']] = $saleCategory;
                         $sale[$saleCategory['id']]['saleInformation'] = $saleInformation['infoAll']['category'][$saleCategory['id']];
-                        $sale[$saleCategory['id']]['saleInformation']['time_expire_view'] = date("Y-m-d H:i:s", $saleInformation['infoAll']['category'][$saleCategory['id']]['time_expire']);
+                        $sale[$saleCategory['id']]['saleInformation']['price_time'] = array(
+                            'year' => date("Y", $time),
+                            'month' => date("m", $time),
+                            'day' => date("d", $time),
+                            'hour' => date("H", $time),
+                            'minute' => date("i", $time),
+                            'second' => date("s", $time),
+                        );
                     }
                 }
                 break;
