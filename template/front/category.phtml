@@ -35,10 +35,12 @@
             <div class="page-header">
                 <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
             </div>
-
+            <?php if (!empty($category['text_summary'])) { ?>
+                <div class="e-description clearfix well" itemprop="description"><?php echo $category['text_summary']; ?></div>
+            <?php } ?>
         <?php } ?>
-        <?php if (!empty($category['text_summary'])) { ?>
-            <div class="e-description clearfix well" itemprop="description"><?php echo $category['text_summary']; ?></div>
+        <?php if (!empty($category['text_description'])) { ?>
+            <div class="e-description clearfix well" itemprop="description"><?php echo $category['text_description']; ?></div>
         <?php } ?>
     </div>
 <?php } ?>
