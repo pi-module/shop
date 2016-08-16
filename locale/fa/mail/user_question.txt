@@ -11,11 +11,11 @@
 	<div style="padding: 3px; margin: 2px;">
         <p><strong>نام کاربر</strong> : <span>%name%</span></p>
         <p><strong>ایمیل کاربر</strong> : <span>%email%</span></p>
-        <p><strong>سوال کاربر</strong> : <span>%question%</span></p>
+        <p><strong>سوال کاربر</strong> : <span>%text_ask%</span></p>
         <p><strong>نام محصول</strong> : <span>%title%</span></p>
         <p><strong>شناسه محصول</strong> : <span>%product%</span></p>
 	</div>
-	<div style="padding: 3px; margin: 2px;">Dont reply to this email</div>
+	<div style="padding: 3px; margin: 2px;">لطفا به این پیام پاسخی ندهید</div>
 	<div style="margin-top: 10px">
         <a href="%site_url%" title="%site_name%">%site_name%</a>
     </divp>

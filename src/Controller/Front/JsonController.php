@@ -121,7 +121,7 @@ class JsonController extends IndexController
         return $productSingle;
     }
 
-    public function questionAction()
+    /* public function questionAction()
     {
         // Get info from url
         $module = $this->params('module');
@@ -167,7 +167,7 @@ class JsonController extends IndexController
             $message = __('Your question send to admin');
             $this->jump($data['back'], $message);
         }
-    }
+    } */
 
     public function filterIndexAction()
     {

@@ -59,7 +59,7 @@ class QuestionController extends IndexController
                     $information = array(
                         'name' => $question['name'],
                         'email' => $question['email'],
-                        'question' => $question['question'],
+                        'text_ask' => $question['text_ask'],
                         'product' => $question['product'],
                         'title' => $product['title'],
                     );

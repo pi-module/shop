@@ -29,7 +29,6 @@
                                 <span><?php echo $this->escape($product['price_title']); ?></span>
                             <?php } ?>
                             <div class="clearfix">
-                                <strong><?php _e('Stock status'); ?> : </strong>
                                 <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
                             </div>
                             <?php if (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) { ?>
@@ -43,15 +42,14 @@
                             <?php } ?>
                         </div>
                     <?php } elseif ($config['order_stock'] == 'manual') { ?>
-                        <?php if ($product['stock_type'] == 1) { ?>
+                        <?php if ($product['stock_type'] == 1 || $product['stock_type'] == 5) { ?>
                             <div class="clearfix">
                                 <?php if (!empty($product['price_title'])) { ?>
                                     <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
                                     <span><?php echo $this->escape($product['price_title']); ?></span>
                                 <?php } ?>
                                 <div class="clearfix">
-                                    <strong><?php _e('Stock status'); ?> : </strong>
-                                    <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                    <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php echo $this->escape($product['stock_type_view']); ?></span>
                                 </div>
                                 <?php if (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) { ?>
                                     <span class="text-danger">
@@ -65,7 +63,6 @@
                             </div>
                         <?php } else { ?>
                             <div class="clearfix">
-                                <strong><?php _e('Stock status'); ?> : </strong>
                                 <span class="text-danger"><?php echo $this->escape($product['stock_type_view']); ?></span>
                             </div>
                         <?php } ?>
@@ -77,7 +74,6 @@
                                     <span><?php echo $this->escape($product['price_title']); ?></span>
                                 <?php } ?>
                                 <div class="clearfix">
-                                    <strong><?php _e('Stock status'); ?> : </strong>
                                     <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
                                 </div>
                                 <?php if (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) { ?>
@@ -92,7 +88,6 @@
                             </div>
                         <?php } else { ?>
                             <div class="clearfix">
-                                <strong><?php _e('Stock status'); ?> : </strong>
                                 <span class="text-danger"><?php _e('Out of stock'); ?></span>
                             </div>
                         <?php } ?>
