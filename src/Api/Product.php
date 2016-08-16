@@ -423,7 +423,7 @@ class Product extends AbstractApi
         // Set price_percent
         $product['price_percent'] = 0;
         if ($product['price_discount_has']) {
-            $product['price_percent'] = ($product['price'] * 100) / $product['price_main'];
+            $product['price_percent'] = 100 - intval(($product['price'] * 100) / $product['price_main']);
         }
 
         // return product

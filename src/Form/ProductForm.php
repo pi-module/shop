@@ -261,6 +261,7 @@ class ProductForm extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => __('Real price'),
+                'required' => true,
             )
         ));
         // price_discount
