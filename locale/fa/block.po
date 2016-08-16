@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-08-16 16:46+0430\n"
+"POT-Creation-Date: 2016-08-16 16:59+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -41,27 +41,27 @@ msgstr "سبد خرید شما خالی است"
 msgid "Go to basket"
 msgstr "برو به سبد خرید"
 
-#: template/block/category-sale.phtml:62 template/block/product-sale.phtml:88
+#: template/block/category-sale.phtml:62 template/block/product-sale.phtml:93
 msgid "Second"
 msgstr "ثانیه"
 
-#: template/block/category-sale.phtml:63 template/block/product-sale.phtml:89
+#: template/block/category-sale.phtml:63 template/block/product-sale.phtml:94
 msgid "Minute"
 msgstr "دقیقه"
 
-#: template/block/category-sale.phtml:64 template/block/product-sale.phtml:90
+#: template/block/category-sale.phtml:64 template/block/product-sale.phtml:95
 msgid "Hour"
 msgstr "ساعت"
 
-#: template/block/category-sale.phtml:65 template/block/product-sale.phtml:91
+#: template/block/category-sale.phtml:65 template/block/product-sale.phtml:96
 msgid "Day"
 msgstr "روز"
 
-#: template/block/category-sale.phtml:66 template/block/product-sale.phtml:92
+#: template/block/category-sale.phtml:66 template/block/product-sale.phtml:97
 msgid "Month"
 msgstr "ماه"
 
-#: template/block/category-sale.phtml:67 template/block/product-sale.phtml:93
+#: template/block/category-sale.phtml:67 template/block/product-sale.phtml:98
 msgid "Year"
 msgstr "سال"
 
@@ -69,16 +69,31 @@ msgstr "سال"
 msgid "More categories"
 msgstr "شاخه های بیشتر"
 
-#: template/block/category.phtml:116 template/block/product-new.phtml:236
-#: template/block/product-random.phtml:235 template/block/product-tag.phtml:235
+#: template/block/category.phtml:116 template/block/product-new.phtml:240
+#: template/block/product-random.phtml:240 template/block/product-tag.phtml:240
 msgid "View"
 msgstr "نمایش"
 
-#: template/block/product-new.phtml:249 template/block/product-new.phtml:250
-#: template/block/product-random.phtml:248
-#: template/block/product-random.phtml:249
-#: template/block/product-sale.phtml:103 template/block/product-sale.phtml:104
-#: template/block/product-tag.phtml:248 template/block/product-tag.phtml:249
+#: template/block/product-new.phtml:23 template/block/product-random.phtml:23
+#: template/block/product-sale.phtml:6 template/block/product-tag.phtml:23
+msgid "On sale"
+msgstr "تخفیف ویژه"
+
+#: template/block/product-new.phtml:24 template/block/product-random.phtml:24
+#: template/block/product-sale.phtml:7 template/block/product-tag.phtml:24
+msgid "Have discount"
+msgstr "با تخفیف"
+
+#: template/block/product-new.phtml:25 template/block/product-random.phtml:25
+#: template/block/product-sale.phtml:8 template/block/product-tag.phtml:25
+msgid "Recommended"
+msgstr "پیشنهاد شده"
+
+#: template/block/product-new.phtml:253 template/block/product-new.phtml:254
+#: template/block/product-random.phtml:253
+#: template/block/product-random.phtml:254
+#: template/block/product-sale.phtml:108 template/block/product-sale.phtml:109
+#: template/block/product-tag.phtml:253 template/block/product-tag.phtml:254
 msgid "More products"
 msgstr "محصولات بیشتر"
 

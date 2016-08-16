@@ -1,7 +1,12 @@
 <?php if ($block['blockEffect']) {
     $this->jQuery();
     $this->js($this->assetModule('js/countdown.js', 'shop'));
-} ?>
+}
+// language
+_b('On sale');
+_b('Have discount');
+_b('Recommended');
+?>
 <div class="shop-block">
     <div class="shop-block-sale clearfix">
         <?php foreach ($block['resources'] as $product) { ?>
