@@ -72,12 +72,32 @@ class ProductController extends ActionController
         if (!empty($title)) {
             $whereProduct['title LIKE ?'] = '%' . $title . '%';
         }
+        //
+        $propertyList = Pi::api('property', 'shop')->getList();
         // Get list of product
         $select = $this->getModel('product')->select()->where($whereProduct)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
             $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
+            $product[$row->id]['property'] = Pi::api('property', 'shop')->getValue($row->id);
+            if (empty($product[$row->id]['property'])) {
+                $product[$row->id]['form'] = array(
+                    'type' => 'product',
+                    'price' => $product[$row->id]['price'],
+                    'price_discount' => $product[$row->id]['price_discount'],
+                    'price_shipping' => $product[$row->id]['price_shipping'],
+                    'stock_type' => $product[$row->id]['stock_type'],
+                );
+            } else {
+                $product[$row->id]['form'] = array(
+                    'type' => 'property',
+                    'price' => $product[$row->id]['price'],
+                    'price_discount' => $product[$row->id]['price_discount'],
+                    'price_shipping' => $product[$row->id]['price_shipping'],
+                    'stock_type' => $product[$row->id]['stock_type'],
+                );
+            }
         }
         // Set count
         if (empty($title)) {
@@ -171,8 +191,7 @@ class ProductController extends ActionController
         $option = array();
         // Find Product
         if ($id) {
-            $product = $this->getModel('product')->find($id)->toArray();
-            $product['category'] = Json::decode($product['category'], true);
+            $product = Pi::api('product', 'shop')->getProduct($id);
             if ($product['image']) {
                 $thumbUrl = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $product['path'], $product['image']);
                 $option['thumbUrl'] = Pi::url($thumbUrl);
@@ -305,8 +324,7 @@ class ProductController extends ActionController
                 }
                 // Make setting
                 if ($config['order_discount']) {
-                    $setting = Json::decode($product['setting'], true);
-                    foreach ($setting['discount'] as $name => $value) {
+                    foreach ($product['setting']['discount'] as $name => $value) {
                         $product[$name] = $value;
                     }
                 }
@@ -342,7 +360,7 @@ class ProductController extends ActionController
         $config = Pi::service('registry')->config->read($module);
         // Find product
         if ($id) {
-            $product = $this->getModel('product')->find($id)->toArray();
+            $product = Pi::api('product', 'shop')->getProduct($id);
         } else {
             $this->jump(array('action' => 'index'), __('Please select product'));
         }
@@ -512,7 +530,7 @@ class ProductController extends ActionController
         $product_list = array();
         // Find Product
         if ($id) {
-            $product = $this->getModel('product')->find($id)->toArray();
+            $product = Pi::api('product', 'shop')->getProduct($id);
         } else {
             return $this->redirect()->toRoute('', array('action' => 'index'));
         }
@@ -617,24 +635,62 @@ class ProductController extends ActionController
     {
         // Check post
         if ($this->request->isPost()) {
-            // Get from post
+            // Get information
             $data = $this->request->getPost();
             $data = $data->toArray();
-            // Check price
-            if (!empty($data['price'])) {
-                foreach ($data['price'] as $id => $price) {
+            // Check type
+            switch ($data['type']) {
+                case 'product':
+                    // Update product
                     $this->getModel('product')->update(
-                        array('price' => (int)$price),
-                        array('id' => (int)$id)
+                        array(
+                            'price' => (int)$data['price'],
+                            'price_discount' => (int)$data['price_discount'],
+                            'price_shipping' => (int)$data['price_shipping'],
+                        ),
+                        array('id' => (int)$data['id'])
                     );
-                }
-            }
+                    // Update link
+                    $this->getModel('link')->update(
+                        array('price' => (int)$data['price']),
+                        array('product' => (int)$data['id'])
+                    );
+                    break;
 
+                case 'property':
+                    // Update property
+                    $priceList = array();
+                    foreach ($data['property'] as $property) {
+                        $priceList[] = (int)$property['price'];
+                        $this->getModel('property_value')->update(
+                            array('price' => (int)$property['price']),
+                            array('id' => (int)$property['id'])
+                        );
+                    }
+                    $minPrice = min($priceList);
+                    // Update product
+                    $this->getModel('product')->update(
+                        array(
+                            'price' => (int)$minPrice,
+                            'price_discount' => (int)$data['price_discount'],
+                            'price_shipping' => (int)$data['price_shipping'],
+                        ),
+                        array('id' => (int)$data['id'])
+                    );
+                    // Update link
+                    $this->getModel('link')->update(
+                        array('price' => (int)$minPrice),
+                        array('product' => (int)$data['id'])
+                    );
+                    break;
+            }
+            // Set url
+            $url = Pi::url($this->url('', array('action' => 'index')));
+            return $this->jump(
+                $url,
+                __('Product prices updated successfully.')
+            );
         }
-        return $this->jump(
-            array('action' => 'index'),
-            __('Product prices updated successfully.')
-        );
     }
 
     public function removeAction()

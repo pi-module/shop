@@ -64,17 +64,29 @@ return array(
             'module' => 'shop',
             'controller' => 'attribute',
             'action' => 'index',
-        ),
 
-        'position' => array(
-            'label' => _a('Attribute position'),
-            'permission' => array(
-                'resource' => 'position',
+            'pages' => array(
+                'attribute' => array(
+                    'label' => _a('Attribute'),
+                    'permission' => array(
+                        'resource' => 'attribute',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'attribute',
+                    'action' => 'index',
+                ),
+                'position' => array(
+                    'label' => _a('Attribute position'),
+                    'permission' => array(
+                        'resource' => 'position',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'position',
+                    'action' => 'index',
+                ),
             ),
-            'route' => 'admin',
-            'module' => 'shop',
-            'controller' => 'position',
-            'action' => 'index',
         ),
 
         'property' => array(
@@ -99,8 +111,8 @@ return array(
             'action' => 'index',
         ),
 
-        'discount' => array(
-            'label' => _a('Discount'),
+        'discount-system' => array(
+            'label' => _a('Discount systems'),
             'permission' => array(
                 'resource' => 'discount',
             ),
@@ -108,39 +120,38 @@ return array(
             'module' => 'shop',
             'controller' => 'discount',
             'action' => 'index',
-        ),
-
-        'sale' => array(
-            'label' => _a('Sale'),
-            'permission' => array(
-                'resource' => 'sale',
+            'pages' => array(
+                'discount' => array(
+                    'label' => _a('Discount'),
+                    'permission' => array(
+                        'resource' => 'discount',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'discount',
+                    'action' => 'index',
+                ),
+                'sale' => array(
+                    'label' => _a('Sale'),
+                    'permission' => array(
+                        'resource' => 'sale',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'sale',
+                    'action' => 'index',
+                ),
+                'promotion' => array(
+                    'label' => _a('Promotion'),
+                    'permission' => array(
+                        'resource' => 'promotion',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'promotion',
+                    'action' => 'index',
+                ),
             ),
-            'route' => 'admin',
-            'module' => 'shop',
-            'controller' => 'sale',
-            'action' => 'index',
-        ),
-
-        'promotion' => array(
-            'label' => _a('Promotion'),
-            'permission' => array(
-                'resource' => 'promotion',
-            ),
-            'route' => 'admin',
-            'module' => 'shop',
-            'controller' => 'promotion',
-            'action' => 'index',
-        ),
-
-        'log' => array(
-            'label' => _a('Logs'),
-            'permission' => array(
-                'resource' => 'log',
-            ),
-            'route' => 'admin',
-            'module' => 'shop',
-            'controller' => 'log',
-            'action' => 'index',
         ),
 
         'tools' => array(
@@ -152,16 +163,48 @@ return array(
             'module' => 'shop',
             'controller' => 'tools',
             'action' => 'index',
-        ),
-        'json' => array(
-            'label' => _a('Json'),
-            'permission' => array(
-                'resource' => 'json',
+            'pages' => array(
+                'tools' => array(
+                    'label' => _a('Tools'),
+                    'permission' => array(
+                        'resource' => 'tools',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'tools',
+                    'action' => 'index',
+                ),
+                'sitemap' => array(
+                    'label' => _a('Sitemap'),
+                    'permission' => array(
+                        'resource' => 'tools',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'tools',
+                    'action' => 'sitemap',
+                ),
+                'log' => array(
+                    'label' => _a('Logs'),
+                    'permission' => array(
+                        'resource' => 'log',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'log',
+                    'action' => 'index',
+                ),
+                'json' => array(
+                    'label' => _a('Json'),
+                    'permission' => array(
+                        'resource' => 'json',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'json',
+                    'action' => 'index',
+                ),
             ),
-            'route' => 'admin',
-            'module' => 'shop',
-            'controller' => 'json',
-            'action' => 'index',
         ),
     ),
 );

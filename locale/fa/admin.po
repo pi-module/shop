@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2016-08-16 16:44+0430\n"
+"POT-Creation-Date: 2016-08-25 13:30+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -245,7 +245,7 @@ msgstr "علاقه مندی"
 msgid "Video"
 msgstr "ویدیو"
 
-#: config/config.php:53 config/navigation.php:114 config/page.php:52
+#: config/config.php:53 config/navigation.php:135 config/page.php:52
 #: config/permission.php:68
 msgid "Sale"
 msgstr "حراج"
@@ -567,39 +567,49 @@ msgstr "فهرست برچسب ها"
 msgid "Product"
 msgstr "محصول"
 
-#: config/navigation.php:59 config/page.php:27 config/permission.php:43
+#: config/navigation.php:59 config/navigation.php:70 config/page.php:27
+#: config/permission.php:43
 msgid "Attribute"
 msgstr "خواص"
 
-#: config/navigation.php:70 config/page.php:32 config/permission.php:48
+#: config/navigation.php:80 config/page.php:32 config/permission.php:48
 msgid "Attribute position"
 msgstr "موقعیت خواص"
 
-#: config/navigation.php:81 config/page.php:37 config/permission.php:53
+#: config/navigation.php:93 config/page.php:37 config/permission.php:53
 msgid "Order property"
 msgstr "ویژگی سفارش"
 
-#: config/navigation.php:92 config/page.php:42 config/permission.php:58
+#: config/navigation.php:104 config/page.php:42 config/permission.php:58
 msgid "Attach"
 msgstr "پیوست"
 
-#: config/navigation.php:103 config/page.php:47 config/permission.php:63
+#: config/navigation.php:115
+msgid "Discount systems"
+msgstr "گزینه های تخفیف"
+
+#: config/navigation.php:125 config/page.php:47 config/permission.php:63
 msgid "Discount"
 msgstr "تخفیف گروهی"
 
-#: config/navigation.php:125 config/page.php:57 config/permission.php:73
+#: config/navigation.php:145 config/page.php:57 config/permission.php:73
 msgid "Promotion"
 msgstr "کد تخفیف"
 
-#: config/navigation.php:136 config/page.php:62 config/permission.php:78
-msgid "Logs"
-msgstr "گزارش ها"
-
-#: config/navigation.php:147 config/page.php:67 config/permission.php:83
+#: config/navigation.php:158 config/navigation.php:168 config/page.php:67
+#: config/permission.php:83
 msgid "Tools"
 msgstr "ابزار ها"
 
-#: config/navigation.php:157 config/permission.php:88
+#: config/navigation.php:178
+msgid "Sitemap"
+msgstr "نقشه سایت"
+
+#: config/navigation.php:188 config/page.php:62 config/permission.php:78
+msgid "Logs"
+msgstr "گزارش ها"
+
+#: config/navigation.php:198 config/permission.php:88
 msgid "Json"
 msgstr "جیسون"
 

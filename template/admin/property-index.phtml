@@ -11,21 +11,35 @@
         <tr>
             <th><?php _e('ID'); ?></th>
             <th><?php _e('Title'); ?></th>
+            <th><?php _e('Influence price'); ?></th>
+            <th><?php _e('Influence stock'); ?></th>
             <th><?php _e('Action'); ?></th>
         </tr>
         <?php foreach ($list as $property) { ?>
-            <?php
-            if ($property['status'] == 1) {
+            <?php if ($property['status'] == 1) {
                 $labelIdClass = 'label-success';
             } else {
                 $labelIdClass = 'label-warning';
-            }
-            ?>
+            } ?>
             <tr>
                 <td><span
                         class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($property['id']); ?></span>
                 </td>
                 <td><?php echo $this->escape($property['title']); ?></td>
+                <td>
+                    <?php if ($property['influence_price'] == 1) { ?>
+                        <span class="label label-success"><?php _e('Yes'); ?></span>
+                    <?php } else { ?>
+                        <span class="label label-warning"><?php _e('No'); ?></span>
+                    <?php } ?>
+                </td>
+                <td>
+                    <?php if ($property['influence_stock'] == 1) { ?>
+                        <span class="label label-success"><?php _e('Yes'); ?></span>
+                    <?php } else { ?>
+                        <span class="label label-warning"><?php _e('No'); ?></span>
+                    <?php } ?>
+                </td>
                 <td>
                     <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
                        href="<?php echo $this->url('', array('action' => 'update', 'id' => $property['id'])); ?>"><i

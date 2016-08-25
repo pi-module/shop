@@ -50,6 +50,8 @@ class Property extends AbstractApi
 
     public function setValue($properties, $product)
     {
+        // Set price array
+        $priceList = array();
         //Remove
         Pi::model('property_value', $this->getModule())->delete(array('product' => $product));
         // Add
@@ -68,8 +70,24 @@ class Property extends AbstractApi
                     $row = Pi::model('property_value', $this->getModule())->createRow();
                     $row->assign($values);
                     $row->save();
+                    // Add price to array
+                    if (isset($propertyValue['price']) && !empty($propertyValue['price'])) {
+                        $priceList[] = $propertyValue['price'];
+                    }
                 }
             }
+        }
+        // Check price and update tables
+        if (!empty($priceList)) {
+            $minPrice = min($priceList);
+            Pi::model('product', $this->getModule())->update(
+                array('price' => $minPrice),
+                array('id' => $product)
+            );
+            Pi::model('link', $this->getModule())->update(
+                array('price' => $minPrice),
+                array('product' => $product)
+            );
         }
     }
 

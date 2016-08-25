@@ -19,6 +19,7 @@ $this->Backbone();
                 <li<?php if ($nav['page'] == 'additional') { echo ' class="active"';} ?>><a href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'additional', 'id' => $product['id'])); ?>"><?php _e('Edit additional information'); ?></a></li>
                 <li<?php if ($nav['page'] == 'attach') { echo ' class="active"';} ?>><a href="<?php echo $this->url('', array('controller' => 'attach', 'action' => 'add', 'id' => $product['id'])); ?>"><?php _e('Attach files'); ?></a></li>
                 <li<?php if ($nav['page'] == '') { echo ' class="active"';} ?>><a href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'related', 'id' => $product['id'])); ?>"><?php _e('Related products'); ?></a></li>
+                <li class="active pull-right"><a target="_blank" href="<?php echo $product['productUrl']; ?>"><?php _e('View'); ?></a></li>
             </ul>
         </div>
     <?php } ?>

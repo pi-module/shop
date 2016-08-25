@@ -85,7 +85,7 @@ class AttachController extends ActionController
             $this->jump(array('controller' => 'product', 'action' => 'index'), __('You must select product'));
         }
         // Get product
-        $product = $this->getModel('product')->find($id)->toArray();
+        $product = Pi::api('product', 'shop')->getProduct($id);
         if (empty($product)) {
             $this->jump(array('controller' => 'product', 'action' => 'index'), __('Your selected product not exist'));
         }

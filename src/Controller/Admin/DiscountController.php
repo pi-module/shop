@@ -30,10 +30,6 @@ class DiscountController extends ActionController
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
         }
-        // Go to update page if empty
-        if (empty($list)) {
-            return $this->redirect()->toRoute('', array('action' => 'update'));
-        }
         // Set view
         $this->view()->setTemplate('discount-index');
         $this->view()->assign('list', $list);
