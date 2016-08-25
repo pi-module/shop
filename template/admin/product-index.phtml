@@ -147,11 +147,10 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                 this.$('.product-price').click(this.productPriceAction);
             },
             productRecommendAction: function (e) {
-                alert($(this).attr("data-recommended"));
                 var p = $(e.target).parents('tr'),
                     self = this;
                 systemMessage.wait("<?php _e('Recommended in process'); ?>");
-                $.getJSON($(this).attr("data-recommended")).done(function (result) {
+                $.getJSON(p.attr("data-recommended")).done(function (result) {
                     if (result.ajaxstatus == 1) {
                         if (result.recommended == 1) {
                             var buttonClass = 'fa fa-heart';
