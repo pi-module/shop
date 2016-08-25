@@ -4,9 +4,10 @@ $this->css(array(
     $this->assetModule('script/system-ui.css', 'system'),
 ));
 $this->jQuery();
+$this->backbone();
 $this->js($this->assetModule('script/system-msg.js', 'system'));
 ?>
-<div class="clearfix">
+<div id="js-product" class="clearfix">
     <div class="admin-header clearfix well well-sm">
         <div class="col-md-4">
             <div class="nav">
@@ -61,20 +62,24 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                 $labelIdClass = 'label-warning';
             }
             ?>
-            <tr id="product-<?php echo $this->escape($product['id']); ?>">
+            <tr data-id="<?php echo $this->escape($product['id']); ?>"
+                data-price="<?php echo Pi::url($this->url('', array('action' => 'price', 'id' => $product['id']))); ?>"
+                <?php if ($product['recommended'] == 1) { ?>
+                    data-recommended="<?php echo Pi::url($this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '0'))); ?>"
+                <?php } else { ?>
+                    data-recommended="<?php echo Pi::url($this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '1'))); ?>"
+                <?php } ?>
+                >
                 <td class="product-ajax">
-                        <span
-                            class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($product['id']); ?></span>
+                        <span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($product['id']); ?></span>
                     <?php if ($product['recommended'] == 1) { ?>
-                        <button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link"
-                                data-toggle="button"
-                                data-link="<?php echo $this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '0')); ?>">
-                            <i class="fa fa-heart"></i></button>
+                        <button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link product-recommend" data-toggle="button">
+                            <i class="fa fa-heart"></i>
+                        </button>
                     <?php } else { ?>
-                        <button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link"
-                                data-toggle="button"
-                                data-link="<?php echo $this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '1')); ?>">
-                            <i class="fa fa-heart-o"></i></button>
+                        <button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link product-recommend" data-toggle="button">
+                            <i class="fa fa-heart-o"></i>
+                        </button>
                     <?php } ?>
                     <?php echo $this->escape($product['title']); ?>
                     <?php if (!empty($product['subtitle'])) { ?> ( <?php echo $this->escape($product['subtitle']); ?> )<?php } ?>
@@ -108,56 +113,13 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                 </td>
                 <td>
                     <ul class="list-inline">
-                        <li class="col-md-6">
+                        <li class="col-md-6 product-price-<?php echo $this->escape($product['id']); ?>">
                             <?php echo $product['price_view']; ?>
                         </li>
                         <li class="col-md-6">
-                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#productPriceModal<?php echo $product['id']; ?>">
+                            <button type="button" class="btn btn-primary btn-xs product-price">
                                 <?php _e('Update price and stock'); ?>
                             </button>
-                            <div class="modal fade" id="productPriceModal<?php echo $product['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="productPriceModalLabel<?php echo $product['id']; ?>">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="productPriceModalLabel<?php echo $product['id']; ?>"><?php _e('Update price and stock'); ?></h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="post" action="<?php echo Pi::url($this->url('', array('action' => 'price'))); ?>">
-                                                <input name="id" type="hidden" value="<?php echo $this->escape($product['id']); ?>">
-                                                <input name="type" type="hidden" value="<?php echo $this->escape($product['form']['type']); ?>">
-                                                <input name="back" type="hidden" value="#product-<?php echo $this->escape($product['id']); ?>">
-                                                <?php if ($product['form']['type'] == 'product') { ?>
-                                                    <div class="form-group">
-                                                        <label><?php _e('Price'); ?></label>
-                                                        <input type="text" class="form-control" name="price" value="<?php echo $this->escape($product['form']['price']); ?>">
-                                                    </div>
-                                                <?php } elseif ($product['form']['type'] == 'property') { ?>
-                                                    <?php foreach ($product['property'] as $propertyList) { ?>
-                                                        <?php foreach ($propertyList as $propertySingle) { ?>
-                                                            <input name="property[<?php echo $propertySingle['id']; ?>][unique_key]" type="hidden" value="<?php echo $propertySingle['unique_key']; ?>">
-                                                            <input name="property[<?php echo $propertySingle['id']; ?>][id]" type="hidden" value="<?php echo $propertySingle['id']; ?>">
-                                                            <div class="form-group">
-                                                                <label><?php echo $propertySingle['name']; ?></label>
-                                                                <input type="text" class="form-control" name="property[<?php echo $propertySingle['id']; ?>][price]" value="<?php echo $propertySingle['price']; ?>">
-                                                            </div>
-                                                        <?php } ?>
-                                                    <?php } ?>
-                                                <?php } ?>
-                                                <div class="form-group">
-                                                    <label><?php _e('Display prices'); ?></label>
-                                                    <input type="text" class="form-control" name="price_discount" value="<?php echo $this->escape($product['form']['price_discount']); ?>">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><?php _e('Extra shipping price'); ?></label>
-                                                    <input type="text" class="form-control" name="price_shipping" value="<?php echo $this->escape($product['form']['price_shipping']); ?>">
-                                                </div>
-                                                <button type="submit" class="btn btn-primary"><?php _e('Save changes'); ?></button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </li>
                     </ul>
                 </td>
@@ -171,24 +133,52 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
         <span class="label label-danger"><?php _e('Trash'); ?></span>
     </p>
 </div>
-<script type="text/javascript">
+<script>
     (function ($) {
-        $("#product-list .product-ajax").on("click", "button", function () {
-            systemMessage.wait("<?php _e('Recommended in process'); ?>");
-            $.getJSON($(this).attr("data-link")).done(function (result) {
-                if (result.ajaxstatus == 1) {
-                    if (result.recommended == 1) {
-                        var buttonClass = 'fa fa-heart';
+        var page = {
+            el: $('#js-product'),
+            modal: $('<div class="modal fade">').appendTo(document.body),
+            $: function (selector) {
+                return this.el.find(selector);
+            },
+            init: function () {
+                _.bindAll(this);
+                this.$('.product-recommend').click(this.productRecommendAction);
+                this.$('.product-price').click(this.productPriceAction);
+            },
+            productRecommendAction: function (e) {
+                alert($(this).attr("data-recommended"));
+                var p = $(e.target).parents('tr'),
+                    self = this;
+                systemMessage.wait("<?php _e('Recommended in process'); ?>");
+                $.getJSON($(this).attr("data-recommended")).done(function (result) {
+                    if (result.ajaxstatus == 1) {
+                        if (result.recommended == 1) {
+                            var buttonClass = 'fa fa-heart';
+                        }
+                        if (result.recommended == 0) {
+                            var buttonClass = 'fa fa-heart-o';
+                        }
+                        $('#button-' + result.id + ' i').attr('class', buttonClass);
+                        systemMessage.succ(result.message);
+                    } else {
+                        systemMessage.fail(result.message);
                     }
-                    if (result.recommended == 0) {
-                        var buttonClass = 'fa fa-heart-o';
-                    }
-                    $('#button-' + result.id + ' i').attr('class', buttonClass);
-                    systemMessage.succ(result.message);
-                } else {
-                    systemMessage.fail(result.message);
-                }
-            });
-        });
+                });
+            },
+            productPriceAction: function (e) {
+                var p = $(e.target).parents('tr'),
+                    self = this;
+                $.get(p.attr('data-price')).done(function (res) {
+                    self.modal.html(res).modal('show');
+                    formModule.success = function (res) {
+                        var d = res.data;
+                        self.modal.html(res).modal('hide');
+                        $('.product-price-' + p.attr('data-id')).html(d.price);
+                    };
+                });
+            },
+        }
+        page.init();
     })(jQuery)
 </script>

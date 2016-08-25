@@ -21,6 +21,8 @@ use Module\Shop\Form\ProductForm;
 use Module\Shop\Form\ProductFilter;
 use Module\Shop\Form\ProductAdditionalForm;
 use Module\Shop\Form\ProductAdditionalFilter;
+use Module\Shop\Form\ProductPriceForm;
+use Module\Shop\Form\ProductPriceFilter;
 use Module\Shop\Form\RelatedForm;
 use Module\Shop\Form\RelatedFilter;
 use Module\Shop\Form\AdminSearchForm;
@@ -72,32 +74,31 @@ class ProductController extends ActionController
         if (!empty($title)) {
             $whereProduct['title LIKE ?'] = '%' . $title . '%';
         }
-        //
-        $propertyList = Pi::api('property', 'shop')->getList();
         // Get list of product
         $select = $this->getModel('product')->select()->where($whereProduct)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
             $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
-            $product[$row->id]['property'] = Pi::api('property', 'shop')->getValue($row->id);
+            /* $product[$row->id]['property'] = Pi::api('property', 'shop')->getValue($row->id);
+            $name = sprintf('product-price-%s', $row->id);
+            $option = array(
+                'id' => $row->id,
+                'price' => $row->price,
+                'price_discount' => $row->price_discount,
+                'price_shipping' => $row->price_shipping,
+                'stock_type' => $row->stock_type,
+                'propertyList' => $propertyList,
+            );
             if (empty($product[$row->id]['property'])) {
-                $product[$row->id]['form'] = array(
-                    'type' => 'product',
-                    'price' => $product[$row->id]['price'],
-                    'price_discount' => $product[$row->id]['price_discount'],
-                    'price_shipping' => $product[$row->id]['price_shipping'],
-                    'stock_type' => $product[$row->id]['stock_type'],
-                );
+                $option['type'] = 'product';
             } else {
-                $product[$row->id]['form'] = array(
-                    'type' => 'property',
-                    'price' => $product[$row->id]['price'],
-                    'price_discount' => $product[$row->id]['price_discount'],
-                    'price_shipping' => $product[$row->id]['price_shipping'],
-                    'stock_type' => $product[$row->id]['stock_type'],
-                );
+                $option['type'] = 'property';
+                $option['property'] = $product[$row->id]['property'];
             }
+            $product[$row->id]['form'] = new ProductPriceForm($name, $option);
+            $product[$row->id]['form']->setAttribute('enctype', 'multipart/form-data');
+            $product[$row->id]['form']->setAttribute('action', $this->url('', array('action' => 'price'))); */
         }
         // Set count
         if (empty($title)) {
@@ -633,64 +634,118 @@ class ProductController extends ActionController
 
     public function priceAction()
     {
-        // Check post
+        // Set return
+        $return = array();
+        // Get id
+        $id = $this->params('id');
+        // Get property list
+        $propertyList = Pi::api('property', 'shop')->getList();
+        // Get product
+        $product = Pi::api('product', 'shop')->getProduct($id);
+        $product['property'] = Pi::api('property', 'shop')->getValue($product['id']);
+        // Set option
+        $option = array(
+            'id' => $product['id'],
+            'price' => $product['price'],
+            'price_discount' => $product['price_discount'],
+            'price_shipping' => $product['price_shipping'],
+            'stock_type' => $product['stock_type'],
+            'propertyList' => $propertyList,
+            'property' => $product['property'],
+            'type' => empty($product['property']) ? 'product' : 'property',
+        );
+        // Set form
+        $form = new ProductPriceForm('productPrice', $option);
         if ($this->request->isPost()) {
             // Get information
             $data = $this->request->getPost();
-            $data = $data->toArray();
-            // Check type
-            switch ($data['type']) {
-                case 'product':
-                    // Update product
-                    $this->getModel('product')->update(
-                        array(
-                            'price' => (int)$data['price'],
-                            'price_discount' => (int)$data['price_discount'],
-                            'price_shipping' => (int)$data['price_shipping'],
-                        ),
-                        array('id' => (int)$data['id'])
-                    );
-                    // Update link
-                    $this->getModel('link')->update(
-                        array('price' => (int)$data['price']),
-                        array('product' => (int)$data['id'])
-                    );
-                    break;
-
-                case 'property':
-                    // Update property
-                    $priceList = array();
-                    foreach ($data['property'] as $property) {
-                        $priceList[] = (int)$property['price'];
-                        $this->getModel('property_value')->update(
-                            array('price' => (int)$property['price']),
-                            array('id' => (int)$property['id'])
+            $form->setInputFilter(new ProductPriceFilter($option));
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Check type
+                switch ($values['type']) {
+                    case 'product':
+                        // Update product
+                        $this->getModel('product')->update(
+                            array(
+                                'price' => (int)$values['price'],
+                                'price_discount' => (int)$values['price_discount'],
+                                'price_shipping' => (int)$values['price_shipping'],
+                            ),
+                            array('id' => (int)$values['id'])
                         );
-                    }
-                    $minPrice = min($priceList);
-                    // Update product
-                    $this->getModel('product')->update(
-                        array(
-                            'price' => (int)$minPrice,
-                            'price_discount' => (int)$data['price_discount'],
-                            'price_shipping' => (int)$data['price_shipping'],
-                        ),
-                        array('id' => (int)$data['id'])
-                    );
-                    // Update link
-                    $this->getModel('link')->update(
-                        array('price' => (int)$minPrice),
-                        array('product' => (int)$data['id'])
-                    );
-                    break;
+                        // Update link
+                        $this->getModel('link')->update(
+                            array('price' => (int)$values['price']),
+                            array('product' => (int)$values['id'])
+                        );
+                        // return
+                        $return['status'] = 1;
+                        $return['data']['price'] = Pi::api('api', 'shop')->viewPrice($values['price']);
+                        $return['data']['id'] = $values['id'];
+                        break;
+
+                    case 'property':
+                        // Update property
+                        $priceList = array();
+
+                        // Make property all
+                        $propertyValues = $values;
+                        unset($propertyValues['price_discount']);
+                        unset($propertyValues['price_shipping']);
+                        unset($propertyValues['id']);
+                        unset($propertyValues['type']);
+                        $propertyAll = array();
+                        foreach ($propertyValues as $propertyKey => $propertyValue) {
+                            $propertySingle = explode('-', $propertyKey);
+                            $propertyAll[$propertySingle[1]][$propertySingle[2]] = $propertyValue;
+                        }
+
+                        // Update property_value
+                        foreach ($propertyAll as $property) {
+                            $priceList[] = (int)$property['price'];
+                            $this->getModel('property_value')->update(
+                                array('price' => (int)$property['price']),
+                                array('id' => (int)$property['id'])
+                            );
+                        }
+                        $minPrice = min($priceList);
+
+                        // Update product
+                        $this->getModel('product')->update(
+                            array(
+                                'price' => (int)$minPrice,
+                                'price_discount' => (int)$values['price_discount'],
+                                'price_shipping' => (int)$values['price_shipping'],
+                            ),
+                            array('id' => (int)$values['id'])
+                        );
+
+                        // Update link
+                        $this->getModel('link')->update(
+                            array('price' => (int)$minPrice),
+                            array('product' => (int)$values['id'])
+                        );
+
+                        // return
+                        $return['status'] = 1;
+                        $return['data']['price'] = Pi::api('api', 'shop')->viewPrice($minPrice);
+                        $return['data']['id'] = $values['id'];
+                        break;
+                }
+            } else {
+                $return['status'] = 0;
+                $return['data'] = '';
             }
-            // Set url
-            $url = Pi::url($this->url('', array('action' => 'index')));
-            return $this->jump(
-                $url,
-                __('Product prices updated successfully.')
-            );
+            return $return;
+        } else {
+            $form->setAttribute('action', $this->url('', array('action' => 'price', 'id' => $product['id'])));
         }
+        // Set view
+        $this->view()->setTemplate('system:component/form-popup');
+        $this->view()->assign('title', __('Update price and stock'));
+        $this->view()->assign('form', $form);
     }
 
     public function removeAction()
