@@ -18,6 +18,10 @@
     case 5:
         $shopBlockBoxSize = 'col-xs-12 col-sm-2 col-md-2';
         break;
+
+    default:
+        $shopBlockBoxSize = 'col-xs-12 col-sm-3 col-md-3';
+        break;
 }
 // language
 _b('On sale');
@@ -28,7 +32,7 @@ _b('Recommended');
     <div class="shop-block-product clearfix">
         <?php if ($block['list-type'] == 'horizontal') { ?>
             <?php foreach ($block['resources'] as $product) { ?>
-                <div class="col-xs-12 col-sm-3 col-md-3 productBox h-product" itemscope itemtype="http://schema.org/Product">
+                <div class="<?php echo $shopBlockBoxSize; ?> productBox h-product" itemscope itemtype="http://schema.org/Product">
                     <div class="thumbnail">
                         <?php if ($product['image']) { ?>
                             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>" title="<?php echo $this->escape($product['title']); ?>"
