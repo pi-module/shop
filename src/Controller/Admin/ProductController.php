@@ -805,7 +805,7 @@ class ProductController extends ActionController
         // Check post
         if ($this->request->isPost()) {
             Pi::api('serial', 'shop')->createSerial($product['id']);
-            $this->jump(array('action' => 'serial', 'id' => $product['id']), sprintf(__('%s new serial number added')), $config['serial_count']);
+            $this->jump(array('action' => 'serial', 'id' => $product['id']), sprintf(__('%s new serial number added'), $config['serial_count']));
         }
         // Get count
         $count = array();
