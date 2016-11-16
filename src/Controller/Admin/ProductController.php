@@ -821,6 +821,7 @@ class ProductController extends ActionController
         $count['notChecked'] = $this->getModel('serial')->selectWith($select)->current()->count;
         // Set view
         $this->view()->setTemplate('product-serial');
+        $this->view()->assign('title', sprintf(__('Manage serial number of %s'), $product['title']));
         $this->view()->assign('product', $product);
         $this->view()->assign('count', $count);
         $this->view()->assign('config', $config);
