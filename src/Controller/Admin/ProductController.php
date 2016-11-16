@@ -43,10 +43,13 @@ class ProductController extends ActionController
     public function indexAction()
     {
         // Get page
+        $module = $this->params('module');
         $page = $this->params('page', 1);
         $status = $this->params('status');
         $category = $this->params('category');
         $title = $this->params('title');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
         // Set info
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $order = array('time_create DESC', 'id DESC');
@@ -139,6 +142,7 @@ class ProductController extends ActionController
         $this->view()->assign('list', $product);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('form', $form);
+        $this->view()->assign('config', $config);
     }
 
     public function processAction()
@@ -783,5 +787,42 @@ class ProductController extends ActionController
             'status' => $status,
             'message' => $message,
         );
+    }
+
+    public function serialAction()
+    {
+        // Get id
+        $id = $this->params('id');
+        $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Get product
+        $product = Pi::api('product', 'shop')->getProduct($id);
+        // Check
+        if (empty($product)) {
+            $this->jump(array('action' => 'index'), __('Please select product'));
+        }
+        // Check post
+        if ($this->request->isPost()) {
+            Pi::api('serial', 'shop')->createSerial($product['id']);
+            $this->jump(array('action' => 'serial', 'id' => $product['id']), sprintf(__('%s new serial number added')), $config['serial_count']);
+        }
+        // Get count
+        $count = array();
+        $columns = array('count' => new Expression('count(*)'));
+        $whereAll = array('product' => $product['id']);
+        $whereChecked = array('product' => $product['id'], 'status' => 1);
+        $whereNotChecked = array('product' => $product['id'], 'status' => 0);
+        $select = $this->getModel('serial')->select()->where($whereAll)->columns($columns);
+        $count['all'] = $this->getModel('serial')->selectWith($select)->current()->count;
+        $select = $this->getModel('serial')->select()->where($whereChecked)->columns($columns);
+        $count['checked'] = $this->getModel('serial')->selectWith($select)->current()->count;
+        $select = $this->getModel('serial')->select()->where($whereNotChecked)->columns($columns);
+        $count['notChecked'] = $this->getModel('serial')->selectWith($select)->current()->count;
+        // Set view
+        $this->view()->setTemplate('product-serial');
+        $this->view()->assign('product', $product);
+        $this->view()->assign('count', $count);
+        $this->view()->assign('config', $config);
     }
 }

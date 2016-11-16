@@ -305,3 +305,20 @@ CREATE TABLE `{log}` (
   KEY `uid` (`uid`),
   KEY `time_create` (`time_create`)
 );
+
+CREATE TABLE `{serial}` (
+  `id`            INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
+  `product`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `status`        TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
+  `serial_number` VARCHAR(255)        NOT NULL DEFAULT '',
+  `time_create`   INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `time_expire`   INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `check_time`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `check_uid`     INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+  `check_ip`      CHAR(15)            NOT NULL DEFAULT '',
+  `information`   TEXT,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `serial_number` (`serial_number`),
+  KEY `product` (`product`),
+  KEY `status` (`status`)
+);

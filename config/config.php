@@ -57,6 +57,10 @@ return array(
             'title' => _a('Order'),
             'name' => 'order'
         ),
+        array(
+            'title' => _a('Serial'),
+            'name' => 'serial'
+        ),
     ),
     'item' => array(
         // Admin
@@ -519,6 +523,49 @@ return array(
             'edit' => 'checkbox',
             'filter' => 'number_int',
             'value' => 1
+        ),
+        // Serial
+        'serial_active' => array(
+            'category' => 'serial',
+            'title' => _a('Active serial number system'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 0
+        ),
+        'serial_count' => array(
+            'category' => 'serial',
+            'title' => _a('Count of build serial number'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 5000
+        ),
+        'serial_role' => array(
+            'category' => 'serial',
+            'title' => _a('Serial number role'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'string',
+            'value' => 'P%s-N%s'
+        ),
+        'serial_role_type' => array(
+            'category' => 'serial',
+            'title' => _a('Serial number role type'),
+            'description' => '',
+            'edit' => array(
+                'type' => 'select',
+                'options' => array(
+                    'options' => array(
+                        1 => _a('Just Number'),
+                        2 => _a('Number and Lowercase alphabet'),
+                        3 => _a('Number and Uppercase alphabet'),
+                        4 => _a('Number, Lowercase and Uppercase alphabet\''),
+                    ),
+                ),
+            ),
+            'filter' => 'text',
+            'value' => 2,
         ),
         // Texts
         'text_description_index' => array(

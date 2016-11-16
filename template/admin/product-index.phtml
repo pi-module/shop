@@ -104,6 +104,11 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                             <li><a title="<?php _e('Related products'); ?>"
                                    href="<?php echo $this->url('', array('action' => 'related', 'id' => $product['id'])); ?>"><i
                                         class="fa fa-edit"></i> <?php _e('Related products'); ?></a></li>
+                            <?php if ($config['serial_active']) { ?>
+                                <li><a title="<?php _e('Manage serial number'); ?>"
+                                       href="<?php echo $this->url('', array('action' => 'serial', 'id' => $product['id'])); ?>"><i
+                                            class="fa fa-edit"></i> <?php _e('Manage serial number'); ?></a></li>
+                            <?php } ?>
                         </ul>
                     </div>
                     <?php if ($product['status'] == 1) { ?>
