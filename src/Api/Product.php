@@ -450,7 +450,7 @@ class Product extends AbstractApi
         // boject to array
         $product = $product->toArray();
         // Make setting
-        $product['setting'] = json::decode($product['setting'], true);
+        $product['setting'] = json_decode($product['setting'], true);
         // Set text_summary
         $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'html', 'text');
         // Set text_description
@@ -472,7 +472,7 @@ class Product extends AbstractApi
             //'slug'          => $product['slug'],
         )));
         // Set category information
-        $product['category'] = Json::decode($product['category']);
+        $product['category'] = json_decode($product['category']);
         foreach ($product['category'] as $category) {
             $product['categories'][$category]['id'] = $categoryList[$category]['id'];
             $product['categories'][$category]['title'] = $categoryList[$category]['title'];
@@ -573,7 +573,7 @@ class Product extends AbstractApi
         // boject to array
         $product = $product->toArray();
         // Make setting
-        $product['setting'] = json::decode($product['setting'], true);;
+        $product['setting'] = json_decode($product['setting'], true);;
         // Set times
         $product['time_create_view'] = _date($product['time_create']);
         $product['time_update_view'] = _date($product['time_update']);
@@ -591,7 +591,7 @@ class Product extends AbstractApi
             //'slug'          => $product['slug'],
         )));
         // Set category information
-        $product['category'] = Json::decode($product['category']);
+        $product['category'] = json_decode($product['category']);
         // Set discount
         $product = $this->canonizePriceAndDiscount($product, $config);
         // Set marketable
@@ -660,7 +660,7 @@ class Product extends AbstractApi
         // boject to array
         $product = $product->toArray();
         // Make setting
-        $product['setting'] = json::decode($product['setting'], true);;
+        $product['setting'] = json_decode($product['setting'], true);;
         // Set product url
         $product['productUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
             'module' => $this->getModule(),
@@ -701,7 +701,7 @@ class Product extends AbstractApi
         // boject to array
         $product = $product->toArray();
         // Make setting
-        $product['setting'] = json::decode($product['setting'], true);;
+        $product['setting'] = json_decode($product['setting'], true);;
         // Set text_summary
         $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'html', 'html');
         // Set text_description
@@ -734,7 +734,7 @@ class Product extends AbstractApi
             'id' => $product['id'],
         )));
         // Set category information
-        $product['category'] = Json::decode($product['category']);
+        $product['category'] = json_decode($product['category']);
         // Set discount
         $product = $this->canonizePriceAndDiscount($product, $config);
         // Set stock
@@ -820,7 +820,7 @@ class Product extends AbstractApi
         // boject to array
         $product = $product->toArray();
         // Make setting
-        $product['setting'] = json::decode($product['setting'], true);
+        $product['setting'] = json_decode($product['setting'], true);
         // Set text_summary
         $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'html', 'html');
         // Set text_description
@@ -842,7 +842,7 @@ class Product extends AbstractApi
             //'slug'          => $product['slug'],
         )));
         // Set category information
-        $product['category'] = Json::decode($product['category']);
+        $product['category'] = json_decode($product['category']);
         foreach ($product['category'] as $category) {
             $product['categories'][$category]['id'] = $categoryList[$category]['id'];
             $product['categories'][$category]['title'] = $categoryList[$category]['title'];
