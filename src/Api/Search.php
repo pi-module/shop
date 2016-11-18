@@ -27,7 +27,6 @@ class Search extends AbstractSearch
      */
     protected $searchIn = array(
         'title',
-        'subtitle',
         'text_summary',
         'text_description',
     );
@@ -40,7 +39,6 @@ class Search extends AbstractSearch
         'title' => 'title',
         'text_summary' => 'content',
         'time_create' => 'time',
-        'uid' => 'uid',
         'slug' => 'slug',
         'image' => 'image',
         'path' => 'path',
