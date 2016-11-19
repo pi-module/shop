@@ -93,5 +93,15 @@ class ProductPriceFilter extends InputFilter
                 ),
             ),
         ));
+        // stock_type
+        $this->add(array(
+            'name' => 'stock_type',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
     }
 }

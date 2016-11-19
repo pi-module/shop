@@ -124,6 +124,34 @@ class ProductPriceForm extends BaseForm
                 'value' => $this->option['price_shipping'],
             )
         ));
+        // stock_type
+        if ($this->option['order_stock'] == 'manual') {
+            $this->add(array(
+                'name' => 'stock_type',
+                'type' => 'select',
+                'options' => array(
+                    'label' => __('Stock type'),
+                    'value_options' => array(
+                        1 => __('In stock'),
+                        2 => __('Out of stock'),
+                        3 => __('Coming soon'),
+                        4 => __('Contact'),
+                        5 => __('Variable stock (make order without active payment)'),
+                    ),
+                ),
+                'attributes' => array(
+                    'required' => true,
+                    'value' => $this->option['stock_type'],
+                )
+            ));
+        } else {
+            $this->add(array(
+                'name' => 'stock_type',
+                'attributes' => array(
+                    'type' => 'hidden',
+                ),
+            ));
+        }
         // Save
         $this->add(array(
             'name' => 'submit',

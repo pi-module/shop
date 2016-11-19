@@ -27,6 +27,7 @@ class ProductAdditionalForm extends BaseForm
         $this->product_ribbon = $option['product_ribbon'];
         $this->video_service = $option['video_service'];
         $this->module = Pi::service('module')->current();
+        $this->config = Pi::service('registry')->config->read('shop');
         parent::__construct($name);
     }
 
@@ -197,7 +198,51 @@ EOT;
                 ));
             }
         }
-
+       // price
+        $this->add(array(
+            'name' => 'price',
+            'options' => array(
+                'label' => __('Price'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('Real price'),
+                'required' => true,
+            )
+        ));
+        // price_discount
+        $this->add(array(
+            'name' => 'price_discount',
+            'options' => array(
+                'label' => __('Price Discount'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('Display prices'),
+            )
+        ));
+        // price_shipping
+        $this->add(array(
+            'name' => 'price_shipping',
+            'options' => array(
+                'label' => __('Extra shipping price'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('If your product have special shipping price, you can add it here and this price collected to general order shipping price'),
+            )
+        ));
+        // price_title
+        $this->add(array(
+            'name' => 'price_title',
+            'options' => array(
+                'label' => __('Price title'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+            )
+        ));
         // stock
         if ($this->config['order_stock'] == 'product') {
             $this->add(array(
@@ -245,51 +290,6 @@ EOT;
                 ),
             ));
         }
-        // price
-        $this->add(array(
-            'name' => 'price',
-            'options' => array(
-                'label' => __('Price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => __('Real price'),
-                'required' => true,
-            )
-        ));
-        // price_discount
-        $this->add(array(
-            'name' => 'price_discount',
-            'options' => array(
-                'label' => __('Price Discount'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => __('Display prices'),
-            )
-        ));
-        // price_shipping
-        $this->add(array(
-            'name' => 'price_shipping',
-            'options' => array(
-                'label' => __('Extra shipping price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => __('If your product have special shipping price, you can add it here and this price collected to general order shipping price'),
-            )
-        ));
-        // price_title
-        $this->add(array(
-            'name' => 'price_title',
-            'options' => array(
-                'label' => __('Price title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
-                'description' => '',
-            )
-        ));
         // order_discount
         if ($this->config['order_discount']) {
             // extra_product

@@ -32,14 +32,8 @@ use Zend\Json\Json;
 
 class ProductController extends ActionController
 {
-    /**
-     * Product Image Prefix
-     */
     protected $ImageProductPrefix = 'product-';
 
-    /**
-     * index Action
-     */
     public function indexAction()
     {
         // Get page
@@ -55,27 +49,49 @@ class ProductController extends ActionController
         $order = array('time_create DESC', 'id DESC');
         $limit = intval($this->config('admin_perpage'));
         $product = array();
-        // Set where
-        $whereLink = array();
-        if (!empty($status)) {
-            $whereLink['status'] = $status;
-        }
-        if (!empty($category)) {
-            $whereLink['category'] = $category;
-        }
-        $columnsLink = array('product' => new Expression('DISTINCT product'));
-        // Get info from link table
-        $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('link')->selectWith($select)->toArray();
-        // Make list
-        foreach ($rowset as $id) {
-            $productId[] = $id['product'];
-        }
-        // Set info
-        $whereProduct = array('id' => $productId);
+       
         // Set title
-        if (!empty($title)) {
-            $whereProduct['title LIKE ?'] = '%' . $title . '%';
+        if (!empty($title) && !empty($category)) {
+            // Set where
+            $whereLink = array();
+            $whereLink['category'] = $category;
+            $columnsLink = array('product' => new Expression('DISTINCT product'));
+            // Get info from link table
+            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order);
+            $rowset = $this->getModel('link')->selectWith($select)->toArray();
+            // Make list
+            foreach ($rowset as $id) {
+                $productId[] = $id['product'];
+            }
+            // Set info
+            $whereProduct = array('title LIKE ?' => '%' . $title . '%');
+            if (!empty($productId)) {
+                $whereProduct['id'] = $productId;
+            }
+        } elseif (!empty($title)) {
+            $whereProduct = array('title LIKE ?' => '%' . $title . '%');
+        } else {
+            // Set where
+            $whereLink = array();
+            if (!empty($status)) {
+                $whereLink['status'] = $status;
+            }
+            if (!empty($category)) {
+                $whereLink['category'] = $category;
+            }
+            $columnsLink = array('product' => new Expression('DISTINCT product'));
+            // Get info from link table
+            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order)->offset($offset)->limit($limit);
+            $rowset = $this->getModel('link')->selectWith($select)->toArray();
+            // Make list
+            foreach ($rowset as $id) {
+                $productId[] = $id['product'];
+            }
+            // Set info
+            $whereProduct = array();
+            if (!empty($productId)) {
+                $whereProduct['id'] = $productId;
+            }
         }
         // Get list of product
         $select = $this->getModel('product')->select()->where($whereProduct)->order($order);
@@ -83,25 +99,6 @@ class ProductController extends ActionController
         // Make list
         foreach ($rowset as $row) {
             $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
-            /* $product[$row->id]['property'] = Pi::api('property', 'shop')->getValue($row->id);
-            $name = sprintf('product-price-%s', $row->id);
-            $option = array(
-                'id' => $row->id,
-                'price' => $row->price,
-                'price_discount' => $row->price_discount,
-                'price_shipping' => $row->price_shipping,
-                'stock_type' => $row->stock_type,
-                'propertyList' => $propertyList,
-            );
-            if (empty($product[$row->id]['property'])) {
-                $option['type'] = 'product';
-            } else {
-                $option['type'] = 'property';
-                $option['property'] = $product[$row->id]['property'];
-            }
-            $product[$row->id]['form'] = new ProductPriceForm($name, $option);
-            $product[$row->id]['form']->setAttribute('enctype', 'multipart/form-data');
-            $product[$row->id]['form']->setAttribute('action', $this->url('', array('action' => 'price'))); */
         }
         // Set count
         if (empty($title)) {
@@ -642,6 +639,9 @@ class ProductController extends ActionController
         $return = array();
         // Get id
         $id = $this->params('id');
+        $module = $this->params('module');
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
         // Get property list
         $propertyList = Pi::api('property', 'shop')->getList();
         // Get product
@@ -657,6 +657,8 @@ class ProductController extends ActionController
             'propertyList' => $propertyList,
             'property' => $product['property'],
             'type' => empty($product['property']) ? 'product' : 'property',
+            'order_stock' => $config['order_stock'],
+            'stock_type' => $product['stock_type'],
         );
         // Set form
         $form = new ProductPriceForm('productPrice', $option);
@@ -676,6 +678,7 @@ class ProductController extends ActionController
                                 'price' => (int)$values['price'],
                                 'price_discount' => (int)$values['price_discount'],
                                 'price_shipping' => (int)$values['price_shipping'],
+                                'stock_type' => (int)$values['stock_type'],
                             ),
                             array('id' => (int)$values['id'])
                         );
@@ -722,6 +725,7 @@ class ProductController extends ActionController
                                 'price' => (int)$minPrice,
                                 'price_discount' => (int)$values['price_discount'],
                                 'price_shipping' => (int)$values['price_shipping'],
+                                'stock_type' => (int)$values['stock_type'],
                             ),
                             array('id' => (int)$values['id'])
                         );
