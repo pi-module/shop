@@ -93,13 +93,27 @@ class Property extends AbstractApi
 
     public function getValue($product)
     {
+        $prices = array();
         $values = array();
         $where = array('product' => $product);
         $select = Pi::model('property_value', $this->getModule())->select()->where($where);
         $rowset = Pi::model('property_value', $this->getModule())->selectWith($select);
+        // Make values list
         foreach ($rowset as $row) {
+            $prices[$row->property][$row->id] = $row->price;
             $values[$row->property][$row->id] = $row->toArray();
             $values[$row->property][$row->id]['price_view'] = Pi::api('api', 'shop')->viewPrice($row->price);
+            $values[$row->property][$row->id]['select'] = 0;
+        }
+        // Set checked for min price
+        foreach ($prices as $property => $priceList) {
+            $minPrice = min($priceList);
+            foreach ($priceList as $key => $price) {
+                if ($price == $minPrice) {
+                    $values[$property][$key]['select'] = 1;
+                    break;
+                }
+            }
         }
         return $values;
     }

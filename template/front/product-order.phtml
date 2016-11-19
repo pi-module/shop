@@ -23,11 +23,14 @@ $this->footScript()->appendScript($script);
                             <?php if ($config['order_stock'] != 'property') { ?>
                                 <label class="radio-inline input-sm">
                                     <input type="radio" class="property-value-radio"
-                                           <?php if ($propertyList['influence_price']) { ?>
-                                           data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
-                                           data-price="<?php echo $this->escape($propertyValue['price']); ?>"
-                                           data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
-                                           <?php } ?>
+                                        <?php if ($propertyList['influence_price']) { ?>
+                                            data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
+                                            data-price="<?php echo $this->escape($propertyValue['price']); ?>"
+                                            data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                        <?php } ?>
+                                        <?php if ($propertyValue['select']) { ?>
+                                            checked="checked"
+                                        <?php } ?>
                                            name="property[<?php echo $this->escape($propertyList['id']); ?>]"
                                            value="<?php echo $this->escape($propertyValue['unique_key']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
                                 </label>
@@ -38,6 +41,9 @@ $this->footScript()->appendScript($script);
                                             data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
                                             data-price="<?php echo $this->escape($propertyValue['price']); ?>"
                                             data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                        <?php } ?>
+                                        <?php if ($propertyValue['select']) { ?>
+                                            checked="checked"
                                         <?php } ?>
                                            name="property[<?php echo $this->escape($propertyList['id']); ?>]"
                                            value="<?php echo $this->escape($propertyValue['unique_key']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
@@ -56,6 +62,9 @@ $this->footScript()->appendScript($script);
                                             data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
                                             data-price="<?php echo $this->escape($propertyValue['price']); ?>"
                                             data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                        <?php } ?>
+                                        <?php if ($propertyValue['select']) { ?>
+                                            selected="selected"
                                         <?php } ?>>
                                         <?php echo $this->escape($propertyValue['name']); ?>
                                     </option>
@@ -65,6 +74,9 @@ $this->footScript()->appendScript($script);
                                             data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
                                             data-price="<?php echo $this->escape($propertyValue['price']); ?>"
                                             data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                        <?php } ?>
+                                        <?php if ($propertyValue['select']) { ?>
+                                            selected="selected"
                                         <?php } ?>>
                                         <?php echo $this->escape($propertyValue['name']); ?>
                                     </option>
