@@ -20,8 +20,6 @@ class ProductFilter extends InputFilter
 {
     public function __construct($attribute = null)
     {
-        // Get config
-        $config = Pi::service('registry')->config->read('shop');
         // id
         $this->add(array(
             'name' => 'id',
@@ -106,79 +104,6 @@ class ProductFilter extends InputFilter
             'name' => 'image',
             'required' => false,
         ));
-        // stock
-        $this->add(array(
-            'name' => 'stock',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // stock_type
-        $this->add(array(
-            'name' => 'stock_type',
-            'required' => false,
-        ));
-        // price
-        $this->add(array(
-            'name' => 'price',
-            'required' => true,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // price_discount
-        $this->add(array(
-            'name' => 'price_discount',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // price_shipping
-        $this->add(array(
-            'name' => 'price_shipping',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // price_title
-        $this->add(array(
-            'name' => 'price_title',
-            'required' => false,
-            'filters' => array(
-                array(
-                    'name' => 'StringTrim',
-                ),
-            ),
-        ));
-        // order_discount
-        if ($config['order_discount']) {
-            // Get role list
-            $roles = Pi::service('registry')->Role->read('front');
-            unset($roles['webmaster']);
-            unset($roles['guest']);
-            foreach ($roles as $name => $role) {
-                $this->add(array(
-                    'name' => $name,
-                    'required' => false,
-                    'filters' => array(
-                        array(
-                            'name' => 'StringTrim',
-                        ),
-                    ),
-                ));
-            }
-        }
         // seo_title
         $this->add(array(
             'name' => 'seo_title',

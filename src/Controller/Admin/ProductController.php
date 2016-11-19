@@ -35,7 +35,7 @@ class ProductController extends ActionController
     /**
      * Product Image Prefix
      */
-    protected $ImageProductPrefix = 'product_';
+    protected $ImageProductPrefix = 'product-';
 
     /**
      * index Action
@@ -247,18 +247,6 @@ class ProductController extends ActionController
                 } elseif (!isset($values['image'])) {
                     $values['image'] = '';
                 }
-                // Set setting
-                $setting = array();
-                if ($config['order_discount']) {
-                    // Get role list
-                    $roles = Pi::service('registry')->Role->read('front');
-                    unset($roles['webmaster']);
-                    unset($roles['guest']);
-                    foreach ($roles as $name => $role) {
-                        $setting['discount'][$name] = $values[$name];
-                    }
-                }
-                $values['setting'] = Json::encode($setting);
                 // Category
                 $values['category'] = Json::encode(array_unique($values['category']));
                 // Set seo_title
@@ -327,13 +315,7 @@ class ProductController extends ActionController
                         $product['tag'] = implode('|', $tag);
                     }
                 }
-                // Make setting
-                if ($config['order_discount']) {
-                    foreach ($product['setting']['discount'] as $name => $value) {
-                        $product[$name] = $value;
-                    }
-                }
-                // Set data 
+                // Set data
                 $form->setData($product);
                 // set nav
                 $nav = array(
@@ -397,6 +379,18 @@ class ProductController extends ActionController
                 }
                 // Set time
                 $values['time_update'] = time();
+                // Set setting
+                $setting = array();
+                if ($config['order_discount']) {
+                    // Get role list
+                    $roles = Pi::service('registry')->Role->read('front');
+                    unset($roles['webmaster']);
+                    unset($roles['guest']);
+                    foreach ($roles as $name => $role) {
+                        $setting['discount'][$name] = $values[$name];
+                    }
+                }
+                $values['setting'] = Json::encode($setting);
                 // Save
                 $row = $this->getModel('product')->find($values['id']);
                 $row->assign($values);
@@ -432,6 +426,12 @@ class ProductController extends ActionController
                 $videos = Pi::api('service', 'video')->getVideo($module, 'product', $product['id'], false);
                 foreach ($videos as $video) {
                     $product['video_list'] = $video['id'];
+                }
+            }
+            // Make setting
+            if ($config['order_discount'] && !empty($product['setting']['discount'])) {
+                foreach ($product['setting']['discount'] as $name => $value) {
+                    $product[$name] = $value;
                 }
             }
             // Set form

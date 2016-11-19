@@ -26,7 +26,7 @@ class CategoryController extends ActionController
     /**
      * Image Prefix
      */
-    protected $ImageCategoryPrefix = 'category_';
+    protected $ImageCategoryPrefix = 'category-';
 
     /**
      * index Action
