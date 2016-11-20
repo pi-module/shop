@@ -53,17 +53,10 @@ class ProductPriceForm extends BaseForm
         // Check type
         switch ($this->option['type']) {
             case 'property':
+                $fieldCount = 0;
                 foreach ($this->option['property'] as $key => $propertyDetails) {
                     if ($this->option['propertyList'][$key]['influence_price']) {
                         foreach ($propertyDetails as $propertySingle) {
-                            // unique_key
-                            /* $this->add(array(
-                                'name' => sprintf('property-%s-unique_key',  $propertySingle['id']),
-                                'attributes' => array(
-                                    'type' => 'hidden',
-                                    'value' => $propertySingle['unique_key'],
-                                ),
-                            )); */
                             // id
                             $this->add(array(
                                 'name' => sprintf('property-%s-id',  $propertySingle['id']),
@@ -83,8 +76,24 @@ class ProductPriceForm extends BaseForm
                                     'value' => $propertySingle['price'],
                                 )
                             ));
+                            // Update field count
+                            $fieldCount++;
                         }
                     }
+                }
+                // Check  field count
+                if ($fieldCount == 0) {
+                    // price
+                    $this->add(array(
+                        'name' => 'price',
+                        'options' => array(
+                            'label' => __('Price'),
+                        ),
+                        'attributes' => array(
+                            'type' => 'text',
+                            'value' => $this->option['price'],
+                        )
+                    ));
                 }
                 break;
 

@@ -71,7 +71,7 @@ class Property extends AbstractApi
                     $row->assign($values);
                     $row->save();
                     // Add price to array
-                    if (isset($propertyValue['price']) && !empty($propertyValue['price'])) {
+                    if (isset($propertyValue['price']) && !empty($propertyValue['price']) && $propertyValue['price'] > 0) {
                         $priceList[] = $propertyValue['price'];
                     }
                 }
@@ -100,7 +100,9 @@ class Property extends AbstractApi
         $rowset = Pi::model('property_value', $this->getModule())->selectWith($select);
         // Make values list
         foreach ($rowset as $row) {
-            $prices[$row->property][$row->id] = $row->price;
+            if ($row->price > 0) {
+                $prices[$row->property][$row->id] = $row->price;
+            }
             $values[$row->property][$row->id] = $row->toArray();
             $values[$row->property][$row->id]['price_view'] = Pi::api('api', 'shop')->viewPrice($row->price);
             $values[$row->property][$row->id]['select'] = 0;

@@ -172,9 +172,6 @@ class ProductController extends ActionController
         return $this->jump($url, $message);
     }
 
-    /**
-     * update Action
-     */
     public function updateAction()
     {
         // check category
@@ -520,9 +517,6 @@ class ProductController extends ActionController
         return $return;
     }
 
-    /**
-     * related Action
-     */
     public function relatedAction()
     {
         // Get id
@@ -711,7 +705,9 @@ class ProductController extends ActionController
 
                         // Update property_value
                         foreach ($propertyAll as $property) {
-                            $priceList[] = (int)$property['price'];
+                            if ($property['price'] > 0) {
+                                $priceList[] = (int)$property['price'];
+                            }
                             $this->getModel('property_value')->update(
                                 array('price' => (int)$property['price']),
                                 array('id' => (int)$property['id'])

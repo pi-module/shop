@@ -33,14 +33,10 @@ class ProductPriceFilter extends InputFilter
         // Check type
         switch ($option['type']) {
             case 'property':
+                $fieldCount = 0;
                 foreach ($option['property'] as $key => $propertyDetails) {
                     if ($option['propertyList'][$key]['influence_price']) {
                         foreach ($propertyDetails as $propertySingle) {
-                            // unique_key
-                            /* $this->add(array(
-                                'name' => sprintf('property-%s-unique_key',  $propertySingle['id']),
-                                'required' => false,
-                            )); */
                             // id
                             $this->add(array(
                                 'name' => sprintf('property-%s-id',  $propertySingle['id']),
@@ -55,8 +51,23 @@ class ProductPriceFilter extends InputFilter
                                     ),
                                 ),
                             ));
+                            // Update field count
+                            $fieldCount++;
                         }
                     }
+                }
+                // Check  field count
+                if ($fieldCount == 0) {
+                    // price
+                    $this->add(array(
+                        'name' => 'price',
+                        'required' => false,
+                        'filters' => array(
+                            array(
+                                'name' => 'StringTrim',
+                            ),
+                        ),
+                    ));
                 }
                 break;
 
