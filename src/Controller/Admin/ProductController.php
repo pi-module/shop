@@ -663,8 +663,79 @@ class ProductController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+                // Check price set or not
+                if (isset($values['price']) && !empty($values['price'])) {
+                    // Update product
+                    $this->getModel('product')->update(
+                        array(
+                            'price' => (int)$values['price'],
+                            'price_discount' => (int)$values['price_discount'],
+                            'price_shipping' => (int)$values['price_shipping'],
+                            'stock_type' => (int)$values['stock_type'],
+                        ),
+                        array('id' => (int)$values['id'])
+                    );
+                    // Update link
+                    $this->getModel('link')->update(
+                        array('price' => (int)$values['price']),
+                        array('product' => (int)$values['id'])
+                    );
+                    // return
+                    $return['status'] = 1;
+                    $return['data']['price'] = Pi::api('api', 'shop')->viewPrice($values['price']);
+                    $return['data']['id'] = $values['id'];
+                } else {
+                    // Update property
+                    $priceList = array();
+
+                    // Make property all
+                    $propertyValues = $values;
+                    unset($propertyValues['price_discount']);
+                    unset($propertyValues['price_shipping']);
+                    unset($propertyValues['id']);
+                    unset($propertyValues['type']);
+                    $propertyAll = array();
+                    foreach ($propertyValues as $propertyKey => $propertyValue) {
+                        $propertySingle = explode('-', $propertyKey);
+                        $propertyAll[$propertySingle[1]][$propertySingle[2]] = $propertyValue;
+                    }
+
+                    // Update property_value
+                    foreach ($propertyAll as $property) {
+                        if ($property['price'] > 0) {
+                            $priceList[] = (int)$property['price'];
+                        }
+                        $this->getModel('property_value')->update(
+                            array('price' => (int)$property['price']),
+                            array('id' => (int)$property['id'])
+                        );
+                    }
+                    $minPrice = min($priceList);
+
+                    // Update product
+                    $this->getModel('product')->update(
+                        array(
+                            'price' => (int)$minPrice,
+                            'price_discount' => (int)$values['price_discount'],
+                            'price_shipping' => (int)$values['price_shipping'],
+                            'stock_type' => (int)$values['stock_type'],
+                        ),
+                        array('id' => (int)$values['id'])
+                    );
+
+                    // Update link
+                    $this->getModel('link')->update(
+                        array('price' => (int)$minPrice),
+                        array('product' => (int)$values['id'])
+                    );
+
+                    // return
+                    $return['status'] = 1;
+                    $return['data']['price'] = Pi::api('api', 'shop')->viewPrice($minPrice);
+                    $return['data']['id'] = $values['id'];
+                }
                 // Check type
-                switch ($values['type']) {
+                /* switch ($values['type']) {
                     case 'product':
                         // Update product
                         $this->getModel('product')->update(
@@ -737,7 +808,7 @@ class ProductController extends ActionController
                         $return['data']['price'] = Pi::api('api', 'shop')->viewPrice($minPrice);
                         $return['data']['id'] = $values['id'];
                         break;
-                }
+                } */
             } else {
                 $return['status'] = 0;
                 $return['data'] = '';
