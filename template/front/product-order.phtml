@@ -27,6 +27,9 @@ $this->footScript()->appendScript($script);
                                             data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
                                             data-price="<?php echo $this->escape($propertyValue['price']); ?>"
                                             data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                            <?php if ($propertyValue['price'] == 0) { ?>
+                                                disabled="disabled"
+                                            <?php } ?>
                                         <?php } ?>
                                         <?php if ($propertyValue['select']) { ?>
                                             checked="checked"
@@ -62,6 +65,9 @@ $this->footScript()->appendScript($script);
                                             data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
                                             data-price="<?php echo $this->escape($propertyValue['price']); ?>"
                                             data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                            <?php if ($propertyValue['price'] == 0) { ?>
+                                                disabled="disabled"
+                                            <?php } ?>
                                         <?php } ?>
                                         <?php if ($propertyValue['select']) { ?>
                                             selected="selected"
