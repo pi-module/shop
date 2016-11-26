@@ -897,4 +897,31 @@ class ProductController extends ActionController
         $this->view()->assign('count', $count);
         $this->view()->assign('config', $config);
     }
+
+    public function deleteAction()
+    {
+        // Get information
+        $this->view()->setTemplate(false);
+        $module = $this->params('module');
+        $id = $this->params('id');
+        $row = $this->getModel('product')->find($id);
+        if ($row) {
+            $row->status = 5;
+            $row->save();
+            // update links
+            $this->getModel('link')->update(array('status' => $row->status), array('product' => $row->id));
+            // Remove sitemap
+            if (Pi::service('module')->isActive('sitemap')) {
+                $loc = Pi::url($this->url('news', array(
+                    'module'      => $module,
+                    'controller'  => 'product',
+                    'slug'        => $row->slug
+                )));
+                Pi::api('sitemap', 'sitemap')->remove($loc);
+            }
+            // Remove page
+            $this->jump(array('action' => 'index'), __('This product deleted'));
+        }
+        $this->jump(array('action' => 'index'), __('Please select product'));
+    }
 }

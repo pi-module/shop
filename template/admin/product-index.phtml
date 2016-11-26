@@ -116,6 +116,11 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                            href="<?php echo $product['productUrl']; ?>" target="_blank"><i
                                 class="fa fa-eye"></i> <?php _e('View'); ?></a>
                     <?php } ?>
+                    <?php if ($product['status'] != 5) { ?>
+                        <a class="btn btn-danger btn-xs" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $product['id'])); ?>" onclick="return confirm('<?php echo _a('Are you sure to delete this product?'); ?>')">
+                            <i class="fa fa-trash"></i>  <?php _e('Delete'); ?>
+                        </a>
+                    <?php } ?>
                 </td>
                 <td>
                     <ul class="list-inline">
