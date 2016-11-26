@@ -183,7 +183,7 @@ class JsonController extends IndexController
         $where = array(
             'status' => 1,
         );
-        $order = array('time_create DESC', 'id DESC');
+        $order = array('recommended DESC', 'time_create DESC', 'id DESC');
         $columns = array('product' => new Expression('DISTINCT product'));
         // Get info from link table
         $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order);
@@ -241,7 +241,7 @@ class JsonController extends IndexController
             'status' => 1,
             'category' => $idList,
         );
-        $order = array('time_create DESC', 'id DESC');
+        $order = array('recommended DESC', 'time_create DESC', 'id DESC');
         $columns = array('product' => new Expression('DISTINCT product'));
         // Get info from link table
         $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order);
@@ -304,7 +304,7 @@ class JsonController extends IndexController
         $categoryList = Pi::registry('categoryList', 'shop')->read();
         // Set info
         $where = array('status' => 1, 'id' => $tagId);
-        $order = array('time_create DESC', 'id DESC');
+        $order = array('recommended DESC', 'time_create DESC', 'id DESC');
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
@@ -333,7 +333,7 @@ class JsonController extends IndexController
         // Set info
         $where = array('status' => 1);
         $where['title LIKE ?'] = '%' . $keyword . '%';
-        $order = array('time_create DESC', 'id DESC');
+        $order = array('recommended DESC', 'time_create DESC', 'id DESC');
         // Item list header
         $list[] = array(
             'class' => ' class="dropdown-header"',
