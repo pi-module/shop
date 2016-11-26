@@ -878,18 +878,16 @@ EOD;
                 return false;
             }
             // Update recommended value
-            $list = array();
             $columns = array('id');
             $where = array('recommended' => 1);
             $select = $productModel->select()->columns($columns)->where($where);
             $rowset = $productModel->selectWith($select);
             foreach ($rowset as $row) {
-                $list[$row->id] = $row->id;
+                $linkModel->update(
+                    array('recommended' => 1),
+                    array('id' => $row->id)
+                );
             }
-            $linkModel->update(
-                array('recommended' => 1),
-                array('id' => $list)
-            );
         }
 
         return true;
