@@ -41,8 +41,10 @@ CREATE TABLE `{product}` (
   KEY `time_create` (`time_create`),
   KEY `status` (`status`),
   KEY `uid` (`uid`),
+  KEY `recommended` (`recommended`),
   KEY `product_list` (`status`, `id`),
-  KEY `product_order` (`time_create`, `id`)
+  KEY `product_order` (`time_create`, `id`),
+  KEY `product_order_recommended` (`recommended`, `time_create`, `id`)
 );
 
 CREATE TABLE `{category}` (
@@ -80,6 +82,7 @@ CREATE TABLE `{link}` (
   `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `time_update` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+  `recommended` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
   `price`       DECIMAL(16, 2)      NOT NULL DEFAULT '0.00',
   `stock`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -91,7 +94,8 @@ CREATE TABLE `{link}` (
   KEY `stock` (`stock`),
   KEY `category_list` (`status`, `category`, `time_create`),
   KEY `product_list` (`status`, `product`, `time_create`, `category`),
-  KEY `link_order` (`time_create`, `id`)
+  KEY `link_order` (`time_create`, `id`),
+  KEY `link_order_recommended` (`recommended`, `time_create`, `id`)
 );
 
 CREATE TABLE `{related}` (

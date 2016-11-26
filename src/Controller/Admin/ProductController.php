@@ -73,8 +73,10 @@ class ProductController extends ActionController
         } else {
             // Set where
             $whereLink = array();
-            if (!empty($status)) {
+            if (!empty($status) && in_array($status, array(1, 2, 3, 4, 5))) {
                 $whereLink['status'] = $status;
+            } else {
+                $whereLink['status'] = array(1, 2, 3, 4);
             }
             if (!empty($category)) {
                 $whereLink['category'] = $category;
