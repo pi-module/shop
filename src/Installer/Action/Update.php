@@ -890,6 +890,21 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.5.8', '<')) {
+            // Alter table field `image_wide`
+            $sql = sprintf("ALTER TABLE %s ADD `image_wide` VARCHAR(255) NOT NULL DEFAULT ''", $categoryTable);
+            try {
+                $categoryAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }

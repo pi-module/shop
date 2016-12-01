@@ -96,6 +96,16 @@ class CategoryFilter extends InputFilter
             'name' => 'image',
             'required' => false,
         ));
+        // image_wide
+        $this->add(array(
+            'name' => 'image_wide',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // Check is new
         if ($option['isNew']) {
             // percent

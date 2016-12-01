@@ -20,7 +20,18 @@
     }
     ?>
     <div class="clearfix categoryItem" itemscope itemtype="https://schema.org/Brand">
-        <?php if (!empty($category['largeUrl'])) { ?>
+        <?php if (!empty($category['image_wide'])) { ?>
+            <div class="category-width-description">
+                <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
+                <?php if (!empty($category['text_summary'])) { ?>
+                    <div class="clearfix"><?php echo $category['text_summary']; ?></div>
+                <?php } ?>
+            </div>
+            <div class="category-width-image">
+                <img class="img-responsive" itemprop="image" src="<?php echo $category['image_wide']; ?>"
+                     alt="<?php echo $this->escape($category['title']); ?>">
+            </div>
+        <?php } elseif (!empty($category['largeUrl'])) { ?>
             <div class="category-width-description">
                 <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
                 <?php if (!empty($category['text_summary'])) { ?>
