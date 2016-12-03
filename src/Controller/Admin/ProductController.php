@@ -914,7 +914,7 @@ class ProductController extends ActionController
             $this->getModel('link')->update(array('status' => $row->status), array('product' => $row->id));
             // Remove sitemap
             if (Pi::service('module')->isActive('sitemap')) {
-                $loc = Pi::url($this->url('news', array(
+                $loc = Pi::url($this->url('shop', array(
                     'module'      => $module,
                     'controller'  => 'product',
                     'slug'        => $row->slug
