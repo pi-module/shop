@@ -25,7 +25,42 @@ use Zend\Math\Rand;
 class Serial extends AbstractApi
 {
     public function checkSerial($serial)
-    {}
+    {
+        $result = array(
+            'status' => 0,
+            'message' => '',
+            'product' => array(),
+            'serial' => array(),
+        );
+        $serial = Pi::model('serial', $this->getModule())->find($serial, 'serial_number');
+
+        // Check
+        if (!empty($serial)) {
+            // Get product
+            $result['product'] = Pi::api('product', 'shop')->getProductLight($serial->product);
+            // Check serial check before or not
+            if ($serial['status'] == 0) {
+                $result['status'] = 1;
+                $result['message'] = __('This serial number is true and joined to your product');
+                // Update serial row
+                $serial->status = 1;
+                $serial->check_time = time();
+                $serial->check_uid = Pi::user()->getId();
+                $serial->check_ip = Pi::user()->getIp();
+                $serial->save();
+            } else {
+                $result['status'] = 2;
+                $result['message'] = __('This serial number checked before by another user, please call seller and ask about your product');
+            }
+            // Set serial
+            $result['serial'] = $serial->toArray();
+        } else {
+            $result['status'] = 3;
+            $result['message'] = __('This serial number not fount on our system ! please check you input true serial number, if is true please call seller and ask about your product');
+        }
+
+        return $result;
+    }
 
     public function createSerial($product)
     {
