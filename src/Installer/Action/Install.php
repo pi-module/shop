@@ -15,7 +15,6 @@ namespace Module\Shop\Installer\Action;
 use Pi;
 use Pi\Application\Installer\Action\Install as BasicInstall;
 use Zend\EventManager\Event;
-use Zend\Json\Json;
 
 class Install extends BasicInstall
 {
@@ -64,7 +63,7 @@ class Install extends BasicInstall
         $productData = array(
             'title' => __('Demo product'),
             'slug' => __('demo-product'),
-            'category' => Json::encode(array('1')),
+            'category' => json_encode(array('1')),
             'category_main' => 1,
             'text_summary' => __('This is a summery for this demo product'),
             'seo_title' => __('demo product'),

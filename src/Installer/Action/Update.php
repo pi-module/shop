@@ -16,7 +16,6 @@ use Pi;
 use Pi\Application\Installer\Action\Update as BasicUpdate;
 use Pi\Application\Installer\SqlSchema;
 use Zend\EventManager\Event;
-use Zend\Json\Json;
 
 class Update extends BasicUpdate
 {
@@ -347,7 +346,7 @@ EOD;
                     'data' => $row->value,
                     'default' => '',
                 );
-                $value = Json::encode($value);
+                $value = json_encode($value);
                 // Save value
                 $row->value = $value;
                 $row->save();

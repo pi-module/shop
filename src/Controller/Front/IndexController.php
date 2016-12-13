@@ -17,7 +17,6 @@ use Pi;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Zend\Json\Json;
 use Zend\Db\Sql\Predicate\Expression;
 
 class IndexController extends ActionController

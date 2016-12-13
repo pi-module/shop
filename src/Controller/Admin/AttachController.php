@@ -19,7 +19,6 @@ use Pi\File\Transfer\Upload;
 use Module\Shop\Form\AttachForm;
 use Module\Shop\Form\AttachFilter;
 use Zend\Db\Sql\Predicate\Expression;
-use Zend\Json\Json;
 
 class AttachController extends ActionController
 {
@@ -107,7 +106,7 @@ class AttachController extends ActionController
         );
         // Set view
         $this->view()->setTemplate('attach-add');
-        $this->view()->assign('content', Json::encode($contents));
+        $this->view()->assign('content', json_encode($contents));
         $this->view()->assign('product', $product);
         $this->view()->assign('title', sprintf(__('Attach files to %s'), $product['title']));
         $this->view()->assign('nav', $nav);
@@ -250,7 +249,7 @@ class AttachController extends ActionController
             }
         }
         $this->view()->setTemplate(false)->setLayout('layout-content');
-        return Json::encode($return);
+        return json_encode($return);
     }
 
     public function deleteAction()

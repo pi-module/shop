@@ -15,7 +15,6 @@ namespace Module\Shop\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
-use Zend\Json\Json;
 
 /*
  * Pi::api('basket', 'shop')->setBasket($id, $number, $properties);
@@ -66,18 +65,18 @@ class Basket extends AbstractApi
             $basket = Pi::model('basket', $this->getModule())->createRow();
             $basket->uid = $uid;
             $basket->value = uniqid('basket-');
-            $basket->data = json::encode($data);
+            $basket->data = json_encode($data);
             $basket->save();
         } else {
             // Set data
-            $data = json::decode($basket->data, true);
+            $data = json_decode($basket->data, true);
             $data['time'] = time();
             $data['product'][$id] = $product;
             if (!isset($data['promotion']) || empty($data['promotion'])) {
                 $data['promotion'] = '';
             }
             // Set basket
-            $basket->data = json::encode($data);
+            $basket->data = json_encode($data);
             $basket->save();
         }
 
@@ -121,7 +120,7 @@ class Basket extends AbstractApi
             return '';
         }
         // Update data
-        $data = json::decode($basket->data, true);
+        $data = json_decode($basket->data, true);
         switch ($type) {
             case 'number':
                 $data['product'][$value]['number'] = $number;
@@ -131,7 +130,7 @@ class Basket extends AbstractApi
                 $data['promotion'] = $value;
                 break;
         }
-        $basket->data = json::encode($data);
+        $basket->data = json_encode($data);
         // Save
         $basket->save();
     }
@@ -167,11 +166,11 @@ class Basket extends AbstractApi
             return '';
         }
         // Set data
-        $data = json::decode($basket->data, true);
+        $data = json_decode($basket->data, true);
         $data['time'] = time();
         unset($data['product'][$id]);
         // Set basket
-        $basket->data = json::encode($data);
+        $basket->data = json_encode($data);
         $basket->save();
     }
 
@@ -189,7 +188,7 @@ class Basket extends AbstractApi
             return 0;
         } else {
             $number = 0;
-            $data = json::decode($basket['data'], true);
+            $data = json_decode($basket['data'], true);
             foreach ($data['product'] as $product) {
                 $number = $number + $product['number'];
             }
@@ -210,7 +209,7 @@ class Basket extends AbstractApi
         }
         // Check basket
         if (isset($basket) && !empty($basket)) {
-            $data = json::decode($basket['data'], true);
+            $data = json_decode($basket['data'], true);
             foreach ($data['product'] as $product) {
                 // Set list
                 $productInfo = Pi::api('product', 'shop')->getProductLight($product['id']);
@@ -235,7 +234,7 @@ class Basket extends AbstractApi
         // to array
         $basket = $basket->toArray();
         // Set data
-        $basket['data'] = json::decode($basket['data'], true);
+        $basket['data'] = json_decode($basket['data'], true);
         // Set total empty
         $total = array(
             'price' => 0,

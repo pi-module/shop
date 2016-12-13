@@ -15,7 +15,6 @@ namespace Module\Shop\Controller\Front;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Zend\Json\Json;
 use Module\Shop\Form\PromotionCheckForm;
 use Module\Shop\Form\PromotionCheckFilter;
 
@@ -301,7 +300,7 @@ class CartController extends ActionController
                 'vat_price' => 0,
                 'number' => $product['number'],
                 'title' => $product['title'],
-                'extra' => json::encode($product['property']),
+                'extra' => json_encode($product['property']),
             );
             // Set order product
             $order['product'][$product['id']] = $singelProduct;

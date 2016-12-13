@@ -15,7 +15,6 @@ namespace Module\Shop\Api;
 use Pi;
 use Pi\Application\Api\AbstractApi;
 use Zend\Db\Sql\Predicate\Expression;
-use Zend\Json\Json;
 
 /*
  * Pi::api('category', 'shop')->getCategory($parameter, $type = 'id');
@@ -47,7 +46,7 @@ class Category extends AbstractApi
         //Remove
         Pi::model('link', $this->getModule())->delete(array('product' => $product));
         // Add
-        $allCategory = Json::decode($category);
+        $allCategory = json_decode($category);
         foreach ($allCategory as $category) {
             // Set array
             $values['product'] = $product;
@@ -149,7 +148,7 @@ class Category extends AbstractApi
             );
         }
         $return = $this->makeTree($return);
-        $return =  Json::encode($return);
+        $return =  json_encode($return);
         return $return;
     }
 

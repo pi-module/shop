@@ -15,7 +15,6 @@ namespace Module\Shop\Api;
 use Pi;
 use Pi\Application\Api\AbstractApi;
 use Zend\Json\Json;
-use Zend\Math\Rand;
 
 /*
  * Pi::api('serial', 'shop')->checkSerial($serial);

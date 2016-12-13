@@ -17,7 +17,6 @@ use Pi\Mvc\Controller\ActionController;
 use Pi\Filter;
 use Module\Shop\Form\AttributeForm;
 use Module\Shop\Form\AttributeFilter;
-use Zend\Json\Json;
 
 class AttributeController extends ActionController
 {
@@ -59,7 +58,7 @@ class AttributeController extends ActionController
             $attribute = $this->getModel('field')->find($id)->toArray();
             $attribute['category'] = Pi::api('attribute', 'shop')->getCategory($attribute['id']);
             // Set value
-            $value = Json::decode($attribute['value'], true);
+            $value = json_decode($attribute['value'], true);
             $attribute['data'] = $value['data'];
             $attribute['default'] = $value['default'];
             $attribute['information'] = $value['information'];
@@ -83,7 +82,7 @@ class AttributeController extends ActionController
                     'default' => (isset($data['default'])) ? $data['default'] : '',
                     'information' => $data['information'],
                 );
-                $values['value'] = Json::encode($value);
+                $values['value'] = json_encode($value);
                 // Set type
                 $values['type'] = $type;
                 // Set order

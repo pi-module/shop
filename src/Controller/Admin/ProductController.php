@@ -28,7 +28,6 @@ use Module\Shop\Form\RelatedFilter;
 use Module\Shop\Form\AdminSearchForm;
 use Module\Shop\Form\AdminSearchFilter;
 use Zend\Db\Sql\Predicate\Expression;
-use Zend\Json\Json;
 
 class ProductController extends ActionController
 {
@@ -244,7 +243,7 @@ class ProductController extends ActionController
                     $values['image'] = '';
                 }
                 // Category
-                $values['category'] = Json::encode(array_unique($values['category']));
+                $values['category'] = json_encode(array_unique($values['category']));
                 // Set seo_title
                 $title = ($values['seo_title']) ? $values['seo_title'] : $values['title'];
                 $filter = new Filter\HeadTitle;
@@ -386,7 +385,7 @@ class ProductController extends ActionController
                         $setting['discount'][$name] = $values[$name];
                     }
                 }
-                $values['setting'] = Json::encode($setting);
+                $values['setting'] = json_encode($setting);
                 // Save
                 $row = $this->getModel('product')->find($values['id']);
                 $row->assign($values);

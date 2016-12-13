@@ -17,7 +17,6 @@ use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Module\Shop\Form\QuestionForm;
 use Module\Shop\Form\QuestionFilter;
-use Zend\Json\Json;
 
 class QuestionController extends IndexController
 {

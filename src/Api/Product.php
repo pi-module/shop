@@ -15,7 +15,6 @@ namespace Module\Shop\Api;
 use Pi;
 use Pi\Application\Api\AbstractApi;
 use Zend\Db\Sql\Predicate\Expression;
-use Zend\Json\Json;
 
 /*
  * Pi::api('product', 'shop')->getProduct($parameter, $type);
