@@ -501,6 +501,11 @@ class ProductController extends ActionController
                 $return['ajaxstatus'] = 1;
                 $return['id'] = $product->id;
                 $return['recommended'] = $product->recommended;
+                // Update recommended
+                $this->getModel('link')->update(
+                    array('recommended' => $product->recommended),
+                    array('product' => $product->id)
+                );
                 // Add log
                 Pi::api('log', 'shop')->addLog('product', $product->id, 'recommend');
             } else {
