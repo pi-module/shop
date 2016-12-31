@@ -80,7 +80,8 @@ class Category extends AbstractApi
     {
         $list = array();
         $where = array('id' => $id, 'status' => 1);
-        $select = Pi::model('category', $this->getModule())->select()->where($where);
+        $order = array('display_order DESC', 'id DESC');
+        $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
         if ($limit > 0) {
             $select->limit($limit);
         }
