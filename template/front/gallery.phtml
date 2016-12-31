@@ -1,4 +1,8 @@
 <?php
+// Get local
+$locale = Pi::service('i18n')->getLocale();
+$rtl = (in_array($locale, array('fa', 'ar'))) ? 'true' : 'false';
+
 $iconOwlLeft = '<i class="owl-prev fa fa-angle-left"></i>';
 $iconOwlRight = '<i class="owl-next fa fa-angle-right"></i>';
 $script1 = <<<'EOT'
@@ -16,7 +20,7 @@ $script2 = <<<'EOT'
     $(document).ready(function($) {
 		$('.owl-carousel').owlCarousel({
     		loop:false,
-    		rtl:true,
+    		rtl:%s,
     		margin:3,
     		nav:true,
     		autoplay:true,
@@ -32,7 +36,7 @@ $script2 = <<<'EOT'
 		})
     });
 EOT;
-$script2 = sprintf($script2, $iconOwlLeft, $iconOwlRight);
+$script2 = sprintf($script2, $rtl, $iconOwlLeft, $iconOwlRight);
 $this->jQuery(array(
     'extension/jquery.magnific-popup.min.js',
     'extension/magnific-popup.css',
