@@ -14,7 +14,7 @@
 }
 
 .product-list .product-box .caption {
-    min-height: 100px;
+    min-height: 80px;
 }
 
 .product-list .product-box:hover .caption {
@@ -32,7 +32,8 @@
 }
 
 .product-list .thumbnail img {
-    padding: 0;
+    width: 100%;
+    height: 160px;
 }
 
 /* product page */
@@ -215,6 +216,11 @@
     font-size: 0.9em;
     padding: 1px;
     margin: 1px;
+}
+
+.product-compare-list .thumbnail img {
+    width: 100%;
+    height: 75px;
 }
 
 .product-compare-list .product-compare-button {

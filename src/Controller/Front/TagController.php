@@ -41,14 +41,6 @@ class TagController extends IndexController
         }
         // category list
         $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
-        // Set filter url
-        $filterUrl = Pi::url($this->url('', array(
-            'controller' => 'json',
-            'action' => 'filterTag',
-            'slug' => $slug
-        )));
-        // Set filter list
-        $filterList = Pi::api('attribute', 'shop')->filterList();
         // Set header and title
         $title = sprintf(__('All products by %s tag'), $slug);
         // Set seo_keywords
@@ -64,9 +56,8 @@ class TagController extends IndexController
         $this->view()->setTemplate('product-angular');
         $this->view()->assign('config', $config);
         $this->view()->assign('categoriesJson', $categoriesJson);
-        $this->view()->assign('filterUrl', $filterUrl);
-        $this->view()->assign('filterList', $filterList);
-        $this->view()->assign('productTitleH1', $title);
+        $this->view()->assign('pageType', 'tag');
+        $this->view()->assign('tag', $slug);
     }
 
     public function listAction()

@@ -29,31 +29,14 @@ class IndexController extends ActionController
         $config = Pi::service('registry')->config->read($module);
         // category list
         $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
-        // Get sale
-        if ($config['sale_view']) {
-            $saleList = Pi::api('sale', 'shop')->getAll(0, 'product');
-            $this->view()->assign('saleList', $saleList);
-        }
         // Check homepage type
         switch ($config['homepage_type']) {
             default:
             case 'list':
-                // Set filter url
-                $filterUrl = Pi::url($this->url('', array(
-                    'controller' => 'json',
-                    'action' => 'filterIndex'
-                )));
-                // Set filter list
-                $filterList = Pi::api('attribute', 'shop')->filterList();
-                // Set view
                 $this->view()->setTemplate('product-angular');
                 $this->view()->assign('config', $config);
                 $this->view()->assign('categoriesJson', $categoriesJson);
-                $this->view()->assign('filterUrl', $filterUrl);
-                $this->view()->assign('filterList', $filterList);
-                $this->view()->assign('productTitleH1', __('New products'));
-                $this->view()->assign('showIndexDesc', 1);
-                $this->view()->assign('isHomepage', 1);
+                $this->view()->assign('pageType', 'all');
                 break;
 
             case 'brand':

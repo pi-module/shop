@@ -323,10 +323,12 @@ class Attribute extends AbstractApi
         $select = Pi::model('field', $this->getModule())->select()->where($whereField)->order($orderField);
         $rowset = Pi::model('field', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
-            $return[$row->id] = $row->toArray();
-            $return[$row->id]['position_vew'] = $position[$row->position];
-            $return[$row->id]['value'] = json_decode($row->value, true);
-            $return[$row->id]['value']['data'] = explode('|', $return[$row->id]['value']['data']);
+            $filter = $row->toArray();
+            $filter['position_vew'] = $position[$row->position];
+            $filter['value'] = json_decode($row->value, true);
+            $filter['value']['data'] = explode('|', $return[$row->id]['value']['data']);
+            $filter['filter'] = sprintf('filter.%s', $row->name);
+            $return[] = $filter;
         }
         return $return;
     }

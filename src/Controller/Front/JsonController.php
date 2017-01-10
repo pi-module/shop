@@ -19,7 +19,7 @@ use Zend\Db\Sql\Predicate\Expression;
 
 class JsonController extends IndexController
 {
-    public function indexAction()
+    /* public function indexAction()
     {
         // Set return
         $return = array(
@@ -28,6 +28,94 @@ class JsonController extends IndexController
         );
         // Set view
         return $return;
+    } */
+
+    public function searchAction()
+    {
+        // Get info from url
+        $module = $this->params('module');
+        $category = $this->params('category');
+        $tag = $this->params('tag');
+        $page = $this->params('page', 1);
+
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+
+        // Get category information from model
+        if (!empty($category)) {
+            $category = $this->getModel('category')->find($category, 'slug');
+            $category = Pi::api('category', 'shop')->canonizeCategory($category, 'compact');
+            // Check category
+            if (!$category || $category['status'] != 1) {
+                return array();
+            }
+            // category list
+            $categories = Pi::api('category', 'shop')->categoryList($category['id']);
+            // Get id list
+            $categoryIdList = array();
+            $categoryIdList[] = $category['id'];
+            foreach ($categories as $singleCategory) {
+                $categoryIdList[] = $singleCategory['id'];
+            }
+        } else {
+            $category = array();
+        }
+
+        // Get search form
+        $filterList = Pi::api('attribute', 'shop')->filterList();
+        $categoryList = Pi::registry('categoryList', 'shop')->read();
+
+        // Set info
+        $product = array();
+        $whereLink = array('status' => 1);
+        $order = array('recommended DESC', 'time_create DESC', 'id DESC');
+        $columns = array('product' => new Expression('DISTINCT product'));
+        $offset = (int)($page - 1) * $config['view_perpage'];
+        $limit = intval($config['view_perpage']);
+        if (isset($categoryIdList) && !empty($categoryIdList)) {
+            $whereLink['category'] = $categoryIdList;
+        }
+
+        // Get info from link table
+        $select = $this->getModel('link')->select()->where($whereLink)->columns($columns)->order($order)->offset($offset)->limit($limit);
+        $rowset = $this->getModel('link')->selectWith($select)->toArray();
+        foreach ($rowset as $id) {
+            $productId[] = $id['product'];
+        }
+
+        // Get count
+        $columnsCount = array('count' => new Expression('count(DISTINCT `product`)'));
+        $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsCount);
+        $count = $this->getModel('link')->selectWith($select)->current()->count;
+
+        // Get list of product
+        if (!empty($productId)) {
+            $where = array('status' => 1, 'id' => $productId);
+            $select = $this->getModel('product')->select()->where($where)->order($order);
+            $rowset = $this->getModel('product')->selectWith($select);
+            foreach ($rowset as $row) {
+                $product[] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
+            }
+        }
+
+        // Set result
+        $result = array(
+            'products' => $product,
+            'category' => $category,
+            'tag' => $tag,
+            'filterList' => $filterList,
+            'paginator' => array(
+                'count' => $count,
+                'limit' => intval($config['view_perpage']),
+                'page' => $page,
+            ),
+            'condition' => array(
+                'title' => __('New products'),
+                'urlCompare' => Pi::url($this->url('', array('controller' => 'compare'))),
+            ),
+        );
+
+        return $result;
     }
 
     public function productAllAction()
@@ -168,7 +256,7 @@ class JsonController extends IndexController
         }
     } */
 
-    public function filterIndexAction()
+    /* public function filterIndexAction()
     {
         // Get info from url
         $module = $this->params('module');
@@ -204,9 +292,9 @@ class JsonController extends IndexController
         }
         // Set view
         return $product;
-    }
+    } */
 
-    public function filterCategoryAction()
+    /* public function filterCategoryAction()
     {
         // Get info from url
         $module = $this->params('module');
@@ -262,9 +350,9 @@ class JsonController extends IndexController
         }
         // Set view
         return $product;
-    }
+    } */
 
-    public function filterTagAction()
+    /* public function filterTagAction()
     {
         // Check tag
         if (!Pi::service('module')->isActive('tag')) {
@@ -312,9 +400,9 @@ class JsonController extends IndexController
         }
         // Set view
         return $product;
-    }
+    } */
 
-    public function filterSearchAction() {
+    /* public function filterSearchAction() {
         // Get info from url
         $module = $this->params('module');
         $keyword = $this->params('keyword');
@@ -373,7 +461,7 @@ class JsonController extends IndexController
         }
         // Set view
         return $list;
-    }
+    } */
 
     public function checkPassword() {
         // Get info from url
