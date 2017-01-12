@@ -20,6 +20,28 @@
 
 
 
+                <div ng-if="filterList">
+                    <div ng-repeat="filterSingle in filterList">
+                        <div ng-if="filterSingle.type == 'text'">
+                            <div class="form-group">
+                                <label>{{filterSingle.title}}</label>
+                                <input type="text" class="form-control" ng-model="filterSingle.filter">
+                            </div>
+                        </div>
+                        <div ng-if="filterSingle.type == 'select'">
+                            <div class="form-group">
+                                <label>{{filterSingle.title}}</label>
+                                <select class="form-control" ng-model="filterSingle.filter">
+                                    <option value="">{{'ALL' | translate}}</option>
+                                    <option ng-repeat="filterData in filterSingle.value.data" ng-if="filterData">
+                                        {{filterData}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <button class="btn btn-info" ng-click="filterAction()"><i class="fa fa-search"></i></button>
             </form>

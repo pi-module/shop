@@ -326,7 +326,7 @@ class Attribute extends AbstractApi
             $filter = $row->toArray();
             $filter['position_vew'] = $position[$row->position];
             $filter['value'] = json_decode($row->value, true);
-            $filter['value']['data'] = explode('|', $return[$row->id]['value']['data']);
+            $filter['value']['data'] = explode('|', $filter['value']['data']);
             $filter['filter'] = sprintf('filter.%s', $row->name);
             $return[] = $filter;
         }
