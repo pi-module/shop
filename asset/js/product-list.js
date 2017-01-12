@@ -120,19 +120,5 @@ angular.module('shop')
                     uncheckedIcon: 'fa fa-square-o',
                 });
             });
-
-
-            $(function () {
-
-
-                var filterJson = config.filterJson;
-                angular.forEach(filterJson, function(value, key){});
-
-
-                $('#list-filter').append('<button class="btn btn-info" ng-click="filterAction()"><i class="fa fa-search"></i></button>');
-            })
-
-
-
         }
     ]);

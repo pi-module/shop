@@ -7,11 +7,8 @@ $this->angular(array(
     'pi.js',
     'i18n'
 ));
-$this->js(array(
-    $this->assetModule('js/bootstrap-treeview.min.js')
-));
+$this->js($this->assetModule('js/bootstrap-treeview.min.js'));
 $this->css($this->assetModule('css/front.css'));
-$this->footScript()->appendScript($scriptMenu);
 ?>
 <script>
     angular

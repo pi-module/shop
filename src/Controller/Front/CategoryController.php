@@ -27,8 +27,7 @@ class CategoryController extends IndexController
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get category information from model
-        $category = $this->getModel('category')->find($slug, 'slug');
-        $category = Pi::api('category', 'shop')->canonizeCategory($category);
+        $category = Pi::api('category', 'shop')->getCategory($slug, 'slug');
         // Check category
         if (!$category || $category['status'] != 1) {
             $this->getResponse()->setStatusCode(404);

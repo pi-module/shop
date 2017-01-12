@@ -34,63 +34,151 @@ class JsonController extends IndexController
     {
         // Get info from url
         $module = $this->params('module');
+        $page = $this->params('page', 1);
         $category = $this->params('category');
         $tag = $this->params('tag');
-        $page = $this->params('page', 1);
+        $title = $this->params('title');
+
+        // Clean title
+        if (Pi::service('module')->isActive('search') && isset($title) && !empty($title)) {
+            $title = Pi::api('api', 'search')->parseQuery($title);
+        } elseif (isset($title) && !empty($title)) {
+            $title = _strip($title);
+        } else {
+            $title = '';
+        }
+
+        // Clean params
+        $paramsClean = array();
+        foreach ($_GET as $key => $value) {
+            $key = _strip($key);
+            $value = _strip($value);
+            $paramsClean[$key] = $value;
+        }
 
         // Get config
         $config = Pi::service('registry')->config->read($module);
 
+        // Set empty result
+        $result = array(
+            'products' => array(),
+            'category' => array(),
+            'filterList' => array(),
+            'paginator' => array(),
+            'condition' => array(),
+        );
+
         // Get category information from model
         if (!empty($category)) {
-            $category = $this->getModel('category')->find($category, 'slug');
-            $category = Pi::api('category', 'shop')->canonizeCategory($category, 'compact');
+            // Get category
+            $category = Pi::api('category', 'shop')->getCategory($category, 'slug');
             // Check category
             if (!$category || $category['status'] != 1) {
-                return array();
+                return $result;
             }
             // category list
             $categories = Pi::api('category', 'shop')->categoryList($category['id']);
             // Get id list
-            $categoryIdList = array();
-            $categoryIdList[] = $category['id'];
+            $categoryIDList = array();
+            $categoryIDList[] = $category['id'];
             foreach ($categories as $singleCategory) {
-                $categoryIdList[] = $singleCategory['id'];
+                $categoryIDList[] = $singleCategory['id'];
             }
-        } else {
-            $category = array();
         }
 
         // Get search form
         $filterList = Pi::api('attribute', 'shop')->filterList();
         $categoryList = Pi::registry('categoryList', 'shop')->read();
 
+        // Set product ID list
+        $checkTitle = false;
+        $checkAttribute = false;
+        $productIDList = array(
+            'title' => array(),
+            'attribute' => array(),
+        );
+
+        // Check title from product table
+        if (isset($title) && !empty($title)) {
+            $checkTitle = true;
+            $titles = is_array($title) ? $title : array($title);
+            $order = array('recommended DESC', 'time_create DESC', 'id DESC');
+            $columns = array('id');
+            $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($titles) {
+                $whereMain = clone $where;
+                $whereKey = clone $where;
+                $whereMain->equalTo('status', 1);
+                foreach ($titles as $title) {
+                    $whereKey->like('title', '%' . $title . '%')->or;
+                }
+                $where->andPredicate($whereMain)->andPredicate($whereKey);
+            })->order($order);
+            $rowset = $this->getModel('product')->selectWith($select);
+            foreach ($rowset as $row) {
+                $productIDList['title'][$row->id] = $row->id;
+            }
+        }
+
+        // Check attribute
+        if (!empty($paramsClean)) {
+            // Make attribute list
+            $attributeList = array();
+            foreach ($filterList as $filterSingle) {
+                if (isset($paramsClean[$filterSingle['name']]) && !empty($paramsClean[$filterSingle['name']])) {
+                    $attributeList[$filterSingle['name']] = array(
+                        'field' => $filterSingle['id'],
+                        'data' => $paramsClean[$filterSingle['name']],
+                    );
+                }
+            }
+            // Search on attribute
+            if (!empty($attributeList)) {
+                $checkAttribute = true;
+                $column = array('product');
+                foreach ($attributeList as $attributeSingle) {
+                    $where = array(
+                        'field' => $attributeSingle['field'],
+                        'data' => $attributeSingle['data'],
+                    );
+                    $select = $this->getModel('field_data')->select()->where($where)->columns($column);
+                    $rowset = $this->getModel('field_data')->selectWith($select);
+                    foreach ($rowset as $row) {
+                        $productIDList['attribute'][$row->product] = $row->product;
+                    }
+                }
+            }
+        }
+
         // Set info
         $product = array();
-        $whereLink = array('status' => 1);
         $order = array('recommended DESC', 'time_create DESC', 'id DESC');
         $columns = array('product' => new Expression('DISTINCT product'));
         $offset = (int)($page - 1) * $config['view_perpage'];
         $limit = intval($config['view_perpage']);
-        if (isset($categoryIdList) && !empty($categoryIdList)) {
-            $whereLink['category'] = $categoryIdList;
+        // Set where link
+        $whereLink = array('status' => 1);
+        if (isset($categoryIDList) && !empty($categoryIDList)) {
+            $whereLink['category'] = $categoryIDList;
+        }
+        if ($checkTitle && $checkAttribute) {
+            $id = array_intersect($productIDList['title'], $productIDList['attribute']);
+            $whereLink['product'] = !empty($id) ? $id : 'dd';
+        } elseif ($checkTitle) {
+            $whereLink['product'] = !empty($productIDList['title']) ? $productIDList['title'] : 'aa';
+        } elseif ($checkAttribute) {
+            $whereLink['product'] = !empty($productIDList['attribute']) ? $productIDList['attribute'] : 'bb';
         }
 
         // Get info from link table
         $select = $this->getModel('link')->select()->where($whereLink)->columns($columns)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('link')->selectWith($select)->toArray();
         foreach ($rowset as $id) {
-            $productId[] = $id['product'];
+            $productIDSelect[] = $id['product'];
         }
 
-        // Get count
-        $columnsCount = array('count' => new Expression('count(DISTINCT `product`)'));
-        $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsCount);
-        $count = $this->getModel('link')->selectWith($select)->current()->count;
-
         // Get list of product
-        if (!empty($productId)) {
-            $where = array('status' => 1, 'id' => $productId);
+        if (!empty($productIDSelect)) {
+            $where = array('status' => 1, 'id' => $productIDSelect);
             $select = $this->getModel('product')->select()->where($where)->order($order);
             $rowset = $this->getModel('product')->selectWith($select);
             foreach ($rowset as $row) {
@@ -98,8 +186,18 @@ class JsonController extends IndexController
             }
         }
 
+        // Get count
+        $columnsCount = array('count' => new Expression('count(DISTINCT `product`)'));
+        $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsCount);
+        $count = $this->getModel('link')->selectWith($select)->current()->count;
+
         // Set result
         $result = array(
+            //'paramsClean' => $paramsClean,
+            //'whereLink' => $whereLink,
+            //'categoryIDList' => $categoryIDList,
+            //'productIDList' => $productIDList,
+
             'products' => $product,
             'category' => $category,
             'tag' => $tag,
