@@ -40,6 +40,7 @@ class ProductController extends ActionController
         $page = $this->params('page', 1);
         $status = $this->params('status');
         $category = $this->params('category');
+        $recommended = $this->params('recommended');
         $title = $this->params('title');
         // Get config
         $config = Pi::service('registry')->config->read($module);
@@ -48,7 +49,8 @@ class ProductController extends ActionController
         $order = array('time_create DESC', 'id DESC');
         $limit = intval($this->config('admin_perpage'));
         $product = array();
-       
+        $productId = array();
+        $whereProduct = array();
         // Set title
         if (!empty($title) && !empty($category)) {
             // Set where
@@ -60,15 +62,58 @@ class ProductController extends ActionController
             $rowset = $this->getModel('link')->selectWith($select)->toArray();
             // Make list
             foreach ($rowset as $id) {
-                $productId[] = $id['product'];
+                $productId[$id['product']] = $id['product'];
+            }
+            // Set title
+            if (Pi::service('module')->isActive('search') && isset($title) && !empty($title)) {
+                $title = Pi::api('api', 'search')->parseQuery($title);
+            } elseif (isset($title) && !empty($title)) {
+                $title = _strip($title);
+            }
+            $title = is_array($title) ? $title : array($title);
+            $columns = array('id');
+            $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($title) {
+                $whereMain = clone $where;
+                $whereKey = clone $where;
+                $whereMain->equalTo('status', 1);
+                foreach ($title as $term) {
+                    $whereKey->like('title', '%' . $term . '%')->or;
+                }
+                $where->andPredicate($whereMain)->andPredicate($whereKey);
+            });
+            $rowset = $this->getModel('product')->selectWith($select);
+            foreach ($rowset as $row) {
+                $productId[$row->id] = $row->id;
             }
             // Set info
-            $whereProduct = array('title LIKE ?' => '%' . $title . '%');
             if (!empty($productId)) {
                 $whereProduct['id'] = $productId;
             }
         } elseif (!empty($title)) {
-            $whereProduct = array('title LIKE ?' => '%' . $title . '%');
+            if (Pi::service('module')->isActive('search') && isset($title) && !empty($title)) {
+                $title = Pi::api('api', 'search')->parseQuery($title);
+            } elseif (isset($title) && !empty($title)) {
+                $title = _strip($title);
+            }
+            $title = is_array($title) ? $title : array($title);
+            $columns = array('id');
+            $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($title) {
+                $whereMain = clone $where;
+                $whereKey = clone $where;
+                $whereMain->equalTo('status', 1);
+                foreach ($title as $term) {
+                    $whereKey->like('title', '%' . $term . '%')->or;
+                }
+                $where->andPredicate($whereMain)->andPredicate($whereKey);
+            });
+            $rowset = $this->getModel('product')->selectWith($select);
+            foreach ($rowset as $row) {
+                $productId[$row->id] = $row->id;
+            }
+            // Set info
+            if (!empty($productId)) {
+                $whereProduct['id'] = $productId;
+            }
         } else {
             // Set where
             $whereLink = array();
@@ -80,6 +125,9 @@ class ProductController extends ActionController
             if (!empty($category)) {
                 $whereLink['category'] = $category;
             }
+            if (!empty($recommended)) {
+                $whereLink['recommended'] = 1;
+            }
             $columnsLink = array('product' => new Expression('DISTINCT product'));
             // Get info from link table
             $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order)->offset($offset)->limit($limit);
@@ -89,7 +137,6 @@ class ProductController extends ActionController
                 $productId[] = $id['product'];
             }
             // Set info
-            $whereProduct = array();
             if (!empty($productId)) {
                 $whereProduct['id'] = $productId;
             }
@@ -111,6 +158,8 @@ class ProductController extends ActionController
             $select = $this->getModel('product')->select()->where($whereProduct)->columns($columnsLink);
             $count = $this->getModel('product')->selectWith($select)->current()->count;
         }
+        // Set title
+        $title = is_array($title) ? implode(' ', $title) : $title;
         // Set paginator
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
@@ -125,6 +174,7 @@ class ProductController extends ActionController
                 'category' => $category,
                 'status' => $status,
                 'title' => $title,
+                'recommended' => $recommended,
             )),
         ));
         // Set form
@@ -153,16 +203,6 @@ class ProductController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 $message = __('View filtered products');
-                // Clean title
-                if (Pi::service('module')->isActive('search') && isset($values['title']) && !empty($values['title'])) {
-                    $values['title'] = Pi::api('api', 'search')->parseQuery($values['title']);
-                    $values['title'] = implode(' ', $values['title']);
-                } elseif (isset($values['title']) && !empty($values['title'])) {
-                    $values['title'] = _strip($values['title']);
-                } else {
-                    $values['title'] = '';
-                }
-                // Set url
                 $url = array(
                     'action' => 'index',
                     'title' => $values['title'],
