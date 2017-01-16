@@ -56,8 +56,8 @@ class TagController extends IndexController
         $this->view()->setTemplate('product-angular');
         $this->view()->assign('config', $config);
         $this->view()->assign('categoriesJson', $categoriesJson);
-        $this->view()->assign('pageType', 'tag');
         $this->view()->assign('tag', $slug);
+        $this->view()->assign('pageType', 'tag');
     }
 
     public function listAction()
