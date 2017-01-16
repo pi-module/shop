@@ -62,7 +62,7 @@ class JsonController extends IndexController
         // Set empty result
         $result = array(
             'products' => array(),
-            'category' => array(),
+            //'category' => array(),
             'filterList' => array(),
             'paginator' => array(),
             'condition' => array(),
@@ -199,8 +199,8 @@ class JsonController extends IndexController
             //'productIDList' => $productIDList,
 
             'products' => $product,
-            'category' => $category,
-            'tag' => $tag,
+            //'category' => $category,
+            //'tag' => $tag,
             'filterList' => $filterList,
             'paginator' => array(
                 'count' => $count,
