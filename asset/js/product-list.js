@@ -17,7 +17,7 @@ angular.module('shop')
                             if (config.pageType == 'category') {
                                 $location.search('category', config.categorySlug);
                             } else if (config.pageType == 'tag') {
-                                $location.search('category', config.categorySlug);
+                                $location.search('tag', config.tagTerm);
                             }
 
                             $rootScope.alert = 2;
