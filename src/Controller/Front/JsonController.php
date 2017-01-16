@@ -162,11 +162,11 @@ class JsonController extends IndexController
         }
         if ($checkTitle && $checkAttribute) {
             $id = array_intersect($productIDList['title'], $productIDList['attribute']);
-            $whereLink['product'] = !empty($id) ? $id : 'dd';
+            $whereLink['product'] = !empty($id) ? $id : '';
         } elseif ($checkTitle) {
-            $whereLink['product'] = !empty($productIDList['title']) ? $productIDList['title'] : 'aa';
+            $whereLink['product'] = !empty($productIDList['title']) ? $productIDList['title'] : '';
         } elseif ($checkAttribute) {
-            $whereLink['product'] = !empty($productIDList['attribute']) ? $productIDList['attribute'] : 'bb';
+            $whereLink['product'] = !empty($productIDList['attribute']) ? $productIDList['attribute'] : '';
         }
 
         // Get info from link table

@@ -19,7 +19,6 @@ $this->css($this->assetModule('css/front.css'));
             urlRoot: '<?php echo Pi::url($this->url('', array('controller' => 'json', 'action' => 'var'))); ?>'.replace(/var\/?$/, ''),
             urlCompare: '<?php echo Pi::url($this->url('', array('controller' => 'compare'))); ?>',
             assetRoot: '<?php echo $this->assetModule('ng-template/front/', '', false); ?>',
-            filterJson: '<?php echo json_encode(Pi::api('attribute', 'shop')->filterList()); ?>',
             categoryJson: '<?php echo $categoriesJson; ?>',
             categorySlug: '<?php echo isset($category) ? $category['slug'] : '' ?>',
             tagTerm: '<?php echo isset($tag) ? $tag : '' ?>',
