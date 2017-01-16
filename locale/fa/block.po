@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2016-08-16 16:59+0430\n"
+"POT-Creation-Date: 2017-01-16 20:11+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _b\n"
 "X-Poedit-Basepath: ../..\n"
@@ -17,27 +17,27 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: template/block/basket.phtml:3 template/block/basket.phtml:4
-#: template/block/basket.phtml:8
+#: template/block/basket.phtml:10
 msgid "Basket"
 msgstr "سبد خرید"
 
-#: template/block/basket.phtml:18
+#: template/block/basket.phtml:20
 msgid "List of products on your basket"
 msgstr "فهرست محصولات در سبد خرید شما"
 
-#: template/block/basket.phtml:34
+#: template/block/basket.phtml:36
 msgid "Number"
 msgstr "تعداد"
 
-#: template/block/basket.phtml:35
+#: template/block/basket.phtml:37
 msgid "Total price"
 msgstr "قیمت مجموع"
 
-#: template/block/basket.phtml:41
+#: template/block/basket.phtml:43
 msgid "Your basket is empty"
 msgstr "سبد خرید شما خالی است"
 
-#: template/block/basket.phtml:46 template/block/basket.phtml:47
+#: template/block/basket.phtml:48 template/block/basket.phtml:49
 msgid "Go to basket"
 msgstr "برو به سبد خرید"
 
@@ -69,31 +69,31 @@ msgstr "سال"
 msgid "More categories"
 msgstr "شاخه های بیشتر"
 
-#: template/block/category.phtml:116 template/block/product-new.phtml:240
-#: template/block/product-random.phtml:240 template/block/product-tag.phtml:240
+#: template/block/category.phtml:116 template/block/product-new.phtml:244
+#: template/block/product-random.phtml:244 template/block/product-tag.phtml:244
 msgid "View"
 msgstr "نمایش"
 
-#: template/block/product-new.phtml:23 template/block/product-random.phtml:23
-#: template/block/product-sale.phtml:6 template/block/product-tag.phtml:23
+#: template/block/product-new.phtml:27 template/block/product-random.phtml:27
+#: template/block/product-sale.phtml:6 template/block/product-tag.phtml:27
 msgid "On sale"
 msgstr "تخفیف ویژه"
 
-#: template/block/product-new.phtml:24 template/block/product-random.phtml:24
-#: template/block/product-sale.phtml:7 template/block/product-tag.phtml:24
+#: template/block/product-new.phtml:28 template/block/product-random.phtml:28
+#: template/block/product-sale.phtml:7 template/block/product-tag.phtml:28
 msgid "Have discount"
 msgstr "با تخفیف"
 
-#: template/block/product-new.phtml:25 template/block/product-random.phtml:25
-#: template/block/product-sale.phtml:8 template/block/product-tag.phtml:25
+#: template/block/product-new.phtml:29 template/block/product-random.phtml:29
+#: template/block/product-sale.phtml:8 template/block/product-tag.phtml:29
 msgid "Recommended"
 msgstr "پیشنهاد شده"
 
-#: template/block/product-new.phtml:253 template/block/product-new.phtml:254
-#: template/block/product-random.phtml:253
-#: template/block/product-random.phtml:254
+#: template/block/product-new.phtml:257 template/block/product-new.phtml:258
+#: template/block/product-random.phtml:257
+#: template/block/product-random.phtml:258
 #: template/block/product-sale.phtml:108 template/block/product-sale.phtml:109
-#: template/block/product-tag.phtml:253 template/block/product-tag.phtml:254
+#: template/block/product-tag.phtml:257 template/block/product-tag.phtml:258
 msgid "More products"
 msgstr "محصولات بیشتر"
 
