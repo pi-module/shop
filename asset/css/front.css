@@ -1,23 +1,33 @@
-/* image gallery */
-.product-image .product-image-attach {
-    margin-top: 10px;
-}
-
-/* homepage widget */
-.shop-widget .shop-widget-single {
-    margin-bottom: 5px;
-}
-
 /* product list */
-.product-list .product-box {
+.pi-item-list .page-header h1,
+.pi-item-list .page-header h2,
+.pi-item-list .page-header h3,
+.pi-item-list .page-header h4 {
+    font-size: 1.5em;
+    padding: 2px 0;
+    margin: 2px 0;
+}
+
+.pi-item-list .pi-item-box {
     text-align: center;
 }
 
-.product-list .product-box .caption {
+.pi-item-list .pi-item-box h3 {
+    margin: 1px;
+    padding: 1px;
+    font-size: 1.1em;
+}
+
+.pi-item-list .pi-item-box img {
+    width: 100%;
+    height: 160px;
+}
+
+.pi-item-list .pi-item-box .caption {
     min-height: 80px;
 }
 
-.product-list .product-box:hover .caption {
+.pi-item-list .pi-item-box:hover .caption {
     transition: background-color 0.3s;
     -webkit-transition: background-color 0.3s;
     -moz-transition: background-color 0.3s;
@@ -25,15 +35,50 @@
     border-radius: 4px;
 }
 
-.product-list .product-box h3 {
-    margin: 1px;
-    padding: 1px;
-    font-size: 1.1em;
+.pi-item-list .pi-paginator {
+    text-align: center;
 }
 
-.product-list .thumbnail img {
+.pi-item-list .pi-item-compare-add {
+    position: absolute;
+    cursor: pointer;
+    padding: 5px 15px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    left: 21px;
+    top: 6px;
+    z-index: 10000;
+}
+
+.pi-item-list .pi-item-compare-list {
+    background: #f5f5f5;
+    padding-top: 10px;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+    margin-bottom: 15px;
+}
+
+.pi-item-list .pi-item-compare-list .col-md-2 {
+    padding: 0 3px;
+}
+
+.pi-item-list .pi-item-compare-list .thumbnail {
+    text-align: center;
+}
+
+.pi-item-list .pi-item-compare-list .thumbnail h4 {
+    font-size: 0.9em;
+    padding: 1px;
+    margin: 1px;
+}
+
+.pi-item-list .pi-item-compare-list .thumbnail img {
     width: 100%;
-    height: 160px;
+    height: 75px;
+}
+
+.pi-item-list .pi-item-compare-list .product-compare-button {
+    margin-top: 50px;
 }
 
 /* product page */
@@ -89,6 +134,16 @@
 .product-cart-box .list-unstyled li {
     padding-top: 3px;
     padding-bottom: 3px;
+}
+
+/* image gallery */
+.product-image .product-image-attach {
+    margin-top: 10px;
+}
+
+/* homepage widget */
+.shop-widget .shop-widget-single {
+    margin-bottom: 5px;
 }
 
 /* compare page */
@@ -183,50 +238,6 @@
     cursor: pointer;
 }
 
-/* compare button on product */
-.product-compare-add {
-    position: absolute;
-    cursor: pointer;
-    padding: 5px 15px;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    left: 21px;
-    top: 6px;
-    z-index: 10000;
-}
-
-/* compare on product list */
-.product-compare-list {
-    background: #f5f5f5;
-    padding-top: 10px;
-    border-radius: 4px;
-    border: 1px solid #f0f0f0;
-    margin-bottom: 15px;
-}
-
-.product-compare-list .col-md-2 {
-    padding: 0 3px;
-}
-
-.product-compare-list .thumbnail {
-    text-align: center;
-}
-
-.product-compare-list .thumbnail h4 {
-    font-size: 0.9em;
-    padding: 1px;
-    margin: 1px;
-}
-
-.product-compare-list .thumbnail img {
-    width: 100%;
-    height: 75px;
-}
-
-.product-compare-list .product-compare-button {
-    margin-top: 50px;
-}
-
 /* owl carousel list */
 .owl-carousel-list {
     height: 303px !important;
@@ -250,6 +261,33 @@
 
 .owl-carousel-list .owl-controls .owl-nav {
     margin-top: -200px !important;
+}
+
+.owl-carousel-list .product-box {
+    text-align: center;
+}
+
+.owl-carousel-list .product-box h3 {
+    margin: 1px;
+    padding: 1px;
+    font-size: 1.1em;
+}
+
+.owl-carousel-list .product-box img {
+    width: 100%;
+    height: 160px;
+}
+
+.owl-carousel-list .product-box .caption {
+    min-height: 80px;
+}
+
+.owl-carousel-list .product-box:hover .caption {
+    transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    background-color: #f0f0f0;
+    border-radius: 4px;
 }
 
 /* owl carousel list for sale products */
@@ -367,7 +405,7 @@ a.product-ribbon:hover {
     -ms-transform: rotate(45deg);
 }
 
-/* */
+/* countdown */
 .product-countdown {
     padding: 15px;
     margin-right: 1px;

@@ -1,22 +1,22 @@
-<div class="clearfix product-angular-list">
+<div class="clearfix pi-item-list">
     <div class="col-sm-12 col-md-3">
-        <div class="shop-search-form clearfix">
+        <div class="pi-item-search-form clearfix">
             <div class="page-header">
-                <h4>{{'SEARCH' | translate}}</h4>
+                <h3>{{'SEARCH' | translate}}</h3>
             </div>
             <form id="list-filter" ng-submit="filterAction()">
                 <div class="form-group">
                     <label>{{'TITLE' | translate}}</label>
                     <input type="text" class="form-control" ng-model="filter.title">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>{{'MARKETABLE' | translate}}</label>
                     <select ng-model="filter.marketable" class="form-control">
                         <option value="">{{'ALL' | translate}}</option>
                         <option value="1">{{'MARKETABLE' | translate}}</option>
                         <option value="0">{{'NOT_MARKETABLE' | translate}}</option>
                     </select>
-                </div>
+                </div> -->
 
 
 
@@ -48,18 +48,18 @@
         </div>
         <div class="clearfix category-list">
             <div class="page-header">
-                <h4>{{'CATEGORY_LIST' | translate}}</h4>
+                <h3>{{'CATEGORY_LIST' | translate}}</h3>
             </div>
             <div class="clearfix">
-                <div id="category-tree-view"></div>
+                <div class="pi-item-category"></div>
             </div>
         </div>
     </div>
     <div class="col-sm-12 col-md-9">
-        <div class="product-compare-list hide">
+        <div class="pi-item-compare-list hide">
             <div class="clearfix">
                 <div class="col-md-2">
-                    <div class="product-compare-button text-center">
+                    <div class="pi-item-compare-button text-center">
                         <a href="{{condition.urlCompare}}" title="{{'COMPARE_PRODUCTS' | translate}}" class="btn btn-success btn-xs">
                             {{'COMPARE_PRODUCTS' | translate}}
                         </a>
@@ -81,61 +81,61 @@
             </div>
         </div>
         <div class="clearfix">
-            <div class="product-list clearfix">
-                <div class="page-header">
-                    <h1>{{condition.title}}</h1>
-                </div>
-                <div ng-show="products.length">
-                    <div class="clearfix row">
-                        <div ng-repeat="product in products">
-                            <div class="col-md-4 product-box">
-                                <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
-                                    <div ng-show="hoverCompare"
-                                         ng-click="changeClass()"
-                                         ng-class="class"
-                                         data-title="{{product.title}}"
-                                         data-slug="{{product.slug}}"
-                                         data-image="{{product.thumbUrl}}"
-                                         class="product-compare-add">
-                                        <i class="fa fa-plus"></i> {{'COMPARE' | translate}}
-                                    </div>
-                                    <a class="u-url {{product.ribbon_class}}" itemprop="url" title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
-                                        <img itemprop="image" class="img-responsive u-photo" src="{{product.thumbUrl}}" alt="{{product.title}}"/>
-                                        <p ng-if="product.ribbon">
-                                            <span>{{product.ribbon}}</span>
-                                        </p>
-                                    </a>
-                                    <div class="caption">
-                                        <h3 class="p-name" itemprop="name">
-                                            <a title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
-                                                {{product.title}}
-                                            </a>
-                                        </h3>
-                                        <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                            <div class="clearfix">
-                                                <div ng-if="product.price_discount_has == 1">
+            <div class="page-header">
+                <h1>{{condition.title}}</h1>
+            </div>
+            <div ng-show="products.length">
+                <div class="row">
+                    <div ng-repeat="product in products">
+                        <div class="col-md-4 pi-item-box">
+                            <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
+                                <div ng-show="hoverCompare"
+                                     ng-click="changeClass()"
+                                     ng-class="class"
+                                     data-title="{{product.title}}"
+                                     data-slug="{{product.slug}}"
+                                     data-image="{{product.thumbUrl}}"
+                                     class="pi-item-compare-add">
+                                    <i class="fa fa-plus"></i> {{'COMPARE' | translate}}
+                                </div>
+                                <a class="u-url {{product.ribbon_class}}" itemprop="url" title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
+                                    <img itemprop="image" class="img-responsive u-photo" src="{{product.thumbUrl}}" alt="{{product.title}}"/>
+                                    <p ng-if="product.ribbon">
+                                        <span>{{product.ribbon}}</span>
+                                    </p>
+                                </a>
+                                <div class="caption">
+                                    <h3 class="p-name" itemprop="name">
+                                        <a title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
+                                            {{product.title}}
+                                        </a>
+                                    </h3>
+                                    <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                        <div class="clearfix">
+                                            <div ng-if="product.price_discount_has == 1">
                                                 <span class="text-danger">
                                                     <del>{{product.price_discount_view}}</del>
                                                 </span>
-                                                </div>
-                                                <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
-                                                <meta itemprop="priceCurrency" content="{{product.price_currency}}">
                                             </div>
+                                            <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
+                                            <meta itemprop="priceCurrency" content="{{product.price_currency}}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="pi-paginator">
                     <pagination ng-if="paginator.count > paginator.limit"
                                 total-items="paginator.count" page="paginator.page" max-size="10"
                                 previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
                                 boundary-links="true" items-per-page="paginator.limit">
                     </pagination>
                 </div>
-                <div class="alert alert-info" ng-if="!products.length">
-                    {{'NONE_PRODUCT' | translate}}
-                </div>
+            </div>
+            <div class="alert alert-info" ng-if="!products.length">
+                {{'NONE_PRODUCT' | translate}}
             </div>
         </div>
     </div>

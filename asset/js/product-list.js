@@ -1,5 +1,3 @@
-var compareCount = 0;
-var compareList = [];
 angular.module('shop')
     .config(['$routeProvider', 'piProvider', 'config',
         function ($routeProvider, piProvider, config) {
@@ -85,7 +83,9 @@ angular.module('shop')
             }
 
             // compare products
-            $(document).on("click", ".product-compare-add", function() {
+            var compareCount = 0;
+            var compareList = [];
+            $(document).on("click", ".pi-item-compare-add", function() {
                 if (compareCount < 5) {
                     if(jQuery.inArray($(this).attr("data-slug"), compareList) !== -1) {
                         $('#compareModal .modal-body').html(config.t.COMPARE_MESSAGE_2);
@@ -94,12 +94,12 @@ angular.module('shop')
                         compareList.push($(this).attr("data-slug"));
                         compareCount = compareCount + 1;
 
-                        var url = $('.product-compare-button a').attr('href');
+                        var url = $('.pi-item-compare-button a').attr('href');
                         url = url + '/' + $(this).attr("data-slug");
 
-                        $('.product-compare-button a').attr("href", url);
-                        $(".product-compare-list").removeClass("hide");
-                        $(".product-compare-list .clearfix").append("<div class='col-md-2'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
+                        $('.pi-item-compare-button a').attr("href", url);
+                        $(".pi-item-compare-list").removeClass("hide");
+                        $(".pi-item-compare-list .clearfix").append("<div class='col-md-2'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
                     }
                 } else {
                     $('#compareModal .modal-body').html(config.t.COMPARE_MESSAGE_1);
@@ -109,7 +109,7 @@ angular.module('shop')
 
             // category list
             $(function() {
-                $('#category-tree-view').treeview({
+                $('.pi-item-category').treeview({
                     levels: 1,
                     data: config.categoryJson,
                     enableLinks: true,

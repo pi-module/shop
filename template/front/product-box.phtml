@@ -22,7 +22,22 @@
             </h3>
             <?php if (isset($product['price']) && $config['order_active']) { ?>
                 <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                    <?php if ($config['order_stock'] == 'never') { ?>
+                    <div class="clearfix">
+                        <?php if (!empty($product['price_title'])) { ?>
+                            <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
+                            <span><?php echo $this->escape($product['price_title']); ?></span>
+                        <?php } ?>
+                        <?php if (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) { ?>
+                            <span class="text-danger">
+                                    <del><?php echo $this->escape($product['price_discount_view']); ?></del>
+                                </span>
+                        <?php } ?>
+                        <span class="p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>"><?php echo $this->escape($product['price_view']); ?></span>
+                        <?php if(isset($product['price_currency'])) { ?>
+                            <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
+                        <?php } ?>
+                    </div>
+                    <?php /* if ($config['order_stock'] == 'never') { ?>
                         <div class="clearfix">
                             <?php if (!empty($product['price_title'])) { ?>
                                 <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
@@ -103,7 +118,7 @@
                                 <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
                             <?php } ?>
                         </div>
-                    <?php } ?>
+                    <?php } */ ?>
                 </div>
             <?php } ?>
         </div>
