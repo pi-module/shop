@@ -153,6 +153,16 @@ class ProductController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 $message = __('View filtered products');
+                // Clean title
+                if (Pi::service('module')->isActive('search') && isset($values['title']) && !empty($values['title'])) {
+                    $values['title'] = Pi::api('api', 'search')->parseQuery($values['title']);
+                    $values['title'] = implode(' ', $values['title']);
+                } elseif (isset($values['title']) && !empty($values['title'])) {
+                    $values['title'] = _strip($values['title']);
+                } else {
+                    $values['title'] = '';
+                }
+                // Set url
                 $url = array(
                     'action' => 'index',
                     'title' => $values['title'],
