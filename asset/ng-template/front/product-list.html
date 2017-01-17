@@ -7,7 +7,7 @@
             <form id="list-filter" ng-submit="filterAction()">
                 <div class="form-group">
                     <label>{{'TITLE' | translate}}</label>
-                    <input type="text" class="form-control" ng-model="filter.title" ng-change="filterAction()" ng-model-options="{ debounce: 2000 }">
+                    <input type="text" class="form-control" ng-model="filter.title" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
                 </div>
                 <!-- <div class="form-group">
                     <label>{{'MARKETABLE' | translate}}</label>
@@ -25,13 +25,13 @@
                         <div ng-if="filterSingle.type == 'text'">
                             <div class="form-group">
                                 <label>{{filterSingle.title}}</label>
-                                <input type="text" class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 2000 }">
+                                <input type="text" class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
                             </div>
                         </div>
                         <div ng-if="filterSingle.type == 'select'">
                             <div class="form-group">
                                 <label>{{filterSingle.title}}</label>
-                                <select class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 2000 }">
+                                <select class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
                                     <option value="">{{'ALL' | translate}}</option>
                                     <option ng-repeat="filterData in filterSingle.value.data" ng-if="filterData">
                                         {{filterData}}
