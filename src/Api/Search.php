@@ -63,7 +63,6 @@ class Search extends AbstractSearch
         'id DESC'
     );
 
-
     /**
      * {@inheritDoc}
      */
