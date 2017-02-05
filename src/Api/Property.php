@@ -96,7 +96,8 @@ class Property extends AbstractApi
         $prices = array();
         $values = array();
         $where = array('product' => $product);
-        $select = Pi::model('property_value', $this->getModule())->select()->where($where);
+        $order = array('name ASC');
+        $select = Pi::model('property_value', $this->getModule())->select()->where($where)->order($order);
         $rowset = Pi::model('property_value', $this->getModule())->selectWith($select);
         // Make values list
         foreach ($rowset as $row) {
