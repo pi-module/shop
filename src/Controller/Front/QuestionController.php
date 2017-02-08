@@ -67,7 +67,7 @@ class QuestionController extends IndexController
                         Pi::config('adminmail') => Pi::config('adminname'),
                     );
                     // Send mail to admin
-                    Pi::api('mail', 'notification')->send(
+                    Pi::service('notification')->send(
                         $toAdmin,
                         'user_question',
                         $information,
