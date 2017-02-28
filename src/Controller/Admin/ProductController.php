@@ -58,7 +58,7 @@ class ProductController extends ActionController
             $whereLink['category'] = $category;
             $columnsLink = array('product' => new Expression('DISTINCT product'));
             // Get info from link table
-            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order)->limit($limit);;
+            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order);
             $rowset = $this->getModel('link')->selectWith($select)->toArray();
             // Make list
             foreach ($rowset as $id) {
@@ -77,7 +77,7 @@ class ProductController extends ActionController
                 $whereKey = clone $where;
                 $whereMain->equalTo('status', 1);
                 foreach ($title as $term) {
-                    $whereKey->like('title', '%' . $term . '%')->or;
+                    $whereKey->like('title', '%' . $term . '%')->and;
                 }
                 $where->andPredicate($whereMain)->andPredicate($whereKey);
             });
@@ -89,6 +89,9 @@ class ProductController extends ActionController
             if (!empty($productId)) {
                 $whereProduct['id'] = $productId;
             }
+            // Get list of product
+            $select = $this->getModel('product')->select()->where($whereProduct)->order($order)->offset($offset)->limit($limit);
+            $rowset = $this->getModel('product')->selectWith($select);
         } elseif (!empty($title)) {
             if (Pi::service('module')->isActive('search') && isset($title) && !empty($title)) {
                 $title = Pi::api('api', 'search')->parseQuery($title);
@@ -102,10 +105,10 @@ class ProductController extends ActionController
                 $whereKey = clone $where;
                 $whereMain->equalTo('status', 1);
                 foreach ($title as $term) {
-                    $whereKey->like('title', '%' . $term . '%')->or;
+                    $whereKey->like('title', '%' . $term . '%')->and;
                 }
                 $where->andPredicate($whereMain)->andPredicate($whereKey);
-            })->limit($limit);;
+            })->order($order);
             $rowset = $this->getModel('product')->selectWith($select);
             foreach ($rowset as $row) {
                 $productId[$row->id] = $row->id;
@@ -114,6 +117,9 @@ class ProductController extends ActionController
             if (!empty($productId)) {
                 $whereProduct['id'] = $productId;
             }
+            // Get list of product
+            $select = $this->getModel('product')->select()->where($whereProduct)->order($order)->offset($offset)->limit($limit);
+            $rowset = $this->getModel('product')->selectWith($select);
         } else {
             // Set where
             $whereLink = array();
@@ -140,10 +146,10 @@ class ProductController extends ActionController
             if (!empty($productId)) {
                 $whereProduct['id'] = $productId;
             }
+            // Get list of product
+            $select = $this->getModel('product')->select()->where($whereProduct)->order($order);
+            $rowset = $this->getModel('product')->selectWith($select);
         }
-        // Get list of product
-        $select = $this->getModel('product')->select()->where($whereProduct)->order($order);
-        $rowset = $this->getModel('product')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
             $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
