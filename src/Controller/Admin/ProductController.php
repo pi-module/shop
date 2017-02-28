@@ -58,7 +58,7 @@ class ProductController extends ActionController
             $whereLink['category'] = $category;
             $columnsLink = array('product' => new Expression('DISTINCT product'));
             // Get info from link table
-            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order);
+            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order)->limit($limit);;
             $rowset = $this->getModel('link')->selectWith($select)->toArray();
             // Make list
             foreach ($rowset as $id) {
@@ -105,7 +105,7 @@ class ProductController extends ActionController
                     $whereKey->like('title', '%' . $term . '%')->or;
                 }
                 $where->andPredicate($whereMain)->andPredicate($whereKey);
-            });
+            })->limit($limit);;
             $rowset = $this->getModel('product')->selectWith($select);
             foreach ($rowset as $row) {
                 $productId[$row->id] = $row->id;
