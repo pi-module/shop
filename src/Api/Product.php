@@ -452,6 +452,7 @@ class Product extends AbstractApi
         $product['setting'] = json_decode($product['setting'], true);
         // Set text_summary
         $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'html', 'html');
+        $product['text_summary_view'] = Pi::service('markup')->render($product['text_summary'], 'html', 'text', array('nl2br' => true));
         // Set text_description
         $product['text_description'] = Pi::service('markup')->render($product['text_description'], 'html', 'html');
         // Set times
