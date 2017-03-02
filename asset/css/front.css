@@ -347,12 +347,12 @@
 
 .category-list .thumbnail img {
     width: 100%;
-    max-height: 150px;
+    max-height: 250px;
 }
 
 .category-list .thumbnail-bg {
     width: 100%;
-    height: 150px;
+    height: 250px;
     background-color: #f2f2f2;
     padding-top: 60px;
 }
