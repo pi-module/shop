@@ -49,21 +49,20 @@ class ProductController extends ActionController
         $order = array('time_create DESC', 'id DESC');
         $limit = intval($this->config('admin_perpage'));
         $product = array();
-        $productId = array();
+        // Set where
         $whereProduct = array();
-        // Set title
-        if (!empty($title) && !empty($category)) {
-            // Set where
-            $whereLink = array();
-            $whereLink['category'] = $category;
-            $columnsLink = array('product' => new Expression('DISTINCT product'));
-            // Get info from link table
-            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order);
-            $rowset = $this->getModel('link')->selectWith($select)->toArray();
-            // Make list
-            foreach ($rowset as $id) {
-                $productId[$id['product']] = $id['product'];
-            }
+        if (!empty($recommended)) {
+            $whereProduct['recommended'] = 1;
+        }
+        if (!empty($category)) {
+            $whereProduct['category_main'] = $category;
+        }
+        if (!empty($status) && in_array($status, array(1, 2, 3, 4, 5))) {
+            $whereProduct['status'] = $status;
+        } else {
+            $whereProduct['status'] = array(1, 2, 3, 4);
+        }
+        if (!empty($title)) {
             // Set title
             if (Pi::service('module')->isActive('search') && isset($title) && !empty($title)) {
                 $title = Pi::api('api', 'search')->parseQuery($title);
@@ -71,99 +70,33 @@ class ProductController extends ActionController
                 $title = _strip($title);
             }
             $title = is_array($title) ? $title : array($title);
-            $columns = array('id');
-            $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($title) {
-                $whereMain = clone $where;
+            $titleWhere = function ($where) use ($title) {
                 $whereKey = clone $where;
-                $whereMain->equalTo('status', 1);
                 foreach ($title as $term) {
                     $whereKey->like('title', '%' . $term . '%')->and;
                 }
-                $where->andPredicate($whereMain)->andPredicate($whereKey);
-            });
-            $rowset = $this->getModel('product')->selectWith($select);
-            foreach ($rowset as $row) {
-                $productId[$row->id] = $row->id;
-            }
-            // Set info
-            if (!empty($productId)) {
-                $whereProduct['id'] = $productId;
-            }
-            // Get list of product
-            $select = $this->getModel('product')->select()->where($whereProduct)->order($order)->offset($offset)->limit($limit);
-            $rowset = $this->getModel('product')->selectWith($select);
-        } elseif (!empty($title)) {
-            if (Pi::service('module')->isActive('search') && isset($title) && !empty($title)) {
-                $title = Pi::api('api', 'search')->parseQuery($title);
-            } elseif (isset($title) && !empty($title)) {
-                $title = _strip($title);
-            }
-            $title = is_array($title) ? $title : array($title);
-            $columns = array('id');
-            $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($title) {
-                $whereMain = clone $where;
-                $whereKey = clone $where;
-                $whereMain->equalTo('status', 1);
-                foreach ($title as $term) {
-                    $whereKey->like('title', '%' . $term . '%')->and;
-                }
-                $where->andPredicate($whereMain)->andPredicate($whereKey);
-            })->order($order);
-            $rowset = $this->getModel('product')->selectWith($select);
-            foreach ($rowset as $row) {
-                $productId[$row->id] = $row->id;
-            }
-            // Set info
-            if (!empty($productId)) {
-                $whereProduct['id'] = $productId;
-            }
-            // Get list of product
-            $select = $this->getModel('product')->select()->where($whereProduct)->order($order)->offset($offset)->limit($limit);
-            $rowset = $this->getModel('product')->selectWith($select);
-        } else {
-            // Set where
-            $whereLink = array();
-            if (!empty($status) && in_array($status, array(1, 2, 3, 4, 5))) {
-                $whereLink['status'] = $status;
-            } else {
-                $whereLink['status'] = array(1, 2, 3, 4);
-            }
-            if (!empty($category)) {
-                $whereLink['category'] = $category;
-            }
-            if (!empty($recommended)) {
-                $whereLink['recommended'] = 1;
-            }
-            $columnsLink = array('product' => new Expression('DISTINCT product'));
-            // Get info from link table
-            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink)->order($order)->offset($offset)->limit($limit);
-            $rowset = $this->getModel('link')->selectWith($select)->toArray();
-            // Make list
-            foreach ($rowset as $id) {
-                $productId[] = $id['product'];
-            }
-            // Set info
-            if (!empty($productId)) {
-                $whereProduct['id'] = $productId;
-            }
-            // Get list of product
-            $select = $this->getModel('product')->select()->where($whereProduct)->order($order);
-            $rowset = $this->getModel('product')->selectWith($select);
+                $where->andPredicate($whereKey);
+            };
         }
+        // Get list of product
+        $select = $this->getModel('product')->select();
+        if (!empty($title)) {
+            $select->where($titleWhere);
+        }
+        $select->where($whereProduct)->order($order)->offset($offset)->limit($limit);
+        $rowset = $this->getModel('product')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
             $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
         }
         // Set count
-        if (empty($title)) {
-            $columnsLink = array('count' => new Expression('count(DISTINCT `product`)'));
-            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsLink);
-            $count = $this->getModel('link')->selectWith($select)->current()->count;
-        } else {
-            $columnsLink = array('count' => new Expression('count(*)'));
-            $select = $this->getModel('product')->select()->where($whereProduct)->columns($columnsLink);
-            $count = $this->getModel('product')->selectWith($select)->current()->count;
+        $columnsLink = array('count' => new Expression('count(*)'));
+        $select = $this->getModel('product')->select();
+        if (!empty($title)) {
+            $select->where($titleWhere);
         }
+        $select->where($whereProduct)->columns($columnsLink);
+        $count = $this->getModel('product')->selectWith($select)->current()->count;
         // Set title
         $title = is_array($title) ? implode(' ', $title) : $title;
         // Set paginator
