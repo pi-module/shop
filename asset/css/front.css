@@ -130,6 +130,7 @@
 .product-cart-box .cart-product-single {
     padding-top: 10px;
     padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
 }
 
 .product-cart-box .cart-product-single:hover {

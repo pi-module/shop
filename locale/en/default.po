@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2017-01-16 20:08+0330\n"
+"POT-Creation-Date: 2017-03-02 13:17+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ../..\n"
@@ -44,7 +44,7 @@ msgid "Date"
 msgstr ""
 
 #: src/Api/Attribute.php:90 template/admin/product-serial.phtml:7
-#: template/front/checkout-cart.phtml:107
+#: template/front/checkout-cart.phtml:109
 msgid "Number"
 msgstr ""
 
@@ -93,7 +93,7 @@ msgstr ""
 msgid "Compare products"
 msgstr ""
 
-#: src/Api/Product.php:490 src/Api/Product.php:743 src/Api/Product.php:860
+#: src/Api/Product.php:491 src/Api/Product.php:744 src/Api/Product.php:861
 #: src/Form/ProductAdditionalForm.php:274 src/Form/ProductPriceForm.php:144
 #: template/front/product-angular-old.phtml:261
 #: template/front/product-angular-old.phtml:277
@@ -102,36 +102,36 @@ msgstr ""
 msgid "In stock"
 msgstr ""
 
-#: src/Api/Product.php:494 src/Api/Product.php:747 src/Api/Product.php:864
+#: src/Api/Product.php:495 src/Api/Product.php:748 src/Api/Product.php:865
 #: src/Form/ProductAdditionalForm.php:275 src/Form/ProductPriceForm.php:145
 #: template/front/product-angular-old.phtml:341
 #: template/front/product-price.phtml:148
 msgid "Out of stock"
 msgstr ""
 
-#: src/Api/Product.php:498 src/Api/Product.php:751 src/Api/Product.php:868
+#: src/Api/Product.php:499 src/Api/Product.php:752 src/Api/Product.php:869
 #: src/Form/ProductAdditionalForm.php:276 src/Form/ProductPriceForm.php:146
 msgid "Coming soon"
 msgstr ""
 
-#: src/Api/Product.php:502 src/Api/Product.php:755 src/Api/Product.php:872
+#: src/Api/Product.php:503 src/Api/Product.php:756 src/Api/Product.php:873
 #: src/Form/ProductAdditionalForm.php:277 src/Form/ProductPriceForm.php:147
 msgid "Contact"
 msgstr ""
 
-#: src/Api/Product.php:506 src/Api/Product.php:759 src/Api/Product.php:876
+#: src/Api/Product.php:507 src/Api/Product.php:760 src/Api/Product.php:877
 msgid "Variable stock"
 msgstr ""
 
-#: src/Api/Product.php:546 src/Api/Product.php:612 src/Api/Product.php:918
+#: src/Api/Product.php:547 src/Api/Product.php:613 src/Api/Product.php:919
 msgid "On sale"
 msgstr ""
 
-#: src/Api/Product.php:549 src/Api/Product.php:615 src/Api/Product.php:921
+#: src/Api/Product.php:550 src/Api/Product.php:616 src/Api/Product.php:922
 msgid "Have discount"
 msgstr ""
 
-#: src/Api/Product.php:554 src/Api/Product.php:620 src/Api/Product.php:926
+#: src/Api/Product.php:555 src/Api/Product.php:621 src/Api/Product.php:927
 #: template/admin/product-index.phtml:27 template/admin/product-index.phtml:29
 msgid "Recommended"
 msgstr ""
@@ -176,7 +176,7 @@ msgid "All changes in file saved successfully."
 msgstr ""
 
 #: src/Controller/Admin/AttachController.php:147
-#: src/Controller/Admin/ProductController.php:602
+#: src/Controller/Admin/ProductController.php:541
 msgid "Invalid data, please check and re-submit."
 msgstr ""
 
@@ -214,7 +214,7 @@ msgid "Please select field"
 msgstr ""
 
 #: src/Controller/Admin/CategoryController.php:138
-#: src/Controller/Admin/ProductController.php:290
+#: src/Controller/Admin/ProductController.php:229
 msgid "Problem in upload image. please try again"
 msgstr ""
 
@@ -227,13 +227,13 @@ msgid "Add a category"
 msgstr ""
 
 #: src/Controller/Admin/CategoryController.php:244
-#: src/Controller/Admin/ProductController.php:903
+#: src/Controller/Admin/ProductController.php:842
 #, php-format
 msgid "Image of %s removed"
 msgstr ""
 
 #: src/Controller/Admin/CategoryController.php:247
-#: src/Controller/Admin/ProductController.php:906
+#: src/Controller/Admin/ProductController.php:845
 msgid "Image not remove"
 msgstr ""
 
@@ -259,78 +259,78 @@ msgstr ""
 msgid "Add position"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:205
+#: src/Controller/Admin/ProductController.php:144
 msgid "View filtered products"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:212
+#: src/Controller/Admin/ProductController.php:151
 msgid "Not valid"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:218
+#: src/Controller/Admin/ProductController.php:157
 msgid "Not set"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:351
-#: src/Controller/Admin/ProductController.php:460
+#: src/Controller/Admin/ProductController.php:290
+#: src/Controller/Admin/ProductController.php:399
 msgid "Product data saved successfully."
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:397
+#: src/Controller/Admin/ProductController.php:336
+#: src/Controller/Admin/ProductController.php:507
 #: src/Controller/Admin/ProductController.php:568
-#: src/Controller/Admin/ProductController.php:629
-#: src/Controller/Admin/ProductController.php:910
-#: src/Controller/Admin/ProductController.php:930
-#: src/Controller/Admin/ProductController.php:981
-#: src/Controller/Front/CartController.php:184
+#: src/Controller/Admin/ProductController.php:849
+#: src/Controller/Admin/ProductController.php:869
+#: src/Controller/Admin/ProductController.php:920
+#: src/Controller/Front/CartController.php:189
 msgid "Please select product"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:550
+#: src/Controller/Admin/ProductController.php:489
 #, php-format
 msgid "%s set recommended successfully"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:562
+#: src/Controller/Admin/ProductController.php:501
 #, php-format
 msgid "Error in set recommended for %s product"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:612
+#: src/Controller/Admin/ProductController.php:551
 msgid "Add Related"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:655
+#: src/Controller/Admin/ProductController.php:594
 msgid "OK Add"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:661
+#: src/Controller/Admin/ProductController.php:600
 msgid "Error Add , It added before"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:668
+#: src/Controller/Admin/ProductController.php:607
 msgid "Error , Product and related is same"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:675
+#: src/Controller/Admin/ProductController.php:614
 msgid "OK Remove"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:878
+#: src/Controller/Admin/ProductController.php:817
 msgid "Update price and stock"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:935
+#: src/Controller/Admin/ProductController.php:874
 #, php-format
 msgid "%s new serial number added"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:951
+#: src/Controller/Admin/ProductController.php:890
 #, php-format
 msgid "Manage serial number of %s"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:979
+#: src/Controller/Admin/ProductController.php:918
 msgid "This product deleted"
 msgstr ""
 
@@ -401,51 +401,56 @@ msgid "Recent products."
 msgstr ""
 
 #: src/Controller/Front/CartController.php:28
-#: src/Controller/Front/CartController.php:118
+#: src/Controller/Front/CartController.php:123
 msgid "So sorry, At this moment order is inactive"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:61
+#: src/Controller/Front/CartController.php:45
+msgid "Basket"
+msgstr ""
+
+#: src/Controller/Front/CartController.php:66
+#: template/front/checkout-cart.phtml:164
 msgid "Your basket is empty"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:64
+#: src/Controller/Front/CartController.php:69
 #, php-format
 msgid "Your already use %s promotion code"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:93
+#: src/Controller/Front/CartController.php:98
 msgid "Promotion code add successfully to your basket"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:96
-#: src/Controller/Front/CartController.php:100
-#: src/Controller/Front/CartController.php:104
+#: src/Controller/Front/CartController.php:101
+#: src/Controller/Front/CartController.php:105
+#: src/Controller/Front/CartController.php:109
 msgid "Promotion code is not valid"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:130
+#: src/Controller/Front/CartController.php:135
 msgid "The product was not marketable."
 msgstr ""
 
-#: src/Controller/Front/CartController.php:171
+#: src/Controller/Front/CartController.php:176
 msgid "Your cart are empty"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:193
+#: src/Controller/Front/CartController.php:198
 msgid "Selected product removed from your cart"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:220
+#: src/Controller/Front/CartController.php:225
 msgid "Update number"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:226
+#: src/Controller/Front/CartController.php:231
 msgid "You can not set product number to 0"
 msgstr ""
 
-#: src/Controller/Front/CartController.php:362
-#: src/Controller/Front/CartController.php:363
+#: src/Controller/Front/CartController.php:367
+#: src/Controller/Front/CartController.php:368
 #, php-format
 msgid "Increase credit from shop module by use <strong>%s</strong> code"
 msgstr ""
@@ -805,7 +810,7 @@ msgstr ""
 #: src/Form/SaleForm.php:83 template/admin/product-update.phtml:12
 #: template/admin/product-update.phtml:16
 #: template/admin/promotion-index.phtml:47
-#: template/front/checkout-cart.phtml:98
+#: template/front/checkout-cart.phtml:100
 #: template/front/product-angular-old.phtml:225
 #: template/front/product-compare.phtml:86
 #: template/front/product-price.phtml:71 template/front/product-price.phtml:101
@@ -1421,7 +1426,7 @@ msgid "List of related products"
 msgstr ""
 
 #: template/admin/product-related.phtml:39
-#: template/front/checkout-cart.phtml:118
+#: template/front/checkout-cart.phtml:123
 msgid "Remove"
 msgstr ""
 
@@ -1566,63 +1571,63 @@ msgstr ""
 msgid "List of sub categories"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:67
+#: template/front/checkout-cart.phtml:68
 msgid "Are you sure to delete this product from your cart?"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:75
-msgid "List of prodcuts on cart"
+#: template/front/checkout-cart.phtml:77
+msgid "List of products on cart"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:104
+#: template/front/checkout-cart.phtml:106
 msgid "Discount"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:114
-#: template/front/checkout-cart.phtml:116
+#: template/front/checkout-cart.phtml:117
+#: template/front/checkout-cart.phtml:119
 msgid "Total"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:114
+#: template/front/checkout-cart.phtml:117
 msgid "Payment after admin validation"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:125
-#: template/front/checkout-cart.phtml:126
+#: template/front/checkout-cart.phtml:132
+#: template/front/checkout-cart.phtml:133
 msgid "Back to Shoping"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:127
-#: template/front/checkout-cart.phtml:128
+#: template/front/checkout-cart.phtml:134
+#: template/front/checkout-cart.phtml:135
 msgid "Empty cart"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:139
+#: template/front/checkout-cart.phtml:146
 msgid "Pre Invoice"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:142
+#: template/front/checkout-cart.phtml:148
 msgid "Total Price"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:143
+#: template/front/checkout-cart.phtml:149
 msgid "Total Discount"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:144
+#: template/front/checkout-cart.phtml:150
 msgid "Total Number"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:145
+#: template/front/checkout-cart.phtml:151
 msgid "Total Shipping"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:146
+#: template/front/checkout-cart.phtml:152
 msgid "Final Price"
 msgstr ""
 
-#: template/front/checkout-cart.phtml:151
-#: template/front/checkout-cart.phtml:152
+#: template/front/checkout-cart.phtml:156
+#: template/front/checkout-cart.phtml:157
 msgid "Next"
 msgstr ""
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2017-01-16 20:11+0330\n"
+"POT-Creation-Date: 2017-03-02 13:10+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ../..\n"
@@ -44,7 +44,7 @@ msgid "Date"
 msgstr "تاریخ"
 
 #: src/Api/Attribute.php:90 template/admin/product-serial.phtml:7
-#: template/front/checkout-cart.phtml:107
+#: template/front/checkout-cart.phtml:109
 msgid "Number"
 msgstr "تعداد"
 
@@ -93,7 +93,7 @@ msgstr "فهرست برچسب ها"
 msgid "Compare products"
 msgstr "مقایسه محصولات"
 
-#: src/Api/Product.php:490 src/Api/Product.php:743 src/Api/Product.php:860
+#: src/Api/Product.php:491 src/Api/Product.php:744 src/Api/Product.php:861
 #: src/Form/ProductAdditionalForm.php:274 src/Form/ProductPriceForm.php:144
 #: template/front/product-angular-old.phtml:261
 #: template/front/product-angular-old.phtml:277
@@ -102,36 +102,36 @@ msgstr "مقایسه محصولات"
 msgid "In stock"
 msgstr "موجود"
 
-#: src/Api/Product.php:494 src/Api/Product.php:747 src/Api/Product.php:864
+#: src/Api/Product.php:495 src/Api/Product.php:748 src/Api/Product.php:865
 #: src/Form/ProductAdditionalForm.php:275 src/Form/ProductPriceForm.php:145
 #: template/front/product-angular-old.phtml:341
 #: template/front/product-price.phtml:148
 msgid "Out of stock"
 msgstr "نا موجود"
 
-#: src/Api/Product.php:498 src/Api/Product.php:751 src/Api/Product.php:868
+#: src/Api/Product.php:499 src/Api/Product.php:752 src/Api/Product.php:869
 #: src/Form/ProductAdditionalForm.php:276 src/Form/ProductPriceForm.php:146
 msgid "Coming soon"
 msgstr "به زودی"
 
-#: src/Api/Product.php:502 src/Api/Product.php:755 src/Api/Product.php:872
+#: src/Api/Product.php:503 src/Api/Product.php:756 src/Api/Product.php:873
 #: src/Form/ProductAdditionalForm.php:277 src/Form/ProductPriceForm.php:147
 msgid "Contact"
 msgstr "تماس بگیرید"
 
-#: src/Api/Product.php:506 src/Api/Product.php:759 src/Api/Product.php:876
+#: src/Api/Product.php:507 src/Api/Product.php:760 src/Api/Product.php:877
 msgid "Variable stock"
 msgstr "موجودی متغیر"
 
-#: src/Api/Product.php:546 src/Api/Product.php:612 src/Api/Product.php:918
+#: src/Api/Product.php:547 src/Api/Product.php:613 src/Api/Product.php:919
 msgid "On sale"
 msgstr "تخفیف ویژه"
 
-#: src/Api/Product.php:549 src/Api/Product.php:615 src/Api/Product.php:921
+#: src/Api/Product.php:550 src/Api/Product.php:616 src/Api/Product.php:922
 msgid "Have discount"
 msgstr "با تخفیف"
 
-#: src/Api/Product.php:554 src/Api/Product.php:620 src/Api/Product.php:926
+#: src/Api/Product.php:555 src/Api/Product.php:621 src/Api/Product.php:927
 #: template/admin/product-index.phtml:27 template/admin/product-index.phtml:29
 msgid "Recommended"
 msgstr "پیشنهاد شده"
@@ -181,7 +181,7 @@ msgid "All changes in file saved successfully."
 msgstr "همه تغییرات در فایل با موفقیت ذخیره شد"
 
 #: src/Controller/Admin/AttachController.php:147
-#: src/Controller/Admin/ProductController.php:602
+#: src/Controller/Admin/ProductController.php:541
 msgid "Invalid data, please check and re-submit."
 msgstr "اطلاعات اشتباه، لطفا بررسی کنید و دوباره ارسال کنید"
 
@@ -219,7 +219,7 @@ msgid "Please select field"
 msgstr "لطفا یک فیلد انتخاب کنید"
 
 #: src/Controller/Admin/CategoryController.php:138
-#: src/Controller/Admin/ProductController.php:290
+#: src/Controller/Admin/ProductController.php:229
 msgid "Problem in upload image. please try again"
 msgstr "مشکل در بارگذاری تصویر، لطفا مجددا امتحان کنید"
 
@@ -232,13 +232,13 @@ msgid "Add a category"
 msgstr "شاخه جدید"
 
 #: src/Controller/Admin/CategoryController.php:244
-#: src/Controller/Admin/ProductController.php:903
+#: src/Controller/Admin/ProductController.php:842
 #, php-format
 msgid "Image of %s removed"
 msgstr "تصویر مربوط به %s حذف شد"
 
 #: src/Controller/Admin/CategoryController.php:247
-#: src/Controller/Admin/ProductController.php:906
+#: src/Controller/Admin/ProductController.php:845
 msgid "Image not remove"
 msgstr "تصویر حذف نشد"
 
@@ -264,78 +264,78 @@ msgstr "اطلاعات موقعیت خواص با موفقیت ذخیره شد"
 msgid "Add position"
 msgstr "موقعیت جدید"
 
-#: src/Controller/Admin/ProductController.php:205
+#: src/Controller/Admin/ProductController.php:144
 msgid "View filtered products"
 msgstr "نمایش محصولات فیلتر شده"
 
-#: src/Controller/Admin/ProductController.php:212
+#: src/Controller/Admin/ProductController.php:151
 msgid "Not valid"
 msgstr "صحیح نیست"
 
-#: src/Controller/Admin/ProductController.php:218
+#: src/Controller/Admin/ProductController.php:157
 msgid "Not set"
 msgstr "تنظیم نشده"
 
-#: src/Controller/Admin/ProductController.php:351
-#: src/Controller/Admin/ProductController.php:460
+#: src/Controller/Admin/ProductController.php:290
+#: src/Controller/Admin/ProductController.php:399
 msgid "Product data saved successfully."
 msgstr "اطلاعات محصول با موفقیت ذخیره شد"
 
-#: src/Controller/Admin/ProductController.php:397
+#: src/Controller/Admin/ProductController.php:336
+#: src/Controller/Admin/ProductController.php:507
 #: src/Controller/Admin/ProductController.php:568
-#: src/Controller/Admin/ProductController.php:629
-#: src/Controller/Admin/ProductController.php:910
-#: src/Controller/Admin/ProductController.php:930
-#: src/Controller/Admin/ProductController.php:981
-#: src/Controller/Front/CartController.php:184
+#: src/Controller/Admin/ProductController.php:849
+#: src/Controller/Admin/ProductController.php:869
+#: src/Controller/Admin/ProductController.php:920
+#: src/Controller/Front/CartController.php:189
 msgid "Please select product"
 msgstr "لطفا یک محصول انتخاب کنید"
 
-#: src/Controller/Admin/ProductController.php:550
+#: src/Controller/Admin/ProductController.php:489
 #, php-format
 msgid "%s set recommended successfully"
 msgstr "محصول %s پیشنهاد شده شد"
 
-#: src/Controller/Admin/ProductController.php:562
+#: src/Controller/Admin/ProductController.php:501
 #, php-format
 msgid "Error in set recommended for %s product"
 msgstr "خطا در تنظیم پیشنهاد شده برای محصول %s"
 
-#: src/Controller/Admin/ProductController.php:612
+#: src/Controller/Admin/ProductController.php:551
 msgid "Add Related"
 msgstr "اضافه کردن مشابه"
 
-#: src/Controller/Admin/ProductController.php:655
+#: src/Controller/Admin/ProductController.php:594
 msgid "OK Add"
 msgstr "با موفقیت اضافه شد"
 
-#: src/Controller/Admin/ProductController.php:661
+#: src/Controller/Admin/ProductController.php:600
 msgid "Error Add , It added before"
 msgstr "خطا، این مورد قبلا اضافه شده است"
 
-#: src/Controller/Admin/ProductController.php:668
+#: src/Controller/Admin/ProductController.php:607
 msgid "Error , Product and related is same"
 msgstr "خطا، محصول و مشابه یکی هستند"
 
-#: src/Controller/Admin/ProductController.php:675
+#: src/Controller/Admin/ProductController.php:614
 msgid "OK Remove"
 msgstr "با موفقیت حذف شد"
 
-#: src/Controller/Admin/ProductController.php:878
+#: src/Controller/Admin/ProductController.php:817
 msgid "Update price and stock"
 msgstr "به روز رسانی قیمت"
 
-#: src/Controller/Admin/ProductController.php:935
+#: src/Controller/Admin/ProductController.php:874
 #, php-format
 msgid "%s new serial number added"
 msgstr "%s شماره سریال جدید اضافه شد"
 
-#: src/Controller/Admin/ProductController.php:951
+#: src/Controller/Admin/ProductController.php:890
 #, php-format
 msgid "Manage serial number of %s"
 msgstr "مدیریت شماره سریال های %s"
 
-#: src/Controller/Admin/ProductController.php:979
+#: src/Controller/Admin/ProductController.php:918
 msgid "This product deleted"
 msgstr "این محصول حذف شد"
 
@@ -409,51 +409,56 @@ msgid "Recent products."
 msgstr "آخرین محصولات اضافه شده"
 
 #: src/Controller/Front/CartController.php:28
-#: src/Controller/Front/CartController.php:118
+#: src/Controller/Front/CartController.php:123
 msgid "So sorry, At this moment order is inactive"
 msgstr "متاسفانه در این لحظه امکان ثبت سفارش وجود ندارد"
 
-#: src/Controller/Front/CartController.php:61
+#: src/Controller/Front/CartController.php:45
+msgid "Basket"
+msgstr "سبد خرید"
+
+#: src/Controller/Front/CartController.php:66
+#: template/front/checkout-cart.phtml:163
 msgid "Your basket is empty"
 msgstr "سبد خرید شما خالی است"
 
-#: src/Controller/Front/CartController.php:64
+#: src/Controller/Front/CartController.php:69
 #, php-format
 msgid "Your already use %s promotion code"
 msgstr "شما قبلا از کد تخفیف %s استفاده کرده اید"
 
-#: src/Controller/Front/CartController.php:93
+#: src/Controller/Front/CartController.php:98
 msgid "Promotion code add successfully to your basket"
 msgstr "کد تخفیف با موفقیت بر روی سبد خرید شما اعمال شد"
 
-#: src/Controller/Front/CartController.php:96
-#: src/Controller/Front/CartController.php:100
-#: src/Controller/Front/CartController.php:104
+#: src/Controller/Front/CartController.php:101
+#: src/Controller/Front/CartController.php:105
+#: src/Controller/Front/CartController.php:109
 msgid "Promotion code is not valid"
 msgstr "کد تخفیف معتبر نیست"
 
-#: src/Controller/Front/CartController.php:130
+#: src/Controller/Front/CartController.php:135
 msgid "The product was not marketable."
 msgstr "این محصول قابل فروش نیست"
 
-#: src/Controller/Front/CartController.php:171
+#: src/Controller/Front/CartController.php:176
 msgid "Your cart are empty"
 msgstr "سبد خرید شما خالی است"
 
-#: src/Controller/Front/CartController.php:193
+#: src/Controller/Front/CartController.php:198
 msgid "Selected product removed from your cart"
 msgstr "محصول انتخاب شده از سبد خرید شما حذف شد"
 
-#: src/Controller/Front/CartController.php:220
+#: src/Controller/Front/CartController.php:225
 msgid "Update number"
 msgstr "تغییر تعداد"
 
-#: src/Controller/Front/CartController.php:226
+#: src/Controller/Front/CartController.php:231
 msgid "You can not set product number to 0"
 msgstr "شما نمی توانید تعداد یک محصول را ۰ تنظیم کنید"
 
-#: src/Controller/Front/CartController.php:362
-#: src/Controller/Front/CartController.php:363
+#: src/Controller/Front/CartController.php:367
+#: src/Controller/Front/CartController.php:368
 #, php-format
 msgid "Increase credit from shop module by use <strong>%s</strong> code"
 msgstr ""
@@ -818,7 +823,7 @@ msgstr "موجودی"
 #: src/Form/SaleForm.php:83 template/admin/product-update.phtml:12
 #: template/admin/product-update.phtml:16
 #: template/admin/promotion-index.phtml:47
-#: template/front/checkout-cart.phtml:98
+#: template/front/checkout-cart.phtml:100
 #: template/front/product-angular-old.phtml:225
 #: template/front/product-compare.phtml:86
 #: template/front/product-price.phtml:71 template/front/product-price.phtml:101
@@ -1444,7 +1449,7 @@ msgid "List of related products"
 msgstr "فهرست محصولات مشابه"
 
 #: template/admin/product-related.phtml:39
-#: template/front/checkout-cart.phtml:118
+#: template/front/checkout-cart.phtml:121
 msgid "Remove"
 msgstr "حذف"
 
@@ -1599,63 +1604,63 @@ msgstr ""
 msgid "List of sub categories"
 msgstr "فهرست تمام زیر شاخه ها"
 
-#: template/front/checkout-cart.phtml:67
+#: template/front/checkout-cart.phtml:68
 msgid "Are you sure to delete this product from your cart?"
 msgstr "آیا اطمینان دارید که میخواهید این محصول را از سبد خرید خود حذف کنید؟"
 
-#: template/front/checkout-cart.phtml:75
-msgid "List of prodcuts on cart"
-msgstr "فهرست محصولات انتخابی در سبد خرید"
+#: template/front/checkout-cart.phtml:77
+msgid "List of products on cart"
+msgstr "فهرست محصولات موجود در سبد خرید"
 
-#: template/front/checkout-cart.phtml:104
+#: template/front/checkout-cart.phtml:106
 msgid "Discount"
 msgstr "تخفیف"
 
-#: template/front/checkout-cart.phtml:114
-#: template/front/checkout-cart.phtml:116
+#: template/front/checkout-cart.phtml:117
+#: template/front/checkout-cart.phtml:119
 msgid "Total"
 msgstr "مجموع"
 
-#: template/front/checkout-cart.phtml:114
+#: template/front/checkout-cart.phtml:117
 msgid "Payment after admin validation"
 msgstr "پرداخت بعد از بررسی و تایید دستی مدیر"
 
-#: template/front/checkout-cart.phtml:125
-#: template/front/checkout-cart.phtml:126
+#: template/front/checkout-cart.phtml:129
+#: template/front/checkout-cart.phtml:130
 msgid "Back to Shoping"
 msgstr "اضافه کردن محصول جدید"
 
-#: template/front/checkout-cart.phtml:127
-#: template/front/checkout-cart.phtml:128
+#: template/front/checkout-cart.phtml:131
+#: template/front/checkout-cart.phtml:132
 msgid "Empty cart"
 msgstr "خالی کردن"
 
-#: template/front/checkout-cart.phtml:139
+#: template/front/checkout-cart.phtml:143
 msgid "Pre Invoice"
 msgstr "پیش فاکتور"
 
-#: template/front/checkout-cart.phtml:142
+#: template/front/checkout-cart.phtml:146
 msgid "Total Price"
 msgstr "قیمت کل"
 
-#: template/front/checkout-cart.phtml:143
+#: template/front/checkout-cart.phtml:147
 msgid "Total Discount"
 msgstr "تخفیف کل"
 
-#: template/front/checkout-cart.phtml:144
+#: template/front/checkout-cart.phtml:148
 msgid "Total Number"
 msgstr "تعداد کل"
 
-#: template/front/checkout-cart.phtml:145
+#: template/front/checkout-cart.phtml:149
 msgid "Total Shipping"
 msgstr "هزینه ارسال کل"
 
-#: template/front/checkout-cart.phtml:146
+#: template/front/checkout-cart.phtml:150
 msgid "Final Price"
 msgstr "قیمت نهایی"
 
-#: template/front/checkout-cart.phtml:151
-#: template/front/checkout-cart.phtml:152
+#: template/front/checkout-cart.phtml:155
+#: template/front/checkout-cart.phtml:156
 msgid "Next"
 msgstr "خرید خود را نهایی کنید"
 
@@ -1807,6 +1812,9 @@ msgstr ""
 #: template/front/tag.phtml:4
 msgid "Tag"
 msgstr "برچسب"
+
+#~ msgid "List of prodcuts on cart"
+#~ msgstr "فهرست محصولات انتخابی در سبد خرید"
 
 #~ msgid "Product prices updated successfully."
 #~ msgstr "قیمت محصولات به موفقیت به روز شد"
