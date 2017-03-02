@@ -181,6 +181,7 @@ class ProductController extends ActionController
         // Find Product
         if ($id) {
             $product = Pi::api('product', 'shop')->getProduct($id);
+            // $product = $this->getModel('product')->find($id)->toArray();
             if ($product['image']) {
                 $thumbUrl = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $product['path'], $product['image']);
                 $option['thumbUrl'] = Pi::url($thumbUrl);
@@ -331,7 +332,8 @@ class ProductController extends ActionController
         $config = Pi::service('registry')->config->read($module);
         // Find product
         if ($id) {
-            $product = Pi::api('product', 'shop')->getProduct($id);
+            //$product = Pi::api('product', 'shop')->getProduct($id);
+            $product = $this->getModel('product')->find($id)->toArray();
         } else {
             $this->jump(array('action' => 'index'), __('Please select product'));
         }
