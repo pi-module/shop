@@ -1,7 +1,7 @@
 <?php if (!isset($shopListBoxSize) || empty($shopListBoxSize)) {
     $shopListBoxSize = 'col-md-4';
 } ?>
-<div class="<?php echo $shopListBoxSize; ?> product-box h-product" itemscope itemtype="http://schema.org/Product">
+<div class="<?php echo $shopListBoxSize; ?> product-box h-product" itemscope itemtype="https://schema.org/Product">
     <div class="thumbnail">
         <?php if ($product['image']) { ?>
             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>" title="<?php echo $this->escape($product['title']); ?>"
@@ -21,7 +21,7 @@
                 </a>
             </h3>
             <?php if (isset($product['price']) && $config['order_active']) { ?>
-                <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                <div class="clearfix" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <div class="clearfix">
                         <?php if (!empty($product['price_title'])) { ?>
                             <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
@@ -44,7 +44,7 @@
                                 <span><?php echo $this->escape($product['price_title']); ?></span>
                             <?php } ?>
                             <div class="clearfix">
-                                <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
                             </div>
                             <?php if (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) { ?>
                                 <span class="text-danger">
@@ -64,7 +64,7 @@
                                     <span><?php echo $this->escape($product['price_title']); ?></span>
                                 <?php } ?>
                                 <div class="clearfix">
-                                    <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php echo $this->escape($product['stock_type_view']); ?></span>
+                                    <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php echo $this->escape($product['stock_type_view']); ?></span>
                                 </div>
                                 <?php if (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) { ?>
                                     <span class="text-danger">
@@ -89,7 +89,7 @@
                                     <span><?php echo $this->escape($product['price_title']); ?></span>
                                 <?php } ?>
                                 <div class="clearfix">
-                                    <span class="text-success" itemprop="availability" href="http://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                    <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
                                 </div>
                                 <?php if (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) { ?>
                                     <span class="text-danger">

@@ -10,7 +10,7 @@ _b('Recommended');
 <div class="shop-block">
     <div class="shop-block-sale clearfix">
         <?php foreach ($block['resources'] as $product) { ?>
-            <div class="productBox h-product row" itemscope itemtype="http://schema.org/Product">
+            <div class="productBox h-product row" itemscope itemtype="https://schema.org/Product">
                 <div class="col-md-3">
                     <?php if ($product['image']) { ?>
                         <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>" title="<?php echo $this->escape($product['title']); ?>"
@@ -38,7 +38,7 @@ _b('Recommended');
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
                                 <li class="pull-right">
                                     <?php if ($product['stock_type'] == 1 || $product['stock_type'] == 5) { ?>
-                                        <div class="clearfix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                        <div class="clearfix" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                                             <div class="productPrice p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>">
                                                 <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
                                                 <?php if ($product['price_discount'] && ($product['price_discount'] > $product['price'])) { ?>

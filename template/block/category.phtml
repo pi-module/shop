@@ -1,4 +1,4 @@
-<div class="shop-block clearfix" itemscope itemtype="http://schema.org/ItemList">
+<div class="shop-block clearfix" itemscope itemtype="https://schema.org/ItemList">
     <?php if ($block['type'] == 'horizontal') { ?>
         <?php $this->css($this->assetModule('css/block.css', 'shop')); ?>
         <div class="shop-block-category clearfix row">
@@ -55,7 +55,7 @@
         <ul class="list-group">
             <?php foreach ($block['resources'] as $category) { ?>
                 <li class="p-name list-group-item" itemprop="itemListElement" itemscope
-                    itemtype="http://schema.org/Place">
+                    itemtype="https://schema.org/Place">
                     <a class="u-url" itemprop="url" title="<?php echo $this->escape($category['title']); ?>"
                        href="<?php echo $this->escape($category['categoryUrl']); ?>">
                         <span itemprop="name"><?php echo $this->escape($category['title']); ?></span>
