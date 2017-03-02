@@ -1,26 +1,26 @@
 <?php switch ($block['column']) {
     case 1:
-        $shopBlockBoxSize = 'col-xs-12 col-sm-12 col-md-12';
+        $shopBlockBoxSize = ' col-md-12';
         break;
 
     case 2:
-        $shopBlockBoxSize = 'col-xs-6 col-sm-6 col-md-6';
+        $shopBlockBoxSize = 'col-md-6';
         break;
 
     case 3:
-        $shopBlockBoxSize = 'col-xs-6 col-sm-4 col-md-4';
+        $shopBlockBoxSize = 'col-md-4';
         break;
 
     case 4:
-        $shopBlockBoxSize = 'col-xs-6 col-sm-3 col-md-3';
+        $shopBlockBoxSize = 'col-md-3';
         break;
 
     case 6:
-        $shopBlockBoxSize = 'col-xs-6 col-sm-2 col-md-2';
+        $shopBlockBoxSize = 'col-md-2';
         break;
 
     default:
-        $shopBlockBoxSize = 'col-xs-6 col-sm-3 col-md-3';
+        $shopBlockBoxSize = 'col-md-3';
         break;
 }
 // language
@@ -72,7 +72,7 @@ _b('Recommended');
             <?php } ?>
         <?php } elseif ($block['list-type'] == 'vertical') { ?>
             <?php foreach ($block['resources'] as $product) { ?>
-                <div class="col-sm-12 col-md-12 productBox h-product" itemscope itemtype="http://schema.org/Product">
+                <div class="col-md-12 productBox h-product" itemscope itemtype="http://schema.org/Product">
                     <div class="thumbnail">
                         <?php if ($product['image']) { ?>
                             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>" title="<?php echo $this->escape($product['title']); ?>"
@@ -114,13 +114,13 @@ _b('Recommended');
             <?php $i = 1;?>
             <?php foreach($block['resources'] as $product) { ?>
                 <?php if (in_array($i, array(1,11,21,31,41,51,61))) {
-                    $class = 'col-md-6 col-sm-12 col-xs-12 productBoxBig pull-left';
+                    $class = 'col-md-6 productBoxBig pull-left';
                     $img = $product['largeUrl'];
                 } elseif (in_array($i, array(6,16,26,36,46,56,66))) {
-                    $class = 'col-md-6 col-sm-12 col-xs-12 productBoxBig pull-right';
+                    $class = 'col-md-6 productBoxBig pull-right';
                     $img = $product['largeUrl'];
                 } else {
-                    $class = 'col-md-3 col-sm-12 col-xs-12';
+                    $class = 'col-md-3';
                     $img = $product['thumbUrl'];
                 } ?>
                 <div class="<?php echo $class;?> productBox h-product" itemscope itemtype="http://schema.org/Product">

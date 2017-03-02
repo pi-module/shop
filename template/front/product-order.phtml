@@ -16,9 +16,9 @@ $this->footScript()->appendScript($script);
     <?php foreach ($property['list'] as $propertyList) { ?>
         <?php if (!empty($property['value'][$propertyList['id']])) { ?>
             <div class="form-group clearfix">
-                <label class="col-sm-3 control-label"><?php echo $this->escape($propertyList['title']); ?></label>
+                <label class="control-label"><?php echo $this->escape($propertyList['title']); ?></label>
                 <?php if ($propertyList['type'] == 'checkbox') { ?>
-                    <div class="col-sm-9">
+                    <div class="col-md-9">
                         <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
                             <?php if ($config['order_stock'] != 'property') { ?>
                                 <label class="radio-inline input-sm">
@@ -55,7 +55,7 @@ $this->footScript()->appendScript($script);
                         <?php } ?>
                     </div>
                 <?php } elseif ($propertyList['type'] == 'selectbox') { ?>
-                    <div class="col-sm-8">
+                    <div class="col-md-8">
                         <select name="property[<?php echo $this->escape($propertyList['id']); ?>]"
                                 class="form-control input-sm property-value-select">
                             <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>

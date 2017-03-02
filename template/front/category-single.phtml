@@ -57,7 +57,7 @@ if (isset($category['largeUrl']) && !empty($category['largeUrl'])) {
         <div class="category-list row">
             <?php foreach ($list as $categorySingle) { ?>
                 <div class="category-single" itemscope itemtype="https://schema.org/Brand">
-                    <div class="col-sm-6 col-md-4">
+                    <div class="col-md-4">
                         <div class="thumbnail">
                             <a itemprop="url" title="<?php echo $this->escape($categorySingle['title']); ?>" href="<?php echo $this->escape($categorySingle['categoryUrl']); ?>">
                                 <img class="img-responsive" itemprop="image" src="<?php echo $categorySingle['mediumUrl']; ?>" alt="<?php echo $this->escape($categorySingle['title']); ?>">

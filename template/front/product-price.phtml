@@ -2,7 +2,7 @@
     <div class="clearfix row" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
         <?php if (isset($productItem['price_sale']) && $productItem['price_sale']) { ?>
             <?php $this->js($this->assetModule('js/countdown.js')); ?>
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12">
                 <ul class="list-inline bg-info product-countdown clearfix">
                     <li><?php _e('The time remaining until the end of the offer : '); ?></li>
                     <li class="pull-right"><div id="saleCountdown"></div></li>
@@ -56,10 +56,10 @@ EOT;
         <?php } ?>
         <?php if ($config['order_stock'] == 'never') { ?>
             <div class="clearfix">
-                <div class="col-md-7 col-sm-7 col-xs-12">
+                <div class="col-md-7">
                     <?php include $this->template('front/product-order'); ?>
                 </div>
-                <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="col-md-5">
                     <?php if (!empty($productItem['price_title'])) { ?>
                         <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
                         <span><?php echo $this->escape($productItem['price_title']); ?></span>
@@ -82,10 +82,10 @@ EOT;
         <?php } elseif ($config['order_stock'] == 'manual') { ?>
             <?php if ($productItem['stock_type'] == 1 || $productItem['stock_type'] == 5) { ?>
                 <div class="clearfix">
-                    <div class="col-md-7 col-sm-7 col-xs-12">
+                    <div class="col-md-7">
                         <?php include $this->template('front/product-order'); ?>
                     </div>
-                    <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="col-md-5">
                         <?php if (!empty($productItem['price_title'])) { ?>
                             <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
                             <span><?php echo $this->escape($productItem['price_title']); ?></span>
@@ -119,10 +119,10 @@ EOT;
         <?php } elseif ($config['order_stock'] == 'product') { ?>
             <?php if ($productItem['stock'] > 0) { ?>
                 <div class="clearfix">
-                    <div class="col-md-7 col-sm-7 col-xs-12">
+                    <div class="col-md-7">
                         <?php include $this->template('front/product-order'); ?>
                     </div>
-                    <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="col-md-5">
                         <?php if (!empty($productItem['price_title'])) { ?>
                             <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
                             <span><?php echo $this->escape($productItem['price_title']); ?></span>
@@ -151,10 +151,10 @@ EOT;
             <?php } ?>
         <?php } elseif ($config['order_stock'] == 'property') { ?>
             <div class="clearfix">
-                <div class="col-md-7 col-sm-7 col-xs-12">
+                <div class="col-md-7">
                     <?php include $this->template('front/product-order'); ?>
                 </div>
-                <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="col-md-5">
                     <strong><?php _e('Price'); ?> : </strong>
                     <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
                         <span class="text-danger">
