@@ -127,8 +127,22 @@
     margin: 10px 0;
 }
 
+.product-cart-box .cart-product-single {
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.product-cart-box .cart-product-single:hover {
+    background-color: #f7f7f7;
+}
+
 .product-cart-box .cart-product-title {
-    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.product-cart-box .cart-product-title h4 {
+    margin: 0;
+    padding: 0;
 }
 
 .product-cart-box .cart-product-info {

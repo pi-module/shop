@@ -39,6 +39,7 @@ $script = <<<'EOT'
                         if (result.actionStatus==1){
                             $('#cart-product-' + result.id + '-number').html(result.actionNumber);
                             $('#cart-product-' + result.id + '-total').html(result.actionTotal);
+                            location.reload();
                         } else {
                             alert(result.message);
                         }
@@ -70,19 +71,12 @@ $script = sprintf(
 $this->footScript()->appendScript($script);
 ?>
 <div id="shop-cart-page" class="product-cart-box clearfix">
+    <?php if (!empty($basket)) { ?>
     <div class="col-md-8 cart-product">
         <div class="panel panel-default">
-            <div class="panel-heading"><?php _e('List of prodcuts on cart'); ?></div>
+            <div class="panel-heading"><?php _e('List of products on cart'); ?></div>
             <?php foreach ($basket['products'] as $product) { ?>
-                <div data-id="<?php echo $product['id']; ?>" id="cart-product-<?php echo $this->escape($product['id']); ?>" class="clearfix">
-                    <div class="col-md-12 cart-product-title">
-                        <h4>
-                            <a title="<?php echo $this->escape($product['title']); ?>"
-                               href="<?php echo $this->escape($product['productUrl']); ?>"
-                               target="_blank"><?php echo $this->escape($product['title']); ?>
-                            </a>
-                        </h4>
-                    </div>
+                <div data-id="<?php echo $product['id']; ?>" id="cart-product-<?php echo $this->escape($product['id']); ?>" class="clearfix cart-product-single">
                     <div class="col-md-4 cart-product-image">
                         <?php if (!empty($product['image'])) { ?>
                             <a title="<?php echo $this->escape($product['title']); ?>"
@@ -94,6 +88,14 @@ $this->footScript()->appendScript($script);
                         <?php } ?>
                     </div>
                     <div class="col-md-8 cart-product-info">
+                        <div class="cart-product-title">
+                            <h4>
+                                <a title="<?php echo $this->escape($product['title']); ?>"
+                                   href="<?php echo $this->escape($product['productUrl']); ?>"
+                                   target="_blank"><?php echo $this->escape($product['title']); ?>
+                                </a>
+                            </h4>
+                        </div>
                         <ul class="list-unstyled">
                             <li><strong><?php _e('Price'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['price_single_view']); ?></span></li>
                             <?php if (!empty($product['property'])) { ?>
@@ -110,12 +112,14 @@ $this->footScript()->appendScript($script);
                                     <li><button id="button-numberminus-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-default btn-sm js-number" data-id="<?php echo $product['id']; ?>" data-toggle="button" data-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => -1))); ?>"><i class="fa fa-minus"></i></button></li>
                                 </ul>
                             </li>
+                            <li>
                             <?php if ($product['can_pay'] == 2) { ?>
-                                <li><strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total" class="label label-danger"><?php echo $this->escape($product['total_view']); ?></span> <?php _e('Payment after admin validation'); ?></li>
+                                <strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total" class="label label-danger"><?php echo $this->escape($product['total_view']); ?></span> <?php _e('Payment after admin validation'); ?>
                             <?php } else { ?>
-                                <li><strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total" class="label label-success"><?php echo $this->escape($product['total_view']); ?></span></li>
+                                <strong><?php _e('Total'); ?></strong> : <span id="cart-product-<?php echo $this->escape($product['id']); ?>-total" class="label label-success"><?php echo $this->escape($product['total_view']); ?></span>
                             <?php } ?>
-                            <li><button id="button-remove-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-danger btn-xs js-remove" data-toggle="button" data-remove-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'remove', 'product' => $product['id']))); ?>"><i class="fa fa-ok fa fa-white"></i> <?php _e('Remove'); ?></button></li>
+                            <button id="button-remove-<?php echo $this->escape($product['id']); ?>" type="button" class="btn btn-danger btn-xs js-remove" data-toggle="button" data-remove-link="<?php echo Pi::url($this->url('', array('action' => 'basket', 'process' => 'remove', 'product' => $product['id']))); ?>"><i class="fa fa-ok fa fa-white"></i> <?php _e('Remove'); ?></button>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -153,4 +157,10 @@ $this->footScript()->appendScript($script);
             </div>
         </div>
     </div>
+    <?php } else { ?>
+        <div class="alert alert-danger text-center" role="alert">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <?php _e('Your basket is empty'); ?>
+        </div>
+    <?php } ?>
 </div>

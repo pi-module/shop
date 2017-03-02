@@ -41,7 +41,12 @@ class CartController extends ActionController
             );
             $form->setData($data);
         }
+        // Set title
+        $title = __('Basket');
         // Set view
+        $this->view()->headTitle($title);
+        $this->view()->headDescription($title, 'prepend');
+        $this->view()->headKeywords($title, 'prepend');
         $this->view()->setTemplate('checkout-cart');
         $this->view()->assign('basket', $basket);
         $this->view()->assign('form', $form);
