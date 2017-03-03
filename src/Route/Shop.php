@@ -28,7 +28,7 @@ class Shop extends Standard
     );
 
     protected $controllerList = array(
-        'cart', 'category', 'index', 'json', 'product', 'tag', 'compare', 'question', 'serial'
+        'cart', 'category', 'index', 'json', 'product', 'tag', 'compare', 'question', 'serial', 'result',
     );
 
     /**
