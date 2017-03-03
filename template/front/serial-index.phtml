@@ -19,10 +19,10 @@
     <?php if (isset($result) && !empty($result['product'])) { ?>
         <div class="thumbnail">
             <div class="row clearfix ">
-                <div class="col-md-2">
+                <div class="col-xs-2">
                     <img src="<?php echo $this->escape($result['product']['thumbUrl']); ?>" alt="<?php echo $this->escape($result['product']['title']); ?>" class="img-responsive img-rounded">
                 </div>
-                <div class="col-md-10">
+                <div class="col-xs-10">
                     <h2><?php echo $this->escape($result['product']['title']); ?></h2>
                     <ul>
                         <li><?php _e('Serial number'); ?> : <?php echo $this->escape($result['serial']['serial_number']); ?></li>

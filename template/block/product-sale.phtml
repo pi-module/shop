@@ -11,7 +11,7 @@ _b('Recommended');
     <div class="shop-block-sale clearfix">
         <?php foreach ($block['resources'] as $product) { ?>
             <div class="productBox h-product row" itemscope itemtype="https://schema.org/Product">
-                <div class="col-md-3">
+                <div class="col-xs-3">
                     <?php if ($product['image']) { ?>
                         <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>" title="<?php echo $this->escape($product['title']); ?>"
                            href="<?php echo $this->escape($product['productUrl']); ?>">
@@ -23,7 +23,7 @@ _b('Recommended');
                         </a>
                     <?php } ?>
                 </div>
-                <div class="col-md-9">
+                <div class="col-xs-9">
                     <h4 itemprop="name" class="p-name">
                         <a itemprop="url" title="<?php echo $this->escape($product['title']); ?>"
                            href="<?php echo $this->escape($product['productUrl']); ?>">

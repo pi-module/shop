@@ -32,7 +32,7 @@ app.controller('listdata',function($scope, $http){
 
                 $('.product-compare-button a').attr("href", url);
                 $(".product-compare-list").removeClass("hide");
-                $(".product-compare-list .clearfix").append("<div class='col-md-2'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
+                $(".product-compare-list .clearfix").append("<div class='col-xs-2'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
             }
         } else {
             $('#compareModal .modal-body').html('%s');
@@ -82,23 +82,23 @@ $this->footScript()->appendScript($scriptMenu);
 // Set box site
 switch ($config['view_column']) {
     case 1:
-        $shopBoxSize = 'col-md-12';
+        $shopBoxSize = 'col-xs-12';
         break;
 
     case 2:
-        $shopBoxSize = 'col-md-6';
+        $shopBoxSize = 'col-xs-6';
         break;
 
     case 3:
-        $shopBoxSize = 'col-md-4';
+        $shopBoxSize = 'col-xs-4';
         break;
 
     case 4:
-        $shopBoxSize = 'col-md-3';
+        $shopBoxSize = 'col-xs-3';
         break;
 
     case 5:
-        $shopBoxSize = 'col-md-2';
+        $shopBoxSize = 'col-xs-2';
         break;
 }
 ?>
@@ -106,10 +106,10 @@ switch ($config['view_column']) {
     <div class="ajax-spinner">
         <img src="<?php echo $this->assetModule('image/spinner.gif'); ?>" class="ajax-spinner-loader"/>
     </div>
-    <div class="col-md-12">
+    <div class="col-xs-12">
         <?php include $this->template('front/category'); ?>
     </div>
-    <div class="col-md-3">
+    <div class="col-xs-3">
         <div class="shop-search-form clearfix">
             <div class="page-header">
                 <h4><?php _e('Search on this group'); ?></h4>
@@ -173,11 +173,11 @@ switch ($config['view_column']) {
             </div>
         </div>
     </div>
-    <div class="col-md-9" ng-controller="listdata">
+    <div class="col-xs-9" ng-controller="listdata">
         <?php include $this->template('front/product-list-sale'); ?>
         <div class="product-compare-list hide">
             <div class="clearfix">
-                <div class="col-md-2">
+                <div class="col-xs-2">
                     <div class="product-compare-button text-center">
                         <a href="<?php echo Pi::url($this->url('', array('controller' => 'compare'))); ?>" title="<?php _e("Compare products"); ?>" class="btn btn-success btn-xs">
                             <?php _e("Compare products"); ?>
