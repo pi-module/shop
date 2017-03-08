@@ -109,7 +109,7 @@ class JsonController extends IndexController
                 $whereKey = clone $where;
                 $whereMain->equalTo('status', 1);
                 foreach ($titles as $title) {
-                    $whereKey->like('title', '%' . $title . '%')->or;
+                    $whereKey->like('title', '%' . $title . '%')->and;
                 }
                 $where->andPredicate($whereMain)->andPredicate($whereKey);
             })->order($order);
