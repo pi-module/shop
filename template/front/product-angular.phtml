@@ -7,8 +7,14 @@ $this->angular(array(
     'pi.js',
     'i18n'
 ));
-$this->js($this->assetModule('js/bootstrap-treeview.min.js'));
-$this->css($this->assetModule('css/front.css'));
+$this->js(array(
+    $this->assetModule('js/bootstrap-treeview.min.js'),
+    $this->assetModule('js/rzslider.min.js'),
+));
+$this->css(array(
+    $this->assetModule('css/front.css'),
+    $this->assetModule('css/rzslider.min.css'),
+));
 ?>
 <div class="row clearfix pi-item-angular">
     <div class="ajax-spinner">
@@ -21,7 +27,7 @@ $this->css($this->assetModule('css/front.css'));
 </div>
 <script>
     angular
-        .module('shop', ['ngRoute', 'ui.bootstrap', 'pi'])
+        .module('shop', ['ngRoute', 'ui.bootstrap', 'pi', 'rzModule'])
         .constant('config', {
             pageType: '<?php echo $pageType; ?>',
             urlRoot: '<?php echo Pi::url($this->url('', array('controller' => 'json', 'action' => 'var'))); ?>'.replace(/var\/?$/, ''),

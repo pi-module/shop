@@ -71,6 +71,50 @@ angular.module('shop')
     ])
     .controller('ListCtrl', ['$scope', '$location', 'data', 'config', 'server',
         function ($scope, $location, data, config, server) {
+
+            $scope.slider = {
+                minValue: 0,
+                maxValue: 500,
+                options: {
+                    floor: 0,
+                    ceil: 500,
+                    translate: function(value, sliderId, label) {
+                        switch (label) {
+                            case 'model':
+                                return '<b>Min price:</b> $' + value;
+                            case 'high':
+                                return '<b>Max price:</b> $' + value;
+                            default:
+                                return '$' + value
+                        }
+                    }
+                }
+            };
+
+            $scope.$watch('slider.minValue', function (newValue, oldValue) {
+                if (newValue === oldValue) {
+                    return
+                } else {
+                    if (newValue === 0) {
+                        $location.search('minPrice', null);
+                    } else {
+                        $location.search('minPrice', $scope.slider.minValue);
+                    }
+                };
+            });
+
+            $scope.$watch('slider.maxValue', function (newValue, oldValue) {
+                if (newValue === oldValue) {
+                    return
+                } else {
+                    if (newValue === 500) {
+                        $location.search('maxPrice', null);
+                    } else {
+                        $location.search('maxPrice', $scope.slider.maxValue);
+                    }
+                };
+            });
+
             angular.extend($scope, data);
 
             $scope.$watch('paginator.page', function (newValue, oldValue) {
@@ -81,6 +125,8 @@ angular.module('shop')
             $scope.filterAction = function () {
                 $location.search(server.filterEmpty($scope.filter));
                 $location.search('page', null);
+                $location.search('minPrice', null);
+                $location.search('maxPrice', null);
             }
 
             // compare products
