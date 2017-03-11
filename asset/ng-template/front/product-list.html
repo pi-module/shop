@@ -9,29 +9,12 @@
                     <label>{{'TITLE' | translate}}</label>
                     <input type="text" class="form-control" ng-model="filter.title" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
                 </div>
-
-
                 <div class="form-group">
-
-
-
-
-
-
-
-
-                    <rzslider rz-slider-model="slider.minValue"
+                    <rzslider class="custom-slider"
+                              rz-slider-model="slider.minValue"
                               rz-slider-high="slider.maxValue"
                               rz-slider-options="slider.options"></rzslider>
-
-
-
-
-
-
-
                 </div>
-
 
                 <!-- <div class="form-group">
                     <label>{{'MARKETABLE' | translate}}</label>
@@ -41,8 +24,6 @@
                         <option value="0">{{'NOT_MARKETABLE' | translate}}</option>
                     </select>
                 </div> -->
-
-
 
                 <div ng-if="filterList">
                     <div ng-repeat="filterSingle in filterList">

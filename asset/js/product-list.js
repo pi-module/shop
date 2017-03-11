@@ -125,8 +125,6 @@ angular.module('shop')
             $scope.filterAction = function () {
                 $location.search(server.filterEmpty($scope.filter));
                 $location.search('page', null);
-                $location.search('minPrice', null);
-                $location.search('maxPrice', null);
             }
 
             // compare products
