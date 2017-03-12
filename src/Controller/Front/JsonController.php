@@ -184,10 +184,6 @@ class JsonController extends IndexController
         $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current()->toArray();
         $minPrice = $rowPrice['price'];
 
-
-
-
-
         // Get select min price
         $minSelect = $minPrice;
         if (isset($paramsClean['minPrice']) && !empty($paramsClean['minPrice'])) {
