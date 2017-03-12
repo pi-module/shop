@@ -73,19 +73,20 @@ angular.module('shop')
         function ($scope, $location, data, config, server) {
 
             $scope.slider = {
-                minValue: 0,
-                maxValue: 500,
+                minValue: data.price.minSelect,
+                maxValue: data.price.maxSelect,
                 options: {
-                    floor: 0,
-                    ceil: 500,
+                    floor: data.price.minValue,
+                    ceil: data.price.maxValue,
+                    step: data.price.step,
                     translate: function(value, sliderId, label) {
                         switch (label) {
                             case 'model':
-                                return '<b>Min price:</b> $' + value;
+                                return '<b>' + config.t.MIN_PRICE + ':</b> ' + config.t.PRICE_SYMBOL + value;
                             case 'high':
-                                return '<b>Max price:</b> $' + value;
+                                return '<b>' + config.t.MAX_PRICE + ':</b> ' + config.t.PRICE_SYMBOL + value;
                             default:
-                                return '$' + value
+                                return config.t.PRICE_SYMBOL + value
                         }
                     }
                 }
@@ -95,11 +96,13 @@ angular.module('shop')
                 if (newValue === oldValue) {
                     return
                 } else {
-                    if (newValue === 0) {
-                        $location.search('minPrice', null);
-                    } else {
-                        $location.search('minPrice', $scope.slider.minValue);
-                    }
+                    setTimeout(function() {
+                        if (newValue === data.price.minValue) {
+                            $location.search('minPrice', null);
+                        } else {
+                            $location.search('minPrice', $scope.slider.minValue);
+                        }
+                    }, 1500);
                 };
             });
 
@@ -107,11 +110,13 @@ angular.module('shop')
                 if (newValue === oldValue) {
                     return
                 } else {
-                    if (newValue === 500) {
-                        $location.search('maxPrice', null);
-                    } else {
-                        $location.search('maxPrice', $scope.slider.maxValue);
-                    }
+                    setTimeout(function() {
+                        if (newValue === data.price.maxValue) {
+                            $location.search('maxPrice', null);
+                        } else {
+                            $location.search('maxPrice', $scope.slider.maxValue);
+                        }
+                    }, 1500);
                 };
             });
 

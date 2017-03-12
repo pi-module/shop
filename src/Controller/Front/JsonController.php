@@ -66,6 +66,7 @@ class JsonController extends IndexController
             'filterList' => array(),
             'paginator' => array(),
             'condition' => array(),
+            'price' => array(),
         );
 
         // Get category information from model
@@ -169,6 +170,42 @@ class JsonController extends IndexController
             $whereLink['product'] = !empty($productIDList['attribute']) ? $productIDList['attribute'] : '';
         }
 
+        // Get max price
+        $columnsPrice = array('id', 'price');
+        $limitPrice = 1;
+
+        $orderPrice = array('price DESC', 'id DESC');
+        $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
+        $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current()->toArray();
+        $maxPrice = $rowPrice['price'];
+
+        $orderPrice = array('price ASC', 'id ASC');
+        $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
+        $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current()->toArray();
+        $minPrice = $rowPrice['price'];
+
+
+
+
+
+        // Get select min price
+        $minSelect = $minPrice;
+        if (isset($paramsClean['minPrice']) && !empty($paramsClean['minPrice'])) {
+            $minSelect = $paramsClean['minPrice'];
+            if ($minSelect > $minPrice) {
+                $whereLink['price >= ?'] = $minSelect;
+            }
+        }
+
+        // Get select max price
+        $maxSelect = $maxPrice;
+        if (isset($paramsClean['maxPrice']) && !empty($paramsClean['maxPrice'])) {
+            $maxSelect = $paramsClean['maxPrice'];
+            if ($maxSelect < $maxPrice) {
+                $whereLink['price <= ?'] = $maxSelect;
+            }
+        }
+
         // Get info from link table
         $select = $this->getModel('link')->select()->where($whereLink)->columns($columns)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('link')->selectWith($select)->toArray();
@@ -210,6 +247,13 @@ class JsonController extends IndexController
             'condition' => array(
                 'title' => __('New products'),
                 'urlCompare' => Pi::url($this->url('', array('controller' => 'compare'))),
+            ),
+            'price' => array(
+                'minValue' => intval($minPrice),
+                'maxValue' => intval($maxPrice),
+                'minSelect' => intval($minSelect),
+                'maxSelect' => intval($maxSelect),
+                'step' => intval(($maxPrice - $minPrice) / 10),
             ),
         );
 
