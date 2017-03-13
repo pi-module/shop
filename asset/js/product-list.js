@@ -69,8 +69,8 @@ angular.module('shop')
 
         }
     ])
-    .controller('ListCtrl', ['$scope', '$location', 'data', 'config', 'server',
-        function ($scope, $location, data, config, server) {
+    .controller('ListCtrl', ['$scope', '$location', '$timeout', 'data', 'config', 'server',
+        function ($scope, $location, $timeout, data, config, server) {
 
             $scope.slider = {
                 minValue: data.price.minSelect,
@@ -79,6 +79,7 @@ angular.module('shop')
                     floor: data.price.minValue,
                     ceil: data.price.maxValue,
                     step: data.price.step,
+                    rightToLeft: data.price.rightToLeft,
                     translate: function(value, sliderId, label) {
                         switch (label) {
                             case 'model':
@@ -96,7 +97,7 @@ angular.module('shop')
                 if (newValue === oldValue) {
                     return
                 } else {
-                    setTimeout(function() {
+                    $timeout(function() {
                         if (newValue === data.price.minValue) {
                             $location.search('minPrice', null);
                         } else {
@@ -110,7 +111,7 @@ angular.module('shop')
                 if (newValue === oldValue) {
                     return
                 } else {
-                    setTimeout(function() {
+                    $timeout(function() {
                         if (newValue === data.price.maxValue) {
                             $location.search('maxPrice', null);
                         } else {
