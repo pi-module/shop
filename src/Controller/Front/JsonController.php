@@ -189,16 +189,24 @@ class JsonController extends IndexController
         // Get max price
         $columnsPrice = array('id', 'price');
         $limitPrice = 1;
+        $maxPrice = 1000;
+        $minPrice = 0;
 
         $orderPrice = array('price DESC', 'id DESC');
         $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
-        $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current()->toArray();
-        $maxPrice = $rowPrice['price'];
+        $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current();
+        if ($rowPrice) {
+            $rowPrice = $rowPrice->toArray();
+            $maxPrice = $rowPrice['price'];
+        }
 
         $orderPrice = array('price ASC', 'id ASC');
         $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
-        $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current()->toArray();
-        $minPrice = $rowPrice['price'];
+        $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current();
+        if ($rowPrice) {
+            $rowPrice = $rowPrice->toArray();
+            $minPrice = $rowPrice['price'];
+        }
 
         // Get select min price
         $minSelect = $minPrice;
@@ -217,6 +225,8 @@ class JsonController extends IndexController
                 $whereLink['price <= ?'] = $maxSelect;
             }
         }
+
+
 
 
         // Check has Search Result
