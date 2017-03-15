@@ -39,6 +39,9 @@ class JsonController extends IndexController
         $tag = $this->params('tag');
         $title = $this->params('title');
 
+        // Set has search result
+        $hasSearchResult = true;
+
         // Clean title
         if (Pi::service('module')->isActive('search') && isset($title) && !empty($title)) {
             $title = Pi::api('api', 'search')->parseQuery($title);
@@ -152,6 +155,8 @@ class JsonController extends IndexController
 
         // Set info
         $product = array();
+        $count = 0;
+
         $order = array('recommended DESC', 'time_create DESC', 'id DESC');
         $columns = array('product' => new Expression('DISTINCT product'));
         $offset = (int)($page - 1) * $config['view_perpage'];
@@ -162,12 +167,23 @@ class JsonController extends IndexController
             $whereLink['category'] = $categoryIDList;
         }
         if ($checkTitle && $checkAttribute) {
-            $id = array_intersect($productIDList['title'], $productIDList['attribute']);
-            $whereLink['product'] = !empty($id) ? $id : '';
+            if (!empty($productIDList['title']) && !empty($productIDList['attribute'])) {
+                $whereLink['product'] = array_intersect($productIDList['title'], $productIDList['attribute']);
+            } else {
+                $hasSearchResult = false;
+            }
         } elseif ($checkTitle) {
-            $whereLink['product'] = !empty($productIDList['title']) ? $productIDList['title'] : '';
+            if (!empty($productIDList['title'])) {
+                $whereLink['product'] = $productIDList['title'];
+            } else {
+                $hasSearchResult = false;
+            }
         } elseif ($checkAttribute) {
-            $whereLink['product'] = !empty($productIDList['attribute']) ? $productIDList['attribute'] : '';
+            if (!empty($productIDList['attribute'])) {
+                $whereLink['product'] = $productIDList['attribute'];
+            } else {
+                $hasSearchResult = false;
+            }
         }
 
         // Get max price
@@ -202,27 +218,31 @@ class JsonController extends IndexController
             }
         }
 
-        // Get info from link table
-        $select = $this->getModel('link')->select()->where($whereLink)->columns($columns)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('link')->selectWith($select)->toArray();
-        foreach ($rowset as $id) {
-            $productIDSelect[] = $id['product'];
-        }
 
-        // Get list of product
-        if (!empty($productIDSelect)) {
-            $where = array('status' => 1, 'id' => $productIDSelect);
-            $select = $this->getModel('product')->select()->where($where)->order($order);
-            $rowset = $this->getModel('product')->selectWith($select);
-            foreach ($rowset as $row) {
-                $product[] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
+        // Check has Search Result
+        if ($hasSearchResult) {
+            // Get info from link table
+            $select = $this->getModel('link')->select()->where($whereLink)->columns($columns)->order($order)->offset($offset)->limit($limit);
+            $rowset = $this->getModel('link')->selectWith($select)->toArray();
+            foreach ($rowset as $id) {
+                $productIDSelect[] = $id['product'];
             }
-        }
 
-        // Get count
-        $columnsCount = array('count' => new Expression('count(DISTINCT `product`)'));
-        $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsCount);
-        $count = $this->getModel('link')->selectWith($select)->current()->count;
+            // Get list of product
+            if (!empty($productIDSelect)) {
+                $where = array('status' => 1, 'id' => $productIDSelect);
+                $select = $this->getModel('product')->select()->where($where)->order($order);
+                $rowset = $this->getModel('product')->selectWith($select);
+                foreach ($rowset as $row) {
+                    $product[] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
+                }
+            }
+
+            // Get count
+            $columnsCount = array('count' => new Expression('count(DISTINCT `product`)'));
+            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsCount);
+            $count = $this->getModel('link')->selectWith($select)->current()->count;
+        }
 
         // Set result
         $result = array(

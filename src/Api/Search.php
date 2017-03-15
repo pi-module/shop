@@ -30,8 +30,8 @@ class Search extends AbstractSearch
      */
     protected $searchIn = array(
         'title',
-        'text_summary',
-        'text_description',
+        //'text_summary',
+        //'text_description',
     );
 
     /**
