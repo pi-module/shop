@@ -226,9 +226,6 @@ class JsonController extends IndexController
             }
         }
 
-
-
-
         // Check has Search Result
         if ($hasSearchResult) {
             // Get info from link table
