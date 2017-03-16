@@ -257,10 +257,10 @@ class JsonController extends IndexController
             //'whereLink' => $whereLink,
             //'categoryIDList' => $categoryIDList,
             //'productIDList' => $productIDList,
-
-            'products' => $product,
             //'category' => $category,
             //'tag' => $tag,
+
+            'products' => $product,
             'filterList' => $filterList,
             'paginator' => array(
                 'count' => $count,
