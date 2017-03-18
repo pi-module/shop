@@ -35,9 +35,9 @@ class JsonController extends IndexController
         // Get info from url
         $module = $this->params('module');
         $page = $this->params('page', 1);
-        $category = $this->params('category');
-        $tag = $this->params('tag');
         $title = $this->params('title');
+        $category = $this->params('category');
+        $favourite = $this->params('favourite');
 
         // Set has search result
         $hasSearchResult = true;
@@ -65,12 +65,17 @@ class JsonController extends IndexController
         // Set empty result
         $result = array(
             'products' => array(),
-            //'category' => array(),
             'filterList' => array(),
             'paginator' => array(),
             'condition' => array(),
             'price' => array(),
         );
+
+        // Set where link
+        $whereLink = array('status' => 1);
+
+        // Set page title
+        $pageTitle = __('List of products');
 
         // Get category information from model
         if (!empty($category)) {
@@ -88,6 +93,26 @@ class JsonController extends IndexController
             foreach ($categories as $singleCategory) {
                 $categoryIDList[] = $singleCategory['id'];
             }
+            // Set page title
+            $pageTitle = sprintf(__('List of products on %s category'), $category['title']);
+        }
+
+        // Get favourite list
+        if (!empty($favourite)) {
+            // Check favourite
+            if (!Pi::service('module')->isActive('favourite')) {
+                return $result;
+            }
+            // Get uid
+            $uid = Pi::user()->getId();
+            // Check user
+            if (!$uid) {
+                return $result;
+            }
+            // Get id from favourite module
+            $productIDFavourite = Pi::api('favourite', 'favourite')->userFavourite($uid, $module);
+            // Set page title
+            $pageTitle = ('All favourite products by you');
         }
 
         // Get search form
@@ -161,11 +186,13 @@ class JsonController extends IndexController
         $columns = array('product' => new Expression('DISTINCT product'));
         $offset = (int)($page - 1) * $config['view_perpage'];
         $limit = intval($config['view_perpage']);
-        // Set where link
-        $whereLink = array('status' => 1);
+
+        // Set category on where link
         if (isset($categoryIDList) && !empty($categoryIDList)) {
             $whereLink['category'] = $categoryIDList;
         }
+
+        // Set product on where link from title and attribute
         if ($checkTitle && $checkAttribute) {
             if (!empty($productIDList['title']) && !empty($productIDList['attribute'])) {
                 $whereLink['product'] = array_intersect($productIDList['title'], $productIDList['attribute']);
@@ -183,6 +210,15 @@ class JsonController extends IndexController
                 $whereLink['product'] = $productIDList['attribute'];
             } else {
                 $hasSearchResult = false;
+            }
+        }
+
+        // Set favourite products on where link
+        if (isset($favourite)) {
+            if (isset($whereLink['product']) && !empty($whereLink['product'])) {
+                $whereLink['product'] = array_intersect($productIDFavourite, $whereLink['product']);
+            } else {
+                $whereLink['product'] = $productIDFavourite;
             }
         }
 
@@ -253,13 +289,6 @@ class JsonController extends IndexController
 
         // Set result
         $result = array(
-            //'paramsClean' => $paramsClean,
-            //'whereLink' => $whereLink,
-            //'categoryIDList' => $categoryIDList,
-            //'productIDList' => $productIDList,
-            //'category' => $category,
-            //'tag' => $tag,
-
             'products' => $product,
             'filterList' => $filterList,
             'paginator' => array(
@@ -268,7 +297,7 @@ class JsonController extends IndexController
                 'page' => $page,
             ),
             'condition' => array(
-                'title' => __('New products'),
+                'title' => $pageTitle,
                 'urlCompare' => Pi::url($this->url('', array('controller' => 'compare'))),
             ),
             'price' => array(

@@ -134,6 +134,18 @@ class Breadcrumbs extends AbstractBreadcrumbs
                             'label' => __('Compare products'),
                         );
                         break;
+
+                    case 'favourite':
+                        $result[] = array(
+                            'label' => __('All favourite products by you'),
+                        );
+                        break;
+
+                    case 'result':
+                        $result[] = array(
+                            'label' => __('Search result'),
+                        );
+                        break;
                 }
             } else {
                 $result = array(

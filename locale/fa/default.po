@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2017-03-12 11:51+0330\n"
+"POT-Creation-Date: 2017-03-18 10:10+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: ../..\n"
@@ -92,6 +92,14 @@ msgstr "فهرست برچسب ها"
 #: template/front/product-compare.phtml:54
 msgid "Compare products"
 msgstr "مقایسه محصولات"
+
+#: src/Api/Breadcrumbs.php:140
+msgid "All favourite products by you"
+msgstr "فهرست محصولات مورد علاقه شما"
+
+#: src/Api/Breadcrumbs.php:146 template/admin/product-related.phtml:46
+msgid "Search result"
+msgstr "نتایج جستجو"
 
 #: src/Api/Product.php:491 src/Api/Product.php:744 src/Api/Product.php:861
 #: src/Form/ProductAdditionalForm.php:274 src/Form/ProductPriceForm.php:144
@@ -473,13 +481,18 @@ msgstr "شاخه یافت نشد"
 msgid "Shop index"
 msgstr "صفحه اول فروشگاه"
 
-#: src/Controller/Front/JsonController.php:248
-msgid "New products"
-msgstr "آخرین محصولات"
+#: src/Controller/Front/JsonController.php:78 src/Form/CategoryForm.php:130
+msgid "List of products"
+msgstr "فهرست محصولات"
 
-#: src/Controller/Front/JsonController.php:271
-#: src/Controller/Front/JsonController.php:294
-#: src/Controller/Front/JsonController.php:326
+#: src/Controller/Front/JsonController.php:97
+#, php-format
+msgid "List of products on %s category"
+msgstr "فهرست تمام محصولات شاخه %s"
+
+#: src/Controller/Front/JsonController.php:324
+#: src/Controller/Front/JsonController.php:347
+#: src/Controller/Front/JsonController.php:379
 msgid "Password not set or wrong"
 msgstr "واژه رمز تنظیم نشده یا اشتباه است"
 
@@ -663,10 +676,6 @@ msgstr "ترتیب نمایش"
 #: src/Form/CategoryForm.php:128
 msgid "Display type"
 msgstr "نوع نمایش"
-
-#: src/Form/CategoryForm.php:130
-msgid "List of products"
-msgstr "فهرست محصولات"
 
 #: src/Form/CategoryForm.php:131
 msgid "List of sub category"
@@ -1453,10 +1462,6 @@ msgstr "فهرست محصولات مشابه"
 msgid "Remove"
 msgstr "حذف"
 
-#: template/admin/product-related.phtml:46
-msgid "Search result"
-msgstr "نتایج جستجو"
-
 #: template/admin/product-related.phtml:61
 msgid "Add"
 msgstr "اضافه کردن"
@@ -1824,6 +1829,9 @@ msgstr ""
 #: template/front/tag.phtml:4
 msgid "Tag"
 msgstr "برچسب"
+
+#~ msgid "New products"
+#~ msgstr "آخرین محصولات"
 
 #~ msgid "Max price"
 #~ msgstr "حداکثر قیمت"
