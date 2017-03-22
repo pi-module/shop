@@ -26,6 +26,7 @@ class JsonController extends IndexController
         $page = $this->params('page', 1);
         $title = $this->params('title');
         $category = $this->params('category');
+        $tag = $this->params('tag');
         $favourite = $this->params('favourite');
         $recommended = $this->params('recommended');
         $limit = $this->params('limit');
@@ -151,6 +152,22 @@ class JsonController extends IndexController
             $pageTitle = sprintf(__('List of products on %s category'), $category['title']);
         }
 
+        // Get tag list
+        if (!empty($tag)) {
+            $productIDTag = array();
+            // Check favourite
+            if (!Pi::service('module')->isActive('tag')) {
+                return $result;
+            }
+            // Get id from tag module
+            $tagList = Pi::service('tag')->getList($tag, $module);
+            foreach ($tagList as $tagSingle) {
+                $productIDTag[] = $tagSingle['item'];
+            }
+            // Set header and title
+            $pageTitle = sprintf(__('All products from %s'), $tag);
+        }
+
         // Get favourite list
         if (!empty($favourite) && $favourite == 1) {
             // Check favourite
@@ -272,8 +289,21 @@ class JsonController extends IndexController
         if (!empty($favourite) && $favourite == 1 && isset($productIDFavourite)) {
             if (isset($whereLink['product']) && !empty($whereLink['product'])) {
                 $whereLink['product'] = array_intersect($productIDFavourite, $whereLink['product']);
-            } else {
+            } elseif (!empty($whereLink['product'])) {
                 $whereLink['product'] = $productIDFavourite;
+            } else {
+                $hasSearchResult = false;
+            }
+        }
+
+        // Set tag products on where link
+        if (!empty($tag) && isset($productIDTag)) {
+            if (isset($whereLink['product']) && !empty($whereLink['product'])) {
+                $whereLink['product'] = array_intersect($productIDTag, $whereLink['product']);
+            } elseif (!empty($whereLink['product'])) {
+                $whereLink['product'] = $productIDTag;
+            } else {
+                $hasSearchResult = false;
             }
         }
 
