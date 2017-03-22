@@ -35,6 +35,8 @@ class CategoryController extends IndexController
             $this->view()->setLayout('layout-simple');
             return;
         }
+        // Update Hits
+        $this->getModel('category')->increment('hits', array('id' => $category['id']));
         // category list
         $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
         // Check display type

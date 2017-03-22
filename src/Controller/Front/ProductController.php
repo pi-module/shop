@@ -37,7 +37,7 @@ class ProductController extends IndexController
             return;
         }
         // Update Hits
-        $this->getModel('product')->update(array('hits' => $product['hits'] + 1), array('id' => $product['id']));
+        $this->getModel('product')->increment('hits', array('id' => $product['id']));
         // Get user information
         $uid = Pi::user()->getId();
         if ($uid > 0) {

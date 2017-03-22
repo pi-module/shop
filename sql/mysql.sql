@@ -44,6 +44,7 @@ CREATE TABLE `{product}` (
   KEY `recommended` (`recommended`),
   KEY `price` (`price`),
   KEY `stock` (`stock`),
+  KEY `sold` (`sold`),
   KEY `product_list` (`status`, `id`),
   KEY `product_order` (`time_create`, `id`),
   KEY `product_order_recommended` (`recommended`, `time_create`, `id`)
@@ -68,12 +69,15 @@ CREATE TABLE `{category}` (
   `status`           TINYINT(1) UNSIGNED             NOT NULL DEFAULT '1',
   `display_order`    INT(10) UNSIGNED                NOT NULL DEFAULT '0',
   `display_type`     ENUM ('product', 'subcategory') NOT NULL DEFAULT 'product',
+  `type`             ENUM ('category', 'brand')      NOT NULL DEFAULT 'category',
+  `hits`             INT(10) UNSIGNED                NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `parent` (`parent`),
   KEY `title` (`title`),
   KEY `time_create` (`time_create`),
   KEY `status` (`status`),
+  KEY `type` (`type`),
   KEY `display_order` (`display_order`),
   KEY `category_list` (`status`, `parent`, `display_order`, `id`)
 );

@@ -127,6 +127,10 @@ class JsonController extends IndexController
                 $order = array('stock ASC', 'id ASC');
                 break;
 
+            case 'sold':
+                $order = array('sold DESC', 'id DESC');
+                break;
+
             default:
                 $order = array('time_create DESC', 'id DESC');
                 break;
