@@ -19,17 +19,6 @@ use Zend\Db\Sql\Predicate\Expression;
 
 class JsonController extends IndexController
 {
-    /* public function indexAction()
-    {
-        // Set return
-        $return = array(
-            'website' => Pi::url(),
-            'module' => $this->params('module'),
-        );
-        // Set view
-        return $return;
-    } */
-
     public function searchAction()
     {
         // Get info from url
@@ -38,6 +27,9 @@ class JsonController extends IndexController
         $title = $this->params('title');
         $category = $this->params('category');
         $favourite = $this->params('favourite');
+        $recommended = $this->params('recommended');
+        $limit = $this->params('limit');
+        $order = $this->params('order');
 
         // Set has search result
         $hasSearchResult = true;
@@ -73,9 +65,55 @@ class JsonController extends IndexController
 
         // Set where link
         $whereLink = array('status' => 1);
+        if (!empty($recommended) && $recommended == 1) {
+            $whereLink['recommended'] = 1;
+        }
 
         // Set page title
         $pageTitle = __('List of products');
+
+        // Set order
+        switch ($order) {
+            case 'title':
+                $order = array('title DESC', 'id DESC');
+                break;
+
+            case 'titleASC':
+                $order = array('title ASC', 'id ASC');
+                break;
+
+            case 'hits':
+                $order = array('hits DESC', 'id DESC');
+                break;
+
+            case 'hitsASC':
+                $order = array('hits ASC', 'id ASC');
+                break;
+
+            case 'create':
+                $order = array('time_create DESC', 'id DESC');
+                break;
+
+            case 'createASC':
+                $order = array('time_create ASC', 'id ASC');
+                break;
+
+            case 'update':
+                $order = array('time_update DESC', 'id DESC');
+                break;
+
+            case 'updateASC':
+                $order = array('time_update ASC', 'id ASC');
+                break;
+
+            case 'recommended':
+                $order = array('recommended DESC', 'time_create DESC', 'id DESC');
+                break;
+
+            default:
+                $order = array('time_create DESC', 'id DESC');
+                break;
+        }
 
         // Get category information from model
         if (!empty($category)) {
@@ -98,7 +136,7 @@ class JsonController extends IndexController
         }
 
         // Get favourite list
-        if (!empty($favourite)) {
+        if (!empty($favourite) && $favourite == 1) {
             // Check favourite
             if (!Pi::service('module')->isActive('favourite')) {
                 return $result;
@@ -131,12 +169,14 @@ class JsonController extends IndexController
         if (isset($title) && !empty($title)) {
             $checkTitle = true;
             $titles = is_array($title) ? $title : array($title);
-            $order = array('recommended DESC', 'time_create DESC', 'id DESC');
             $columns = array('id');
-            $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($titles) {
+            $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($titles, $recommended) {
                 $whereMain = clone $where;
                 $whereKey = clone $where;
                 $whereMain->equalTo('status', 1);
+                if (!empty($recommended) && $recommended == 1) {
+                    $whereMain->equalTo('recommended', 1);
+                }
                 foreach ($titles as $title) {
                     $whereKey->like('title', '%' . $title . '%')->and;
                 }
@@ -182,10 +222,9 @@ class JsonController extends IndexController
         $product = array();
         $count = 0;
 
-        $order = array('recommended DESC', 'time_create DESC', 'id DESC');
         $columns = array('product' => new Expression('DISTINCT product'));
         $offset = (int)($page - 1) * $config['view_perpage'];
-        $limit = intval($config['view_perpage']);
+        $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
 
         // Set category on where link
         if (isset($categoryIDList) && !empty($categoryIDList)) {
@@ -214,7 +253,7 @@ class JsonController extends IndexController
         }
 
         // Set favourite products on where link
-        if (isset($favourite)) {
+        if (!empty($favourite) && $favourite == 1 && isset($productIDFavourite)) {
             if (isset($whereLink['product']) && !empty($whereLink['product'])) {
                 $whereLink['product'] = array_intersect($productIDFavourite, $whereLink['product']);
             } else {
@@ -316,7 +355,6 @@ class JsonController extends IndexController
     public function productAllAction()
     {
         // Get info from url
-        $id = $this->params('id', 0);
         $update = $this->params('update', 0);
         // Check password
         if (!$this->checkPassword()) {
@@ -402,261 +440,6 @@ class JsonController extends IndexController
         // Set view
         return $productSingle;
     }
-
-    /* public function questionAction()
-    {
-        // Get info from url
-        $module = $this->params('module');
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
-        // Set view
-        $this->view()->setTemplate(false)->setLayout('layout-content');
-        // Check post
-        if ($this->request->isPost() && $config['view_question']) {
-            // Get from post
-            $data = $this->request->getPost();
-            $data = $data->toArray();
-            // Check notification module
-            if (Pi::service('module')->isActive('notification')) {
-                // Get admin main
-                $adminmail = Pi::config('adminmail');
-                $adminname = Pi::config('adminname');
-
-                // Set mail information
-                $information = array(
-                    'name' => $data['name'],
-                    'email' => $data['email'],
-                    'question' => $data['question'],
-                    'id' => $data['id'],
-                    'title' => $data['title'],
-                );
-
-                // Set toAdmin
-                $toAdmin = array(
-                    $adminmail => $adminname,
-                );
-
-                // Send mail to admin
-                Pi::api('mail', 'notification')->send(
-                    $toAdmin,
-                    'user_question',
-                    $information,
-                    Pi::service('module')->current()
-                );
-            }
-
-            // back
-            $message = __('Your question send to admin');
-            $this->jump($data['back'], $message);
-        }
-    } */
-
-    /* public function filterIndexAction()
-    {
-        // Get info from url
-        $module = $this->params('module');
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
-        // Get search form
-        $filterList = Pi::api('attribute', 'shop')->filterList();
-        $categoryList = Pi::registry('categoryList', 'shop')->read();
-        // Set info
-        $product = array();
-        $where = array(
-            'status' => 1,
-        );
-        $order = array('recommended DESC', 'time_create DESC', 'id DESC');
-        $columns = array('product' => new Expression('DISTINCT product'));
-        // Get info from link table
-        $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order);
-        $rowset = $this->getModel('link')->selectWith($select)->toArray();
-        // Make list
-        foreach ($rowset as $id) {
-            $productId[] = $id['product'];
-        }
-        if (empty($productId)) {
-            return $product;
-        }
-        // Set info
-        $where = array('status' => 1, 'id' => $productId);
-        // Get list of product
-        $select = $this->getModel('product')->select()->where($where)->order($order);
-        $rowset = $this->getModel('product')->selectWith($select);
-        foreach ($rowset as $row) {
-            $product[] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
-        }
-        // Set view
-        return $product;
-    } */
-
-    /* public function filterCategoryAction()
-    {
-        // Get info from url
-        $module = $this->params('module');
-        $slug = $this->params('slug');
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
-        // Get category information from model
-        $category = $this->getModel('category')->find($slug, 'slug');
-        $category = Pi::api('category', 'shop')->canonizeCategory($category, 'compact');
-        // Check category
-        if (!$category || $category['status'] != 1) {
-            $this->getResponse()->setStatusCode(404);
-            $this->terminate(__('The category not found.'), '', 'error-404');
-            $this->view()->setLayout('layout-simple');
-            return;
-        }
-        // Get search form
-        $filterList = Pi::api('attribute', 'shop')->filterList();
-        $categoryList = Pi::registry('categoryList', 'shop')->read();
-        // category list
-        $categories = Pi::api('category', 'shop')->categoryList($category['id']);
-        // Get id list
-        $idList = array();
-        $idList[] = $category['id'];
-        foreach ($categories as $singleCategory) {
-            $idList[] = $singleCategory['id'];
-        }
-        // Set info
-        $product = array();
-        $where = array(
-            'status' => 1,
-            'category' => $idList,
-        );
-        $order = array('recommended DESC', 'time_create DESC', 'id DESC');
-        $columns = array('product' => new Expression('DISTINCT product'));
-        // Get info from link table
-        $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order);
-        $rowset = $this->getModel('link')->selectWith($select)->toArray();
-        // Make list
-        foreach ($rowset as $id) {
-            $productId[] = $id['product'];
-        }
-        if (empty($productId)) {
-            return $product;
-        }
-        // Set info
-        $where = array('status' => 1, 'id' => $productId);
-        // Get list of product
-        $select = $this->getModel('product')->select()->where($where)->order($order);
-        $rowset = $this->getModel('product')->selectWith($select);
-        foreach ($rowset as $row) {
-            $product[] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
-        }
-        // Set view
-        return $product;
-    } */
-
-    /* public function filterTagAction()
-    {
-        // Check tag
-        if (!Pi::service('module')->isActive('tag')) {
-            $this->getResponse()->setStatusCode(404);
-            $this->terminate(__('Tag module not installed.'), '', 'error-404');
-            $this->view()->setLayout('layout-simple');
-            return;
-        }
-        // Get info from url
-        $module = $this->params('module');
-        $slug = $this->params('slug');
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
-        // Check slug
-        if (!isset($slug) || empty($slug)) {
-            $this->getResponse()->setStatusCode(404);
-            $this->terminate(__('The tag not set.'), '', 'error-404');
-            $this->view()->setLayout('layout-simple');
-            return;
-        }
-        // Get id from tag module
-        $tagId = array();
-        $tags = Pi::service('tag')->getList($slug, $module);
-        foreach ($tags as $tag) {
-            $tagId[] = $tag['item'];
-        }
-        // Check slug
-        if (empty($tagId)) {
-            $this->getResponse()->setStatusCode(404);
-            $this->terminate(__('The tag not found.'), '', 'error-404');
-            $this->view()->setLayout('layout-simple');
-            return;
-        }
-        // Get search form
-        $filterList = Pi::api('attribute', 'shop')->filterList();
-        $categoryList = Pi::registry('categoryList', 'shop')->read();
-        // Set info
-        $where = array('status' => 1, 'id' => $tagId);
-        $order = array('recommended DESC', 'time_create DESC', 'id DESC');
-        // Get list of product
-        $select = $this->getModel('product')->select()->where($where)->order($order);
-        $rowset = $this->getModel('product')->selectWith($select);
-        foreach ($rowset as $row) {
-            $product[] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
-        }
-        // Set view
-        return $product;
-    } */
-
-    /* public function filterSearchAction() {
-        // Get info from url
-        $module = $this->params('module');
-        $keyword = $this->params('keyword');
-        // Get config
-        $config = Pi::service('registry')->config->read($module);
-        // Check keyword not empty
-        if (empty($keyword)) {
-            $this->getResponse()->setStatusCode(404);
-            $this->terminate(__('The keyword not found.'), '', 'error-404');
-            $this->view()->setLayout('layout-simple');
-            return;
-        }
-        // Set list
-        $list = array();
-        // Set info
-        $where = array('status' => 1);
-        $where['title LIKE ?'] = '%' . $keyword . '%';
-        $order = array('recommended DESC', 'time_create DESC', 'id DESC');
-        // Item list header
-        $list[] = array(
-            'class' => ' class="dropdown-header"',
-            'title' => sprintf(__('Products related to %s'), $keyword),
-            'url' => '#',
-            'image' => Pi::service('asset')->logo(),
-        );
-        // Get list of product
-        $select = $this->getModel('product')->select()->where($where)->order($order)->limit(10);
-        $rowset = $this->getModel('product')->selectWith($select);
-        foreach ($rowset as $row) {
-            $product = Pi::api('product', 'shop')->canonizeProductLight($row);
-            $list[] = array(
-                'class' => '',
-                'title' => $product['title'],
-                'url' => $product['productUrl'],
-                'image' =>  $product['thumbUrl'],
-            );
-        }
-        // Location list header
-        $list[] = array(
-            'class' => ' class="dropdown-header"',
-            'title' => sprintf(__('Categories related to %s'), $keyword),
-            'url' => '#',
-            'image' => Pi::service('asset')->logo(),
-        );
-        // Get list of categories
-        $select = $this->getModel('category')->select()->where($where)->order($order)->limit(5);
-        $rowset = $this->getModel('category')->selectWith($select);
-        foreach ($rowset as $row) {
-            $category = Pi::api('category', 'shop')->canonizeCategory($row);
-            $list[] = array(
-                'class' => '',
-                'title' => $category['title'],
-                'url' => $category['categoryUrl'],
-                'image' => isset($category['thumbUrl']) ? $category['thumbUrl'] : Pi::service('asset')->logo(),
-            );
-        }
-        // Set view
-        return $list;
-    } */
 
     public function checkPassword() {
         // Get info from url
