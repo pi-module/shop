@@ -42,6 +42,8 @@ CREATE TABLE `{product}` (
   KEY `status` (`status`),
   KEY `uid` (`uid`),
   KEY `recommended` (`recommended`),
+  KEY `price` (`price`),
+  KEY `stock` (`stock`),
   KEY `product_list` (`status`, `id`),
   KEY `product_order` (`time_create`, `id`),
   KEY `product_order_recommended` (`recommended`, `time_create`, `id`)

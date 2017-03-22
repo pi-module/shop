@@ -110,6 +110,22 @@ class JsonController extends IndexController
                 $order = array('recommended DESC', 'time_create DESC', 'id DESC');
                 break;
 
+            case 'price':
+                $order = array('price DESC', 'id DESC');
+                break;
+
+            case 'priceASC':
+                $order = array('price ASC', 'id ASC');
+                break;
+
+            case 'stock':
+                $order = array('stock DESC', 'id DESC');
+                break;
+
+            case 'stockASC':
+                $order = array('stock ASC', 'id ASC');
+                break;
+
             default:
                 $order = array('time_create DESC', 'id DESC');
                 break;
