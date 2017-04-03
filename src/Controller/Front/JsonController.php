@@ -402,6 +402,28 @@ class JsonController extends IndexController
         return $result;
     }
 
+    public function brandAction()
+    {
+        $category = array();
+        /* $where = array('status' => 1, 'type' => 'brand');
+        $select = $this->getModel('category')->select()->where($where);
+        $rowset = $this->getModel('category')->selectWith($select);
+        foreach ($rowset as $row) {
+            $category[] = Pi::api('category', 'shop')->canonizeCategory($row);
+        }
+        $category = Pi::api('category', 'shop')->makeTree($category); */
+        $result = array(
+            'brand' => $category,
+            'condition' => array(),
+            'paginator' => array(
+                'count' => '',
+                'limit' => '',
+                'page' => '',
+            ),
+        );
+        return $result;
+    }
+
     public function productAllAction()
     {
         // Get info from url
