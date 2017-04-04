@@ -293,7 +293,7 @@ class JsonController extends IndexController
         if (!empty($favourite) && $favourite == 1 && isset($productIDFavourite)) {
             if (isset($whereLink['product']) && !empty($whereLink['product'])) {
                 $whereLink['product'] = array_intersect($productIDFavourite, $whereLink['product']);
-            } elseif (!empty($whereLink['product'])) {
+            } elseif (!isset($whereLink['product']) || empty($whereLink['product'])) {
                 $whereLink['product'] = $productIDFavourite;
             } else {
                 $hasSearchResult = false;
@@ -304,7 +304,7 @@ class JsonController extends IndexController
         if (!empty($tag) && isset($productIDTag)) {
             if (isset($whereLink['product']) && !empty($whereLink['product'])) {
                 $whereLink['product'] = array_intersect($productIDTag, $whereLink['product']);
-            } elseif (!empty($whereLink['product'])) {
+            } elseif (!isset($whereLink['product']) || empty($whereLink['product'])) {
                 $whereLink['product'] = $productIDTag;
             } else {
                 $hasSearchResult = false;
