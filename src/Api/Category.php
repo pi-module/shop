@@ -18,7 +18,7 @@ use Zend\Db\Sql\Predicate\Expression;
 
 /*
  * Pi::api('category', 'shop')->getCategory($parameter, $type = 'id');
- * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status);
+ * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status, $recommended);
  * Pi::api('category', 'shop')->findFromCategory($category);
  * Pi::api('category', 'shop')->categoryList($parent);
  * Pi::api('category', 'shop')->categoryListJson();
@@ -38,10 +38,7 @@ class Category extends AbstractApi
         return $category;
     }
 
-    /**
-     * Set product category to link table
-     */
-    public function setLink($product, $category, $create, $update, $price, $stock, $status)
+    public function setLink($product, $category, $create, $update, $price, $stock, $status, $recommended = 0)
     {
         //Remove
         Pi::model('link', $this->getModule())->delete(array('product' => $product));
@@ -56,6 +53,7 @@ class Category extends AbstractApi
             $values['price'] = $price;
             $values['stock'] = ($stock > 0) ? 1 : 0;
             $values['status'] = $status;
+            $values['recommended'] = $recommended;
             // Save
             $row = Pi::model('link', $this->getModule())->createRow();
             $row->assign($values);
