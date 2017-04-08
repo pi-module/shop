@@ -20,7 +20,7 @@ use Pi\Application\Api\AbstractApi;
  * Pi::api('attribute', 'shop')->Get($category);
  * Pi::api('attribute', 'shop')->Set($attribute, $product);
  * Pi::api('attribute', 'shop')->Form($values);
- * Pi::api('attribute', 'shop')->Product($id);
+ * Pi::api('attribute', 'shop')->Product($id, $category);
  * Pi::api('attribute', 'shop')->SearchForm($form);
  * Pi::api('attribute', 'shop')->findFromattribute($search);
  * Pi::api('attribute', 'shop')->setCategory($field, $categoryArr);

@@ -132,7 +132,7 @@ class Product extends AbstractApi
             $product = $this->canonizeProduct($row);
             // Set attribute
             if ($row->attribute) {
-                $attributes = Pi::api('attribute', 'shop')->Product($row->id);
+                $attributes = Pi::api('attribute', 'shop')->Product($row->id, $row->category_main);
                 $product['attribute'] = $attributes['all'];
             }
             $key = array_search($product['slug'], $slugList);
@@ -797,7 +797,7 @@ class Product extends AbstractApi
         $product['categoryMainTitle'] = $categoryList[$product['category_main']]['title'];
         // Set attribute
         if ($product['attribute'] && $config['view_attribute']) {
-            $attributes = Pi::api('attribute', 'shop')->Product($product['id']);
+            $attributes = Pi::api('attribute', 'shop')->Product($product['id'], $product['category_main']);
             //$productSingle['attributes'] = $attributes['all'];
             foreach ($attributes['all'] as $attribute) {
                 $product['attribute-' . $attribute['id']] = $attribute['data'];
