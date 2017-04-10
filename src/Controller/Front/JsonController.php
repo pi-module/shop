@@ -404,7 +404,7 @@ class JsonController extends IndexController
 
     public function brandAction()
     {
-        /* $module = $this->params('module');
+        $module = $this->params('module');
         $page = $this->params('page', 1);
         $limit = $this->params('limit');
 
@@ -444,7 +444,66 @@ class JsonController extends IndexController
             ),
         );
 
-        return $result; */
+        return $result;
+    }
+
+    public function categoryAction()
+    {
+        $module = $this->params('module');
+        $page = $this->params('page', 1);
+        $limit = $this->params('limit');
+        $parent = $this->params('parent');
+        $tree = $this->params('tree');
+
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+
+        $category = array();
+        $offset = (int)($page - 1) * $config['view_perpage'];
+        $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
+
+        // Set where
+        $where = array('status' => 1, 'type' => 'category');
+        if (!empty(intval($parent))) {
+            $where['parent'] = intval($parent);
+        }
+
+        // Select
+        $order = array('parent ASC', 'id DESC');
+        $select = $this->getModel('category')->select()->where($where)->order($order)->offset($offset)->limit($limit);
+        $rowset = $this->getModel('category')->selectWith($select);
+        foreach ($rowset as $row) {
+            $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
+            $category[] = array(
+                'id' => $categorySingle['id'],
+                'parent' => $categorySingle['parent'],
+                'title' => $categorySingle['title'],
+                'mediumUrl' => $categorySingle['mediumUrl'],
+                'thumbUrl' => $categorySingle['thumbUrl'],
+            );
+        }
+
+        // Set as tree
+        if ($tree == 1) {
+            $category = Pi::api('category', 'shop')->makeTree($category);
+        }
+
+        // Get count
+        $columnsCount = array('count' => new Expression('count(*)'));
+        $select = $this->getModel('category')->select()->where($where)->columns($columnsCount);
+        $count = $this->getModel('category')->selectWith($select)->current()->count;
+
+        // Set result
+        $result = array(
+            'categories' => $category,
+            'paginator' => array(
+                'count' => $count,
+                'limit' => intval($config['view_perpage']),
+                'page' => $page,
+            ),
+        );
+
+        return $result;
     }
 
     public function productAllAction()
