@@ -404,24 +404,47 @@ class JsonController extends IndexController
 
     public function brandAction()
     {
-        $category = array();
-        /* $where = array('status' => 1, 'type' => 'brand', 'parent > ?' => 0);
+        /* $module = $this->params('module');
+        $page = $this->params('page', 1);
+        $limit = $this->params('limit');
+
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+
+        $brand = array();
+        $offset = (int)($page - 1) * $config['view_perpage'];
+        $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
+
+        $where = array('status' => 1, 'type' => 'brand', 'parent > ?' => 0);
         $order = array('parent ASC', 'id DESC');
-        $select = $this->getModel('category')->select()->where($where)->order($order);
+        $select = $this->getModel('category')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
-            $category[] = Pi::api('category', 'shop')->canonizeCategory($row);
-        } */
+            $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
+            $brand[] = array(
+                'id' => $categorySingle['id'],
+                'parent' => $categorySingle['parent'],
+                'title' => $categorySingle['title'],
+                'mediumUrl' => $categorySingle['mediumUrl'],
+                'thumbUrl' => $categorySingle['thumbUrl'],
+            );
+        }
+
+        // Get count
+        $columnsCount = array('count' => new Expression('count(*)'));
+        $select = $this->getModel('category')->select()->where($where)->columns($columnsCount);
+        $count = $this->getModel('category')->selectWith($select)->current()->count;
+
         $result = array(
-            'brand' => $category,
-            'condition' => array(),
+            'brands' => $brand,
             'paginator' => array(
-                'count' => '',
-                'limit' => '',
-                'page' => '',
+                'count' => $count,
+                'limit' => intval($config['view_perpage']),
+                'page' => $page,
             ),
         );
-        return $result;
+
+        return $result; */
     }
 
     public function productAllAction()
