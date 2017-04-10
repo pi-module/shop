@@ -405,13 +405,13 @@ class JsonController extends IndexController
     public function brandAction()
     {
         $category = array();
-        /* $where = array('status' => 1, 'type' => 'brand');
-        $select = $this->getModel('category')->select()->where($where);
+        /* $where = array('status' => 1, 'type' => 'brand', 'parent > ?' => 0);
+        $order = array('parent ASC', 'id DESC');
+        $select = $this->getModel('category')->select()->where($where)->order($order);
         $rowset = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
             $category[] = Pi::api('category', 'shop')->canonizeCategory($row);
-        }
-        $category = Pi::api('category', 'shop')->makeTree($category); */
+        } */
         $result = array(
             'brand' => $category,
             'condition' => array(),
