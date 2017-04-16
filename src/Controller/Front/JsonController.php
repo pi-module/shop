@@ -394,7 +394,7 @@ class JsonController extends IndexController
                 'maxValue' => intval($maxPrice),
                 'minSelect' => intval($minSelect),
                 'maxSelect' => intval($maxSelect),
-                'step' => intval(($maxPrice - $minPrice) / 10),
+                'step' => intval(($maxPrice - $minPrice) / 25),
                 'rightToLeft' => false,
             ),
         );
