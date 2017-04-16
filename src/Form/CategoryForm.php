@@ -121,7 +121,8 @@ class CategoryForm extends BaseForm
             ),
             'attributes' => array(
                 'required' => true,
-            )
+                'value' => $this->option['type'],
+            ),
         ));
         // display_order
         $this->add(array(

@@ -1,57 +1,55 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
-    <p>
-        <a class="btn btn-primary" title="<?php _e('Add Category'); ?>"
-           href="<?php echo $this->url('', array('controller' => 'category', 'action' => 'update')); ?>"><i
-                class="fa fa-folder-open"></i> <?php _e('Add Category'); ?></a>
-    </p>
-
-    <h3><?php _e('List of Categores'); ?></h3>
-    <table class="table table-striped table-bordered table-condensed">
-        <tr>
-            <th><?php _e('ID'); ?></th>
-            <th><?php _e('Title'); ?></th>
-            <th><?php _e('Display order'); ?></th>
-            <th><?php _e('Action'); ?></th>
-        </tr>
-        <?php foreach ($list as $category) { ?>
-            <?php
-            if ($category['status'] == 1) {
-                $labelIdClass = 'label-success';
-            } elseif ($category['status'] == 2) {
-                $labelIdClass = 'label-warning';
-            } elseif ($category['status'] == 3) {
-                $labelIdClass = 'label-warning';
-            } elseif ($category['status'] == 4) {
-                $labelIdClass = 'label-warning';
-            } elseif ($category['status'] == 5) {
-                $labelIdClass = 'label-danger';
-            }
-            ?>
+    <?php if (!empty($list)) { ?>
+        <h3><?php _e('List of Categores'); ?></h3>
+        <table class="table table-striped table-bordered table-condensed">
             <tr>
-                <td>
+                <th><?php _e('ID'); ?></th>
+                <th><?php _e('Title'); ?></th>
+                <th><?php _e('Display order'); ?></th>
+                <th><?php _e('Action'); ?></th>
+            </tr>
+            <?php foreach ($list as $category) { ?>
+                <?php
+                if ($category['status'] == 1) {
+                    $labelIdClass = 'label-success';
+                } elseif ($category['status'] == 2) {
+                    $labelIdClass = 'label-warning';
+                } elseif ($category['status'] == 3) {
+                    $labelIdClass = 'label-warning';
+                } elseif ($category['status'] == 4) {
+                    $labelIdClass = 'label-warning';
+                } elseif ($category['status'] == 5) {
+                    $labelIdClass = 'label-danger';
+                }
+                ?>
+                <tr>
+                    <td>
                     <span class="label <?php echo $labelIdClass; ?>">
                         <?php echo $this->escape($category['id']); ?>
                     </span>
-                </td>
-                <td><?php echo $this->escape($category['title']); ?></td>
-                <td><?php echo $this->escape($category['display_order']); ?></td>
-                <td>
-                    <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $category['url']; ?>"><i
-                            class="fa fa-edit"></i> <?php _e('View'); ?></a>
-                    <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
-                       href="<?php echo $this->url('', array('action' => 'update', 'id' => $category['id'])); ?>"><i
-                            class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
-                </td>
-            </tr>
-        <?php } ?>
-    </table>
-    <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
-    <p>
-        <span class="label label-success"><?php _e('Published'); ?></span>
-        <span class="label label-warning"><?php _e('Pending review'); ?></span>
-        <span class="label label-warning"><?php _e('Draft'); ?></span>
-        <span class="label label-warning"><?php _e('Private'); ?></span>
-        <span class="label label-danger"><?php _e('Trash'); ?></span>
-    </p>
+                    </td>
+                    <td><?php echo $this->escape($category['title']); ?></td>
+                    <td><?php echo $this->escape($category['display_order']); ?></td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" title="<?php _e('View'); ?>" href="<?php echo $category['url']; ?>"><i
+                                    class="fa fa-edit"></i> <?php _e('View'); ?></a>
+                        <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
+                           href="<?php echo $this->url('', array('action' => 'update', 'id' => $category['id'], 'type' =>  $category['type'])); ?>"><i
+                                    class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+        <div class="paginator"><?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?></div>
+        <p>
+            <span class="label label-success"><?php _e('Published'); ?></span>
+            <span class="label label-warning"><?php _e('Pending review'); ?></span>
+            <span class="label label-warning"><?php _e('Draft'); ?></span>
+            <span class="label label-warning"><?php _e('Private'); ?></span>
+            <span class="label label-danger"><?php _e('Trash'); ?></span>
+        </p>
+    <?php } else { ?>
+        <div class="alert alert-danger" role="alert"><?php _e('Please build new category or brand'); ?></div>
+    <?php } ?>
 </div>

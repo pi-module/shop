@@ -53,6 +53,64 @@ return array(
             'module' => 'shop',
             'controller' => 'category',
             'action' => 'index',
+            'params'        => array(
+                'type'    => 'category',
+            ),
+
+            'pages' => array(
+                'category' => array(
+                    'label' => _a('Category'),
+                    'permission' => array(
+                        'resource' => 'category',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'category',
+                    'action' => 'index',
+                    'params'        => array(
+                        'type'    => 'category',
+                    ),
+                ),
+                'brand' => array(
+                    'label' => _a('Brand'),
+                    'permission' => array(
+                        'resource' => 'category',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'category',
+                    'action' => 'index',
+                    'params'        => array(
+                        'type'    => 'brand',
+                    ),
+                ),
+                'update-category' => array(
+                    'label' => _a('New category'),
+                    'permission' => array(
+                        'resource' => 'category',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'category',
+                    'action' => 'update',
+                    'params'        => array(
+                        'type'    => 'category',
+                    ),
+                ),
+                'update-brand' => array(
+                    'label' => _a('New brand'),
+                    'permission' => array(
+                        'resource' => 'category',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'category',
+                    'action' => 'update',
+                    'params'        => array(
+                        'type'    => 'brand',
+                    ),
+                ),
+            ),
         ),
 
         'attribute' => array(
