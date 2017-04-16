@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Model;
 
 use Pi\Application\Model\Model;
@@ -25,6 +26,8 @@ class Product extends Model
         'subtitle',
         'slug',
         'category',
+        'category_main',
+        'brand',
         'text_summary',
         'text_description',
         'seo_title',
@@ -41,11 +44,11 @@ class Product extends Model
         'comment',
         'point',
         'count',
+        'favourite',
         'attach',
         'attribute',
         'related',
         'recommended',
-        'category_main',
         'stock',
         'stock_alert',
         'stock_type',
@@ -54,6 +57,6 @@ class Product extends Model
         'price_shipping',
         'price_title',
         'ribbon',
-        'setting'
+        'setting',
     );
 }

@@ -931,6 +931,21 @@ EOD;
             }
         }
 
+        if (version_compare($moduleVersion, '1.7.6', '<')) {
+            // Alter table field `brand`
+            $sql = sprintf("ALTER TABLE %s ADD `brand` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX (`brand`)", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }

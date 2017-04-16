@@ -99,6 +99,11 @@ class ProductFilter extends InputFilter
                 new \Module\Shop\Validator\Category,
             ),
         ));
+        // brand
+        $this->add(array(
+            'name' => 'brand',
+            'required' => false,
+        ));
         // image
         $this->add(array(
             'name' => 'image',

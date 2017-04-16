@@ -15,7 +15,7 @@ namespace Module\Shop\Form\Element;
 use Pi;
 use Zend\Form\Element\Select;
 
-class Category extends Select
+class Brand extends Select
 {
 
     /**
@@ -26,7 +26,7 @@ class Category extends Select
         if (empty($this->valueOptions)) {
             $list = array();
             $columns = array('id', 'parent', 'title');
-            $where = array('status' => 1, 'type' => 'category');
+            $where = array('status' => 1, 'type' => 'brand');
             $order = array('title ASC', 'id DESC');
             $select = Pi::model('category', 'shop')->select()->columns($columns)->where($where)->order($order);
             $rowset = Pi::model('category', 'shop')->selectWith($select);

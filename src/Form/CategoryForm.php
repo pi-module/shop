@@ -47,18 +47,20 @@ class CategoryForm extends BaseForm
             ),
         ));
         // parent
-        $this->add(array(
-            'name' => 'parent',
-            'type' => 'Module\Shop\Form\Element\Category',
-            'options' => array(
-                'label' => __('Parent Category'),
-                'category' => $this->category,
-            ),
-            'attributes' => array(
-                'size' => 1,
-                'multiple' => 0,
-            ),
-        ));
+        if ($this->option['type'] == 'category') {
+            $this->add(array(
+                'name' => 'parent',
+                'type' => 'Module\Shop\Form\Element\Category',
+                'options' => array(
+                    'label' => __('Parent Category'),
+                    'category' => $this->category,
+                ),
+                'attributes' => array(
+                    'size' => 1,
+                    'multiple' => 0,
+                ),
+            ));
+        }
         // title
         $this->add(array(
             'name' => 'title',

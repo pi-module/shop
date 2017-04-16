@@ -26,10 +26,12 @@ class CategoryFilter extends InputFilter
             'required' => false,
         ));
         // parent
-        $this->add(array(
-            'name' => 'parent',
-            'required' => false,
-        ));
+        if ($option['type'] == 'category') {
+            $this->add(array(
+                'name' => 'parent',
+                'required' => false,
+            ));
+        }
         // title
         $this->add(array(
             'name' => 'title',
