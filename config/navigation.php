@@ -242,6 +242,16 @@ return array(
                     'controller' => 'tools',
                     'action' => 'sitemap',
                 ),
+                'price' => array(
+                    'label' => _a('Price'),
+                    'permission' => array(
+                        'resource' => 'tools',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'tools',
+                    'action' => 'price',
+                ),
                 'log' => array(
                     'label' => _a('Logs'),
                     'permission' => array(
