@@ -415,8 +415,8 @@ class JsonController extends IndexController
         $offset = (int)($page - 1) * $config['view_perpage'];
         $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
 
-        $where = array('status' => 1, 'type' => 'brand', 'parent > ?' => 0);
-        $order = array('parent ASC', 'id DESC');
+        $where = array('status' => 1, 'type' => 'brand');
+        $order = array('display_order ASC', 'title ASC', 'id DESC');
         $select = $this->getModel('category')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
