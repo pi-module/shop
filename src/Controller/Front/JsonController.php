@@ -464,7 +464,7 @@ class JsonController extends IndexController
 
         // Set where
         $where = array('status' => 1, 'type' => 'category');
-        if (!empty(intval($parent))) {
+        if (is_numeric(intval($parent))) {
             $where['parent'] = intval($parent);
         }
 
