@@ -18,6 +18,7 @@ use Zend\Db\Sql\Predicate\Expression;
 
 /*
  * Pi::api('category', 'shop')->getCategory($parameter, $type = 'id');
+ * Pi::api('category', 'shop')->getChildCount($parent);
  * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status, $recommended);
  * Pi::api('category', 'shop')->findFromCategory($category);
  * Pi::api('category', 'shop')->categoryList($parent);
@@ -36,6 +37,15 @@ class Category extends AbstractApi
         $category = Pi::model('category', $this->getModule())->find($parameter, $type);
         $category = $this->canonizeCategory($category);
         return $category;
+    }
+
+    public function getChildCount($parent)
+    {
+        $where = array('parent' => $parent, 'status' => 1);
+        $columns = array('count' => new Expression('count(*)'));
+        $select = Pi::model('category', $this->getModule())->select()->columns($columns)->where($where);
+        $count = Pi::model('category', $this->getModule())->selectWith($select)->current()->count;
+        return $count;
     }
 
     public function setLink($product, $category, $create, $update, $price, $stock, $status, $recommended = 0)

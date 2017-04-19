@@ -474,13 +474,14 @@ class JsonController extends IndexController
         $rowset = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
             $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
+            $childCount = Pi::api('category', 'shop')->getChildCount($categorySingle['id']);
             $category[] = array(
                 'id' => $categorySingle['id'],
                 'parent' => $categorySingle['parent'],
                 'title' => $categorySingle['title'],
                 'mediumUrl' => $categorySingle['mediumUrl'],
                 'thumbUrl' => $categorySingle['thumbUrl'],
-                'type' => $categorySingle['display_type'],
+                'type' => ($childCount > 0) ? 'category' : 'product',
             );
         }
 
