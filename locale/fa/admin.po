@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2017-03-18 10:10+0330\n"
+"POT-Creation-Date: 2017-04-19 15:00+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -24,8 +24,8 @@ msgid "New Product list"
 msgstr "فهرست محوصلات جدید"
 
 #: config/block.php:22 config/block.php:124 config/block.php:410
-#: config/block.php:416 config/navigation.php:48 config/page.php:22
-#: config/page.php:86 config/permission.php:38
+#: config/block.php:416 config/navigation.php:48 config/navigation.php:62
+#: config/page.php:22 config/page.php:86 config/permission.php:38
 msgid "Category"
 msgstr "شاخه"
 
@@ -245,7 +245,7 @@ msgstr "علاقه مندی"
 msgid "Video"
 msgstr "ویدیو"
 
-#: config/config.php:53 config/navigation.php:135 config/page.php:52
+#: config/config.php:53 config/navigation.php:193 config/page.php:52
 #: config/permission.php:68
 msgid "Sale"
 msgstr "حراج"
@@ -603,49 +603,65 @@ msgstr "فهرست برچسب ها"
 msgid "Product"
 msgstr "محصول"
 
-#: config/navigation.php:59 config/navigation.php:70 config/page.php:27
+#: config/navigation.php:75
+msgid "Brand"
+msgstr "شرکت"
+
+#: config/navigation.php:88
+msgid "New category"
+msgstr "شاخه جدید"
+
+#: config/navigation.php:101
+msgid "New brand"
+msgstr "شرکت جدید"
+
+#: config/navigation.php:117 config/navigation.php:128 config/page.php:27
 #: config/permission.php:43
 msgid "Attribute"
 msgstr "خواص"
 
-#: config/navigation.php:80 config/page.php:32 config/permission.php:48
+#: config/navigation.php:138 config/page.php:32 config/permission.php:48
 msgid "Attribute position"
 msgstr "موقعیت خواص"
 
-#: config/navigation.php:93 config/page.php:37 config/permission.php:53
+#: config/navigation.php:151 config/page.php:37 config/permission.php:53
 msgid "Order property"
 msgstr "ویژگی سفارش"
 
-#: config/navigation.php:104 config/page.php:42 config/permission.php:58
+#: config/navigation.php:162 config/page.php:42 config/permission.php:58
 msgid "Attach"
 msgstr "پیوست"
 
-#: config/navigation.php:115
+#: config/navigation.php:173
 msgid "Discount systems"
 msgstr "گزینه های تخفیف"
 
-#: config/navigation.php:125 config/page.php:47 config/permission.php:63
+#: config/navigation.php:183 config/page.php:47 config/permission.php:63
 msgid "Discount"
 msgstr "تخفیف گروهی"
 
-#: config/navigation.php:145 config/page.php:57 config/permission.php:73
+#: config/navigation.php:203 config/page.php:57 config/permission.php:73
 msgid "Promotion"
 msgstr "کد تخفیف"
 
-#: config/navigation.php:158 config/navigation.php:168 config/page.php:67
+#: config/navigation.php:216 config/navigation.php:226 config/page.php:67
 #: config/permission.php:83
 msgid "Tools"
 msgstr "ابزار ها"
 
-#: config/navigation.php:178
+#: config/navigation.php:236
 msgid "Sitemap"
 msgstr "نقشه سایت"
 
-#: config/navigation.php:188 config/page.php:62 config/permission.php:78
+#: config/navigation.php:246
+msgid "Price"
+msgstr ""
+
+#: config/navigation.php:256 config/page.php:62 config/permission.php:78
 msgid "Logs"
 msgstr "گزارش ها"
 
-#: config/navigation.php:198 config/permission.php:88
+#: config/navigation.php:266 config/permission.php:88
 msgid "Json"
 msgstr "جیسون"
 

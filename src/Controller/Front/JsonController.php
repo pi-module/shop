@@ -480,6 +480,7 @@ class JsonController extends IndexController
                 'title' => $categorySingle['title'],
                 'mediumUrl' => $categorySingle['mediumUrl'],
                 'thumbUrl' => $categorySingle['thumbUrl'],
+                'type' => $categorySingle['display_type'],
             );
         }
 
