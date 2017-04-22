@@ -455,6 +455,7 @@ class JsonController extends IndexController
         $parent = $this->params('parent');
         $tree = $this->params('tree');
         $product = $this->params('product');
+        $brand = $this->params('brand');
 
         // Get config
         $config = Pi::service('registry')->config->read($module);
@@ -467,6 +468,18 @@ class JsonController extends IndexController
         $where = array('status' => 1, 'type' => 'category');
         if (intval($parent) > 0) {
             $where['parent'] = intval($parent);
+        }
+
+        // Check $brand
+        if (intval($brand) > 0) {
+            $whereBrand = array('brand' => intval($brand));
+            $columnsBrand = array('category' => new Expression('DISTINCT `category_main`'));
+            $select = $this->getModel('product')->select()->where($whereBrand)->columns($columnsBrand);
+            $rowset = $this->getModel('product')->selectWith($select)->toArray();
+            foreach ($rowset as $id) {
+                $categoryIDSelect[] = $id['category'];
+            }
+            $where['id'] = $categoryIDSelect;
         }
 
         // Select
