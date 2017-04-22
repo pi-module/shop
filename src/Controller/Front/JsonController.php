@@ -454,6 +454,7 @@ class JsonController extends IndexController
         $limit = $this->params('limit');
         $parent = $this->params('parent');
         $tree = $this->params('tree');
+        $product = $this->params('product');
 
         // Get config
         $config = Pi::service('registry')->config->read($module);
@@ -464,29 +465,46 @@ class JsonController extends IndexController
 
         // Set where
         $where = array('status' => 1, 'type' => 'category');
-        if (is_numeric(intval($parent))) {
+        if (intval($parent) > 0) {
             $where['parent'] = intval($parent);
         }
 
         // Select
+        $categoryId = array();
         $order = array('parent ASC', 'id DESC');
         $select = $this->getModel('category')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
             $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
-            $childCount = Pi::api('category', 'shop')->getChildCount($categorySingle['id']);
+            $categoryId[] = $row->id;
             $category[] = array(
                 'id' => $categorySingle['id'],
                 'parent' => $categorySingle['parent'],
                 'title' => $categorySingle['title'],
                 'mediumUrl' => $categorySingle['mediumUrl'],
                 'thumbUrl' => $categorySingle['thumbUrl'],
-                'type' => ($childCount > 0) ? 'category' : 'product',
             );
         }
 
-        // Set as tree
-        if ($tree == 1) {
+        if ($product == 1 && !empty($categoryId)) {
+            $products = array();
+            $whereProduct = array('status' => 1, 'category_main' => $categoryId);
+            $orderProduct = array('title DESC', 'id DESC');
+            $select = $this->getModel('product')->select()->where($whereProduct)->order($orderProduct);
+            $rowset = $this->getModel('product')->selectWith($select);
+            foreach ($rowset as $row) {
+                $productSingle = Pi::api('product', 'shop')->canonizeProductLight($row);
+                $products[] = array(
+                    'id' => $productSingle['id'],
+                    'category' => $productSingle['category_main'],
+                    'brand' => $productSingle['brand'],
+                    'title' => $productSingle['title'],
+                    'mediumUrl' => $productSingle['mediumUrl'],
+                    'thumbUrl' => $productSingle['thumbUrl'],
+                );
+            }
+        } elseif ($tree == 1) {
+            // Set as tree
             $category = Pi::api('category', 'shop')->makeTree($category);
         }
 
@@ -498,6 +516,7 @@ class JsonController extends IndexController
         // Set result
         $result = array(
             'categories' => $category,
+            'products' => $products,
             'paginator' => array(
                 'count' => $count,
                 'limit' => intval($config['view_perpage']),
