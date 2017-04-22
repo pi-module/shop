@@ -461,6 +461,7 @@ class JsonController extends IndexController
         $config = Pi::service('registry')->config->read($module);
 
         $category = array();
+        $products = array();
         $offset = (int)($page - 1) * $config['view_perpage'];
         $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
 
