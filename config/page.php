@@ -74,7 +74,7 @@ return array(
             'permission' => 'json',
         ),
         array(
-            'title' => _a('Price'),
+            'title' => _a('Price systems'),
             'controller' => 'price',
             'permission' => 'price',
         ),

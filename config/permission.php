@@ -90,7 +90,7 @@ return array(
             ),
         ),
         'price' => array(
-            'title' => _a('Price'),
+            'title' => _a('Price systems'),
             'access' => array(//'admin',
             ),
         ),
