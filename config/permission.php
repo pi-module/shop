@@ -89,5 +89,10 @@ return array(
             'access' => array(//'admin',
             ),
         ),
+        'price' => array(
+            'title' => _a('Price'),
+            'access' => array(//'admin',
+            ),
+        ),
     ),
 );

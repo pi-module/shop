@@ -73,6 +73,11 @@ return array(
             'controller' => 'json',
             'permission' => 'json',
         ),
+        array(
+            'title' => _a('Price'),
+            'controller' => 'price',
+            'permission' => 'price',
+        ),
     ),
     // Front section
     'front' => array(

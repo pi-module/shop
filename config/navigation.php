@@ -212,6 +212,59 @@ return array(
             ),
         ),
 
+        'price' => array(
+            'label' => _a('Price systems'),
+            'permission' => array(
+                'resource' => 'price',
+            ),
+            'route' => 'admin',
+            'module' => 'shop',
+            'controller' => 'price',
+            'action' => 'index',
+            'pages' => array(
+                'index' => array(
+                    'label' => _a('Price systems'),
+                    'permission' => array(
+                        'resource' => 'price',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'price',
+                    'action' => 'index',
+                ),
+                'update' => array(
+                    'label' => _a('Price update'),
+                    'permission' => array(
+                        'resource' => 'price',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'price',
+                    'action' => 'update',
+                ),
+                'sync' => array(
+                    'label' => _a('Price sync'),
+                    'permission' => array(
+                        'resource' => 'price',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'price',
+                    'action' => 'sync',
+                ),
+                'log' => array(
+                    'label' => _a('Price log'),
+                    'permission' => array(
+                        'resource' => 'price',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'price',
+                    'action' => 'log',
+                ),
+            ),
+        ),
+
         'tools' => array(
             'label' => _a('Tools'),
             'permission' => array(
@@ -241,16 +294,6 @@ return array(
                     'module' => 'shop',
                     'controller' => 'tools',
                     'action' => 'sitemap',
-                ),
-                'price' => array(
-                    'label' => _a('Price'),
-                    'permission' => array(
-                        'resource' => 'tools',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
-                    'controller' => 'tools',
-                    'action' => 'price',
                 ),
                 'log' => array(
                     'label' => _a('Logs'),

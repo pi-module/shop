@@ -1,0 +1,159 @@
+<?php
+/**
+ * Pi Engine (http://pialog.org)
+ *
+ * @link            http://code.pialog.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://pialog.org
+ * @license         http://pialog.org/license.txt New BSD License
+ */
+
+/**
+ * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
+ */
+namespace Module\Shop\Controller\Admin;
+
+use Pi;
+use Pi\Mvc\Controller\ActionController;
+use Zend\Db\Sql\Predicate\Expression;
+
+class PriceController extends ActionController
+{
+    public function indexAction()
+    {
+        // Set template
+        $this->view()->setTemplate('price-index');
+    }
+
+    public function updateAction()
+    {
+
+        // Set template
+        $this->view()->setTemplate('price-update');
+    }
+
+    public function syncAction()
+    {
+        // Get info
+        $start = $this->params('start', 0);
+        $count = $this->params('count');
+        $complete = $this->params('start', 0);
+        $confirm = $this->params('confirm', 0);
+        $priceListInfo = array();
+
+        // Check confirm
+        if ($confirm == 1) {
+            // Get category list
+            $categoryList = Pi::registry('categoryList', 'shop')->read();
+            // Get products and send
+            $where = array(
+                'id > ?' => $start,
+            );
+            $order = array('id ASC');
+            $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
+            $rowset = $this->getModel('product')->selectWith($select);
+
+            // Make list
+            foreach ($rowset as $row) {
+                $product = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
+                $product['property'] = Pi::api('property', 'shop')->getValue($product['id']);
+
+                if ($product['price_main'] == 0 && $product['price_discount'] > 0) {
+                    $mainPrice = $product['price_discount'];
+                } else {
+                    $mainPrice = $product['price_main'];
+                }
+                $priceList = array();
+                $priceList[] = $mainPrice;
+
+                // Check product property
+                if (!empty($product['property'])) {
+                    foreach ($product['property'] as $property) {
+                        if (isset($property['price']) && $property['price'] > 0) {
+                            $priceList[] = (int)$property['price'];
+                        }
+                    }
+                }
+
+                // Set min price
+                $minPrice = min($priceList);
+
+                // Update product
+                $this->getModel('product')->update(
+                    array('price' => (int)$minPrice,),
+                    array('id' => (int)$product['id'])
+                );
+
+                // Update link
+                $this->getModel('link')->update(
+                    array('price' => (int)$minPrice),
+                    array('product' => (int)$product['id'])
+                );
+
+                // Save log to csv file
+                $args = array($product['id'], $product['title'], $mainPrice, $minPrice);
+                Pi::service('audit')->attach('audit', array(
+                    'file'  => Pi::path('log') . '/shop-price.csv'
+                ));
+                Pi::service('audit')->log('audit', $args);
+
+                // Set price log
+                Pi::api('price', 'shop')->addLog($minPrice, $product['id'], 'product');
+
+                // Set extra
+                $priceListInfo[$product['id']] = $minPrice;
+                $lastId = $product['id'];
+                $complete++;
+            }
+            // Get count
+            if (!$count) {
+                $columns = array('count' => new Expression('count(*)'));
+                $select = $this->getModel('product')->select()->columns($columns);
+                $count = $this->getModel('product')->selectWith($select)->current()->count;
+            }
+            // Set complete
+            $percent = (100 * $start) / $count;
+            // Set next url
+            if ($complete >= $count) {
+                $nextUrl = '';
+            } else {
+                $nextUrl = Pi::url($this->url('', array(
+                    'action' => 'sync',
+                    'start' => $lastId,
+                    'count' => $count,
+                    'complete' => $complete,
+                    'confirm' => $confirm,
+                )));
+            }
+
+            $info = array(
+                'start' => $lastId,
+                'count' => $count,
+                'complete' => $complete,
+                'percent' => $percent,
+                'nextUrl' => $nextUrl,
+                'price' => $priceListInfo,
+            );
+
+            $percent = ($percent > 99) ? (intval($percent) + 1) : intval($percent);
+        } else {
+            $info = array();
+            $percent = 0;
+            $nextUrl = Pi::url($this->url('', array(
+                'action' => 'sync',
+                'confirm' => 1,
+            )));
+        }
+        // Set template
+        $this->view()->setTemplate('price-sync');
+        $this->view()->assign('nextUrl', $nextUrl);
+        $this->view()->assign('percent', $percent);
+        $this->view()->assign('info', $info);
+        $this->view()->assign('confirm', $confirm);
+    }
+
+    public function logAction()
+    {
+        // Set template
+        $this->view()->setTemplate('price-log');
+    }
+}
