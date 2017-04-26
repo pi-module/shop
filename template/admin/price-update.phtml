@@ -1,0 +1,23 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="clearfix">
+    <?php if ($selectCategory > 0 && $selectPercent > 0) { ?>
+        <div class="progress progress-striped active">
+            <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $percent; ?>" aria-valuemin="0"
+                 aria-valuemax="100" style="width: <?php echo $percent; ?>%">
+                <?php echo $percent; ?> % Complete
+            </div>
+        </div>
+        <pre><?php print_r($info); ?></pre>
+        <?php if (!empty($nextUrl)) { ?>
+        <script>
+            window.setTimeout(function () {
+                window.location.href = '<?php echo $nextUrl; ?>';
+            }, 2000);
+        </script>
+        <?php } ?>
+    <?php } else { ?>
+        <div class="well">
+            <?php echo $this->form($form); ?>
+        </div>
+    <?php } ?>
+</div>

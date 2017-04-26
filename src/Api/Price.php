@@ -19,6 +19,7 @@ use Pi\Application\Api\AbstractApi;
 /*
  * Pi::api('price', 'shop')->addLog($price, $product, $type, $extra);
  * Pi::api('price', 'shop')->lastUpdate($product, $type);
+ * Pi::api('price', 'shop')->makeUpdatePrice($price, $percent);
  */
 
 class Price extends AbstractApi
@@ -68,6 +69,26 @@ class Price extends AbstractApi
             $price = $row->toArray();
         }
 
+        return $price;
+    }
+    
+    public function makeUpdatePrice($price, $percent)
+    {
+        // Make new price
+        switch (Pi::config('number_currency')) {
+            // Set for Iran Rial
+            case 'IRR':
+                $price = $price + (($price * $percent) / 100);
+                $price = ((int)($price / 1000)) * 1000;
+                $price = number_format((float)$price, 2, '.', '');
+                break;
+
+            default:
+                $price = $price + (($price * $percent) / 100);
+                $price = number_format((float)$price, 2, '.', '');
+                break;
+        }
+        
         return $price;
     }
 }
