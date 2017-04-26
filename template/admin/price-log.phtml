@@ -1,6 +1,66 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
-    <div class="alert alert-danger">
-        <?php _e('This page still not finished'); ?>
+    <div class="clearfix well well-sm">
+        <?php echo $this->form($form); ?>
     </div>
+    <?php if (isset($product) && !empty($product)) { ?>
+        <div class="clearfix well well-sm">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="<?php echo $this->escape($product['thumbUrl']); ?>">
+                </div>
+                <div class="col-md-9">
+                    <h4><?php echo $this->escape($product['title']); ?></h4>
+                    <ul class="list-inline">
+                        <li><strong><?php _e('Price'); ?></strong> : <?php echo $this->escape($product['price_view']); ?></li>
+                        <li><a target="_blank" href="<?php echo $this->url('', array(
+                                'controller' => 'product',
+                                'action' => 'update',
+                                'id' => $product['id'],
+                            )); ?>"><?php _e('Edit'); ?></a></li>
+                        <?php if ($product['status'] == 1) { ?>
+                            <li><a target="_blank" href="<?php echo $this->escape($product['productUrl']); ?>"><?php _e('View'); ?></a></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+    <?php if (isset($list) && !empty($list)) { ?>
+        <h3><?php _e('Price change log'); ?></h3>
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th><?php _e('Title'); ?></th>
+                <th><?php _e('Type'); ?></th>
+                <th><?php _e('Price'); ?></th>
+                <th><?php _e('Time update'); ?></th>
+                <th><?php _e('Action'); ?></th>
+            </tr>
+            <?php foreach ($list as $log) { ?>
+                <tr>
+                    <td><?php echo $this->escape($log['productTitle']); ?></td>
+                    <td><?php echo $this->escape($log['type_view']); ?></td>
+                    <td><?php echo $this->escape($log['price_view']); ?> (<?php echo $this->escape($log['price']); ?>)</td>
+                    <td><?php echo $this->escape($log['time_update_view']); ?></td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
+                           href="<?php echo $log['productEditUrl']; ?>" target="_blank"><i
+                                    class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
+                        <?php if ($log['productStatus'] == 1) { ?>
+                            <a class="btn btn-success btn-xs" title="<?php _e('View'); ?>"
+                               href="<?php echo $log['productUrl']; ?>" target="_blank"><i
+                                        class="fa fa-eye"></i> <?php _e('View'); ?></a>
+                        <?php } ?>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+        <div class="paginator">
+            <?php echo $this->paginationControl($paginator, 'Sliding', 'paginator.phtml'); ?>
+        </div>
+    <?php } else { ?>
+        <div class="alert alert-danger" role="alert">
+            <?php _e('No price change log saved for your request'); ?>
+        </div>
+    <?php } ?>
 </div>

@@ -14,8 +14,11 @@ namespace Module\Shop\Controller\Admin;
 
 use Pi;
 use Pi\Mvc\Controller\ActionController;
+use Pi\Paginator\Paginator;
 use Module\Shop\Form\PriceUpdateForm;
 use Module\Shop\Form\PriceUpdateFilter;
+use Module\Shop\Form\PriceLogForm;
+use Module\Shop\Form\PriceLogFilter;
 use Zend\Db\Sql\Predicate\Expression;
 
 class PriceController extends ActionController
@@ -340,7 +343,102 @@ class PriceController extends ActionController
 
     public function logAction()
     {
+        $product = $this->params('product');
+        $page = $this->params('page', 1);
+
+        // Set form
+        $form = new PriceLogForm('price');
+        if ($this->request->isPost()) {
+            // Get information
+            $data = $this->request->getPost();
+            $form->setInputFilter(new PriceLogFilter);
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                // Set redirect
+                return $this->redirect()->toRoute('', array(
+                    'controller' => 'price',
+                    'action' => 'log',
+                    'product' => $values['product'],
+                ));
+            }
+        } else {
+            $data = array();
+            $data['product'] = $product;
+            $form->setData($data);
+        }
+
+        // Set product list
+        $productList = array();
+
+        // Get log
+        $list = array();
+        $where = array();
+        $order = array('time_update DESC', 'id DESC');
+        $offset = (int)($page - 1) * $this->config('admin_perpage');
+        $limit = intval($this->config('admin_perpage'));
+        if ($product > 0) {
+            $where['product'] = $product;
+        }
+
+        // Select
+        $select = $this->getModel('price')->select()->where($where)->order($order)->offset($offset)->limit($limit);
+        $rowset = $this->getModel('price')->selectWith($select);
+        foreach ($rowset as $row) {
+            if (!isset($productList[$row->product])) {
+                $productList[$row->product] = Pi::api('product', 'shop')->getProductLight($row->product);
+            }
+
+            $list[$row->id] = $row->toArray();
+            $list[$row->id]['time_update_view'] = _date($row->time_update);
+            $list[$row->id]['price_view'] = Pi::api('api', 'shop')->viewPrice($row->price);
+            $list[$row->id]['productId'] = $productList[$row->product]['id'];
+            $list[$row->id]['productTitle'] = $productList[$row->product]['title'];
+            $list[$row->id]['productStatus'] = $productList[$row->product]['status'];
+            $list[$row->id]['productUrl'] = $productList[$row->product]['productUrl'];
+            $list[$row->id]['productEditUrl'] = $this->url('', array(
+                'controller' => 'product',
+                'action' => 'update',
+                'id' => $productList[$row->product]['id'],
+            ));
+
+            switch ($row->type) {
+                case 'product':
+                    $list[$row->id]['type_view'] = __('Product price');
+                    break;
+
+                case 'property':
+                    $list[$row->id]['type_view'] = __('Property price');
+                    break;
+
+                case 'sale':
+                    $list[$row->id]['type_view'] = __('Sale price');
+                    break;
+            }
+        }
+
+        // Set paginator
+        $count = array('count' => new Expression('count(*)'));
+        $select = $this->getModel('price')->select()->columns($count)->where($where);
+        $count = $this->getModel('price')->selectWith($select)->current()->count;
+        $paginator = Paginator::factory(intval($count));
+        $paginator->setItemCountPerPage($this->config('admin_perpage'));
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setUrlOptions(array(
+            'router' => $this->getEvent()->getRouter(),
+            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter(array(
+                'module' => $this->getModule(),
+                'controller' => 'price',
+                'action' => 'log',
+                'product' => $product,
+            )),
+        ));
+
         // Set template
         $this->view()->setTemplate('price-log');
+        $this->view()->assign('form', $form);
+        $this->view()->assign('list', $list);
+        $this->view()->assign('paginator', $paginator);
     }
 }
