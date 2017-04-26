@@ -243,6 +243,22 @@ return array(
             'filter' => 'string',
             'value' => _a('|Professional|Best offer|For you'),
         ),
+        'view_description_category' => array(
+            'category' => 'view',
+            'title' => _a('Show category description on category page'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
+        'view_description_product' => array(
+            'category' => 'view',
+            'title' => _a('Show category description on product page'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 0
+        ),
         // Image
         'image_size' => array(
             'category' => 'image',

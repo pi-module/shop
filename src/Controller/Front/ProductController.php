@@ -116,6 +116,11 @@ class ProductController extends IndexController
             $this->view()->assign('questionForm', $form);
             $this->view()->assign('questionMessage', __('You can any question about this product from us, we read your question and answer you as soon as possible'));
         }
+        // Set main category info
+        if ($config['view_description_product']) {
+            $category = Pi::api('category', 'shop')->getCategory($product['category_main']);
+            $this->view()->assign('category', $category);
+        }
         // Set property
         $property = array();
         $property['list'] = Pi::api('property', 'shop')->getList();

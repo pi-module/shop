@@ -50,7 +50,7 @@
                 <div class="e-description clearfix well" itemprop="description"><?php echo $category['text_summary']; ?></div>
             <?php } ?>
         <?php } ?>
-        <?php if (!empty($category['text_description'])) { ?>
+        <?php if (!empty($category['text_description']) && $config['view_description_category']) { ?>
             <div class="e-description clearfix well" itemprop="description"><?php echo $category['text_description']; ?></div>
         <?php } ?>
     </div>
