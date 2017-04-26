@@ -64,15 +64,17 @@ class Property extends AbstractApi
                     $values['property'] = $propertyId;
                     $values['name'] = $propertyValue['name'];
                     $values['unique_key'] = isset($propertyValue['unique_key']) ? $propertyValue['unique_key'] : md5(time() + rand(100,999));
-                    $values['stock'] = isset($propertyValue['stock']) ? $propertyValue['stock'] : '';
-                    $values['price'] = isset($propertyValue['price']) ? $propertyValue['price'] : '';
+                    $values['stock'] = isset($propertyValue['stock']) ? (int)$propertyValue['stock'] : '';
+                    $values['price'] = isset($propertyValue['price']) ? (int)$propertyValue['price'] : '';
                     // Save
                     $row = Pi::model('property_value', $this->getModule())->createRow();
                     $row->assign($values);
                     $row->save();
                     // Add price to array
                     if (isset($propertyValue['price']) && !empty($propertyValue['price']) && $propertyValue['price'] > 0) {
-                        $priceList[] = $propertyValue['price'];
+                        $priceList[] = (int)$propertyValue['price'];
+                        // Add price log
+                        Pi::api('price', 'shop')->addLog((int)$propertyValue['price'], $product, 'property', $row->unique_key);
                     }
                 }
             }
@@ -88,6 +90,8 @@ class Property extends AbstractApi
                 array('price' => $minPrice),
                 array('product' => $product)
             );
+            // Add price log
+            Pi::api('price', 'shop')->addLog($minPrice, $product, 'product');
         }
     }
 

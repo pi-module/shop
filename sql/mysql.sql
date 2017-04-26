@@ -335,3 +335,18 @@ CREATE TABLE `{serial}` (
   KEY `product` (`product`),
   KEY `status` (`status`)
 );
+
+CREATE TABLE `{price}` (
+  `id`          INT(10) UNSIGNED                     NOT NULL AUTO_INCREMENT,
+  `price`       DECIMAL(16, 2)                       NOT NULL DEFAULT '0.00',
+  `type`        ENUM ('product', 'property', 'sale') NOT NULL DEFAULT 'product',
+  `product`     VARCHAR(32)                                   DEFAULT NULL,
+  `sale`        INT(10) UNSIGNED                     NOT NULL DEFAULT '0',
+  `property`    INT(10) UNSIGNED                     NOT NULL DEFAULT '0',
+  `time_update` INT(10) UNSIGNED                     NOT NULL DEFAULT '0',
+  `uid`         INT(10) UNSIGNED                     NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `product` (`product`),
+  KEY `type` (`type`),
+  KEY `time_update` (`time_update`)
+);

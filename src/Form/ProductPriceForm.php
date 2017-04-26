@@ -65,6 +65,14 @@ class ProductPriceForm extends BaseForm
                                     'value' => $propertySingle['id'],
                                 ),
                             ));
+                            // unique_key
+                            $this->add(array(
+                                'name' => sprintf('property-%s-key',  $propertySingle['id']),
+                                'attributes' => array(
+                                    'type' => 'hidden',
+                                    'value' => $propertySingle['unique_key'],
+                                ),
+                            ));
                             // price
                             $this->add(array(
                                 'name' => sprintf('property-%s-price',  $propertySingle['id']),

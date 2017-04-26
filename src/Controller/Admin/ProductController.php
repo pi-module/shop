@@ -176,7 +176,6 @@ class ProductController extends ActionController
         $id = $this->params('id');
         $module = $this->params('module');
         // Get config
-        $config = Pi::service('registry')->config->read($module);
         $option = array();
         // Find Product
         if ($id) {
@@ -387,6 +386,9 @@ class ProductController extends ActionController
                 }
                 // Set property
                 if (isset($data['property']) && !empty($data['property'])) {
+                    /*
+                     * Min price for link and product tables update on property api
+                     */
                     Pi::api('property', 'shop')->setValue($data['property'], $row->id);
                 } else {
                     // Update link
@@ -394,6 +396,8 @@ class ProductController extends ActionController
                         array('price' => (int)$values['price']),
                         array('product' => (int)$values['id'])
                     );
+                    // Add price log
+                    Pi::api('price', 'shop')->addLog((int)$values['price'], (int)$values['id'], 'product');
                 }
                 // Set video
                 if ($config['video_service'] && isset($values['video_list']) && Pi::service('module')->isActive('video')) {
@@ -524,8 +528,6 @@ class ProductController extends ActionController
     {
         // Get id
         $id = $this->params('id');
-        $module = $this->params('module');
-        $related_list = array();
         $product_list = array();
         // Find Product
         if ($id) {
@@ -683,6 +685,8 @@ class ProductController extends ActionController
                         array('price' => (int)$values['price']),
                         array('product' => (int)$values['id'])
                     );
+                    // Add price log
+                    Pi::api('price', 'shop')->addLog((int)$values['price'], (int)$values['id'], 'product');
                     // return
                     $return['status'] = 1;
                     $return['data']['price'] = Pi::api('api', 'shop')->viewPrice($values['price']);
@@ -712,6 +716,16 @@ class ProductController extends ActionController
                             array('price' => (int)$property['price']),
                             array('id' => (int)$property['id'])
                         );
+
+                        // Add price log
+                        if (isset($property['key']) && !empty($property['key'])) {
+                            Pi::api('price', 'shop')->addLog(
+                                (int)$property['price'],
+                                (int)$values['id'],
+                                'property',
+                                $property['key']
+                            );
+                        }
                     }
                     $minPrice = min($priceList);
 
@@ -731,6 +745,9 @@ class ProductController extends ActionController
                         array('price' => (int)$minPrice),
                         array('product' => (int)$values['id'])
                     );
+
+                    // Add price log
+                    Pi::api('price', 'shop')->addLog((int)$minPrice, (int)$values['id'], 'product');
 
                     // return
                     $return['status'] = 1;

@@ -42,6 +42,11 @@ class ProductPriceFilter extends InputFilter
                                 'name' => sprintf('property-%s-id',  $propertySingle['id']),
                                 'required' => false,
                             ));
+                            // id
+                            $this->add(array(
+                                'name' => sprintf('property-%s-key',  $propertySingle['id']),
+                                'required' => false,
+                            ));
                             // price
                             $this->add(array(
                                 'name' => sprintf('property-%s-price',  $propertySingle['id']),

@@ -72,7 +72,6 @@ class ToolsController extends ActionController
         $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
         $rowset = $this->getModel('product')->selectWith($select);
 
-
         // Make list
         foreach ($rowset as $row) {
             $product = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
@@ -110,12 +109,15 @@ class ToolsController extends ActionController
                 array('product' => (int)$product['id'])
             );
 
-            // Save log
+            // Save log to csv file
             $args = array($product['id'], $product['title'], $mainPrice, $minPrice);
             Pi::service('audit')->attach('audit', array(
                 'file'  => Pi::path('log') . '/shop-price.csv'
             ));
             Pi::service('audit')->log('audit', $args);
+
+            // Set price log
+            Pi::api('price', 'shop')->addLog($minPrice, $product['id'], 'product');
 
             // Set extra
             $priceListInfo[$product['id']] = $minPrice;
