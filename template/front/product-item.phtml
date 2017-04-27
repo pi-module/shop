@@ -80,9 +80,9 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
             <div class="product-info-box productDescription p-review clearfix" itemprop="description">
                 <?php echo $productItem['text_description']; ?>
             </div>
-            <?php if ($config['view_description_product'] && !empty($category['text_description'])) { ?>
+            <?php if ($config['view_description_product'] && !empty($categorySingle['text_description'])) { ?>
                 <div class="product-info-box categoryDescription p-review clearfix" itemprop="description">
-                    <?php echo $category['text_description']; ?>
+                    <?php echo $categorySingle['text_description']; ?>
                 </div>
             <?php } ?>
             <div class="product-info-box clearfix">

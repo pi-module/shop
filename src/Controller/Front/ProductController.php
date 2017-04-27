@@ -118,8 +118,8 @@ class ProductController extends IndexController
         }
         // Set main category info
         if ($config['view_description_product']) {
-            $category = Pi::api('category', 'shop')->getCategory($product['category_main']);
-            $this->view()->assign('category', $category);
+            $categorySingle = Pi::api('category', 'shop')->getCategory($product['category_main']);
+            $this->view()->assign('categorySingle', $categorySingle);
         }
         // Set property
         $property = array();
