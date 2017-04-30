@@ -55,6 +55,76 @@ class ToolsController extends ActionController
         $this->view()->assign('message', $message);
     }
 
+    /* public function importAction()
+    {
+        $file = '/var/www/html/local/test/shobadebaz/product.csv';
+        $productData = array();
+        $row = 1;
+        if (($handle = fopen($file, "r")) !== false) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+                $num = count($data);
+                $i = 1;
+                for ($c = 0; $c < $num; $c++) {
+                    $productData[$row][$i] = $data[$c];
+                    $i++;
+                }
+                $row++;
+            }
+            fclose($handle);
+        }
+        // Make user field list
+        $fieldList = array_shift($productData);
+
+        echo '<pre>';
+        print_r($fieldList);
+        echo '</pre>';
+
+
+        //$path = sprintf('%s/%s', date('Y'), date('m'));
+        //$originalPath = Pi::path(sprintf('upload/shop/image//original/%s', $path));
+
+        foreach ($productData as $product) {
+
+            $values = array();
+            $values['title'] = $product[5];
+            $values['slug'] = empty($product[7]) ? md5(rand(1000, 99999)) : urldecode($product[7]);
+            $values['text_description'] = $product[10];
+            $values['price'] = $product[19];
+            $values['uid'] = Pi::user()->getId();
+            $values['time_create'] = time();
+            $values['time_update'] = time();
+
+            if (!empty($product[33])) {
+                // Set
+                $key = \Zend\Math\Rand::getString(16, 'abcdefghijklmnopqrstuvwxyz123456789', true);
+                $image = sprintf('%s.jpg', $key);
+                $originalImage = sprintf('%s/%s', $originalPath, $image);
+                // download image
+                Pi::service('remote')->download($product[33], $originalImage);
+                // Resize image
+                Pi::api('image', 'shop')->process($image, $path);
+
+                $values['image'] = $image;
+                $values['path'] = $path;
+            }
+
+            $row = $this->getModel('product')->createRow();
+            $row->assign($values);
+            $row->save();
+        }
+
+
+
+        //5 Title
+        //7 Slug
+        //10 Description
+        //33 image
+        //19 price
+
+        // Set view
+        $this->view()->setTemplate(false);
+    } */
+
     /*
      * Script for build osport main category
      */
