@@ -54,4 +54,39 @@ class ToolsController extends ActionController
         $this->view()->assign('title', __('Rebuild sitemap links'));
         $this->view()->assign('message', $message);
     }
+
+    /*
+     * Script for build osport main category
+     */
+    /* public function osport()
+    {
+        $catList = array();
+        $where = array('parent' => 88);
+        $select = $this->getModel('category')->select()->where($where);
+        $rowset = $this->getModel('category')->selectWith($select);
+        foreach ($rowset as $row) {
+            $catList[$row->id] = array(
+                'id' => $row->id,
+                'title' => $row->title,
+                'count' => 0,
+            );
+        }
+
+        foreach ($catList as $category) {
+            $whereLink = array('category' => $category['id']);
+            $select = $this->getModel('link')->select()->where($whereLink);
+            $count = $this->getModel('link')->selectWith($select);
+            foreach ($count as $link) {
+                $catList[$category['id']]['count']++;
+                $catList[$category['id']]['product'][$link->product] = $link->product;
+            }
+
+            if ($catList[$category['id']]['count'] > 0) {
+                $this->getModel('product')->update(
+                    array('category_main' => $category['id']),
+                    array('id' => $catList[$category['id']]['product'])
+                );
+            }
+        }
+    } */
 }
