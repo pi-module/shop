@@ -72,6 +72,14 @@ return array(
             'filter' => 'number_int',
             'value' => 25
         ),
+        'brand_system' => array(
+            'category' => 'admin',
+            'title' => _a('Active brand system'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 0
+        ),
         // Json
         'json_perpage' => array(
             'category' => 'json',

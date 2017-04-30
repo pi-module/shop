@@ -176,7 +176,10 @@ class ProductController extends ActionController
         $id = $this->params('id');
         $module = $this->params('module');
         // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Get config
         $option = array();
+        $option['brand'] = $config['brand_system'];
         // Find Product
         if ($id) {
             $product = Pi::api('product', 'shop')->getProduct($id);
@@ -198,7 +201,7 @@ class ProductController extends ActionController
             $filter = new Filter\Slug;
             $data['slug'] = $filter($slug);
             // Form filter
-            $form->setInputFilter(new ProductFilter);
+            $form->setInputFilter(new ProductFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();

@@ -22,17 +22,18 @@ class ProductForm extends BaseForm
 
     public function __construct($name = null, $option = array())
     {
+        $this->option = $option;
         $this->category = array(0 => '');
         $this->thumbUrl = (isset($option['thumbUrl'])) ? $option['thumbUrl'] : '';
         $this->removeUrl = (isset($option['removeUrl'])) ? $option['removeUrl'] : '';
-        $this->config = Pi::service('registry')->config->read('shop');
+
         parent::__construct($name);
     }
 
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new ProductFilter;
+            $this->filter = new ProductFilter($this->option);
         }
         return $this->filter;
     }
@@ -159,19 +160,21 @@ class ProductForm extends BaseForm
             ),
         ));
         // brand
-        $this->add(array(
-            'name' => 'brand',
-            'type' => 'Module\Shop\Form\Element\Brand',
-            'options' => array(
-                'label' => __('Brand'),
-                'category' => $this->category,
-            ),
-            'attributes' => array(
-                'size' => 1,
-                'multiple' => 0,
-                'required' => false,
-            ),
-        ));
+        if ($this->option['brand_system']) {
+            $this->add(array(
+                'name' => 'brand',
+                'type' => 'Module\Shop\Form\Element\Brand',
+                'options' => array(
+                    'label' => __('Brand'),
+                    'category' => $this->category,
+                ),
+                'attributes' => array(
+                    'size' => 1,
+                    'multiple' => 0,
+                    'required' => false,
+                ),
+            ));
+        }
         // Image
         if ($this->thumbUrl) {
             $this->add(array(
