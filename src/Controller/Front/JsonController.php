@@ -619,10 +619,22 @@ class JsonController extends IndexController
             $productSingle = $product;
             if ($product['attribute'] && $config['view_attribute']) {
                 $attributes = Pi::api('attribute', 'shop')->Product($product['id'], $product['category_main']);
-                //$productSingle['attributes'] = $attributes['all'];
-                foreach ($attributes['all'] as $attribute) {
-                    $productSingle['attribute-' . $attribute['id']] = $attribute['data'];
+                foreach ($attributes['all'] as $attributesAll) {
+                    foreach ($attributesAll['info'] as $attribute) {
+                        if (!empty($attribute['name'])) {
+                            $productSingle['attribute-' . $attribute['name']] = $attribute['data'];
+                        }
+                    }
                 }
+            }
+            // Get attach file
+            $attach = Pi::api('product', 'shop')->AttachList($product['id']);
+            // Set output array
+            $i = 1;
+            // generate images
+            foreach ($attach['image'] as $image) {
+                $i++;
+                $productSingle['extra-image-' . $i] = $image['largeUrl'];
             }
         }
         $productSingle = array($productSingle);
