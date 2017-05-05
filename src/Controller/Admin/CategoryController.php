@@ -33,49 +33,16 @@ class CategoryController extends ActionController
      */
     public function indexAction()
     {
-        // Get page
-        $page = $this->params('page', 1);
-        $module = $this->params('module');
         $type = $this->params('type', 'category');
-        // Get info
-        $list = array();
+        // Set count
         $where = array('type' => $type);
-        $columns = array('id', 'title', 'slug', 'status', 'display_order', 'type');
-        $order = array('id DESC', 'time_create DESC');
-        $offset = (int)($page - 1) * $this->config('admin_perpage');
-        $limit = intval($this->config('admin_perpage'));
-        $select = $this->getModel('category')->select()->columns($columns)->where($where)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('category')->selectWith($select);
-        // Make list
-        foreach ($rowset as $row) {
-            $list[$row->id] = $row->toArray();
-            $list[$row->id]['url'] = Pi::url($this->url('shop', array(
-                'module' => $module,
-                'controller' => 'category',
-                'slug' => $list[$row->id]['slug'],
-            )));
-        }
-        // Set paginator
         $count = array('count' => new Expression('count(*)'));
         $select = $this->getModel('category')->select()->columns($count)->where($where);
         $count = $this->getModel('category')->selectWith($select)->current()->count;
-        $paginator = Paginator::factory(intval($count));
-        $paginator->setItemCountPerPage($this->config('admin_perpage'));
-        $paginator->setCurrentPageNumber($page);
-        $paginator->setUrlOptions(array(
-            'router' => $this->getEvent()->getRouter(),
-            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params' => array_filter(array(
-                'module' => $this->getModule(),
-                'controller' => 'category',
-                'action' => 'index',
-                'type' => $type,
-            )),
-        ));
         // Set view
         $this->view()->setTemplate('category-index');
-        $this->view()->assign('list', $list);
-        $this->view()->assign('paginator', $paginator);
+        $this->view()->assign('count', $count);
+        $this->view()->assign('type', $type);
     }
 
     /**
@@ -256,5 +223,85 @@ class CategoryController extends ActionController
             'status' => $status,
             'message' => $message,
         );
+    }
+
+    public function ajaxAction()
+    {
+        // Get page
+        $current = $this->params('current', 1);
+        $rowCount = $this->params('rowCount', 25);
+        $module = $this->params('module');
+        $type = $this->params('type', 'category');
+        $searchPhrase = $this->params('searchPhrase');
+        $sort = $this->params('sort');
+
+        // Get info
+        $rows = array();
+        $where = array('type' => $type);
+        if (!empty($searchPhrase)) {
+            $where['title LIKE ?'] = '%' . $searchPhrase . '%';
+        }
+        $columns = array('id', 'title', 'slug', 'status', 'display_order', 'type');
+
+
+        if (isset($sort['id'])) {
+            if ($sort['id'] == 'asc') {
+                $order = array('id ASC');
+            } else {
+                $order = array('id DESC');
+            }
+        } elseif (isset($sort['title'])) {
+            if ($sort['title'] == 'asc') {
+                $order = array('title ASC', 'id ASC');
+            } else {
+                $order = array('title DESC', 'id DESC');
+            }
+        } elseif (isset($sort['display_order'])) {
+            if ($sort['display_order'] == 'asc') {
+                $order = array('display_order ASC', 'id ASC');
+            } else {
+                $order = array('display_order DESC', 'id DESC');
+            }
+        } else {
+            $order = array('id DESC');
+        }
+
+        $offset = (int)($current - 1) * $rowCount;
+        $limit = intval($rowCount);
+        $select = $this->getModel('category')->select()->columns($columns)->where($where)->order($order)->offset($offset)->limit($limit);
+        $rowset = $this->getModel('category')->selectWith($select);
+        // Make list
+        foreach ($rowset as $row) {
+            $rows[] = array(
+                'id' => $row->id,
+                'title' => $row->title,
+                'display_order' => $row->display_order,
+                'status' => $row->status,
+                'view_url' => Pi::url($this->url('shop', array(
+                    'module' => $module,
+                    'controller' => 'category',
+                    'slug' => $row->slug,
+                ))),
+                'edit_url' => Pi::url($this->url('admin', array(
+                    'module' => $module,
+                    'controller' => 'category',
+                    'action' => 'update',
+                    'type' => $row->type,
+                    'id' => $row->id,
+                ))),
+            );
+        }
+        // Set count
+        $count = array('count' => new Expression('count(*)'));
+        $select = $this->getModel('category')->select()->columns($count)->where($where);
+        $count = $this->getModel('category')->selectWith($select)->current()->count;
+        // Set result
+        $result = array(
+            'current' => $current,
+            'rowCount' =>  $rowCount,
+            'total' => intval($count),
+            'rows' => $rows,
+        );
+        return $result;
     }
 }
