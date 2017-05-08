@@ -659,4 +659,54 @@ class JsonController extends IndexController
             return true;
         }
     }
+
+    /* public function visitAction()
+    {
+        $brand = array();
+        $where = array('status' => 1, 'type' => 'brand');
+        $order = array('display_order ASC', 'title ASC', 'id DESC');
+        $select = $this->getModel('category')->select()->where($where)->order($order)->limit(15);
+        $rowset = $this->getModel('category')->selectWith($select);
+        foreach ($rowset as $row) {
+            $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
+            $brand[] = array(
+                'id' => $categorySingle['id'],
+                'parent' => $categorySingle['parent'],
+                'title' => $categorySingle['title'],
+                'mediumUrl' => $categorySingle['mediumUrl'],
+                'thumbUrl' => $categorySingle['thumbUrl'],
+            );
+        }
+
+        $days = array();
+        $daysTitle = array(
+            'Saturday' => 'شنبه',
+            'Sunday' => 'یکشنبه',
+            'Monday' => 'دوشنبه',
+            'Tuesday' => 'سه شنبه',
+            'Wednesday' => 'چهارشنبه',
+            'Thursday' => 'پنجشنبه',
+            'Friday' => 'جمعه',
+        );
+
+        $id = 1;
+        $timestamp = strtotime('today');
+        for ($i = 0; $i < 7; $i++) {
+            $day = strftime('%A', $timestamp);
+            $days[] = array(
+                'id' => $id++,
+                'name' => $day,
+                'title' => $daysTitle[$day],
+            );
+            $timestamp = strtotime('+1 day', $timestamp);
+        }
+
+        // Set result
+        $result = array(
+            'day' => $days,
+            'brands' => $brand,
+        );
+
+        return $result;
+    } */
 }
