@@ -452,42 +452,6 @@ class ProductController extends ActionController
         $this->view()->assign('nav', $nav);
     }
 
-    /* public function deleteAction()
-    {
-        $this->view()->setTemplate(false);
-        $id = $this->params('id');
-        $module = $this->params('module');
-        $row = $this->getModel('product')->find($id);
-        if ($row) {
-            // Link
-            $this->getModel('link')->delete(array('product' => $row->id));
-            // Related
-            $this->getModel('related')->delete(array('product_id' => $row->id));
-            // Attach
-            $this->getModel('attach')->delete(array('product' => $row->id));
-            // attribute Field Data
-            $this->getModel('field_data')->delete(array('product' => $row->id));
-            // Sale
-            $this->getModel('sale')->delete(array('product' => $row->id));
-            // Remove sitemap
-            if (Pi::service('module')->isActive('sitemap')) {
-                $loc = Pi::url($this->url('shop', array(
-                        'module'      => $module, 
-                        'controller'  => 'product', 
-                        'slug'        => $row->slug
-                    )));
-                Pi::api('sitemap', 'sitemap')->remove($loc);
-            }
-            // Add log
-            Pi::api('log', 'shop')->addLog('product', $row->id, 'delete');
-            // Remove page
-            $row->delete();
-            $this->jump(array('action' => 'index'), __('This product deleted'));
-        } else {
-            $this->jump(array('action' => 'index'), __('Please select product'));
-        }
-    } */
-
     public function recommendAction()
     {
         // Get id and recommended
