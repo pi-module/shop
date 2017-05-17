@@ -16,20 +16,20 @@
         </script>
     <?php } ?>
     <?php } else { ?>
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#priceModal">
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#categoryModal">
             <?php _e('Confirm'); ?>
         </button>
-        <div class="modal fade" id="priceModal" tabindex="-1" role="dialog" aria-labelledby="priceModalLabel">
+        <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="<?php _e('Close'); ?>">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="priceModalLabel"><?php _e('Sync price'); ?></h4>
+                        <h4 class="modal-title" id="categoryModalLabel"><?php _e('Sync category'); ?></h4>
                     </div>
                     <div class="modal-body">
-                        <?php _e('For start sync product price, please confirm this form, after start we should wait to finish sync all products , it take some min, please dont close this page before finish sync'); ?>
+                        <?php _e('For start sync product category, please confirm this form, after start we should wait to finish sync all products , it take some min, please dont close this page before finish sync'); ?>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal"><?php _e('Close'); ?></button>
@@ -40,7 +40,7 @@
         </div>
         <script>
             $(document).ready(function () {
-                $('#priceModal').modal('show');
+                $('#categoryModal').modal('show');
             });
         </script>
     <?php } ?>

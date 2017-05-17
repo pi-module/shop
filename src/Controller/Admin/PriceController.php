@@ -269,7 +269,7 @@ class PriceController extends ActionController
 
                 // Update product
                 $this->getModel('product')->update(
-                    array('price' => (int)$minPrice,),
+                    array('price' => (int)$minPrice),
                     array('id' => (int)$product['id'])
                 );
 

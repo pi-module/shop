@@ -39,5 +39,35 @@ class AdminSearchFilter extends InputFilter
                 ),
             ),
         ));
+        // brand
+        $this->add(array(
+            'name' => 'brand',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // status
+        $this->add(array(
+            'name' => 'status',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // recommended
+        $this->add(array(
+            'name' => 'recommended',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
     }
 }

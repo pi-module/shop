@@ -40,6 +40,7 @@ class ProductController extends ActionController
         $page = $this->params('page', 1);
         $status = $this->params('status');
         $category = $this->params('category');
+        $brand = $this->params('brand');
         $recommended = $this->params('recommended');
         $title = $this->params('title');
         // Get config
@@ -54,8 +55,22 @@ class ProductController extends ActionController
         if (!empty($recommended)) {
             $whereProduct['recommended'] = 1;
         }
+        if (!empty($brand)) {
+            $whereVideo['brand'] = $brand;
+        }
         if (!empty($category)) {
-            $whereProduct['category_main'] = $category;
+            $productId = array();
+            $whereLink = array('category' => $category);
+            $selectLink = $this->getModel('link')->select()->where($whereLink);
+            $rowLink = $this->getModel('link')->selectWith($selectLink);
+            foreach ($rowLink as $link) {
+                $productId[] = $link['product'];
+            }
+            if (!empty($productId)) {
+                $whereProduct['id'] = $productId;
+            } else {
+                $whereProduct['id'] = 0;
+            }
         }
         if (!empty($status) && in_array($status, array(1, 2, 3, 4, 5))) {
             $whereProduct['status'] = $status;
@@ -111,6 +126,7 @@ class ProductController extends ActionController
                 'controller' => 'product',
                 'action' => 'index',
                 'category' => $category,
+                'brand' => $brand,
                 'status' => $status,
                 'title' => $title,
                 'recommended' => $recommended,
@@ -120,6 +136,9 @@ class ProductController extends ActionController
         $values = array(
             'title' => $title,
             'category' => $category,
+            'brand' => $brand,
+            'status' => $status,
+            'recommended' => $recommended,
         );
         $form = new AdminSearchForm('search');
         $form->setAttribute('action', $this->url('', array('action' => 'process')));
@@ -146,6 +165,9 @@ class ProductController extends ActionController
                     'action' => 'index',
                     'title' => $values['title'],
                     'category' => $values['category'],
+                    'brand' => $values['brand'],
+                    'status' => $values['status'],
+                    'recommended' => $values['recommended'],
                 );
             } else {
                 $message = __('Not valid');

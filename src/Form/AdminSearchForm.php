@@ -57,6 +57,47 @@ class AdminSearchForm extends BaseForm
                 'multiple' => 0,
             ),
         ));
+        // brand
+        $this->add(array(
+            'name' => 'brand',
+            'type' => 'Module\Shop\Form\Element\Brand',
+            'options' => array(
+                'label' => __('Brand'),
+                //'category' => $this->category,
+            ),
+            'attributes' => array(
+                'size' => 1,
+                'multiple' => 0,
+            ),
+        ));
+        // status
+        $this->add(array(
+            'name' => 'status',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Status'),
+                'value_options' => array(
+                    '' => __('All status'),
+                    1 => __('Published'),
+                    2 => __('Pending review'),
+                    3 => __('Draft'),
+                    4 => __('Private'),
+                    5 => __('Delete'),
+                ),
+            ),
+        ));
+        // recommended
+        $this->add(array(
+            'name' => 'recommended',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Recommended'),
+                'value_options' => array(
+                    '' => __('All'),
+                    1 => __('Recommended'),
+                ),
+            ),
+        ));
         // Save
         $this->add(array(
             'name' => 'submit',

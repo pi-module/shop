@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2017-04-26 14:11+0430\n"
+"POT-Creation-Date: 2017-05-17 11:11+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -140,7 +140,7 @@ msgid "Have discount"
 msgstr ""
 
 #: src/Api/Product.php:555 src/Api/Product.php:621 src/Api/Product.php:927
-#: template/admin/product-index.phtml:27 template/admin/product-index.phtml:29
+#: src/Form/AdminSearchForm.php:94 src/Form/AdminSearchForm.php:97
 msgid "Recommended"
 msgstr ""
 
@@ -184,7 +184,7 @@ msgid "All changes in file saved successfully."
 msgstr ""
 
 #: src/Controller/Admin/AttachController.php:147
-#: src/Controller/Admin/ProductController.php:551
+#: src/Controller/Admin/ProductController.php:541
 msgid "Invalid data, please check and re-submit."
 msgstr ""
 
@@ -221,31 +221,31 @@ msgstr ""
 msgid "Please select field"
 msgstr ""
 
-#: src/Controller/Admin/CategoryController.php:139
-#: src/Controller/Admin/ProductController.php:229
+#: src/Controller/Admin/CategoryController.php:106
+#: src/Controller/Admin/ProductController.php:254
 msgid "Problem in upload image. please try again"
 msgstr ""
 
-#: src/Controller/Admin/CategoryController.php:204
+#: src/Controller/Admin/CategoryController.php:171
 msgid "Category data saved successfully."
 msgstr ""
 
-#: src/Controller/Admin/CategoryController.php:220
+#: src/Controller/Admin/CategoryController.php:187
 msgid "Add a category"
 msgstr ""
 
-#: src/Controller/Admin/CategoryController.php:245
-#: src/Controller/Admin/ProductController.php:792
+#: src/Controller/Admin/CategoryController.php:212
+#: src/Controller/Admin/ProductController.php:782
 #, php-format
 msgid "Image of %s removed"
 msgstr ""
 
-#: src/Controller/Admin/CategoryController.php:248
-#: src/Controller/Admin/ProductController.php:795
+#: src/Controller/Admin/CategoryController.php:215
+#: src/Controller/Admin/ProductController.php:785
 msgid "Image not remove"
 msgstr ""
 
-#: src/Controller/Admin/CategoryController.php:252
+#: src/Controller/Admin/CategoryController.php:219
 msgid "Please select category"
 msgstr ""
 
@@ -285,78 +285,78 @@ msgstr ""
 msgid "Sale price"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:144
+#: src/Controller/Admin/ProductController.php:163
 msgid "View filtered products"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:151
+#: src/Controller/Admin/ProductController.php:173
 msgid "Not valid"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:157
+#: src/Controller/Admin/ProductController.php:179
 msgid "Not set"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:290
-#: src/Controller/Admin/ProductController.php:411
+#: src/Controller/Admin/ProductController.php:316
+#: src/Controller/Admin/ProductController.php:437
 msgid "Product data saved successfully."
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:337
-#: src/Controller/Admin/ProductController.php:519
-#: src/Controller/Admin/ProductController.php:578
-#: src/Controller/Admin/ProductController.php:799
-#: src/Controller/Admin/ProductController.php:819
-#: src/Controller/Admin/ProductController.php:870
+#: src/Controller/Admin/ProductController.php:363
+#: src/Controller/Admin/ProductController.php:509
+#: src/Controller/Admin/ProductController.php:568
+#: src/Controller/Admin/ProductController.php:789
+#: src/Controller/Admin/ProductController.php:809
+#: src/Controller/Admin/ProductController.php:860
 #: src/Controller/Front/CartController.php:189
 msgid "Please select product"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:501
+#: src/Controller/Admin/ProductController.php:491
 #, php-format
 msgid "%s set recommended successfully"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:513
+#: src/Controller/Admin/ProductController.php:503
 #, php-format
 msgid "Error in set recommended for %s product"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:561
+#: src/Controller/Admin/ProductController.php:551
 msgid "Add Related"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:604
+#: src/Controller/Admin/ProductController.php:594
 msgid "OK Add"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:610
+#: src/Controller/Admin/ProductController.php:600
 msgid "Error Add , It added before"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:617
+#: src/Controller/Admin/ProductController.php:607
 msgid "Error , Product and related is same"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:624
+#: src/Controller/Admin/ProductController.php:614
 msgid "OK Remove"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:767
+#: src/Controller/Admin/ProductController.php:757
 msgid "Update price and stock"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:824
+#: src/Controller/Admin/ProductController.php:814
 #, php-format
 msgid "%s new serial number added"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:840
+#: src/Controller/Admin/ProductController.php:830
 #, php-format
 msgid "Manage serial number of %s"
 msgstr ""
 
-#: src/Controller/Admin/ProductController.php:868
+#: src/Controller/Admin/ProductController.php:858
 msgid "This product deleted"
 msgstr ""
 
@@ -553,13 +553,14 @@ msgstr ""
 #: src/Form/AdminSearchForm.php:39 src/Form/AdminSearchForm.php:44
 #: src/Form/AttachForm.php:55 src/Form/AttributeForm.php:49
 #: src/Form/CategoryForm.php:68 src/Form/DiscountForm.php:47
-#: src/Form/PositionForm.php:47 src/Form/ProductForm.php:61
+#: src/Form/PositionForm.php:47 src/Form/ProductForm.php:62
 #: src/Form/PromotionForm.php:47 src/Form/PropertyForm.php:47
 #: src/Form/RelatedForm.php:41 template/admin/attach-add.phtml:64
 #: template/admin/attach-index.phtml:29 template/admin/attribute-index.phtml:57
-#: template/admin/category-index.phtml:8 template/admin/discount-index.phtml:13
+#: template/admin/category-index.phtml:77
+#: template/admin/discount-index.phtml:13
 #: template/admin/position-index.phtml:13 template/admin/price-log.phtml:33
-#: template/admin/product-index.phtml:58
+#: template/admin/product-index.phtml:41
 #: template/admin/product-related.phtml:28
 #: template/admin/product-related.phtml:50
 #: template/admin/product-serial.phtml:6
@@ -573,26 +574,88 @@ msgstr ""
 
 #: src/Form/AdminSearchForm.php:52 src/Form/AttributeForm.php:74
 #: src/Form/CategoryForm.php:120 src/Form/DiscountForm.php:72
-#: src/Form/ProductForm.php:139 src/Form/RelatedForm.php:68
+#: src/Form/ProductForm.php:140 src/Form/RelatedForm.php:68
 #: template/front/category.phtml:61
 msgid "Category"
 msgstr ""
 
-#: src/Form/AdminSearchForm.php:65 src/Form/AttributeForm.php:186
+#: src/Form/AdminSearchForm.php:65 src/Form/CategoryForm.php:121
+#: src/Form/ProductForm.php:168
+msgid "Brand"
+msgstr ""
+
+#: src/Form/AdminSearchForm.php:78 src/Form/AttachForm.php:81
+#: src/Form/AttributeForm.php:88 src/Form/CategoryForm.php:161
+#: src/Form/DiscountForm.php:98 src/Form/PositionForm.php:73
+#: src/Form/ProductForm.php:122 src/Form/PromotionForm.php:153
+#: src/Form/PropertyForm.php:73 src/Form/SaleForm.php:111
+#: template/admin/attach-add.phtml:79
+msgid "Status"
+msgstr ""
+
+#: src/Form/AdminSearchForm.php:80
+msgid "All status"
+msgstr ""
+
+#: src/Form/AdminSearchForm.php:81 src/Form/CategoryForm.php:163
+#: src/Form/DiscountForm.php:100 src/Form/PositionForm.php:75
+#: src/Form/ProductForm.php:124 src/Form/PromotionForm.php:155
+#: src/Form/PropertyForm.php:75 src/Form/SaleForm.php:113
+#: template/admin/attach-index.phtml:51 template/admin/product-index.phtml:132
+#: template/admin/sale-index.phtml:61 template/admin/sale-index.phtml:116
+msgid "Published"
+msgstr ""
+
+#: src/Form/AdminSearchForm.php:82 src/Form/CategoryForm.php:164
+#: src/Form/DiscountForm.php:101 src/Form/PositionForm.php:76
+#: src/Form/ProductForm.php:125 src/Form/PromotionForm.php:156
+#: src/Form/PropertyForm.php:76 src/Form/SaleForm.php:114
+#: template/admin/attach-index.phtml:52 template/admin/product-index.phtml:133
+#: template/admin/sale-index.phtml:62 template/admin/sale-index.phtml:117
+msgid "Pending review"
+msgstr ""
+
+#: src/Form/AdminSearchForm.php:83 src/Form/CategoryForm.php:165
+#: src/Form/DiscountForm.php:102 src/Form/PositionForm.php:77
+#: src/Form/ProductForm.php:126 src/Form/PromotionForm.php:157
+#: src/Form/PropertyForm.php:77 src/Form/SaleForm.php:115
+#: template/admin/sale-index.phtml:63 template/admin/sale-index.phtml:118
+msgid "Draft"
+msgstr ""
+
+#: src/Form/AdminSearchForm.php:84 src/Form/CategoryForm.php:166
+#: src/Form/DiscountForm.php:103 src/Form/PositionForm.php:78
+#: src/Form/ProductForm.php:127 src/Form/PromotionForm.php:158
+#: src/Form/PropertyForm.php:78 src/Form/SaleForm.php:116
+#: template/admin/sale-index.phtml:64 template/admin/sale-index.phtml:119
+msgid "Private"
+msgstr ""
+
+#: src/Form/AdminSearchForm.php:85 src/Form/DiscountForm.php:104
+#: src/Form/PositionForm.php:79 src/Form/ProductForm.php:128
+#: src/Form/PromotionForm.php:159 src/Form/PropertyForm.php:79
+#: template/admin/attach-add.phtml:56 template/admin/attribute-index.phtml:72
+#: template/admin/product-index.phtml:108
+#: template/admin/product-index.phtml:109 template/admin/sale-index.phtml:53
+#: template/admin/sale-index.phtml:55 template/admin/sale-index.phtml:108
+#: template/admin/sale-index.phtml:110
+msgid "Delete"
+msgstr ""
+
+#: src/Form/AdminSearchForm.php:96 template/admin/category-index.phtml:51
+#: template/front/product-angular-old.phtml:125
+#: template/front/product-angular-old.phtml:143
+#: template/front/product-angular.phtml:44
+msgid "All"
+msgstr ""
+
+#: src/Form/AdminSearchForm.php:106 src/Form/AttributeForm.php:186
 msgid "Search"
 msgstr ""
 
 #: src/Form/AttachForm.php:67 template/admin/attach-index.phtml:31
 #: template/admin/sale-index.phtml:22 template/admin/sale-index.phtml:77
 msgid "Product"
-msgstr ""
-
-#: src/Form/AttachForm.php:81 src/Form/AttributeForm.php:88
-#: src/Form/CategoryForm.php:161 src/Form/DiscountForm.php:98
-#: src/Form/PositionForm.php:73 src/Form/ProductForm.php:121
-#: src/Form/PromotionForm.php:153 src/Form/PropertyForm.php:73
-#: src/Form/SaleForm.php:111 template/admin/attach-add.phtml:79
-msgid "Status"
 msgstr ""
 
 #: src/Form/AttachForm.php:83 src/Form/AttributeForm.php:90
@@ -607,7 +670,7 @@ msgstr ""
 #: src/Form/CategoryForm.php:320 src/Form/DiscountForm.php:116
 #: src/Form/PositionForm.php:88 src/Form/PriceLogForm.php:52
 #: src/Form/PriceUpdateForm.php:68 src/Form/ProductAdditionalForm.php:406
-#: src/Form/ProductForm.php:280 src/Form/ProductPriceForm.php:177
+#: src/Form/ProductForm.php:283 src/Form/ProductPriceForm.php:177
 #: src/Form/PromotionForm.php:182 src/Form/PropertyForm.php:122
 #: src/Form/QuestionForm.php:86 src/Form/RelatedForm.php:77
 #: src/Form/SaleForm.php:150 src/Form/SitemapForm.php:48
@@ -665,19 +728,19 @@ msgstr ""
 msgid "Parent Category"
 msgstr ""
 
-#: src/Form/CategoryForm.php:80 src/Form/ProductForm.php:84
+#: src/Form/CategoryForm.php:80 src/Form/ProductForm.php:85
 msgid "slug"
 msgstr ""
 
-#: src/Form/CategoryForm.php:92 src/Form/ProductForm.php:95
+#: src/Form/CategoryForm.php:92 src/Form/ProductForm.php:96
 msgid "Summary"
 msgstr ""
 
-#: src/Form/CategoryForm.php:98 src/Form/ProductForm.php:101
+#: src/Form/CategoryForm.php:98 src/Form/ProductForm.php:102
 msgid "Keep summery short, 2 or 3 lines"
 msgstr ""
 
-#: src/Form/CategoryForm.php:105 src/Form/ProductForm.php:108
+#: src/Form/CategoryForm.php:105 src/Form/ProductForm.php:109
 msgid "Description"
 msgstr ""
 
@@ -685,11 +748,7 @@ msgstr ""
 msgid "Category type"
 msgstr ""
 
-#: src/Form/CategoryForm.php:121 src/Form/ProductForm.php:166
-msgid "Brand"
-msgstr ""
-
-#: src/Form/CategoryForm.php:133 template/admin/category-index.phtml:9
+#: src/Form/CategoryForm.php:133 template/admin/category-index.phtml:78
 msgid "Display order"
 msgstr ""
 
@@ -701,49 +760,11 @@ msgstr ""
 msgid "List of sub category"
 msgstr ""
 
-#: src/Form/CategoryForm.php:163 src/Form/DiscountForm.php:100
-#: src/Form/PositionForm.php:75 src/Form/ProductForm.php:123
-#: src/Form/PromotionForm.php:155 src/Form/PropertyForm.php:75
-#: src/Form/SaleForm.php:113 template/admin/attach-index.phtml:51
-#: template/admin/category-index.phtml:46 template/admin/product-index.phtml:30
-#: template/admin/product-index.phtml:32 template/admin/product-index.phtml:147
-#: template/admin/sale-index.phtml:61 template/admin/sale-index.phtml:116
-msgid "Published"
-msgstr ""
-
-#: src/Form/CategoryForm.php:164 src/Form/DiscountForm.php:101
-#: src/Form/PositionForm.php:76 src/Form/ProductForm.php:124
-#: src/Form/PromotionForm.php:156 src/Form/PropertyForm.php:76
-#: src/Form/SaleForm.php:114 template/admin/attach-index.phtml:52
-#: template/admin/category-index.phtml:47 template/admin/product-index.phtml:33
-#: template/admin/product-index.phtml:35 template/admin/product-index.phtml:148
-#: template/admin/sale-index.phtml:62 template/admin/sale-index.phtml:117
-msgid "Pending review"
-msgstr ""
-
-#: src/Form/CategoryForm.php:165 src/Form/DiscountForm.php:102
-#: src/Form/PositionForm.php:77 src/Form/ProductForm.php:125
-#: src/Form/PromotionForm.php:157 src/Form/PropertyForm.php:77
-#: src/Form/SaleForm.php:115 template/admin/category-index.phtml:48
-#: template/admin/product-index.phtml:36 template/admin/product-index.phtml:38
-#: template/admin/sale-index.phtml:63 template/admin/sale-index.phtml:118
-msgid "Draft"
-msgstr ""
-
-#: src/Form/CategoryForm.php:166 src/Form/DiscountForm.php:103
-#: src/Form/PositionForm.php:78 src/Form/ProductForm.php:126
-#: src/Form/PromotionForm.php:158 src/Form/PropertyForm.php:78
-#: src/Form/SaleForm.php:116 template/admin/category-index.phtml:49
-#: template/admin/product-index.phtml:39 template/admin/product-index.phtml:41
-#: template/admin/sale-index.phtml:64 template/admin/sale-index.phtml:119
-msgid "Private"
-msgstr ""
-
-#: src/Form/CategoryForm.php:188 src/Form/ProductForm.php:190
+#: src/Form/CategoryForm.php:188 src/Form/ProductForm.php:193
 msgid "Remove image"
 msgstr ""
 
-#: src/Form/CategoryForm.php:204 src/Form/ProductForm.php:206
+#: src/Form/CategoryForm.php:204 src/Form/ProductForm.php:209
 msgid "Image"
 msgstr ""
 
@@ -778,31 +799,31 @@ msgstr ""
 msgid "Sale expire time"
 msgstr ""
 
-#: src/Form/CategoryForm.php:273 src/Form/ProductForm.php:219
+#: src/Form/CategoryForm.php:273 src/Form/ProductForm.php:222
 msgid "SEO options"
 msgstr ""
 
-#: src/Form/CategoryForm.php:280 src/Form/ProductForm.php:226
+#: src/Form/CategoryForm.php:280 src/Form/ProductForm.php:229
 msgid "SEO Title"
 msgstr ""
 
-#: src/Form/CategoryForm.php:286 src/Form/ProductForm.php:232
+#: src/Form/CategoryForm.php:286 src/Form/ProductForm.php:235
 msgid "Between 10 to 70 character"
 msgstr ""
 
-#: src/Form/CategoryForm.php:293 src/Form/ProductForm.php:239
+#: src/Form/CategoryForm.php:293 src/Form/ProductForm.php:242
 msgid "SEO Keywords"
 msgstr ""
 
-#: src/Form/CategoryForm.php:299 src/Form/ProductForm.php:245
+#: src/Form/CategoryForm.php:299 src/Form/ProductForm.php:248
 msgid "Between 5 to 10 words"
 msgstr ""
 
-#: src/Form/CategoryForm.php:306 src/Form/ProductForm.php:252
+#: src/Form/CategoryForm.php:306 src/Form/ProductForm.php:255
 msgid "SEO Description"
 msgstr ""
 
-#: src/Form/CategoryForm.php:312 src/Form/ProductForm.php:258
+#: src/Form/CategoryForm.php:312 src/Form/ProductForm.php:261
 msgid "Between 80 to 160 character"
 msgstr ""
 
@@ -816,18 +837,11 @@ msgstr ""
 msgid "Number and between 1 to 99"
 msgstr ""
 
-#: src/Form/DiscountForm.php:104 src/Form/PositionForm.php:79
-#: src/Form/ProductForm.php:127 src/Form/PromotionForm.php:159
-#: src/Form/PropertyForm.php:79 template/admin/attach-add.phtml:56
-#: template/admin/attribute-index.phtml:72
-#: template/admin/product-index.phtml:125
-#: template/admin/product-index.phtml:126 template/admin/sale-index.phtml:53
-#: template/admin/sale-index.phtml:55 template/admin/sale-index.phtml:108
-#: template/admin/sale-index.phtml:110
-msgid "Delete"
+#: src/Form/Element/Brand.php:71
+msgid "All brands"
 msgstr ""
 
-#: src/Form/Element/Brand.php:71 src/Form/Element/Category.php:71
+#: src/Form/Element/Category.php:71
 msgid "All Category"
 msgstr ""
 
@@ -839,7 +853,7 @@ msgstr ""
 msgid "Product id"
 msgstr ""
 
-#: src/Form/PriceUpdateForm.php:41 src/Form/ProductForm.php:151
+#: src/Form/PriceUpdateForm.php:41 src/Form/ProductForm.php:152
 msgid "Main category"
 msgstr ""
 
@@ -943,23 +957,23 @@ msgstr ""
 msgid "Select related video form video system"
 msgstr ""
 
-#: src/Form/ProductForm.php:47
+#: src/Form/ProductForm.php:48
 msgid "General options"
 msgstr ""
 
-#: src/Form/ProductForm.php:73
+#: src/Form/ProductForm.php:74
 msgid "Second title"
 msgstr ""
 
-#: src/Form/ProductForm.php:157
+#: src/Form/ProductForm.php:158
 msgid "Use for breadcrumbs ,mobile app and attribute"
 msgstr ""
 
-#: src/Form/ProductForm.php:267
+#: src/Form/ProductForm.php:270
 msgid "Tags"
 msgstr ""
 
-#: src/Form/ProductForm.php:271
+#: src/Form/ProductForm.php:274
 msgid "Use `|` as delimiter to separate tag terms"
 msgstr ""
 
@@ -1152,40 +1166,39 @@ msgstr ""
 msgid "Default information added."
 msgstr ""
 
-#: template/admin/attach-add.phtml:18 template/admin/product-index.phtml:100
-#: template/admin/product-index.phtml:102
+#: template/admin/attach-add.phtml:18 template/admin/product-index.phtml:83
+#: template/admin/product-index.phtml:85
 #: template/admin/product-related.phtml:13
 #: template/admin/product-update.phtml:47
 msgid "Edit basic information"
 msgstr ""
 
-#: template/admin/attach-add.phtml:19 template/admin/product-index.phtml:103
-#: template/admin/product-index.phtml:105
+#: template/admin/attach-add.phtml:19 template/admin/product-index.phtml:86
+#: template/admin/product-index.phtml:88
 #: template/admin/product-related.phtml:14
 #: template/admin/product-update.phtml:48
 msgid "Edit additional information"
 msgstr ""
 
-#: template/admin/attach-add.phtml:20 template/admin/product-index.phtml:106
-#: template/admin/product-index.phtml:108
+#: template/admin/attach-add.phtml:20 template/admin/product-index.phtml:89
+#: template/admin/product-index.phtml:91
 #: template/admin/product-related.phtml:15
 #: template/admin/product-update.phtml:49
 msgid "Attach files"
 msgstr ""
 
-#: template/admin/attach-add.phtml:21 template/admin/product-index.phtml:109
-#: template/admin/product-index.phtml:111
+#: template/admin/attach-add.phtml:21 template/admin/product-index.phtml:92
+#: template/admin/product-index.phtml:94
 #: template/admin/product-related.phtml:16
 #: template/admin/product-update.phtml:50
 msgid "Related products"
 msgstr ""
 
-#: template/admin/attach-add.phtml:22 template/admin/category-index.phtml:35
-#: template/admin/category-index.phtml:36 template/admin/price-log.phtml:22
-#: template/admin/price-log.phtml:50 template/admin/price-log.phtml:52
-#: template/admin/product-index.phtml:21 template/admin/product-index.phtml:92
-#: template/admin/product-index.phtml:120
-#: template/admin/product-index.phtml:122
+#: template/admin/attach-add.phtml:22 template/admin/category-index.phtml:50
+#: template/admin/price-log.phtml:22 template/admin/price-log.phtml:50
+#: template/admin/price-log.phtml:52 template/admin/product-index.phtml:75
+#: template/admin/product-index.phtml:103
+#: template/admin/product-index.phtml:105
 #: template/admin/product-related.phtml:17
 #: template/admin/product-update.phtml:51 template/admin/sale-index.phtml:46
 #: template/admin/sale-index.phtml:48 template/admin/sale-index.phtml:101
@@ -1215,7 +1228,8 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: template/admin/attach-add.phtml:92 template/admin/price-sync.phtml:26
+#: template/admin/attach-add.phtml:92 template/admin/category-sync.phtml:26
+#: template/admin/category-sync.phtml:35 template/admin/price-sync.phtml:26
 #: template/admin/price-sync.phtml:35
 #: template/front/product-angular-old.phtml:192
 #: template/front/product-angular.phtml:50
@@ -1242,7 +1256,7 @@ msgstr ""
 msgid "List of attached files"
 msgstr ""
 
-#: template/admin/attach-index.phtml:7 template/admin/category-index.phtml:7
+#: template/admin/attach-index.phtml:7 template/admin/category-index.phtml:76
 #: template/admin/discount-index.phtml:12 template/admin/log-index.phtml:6
 #: template/admin/position-index.phtml:12
 #: template/admin/product-related.phtml:27
@@ -1261,10 +1275,10 @@ msgstr ""
 msgid "create"
 msgstr ""
 
-#: template/admin/attach-index.phtml:11 template/admin/category-index.phtml:10
+#: template/admin/attach-index.phtml:11 template/admin/category-index.phtml:79
 #: template/admin/discount-index.phtml:16
 #: template/admin/position-index.phtml:14 template/admin/price-log.phtml:37
-#: template/admin/product-index.phtml:59
+#: template/admin/product-index.phtml:42
 #: template/admin/product-related.phtml:29
 #: template/admin/product-related.phtml:51
 #: template/admin/promotion-index.phtml:18
@@ -1279,8 +1293,7 @@ msgstr ""
 
 #: template/admin/attach-index.phtml:39 template/admin/attach-index.phtml:41
 #: template/admin/attribute-index.phtml:69
-#: template/admin/category-index.phtml:37
-#: template/admin/category-index.phtml:39
+#: template/admin/category-index.phtml:49
 #: template/admin/discount-index.phtml:34
 #: template/admin/discount-index.phtml:36
 #: template/admin/position-index.phtml:30
@@ -1365,18 +1378,48 @@ msgstr ""
 msgid "List of attributes"
 msgstr ""
 
-#: template/admin/category-index.phtml:4
-msgid "List of Categores"
-msgstr ""
-
-#: template/admin/category-index.phtml:50 template/admin/product-index.phtml:42
-#: template/admin/product-index.phtml:44 template/admin/product-index.phtml:149
-#: template/admin/sale-index.phtml:65 template/admin/sale-index.phtml:120
-msgid "Trash"
+#: template/admin/category-index.phtml:52
+msgid "{{ctx.start}} to {{ctx.end}} of {{ctx.total}} entries"
 msgstr ""
 
 #: template/admin/category-index.phtml:53
+msgid "Loading..."
+msgstr ""
+
+#: template/admin/category-index.phtml:54
+msgid "No results found!"
+msgstr ""
+
+#: template/admin/category-index.phtml:55
+msgid "refresh"
+msgstr ""
+
+#: template/admin/category-index.phtml:56
+msgid "search"
+msgstr ""
+
+#: template/admin/category-index.phtml:72
+msgid "List of Categores"
+msgstr ""
+
+#: template/admin/category-index.phtml:85
 msgid "Please build new category or brand"
+msgstr ""
+
+#: template/admin/category-sync.phtml:20 template/admin/category-sync.phtml:36
+#: template/admin/price-sync.phtml:20 template/admin/price-sync.phtml:36
+msgid "Confirm"
+msgstr ""
+
+#: template/admin/category-sync.phtml:29
+msgid "Sync category"
+msgstr ""
+
+#: template/admin/category-sync.phtml:32
+msgid ""
+"For start sync product category, please confirm this form, after start we "
+"should wait to finish sync all products , it take some min, please dont "
+"close this page before finish sync"
 msgstr ""
 
 #: template/admin/category-update.phtml:16
@@ -1484,10 +1527,6 @@ msgstr ""
 msgid "No price change log saved for your request"
 msgstr ""
 
-#: template/admin/price-sync.phtml:20 template/admin/price-sync.phtml:36
-msgid "Confirm"
-msgstr ""
-
 #: template/admin/price-sync.phtml:29
 msgid "Sync price"
 msgstr ""
@@ -1499,41 +1538,51 @@ msgid ""
 "close this page before finish sync"
 msgstr ""
 
-#: template/admin/product-index.phtml:15 template/admin/product-index.phtml:17
-msgid "Add product"
+#: template/admin/product-index.phtml:16
+msgid "Filter products"
 msgstr ""
 
-#: template/admin/product-index.phtml:24 template/admin/product-index.phtml:26
-msgid "All products"
-msgstr ""
-
-#: template/admin/product-index.phtml:55
+#: template/admin/product-index.phtml:29
 msgid "List of product"
 msgstr ""
 
-#: template/admin/product-index.phtml:60
+#: template/admin/product-index.phtml:32 template/admin/product-index.phtml:34
+msgid "Add product"
+msgstr ""
+
+#: template/admin/product-index.phtml:43
 msgid "Min price"
 msgstr ""
 
-#: template/admin/product-index.phtml:91
+#: template/admin/product-index.phtml:74
 #: template/front/product-angular-old.phtml:224
 msgid "Sold"
 msgstr ""
 
-#: template/admin/product-index.phtml:97
+#: template/admin/product-index.phtml:80
 msgid "Manage"
 msgstr ""
 
-#: template/admin/product-index.phtml:113
-#: template/admin/product-index.phtml:115
+#: template/admin/product-index.phtml:96 template/admin/product-index.phtml:98
 msgid "Manage serial number"
 msgstr ""
 
-#: template/admin/product-index.phtml:137
+#: template/admin/product-index.phtml:120
 msgid "Update"
 msgstr ""
 
-#: template/admin/product-index.phtml:168
+#: template/admin/product-index.phtml:134 template/admin/sale-index.phtml:65
+#: template/admin/sale-index.phtml:120
+msgid "Trash"
+msgstr ""
+
+#: template/admin/product-index.phtml:138
+msgid ""
+"Product list is empty, perhaps you still didn't add any product or your "
+"selected filter didn't have any result"
+msgstr ""
+
+#: template/admin/product-index.phtml:158
 msgid "Recommended in process"
 msgstr ""
 
@@ -1762,12 +1811,6 @@ msgstr ""
 #: template/front/product-angular-old.phtml:126
 #: template/front/product-angular.phtml:45
 msgid "Marketable"
-msgstr ""
-
-#: template/front/product-angular-old.phtml:125
-#: template/front/product-angular-old.phtml:143
-#: template/front/product-angular.phtml:44
-msgid "All"
 msgstr ""
 
 #: template/front/product-angular-old.phtml:127

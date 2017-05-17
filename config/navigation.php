@@ -110,6 +110,16 @@ return array(
                         'type'    => 'brand',
                     ),
                 ),
+                'sync' => array(
+                    'label' => _a('Sync category'),
+                    'permission' => array(
+                        'resource' => 'category',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'category',
+                    'action' => 'sync',
+                ),
             ),
         ),
 

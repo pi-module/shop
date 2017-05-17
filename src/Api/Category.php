@@ -53,7 +53,7 @@ class Category extends AbstractApi
         //Remove
         Pi::model('link', $this->getModule())->delete(array('product' => $product));
         // Add
-        $allCategory = json_decode($category);
+        $allCategory = json_decode($category, true);
         foreach ($allCategory as $category) {
             // Set array
             $values['product'] = $product;

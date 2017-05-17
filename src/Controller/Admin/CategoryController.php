@@ -304,4 +304,101 @@ class CategoryController extends ActionController
         );
         return $result;
     }
+
+    public function syncAction()
+    {
+        // Get info
+        $start = $this->params('start', 0);
+        $count = $this->params('count');
+        $complete = $this->params('complete', 0);
+        $confirm = $this->params('confirm', 0);
+
+        // Check confirm
+        if ($confirm == 1) {
+            // Get category list
+            $categoryList = Pi::registry('categoryList', 'shop')->read();
+            // Get products and send
+            $where = array(
+                'id > ?' => $start,
+            );
+            $order = array('id ASC');
+            $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
+            $rowset = $this->getModel('product')->selectWith($select);
+
+            // Make list
+            foreach ($rowset as $row) {
+                $product = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
+
+                // Make category list as json
+                $category = $product['category'];
+                $category[] = $product['category_main'];
+                $category = json_encode(array_unique($category));
+
+                // Update link table
+                Pi::api('category', 'shop')->setLink(
+                    $product['id'],
+                    $category,
+                    $product['time_create'],
+                    $product['time_update'],
+                    $product['price'],
+                    $product['stock'],
+                    $product['status'],
+                    $product['recommended']
+                );
+
+                // Update product
+                $this->getModel('product')->update(
+                    array('category' => $category),
+                    array('id' => (int)$product['id'])
+                );
+
+                // Set extra
+                $lastId = $product['id'];
+                $complete++;
+            }
+            // Get count
+            if (!$count) {
+                $columns = array('count' => new Expression('count(*)'));
+                $select = $this->getModel('product')->select()->columns($columns);
+                $count = $this->getModel('product')->selectWith($select)->current()->count;
+            }
+            // Set complete
+            $percent = (100 * $complete) / $count;
+            // Set next url
+            if ($complete >= $count) {
+                $nextUrl = '';
+            } else {
+                $nextUrl = Pi::url($this->url('', array(
+                    'action' => 'sync',
+                    'start' => $lastId,
+                    'count' => $count,
+                    'complete' => $complete,
+                    'confirm' => $confirm,
+                )));
+            }
+
+            $info = array(
+                'start' => $lastId,
+                'count' => $count,
+                'complete' => $complete,
+                'percent' => $percent,
+                'nextUrl' => $nextUrl,
+            );
+
+            $percent = ($percent > 99 && $percent < 100) ? (intval($percent) + 1) : intval($percent);
+        } else {
+            $info = array();
+            $percent = 0;
+            $nextUrl = Pi::url($this->url('', array(
+                'action' => 'sync',
+                'confirm' => 1,
+            )));
+        }
+        // Set view
+        $this->view()->setTemplate('category-sync');
+        $this->view()->assign('nextUrl', $nextUrl);
+        $this->view()->assign('percent', $percent);
+        $this->view()->assign('info', $info);
+        $this->view()->assign('confirm', $confirm);
+    }
 }
