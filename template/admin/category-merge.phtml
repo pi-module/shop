@@ -1,0 +1,23 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="clearfix">
+    <h3><?php _e('Merge category'); ?></h3>
+    <div class="well">
+        <?php echo $this->form($form); ?>
+    </div>
+    <?php if ($categoryFrom1 > 0 && $categoryFrom2 > 0 && $categoryTo > 0 && in_array($whereType, array('and', 'or'))) { ?>
+        <div class="progress progress-striped active">
+            <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $percent; ?>" aria-valuemin="0"
+                 aria-valuemax="100" style="width: <?php echo $percent; ?>%">
+                <?php echo $percent; ?> % Complete
+            </div>
+        </div>
+        <pre><?php print_r($info); ?></pre>
+    <?php if (!empty($nextUrl)) { ?>
+        <script>
+            window.setTimeout(function () {
+                window.location.href = '<?php echo $nextUrl; ?>';
+            }, 1000);
+        </script>
+    <?php } ?>
+    <?php } ?>
+</div>

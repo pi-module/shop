@@ -106,9 +106,7 @@ class PriceController extends ActionController
                     foreach ($product['property'] as $propertyList) {
                         foreach ($propertyList as $property) {
                             if (isset($property['price']) && $property['price'] > 0) {
-                                echo '<pre>';
-                                print_r($property);
-                                echo '</pre>';
+
                                 $priceList[] = (int)$property['price'];
 
                                 // Make new price

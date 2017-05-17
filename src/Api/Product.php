@@ -637,8 +637,6 @@ class Product extends AbstractApi
         unset($product['attach']);
         unset($product['attribute']);
         unset($product['related']);
-        unset($product['recommended']);
-        unset($product['stock']);
         unset($product['stock_alert']);
         unset($product['price_discount']);
         unset($product['price_discount_view']);

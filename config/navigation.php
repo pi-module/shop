@@ -120,6 +120,16 @@ return array(
                     'controller' => 'category',
                     'action' => 'sync',
                 ),
+                'merge' => array(
+                    'label' => _a('Merge category'),
+                    'permission' => array(
+                        'resource' => 'category',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'category',
+                    'action' => 'merge',
+                ),
             ),
         ),
 
