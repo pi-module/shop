@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2017-05-17 11:11+0430\n"
+"POT-Creation-Date: 2017-05-22 09:56+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -101,7 +101,7 @@ msgstr "فهرست محصولات مورد علاقه شما"
 msgid "Search result"
 msgstr "نتایج جستجو"
 
-#: src/Api/Product.php:491 src/Api/Product.php:744 src/Api/Product.php:861
+#: src/Api/Product.php:491 src/Api/Product.php:742 src/Api/Product.php:859
 #: src/Form/ProductAdditionalForm.php:274 src/Form/ProductPriceForm.php:152
 #: template/front/product-angular-old.phtml:261
 #: template/front/product-angular-old.phtml:277
@@ -110,36 +110,36 @@ msgstr "نتایج جستجو"
 msgid "In stock"
 msgstr "موجود"
 
-#: src/Api/Product.php:495 src/Api/Product.php:748 src/Api/Product.php:865
+#: src/Api/Product.php:495 src/Api/Product.php:746 src/Api/Product.php:863
 #: src/Form/ProductAdditionalForm.php:275 src/Form/ProductPriceForm.php:153
 #: template/front/product-angular-old.phtml:341
 #: template/front/product-price.phtml:148
 msgid "Out of stock"
 msgstr "نا موجود"
 
-#: src/Api/Product.php:499 src/Api/Product.php:752 src/Api/Product.php:869
+#: src/Api/Product.php:499 src/Api/Product.php:750 src/Api/Product.php:867
 #: src/Form/ProductAdditionalForm.php:276 src/Form/ProductPriceForm.php:154
 msgid "Coming soon"
 msgstr "به زودی"
 
-#: src/Api/Product.php:503 src/Api/Product.php:756 src/Api/Product.php:873
+#: src/Api/Product.php:503 src/Api/Product.php:754 src/Api/Product.php:871
 #: src/Form/ProductAdditionalForm.php:277 src/Form/ProductPriceForm.php:155
 msgid "Contact"
 msgstr "تماس بگیرید"
 
-#: src/Api/Product.php:507 src/Api/Product.php:760 src/Api/Product.php:877
+#: src/Api/Product.php:507 src/Api/Product.php:758 src/Api/Product.php:875
 msgid "Variable stock"
 msgstr "موجودی متغیر"
 
-#: src/Api/Product.php:547 src/Api/Product.php:613 src/Api/Product.php:919
+#: src/Api/Product.php:547 src/Api/Product.php:613 src/Api/Product.php:917
 msgid "On sale"
 msgstr "تخفیف ویژه"
 
-#: src/Api/Product.php:550 src/Api/Product.php:616 src/Api/Product.php:922
+#: src/Api/Product.php:550 src/Api/Product.php:616 src/Api/Product.php:920
 msgid "Have discount"
 msgstr "با تخفیف"
 
-#: src/Api/Product.php:555 src/Api/Product.php:621 src/Api/Product.php:927
+#: src/Api/Product.php:555 src/Api/Product.php:621 src/Api/Product.php:925
 #: src/Form/AdminSearchForm.php:94 src/Form/AdminSearchForm.php:97
 msgid "Recommended"
 msgstr "پیشنهاد شده"
@@ -226,31 +226,33 @@ msgstr "فیلد انتخابی حذف شد"
 msgid "Please select field"
 msgstr "لطفا یک فیلد انتخاب کنید"
 
-#: src/Controller/Admin/CategoryController.php:106
+#: src/Controller/Admin/CategoryController.php:108
 #: src/Controller/Admin/ProductController.php:254
 msgid "Problem in upload image. please try again"
 msgstr "مشکل در بارگذاری تصویر، لطفا مجددا امتحان کنید"
 
-#: src/Controller/Admin/CategoryController.php:171
+#: src/Controller/Admin/CategoryController.php:173
 msgid "Category data saved successfully."
 msgstr "اطلاعات شاخه با موفقیت ذخیره شد"
 
-#: src/Controller/Admin/CategoryController.php:187
+#: src/Controller/Admin/CategoryController.php:189
 msgid "Add a category"
 msgstr "شاخه جدید"
 
-#: src/Controller/Admin/CategoryController.php:212
+#: src/Controller/Admin/CategoryController.php:214
 #: src/Controller/Admin/ProductController.php:782
 #, php-format
 msgid "Image of %s removed"
 msgstr "تصویر مربوط به %s حذف شد"
 
-#: src/Controller/Admin/CategoryController.php:215
+#: src/Controller/Admin/CategoryController.php:217
 #: src/Controller/Admin/ProductController.php:785
 msgid "Image not remove"
 msgstr "تصویر حذف نشد"
 
-#: src/Controller/Admin/CategoryController.php:219
+#: src/Controller/Admin/CategoryController.php:221
+#: src/Form/CategoryMergeForm.php:43 src/Form/CategoryMergeForm.php:57
+#: src/Form/CategoryMergeForm.php:86
 msgid "Please select category"
 msgstr "لطفا یک شاخه انتخاب کنید"
 
@@ -280,15 +282,15 @@ msgstr ""
 "شاخه انتخابی شما شامل به عنوان شاخه اصلی هیچ محصولی انتخاب نشده است، لطفا یک "
 "شاخه دیگر انتخاب نمایید"
 
-#: src/Controller/Admin/PriceController.php:407
+#: src/Controller/Admin/PriceController.php:405
 msgid "Product price"
 msgstr "قیمت محصول"
 
-#: src/Controller/Admin/PriceController.php:411
+#: src/Controller/Admin/PriceController.php:409
 msgid "Property price"
 msgstr "قیمت ویژگی سفارش"
 
-#: src/Controller/Admin/PriceController.php:415
+#: src/Controller/Admin/PriceController.php:413
 msgid "Sale price"
 msgstr "قیمت حراج"
 
@@ -681,13 +683,14 @@ msgid "Offline"
 msgstr "آفلاین"
 
 #: src/Form/AttachForm.php:93 src/Form/AttributeForm.php:197
-#: src/Form/CategoryForm.php:320 src/Form/DiscountForm.php:116
-#: src/Form/PositionForm.php:88 src/Form/PriceLogForm.php:52
-#: src/Form/PriceUpdateForm.php:68 src/Form/ProductAdditionalForm.php:406
-#: src/Form/ProductForm.php:283 src/Form/ProductPriceForm.php:177
-#: src/Form/PromotionForm.php:182 src/Form/PropertyForm.php:122
-#: src/Form/QuestionForm.php:86 src/Form/RelatedForm.php:77
-#: src/Form/SaleForm.php:150 src/Form/SitemapForm.php:48
+#: src/Form/CategoryForm.php:320 src/Form/CategoryMergeForm.php:99
+#: src/Form/DiscountForm.php:116 src/Form/PositionForm.php:88
+#: src/Form/PriceLogForm.php:52 src/Form/PriceUpdateForm.php:68
+#: src/Form/ProductAdditionalForm.php:406 src/Form/ProductForm.php:283
+#: src/Form/ProductPriceForm.php:177 src/Form/PromotionForm.php:182
+#: src/Form/PropertyForm.php:122 src/Form/QuestionForm.php:86
+#: src/Form/RelatedForm.php:77 src/Form/SaleForm.php:150
+#: src/Form/SitemapForm.php:48
 msgid "Submit"
 msgstr "ارسال"
 
@@ -841,6 +844,18 @@ msgstr "توضیح سئو"
 #: src/Form/CategoryForm.php:312 src/Form/ProductForm.php:261
 msgid "Between 80 to 160 character"
 msgstr "بین ۸۰ تا ۱۶۰ کلمه"
+
+#: src/Form/CategoryMergeForm.php:42 src/Form/CategoryMergeForm.php:56
+msgid "From category"
+msgstr "از شاخه"
+
+#: src/Form/CategoryMergeForm.php:70
+msgid "Where_type"
+msgstr "نوع ادغام"
+
+#: src/Form/CategoryMergeForm.php:85
+msgid "To category"
+msgstr "به شاخه"
 
 #: src/Form/DiscountForm.php:60
 msgid "User role"
@@ -1426,6 +1441,10 @@ msgstr "فهرست شاخه ها"
 #: template/admin/category-index.phtml:85
 msgid "Please build new category or brand"
 msgstr "لطفا یک شاخه یا شرکت جدید بسازید"
+
+#: template/admin/category-merge.phtml:3
+msgid "Merge category"
+msgstr "ادغام دو شاخه"
 
 #: template/admin/category-sync.phtml:20 template/admin/category-sync.phtml:36
 #: template/admin/price-sync.phtml:20 template/admin/price-sync.phtml:36
