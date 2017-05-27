@@ -29,6 +29,8 @@ class JsonController extends IndexController
         $tag = $this->params('tag');
         $favourite = $this->params('favourite');
         $recommended = $this->params('recommended');
+        $related = $this->params('related');
+        $product = $this->params('product');
         $limit = $this->params('limit');
         $order = $this->params('order');
 
@@ -37,9 +39,9 @@ class JsonController extends IndexController
 
         // Clean title
         if (Pi::service('module')->isActive('search') && isset($title) && !empty($title)) {
-            $title = Pi::api('api', 'search')->parseQuery(urldecode($title));
+            $title = Pi::api('api', 'search')->parseQuery($title);
         } elseif (isset($title) && !empty($title)) {
-            $title = _strip(urldecode($title));
+            $title = _strip($title);
         } else {
             $title = '';
         }
@@ -47,8 +49,8 @@ class JsonController extends IndexController
         // Clean params
         $paramsClean = array();
         foreach ($_GET as $key => $value) {
-            $key = _strip(urldecode($key));
-            $value = _strip(urldecode($value));
+            $key = _strip($key);
+            $value = _strip($value);
             $paramsClean[$key] = $value;
         }
 
@@ -136,10 +138,20 @@ class JsonController extends IndexController
                 break;
         }
 
+        // Get related
+        if (!empty($related) && $related == 1 && !empty($product) && intval($product) > 0) {
+            $productSingle = Pi::api('product', 'shop')->getProductLight(intval($product));
+            $category = $productSingle['category_main'];
+        }
+
         // Get category information from model
         if (!empty($category)) {
             // Get category
-            $category = Pi::api('category', 'shop')->getCategory(urldecode($category), 'slug');
+            if (is_numeric($category) && intval($category) > 0) {
+                $category = Pi::api('category', 'shop')->getCategory(intval($category));
+            } else {
+                $category = Pi::api('category', 'shop')->getCategory($category, 'slug');
+            }
             // Check category
             if (!$category || $category['status'] != 1) {
                 return $result;
@@ -164,7 +176,7 @@ class JsonController extends IndexController
                 return $result;
             }
             // Get id from tag module
-            $tagList = Pi::service('tag')->getList(urldecode($tag), $module);
+            $tagList = Pi::service('tag')->getList($tag, $module);
             foreach ($tagList as $tagSingle) {
                 $productIDTag[] = $tagSingle['item'];
             }

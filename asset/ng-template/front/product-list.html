@@ -103,12 +103,12 @@
                                      ng-class="class"
                                      data-title="{{product.title}}"
                                      data-slug="{{product.slug}}"
-                                     data-image="{{product.thumbUrl}}"
+                                     data-image="{{product.mediumUrl}}"
                                      class="pi-item-compare-add">
                                     <i class="fa fa-plus"></i> {{'COMPARE' | translate}}
                                 </div>
                                 <a class="u-url {{product.ribbon_class}}" itemprop="url" title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
-                                    <img itemprop="image" class="img-responsive u-photo" src="{{product.thumbUrl}}" alt="{{product.title}}"/>
+                                    <img itemprop="image" class="img-responsive u-photo" src="{{product.mediumUrl}}" alt="{{product.title}}"/>
                                     <p ng-if="product.ribbon">
                                         <span>{{product.ribbon}}</span>
                                     </p>
