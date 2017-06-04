@@ -649,9 +649,46 @@ class JsonController extends IndexController
                 $productSingle['extra-image-' . $i] = $image['largeUrl'];
             }
         }
+
+        // Check brand
+        if ($product['brand'] > 0) {
+            $brand = Pi::api('category', 'shop')->getCategory($product['brand']);
+            $productSingle['brandId'] = $brand['id'];
+            $productSingle['brandTitle'] = $brand['title'];
+            $productSingle['brandImage'] = $brand['thumbUrl'];
+        }
+
         $productSingle = array($productSingle);
         // Set view
         return $productSingle;
+    }
+
+    public function categorySingleAction()
+    {
+        // Get info from url
+        $id = $this->params('id');
+        // Check password
+        if (!$this->checkPassword()) {
+            $this->getResponse()->setStatusCode(401);
+            $this->terminate(__('Password not set or wrong'), '', 'error-denied');
+            $this->view()->setLayout('layout-simple');
+            return;
+        }
+        // Get category
+        $category = Pi::api('category', 'shop')->getCategory($id);
+
+        $categorySingle = array(
+            'id' => $category['id'],
+            'title' => $category['title'],
+            'largeUrl' => $category['largeUrl'],
+            'mediumUrl' => $category['mediumUrl'],
+            'thumbUrl' => $category['thumbUrl'],
+            'description' => $category['text_summery'] . $category['text_description'],
+        );
+
+        $categorySingle = array($categorySingle);
+        // Set view
+        return $categorySingle;
     }
 
     public function checkPassword() {

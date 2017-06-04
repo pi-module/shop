@@ -201,7 +201,7 @@ class ProductController extends ActionController
         $config = Pi::service('registry')->config->read($module);
         // Get config
         $option = array();
-        $option['brand'] = $config['brand_system'];
+        $option['brand_system'] = $config['brand_system'];
         // Find Product
         if ($id) {
             $product = Pi::api('product', 'shop')->getProduct($id);
