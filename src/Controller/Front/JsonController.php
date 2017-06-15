@@ -439,6 +439,7 @@ class JsonController extends IndexController
                 'title' => $categorySingle['title'],
                 'mediumUrl' => $categorySingle['mediumUrl'],
                 'thumbUrl' => $categorySingle['thumbUrl'],
+                'count' => Pi::api('product', 'shop')->getBrandCount($categorySingle['id']),
             );
         }
 

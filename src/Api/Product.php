@@ -20,6 +20,9 @@ use Zend\Db\Sql\Predicate\Expression;
  * Pi::api('product', 'shop')->getProduct($parameter, $type);
  * Pi::api('product', 'shop')->getProductLight($parameter, $type);
  * Pi::api('product', 'shop')->getProductOrder($id);
+ * Pi::api('product', 'shop')->getBrandCount($brand);
+ * Pi::api('product', 'shop')->getCategoryMainCount($category);
+ * Pi::api('product', 'shop')->getCategoryLinkCount($category);
  * Pi::api('product', 'shop')->getListFromId($id);
  * Pi::api('product', 'shop')->getListFromIdLight($id);
  * Pi::api('product', 'shop')->getCompareList($slugList, $mainProduct);
@@ -61,6 +64,30 @@ class Product extends AbstractApi
         $product = Pi::model('product', $this->getModule())->find($id);
         $product = $this->canonizeProductOrder($product);
         return $product;
+    }
+
+    public function getBrandCount($brand)
+    {
+        $where = array('brand' => $brand);
+        $columns = array('count' => new Expression('count(*)'));
+        $select = Pi::model('product', $this->getModule())->select()->columns($columns)->where($where);
+        return Pi::model('product', $this->getModule())->selectWith($select)->current()->count;
+    }
+
+    public function getCategoryMainCount($category)
+    {
+        $where = array('category_main' => $category);
+        $columns = array('count' => new Expression('count(*)'));
+        $select = Pi::model('product', $this->getModule())->select()->columns($columns)->where($where);
+        return Pi::model('product', $this->getModule())->selectWith($select)->current()->count;
+    }
+
+    public function getCategoryLinkCount($category)
+    {
+        $where = array('category' => $category);
+        $columns = array('count' => new Expression('count(DISTINCT `product`)'));
+        $select = Pi::model('link', $this->getModule())->select()->columns($columns)->where($where);
+        return Pi::model('link', $this->getModule())->selectWith($select)->current()->count;
     }
 
     public function searchRelated($title, $type)
@@ -141,9 +168,6 @@ class Product extends AbstractApi
         return $list;
     }
 
-    /**
-     * Set number of used attribute fields for selected product
-     */
     public function attributeCount($id)
     {
         // Get attach count
@@ -154,9 +178,6 @@ class Product extends AbstractApi
         Pi::model('product', $this->getModule())->update(array('attribute' => $count), array('id' => $id));
     }
 
-    /**
-     * Set number of attach files for selected product
-     */
     public function attachCount($id)
     {
         // Get attach count
@@ -168,9 +189,6 @@ class Product extends AbstractApi
         Pi::model('product', $this->getModule())->update(array('attach' => $count), array('id' => $id));
     }
 
-    /**
-     * Set number of attach files for selected product
-     */
     public function relatedCount($id)
     {
         // Get attach count
@@ -182,9 +200,6 @@ class Product extends AbstractApi
         Pi::model('product', $this->getModule())->update(array('related' => $count), array('id' => $id));
     }
 
-    /**
-     * Get list of attach files
-     */
     public function AttachList($id)
     {
         // Get config
