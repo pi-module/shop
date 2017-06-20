@@ -272,8 +272,8 @@ class JsonController extends IndexController
         $count = 0;
 
         $columns = array('product' => new Expression('DISTINCT product'));
-        $offset = (int)($page - 1) * $config['view_perpage'];
         $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
+        $offset = (int)($page - 1) * $limit;
 
         // Set category on where link
         if (isset($categoryIDList) && !empty($categoryIDList)) {
@@ -394,7 +394,7 @@ class JsonController extends IndexController
             'filterList' => $filterList,
             'paginator' => array(
                 'count' => $count,
-                'limit' => intval($config['view_perpage']),
+                'limit' => $limit,
                 'page' => $page,
             ),
             'condition' => array(
@@ -424,8 +424,8 @@ class JsonController extends IndexController
         $config = Pi::service('registry')->config->read($module);
 
         $brand = array();
-        $offset = (int)($page - 1) * $config['view_perpage'];
         $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
+        $offset = (int)($page - 1) * $limit;
 
         $where = array('status' => 1, 'type' => 'brand');
         $order = array('display_order ASC', 'title ASC', 'id DESC');
@@ -453,7 +453,7 @@ class JsonController extends IndexController
             'brands' => $brand,
             'paginator' => array(
                 'count' => $count,
-                'limit' => intval($config['view_perpage']),
+                'limit' => $limit,
                 'page' => $page,
             ),
         );
@@ -476,8 +476,8 @@ class JsonController extends IndexController
 
         $category = array();
         $products = array();
-        $offset = (int)($page - 1) * $config['view_perpage'];
         $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
+        $offset = (int)($page - 1) * $limit;
 
         // Set where
         $where = array('status' => 1, 'type' => 'category');
@@ -547,7 +547,7 @@ class JsonController extends IndexController
             'products' => $products,
             'paginator' => array(
                 'count' => $count,
-                'limit' => intval($config['view_perpage']),
+                'limit' => $limit,
                 'page' => $page,
             ),
         );
