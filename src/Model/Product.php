@@ -25,6 +25,7 @@ class Product extends Model
         'title',
         'subtitle',
         'slug',
+        'code',
         'category',
         'category_main',
         'brand',

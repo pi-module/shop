@@ -41,7 +41,19 @@ class AdminSearchForm extends BaseForm
             'attributes' => array(
                 'type' => 'text',
                 'description' => '',
-                'placeholder' => __('Title'),
+                'placeholder' => __('Title / Second title'),
+            )
+        ));
+        // code
+        $this->add(array(
+            'name' => 'code',
+            'options' => array(
+                'label' => __('Product code'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => '',
+                'placeholder' => __('Product code'),
             )
         ));
         // category

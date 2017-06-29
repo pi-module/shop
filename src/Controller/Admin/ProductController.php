@@ -43,6 +43,7 @@ class ProductController extends ActionController
         $brand = $this->params('brand');
         $recommended = $this->params('recommended');
         $title = $this->params('title');
+        $code = $this->params('code');
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Set info
@@ -56,7 +57,7 @@ class ProductController extends ActionController
             $whereProduct['recommended'] = 1;
         }
         if (!empty($brand)) {
-            $whereVideo['brand'] = $brand;
+            $whereProduct['brand'] = $brand;
         }
         if (!empty($category)) {
             $productId = array();
@@ -77,6 +78,9 @@ class ProductController extends ActionController
         } else {
             $whereProduct['status'] = array(1, 2, 3, 4);
         }
+        if (!empty($code)) {
+            $whereProduct['code'] = $code;
+        }
         if (!empty($title)) {
             // Set title
             if (Pi::service('module')->isActive('search') && isset($title) && !empty($title)) {
@@ -85,12 +89,21 @@ class ProductController extends ActionController
                 $title = _strip($title);
             }
             $title = is_array($title) ? $title : array($title);
+
+            // Set where
             $titleWhere = function ($where) use ($title) {
-                $whereKey = clone $where;
+                // title
+                $whereTitleKey = clone $where;
                 foreach ($title as $term) {
-                    $whereKey->like('title', '%' . $term . '%')->and;
+                    $whereTitleKey->like('title', '%' . $term . '%')->and;
                 }
-                $where->andPredicate($whereKey);
+                // subtitle
+                $whereSubTitleKey = clone $where;
+                foreach ($title as $term) {
+                    $whereSubTitleKey->like('subtitle', '%' . $term . '%')->and;
+                }
+                // Set where
+                $where->andPredicate($whereTitleKey)->orPredicate($whereSubTitleKey);
             };
         }
         // Get list of product
@@ -129,12 +142,14 @@ class ProductController extends ActionController
                 'brand' => $brand,
                 'status' => $status,
                 'title' => $title,
+                'code' => $code,
                 'recommended' => $recommended,
             )),
         ));
         // Set form
         $values = array(
             'title' => $title,
+            'code' => $code,
             'category' => $category,
             'brand' => $brand,
             'status' => $status,
@@ -164,6 +179,7 @@ class ProductController extends ActionController
                 $url = array(
                     'action' => 'index',
                     'title' => $values['title'],
+                    'code' => $values['code'],
                     'category' => $values['category'],
                     'brand' => $values['brand'],
                     'status' => $values['status'],
@@ -280,6 +296,10 @@ class ProductController extends ActionController
                     $values['uid'] = Pi::user()->getId();
                 }
                 $values['time_update'] = time();
+                // Set code
+                if (empty($values['code'])) {
+                    $values['code'] = null;
+                }
                 // Save values
                 if (!empty($values['id'])) {
                     $row = $this->getModel('product')->find($values['id']);
@@ -639,7 +659,7 @@ class ProductController extends ActionController
         // Set option
         $option = array(
             'id' => $product['id'],
-            'price' => $product['price'],
+            'price' => $product['price_main'],
             'price_discount' => $product['price_discount'],
             'price_shipping' => $product['price_shipping'],
             'stock_type' => $product['stock_type'],

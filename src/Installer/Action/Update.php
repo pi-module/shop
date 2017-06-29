@@ -585,6 +585,7 @@ EOD;
             }
         }
 
+        // Update to version 1.3.9
         if (version_compare($moduleVersion, '1.3.9', '<')) {
             // Alter table : ADD price_shipping
             $sql = sprintf("ALTER TABLE %s ADD `price_shipping` DECIMAL(16, 2) NOT NULL DEFAULT '0.00'", $productTable);
@@ -600,6 +601,7 @@ EOD;
             }
         }
 
+        // Update to version 1.4.0
         if (version_compare($moduleVersion, '1.4.0', '<')) {
             // Alter table : ADD price_shipping
             $sql = sprintf("ALTER TABLE %s ADD `ribbon` VARCHAR(64) NOT NULL DEFAULT ''", $productTable);
@@ -615,6 +617,7 @@ EOD;
             }
         }
 
+        // Update to version 1.4.1
         if (version_compare($moduleVersion, '1.4.1', '<')) {
             // Alter table : Update sold
             $sql = sprintf("ALTER TABLE %s CHANGE `sales` `sold` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $productTable);
@@ -646,6 +649,7 @@ EOD;
             }
         }
 
+        // Update to version 1.4.2
         if (version_compare($moduleVersion, '1.4.2', '<')) {
             // Add table of discount
             $sql = <<<'EOD'
@@ -682,6 +686,7 @@ EOD;
             }
         }
 
+        // Update to version 1.4.6
         if (version_compare($moduleVersion, '1.4.6', '<')) {
             // Alter table field `type`
             $sql = sprintf("ALTER TABLE %s ADD `text_summary` TEXT", $categoryTable);
@@ -697,6 +702,7 @@ EOD;
             }
         }
 
+        // Update to version 1.4.7
         if (version_compare($moduleVersion, '1.4.7', '<')) {
             // Alter table field `type`
             $sql = sprintf("ALTER TABLE %s ADD `display_type` ENUM ('product', 'subcategory') NOT NULL DEFAULT 'product'", $categoryTable);
@@ -712,6 +718,7 @@ EOD;
             }
         }
 
+        // Update to version 1.4.8
         if (version_compare($moduleVersion, '1.4.8', '<')) {
             // Alter table field `type`
             $sql = sprintf("ALTER TABLE %s ADD `type` ENUM ('product', 'category') NOT NULL DEFAULT 'product'", $saleTable);
@@ -753,6 +760,7 @@ EOD;
             }
         }
 
+        // Update to version 1.5.3
         if (version_compare($moduleVersion, '1.5.3', '<')) {
             // Alter table field `percent_partner`
             $sql = sprintf("ALTER TABLE %s ADD `percent_partner` TINYINT(3) UNSIGNED NOT NULL DEFAULT '0'", $promotionTable);
@@ -792,6 +800,7 @@ EOD;
             }
         }
 
+        // Update to version 1.5.6
         if (version_compare($moduleVersion, '1.5.6', '<')) {
             // Add table of discount
             $sql = <<<'EOD'
@@ -827,6 +836,7 @@ EOD;
             }
         }
 
+        // Update to version 1.5.7
         if (version_compare($moduleVersion, '1.5.7', '<')) {
             // Alter table add index
             $sql = sprintf("ALTER TABLE %s ADD INDEX `recommended` (`recommended`)", $productTable);
@@ -889,6 +899,7 @@ EOD;
             }
         }
 
+        // Update to version 1.5.8
         if (version_compare($moduleVersion, '1.5.8', '<')) {
             // Alter table field `image_wide`
             $sql = sprintf("ALTER TABLE %s ADD `image_wide` VARCHAR(255) NOT NULL DEFAULT ''", $categoryTable);
@@ -904,6 +915,7 @@ EOD;
             }
         }
 
+        // Update to version 1.7.1
         if (version_compare($moduleVersion, '1.7.1', '<')) {
             // Alter table field `type`
             $sql = sprintf("ALTER TABLE %s ADD `type` ENUM ('category', 'brand') NOT NULL DEFAULT 'category', ADD INDEX (`type`)", $categoryTable);
@@ -931,6 +943,7 @@ EOD;
             }
         }
 
+        // Update to version 1.7.6
         if (version_compare($moduleVersion, '1.7.6', '<')) {
             // Alter table field `brand`
             $sql = sprintf("ALTER TABLE %s ADD `brand` INT(10) UNSIGNED NOT NULL DEFAULT '0', ADD INDEX (`brand`)", $productTable);
@@ -946,6 +959,7 @@ EOD;
             }
         }
 
+        // Update to version 1.7.9
         if (version_compare($moduleVersion, '1.7.9', '<')) {
             // Add table of price
             $sql = <<<'EOD'
@@ -975,6 +989,22 @@ EOD;
                         . $exception->getMessage(),
                 ));
 
+                return false;
+            }
+        }
+
+        // Update to version 1.8.7
+        if (version_compare($moduleVersion, '1.8.7', '<')) {
+            // Alter table field `type`
+            $sql = sprintf("ALTER TABLE %s ADD `code` VARCHAR(255) DEFAULT NULL AFTER `slug`, ADD UNIQUE `code` (`code`)", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
                 return false;
             }
         }

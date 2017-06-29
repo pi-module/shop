@@ -89,6 +89,17 @@ class ProductForm extends BaseForm
                 'description' => '',
             )
         ));
+        // code
+        $this->add(array(
+            'name' => 'code',
+            'options' => array(
+                'label' => __('Product code'),
+            ),
+            'attributes' => array(
+                'type' => 'text',
+                'description' => __('Code should be unique or set it empty'),
+            )
+        ));
         // text_summary
         $this->add(array(
             'name' => 'text_summary',

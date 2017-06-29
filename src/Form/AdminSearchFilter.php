@@ -29,6 +29,16 @@ class AdminSearchFilter extends InputFilter
                 ),
             ),
         ));
+        // code
+        $this->add(array(
+            'name' => 'code',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
         // category
         $this->add(array(
             'name' => 'category',

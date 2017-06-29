@@ -61,6 +61,22 @@ class ProductFilter extends InputFilter
                 )),
             ),
         ));
+        // code
+        $this->add(array(
+            'name' => 'code',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+            'validators' => array(
+                new \Module\Shop\Validator\CodeDuplicate(array(
+                    'module' => Pi::service('module')->current(),
+                    'table' => 'product',
+                )),
+            ),
+        ));
         // text_summary
         $this->add(array(
             'name' => 'text_summary',

@@ -221,15 +221,26 @@ class JsonController extends IndexController
             $columns = array('id');
             $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($titles, $recommended) {
                 $whereMain = clone $where;
-                $whereKey = clone $where;
+                $whereTitleKey = clone $where;
+                $whereSubTitleKey = clone $where;
+
+                // Set where Main
                 $whereMain->equalTo('status', 1);
                 if (!empty($recommended) && $recommended == 1) {
                     $whereMain->equalTo('recommended', 1);
                 }
-                foreach ($titles as $title) {
-                    $whereKey->like('title', '%' . $title . '%')->and;
+
+                // Set where title
+                foreach ($titles as $term) {
+                    $whereTitleKey->like('title', '%' . $term . '%')->and;
                 }
-                $where->andPredicate($whereMain)->andPredicate($whereKey);
+
+                // Set where  subtitle
+                foreach ($titles as $term) {
+                    $whereSubTitleKey->like('subtitle', '%' . $term . '%')->and;
+                }
+
+                $where->andPredicate($whereMain)->andPredicate($whereTitleKey)->orPredicate($whereSubTitleKey);
             })->order($order);
             $rowset = $this->getModel('product')->selectWith($select);
             foreach ($rowset as $row) {
