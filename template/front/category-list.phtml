@@ -6,7 +6,7 @@
     <?php if (isset($categories) && !empty($categories)) { ?>
         <div class="category-list clearfix">
             <?php foreach ($categoryTree as $category) { ?>
-                <div class="col-xs-3" itemscope itemtype="https://schema.org/Brand">
+                <div class="col-md-3 col-xs-12" itemscope itemtype="https://schema.org/Brand">
                     <div class="thumbnail">
                         <?php if ($category['image']) { ?>
                         <a itemprop="url" href="<?php echo $this->escape($category['categoryUrl']); ?>"
