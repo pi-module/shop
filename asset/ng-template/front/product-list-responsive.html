@@ -1,0 +1,151 @@
+<div class="clearfix pi-item-list">
+    <div class="col-md-3 col-xs-12">
+        <div class="pi-item-search-form clearfix well well-sm">
+            <div class="page-header">
+                <h3>{{'SEARCH' | translate}}</h3>
+            </div>
+            <form id="list-filter" ng-submit="filterAction()">
+                <div class="form-group">
+                    <label>{{'TITLE' | translate}}</label>
+                    <input type="text" class="form-control" ng-model="filter.title" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
+                </div>
+                <div class="form-group">
+                    <rzslider class="custom-slider"
+                              rz-slider-model="slider.minValue"
+                              rz-slider-high="slider.maxValue"
+                              rz-slider-options="slider.options"></rzslider>
+                </div>
+
+                <!-- <div class="form-group">
+                    <label>{{'MARKETABLE' | translate}}</label>
+                    <select ng-model="filter.marketable" class="form-control">
+                        <option value="">{{'ALL' | translate}}</option>
+                        <option value="1">{{'MARKETABLE' | translate}}</option>
+                        <option value="0">{{'NOT_MARKETABLE' | translate}}</option>
+                    </select>
+                </div> -->
+
+                <!-- <div ng-if="filterList">
+                    <div ng-repeat="filterSingle in filterList">
+                        <div ng-if="filterSingle.type == 'text'">
+                            <div class="form-group">
+                                <label>{{filterSingle.title}}</label>
+                                <input type="text" class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
+                            </div>
+                        </div>
+                        <div ng-if="filterSingle.type == 'select'">
+                            <div class="form-group">
+                                <label>{{filterSingle.title}}</label>
+                                <select class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
+                                    <option value="">{{'ALL' | translate}}</option>
+                                    <option ng-repeat="filterData in filterSingle.value.data" ng-if="filterData">
+                                        {{filterData}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <div class="text-center">
+                    <button class="btn btn-info" ng-click="filterAction()">
+                        <i class="fa fa-search"></i> {{'SEARCH' | translate}}
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="clearfix category-list">
+            <div class="page-header">
+                <h3>{{'CATEGORY_LIST' | translate}}</h3>
+            </div>
+            <div class="clearfix">
+                <div class="pi-item-category"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 col-xs-12">
+        <div class="pi-item-compare-list hide">
+            <div class="clearfix">
+                <div class="col-md-2 col-xs-6">
+                    <div class="pi-item-compare-button text-center">
+                        <a href="{{condition.urlCompare}}" title="{{'COMPARE_PRODUCTS' | translate}}" class="btn btn-success btn-xs">
+                            {{'COMPARE_PRODUCTS' | translate}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="compareModal" tabindex="-1" role="dialog" aria-labelledby="compareModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="{{'CLOSE' | translate}}">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="compareModalLabel">{{'COMPARE_PRODUCTS' | translate}}</h4>
+                        </div>
+                        <div class="modal-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="page-header">
+                <h1>{{condition.title}}</h1>
+            </div>
+            <div ng-show="products.length">
+                <div class="row">
+                    <div ng-repeat="product in products">
+                        <div class="col-md-4 col-xs-12 pi-item-box">
+                            <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
+                                <div ng-show="hoverCompare"
+                                     ng-click="changeClass()"
+                                     ng-class="class"
+                                     data-title="{{product.title}}"
+                                     data-slug="{{product.slug}}"
+                                     data-image="{{product.mediumUrl}}"
+                                     class="pi-item-compare-add">
+                                    <i class="fa fa-plus"></i> {{'COMPARE' | translate}}
+                                </div>
+                                <a class="u-url {{product.ribbon_class}}" itemprop="url" title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
+                                    <img itemprop="image" class="img-responsive u-photo" src="{{product.mediumUrl}}" alt="{{product.title}}"/>
+                                    <p ng-if="product.ribbon">
+                                        <span>{{product.ribbon}}</span>
+                                    </p>
+                                </a>
+                                <div class="caption">
+                                    <h3 class="p-name" itemprop="name">
+                                        <a title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
+                                            {{product.title}}
+                                        </a>
+                                    </h3>
+                                    <div class="clearfix" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                        <div class="clearfix">
+                                            <div ng-if="product.price_discount_has == 1">
+                                                <span class="text-danger">
+                                                    <del>{{product.price_discount_view}}</del>
+                                                </span>
+                                            </div>
+                                            <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
+                                            <meta itemprop="priceCurrency" content="{{product.price_currency}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pi-paginator">
+                    <pagination ng-if="paginator.count > paginator.limit"
+                                total-items="paginator.count" page="paginator.page" max-size="10"
+                                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+                                boundary-links="true" items-per-page="paginator.limit">
+                    </pagination>
+                </div>
+            </div>
+            <div class="alert alert-info" ng-if="!products.length">
+                {{'NONE_PRODUCT' | translate}}
+            </div>
+        </div>
+    </div>
+</div>
