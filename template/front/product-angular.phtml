@@ -7,10 +7,8 @@ $this->angular(array(
     'pi.js',
     'i18n'
 ));
-$this->js(array(
-    $this->assetModule('js/bootstrap-treeview.min.js'),
-    $this->assetModule('js/rzslider.min.js'),
-));
+$this->js($this->assetModule('js/bootstrap-treeview.min.js'));
+$this->js($this->assetModule('js/rzslider.min.js'));
 $this->css(array(
     $this->assetModule('css/front.css'),
     $this->assetModule('css/rzslider.min.css'),
@@ -20,7 +18,7 @@ $this->css(array(
     <div class="ajax-spinner">
         <img src="<?php echo $this->assetModule('image/spinner.gif'); ?>" class="ajax-spinner-loader"/>
     </div>
-    <div class="col-xs-12">
+    <div class="col-md-12 col-xs-12">
         <?php include $this->template('front/category'); ?>
     </div>
     <div ng-view></div>
@@ -36,6 +34,7 @@ $this->css(array(
             categoryJson: '<?php echo $categoriesJson; ?>',
             categorySlug: '<?php echo isset($category) ? $category['slug'] : '' ?>',
             tagTerm: '<?php echo isset($tag) ? $tag : '' ?>',
+            priceFilter: '<?php echo $config['view_price_filter']; ?>',
             t: {
                 COMPARE_MESSAGE_1: '<?php _e('You put this product on compare list before'); ?>',
                 COMPARE_MESSAGE_2: '<?php _e('You can add just 5 products on compare list'); ?>',

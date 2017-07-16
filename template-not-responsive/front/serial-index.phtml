@@ -1,0 +1,42 @@
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="clearfix">
+    <div class="page-header">
+        <h1><?php echo $this->escape($title); ?></h1>
+    </div>
+    <?php if (isset($result) && $result['status'] == 1) { ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo $result['message']; ?>
+        </div>
+    <?php } elseif (isset($result) && $result['status'] == 2) { ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $result['message']; ?>
+        </div>
+    <?php } elseif (isset($result) && $result['status'] == 3) { ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $result['message']; ?>
+        </div>
+    <?php } ?>
+    <?php if (isset($result) && !empty($result['product'])) { ?>
+        <div class="thumbnail">
+            <div class="row clearfix ">
+                <div class="col-xs-2">
+                    <img src="<?php echo $this->escape($result['product']['thumbUrl']); ?>" alt="<?php echo $this->escape($result['product']['title']); ?>" class="img-responsive img-rounded">
+                </div>
+                <div class="col-xs-10">
+                    <h2><?php echo $this->escape($result['product']['title']); ?></h2>
+                    <ul>
+                        <li><?php _e('Serial number'); ?> : <?php echo $this->escape($result['serial']['serial_number']); ?></li>
+                        <li>
+                            <a href="<?php echo $this->escape($result['product']['productUrl']); ?>" title="<?php echo $this->escape($result['product']['title']); ?>">
+                                <?php _e('Check your product information from here'); ?>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+    <div class="well well-sm">
+        <?php echo $this->form($form, 'inline'); ?>
+    </div>
+</div>

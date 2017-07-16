@@ -163,6 +163,30 @@ return array(
             'value' => 3,
             'category' => 'view',
         ),
+        'product_template' => array(
+            'title' => _a('Product page template'),
+            'description' => '',
+            'edit' => array(
+                'type' => 'select',
+                'options' => array(
+                    'options' => array(
+                        'plain' => _a('Plain'),
+                        'tab' => _a('Tab'),
+                    ),
+                ),
+            ),
+            'filter' => 'text',
+            'value' => 'plain',
+            'category' => 'view',
+        ),
+        'view_price_filter' => array(
+            'category' => 'view',
+            'title' => _a('Show price filter'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 1
+        ),
         'view_attribute' => array(
             'category' => 'view',
             'title' => _a('Show attribute fields'),
@@ -267,6 +291,7 @@ return array(
             'filter' => 'number_int',
             'value' => 0
         ),
+
         // Image
         'image_size' => array(
             'category' => 'image',

@@ -126,11 +126,22 @@ class ProductController extends IndexController
         $property['list'] = Pi::api('property', 'shop')->getList();
         $property['value'] = Pi::api('property', 'shop')->getValue($product['id']);
         $this->view()->assign('property', $property);
+        // Set template
+        switch ($config['product_template']) {
+            case 'tab':
+                $template = 'product-item-tab';
+                break;
+
+            default:
+            case 'plain':
+                $template = 'product-item';
+                break;
+        }
         // Set view
         $this->view()->headTitle($product['seo_title']);
         $this->view()->headDescription($product['seo_description'], 'set');
         $this->view()->headKeywords($product['seo_keywords'], 'set');
-        $this->view()->setTemplate('product-item');
+        $this->view()->setTemplate($template);
         $this->view()->assign('productItem', $product);
         $this->view()->assign('categoryItem', $product['categories']);
         $this->view()->assign('config', $config);

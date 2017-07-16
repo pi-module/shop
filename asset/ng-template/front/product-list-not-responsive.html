@@ -1,5 +1,5 @@
 <div class="clearfix pi-item-list">
-    <div class="col-md-3 col-xs-12">
+    <div class="col-xs-3">
         <div class="pi-item-search-form clearfix well well-sm">
             <div class="page-header">
                 <h3>{{'SEARCH' | translate}}</h3>
@@ -25,7 +25,7 @@
                     </select>
                 </div> -->
 
-                <!-- <div ng-if="filterList">
+                <div ng-if="filterList">
                     <div ng-repeat="filterSingle in filterList">
                         <div ng-if="filterSingle.type == 'text'">
                             <div class="form-group">
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
 
                 <div class="text-center">
@@ -64,10 +64,10 @@
             </div>
         </div>
     </div>
-    <div class="col-md-9 col-xs-12">
+    <div class="col-xs-9">
         <div class="pi-item-compare-list hide">
             <div class="clearfix">
-                <div class="col-md-2 col-xs-6">
+                <div class="col-xs-2">
                     <div class="pi-item-compare-button text-center">
                         <a href="{{condition.urlCompare}}" title="{{'COMPARE_PRODUCTS' | translate}}" class="btn btn-success btn-xs">
                             {{'COMPARE_PRODUCTS' | translate}}
@@ -96,7 +96,7 @@
             <div ng-show="products.length">
                 <div class="row">
                     <div ng-repeat="product in products">
-                        <div class="col-md-4 col-xs-12 pi-item-box">
+                        <div class="col-xs-4 pi-item-box">
                             <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
                                 <div ng-show="hoverCompare"
                                      ng-click="changeClass()"

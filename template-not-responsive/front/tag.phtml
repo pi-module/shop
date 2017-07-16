@@ -1,0 +1,14 @@
+<?php if (isset($tag) && !empty($tag)) { ?>
+    <div class="clearfix tagList">
+        <ul class="list-inline">
+            <li><i class="fa fa-tags"></i> <?php _e('Tag'); ?> : </li>
+            <?php foreach ($tag as $term) { ?>
+                <li itemscope itemtype="https://schema.org/Brand">
+                    <a itemprop="url" title="<?php echo $this->escape($term); ?>" href="<?php echo Pi::url($this->url('', array('controller' => 'tag', 'action' => 'index', 'slug' => urlencode($term)))); ?>">
+                        <span class="p-name" itemprop="name"><?php echo $this->escape($term); ?></span>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+<?php } ?>

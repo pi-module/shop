@@ -72,54 +72,56 @@ angular.module('shop')
     .controller('ListCtrl', ['$scope', '$location', '$timeout', 'data', 'config', 'server',
         function ($scope, $location, $timeout, data, config, server) {
 
-            $scope.slider = {
-                minValue: data.price.minSelect,
-                maxValue: data.price.maxSelect,
-                options: {
-                    floor: data.price.minValue,
-                    ceil: data.price.maxValue,
-                    step: data.price.step,
-                    rightToLeft: data.price.rightToLeft,
-                    translate: function(value, sliderId, label) {
-                        switch (label) {
-                            case 'model':
-                                return '<b>' + config.t.MIN_PRICE + ':</b> ' + config.t.PRICE_SYMBOL + value;
-                            case 'high':
-                                return '<b>' + config.t.MAX_PRICE + ':</b> ' + config.t.PRICE_SYMBOL + value;
-                            default:
-                                return config.t.PRICE_SYMBOL + value
+            if (config.priceFilter) {
+                $scope.slider = {
+                    minValue: data.price.minSelect,
+                    maxValue: data.price.maxSelect,
+                    options: {
+                        floor: data.price.minValue,
+                        ceil: data.price.maxValue,
+                        step: data.price.step,
+                        rightToLeft: data.price.rightToLeft,
+                        translate: function(value, sliderId, label) {
+                            switch (label) {
+                                case 'model':
+                                    return '<b>' + config.t.MIN_PRICE + ':</b> ' + config.t.PRICE_SYMBOL + value;
+                                case 'high':
+                                    return '<b>' + config.t.MAX_PRICE + ':</b> ' + config.t.PRICE_SYMBOL + value;
+                                default:
+                                    return config.t.PRICE_SYMBOL + value
+                            }
                         }
                     }
-                }
-            };
-
-            $scope.$watch('slider.minValue', function (newValue, oldValue) {
-                if (newValue === oldValue) {
-                    return
-                } else {
-                    $timeout(function() {
-                        if (newValue === data.price.minValue) {
-                            $location.search('minPrice', null);
-                        } else {
-                            $location.search('minPrice', $scope.slider.minValue);
-                        }
-                    }, 1500);
                 };
-            });
 
-            $scope.$watch('slider.maxValue', function (newValue, oldValue) {
-                if (newValue === oldValue) {
-                    return
-                } else {
-                    $timeout(function() {
-                        if (newValue === data.price.maxValue) {
-                            $location.search('maxPrice', null);
-                        } else {
-                            $location.search('maxPrice', $scope.slider.maxValue);
-                        }
-                    }, 1500);
-                };
-            });
+                $scope.$watch('slider.minValue', function (newValue, oldValue) {
+                    if (newValue === oldValue) {
+                        return
+                    } else {
+                        $timeout(function() {
+                            if (newValue === data.price.minValue) {
+                                $location.search('minPrice', null);
+                            } else {
+                                $location.search('minPrice', $scope.slider.minValue);
+                            }
+                        }, 1500);
+                    };
+                });
+
+                $scope.$watch('slider.maxValue', function (newValue, oldValue) {
+                    if (newValue === oldValue) {
+                        return
+                    } else {
+                        $timeout(function() {
+                            if (newValue === data.price.maxValue) {
+                                $location.search('maxPrice', null);
+                            } else {
+                                $location.search('maxPrice', $scope.slider.maxValue);
+                            }
+                        }, 1500);
+                    };
+                });
+            }
 
             angular.extend($scope, data);
 

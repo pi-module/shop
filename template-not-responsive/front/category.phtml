@@ -1,0 +1,71 @@
+<?php if (isset($category) && !empty($category)) { ?>
+    <?php
+    // Set Open Graph tags for meta
+    $this->doctype('HTML5');
+    $this->headMeta($this->escape($category['title']), 'og:title', 'property');
+    $this->headMeta($this->escape($category['categoryUrl']), 'og:url', 'property');
+    if (isset($category['text_summary']) && !empty($category['text_summary'])) {
+        $this->headMeta(_strip($category['text_summary']), 'og:description', 'property');
+    }
+    if (!empty($category['largeUrl'])) {
+        $this->headMeta($this->escape($category['largeUrl']), 'og:image', 'property');
+    }
+    // Set twitter for meta
+    $this->headMeta($this->escape($category['title']), 'og:title', 'property');
+    if (isset($category['text_summary']) && !empty($category['text_summary'])) {
+        $this->headMeta($this->escape($category['text_summary']), 'twitter:description');
+    }
+    if (isset($category['largeUrl']) && !empty($category['largeUrl'])) {
+        $this->headMeta($this->escape($category['largeUrl']), 'twitter:image');
+    }
+    ?>
+    <div class="clearfix categoryItem" itemscope itemtype="https://schema.org/Brand">
+        <?php if (!empty($category['image_wide'])) { ?>
+            <div class="category-width-description">
+                <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
+                <?php if (!empty($category['text_summary'])) { ?>
+                    <div class="clearfix"><?php echo $category['text_summary']; ?></div>
+                <?php } ?>
+            </div>
+            <div class="category-width-image">
+                <img class="img-responsive" itemprop="image" src="<?php echo $category['image_wide']; ?>"
+                     alt="<?php echo $this->escape($category['title']); ?>">
+            </div>
+        <?php } elseif (!empty($category['largeUrl'])) { ?>
+            <div class="category-width-description">
+                <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
+                <?php if (!empty($category['text_summary'])) { ?>
+                    <div class="clearfix"><?php echo $category['text_summary']; ?></div>
+                <?php } ?>
+            </div>
+            <div class="category-width-image">
+                <img class="img-responsive" itemprop="image" src="<?php echo $category['largeUrl']; ?>"
+                     alt="<?php echo $this->escape($category['title']); ?>">
+            </div>
+        <?php } else { ?>
+            <div class="page-header">
+                <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
+            </div>
+            <?php if (!empty($category['text_summary'])) { ?>
+                <div class="e-description clearfix well" itemprop="description"><?php echo $category['text_summary']; ?></div>
+            <?php } ?>
+        <?php } ?>
+        <?php if (!empty($category['text_description']) && $config['view_description_category']) { ?>
+            <div class="e-description clearfix well" itemprop="description"><?php echo $category['text_description']; ?></div>
+        <?php } ?>
+    </div>
+<?php } ?>
+<?php if (isset($categoryItem) && !empty($categoryItem)) { ?>
+    <div class="clearfix categoryItemList">
+        <ul class="list-inline">
+            <li><i class="fa fa-folder"></i> <?php _e('Category'); ?> : </li>
+            <?php foreach ($categoryItem as $category) { ?>
+                <li itemscope itemtype="https://schema.org/Brand">
+                    <a itemprop="url" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['url']); ?>">
+                        <span class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></span>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+<?php } ?>

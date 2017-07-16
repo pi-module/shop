@@ -1,0 +1,56 @@
+<?php if (isset($attach) && !empty($attach)) { ?>
+    <div class="productAttach clearfix">
+        <?php if (!empty($attach['archive'])) { ?>
+            <div class="attach-archive">
+                <h4><?php _e('Attached archives'); ?></h4>
+                <ul>
+                    <?php foreach ($attach['archive'] as $archive) { ?>
+                        <li>
+                            <a rel="external" title="<?php echo $archive['title']; ?>"
+                               href="<?php echo $archive['fileUrl']; ?>"><?php echo $archive['title']; ?></a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+        <?php } ?>
+        <?php if (!empty($attach['doc'])) { ?>
+            <div class="attach-doc">
+                <h4><?php _e('Attached docs'); ?></h4>
+                <ul>
+                    <?php foreach ($attach['doc'] as $doc) { ?>
+                        <li>
+                            <a rel="external" title="<?php echo $doc['title']; ?>"
+                               href="<?php echo $doc['fileUrl']; ?>"><?php echo $doc['title']; ?></a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+        <?php } ?>
+        <?php if (!empty($attach['pdf'])) { ?>
+            <div class="attach-pdf">
+                <h4><?php _e('Attached pdfs'); ?></h4>
+                <ul>
+                    <?php foreach ($attach['pdf'] as $pdf) { ?>
+                        <li>
+                            <a rel="external" title="<?php echo $pdf['title']; ?>"
+                               href="<?php echo $pdf['fileUrl']; ?>"><?php echo $pdf['title']; ?></a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+        <?php } ?>
+        <?php if (!empty($attach['other'])) { ?>
+            <div class="attach-other">
+                <h4><?php _e('Attached files'); ?></h4>
+                <ul>
+                    <?php foreach ($attach['other'] as $other) { ?>
+                        <li>
+                            <a rel="external" title="<?php echo $other['title']; ?>"
+                               href="<?php echo $other['fileUrl']; ?>"><?php echo $other['title']; ?></a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+        <?php } ?>
+    </div>
+<?php } ?>

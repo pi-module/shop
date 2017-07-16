@@ -335,43 +335,50 @@ class JsonController extends IndexController
         }
 
         // Get max price
-        $columnsPrice = array('id', 'price');
-        $limitPrice = 1;
-        $maxPrice = 1000;
-        $minPrice = 0;
+        if ($config['view_price_filter']) {
+            $columnsPrice = array('id', 'price');
+            $limitPrice = 1;
+            $maxPrice = 1000;
+            $minPrice = 0;
 
-        $orderPrice = array('price DESC', 'id DESC');
-        $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
-        $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current();
-        if ($rowPrice) {
-            $rowPrice = $rowPrice->toArray();
-            $maxPrice = $rowPrice['price'];
-        }
-
-        $orderPrice = array('price ASC', 'id ASC');
-        $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
-        $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current();
-        if ($rowPrice) {
-            $rowPrice = $rowPrice->toArray();
-            $minPrice = $rowPrice['price'];
-        }
-
-        // Get select min price
-        $minSelect = $minPrice;
-        if (isset($paramsClean['minPrice']) && !empty($paramsClean['minPrice'])) {
-            $minSelect = $paramsClean['minPrice'];
-            if ($minSelect > $minPrice) {
-                $whereLink['price >= ?'] = $minSelect;
+            $orderPrice = array('price DESC', 'id DESC');
+            $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
+            $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current();
+            if ($rowPrice) {
+                $rowPrice = $rowPrice->toArray();
+                $maxPrice = $rowPrice['price'];
             }
-        }
 
-        // Get select max price
-        $maxSelect = $maxPrice;
-        if (isset($paramsClean['maxPrice']) && !empty($paramsClean['maxPrice'])) {
-            $maxSelect = $paramsClean['maxPrice'];
-            if ($maxSelect < $maxPrice) {
-                $whereLink['price <= ?'] = $maxSelect;
+            $orderPrice = array('price ASC', 'id ASC');
+            $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
+            $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current();
+            if ($rowPrice) {
+                $rowPrice = $rowPrice->toArray();
+                $minPrice = $rowPrice['price'];
             }
+
+            // Get select min price
+            $minSelect = $minPrice;
+            if (isset($paramsClean['minPrice']) && !empty($paramsClean['minPrice'])) {
+                $minSelect = $paramsClean['minPrice'];
+                if ($minSelect > $minPrice) {
+                    $whereLink['price >= ?'] = $minSelect;
+                }
+            }
+
+            // Get select max price
+            $maxSelect = $maxPrice;
+            if (isset($paramsClean['maxPrice']) && !empty($paramsClean['maxPrice'])) {
+                $maxSelect = $paramsClean['maxPrice'];
+                if ($maxSelect < $maxPrice) {
+                    $whereLink['price <= ?'] = $maxSelect;
+                }
+            }
+        } else {
+            $minPrice = 0;
+            $maxPrice = 0;
+            $minSelect = 0;
+            $maxSelect = 0;
         }
 
         // Check has Search Result
@@ -399,6 +406,34 @@ class JsonController extends IndexController
             $count = $this->getModel('link')->selectWith($select)->current()->count;
         }
 
+        // Set column class
+        switch ($config['view_column']) {
+            case 1:
+                $columnSize = 'col-md-12 col-xs-12';
+                break;
+
+            case 2:
+                $columnSize = 'col-md-6 col-xs-12';
+                break;
+
+            case 3:
+                $columnSize = 'col-md-4 col-xs-12';
+                break;
+
+            case 4:
+                $columnSize = 'col-md-3 col-xs-12';
+                break;
+
+            case 6:
+                $columnSize = 'col-md-2 col-xs-12';
+                break;
+
+            default:
+                $columnSize = 'col-md-3 col-xs-12';
+                break;
+        }
+
+
         // Set result
         $result = array(
             'products' => $product,
@@ -411,6 +446,8 @@ class JsonController extends IndexController
             'condition' => array(
                 'title' => $pageTitle,
                 'urlCompare' => Pi::url($this->url('', array('controller' => 'compare'))),
+                'priceFilter' => $config['view_price_filter'],
+                'columnSize' => $columnSize,
             ),
             'price' => array(
                 'minValue' => intval($minPrice),

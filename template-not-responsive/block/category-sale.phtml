@@ -1,0 +1,89 @@
+<?php if ($block['blockEffect']) {
+    $this->jQuery();
+    $this->js($this->assetModule('js/countdown.js', 'shop'));
+    $this->css($this->assetModule('css/block.css', 'shop'));
+} ?>
+<div class="shop-block">
+    <div class="shop-block-sale-category clearfix">
+        <?php foreach ($block['resources'] as $category) { ?>
+            <div class="category-sale h-category row clearfix" itemscope itemtype="https://schema.org/Brand">
+                <div class="col-xs-12">
+                    <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                        <img itemprop="logo" class="img-responsive u-photo" src="<?php echo $this->escape($category['largeUrl']); ?>" alt="<?php echo $this->escape($category['title']); ?>">
+                    </a>
+                    <div class="category-sale-information">
+                        <ul class="list-inline category-countdown clearfix">
+                            <li class="pull-left" itemprop="title">
+                                <?php echo $this->escape($category['title']); ?>
+                            </li>
+                            <li class="pull-right">
+                                <div id="category-countdown-timer-<?php echo $this->escape($category['id']); ?>"></div>
+                            </li>
+                        </ul>
+                        <?php $script = <<<'EOT'
+$(document).ready(function($) {
+	var saleCountdown = new Countdown({
+		year   : %s,
+		month  : %s,
+		day	   : %s,
+		hour   : %s,
+		minute : %s,
+		second : %s,
+		width  : %s,
+		height : %s,
+		rangeHi: "%s",
+		target : "category-countdown-timer-%s",
+		labelText : {
+			second : "%s",
+			minute : "%s",
+			hour   : "%s",
+			day    : "%s",
+			month  : "%s",
+			year   : "%s"
+		},
+		labels : {
+			color  : "#ffffff",
+		},
+	});
+});
+EOT;
+                        $script = sprintf(
+                            $script,
+                            $category['saleInformation']['price_time']['year'],
+                            $category['saleInformation']['price_time']['month'],
+                            $category['saleInformation']['price_time']['day'],
+                            $category['saleInformation']['price_time']['hour'],
+                            $category['saleInformation']['price_time']['minute'],
+                            $category['saleInformation']['price_time']['second'],
+                            250,
+                            40,
+                            'day',
+                            $category['id'],
+                            _b('Second'),
+                            _b('Minute'),
+                            _b('Hour'),
+                            _b('Day'),
+                            _b('Month'),
+                            _b('Year')
+                        );
+                        $this->footScript()->appendScript($script);
+                        ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        <?php
+$script = <<<'EOT'
+    var width = $('.shop-block-sale-category').width();
+    $('.category-sale-information').css({"width":width});
+EOT;
+        $this->footScript()->appendScript($script);
+        ?>
+    </div>
+    <?php if ($block['more-show'] && !empty($block['more-link'])) { ?>
+        <div class="shop-block-more clearfix">
+            <a title="<?php echo _b('More categories'); ?>"
+               href="<?php echo $block['more-link']; ?>"><?php echo _b('More categories'); ?></a>
+        </div>
+    <?php } ?>
+</div>

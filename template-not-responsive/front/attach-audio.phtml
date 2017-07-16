@@ -1,0 +1,11 @@
+<?php if (isset($attach['audio']) && !empty($attach['audio'])) { ?>
+    <div class="clearfix">
+        <div class="attach-audio">
+            <?php foreach ($attach['audio'] as $audio) { ?>
+                <div class="pi-player clearfix">
+                    <?php echo $this->videojs($audio['fileUrl'], $this->escape($productItem['largeUrl'])); ?>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+<?php } ?>

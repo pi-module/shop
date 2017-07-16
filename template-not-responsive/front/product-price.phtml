@@ -1,0 +1,171 @@
+<?php if (isset($productItem['price']) && $config['order_active']) { ?>
+    <div class="clearfix row" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+        <?php if (isset($productItem['price_sale']) && $productItem['price_sale']) { ?>
+            <?php $this->js($this->assetModule('js/countdown.js')); ?>
+            <div class="col-xs-12">
+                <ul class="list-inline bg-info product-countdown clearfix">
+                    <li><?php _e('The time remaining until the end of the offer : '); ?></li>
+                    <li class="pull-right"><div id="saleCountdown"></div></li>
+                </ul>
+                <?php $script = <<<'EOT'
+$(document).ready(function($) {
+	var saleCountdown = new Countdown({
+		year   : %s,
+		month  : %s,
+		day	   : %s,
+		hour   : %s,
+		minute : %s,
+		second : %s,
+		width  : %s,
+		height : %s,
+		rangeHi: "%s",
+		target : "%s",
+		labelText : {
+			second : "%s",
+			minute : "%s",
+			hour   : "%s",
+			day    : "%s",
+			month  : "%s",
+			year   : "%s"
+		},
+	});
+});
+EOT;
+                $script = sprintf(
+                    $script,
+                    $productItem['price_time']['year'],
+                    $productItem['price_time']['month'],
+                    $productItem['price_time']['day'],
+                    $productItem['price_time']['hour'],
+                    $productItem['price_time']['minute'],
+                    $productItem['price_time']['second'],
+                    300,
+                    40,
+                    'day',
+                    'saleCountdown',
+                    __('Second'),
+                    __('Minute'),
+                    __('Hour'),
+                    __('Day'),
+                    __('Month'),
+                    __('Year')
+                );
+                $this->footScript()->appendScript($script);
+                ?>
+            </div>
+        <?php } ?>
+        <?php if ($config['order_stock'] == 'never') { ?>
+            <div class="clearfix">
+                <div class="col-xs-7">
+                    <?php include $this->template('front/product-order'); ?>
+                </div>
+                <div class="col-xs-5">
+                    <?php if (!empty($productItem['price_title'])) { ?>
+                        <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
+                        <span><?php echo $this->escape($productItem['price_title']); ?></span>
+                    <?php } ?>
+                    <div class="clearfix">
+                        <strong><?php _e('Stock status'); ?> : </strong>
+                        <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
+                    </div>
+                    <strong><?php _e('Price'); ?> : </strong>
+                    <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+                        <span class="text-danger">
+                                <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+                            </span>
+                    <?php } ?>
+                    <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                    <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                    <div class="product-code"><strong> <?php _e('Product code'); ?> : </strong><?php echo $productItem['id']; ?></div>
+                </div>
+            </div>
+        <?php } elseif ($config['order_stock'] == 'manual') { ?>
+            <?php if ($productItem['stock_type'] == 1 || $productItem['stock_type'] == 5) { ?>
+                <div class="clearfix">
+                    <div class="col-xs-7">
+                        <?php include $this->template('front/product-order'); ?>
+                    </div>
+                    <div class="col-xs-5">
+                        <?php if (!empty($productItem['price_title'])) { ?>
+                            <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
+                            <span><?php echo $this->escape($productItem['price_title']); ?></span>
+                        <?php } ?>
+                        <div class="clearfix">
+                            <strong><?php _e('Stock status'); ?> : </strong>
+                            <?php if ($productItem['stock_type'] == 1) { ?>
+                                <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                            <?php } elseif ($productItem['stock_type'] == 5) { ?>
+                                <span class="text-danger" itemprop="availability" href="https://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                            <?php } ?>
+                        </div>
+                        <strong><?php _e('Price'); ?> : </strong>
+                        <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+                            <span class="text-danger">
+                                    <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+                                </span>
+                        <?php } ?>
+                        <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                        <div class="product-code"><strong> <?php _e('Product code'); ?> : </strong><?php echo $productItem['id']; ?></div>
+                    </div>
+                </div>
+            <?php } else { ?>
+                <div class="clearfix">
+                    <strong><?php _e('Stock status'); ?> : </strong>
+                    <span class="text-danger"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                </div>
+                <div class="product-code"><strong> <?php _e('Product code'); ?> : </strong><?php echo $productItem['id']; ?></div>
+            <?php } ?>
+        <?php } elseif ($config['order_stock'] == 'product') { ?>
+            <?php if ($productItem['stock'] > 0) { ?>
+                <div class="clearfix">
+                    <div class="col-xs-7">
+                        <?php include $this->template('front/product-order'); ?>
+                    </div>
+                    <div class="col-xs-5">
+                        <?php if (!empty($productItem['price_title'])) { ?>
+                            <strong><?php echo $this->escape($config['view_price_title']); ?> : </strong>
+                            <span><?php echo $this->escape($productItem['price_title']); ?></span>
+                        <?php } ?>
+                        <div class="clearfix">
+                            <strong><?php _e('Stock status'); ?> : </strong>
+                            <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
+                        </div>
+                        <strong><?php _e('Price'); ?> : </strong>
+                        <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+                            <span class="text-danger">
+                                    <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+                                </span>
+                        <?php } ?>
+                        <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                        <div class="product-code"><strong> <?php _e('Product code'); ?> : </strong><?php echo $productItem['id']; ?></div>
+                    </div>
+                </div>
+            <?php } else { ?>
+                <div class="clearfix">
+                    <strong><?php _e('Stock status'); ?> : </strong>
+                    <span class="text-danger"><?php _e('Out of stock'); ?></span>
+                    <div class="product-code"><strong> <?php _e('Product code'); ?> : </strong><?php echo $productItem['id']; ?></div>
+                </div>
+            <?php } ?>
+        <?php } elseif ($config['order_stock'] == 'property') { ?>
+            <div class="clearfix">
+                <div class="col-xs-7">
+                    <?php include $this->template('front/product-order'); ?>
+                </div>
+                <div class="col-xs-5">
+                    <strong><?php _e('Price'); ?> : </strong>
+                    <?php if ($productItem['price_discount'] && ($productItem['price_discount'] > $productItem['price'])) { ?>
+                        <span class="text-danger">
+                            <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
+                        </span>
+                    <?php } ?>
+                    <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                    <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                    <div class="product-code"><strong> <?php _e('Product code'); ?> : </strong><?php echo $productItem['id']; ?></div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+<?php } ?>

@@ -1,0 +1,22 @@
+<?php if (isset($productCategory) && !empty($productCategory)) { ?>
+    <?php
+    $this->jQuery(array(
+        'extension/owl.carousel.min.js',
+        'extension/owl.carousel.css',
+    ));
+    $this->js($this->assetModule('js/owl-carousel-config-list.js'));
+    $shopListBoxSize = 'col-xs-12';
+    ?>
+    <div class="product-category clearfix">
+        <div class="page-header">
+            <h2><?php _e('Products on this category'); ?></h2>
+        </div>
+        <div class="product-list clearfix">
+            <div class="owl-carousel-list clearfix">
+                <?php foreach ($productCategory as $product) { ?>
+                    <?php include $this->template('front/product-box'); ?>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+<?php } ?>

@@ -7,7 +7,7 @@
     <div class="shop-block-sale-category clearfix">
         <?php foreach ($block['resources'] as $category) { ?>
             <div class="category-sale h-category row clearfix" itemscope itemtype="https://schema.org/Brand">
-                <div class="col-xs-12">
+                <div class="col-md-12 col-xs-12">
                     <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['categoryUrl']); ?>">
                         <img itemprop="logo" class="img-responsive u-photo" src="<?php echo $this->escape($category['largeUrl']); ?>" alt="<?php echo $this->escape($category['title']); ?>">
                     </a>

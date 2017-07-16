@@ -159,4 +159,101 @@ class ToolsController extends ActionController
             }
         }
     } */
+
+    /* public function codeAction()
+    {
+        // Get info
+        $start = $this->params('start', 0);
+        $count = $this->params('count');
+        $complete = $this->params('complete', 0);
+        $confirm = $this->params('confirm', 0);
+
+        // Check confirm
+        if ($confirm == 1) {
+            // Get products and send
+            $where = array(
+                'field' => 1,
+                'id > ?' => $start,
+            );
+            $order = array('id ASC');
+
+            $select = $this->getModel('field_data')->select()->where($where)->order($order)->limit(100);
+            $rowset = $this->getModel('field_data')->selectWith($select);
+
+            $ddd = array();
+
+            // Make list
+            foreach ($rowset as $row) {
+
+                $whereProduct = array('code' => $row->data);
+                $columnsProduct = array('count' => new Expression('count(*)'));
+                $select = $this->getModel('product')->select()->where($whereProduct)->columns($columnsProduct);
+                $countCode = $this->getModel('product')->selectWith($select)->current()->count;
+
+                $ddd[$row->product] = array(
+                    'count' => $countCode,
+                    'product' => $row->product,
+                    'code' => $row->data
+                );
+
+                if (intval($countCode) < 1) {
+                    $this->getModel('product')->update(
+                        array('code' => $row->data),
+                        array('id' => (int)$row->product)
+                    );
+                }
+
+                // Set extra
+                $lastId = (int)$row->id;
+                $complete++;
+            }
+            // Get count
+            if (!$count) {
+                $where = array(
+                    'field' => 1,
+                );
+                $columns = array('count' => new Expression('count(*)'));
+                $select = $this->getModel('field_data')->select()->where($where)->columns($columns);
+                $count = $this->getModel('field_data')->selectWith($select)->current()->count;
+            }
+            // Set complete
+            $percent = (100 * $complete) / $count;
+            // Set next url
+            if ($complete >= $count) {
+                $nextUrl = '';
+            } else {
+                $nextUrl = Pi::url($this->url('', array(
+                    'action' => 'code',
+                    'start' => $lastId,
+                    'count' => $count,
+                    'complete' => $complete,
+                    'confirm' => $confirm,
+                )));
+            }
+
+            $info = array(
+                'start' => $lastId,
+                'count' => $count,
+                'complete' => $complete,
+                'percent' => $percent,
+                'nextUrl' => $nextUrl,
+                'ddd' => $ddd,
+            );
+
+            $percent = ($percent > 99 && $percent < 100) ? (intval($percent) + 1) : intval($percent);
+        } else {
+            $info = array();
+            $percent = 0;
+            $nextUrl = Pi::url($this->url('', array(
+                'action' => 'code',
+                'confirm' => 1,
+            )));
+        }
+        // Set view
+        $this->view()->setTemplate('category-sync');
+        $this->view()->assign('nextUrl', $nextUrl);
+        $this->view()->assign('percent', $percent);
+        $this->view()->assign('info', $info);
+        $this->view()->assign('confirm', $confirm);
+    } */
 }
