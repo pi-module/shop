@@ -39,8 +39,12 @@
     height: 140px;
 }
 
-.pi-item-list .pi-item-box .caption {
+.pi-item-list .pi-item-box-size-0 .caption {
     min-height: 85px;
+}
+
+.pi-item-list .pi-item-box-size-1 .caption {
+    min-height: 105px;
 }
 
 .pi-item-list .pi-item-box:hover .caption {
@@ -49,6 +53,10 @@
     -moz-transition: background-color 0.3s;
     background-color: #f0f0f0;
     border-radius: 4px;
+}
+
+.pi-item-list .pi-item-box .pi-item-box-form {
+    margin-top: 10px;
 }
 
 .pi-item-list .pi-paginator {

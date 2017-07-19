@@ -95,7 +95,7 @@
                 <div class="row">
                     <div ng-repeat="product in products">
                         <div class="{{condition.columnSize}}">
-                            <div class="pi-item-box">
+                            <div class="pi-item-box pi-item-box-size-{{condition.addToCart}}">
                                 <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
                                     <div class="pi-item-box-image">
                                         <div ng-show="hoverCompare"
@@ -134,12 +134,14 @@
                                                 </div>
                                                 <div ng-if="condition.addToCart == 1">
                                                     <div ng-if="product.marketable == 1">
-                                                        <form action="{{product.cartUrl}}" method="post">
-                                                            <input name="id" type="hidden" value="{{product.id}}">
-                                                            <button type="submit" class="btn btn-success">
-                                                                <i class="fa fa-shopping-cart"></i> {{'ADD_TO_CART' | translate}}
-                                                            </button>
-                                                        </form>
+                                                        <div class="pi-item-box-form">
+                                                            <form action="{{product.cartUrl}}" method="post">
+                                                                <input name="id" type="hidden" value="{{product.id}}">
+                                                                <button type="submit" class="btn btn-success">
+                                                                    <i class="fa fa-shopping-cart"></i> {{'ADD_TO_CART' | translate}}
+                                                                </button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <meta itemprop="priceCurrency" content="{{product.price_currency}}">
