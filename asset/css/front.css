@@ -44,7 +44,7 @@
 }
 
 .pi-item-list .pi-item-box-size-1 .caption {
-    min-height: 105px;
+    min-height: 95px;
 }
 
 .pi-item-list .pi-item-box:hover .caption {
@@ -107,7 +107,9 @@
 
 /* product page */
 .product-page .product-title h1 {
-    font-size: 1.6em;
+    font-size: 2em;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 .product-page .product-title h2 {
@@ -126,6 +128,12 @@
     margin: 5px 0;
 }
 
+.product-page .product-info-list {
+    background: #f0f0f0;
+    border-radius: 4px;
+    padding: 15px;
+}
+
 .product-page .product-info-list ul {
     padding: 0;
     margin: 0;
@@ -137,8 +145,12 @@
 }
 
 .product-page .product-price-info .product-price {
-    font-size: 20px;
+    font-size: 30px;
     color: #3E773F;
+}
+
+.product-page .list-unstyled li {
+    padding: 4px 0;
 }
 
 /* product-attribute */

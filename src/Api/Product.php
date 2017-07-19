@@ -497,6 +497,15 @@ class Product extends AbstractApi
                 'slug' => $categoryList[$category]['slug'],
             )));
         }
+        // Set brand information
+        if (!empty($product['brand'])) {
+            $product['brandTitle'] = $categoryList[$product['brand']]['title'];
+            $product['brandUrl'] = Pi::url(Pi::service('url')->assemble('shop', array(
+                'module' => $this->getModule(),
+                'controller' => 'category',
+                'slug' => $categoryList[$product['brand']]['slug'],
+            )));
+        }
         // Set discount
         $product = $this->canonizePriceAndDiscount($product, $config);
         // Set stock

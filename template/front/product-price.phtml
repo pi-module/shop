@@ -58,6 +58,34 @@ EOT;
             <div class="clearfix">
                 <div class="col-md-5 col-xs-12">
                     <ul class="list-unstyled">
+                        </li>
+                        <?php if (!empty($productItem['brand'])) { ?>
+                            <li>
+                                <div class="product-brand">
+                                    <strong><?php _e('Brand'); ?> : </strong>
+                                    <a itemprop="brand" href="<?php echo $this->escape($category['brandUrl']); ?>"
+                                       title="<?php echo $this->escape($category['brandTitle']); ?>">
+                                        <?php echo $this->escape($category['brandTitle']); ?>
+                                    </a>
+                                </div>
+                            </li>
+                        <?php } ?>
+                        <li>
+                            <div class="product-stock">
+                                <strong><?php _e('Stock status'); ?> : </strong>
+                                <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="product-code">
+                                <strong> <?php _e('Product code'); ?> : </strong>
+                                <?php if ($productItem['code']) {
+                                    echo $this->escape($productItem['code']);
+                                } else {
+                                    echo $this->escape($productItem['id']);
+                                } ?>
+                            </div>
+                        </li>
                         <?php if (!empty($productItem['price_title'])) { ?>
                             <li>
                                 <div class="product-price-title">
@@ -77,22 +105,6 @@ EOT;
                                 <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="product-stock">
-                                <strong><?php _e('Stock status'); ?> : </strong>
-                                <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="product-code">
-                                <strong> <?php _e('Product code'); ?> : </strong>
-                                <?php if ($productItem['code']) {
-                                    echo $this->escape($productItem['code']);
-                                } else {
-                                    echo $this->escape($productItem['id']);
-                                } ?>
-                            </div>
-                        </li>
                     </ul>
                     <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
                 </div>
@@ -105,6 +117,37 @@ EOT;
                 <div class="clearfix">
                     <div class="col-md-5 col-xs-12">
                         <ul class="list-unstyled">
+                            <?php if (!empty($productItem['brand'])) { ?>
+                                <li>
+                                    <div class="product-brand">
+                                        <strong><?php _e('Brand'); ?> : </strong>
+                                        <a itemprop="brand" href="<?php echo $this->escape($category['brandUrl']); ?>"
+                                           title="<?php echo $this->escape($category['brandTitle']); ?>">
+                                            <?php echo $this->escape($category['brandTitle']); ?>
+                                        </a>
+                                    </div>
+                                </li>
+                            <?php } ?>
+                            <li>
+                                <div class="product-stock">
+                                    <strong><?php _e('Stock status'); ?> : </strong>
+                                    <?php if ($productItem['stock_type'] == 1) { ?>
+                                        <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                                    <?php } elseif ($productItem['stock_type'] == 5) { ?>
+                                        <span class="text-danger" itemprop="availability" href="https://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                                    <?php } ?>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product-code">
+                                    <strong> <?php _e('Product code'); ?> : </strong>
+                                    <?php if ($productItem['code']) {
+                                        echo $this->escape($productItem['code']);
+                                    } else {
+                                        echo $this->escape($productItem['id']);
+                                    } ?>
+                                </div>
+                            </li>
                             <?php if (!empty($productItem['price_title'])) { ?>
                                 <li>
                                     <div class="product-price-title">
@@ -126,26 +169,6 @@ EOT;
                                     </span>
                                 </div>
                             </li>
-                            <li>
-                                <div class="product-stock">
-                                    <strong><?php _e('Stock status'); ?> : </strong>
-                                    <?php if ($productItem['stock_type'] == 1) { ?>
-                                        <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
-                                    <?php } elseif ($productItem['stock_type'] == 5) { ?>
-                                        <span class="text-danger" itemprop="availability" href="https://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
-                                    <?php } ?>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product-code">
-                                    <strong> <?php _e('Product code'); ?> : </strong>
-                                    <?php if ($productItem['code']) {
-                                        echo $this->escape($productItem['code']);
-                                    } else {
-                                        echo $this->escape($productItem['id']);
-                                    } ?>
-                                </div>
-                            </li>
                         </ul>
                         <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
                     </div>
@@ -155,6 +178,33 @@ EOT;
                 </div>
             <?php } else { ?>
                 <ul class="list-unstyled">
+                    <?php if (!empty($productItem['brand'])) { ?>
+                        <li>
+                            <div class="product-brand">
+                                <strong><?php _e('Brand'); ?> : </strong>
+                                <a itemprop="brand" href="<?php echo $this->escape($category['brandUrl']); ?>"
+                                   title="<?php echo $this->escape($category['brandTitle']); ?>">
+                                    <?php echo $this->escape($category['brandTitle']); ?>
+                                </a>
+                            </div>
+                        </li>
+                    <?php } ?>
+                    <li>
+                        <div class="product-stock">
+                            <strong><?php _e('Stock status'); ?> : </strong>
+                            <span class="text-danger"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="product-code">
+                            <strong> <?php _e('Product code'); ?> : </strong>
+                            <?php if ($productItem['code']) {
+                                echo $this->escape($productItem['code']);
+                            } else {
+                                echo $this->escape($productItem['id']);
+                            } ?>
+                        </div>
+                    </li>
                     <?php if (!empty($productItem['price_title'])) { ?>
                         <li>
                             <div class="product-price-title">
@@ -176,22 +226,6 @@ EOT;
                             </span>
                         </div>
                     </li>
-                    <li>
-                        <div class="product-stock">
-                            <strong><?php _e('Stock status'); ?> : </strong>
-                            <span class="text-danger"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="product-code">
-                            <strong> <?php _e('Product code'); ?> : </strong>
-                            <?php if ($productItem['code']) {
-                                echo $this->escape($productItem['code']);
-                            } else {
-                                echo $this->escape($productItem['id']);
-                            } ?>
-                        </div>
-                    </li>
                 </ul>
             <?php } ?>
         <?php } elseif ($config['order_stock'] == 'product') { ?>
@@ -199,6 +233,33 @@ EOT;
                 <div class="clearfix">
                     <div class="col-md-5 col-xs-12">
                         <ul class="list-unstyled">
+                            <?php if (!empty($productItem['brand'])) { ?>
+                                <li>
+                                    <div class="product-brand">
+                                        <strong><?php _e('Brand'); ?> : </strong>
+                                        <a itemprop="brand" href="<?php echo $this->escape($category['brandUrl']); ?>"
+                                           title="<?php echo $this->escape($category['brandTitle']); ?>">
+                                            <?php echo $this->escape($category['brandTitle']); ?>
+                                        </a>
+                                    </div>
+                                </li>
+                            <?php } ?>
+                            <li>
+                                <div class="product-stock">
+                                    <strong><?php _e('Stock status'); ?> : </strong>
+                                    <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="product-code">
+                                    <strong> <?php _e('Product code'); ?> : </strong>
+                                    <?php if ($productItem['code']) {
+                                        echo $this->escape($productItem['code']);
+                                    } else {
+                                        echo $this->escape($productItem['id']);
+                                    } ?>
+                                </div>
+                            </li>
                             <?php if (!empty($productItem['price_title'])) { ?>
                                 <li>
                                     <div class="product-price-title">
@@ -220,22 +281,6 @@ EOT;
                                     </span>
                                 </div>
                             </li>
-                            <li>
-                                <div class="product-stock">
-                                    <strong><?php _e('Stock status'); ?> : </strong>
-                                    <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="product-code">
-                                    <strong> <?php _e('Product code'); ?> : </strong>
-                                    <?php if ($productItem['code']) {
-                                        echo $this->escape($productItem['code']);
-                                    } else {
-                                        echo $this->escape($productItem['id']);
-                                    } ?>
-                                </div>
-                            </li>
                         </ul>
                         <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
                     </div>
@@ -245,6 +290,33 @@ EOT;
                 </div>
             <?php } else { ?>
                 <ul class="list-unstyled">
+                    <?php if (!empty($productItem['brand'])) { ?>
+                        <li>
+                            <div class="product-brand">
+                                <strong><?php _e('Brand'); ?> : </strong>
+                                <a itemprop="brand" href="<?php echo $this->escape($category['brandUrl']); ?>"
+                                   title="<?php echo $this->escape($category['brandTitle']); ?>">
+                                    <?php echo $this->escape($category['brandTitle']); ?>
+                                </a>
+                            </div>
+                        </li>
+                    <?php } ?>
+                    <li>
+                        <div class="product-stock">
+                            <strong><?php _e('Stock status'); ?> : </strong>
+                            <span class="text-danger"><?php _e('Out of stock'); ?></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="product-code">
+                            <strong> <?php _e('Product code'); ?> : </strong>
+                            <?php if ($productItem['code']) {
+                                echo $this->escape($productItem['code']);
+                            } else {
+                                echo $this->escape($productItem['id']);
+                            } ?>
+                        </div>
+                    </li>
                     <?php if (!empty($productItem['price_title'])) { ?>
                         <li>
                             <div class="product-price-title">
@@ -266,28 +338,33 @@ EOT;
                             </span>
                         </div>
                     </li>
-                    <li>
-                        <div class="product-stock">
-                            <strong><?php _e('Stock status'); ?> : </strong>
-                            <span class="text-danger"><?php _e('Out of stock'); ?></span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="product-code">
-                            <strong> <?php _e('Product code'); ?> : </strong>
-                            <?php if ($productItem['code']) {
-                                echo $this->escape($productItem['code']);
-                            } else {
-                                echo $this->escape($productItem['id']);
-                            } ?>
-                        </div>
-                    </li>
                 </ul>
             <?php } ?>
         <?php } elseif ($config['order_stock'] == 'property') { ?>
             <div class="clearfix">
                 <div class="col-md-5 col-xs-12">
                     <ul class="list-unstyled">
+                        <?php if (!empty($productItem['brand'])) { ?>
+                            <li>
+                                <div class="product-brand">
+                                    <strong><?php _e('Brand'); ?> : </strong>
+                                    <a itemprop="brand" href="<?php echo $this->escape($category['brandUrl']); ?>"
+                                       title="<?php echo $this->escape($category['brandTitle']); ?>">
+                                        <?php echo $this->escape($category['brandTitle']); ?>
+                                    </a>
+                                </div>
+                            </li>
+                        <?php } ?>
+                        <li>
+                            <div class="product-code">
+                                <strong> <?php _e('Product code'); ?> : </strong>
+                                <?php if ($productItem['code']) {
+                                    echo $this->escape($productItem['code']);
+                                } else {
+                                    echo $this->escape($productItem['id']);
+                                } ?>
+                            </div>
+                        </li>
                         <li>
                             <div class="product-price-info">
                                 <strong><?php _e('Price'); ?> : </strong>
@@ -299,16 +376,6 @@ EOT;
                                 <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>">
                                 <?php echo $this->escape($productItem['price_view']); ?>
                             </span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="product-code">
-                                <strong> <?php _e('Product code'); ?> : </strong>
-                                <?php if ($productItem['code']) {
-                                    echo $this->escape($productItem['code']);
-                                } else {
-                                    echo $this->escape($productItem['id']);
-                                } ?>
                             </div>
                         </li>
                     </ul>

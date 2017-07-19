@@ -57,12 +57,12 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
                         </li>
                     <?php } ?>
                     <?php if ($config['view_question']) { ?>
-                        <li class="col-md-2 col-xs-4">
+                        <li class="col-md-3 col-xs-4">
                             <?php include $this->template('front/product-question'); ?>
                         </li>
                     <?php } ?>
                     <?php if ($config['social_sharing']) { ?>
-                        <li class="col-md-6 col-xs-12">
+                        <li class="col-md-5 col-xs-12">
                             <div class="socialSharing">
                                 <?php echo $this->socialSharing(
                                     $config['social_sharing'],
