@@ -136,6 +136,11 @@
     padding: 0;
 }
 
+.product-page .product-price-info .product-price {
+    font-size: 20px;
+    color: #3E773F;
+}
+
 /* product-attribute */
 .product-attribute .product-attribute-head h2 {
     font-size: 1.3em;
