@@ -447,6 +447,7 @@ class JsonController extends IndexController
                 'title' => $pageTitle,
                 'urlCompare' => Pi::url($this->url('', array('controller' => 'compare'))),
                 'priceFilter' => $config['view_price_filter'],
+                'addToCart' => $config['view_add_to_cart'],
                 'columnSize' => $columnSize,
             ),
             'price' => array(

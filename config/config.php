@@ -211,6 +211,14 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
+        'view_add_to_cart' => array(
+            'category' => 'view',
+            'title' => _a('Show add to cart on list'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 0
+        ),
         'view_price_title' => array(
             'category' => 'view',
             'title' => _a('Price title'),
@@ -291,7 +299,6 @@ return array(
             'filter' => 'number_int',
             'value' => 0
         ),
-
         // Image
         'image_size' => array(
             'category' => 'image',
