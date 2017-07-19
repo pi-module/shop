@@ -97,7 +97,7 @@
                         <div class="{{condition.columnSize}}">
                             <div class="pi-item-box">
                                 <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
-                                    <div class="product-image">
+                                    <div class="pi-item-box-image">
                                         <div ng-show="hoverCompare"
                                              ng-click="changeClass()"
                                              ng-class="class"
@@ -115,12 +115,14 @@
                                         </a>
                                     </div>
                                     <div class="caption">
-                                        <h3 class="p-name" itemprop="name">
-                                            <a title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
-                                                {{product.title}}
-                                            </a>
-                                        </h3>
-                                        <div class="clearfix" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                        <div class="pi-item-box-title">
+                                            <h3 class="p-name" itemprop="name">
+                                                <a title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
+                                                    {{product.title}}
+                                                </a>
+                                            </h3>
+                                        </div>
+                                        <div class="pi-item-box-extra clearfix" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                                             <div class="clearfix">
                                                 <div ng-if="product.price_discount_has == 1">
                                                 <span class="text-danger">
