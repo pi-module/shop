@@ -1009,6 +1009,22 @@ EOD;
             }
         }
 
+        // Update to version 1.9.1
+        if (version_compare($moduleVersion, '1.9.1', '<')) {
+            // Alter table field `type`
+            $sql = sprintf("ALTER TABLE %s ADD `code` VARCHAR(255) DEFAULT NULL, ADD UNIQUE `code` (`code`)", $linkTable);
+            try {
+                $linkAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult('db', array(
+                    'status' => false,
+                    'message' => 'Table alter query failed: '
+                        . $exception->getMessage(),
+                ));
+                return false;
+            }
+        }
+
         return true;
     }
 }

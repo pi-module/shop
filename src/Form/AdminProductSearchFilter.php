@@ -15,7 +15,7 @@ namespace Module\Shop\Form;
 use Pi;
 use Zend\InputFilter\InputFilter;
 
-class AdminSearchFilter extends InputFilter
+class AdminProductSearchFilter extends InputFilter
 {
     public function __construct()
     {
@@ -72,6 +72,16 @@ class AdminSearchFilter extends InputFilter
         // recommended
         $this->add(array(
             'name' => 'recommended',
+            'required' => false,
+            'filters' => array(
+                array(
+                    'name' => 'StringTrim',
+                ),
+            ),
+        ));
+        // sort
+        $this->add(array(
+            'name' => 'sort',
             'required' => false,
             'filters' => array(
                 array(

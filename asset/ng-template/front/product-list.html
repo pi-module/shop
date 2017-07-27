@@ -9,6 +9,10 @@
                     <label>{{'TITLE' | translate}}</label>
                     <input type="text" class="form-control" ng-model="filter.title" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
                 </div>
+                <div class="form-group">
+                    <label>{{'CODE' | translate}}</label>
+                    <input type="text" class="form-control" ng-model="filter.code" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
+                </div>
                 <div ng-if="condition.priceFilter == 1">
                     <div class="form-group">
                         <rzslider class="custom-slider"

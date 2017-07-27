@@ -14,6 +14,7 @@
 namespace Module\Shop\Controller\Front;
 
 use Pi;
+use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
 use Zend\Db\Sql\Predicate\Expression;
 
@@ -25,6 +26,7 @@ class JsonController extends IndexController
         $module = $this->params('module');
         $page = $this->params('page', 1);
         $title = $this->params('title');
+        $code = $this->params('code');
         $category = $this->params('category');
         $tag = $this->params('tag');
         $favourite = $this->params('favourite');
@@ -44,6 +46,14 @@ class JsonController extends IndexController
             $title = _strip($title);
         } else {
             $title = '';
+        }
+
+        // Clean code
+        if (isset($code) && !empty($code)) {
+            $filter = new Filter\HeadTitle;
+            $code = $filter($code);
+        } else {
+            $code = '';
         }
 
         // Clean params
@@ -70,6 +80,9 @@ class JsonController extends IndexController
         $whereLink = array('status' => 1);
         if (!empty($recommended) && $recommended == 1) {
             $whereLink['recommended'] = 1;
+        }
+        if (!empty($code)) {
+            $whereLink['code LIKE ?'] = '%' . $code . '%';
         }
 
         // Set page title
@@ -219,7 +232,7 @@ class JsonController extends IndexController
             $checkTitle = true;
             $titles = is_array($title) ? $title : array($title);
             $columns = array('id');
-            $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($titles, $recommended) {
+            $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($titles, $recommended, $code) {
                 $whereMain = clone $where;
                 $whereTitleKey = clone $where;
                 $whereSubTitleKey = clone $where;
@@ -228,6 +241,9 @@ class JsonController extends IndexController
                 $whereMain->equalTo('status', 1);
                 if (!empty($recommended) && $recommended == 1) {
                     $whereMain->equalTo('recommended', 1);
+                }
+                if (!empty($code)) {
+                    $whereMain->like('code', '%' . $code . '%');
                 }
 
                 // Set where title

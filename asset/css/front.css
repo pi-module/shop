@@ -55,9 +55,7 @@
     border-radius: 4px;
 }
 
-.pi-item-list .pi-item-box .pi-item-box-form {
-    margin-top: 10px;
-}
+.pi-item-list .pi-item-box .pi-item-box-form {}
 
 .pi-item-list .pi-paginator {
     text-align: center;

@@ -1,0 +1,43 @@
+<?php $this->css($this->assetModule('css/admin.css')); ?>
+<div class="clearfix">
+    <h3><?php _e('Export product'); ?></h3>
+    <?php if (isset($form) && !empty($form) && $confirm == 0) { ?>
+        <div class="well">
+            <?php echo $this->form($form); ?>
+        </div>
+    <?php } else { ?>
+        <div class="progress progress-striped active">
+            <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $percent; ?>" aria-valuemin="0"
+                 aria-valuemax="100" style="width: <?php echo $percent; ?>%">
+                <?php echo $percent; ?> % Complete
+            </div>
+        </div>
+        <pre><?php print_r($info); ?></pre>
+    <?php if (!empty($nextUrl)) { ?>
+        <script>
+            window.setTimeout(function () {
+                window.location.href = '<?php echo $nextUrl; ?>';
+            }, 1000);
+        </script>
+    <?php } elseif (!empty($downloadUrl)) { ?>
+        <div class="text-right">
+            <a class="btn btn-success" title="<?php _e('Download CSV file'); ?>"
+               href="<?php echo $downloadUrl; ?>"><i
+                        class="fa fa-download"></i> <?php _e('Download CSV file'); ?></a>
+        </div>
+    <?php } ?>
+    <?php } ?>
+    <?php if (isset($fileList) && !empty($fileList)) { ?>
+        <h4><?php _e('List of old exported files'); ?></h4>
+        <div class="list-group">
+            <?php foreach ($fileList as $file) { ?>
+                <a href="<?php echo sprintf(
+                        '%s?upload/shop/export/%s',
+                        Pi::url('www/script/download.php'),
+                        $file); ?>" class="list-group-item">
+                    <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php echo $file; ?>
+                </a>
+            <?php } ?>
+        </div>
+    <?php } ?>
+</div>

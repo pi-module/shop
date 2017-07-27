@@ -42,6 +42,39 @@ return array(
             'module' => 'shop',
             'controller' => 'product',
             'action' => 'index',
+
+            'pages' => array(
+                'category' => array(
+                    'label' => _a('Product'),
+                    'permission' => array(
+                        'resource' => 'product',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'product',
+                    'action' => 'index',
+                ),
+                'update' => array(
+                    'label' => _a('New product'),
+                    'permission' => array(
+                        'resource' => 'product',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'product',
+                    'action' => 'update',
+                ),
+                'csv' => array(
+                    'label' => _a('Export products'),
+                    'permission' => array(
+                        'resource' => 'product',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'product',
+                    'action' => 'export',
+                ),
+            ),
         ),
 
         'category' => array(

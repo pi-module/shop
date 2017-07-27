@@ -19,7 +19,7 @@ use Zend\Db\Sql\Predicate\Expression;
 /*
  * Pi::api('category', 'shop')->getCategory($parameter, $type = 'id');
  * Pi::api('category', 'shop')->getChildCount($parent);
- * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status, $recommended);
+ * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status, $recommended, $code);
  * Pi::api('category', 'shop')->findFromCategory($category);
  * Pi::api('category', 'shop')->categoryList($parent);
  * Pi::api('category', 'shop')->categoryListJson();
@@ -48,8 +48,16 @@ class Category extends AbstractApi
         return $count;
     }
 
-    public function setLink($product, $category, $create, $update, $price, $stock, $status, $recommended = 0)
-    {
+    public function setLink(
+        $product,
+        $category,
+        $create,
+        $update,
+        $price,
+        $stock,
+        $status,
+        $recommended = 0,
+        $code = null) {
         //Remove
         Pi::model('link', $this->getModule())->delete(array('product' => $product));
         // Add
@@ -64,6 +72,7 @@ class Category extends AbstractApi
             $values['stock'] = ($stock > 0) ? 1 : 0;
             $values['status'] = $status;
             $values['recommended'] = $recommended;
+            $values['code'] = $code;
             // Save
             $row = Pi::model('link', $this->getModule())->createRow();
             $row->assign($values);

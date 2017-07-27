@@ -15,7 +15,7 @@ namespace Module\Shop\Form;
 use Pi;
 use Pi\Form\Form as BaseForm;
 
-class AdminSearchForm extends BaseForm
+class AdminProductSearchForm extends BaseForm
 {
     public function __construct($name = null, $option = array())
     {
@@ -25,7 +25,7 @@ class AdminSearchForm extends BaseForm
     public function getInputFilter()
     {
         if (!$this->filter) {
-            $this->filter = new AdminSearchFilter;
+            $this->filter = new AdminProductSearchFilter;
         }
         return $this->filter;
     }
@@ -107,6 +107,29 @@ class AdminSearchForm extends BaseForm
                 'value_options' => array(
                     '' => __('All'),
                     1 => __('Recommended'),
+                ),
+            ),
+        ));
+        // sort
+        $this->add(array(
+            'name' => 'sort',
+            'type' => 'select',
+            'options' => array(
+                'label' => __('Sort order'),
+                'value_options' => array(
+                    'title' => __('Title DESC'),
+                    'titleASC' => __('Title ASC'),
+                    'hits' => __('Hits DESC'),
+                    'hitsASC' => __('Hits ASC'),
+                    'create' => __('Create DESC'),
+                    'createASC' => __('Create ASC'),
+                    'update' => __('Update DESC'),
+                    'updateASC' => __('Update ASC'),
+                    'price' => __('Price DESC'),
+                    'priceASC' => __('Price ASC'),
+                    'stock' => __('Stock DESC'),
+                    'stockASC' => __('Stock ASC'),
+                    'sold' => __('Sold DESC'),
                 ),
             ),
         ));

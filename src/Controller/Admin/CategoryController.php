@@ -25,14 +25,8 @@ use Zend\Db\Sql\Predicate\Expression;
 
 class CategoryController extends ActionController
 {
-    /**
-     * Image Prefix
-     */
     protected $ImageCategoryPrefix = 'category-';
 
-    /**
-     * index Action
-     */
     public function indexAction()
     {
         $type = $this->params('type', 'category');
@@ -47,9 +41,6 @@ class CategoryController extends ActionController
         $this->view()->assign('type', $type);
     }
 
-    /**
-     * update Action
-     */
     public function updateAction()
     {
         // Get id
@@ -345,7 +336,8 @@ class CategoryController extends ActionController
                     $product['price'],
                     $product['stock'],
                     $product['status'],
-                    $product['recommended']
+                    $product['recommended'],
+                    $product['code']
                 );
 
                 // Update product
@@ -558,7 +550,8 @@ class CategoryController extends ActionController
                     $product['price'],
                     $product['stock'],
                     $product['status'],
-                    $product['recommended']
+                    $product['recommended'],
+                    $product['code']
                 );
 
                 // Update product

@@ -25,8 +25,10 @@ use Module\Shop\Form\ProductPriceForm;
 use Module\Shop\Form\ProductPriceFilter;
 use Module\Shop\Form\RelatedForm;
 use Module\Shop\Form\RelatedFilter;
-use Module\Shop\Form\AdminSearchForm;
-use Module\Shop\Form\AdminSearchFilter;
+use Module\Shop\Form\AdminProductSearchForm;
+use Module\Shop\Form\AdminProductSearchFilter;
+use Module\Shop\Form\AdminProductExportForm;
+use Module\Shop\Form\AdminProductExportFilter;
 use Zend\Db\Sql\Predicate\Expression;
 
 class ProductController extends ActionController
@@ -44,11 +46,73 @@ class ProductController extends ActionController
         $recommended = $this->params('recommended');
         $title = $this->params('title');
         $code = $this->params('code');
+        $sort = $this->params('sort', 'create');
         // Get config
         $config = Pi::service('registry')->config->read($module);
+        // Set sort
+        switch ($sort) {
+            case 'title':
+                $order = array('title DESC', 'id DESC');
+                break;
+
+            case 'titleASC':
+                $order = array('title ASC', 'id ASC');
+                break;
+
+            case 'hits':
+                $order = array('hits DESC', 'id DESC');
+                break;
+
+            case 'hitsASC':
+                $order = array('hits ASC', 'id ASC');
+                break;
+
+            case 'create':
+                $order = array('time_create DESC', 'id DESC');
+                break;
+
+            case 'createASC':
+                $order = array('time_create ASC', 'id ASC');
+                break;
+
+            case 'update':
+                $order = array('time_update DESC', 'id DESC');
+                break;
+
+            case 'updateASC':
+                $order = array('time_update ASC', 'id ASC');
+                break;
+
+            case 'recommended':
+                $order = array('recommended DESC', 'time_create DESC', 'id DESC');
+                break;
+
+            case 'price':
+                $order = array('price DESC', 'id DESC');
+                break;
+
+            case 'priceASC':
+                $order = array('price ASC', 'id ASC');
+                break;
+
+            case 'stock':
+                $order = array('stock DESC', 'id DESC');
+                break;
+
+            case 'stockASC':
+                $order = array('stock ASC', 'id ASC');
+                break;
+
+            case 'sold':
+                $order = array('sold DESC', 'id DESC');
+                break;
+
+            default:
+                $order = array('time_create DESC', 'id DESC');
+                break;
+        }
         // Set info
         $offset = (int)($page - 1) * $this->config('admin_perpage');
-        $order = array('time_create DESC', 'id DESC');
         $limit = intval($this->config('admin_perpage'));
         $product = array();
         // Set where
@@ -79,7 +143,7 @@ class ProductController extends ActionController
             $whereProduct['status'] = array(1, 2, 3, 4);
         }
         if (!empty($code)) {
-            $whereProduct['code'] = $code;
+            $whereProduct['code LIKE ?'] = '%' . $code . '%';
         }
         if (!empty($title)) {
             // Set title
@@ -144,6 +208,7 @@ class ProductController extends ActionController
                 'title' => $title,
                 'code' => $code,
                 'recommended' => $recommended,
+                'sort' => $sort,
             )),
         ));
         // Set form
@@ -154,8 +219,9 @@ class ProductController extends ActionController
             'brand' => $brand,
             'status' => $status,
             'recommended' => $recommended,
+            'sort' => $sort,
         );
-        $form = new AdminSearchForm('search');
+        $form = new AdminProductSearchForm('search');
         $form->setAttribute('action', $this->url('', array('action' => 'process')));
         $form->setData($values);
         // Set view
@@ -170,8 +236,8 @@ class ProductController extends ActionController
     {
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
-            $form = new AdminSearchForm('search');
-            $form->setInputFilter(new AdminSearchFilter());
+            $form = new AdminProductSearchForm('search');
+            $form->setInputFilter(new AdminProductSearchFilter());
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
@@ -184,6 +250,7 @@ class ProductController extends ActionController
                     'brand' => $values['brand'],
                     'status' => $values['status'],
                     'recommended' => $values['recommended'],
+                    'sort' => $values['sort']
                 );
             } else {
                 $message = __('Not valid');
@@ -238,6 +305,11 @@ class ProductController extends ActionController
             $slug = ($data['slug']) ? $data['slug'] : $data['title'];
             $filter = new Filter\Slug;
             $data['slug'] = $filter($slug);
+            // Set code
+            if (!empty($data['code'])) {
+                $filter = new Filter\HeadTitle;
+                $data['code'] = $filter($data['code']);
+            }
             // Form filter
             $form->setInputFilter(new ProductFilter($option));
             $form->setData($data);
@@ -309,7 +381,17 @@ class ProductController extends ActionController
                 $row->assign($values);
                 $row->save();
                 // Category
-                Pi::api('category', 'shop')->setLink($row->id, $row->category, $row->time_create, $row->time_update, $row->price, $row->stock, $row->status, $row->recommended);
+                Pi::api('category', 'shop')->setLink(
+                    $row->id,
+                    $row->category,
+                    $row->time_create,
+                    $row->time_update,
+                    $row->price,
+                    $row->stock,
+                    $row->status,
+                    $row->recommended,
+                    $row->code
+                );
                 // Tag
                 if (isset($tag) && is_array($tag) && Pi::service('module')->isActive('tag')) {
                     if (empty($values['id'])) {
@@ -878,5 +960,192 @@ class ProductController extends ActionController
             $this->jump(array('action' => 'index'), __('This product deleted'));
         }
         $this->jump(array('action' => 'index'), __('Please select product'));
+    }
+
+    public function exportAction()
+    {
+        // Get inf0
+        $module = $this->params('module');
+        $status = $this->params('status');
+        $category = $this->params('category');
+        $brand = $this->params('brand');
+        $recommended = $this->params('recommended');
+        $file = $this->params('file');
+        $start = $this->params('start', 0);
+        $count = $this->params('count');
+        $complete = $this->params('complete', 0);
+        $confirm = $this->params('confirm', 0);
+
+        // Set path
+        $path = Pi::path('upload/shop/export');
+        if (!Pi::service('file')->exists($path . '/index.html')) {
+            Pi::service('file')->copy(
+                Pi::path('upload/index.html'),
+                Pi::path('upload/shop/export/index.html')
+            );
+        }
+
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+        // Check request
+        if ($this->request->isPost()) {
+            $data = $this->request->getPost();
+            $form = new AdminProductExportForm('export');
+            $form->setInputFilter(new AdminProductExportFilter());
+            $form->setData($data);
+            if ($form->isValid()) {
+                $values = $form->getData();
+                $url = array(
+                    'action' => 'export',
+                    'category' => $values['category'],
+                    'brand' => $values['brand'],
+                    'status' => $values['status'],
+                    'recommended' => $values['recommended'],
+                    'sort' => $values['sort'],
+                    'confirm' => 1,
+                    'file' => sprintf('product-%s-%s', date('Y-m-d-H-i-s'), rand(100, 999)),
+                );
+                return $this->jump($url);
+            } else {
+                $message = __('Not valid');
+                $url = array(
+                    'action' => 'export',
+                );
+                return $this->jump($url, $message);
+            }
+        } elseif ($confirm == 1) {
+            // Get category list
+            $categoryList = Pi::registry('categoryList', 'shop')->read();
+            // Get products and send
+            $order = array('id ASC');
+            $where = array();
+            $where['id > ?'] = $start;
+            if (!empty($recommended)) {
+                $where['recommended'] = 1;
+            }
+            if (!empty($brand)) {
+                $where['brand'] = $brand;
+            }
+            if (!empty($category)) {
+                $productId = array();
+                $whereLink = array('category' => $category);
+                $selectLink = $this->getModel('link')->select()->where($whereLink);
+                $rowLink = $this->getModel('link')->selectWith($selectLink);
+                foreach ($rowLink as $link) {
+                    $productId[] = $link['product'];
+                }
+                if (!empty($productId)) {
+                    $where['id'] = $productId;
+                } else {
+                    $where['id'] = 0;
+                }
+            }
+            if (!empty($status) && in_array($status, array(1, 2, 3, 4, 5))) {
+                $where['status'] = $status;
+            } else {
+                $where['status'] = array(1, 2, 3, 4);
+            }
+
+            $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
+            $rowset = $this->getModel('product')->selectWith($select);
+
+            // Set file
+            Pi::service('audit')->attach('product-export', array(
+                'file'   => Pi::path(sprintf('upload/shop/export/%s.csv', $file)),
+                'format' => 'csv',
+            ));
+
+            // Make list
+            foreach ($rowset as $row) {
+                $product = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
+
+                // Set key
+                if ($complete == 0) {
+                    $keys = array();
+                    foreach ($product as $key => $value) {
+                        $keys[$key] = $key;
+                    }
+                    Pi::service('audit')->log('product-export', $keys);
+                }
+
+                // Set to csv
+                Pi::service('audit')->log('product-export', $product);
+
+                // Set extra
+                $lastId = $product['id'];
+                $complete++;
+            }
+            // Get count
+            if (!$count) {
+                $columns = array('count' => new Expression('count(*)'));
+                $select = $this->getModel('product')->select()->columns($columns)->where($where);
+                $count = $this->getModel('product')->selectWith($select)->current()->count;
+            }
+            // Set complete
+            $percent = (100 * $complete) / $count;
+            // Set next url
+            if ($complete >= $count) {
+                $nextUrl = '';
+                $downloadUrl = sprintf('%s?upload/shop/export/%s.csv', Pi::url('www/script/download.php'), $file);
+            } else {
+                $nextUrl = Pi::url($this->url('', array(
+                    'action' => 'export',
+                    'start' => $lastId,
+                    'count' => $count,
+                    'complete' => $complete,
+                    'confirm' => $confirm,
+                    'file' => $file,
+                    'category' => $category,
+                    'brand' => $brand,
+                    'status' => $status,
+                    'recommended' => $recommended,
+                )));
+                $downloadUrl = '';
+            }
+
+            $info = array(
+                'start' => $lastId,
+                'count' => $count,
+                'complete' => $complete,
+                'percent' => $percent,
+                'nextUrl' => $nextUrl,
+                'downloadUrl' => $downloadUrl,
+            );
+
+            $percent = ($percent > 99 && $percent < 100) ? (intval($percent) + 1) : intval($percent);
+
+        } else {
+            // Set info
+            $info = array();
+            $percent = 0;
+            $nextUrl = '';
+            $downloadUrl = '';
+            // Set form
+            $form = new AdminProductExportForm('export');
+            // Set filter
+            $filter = function ($fileinfo) {
+                if (!$fileinfo->isFile()) {
+                    return false;
+                }
+                $filename = $fileinfo->getFilename();
+                if ('index.html' == $filename) {
+                    return false;
+                }
+                return $filename;
+            };
+            // Get file list
+            $fileList = Pi::service('file')->getList($path, $filter);
+            // Set view
+            $this->view()->assign('form', $form);
+            $this->view()->assign('fileList', $fileList);
+        }
+        // Set view
+        $this->view()->setTemplate('product-export');
+        $this->view()->assign('config', $config);
+        $this->view()->assign('nextUrl', $nextUrl);
+        $this->view()->assign('downloadUrl', $downloadUrl);
+        $this->view()->assign('percent', $percent);
+        $this->view()->assign('info', $info);
+        $this->view()->assign('confirm', $confirm);
     }
 }
