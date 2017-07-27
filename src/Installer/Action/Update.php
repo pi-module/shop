@@ -1012,7 +1012,7 @@ EOD;
         // Update to version 1.9.1
         if (version_compare($moduleVersion, '1.9.1', '<')) {
             // Alter table field `type`
-            $sql = sprintf("ALTER TABLE %s ADD `code` VARCHAR(255) DEFAULT NULL, ADD UNIQUE `code` (`code`)", $linkTable);
+            $sql = sprintf("ALTER TABLE %s ADD `code` VARCHAR(255) DEFAULT NULL, ADD INDEX `code` (`code`)", $linkTable);
             try {
                 $linkAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
