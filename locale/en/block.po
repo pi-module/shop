@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2017-05-17 11:11+0430\n"
+"POT-Creation-Date: 2017-07-27 13:33+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -15,79 +15,121 @@ msgstr ""
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: template/block/basket.phtml:3 template/block/basket.phtml:4
-#: template/block/basket.phtml:10
+#: template-not-responsive/block/basket.phtml:3
+#: template-not-responsive/block/basket.phtml:4
+#: template-not-responsive/block/basket.phtml:10 template/block/basket.phtml:3
+#: template/block/basket.phtml:4 template/block/basket.phtml:10
 msgid "Basket"
 msgstr ""
 
-#: template/block/basket.phtml:20
+#: template-not-responsive/block/basket.phtml:20 template/block/basket.phtml:20
 msgid "List of products on your basket"
 msgstr ""
 
-#: template/block/basket.phtml:36
+#: template-not-responsive/block/basket.phtml:36 template/block/basket.phtml:36
 msgid "Number"
 msgstr ""
 
-#: template/block/basket.phtml:37
+#: template-not-responsive/block/basket.phtml:37 template/block/basket.phtml:37
 msgid "Total price"
 msgstr ""
 
-#: template/block/basket.phtml:43
+#: template-not-responsive/block/basket.phtml:43 template/block/basket.phtml:43
 msgid "Your basket is empty"
 msgstr ""
 
-#: template/block/basket.phtml:48 template/block/basket.phtml:49
+#: template-not-responsive/block/basket.phtml:48
+#: template-not-responsive/block/basket.phtml:49 template/block/basket.phtml:48
+#: template/block/basket.phtml:49
 msgid "Go to basket"
 msgstr ""
 
+#: template-not-responsive/block/category-sale.phtml:62
+#: template-not-responsive/block/product-sale.phtml:93
 #: template/block/category-sale.phtml:62 template/block/product-sale.phtml:93
 msgid "Second"
 msgstr ""
 
+#: template-not-responsive/block/category-sale.phtml:63
+#: template-not-responsive/block/product-sale.phtml:94
 #: template/block/category-sale.phtml:63 template/block/product-sale.phtml:94
 msgid "Minute"
 msgstr ""
 
+#: template-not-responsive/block/category-sale.phtml:64
+#: template-not-responsive/block/product-sale.phtml:95
 #: template/block/category-sale.phtml:64 template/block/product-sale.phtml:95
 msgid "Hour"
 msgstr ""
 
+#: template-not-responsive/block/category-sale.phtml:65
+#: template-not-responsive/block/product-sale.phtml:96
 #: template/block/category-sale.phtml:65 template/block/product-sale.phtml:96
 msgid "Day"
 msgstr ""
 
+#: template-not-responsive/block/category-sale.phtml:66
+#: template-not-responsive/block/product-sale.phtml:97
 #: template/block/category-sale.phtml:66 template/block/product-sale.phtml:97
 msgid "Month"
 msgstr ""
 
+#: template-not-responsive/block/category-sale.phtml:67
+#: template-not-responsive/block/product-sale.phtml:98
 #: template/block/category-sale.phtml:67 template/block/product-sale.phtml:98
 msgid "Year"
 msgstr ""
 
+#: template-not-responsive/block/category-sale.phtml:85
+#: template-not-responsive/block/category-sale.phtml:86
 #: template/block/category-sale.phtml:85 template/block/category-sale.phtml:86
 msgid "More categories"
 msgstr ""
 
+#: template-not-responsive/block/category.phtml:116
+#: template-not-responsive/block/product-new.phtml:244
+#: template-not-responsive/block/product-random.phtml:244
+#: template-not-responsive/block/product-tag.phtml:244
 #: template/block/category.phtml:116 template/block/product-new.phtml:244
 #: template/block/product-random.phtml:244 template/block/product-tag.phtml:244
 msgid "View"
 msgstr ""
 
+#: template-not-responsive/block/product-new.phtml:27
+#: template-not-responsive/block/product-random.phtml:27
+#: template-not-responsive/block/product-sale.phtml:6
+#: template-not-responsive/block/product-tag.phtml:27
 #: template/block/product-new.phtml:27 template/block/product-random.phtml:27
 #: template/block/product-sale.phtml:6 template/block/product-tag.phtml:27
 msgid "On sale"
 msgstr ""
 
+#: template-not-responsive/block/product-new.phtml:28
+#: template-not-responsive/block/product-random.phtml:28
+#: template-not-responsive/block/product-sale.phtml:7
+#: template-not-responsive/block/product-tag.phtml:28
 #: template/block/product-new.phtml:28 template/block/product-random.phtml:28
 #: template/block/product-sale.phtml:7 template/block/product-tag.phtml:28
 msgid "Have discount"
 msgstr ""
 
+#: template-not-responsive/block/product-new.phtml:29
+#: template-not-responsive/block/product-random.phtml:29
+#: template-not-responsive/block/product-sale.phtml:8
+#: template-not-responsive/block/product-tag.phtml:29
 #: template/block/product-new.phtml:29 template/block/product-random.phtml:29
 #: template/block/product-sale.phtml:8 template/block/product-tag.phtml:29
 msgid "Recommended"
 msgstr ""
 
+#: template-not-responsive/block/product-new.phtml:257
+#: template-not-responsive/block/product-new.phtml:258
+#: template-not-responsive/block/product-random.phtml:257
+#: template-not-responsive/block/product-random.phtml:258
+#: template-not-responsive/block/product-sale.phtml:108
+#: template-not-responsive/block/product-sale.phtml:109
+#: template-not-responsive/block/product-tag.phtml:257
+#: template-not-responsive/block/product-tag.phtml:258
 #: template/block/product-new.phtml:257 template/block/product-new.phtml:258
 #: template/block/product-random.phtml:257
 #: template/block/product-random.phtml:258
@@ -96,6 +138,6 @@ msgstr ""
 msgid "More products"
 msgstr ""
 
-#: template/block/search.phtml:40
+#: template-not-responsive/block/search.phtml:40 template/block/search.phtml:40
 msgid "Search"
 msgstr ""
