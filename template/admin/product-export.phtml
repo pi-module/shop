@@ -31,12 +31,14 @@
         <h4><?php _e('List of old exported files'); ?></h4>
         <div class="list-group">
             <?php foreach ($fileList as $file) { ?>
-                <a href="<?php echo sprintf(
-                        '%s?upload/shop/export/%s',
+                <?php if (substr( $file, 0, 7 ) === 'product') { ?>
+                    <a href="<?php echo sprintf(
+                        '%s?upload/shop/csv/%s',
                         Pi::url('www/script/download.php'),
                         $file); ?>" class="list-group-item">
-                    <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php echo $file; ?>
-                </a>
+                        <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php echo $file; ?>
+                    </a>
+                <?php } ?>
             <?php } ?>
         </div>
     <?php } ?>

@@ -295,6 +295,16 @@ return array(
                     'controller' => 'price',
                     'action' => 'update',
                 ),
+                'csv' => array(
+                    'label' => _a('Price update from CSV'),
+                    'permission' => array(
+                        'resource' => 'price',
+                    ),
+                    'route' => 'admin',
+                    'module' => 'shop',
+                    'controller' => 'price',
+                    'action' => 'csv',
+                ),
                 'sync' => array(
                     'label' => _a('Price sync'),
                     'permission' => array(

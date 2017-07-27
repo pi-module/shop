@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shop\n"
-"POT-Creation-Date: 2017-07-27 13:28+0430\n"
+"POT-Creation-Date: 2017-07-27 19:06+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -702,27 +702,31 @@ msgid "Price update"
 msgstr "به روز رسانی قیمت"
 
 #: config/navigation.php:299
+msgid "Price update from CSV"
+msgstr "به روز رسانی قیمت از فایل CSV"
+
+#: config/navigation.php:309
 msgid "Price sync"
 msgstr "یکسان سازی قیمت"
 
-#: config/navigation.php:309
+#: config/navigation.php:319
 msgid "Price log"
 msgstr "گزارش تغییرات قیمت"
 
-#: config/navigation.php:322 config/navigation.php:332 config/page.php:67
+#: config/navigation.php:332 config/navigation.php:342 config/page.php:67
 #: config/permission.php:83
 msgid "Tools"
 msgstr "ابزار ها"
 
-#: config/navigation.php:342
+#: config/navigation.php:352
 msgid "Sitemap"
 msgstr "نقشه سایت"
 
-#: config/navigation.php:352 config/page.php:62 config/permission.php:78
+#: config/navigation.php:362 config/page.php:62 config/permission.php:78
 msgid "Logs"
 msgstr "گزارش ها"
 
-#: config/navigation.php:362 config/permission.php:88
+#: config/navigation.php:372 config/permission.php:88
 msgid "Json"
 msgstr "جیسون"
 

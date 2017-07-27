@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2017-07-27 13:33+0430\n"
+"POT-Creation-Date: 2017-07-27 19:11+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -292,22 +292,49 @@ msgstr ""
 msgid "Add position"
 msgstr ""
 
-#: src/Controller/Admin/PriceController.php:68
+#: src/Controller/Admin/PriceController.php:102
 msgid ""
 "Your selected category not set as main category for any product, please "
 "select other category"
 msgstr ""
 
-#: src/Controller/Admin/PriceController.php:405
+#: src/Controller/Admin/PriceController.php:464
 msgid "Product price"
 msgstr ""
 
-#: src/Controller/Admin/PriceController.php:409
+#: src/Controller/Admin/PriceController.php:468
 msgid "Property price"
 msgstr ""
 
-#: src/Controller/Admin/PriceController.php:413
+#: src/Controller/Admin/PriceController.php:472
 msgid "Sale price"
+msgstr ""
+
+#: src/Controller/Admin/PriceController.php:585
+#, php-format
+msgid "Working to import information from %s"
+msgstr ""
+
+#: src/Controller/Admin/PriceController.php:588
+#, php-format
+msgid "You can import this information from %s"
+msgstr ""
+
+#: src/Controller/Admin/PriceController.php:591
+#, php-format
+msgid "price.csv not exist on %s"
+msgstr ""
+
+#: src/Controller/Admin/PriceController.php:595
+msgid "total"
+msgstr ""
+
+#: src/Controller/Admin/PriceController.php:596
+msgid "update"
+msgstr ""
+
+#: src/Controller/Admin/PriceController.php:597
+msgid "notUpdate"
 msgstr ""
 
 #: src/Controller/Admin/ProductController.php:244
@@ -1959,6 +1986,24 @@ msgstr ""
 msgid "List of positions"
 msgstr ""
 
+#: template/admin/price-csv.phtml:3
+msgid "Import price list from CSV file"
+msgstr ""
+
+#: template/admin/price-csv.phtml:5
+msgid ""
+"Download this example file and put your product information ( id or code and "
+"price ) on it upload on server and update price on DB"
+msgstr ""
+
+#: template/admin/price-csv.phtml:6 template/admin/price-csv.phtml:7
+msgid "Example"
+msgstr ""
+
+#: template/admin/price-csv.phtml:22 template/admin/price-csv.phtml:25
+msgid "Update price"
+msgstr ""
+
 #: template/admin/price-index.phtml:4 template/admin/tools-index.phtml:4
 msgid "How this part work?"
 msgstr ""
@@ -1979,22 +2024,34 @@ msgid ""
 msgstr ""
 
 #: template/admin/price-index.phtml:8
-msgid "Price sync"
+msgid "Price update from CSV"
 msgstr ""
 
 #: template/admin/price-index.phtml:8
+msgid "Set and upload CSV file for update product price"
+msgstr ""
+
+#: template/admin/price-index.phtml:9
+msgid "Price sync"
+msgstr ""
+
+#: template/admin/price-index.phtml:9
 msgid ""
 "Sync min price on `product` and `link` tables, after click this part start "
 "automatically, us this part just if needed"
 msgstr ""
 
-#: template/admin/price-index.phtml:9
+#: template/admin/price-index.phtml:10
 msgid "Price log"
 msgstr ""
 
-#: template/admin/price-index.phtml:9
+#: template/admin/price-index.phtml:10
 msgid ""
 "Change price log for selected product, you need set product ID and see log"
+msgstr ""
+
+#: template/admin/price-index.phtml:14
+msgid "List of csv logs"
 msgstr ""
 
 #: template/admin/price-log.phtml:30

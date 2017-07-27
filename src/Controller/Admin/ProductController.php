@@ -977,11 +977,11 @@ class ProductController extends ActionController
         $confirm = $this->params('confirm', 0);
 
         // Set path
-        $path = Pi::path('upload/shop/export');
+        $path = Pi::path('upload/shop/csv');
         if (!Pi::service('file')->exists($path . '/index.html')) {
             Pi::service('file')->copy(
                 Pi::path('upload/index.html'),
-                Pi::path('upload/shop/export/index.html')
+                Pi::path('upload/shop/csv/index.html')
             );
         }
 
@@ -1051,7 +1051,7 @@ class ProductController extends ActionController
 
             // Set file
             Pi::service('audit')->attach('product-export', array(
-                'file'   => Pi::path(sprintf('upload/shop/export/%s.csv', $file)),
+                'file'   => Pi::path(sprintf('upload/shop/csv/%s.csv', $file)),
                 'format' => 'csv',
             ));
 
@@ -1086,7 +1086,7 @@ class ProductController extends ActionController
             // Set next url
             if ($complete >= $count) {
                 $nextUrl = '';
-                $downloadUrl = sprintf('%s?upload/shop/export/%s.csv', Pi::url('www/script/download.php'), $file);
+                $downloadUrl = sprintf('%s?upload/shop/csv/%s.csv', Pi::url('www/script/download.php'), $file);
             } else {
                 $nextUrl = Pi::url($this->url('', array(
                     'action' => 'export',

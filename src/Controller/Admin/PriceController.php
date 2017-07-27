@@ -19,14 +19,38 @@ use Module\Shop\Form\PriceUpdateForm;
 use Module\Shop\Form\PriceUpdateFilter;
 use Module\Shop\Form\PriceLogForm;
 use Module\Shop\Form\PriceLogFilter;
+use Module\Shop\Api\Csv;
 use Zend\Db\Sql\Predicate\Expression;
 
 class PriceController extends ActionController
 {
     public function indexAction()
     {
+        // Set path
+        $path = Pi::path('upload/shop/csv');
+        if (!Pi::service('file')->exists($path . '/index.html')) {
+            Pi::service('file')->copy(
+                Pi::path('upload/index.html'),
+                Pi::path('upload/shop/csv/index.html')
+            );
+        }
+
+        // Set filter
+        $filter = function ($fileinfo) {
+            if (!$fileinfo->isFile()) {
+                return false;
+            }
+            $filename = $fileinfo->getFilename();
+            if ('index.html' == $filename) {
+                return false;
+            }
+            return $filename;
+        };
+        // Get file list
+        $fileList = Pi::service('file')->getList($path, $filter);
         // Set template
         $this->view()->setTemplate('price-index');
+        $this->view()->assign('fileList', $fileList);
     }
 
     public function updateAction()
@@ -38,6 +62,16 @@ class PriceController extends ActionController
         $selectPercent = $this->params('selectPercent', 0);
         $info = array();
         $percent = 0;
+
+        // Set path
+        $path = Pi::path('upload/shop/csv');
+        if (!Pi::service('file')->exists($path . '/index.html')) {
+            Pi::service('file')->copy(
+                Pi::path('upload/index.html'),
+                Pi::path('upload/shop/csv/index.html')
+            );
+        }
+
         // Set form
         $form = new PriceUpdateForm('price');
         if ($this->request->isPost()) {
@@ -83,6 +117,12 @@ class PriceController extends ActionController
             $order = array('id ASC');
             $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
             $rowset = $this->getModel('product')->selectWith($select);
+
+            // Set file
+            Pi::service('audit')->attach('price-update', array(
+                'file'   => Pi::path('upload/shop/csv/price-update.csv'),
+                'format' => 'csv',
+            ));
 
             // Make list
             foreach ($rowset as $row) {
@@ -154,11 +194,14 @@ class PriceController extends ActionController
                 );
 
                 // Save log to csv file
-                $args = array($product['id'], $product['title'], $selectCategory, $selectPercent, $mainPrice, $minPrice);
-                Pi::service('audit')->attach('audit', array(
-                    'file'  => Pi::path('log') . '/shop-price-update.csv'
+                Pi::service('audit')->log('price-update', array(
+                    $product['id'],
+                    $product['title'],
+                    $selectCategory,
+                    $selectPercent,
+                    $mainPrice,
+                    $minPrice
                 ));
-                Pi::service('audit')->log('audit', $args);
 
                 // Set price log form price table
                 Pi::api('price', 'shop')->addLog($minPrice, $product['id'], 'product');
@@ -223,6 +266,15 @@ class PriceController extends ActionController
         $confirm = $this->params('confirm', 0);
         $priceListInfo = array();
 
+        // Set path
+        $path = Pi::path('upload/shop/csv');
+        if (!Pi::service('file')->exists($path . '/index.html')) {
+            Pi::service('file')->copy(
+                Pi::path('upload/index.html'),
+                Pi::path('upload/shop/csv/index.html')
+            );
+        }
+
         // Check confirm
         if ($confirm == 1) {
             // Get category list
@@ -234,6 +286,12 @@ class PriceController extends ActionController
             $order = array('id ASC');
             $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
             $rowset = $this->getModel('product')->selectWith($select);
+
+            // Set file
+            Pi::service('audit')->attach('price-sync', array(
+                'file'   => Pi::path('upload/shop/csv/price-sync.csv'),
+                'format' => 'csv',
+            ));
 
             // Make list
             foreach ($rowset as $row) {
@@ -278,11 +336,12 @@ class PriceController extends ActionController
                 );
 
                 // Save log to csv file
-                $args = array($product['id'], $product['title'], $mainPrice, $minPrice);
-                Pi::service('audit')->attach('audit', array(
-                    'file'  => Pi::path('log') . '/shop-price-sync.csv'
+                Pi::service('audit')->log('price-sync', array(
+                    $product['id'],
+                    $product['title'],
+                    $mainPrice,
+                    $minPrice
                 ));
-                Pi::service('audit')->log('audit', $args);
 
                 // Set price log
                 Pi::api('price', 'shop')->addLog($minPrice, $product['id'], 'product');
@@ -438,5 +497,113 @@ class PriceController extends ActionController
         $this->view()->assign('form', $form);
         $this->view()->assign('list', $list);
         $this->view()->assign('paginator', $paginator);
+    }
+
+    public function csvAction()
+    {
+        $addPrice = $this->params('addPrice');
+        $file = Pi::path('upload/shop/csv/price.csv');
+        $working = false;
+
+        // Set path
+        $path = Pi::path('upload/shop/csv');
+        if (!Pi::service('file')->exists($path . '/index.html')) {
+            Pi::service('file')->copy(
+                Pi::path('upload/index.html'),
+                Pi::path('upload/shop/csv/index.html')
+            );
+        }
+
+        if (Pi::service('file')->exists($file)) {
+            if ($addPrice == 'OK') {
+                // Get list from csv file
+                $importer = new Csv($file,true, ',', 1001);
+                $prices = $importer->get(1001);
+
+                // Set cont array
+                $countOfPriceCsv = array(
+                    'total'     => 0,
+                    'update'    => 0,
+                    'notUpdate' => 0,
+                );
+
+                // Make
+                foreach ($prices as $priceSingle) {
+                    $countOfPriceCsv['total']++;
+
+                    if (isset($priceSingle['price']) && !empty($priceSingle['price']) && is_numeric($priceSingle['price'])) {
+                        if (isset($priceSingle['id']) && !empty($priceSingle['id'])) {
+                            $product = Pi::api('product', 'shop')->getProductLight($priceSingle['id']);
+                        } elseif (isset($priceSingle['code']) && !empty($priceSingle['code'])) {
+                            $product = Pi::api('product', 'shop')->getProductLight($priceSingle['code'], 'code');
+                        }
+                        if ($product) {
+                            // Update product
+                            $this->getModel('product')->update(
+                                array('price' => (int)$priceSingle['price']),
+                                array('id' => (int)$product['id'])
+                            );
+
+                            // Update link
+                            $this->getModel('link')->update(
+                                array('price' => (int)$priceSingle['price']),
+                                array('product' => (int)$product['id'])
+                            );
+
+                            // Save log to csv file
+                            Pi::service('audit')->attach('price-csv', array(
+                                'file'   => Pi::path('upload/shop/csv/price-csv-update.csv'),
+                                'format' => 'csv',
+                            ));
+                            Pi::service('audit')->log('price-csv', $priceSingle);
+
+                            // Set price log
+                            Pi::api('price', 'shop')->addLog($priceSingle['price'], $product['id'], 'product');
+
+                            $countOfPriceCsv['update']++;
+                        } else {
+                            $countOfPriceCsv['notUpdate']++;
+
+                            // Save log to csv file
+                            Pi::service('audit')->attach('price-csv', array(
+                                'file'   => Pi::path('upload/shop/csv/price-csv-not-update.csv'),
+                                'format' => 'csv',
+                            ));
+                            Pi::service('audit')->log('price-csv', $priceSingle);
+                        }
+                    } else {
+                        $countOfPriceCsv['notUpdate']++;
+
+                        // Save log to csv file
+                        Pi::service('audit')->attach('price-csv', array(
+                            'file'   => Pi::path('upload/shop/csv/price-csv-not-update.csv'),
+                            'format' => 'csv',
+                        ));
+                        Pi::service('audit')->log('price-csv', $priceSingle);
+                    }
+                }
+                $message = sprintf(__('Working to import information from %s'), $file);
+                $working = true;
+            } else {
+                $message = sprintf(__('You can import this information from %s'), $file);
+            }
+        } else {
+            $message = sprintf(__('price.csv not exist on %s'), $file);
+        }
+
+        // Translate
+        __('total');
+        __('update');
+        __('notUpdate');
+
+        // Set template
+        $this->view()->setTemplate('price-csv');
+        $this->view()->assign('message', $message);
+        $this->view()->assign('file', $file);
+        $this->view()->assign('working', $working);
+        $this->view()->assign('countOfPriceCsv', $countOfPriceCsv);
+
+
+
     }
 }

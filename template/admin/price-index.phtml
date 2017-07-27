@@ -5,8 +5,24 @@
         <p><?php _e('Price system, help you to manage your product price and kep product price update'); ?></p>
         <ul>
             <li><strong><?php _e('Price update'); ?></strong> : <?php _e('Select category ( main category ) and update all products on that category'); ?></li>
+            <li><strong><?php _e('Price update from CSV'); ?></strong> : <?php _e('Set and upload CSV file for update product price'); ?></li>
             <li><strong><?php _e('Price sync'); ?></strong> : <?php _e('Sync min price on `product` and `link` tables, after click this part start automatically, us this part just if needed'); ?></li>
             <li><strong><?php _e('Price log'); ?></strong> : <?php _e('Change price log for selected product, you need set product ID and see log'); ?></li>
         </ul>
     </div>
+    <?php if (isset($fileList) && !empty($fileList)) { ?>
+        <h4><?php _e('List of csv logs'); ?></h4>
+        <div class="list-group">
+            <?php foreach ($fileList as $file) { ?>
+                <?php if (substr( $file, 0, 5 ) === 'price') { ?>
+                    <a href="<?php echo sprintf(
+                        '%s?upload/shop/csv/%s',
+                        Pi::url('www/script/download.php'),
+                        $file); ?>" class="list-group-item">
+                        <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php echo $file; ?>
+                    </a>
+                <?php } ?>
+            <?php } ?>
+        </div>
+    <?php } ?>
 </div>

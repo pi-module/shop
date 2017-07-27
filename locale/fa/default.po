@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2017-07-27 13:29+0430\n"
+"POT-Creation-Date: 2017-07-27 19:07+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -297,7 +297,7 @@ msgstr "اطلاعات موقعیت خواص با موفقیت ذخیره شد"
 msgid "Add position"
 msgstr "موقعیت جدید"
 
-#: src/Controller/Admin/PriceController.php:68
+#: src/Controller/Admin/PriceController.php:102
 msgid ""
 "Your selected category not set as main category for any product, please "
 "select other category"
@@ -305,17 +305,44 @@ msgstr ""
 "شاخه انتخابی شما شامل به عنوان شاخه اصلی هیچ محصولی انتخاب نشده است، لطفا یک "
 "شاخه دیگر انتخاب نمایید"
 
-#: src/Controller/Admin/PriceController.php:405
+#: src/Controller/Admin/PriceController.php:464
 msgid "Product price"
 msgstr "قیمت محصول"
 
-#: src/Controller/Admin/PriceController.php:409
+#: src/Controller/Admin/PriceController.php:468
 msgid "Property price"
 msgstr "قیمت ویژگی سفارش"
 
-#: src/Controller/Admin/PriceController.php:413
+#: src/Controller/Admin/PriceController.php:472
 msgid "Sale price"
 msgstr "قیمت حراج"
+
+#: src/Controller/Admin/PriceController.php:585
+#, php-format
+msgid "Working to import information from %s"
+msgstr "در حال وارد کردن اطلاعات از فایل %s"
+
+#: src/Controller/Admin/PriceController.php:588
+#, php-format
+msgid "You can import this information from %s"
+msgstr "شما میتوانید اطلاعات قیمت را از فایل %s به روز رسانی کنید"
+
+#: src/Controller/Admin/PriceController.php:591
+#, php-format
+msgid "price.csv not exist on %s"
+msgstr "فایل price.csv در مسیر %s وجود ندارد"
+
+#: src/Controller/Admin/PriceController.php:595
+msgid "total"
+msgstr "مجموع"
+
+#: src/Controller/Admin/PriceController.php:596
+msgid "update"
+msgstr "آپدیت شده"
+
+#: src/Controller/Admin/PriceController.php:597
+msgid "notUpdate"
+msgstr "آپدیت نشده"
 
 #: src/Controller/Admin/ProductController.php:244
 msgid "View filtered products"
@@ -1991,6 +2018,27 @@ msgstr "عملکرد"
 msgid "List of positions"
 msgstr "فهرست موقعیت ها"
 
+#: template/admin/price-csv.phtml:3
+msgid "Import price list from CSV file"
+msgstr "به روز کردن اطلاعات قیمت از فایل CSV"
+
+#: template/admin/price-csv.phtml:5
+msgid ""
+"Download this example file and put your product information ( id or code and "
+"price ) on it upload on server and update price on DB"
+msgstr ""
+"فایل CSV نمونه را دانلود کنید و اطلاعات قیمت محصولات خود را (  id یا code و "
+"price ) داخل آن درج کنید و بر روی سرور آپلود کنید و قیمت محصولات را به روز "
+"کنید"
+
+#: template/admin/price-csv.phtml:6 template/admin/price-csv.phtml:7
+msgid "Example"
+msgstr "فایل نمونه"
+
+#: template/admin/price-csv.phtml:22 template/admin/price-csv.phtml:25
+msgid "Update price"
+msgstr "به روز رسانی قیمت"
+
 #: template/admin/price-index.phtml:4 template/admin/tools-index.phtml:4
 msgid "How this part work?"
 msgstr "این بخش چگونه کار می کند؟"
@@ -2015,10 +2063,20 @@ msgstr ""
 "آن را به روز کنید"
 
 #: template/admin/price-index.phtml:8
+msgid "Price update from CSV"
+msgstr "به روز رسانی قیمت از فایل CSV"
+
+#: template/admin/price-index.phtml:8
+msgid "Set and upload CSV file for update product price"
+msgstr ""
+"تنظیم و آپلود فایل CSV بر روی سرور و سپس آپدیت قیمت محصولات بر اساس اطلاعات "
+"داخل فایل"
+
+#: template/admin/price-index.phtml:9
 msgid "Price sync"
 msgstr "یکسان سازی قیمت"
 
-#: template/admin/price-index.phtml:8
+#: template/admin/price-index.phtml:9
 msgid ""
 "Sync min price on `product` and `link` tables, after click this part start "
 "automatically, us this part just if needed"
@@ -2026,16 +2084,20 @@ msgstr ""
 "یکسان سازی حداقل قیمت محصولات در جدول `product` و `link` در پایگاه داده هاو "
 "بعد تایید به صورت خودکار آغاز می شود"
 
-#: template/admin/price-index.phtml:9
+#: template/admin/price-index.phtml:10
 msgid "Price log"
 msgstr "گزارش تغییرات قیمت"
 
-#: template/admin/price-index.phtml:9
+#: template/admin/price-index.phtml:10
 msgid ""
 "Change price log for selected product, you need set product ID and see log"
 msgstr ""
 "گزارش تغییرات قیمت برای تمام محصولات و محلو انتخابی شما، برای مشاهده گزاریش "
 "یک محصول شناسه آن را باید درج نمایید"
+
+#: template/admin/price-index.phtml:14
+msgid "List of csv logs"
+msgstr "فهرست گزارشات CSV"
 
 #: template/admin/price-log.phtml:30
 msgid "Price change log"
