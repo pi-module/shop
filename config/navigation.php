@@ -44,7 +44,7 @@ return array(
             'action' => 'index',
 
             'pages' => array(
-                'category' => array(
+                'product' => array(
                     'label' => _a('Product'),
                     'permission' => array(
                         'resource' => 'product',
