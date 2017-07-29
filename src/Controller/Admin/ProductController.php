@@ -1058,13 +1058,33 @@ class ProductController extends ActionController
             // Make list
             foreach ($rowset as $row) {
                 $product = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
+                if ($product['attribute']) {
+                    $attribute = Pi::api('attribute', 'shop')->Product($product['id'], $product['category_main']);
+                    foreach ($attribute['all'] as $attributeSingle) {
+                        foreach ($attributeSingle['info'] as $field) {
+                            $product[$field['name']] = $field['data'];
+                        }
+                    }
+                }
 
                 // Set key
                 if ($complete == 0) {
                     $keys = array();
+
+                    // Set product fields
                     foreach ($product as $key => $value) {
                         $keys[$key] = $key;
                     }
+
+                    // Set attribute fields
+                    $whereField = array('status' => 1);
+                    $orderField = array('order ASC', 'position ASC', 'id DESC');
+                    $selectField = $this->getModel('field')->select()->where($whereField)->order($orderField);
+                    $rowsetField = $this->getModel('field')->selectWith($selectField);
+                    foreach ($rowsetField as $rowField) {
+                        $keys[$rowField->name] = $rowField->name;
+                    }
+
                     Pi::service('audit')->log('product-export', $keys);
                 }
 
