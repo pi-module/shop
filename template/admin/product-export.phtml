@@ -32,12 +32,27 @@
         <div class="list-group">
             <?php foreach ($fileList as $file) { ?>
                 <?php if (substr( $file, 0, 7 ) === 'product') { ?>
-                    <a href="<?php echo sprintf(
-                        '%s?upload/shop/csv/%s',
-                        Pi::url('www/script/download.php'),
-                        $file); ?>" class="list-group-item">
-                        <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php echo $file; ?>
-                    </a>
+                    <ul class="list-group-item list-inline">
+                        <li><?php echo $file; ?></li>
+                        <li>
+                            <a href="<?php echo sprintf(
+                                '%s?upload/shop/csv/%s',
+                                Pi::url('www/script/download.php'),
+                                $file); ?>">
+                                <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php _e('CSV version'); ?>
+                            </a>
+                        </li>
+                        <?php if ($checkExcel) { ?>
+                        <li>
+                            <a href="<?php echo Pi::url($this->url('', array(
+                                'action' => 'download',
+                                'file' => $file
+                            ))); ?>">
+                                <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php _e('Excel version'); ?>
+                            </a>
+                        </li>
+                        <?php } ?>
+                    </ul>
                 <?php } ?>
             <?php } ?>
         </div>

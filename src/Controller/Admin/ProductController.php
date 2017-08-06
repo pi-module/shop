@@ -1151,6 +1151,10 @@ class ProductController extends ActionController
                 if ('index.html' == $filename) {
                     return false;
                 }
+                $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                if ($ext != 'csv') {
+                    return false;
+                }
                 return $filename;
             };
             // Get file list
@@ -1159,6 +1163,8 @@ class ProductController extends ActionController
             $this->view()->assign('form', $form);
             $this->view()->assign('fileList', $fileList);
         }
+        // Check convert to excel
+        $checkExcel = Pi::api('CSVToExcelConverter', 'shop')->check();
         // Set view
         $this->view()->setTemplate('product-export');
         $this->view()->assign('config', $config);
@@ -1167,5 +1173,34 @@ class ProductController extends ActionController
         $this->view()->assign('percent', $percent);
         $this->view()->assign('info', $info);
         $this->view()->assign('confirm', $confirm);
+        $this->view()->assign('checkExcel', $checkExcel);
+    }
+
+    public function downloadAction()
+    {
+        $file = $this->params('file');
+        $filePath = Pi::path('upload/shop/csv/') . $file;
+        $fileDownload = str_replace('.csv', '.xlsx',$file);
+        $fileDownloadPath = Pi::path('upload/shop/csv/') . $fileDownload;
+        // Check SCV file exists
+        if (Pi::service('file')->exists($filePath)) {
+            // Check excel file exist
+            if (!Pi::service('file')->exists($fileDownloadPath)) {
+                try {
+                    Pi::api('CSVToExcelConverter', 'shop')->convert($filePath, $fileDownloadPath);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                }
+            }
+            // Set url
+            $url = sprintf(
+                '%s?upload/shop/csv/%s',
+                Pi::url('www/script/download.php'),
+                $fileDownload);
+
+            return $this->redirect()->toUrl($url);
+        }
+
+
     }
 }
