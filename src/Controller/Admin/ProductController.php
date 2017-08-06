@@ -1179,28 +1179,43 @@ class ProductController extends ActionController
     public function downloadAction()
     {
         $file = $this->params('file');
-        $filePath = Pi::path('upload/shop/csv/') . $file;
-        $fileDownload = str_replace('.csv', '.xlsx',$file);
-        $fileDownloadPath = Pi::path('upload/shop/csv/') . $fileDownload;
-        // Check SCV file exists
-        if (Pi::service('file')->exists($filePath)) {
-            // Check excel file exist
-            if (!Pi::service('file')->exists($fileDownloadPath)) {
-                try {
-                    Pi::api('CSVToExcelConverter', 'shop')->convert($filePath, $fileDownloadPath);
-                } catch (Exception $e) {
-                    echo $e->getMessage();
-                }
-            }
-            // Set url
-            $url = sprintf(
-                '%s?upload/shop/csv/%s',
-                Pi::url('www/script/download.php'),
-                $fileDownload);
+        $type = $this->params('type');
 
-            return $this->redirect()->toUrl($url);
+        $csvFile = $file . '.csv';
+        $csvPath = Pi::path('upload/shop/csv/') . $csvFile;
+        $excelFile = $file . '.xlsx';
+        $excelPath = Pi::path('upload/shop/csv/') . $excelFile;
+
+        switch ($type) {
+            case 'xlsx':
+                if (Pi::service('file')->exists($csvPath)) {
+                    // Check excel file exist
+                    if (!Pi::service('file')->exists($excelPath)) {
+                        try {
+                            Pi::api('CSVToExcelConverter', 'shop')->convert($csvPath, $excelPath);
+                        } catch (Exception $e) {
+                            echo $e->getMessage();
+                        }
+                    }
+                    $url = sprintf(
+                        '%s?upload/shop/csv/%s',
+                        Pi::url('www/script/download.php'),
+                        $excelFile);
+                }
+                break;
+
+            default:
+            case 'csv':
+                if (Pi::service('file')->exists($csvPath)) {
+                    $url = sprintf(
+                        '%s?upload/shop/csv/%s',
+                        Pi::url('www/script/download.php'),
+                        $csvFile);
+                }
+                break;
         }
 
-
+        // Set url
+        return $this->redirect()->toUrl($url);
     }
 }

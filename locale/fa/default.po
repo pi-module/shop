@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi shop module\n"
-"POT-Creation-Date: 2017-07-27 19:07+0430\n"
+"POT-Creation-Date: 2017-08-06 15:42+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: Pi\n"
@@ -2138,6 +2138,14 @@ msgstr "دریافت فایل CSV"
 msgid "List of old exported files"
 msgstr "فهرست فایل های خروجی تولید شده قبلی"
 
+#: template/admin/product-export.phtml:44
+msgid "CSV version"
+msgstr "نسخه CSV"
+
+#: template/admin/product-export.phtml:54
+msgid "Xlsx version"
+msgstr "نسخه xlsx"
+
 #: template/admin/product-index.phtml:16
 msgid "Filter products"
 msgstr "فیلتر کردن محصولات"
@@ -2308,6 +2316,9 @@ msgstr "نقشه سایت"
 #: template/admin/tools-index.phtml:8
 msgid "Manage links on sitemap module"
 msgstr "مدیریت لینک ها در ماژول نقشه سایت"
+
+#~ msgid "Excel version"
+#~ msgstr "نسخه "
 
 #~ msgid "All products"
 #~ msgstr "همه محصولات"
