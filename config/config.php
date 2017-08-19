@@ -299,6 +299,14 @@ return array(
             'filter' => 'number_int',
             'value' => 0
         ),
+        'new_product' => array(
+            'category' => 'view',
+            'title' => _a('New product days'),
+            'description' => '',
+            'edit' => 'checkbox',
+            'filter' => 'number_int',
+            'value' => 7
+        ),
         // Image
         'image_size' => array(
             'category' => 'image',

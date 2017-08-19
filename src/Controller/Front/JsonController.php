@@ -499,6 +499,7 @@ class JsonController extends IndexController
         foreach ($rowset as $row) {
             $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
             $count = Pi::api('product', 'shop')->getBrandCount($categorySingle['id']);
+            $hasNew = Pi::api('product', 'shop')->getBrandHasNew($categorySingle['id']);
             $brand[] = array(
                 'id' => $categorySingle['id'],
                 'parent' => $categorySingle['parent'],
@@ -506,6 +507,7 @@ class JsonController extends IndexController
                 'mediumUrl' => $categorySingle['mediumUrl'],
                 'thumbUrl' => $categorySingle['thumbUrl'],
                 'count' => _number($count),
+                'is_new' => $hasNew,
             );
         }
 
@@ -594,6 +596,7 @@ class JsonController extends IndexController
                     'title' => $productSingle['title'],
                     'mediumUrl' => $productSingle['mediumUrl'],
                     'thumbUrl' => $productSingle['thumbUrl'],
+                    'is_new' => $productSingle['is_new'],
                 );
             }
         } elseif ($tree == 1) {

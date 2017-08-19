@@ -21,6 +21,7 @@ use Zend\Db\Sql\Predicate\Expression;
  * Pi::api('product', 'shop')->getProductLight($parameter, $type);
  * Pi::api('product', 'shop')->getProductOrder($id);
  * Pi::api('product', 'shop')->getBrandCount($brand);
+ * Pi::api('product', 'shop')->getBrandHasNew($brand);
  * Pi::api('product', 'shop')->getCategoryMainCount($category);
  * Pi::api('product', 'shop')->getCategoryLinkCount($category);
  * Pi::api('product', 'shop')->getListFromId($id);
@@ -69,6 +70,17 @@ class Product extends AbstractApi
     public function getBrandCount($brand)
     {
         $where = array('brand' => $brand);
+        $columns = array('count' => new Expression('count(*)'));
+        $select = Pi::model('product', $this->getModule())->select()->columns($columns)->where($where);
+        return Pi::model('product', $this->getModule())->selectWith($select)->current()->count;
+    }
+
+    public function getBrandHasNew($brand)
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+        $time = time() - ($config['new_product'] * 86400);
+        $where = array('brand' => $brand, 'time_create > ?' => $time);
         $columns = array('count' => new Expression('count(*)'));
         $select = Pi::model('product', $this->getModule())->select()->columns($columns)->where($where);
         return Pi::model('product', $this->getModule())->selectWith($select)->current()->count;
@@ -582,6 +594,15 @@ class Product extends AbstractApi
         if (!empty($product['ribbon']) && $product['price_percent'] > 0) {
             $product['ribbon'] = $product['ribbon'] . ' ' . _number($product['price_percent']) . '%';
         }
+
+        // Set is new product
+        $time = time() - ($config['new_product'] * 86400);
+        if ($product['time_create'] > $time) {
+            $product['is_new'] = 1;
+        } else {
+            $product['is_new'] = 0;
+        }
+
         // return product
         return $product;
     }
@@ -648,6 +669,15 @@ class Product extends AbstractApi
         if (!empty($product['ribbon']) && $product['price_percent'] > 0) {
             $product['ribbon'] = $product['ribbon'] . ' ' . _number($product['price_percent']) . '%';
         }
+
+        // Set is new product
+        $time = time() - ($config['new_product'] * 86400);
+        if ($product['time_create'] > $time) {
+            $product['is_new'] = 1;
+        } else {
+            $product['is_new'] = 0;
+        }
+
         // unset
         unset($product['text_summary']);
         unset($product['text_description']);
@@ -825,6 +855,15 @@ class Product extends AbstractApi
                 $product['attribute-' . $attribute['id']] = $attribute['data'];
             }
         }
+
+        // Set is new product
+        $time = time() - ($config['new_product'] * 86400);
+        if ($product['time_create'] > $time) {
+            $product['is_new'] = 1;
+        } else {
+            $product['is_new'] = 0;
+        }
+
         // return product
         return $product;
     }
@@ -957,6 +996,14 @@ class Product extends AbstractApi
         $filterList = isset($filterList) ? $filterList : Pi::api('attribute', 'shop')->filterList();
         $attribute = Pi::api('attribute', 'shop')->filterData($product['id'], $filterList);
         $product = array_merge($product, $attribute);
+
+        // Set is new product
+        $time = time() - ($config['new_product'] * 86400);
+        if ($product['time_create'] > $time) {
+            $product['is_new'] = 1;
+        } else {
+            $product['is_new'] = 0;
+        }
 
         // unset
         unset($product['text_summary']);
