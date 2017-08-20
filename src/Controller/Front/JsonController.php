@@ -484,6 +484,8 @@ class JsonController extends IndexController
         $module = $this->params('module');
         $page = $this->params('page', 1);
         $limit = $this->params('limit');
+        $form = $this->params('form');
+        //$uid = $this->params('uid');
 
         // Get config
         $config = Pi::service('registry')->config->read($module);
@@ -494,6 +496,11 @@ class JsonController extends IndexController
 
         $where = array('status' => 1, 'type' => 'brand');
         $order = array('display_order ASC', 'title ASC', 'id DESC');
+
+        if ($form) {
+            $where['id'] = Pi::api('form', 'forms')->getAllowIdList($form);
+        }
+
         $select = $this->getModel('category')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
@@ -523,6 +530,7 @@ class JsonController extends IndexController
                 'limit' => $limit,
                 'page' => $page,
             ),
+            'form' => $form
         );
 
         return $result;
