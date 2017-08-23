@@ -303,7 +303,7 @@ return array(
             'category' => 'view',
             'title' => _a('New product days'),
             'description' => '',
-            'edit' => 'checkbox',
+            'edit' => 'text',
             'filter' => 'number_int',
             'value' => 7
         ),
