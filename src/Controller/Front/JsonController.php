@@ -737,6 +737,7 @@ class JsonController extends IndexController
                     foreach ($attributesAll['info'] as $attribute) {
                         if (!empty($attribute['name'])) {
                             $productSingle['attribute-' . $attribute['name']] = $attribute['data'];
+                            $productSingle['attribute-' . $attribute['name'] . '-title'] = $attribute['title'];
                         }
                     }
                 }
