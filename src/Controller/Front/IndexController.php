@@ -52,7 +52,7 @@ class IndexController extends ActionController
         }
     }
 
-    public function productList($where)
+    public function productList($where, $limit = '')
     {
         // Set info
         $product = array();
@@ -62,7 +62,7 @@ class IndexController extends ActionController
         $sort = $this->params('sort', 'create');
         $stock = $this->params('stock');
         $offset = (int)($page - 1) * $this->config('view_perpage');
-        $limit = intval($this->config('view_perpage'));
+        $limit = empty($limit) ? intval($this->config('view_perpage')) : $limit;
         $order = $this->setOrder($sort);
         // Set show just have stock
         if (isset($stock) && $stock == 1) {
