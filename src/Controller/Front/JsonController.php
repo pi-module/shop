@@ -28,6 +28,7 @@ class JsonController extends IndexController
         $title = $this->params('title');
         $code = $this->params('code');
         $category = $this->params('category');
+        $categoryTitle = $this->params('categoryTitle');
         $tag = $this->params('tag');
         $favourite = $this->params('favourite');
         $recommended = $this->params('recommended');
@@ -46,6 +47,15 @@ class JsonController extends IndexController
             $title = _strip($title);
         } else {
             $title = '';
+        }
+
+        // Clean category Title
+        if (Pi::service('module')->isActive('search') && isset($categoryTitle) && !empty($categoryTitle)) {
+            $categoryTitle = Pi::api('api', 'search')->parseQuery($categoryTitle);
+        } elseif (isset($categoryTitle) && !empty($categoryTitle)) {
+            $categoryTitle = _strip($categoryTitle);
+        } else {
+            $categoryTitle = '';
         }
 
         // Clean code
@@ -70,6 +80,7 @@ class JsonController extends IndexController
         // Set empty result
         $result = array(
             'products' => array(),
+            'categories' => array(),
             'filterList' => array(),
             'paginator' => array(),
             'condition' => array(),
@@ -422,6 +433,19 @@ class JsonController extends IndexController
             $count = $this->getModel('link')->selectWith($select)->current()->count;
         }
 
+        // Search on category
+        $categoryList = array();
+        if (!empty($categoryTitle)) {
+            $whereCategory = array('status' => 1);
+            $whereCategory['title LIKE ?'] = '%' . $categoryTitle . '%';
+            $orderCategory = array('title DESC', 'id DESC');
+            $select = $this->getModel('category')->select()->where($whereCategory)->order($orderCategory)->offset($offset)->limit($limit);
+            $rowset = $this->getModel('category')->selectWith($select);
+            foreach ($rowset as $row) {
+                $categoryList[] = Pi::api('category', 'shop')->canonizeCategory($row);
+            }
+        }
+
         // Set column class
         switch ($config['view_column']) {
             case 1:
@@ -449,10 +473,10 @@ class JsonController extends IndexController
                 break;
         }
 
-
         // Set result
         $result = array(
             'products' => $product,
+            'categories' => $categoryList,
             'filterList' => $filterList,
             'paginator' => array(
                 'count' => $count,
