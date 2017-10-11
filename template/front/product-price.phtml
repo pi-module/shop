@@ -76,14 +76,18 @@ EOT;
                                 <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
                             </div>
                         </li>
+                        <?php if ($productItem['code']) { ?>
+                            <li>
+                                <div class="product-code">
+                                    <strong> <?php _e('Product code'); ?> : </strong>
+                                    <?php echo $this->escape($productItem['code']); ?>
+                                </div>
+                            </li>
+                        <?php } ?>
                         <li>
-                            <div class="product-code">
-                                <strong> <?php _e('Product code'); ?> : </strong>
-                                <?php if ($productItem['code']) {
-                                    echo $this->escape($productItem['code']);
-                                } else {
-                                    echo $this->escape($productItem['id']);
-                                } ?>
+                            <div class="product-input-code">
+                                <strong> <?php _e('Input product code'); ?> : </strong>
+                                <?php echo $this->escape($productItem['id']); ?>
                             </div>
                         </li>
                         <?php if (!empty($productItem['price_title'])) { ?>
@@ -138,14 +142,18 @@ EOT;
                                     <?php } ?>
                                 </div>
                             </li>
+                            <?php if ($productItem['code']) { ?>
+                                <li>
+                                    <div class="product-code">
+                                        <strong> <?php _e('Product code'); ?> : </strong>
+                                        <?php echo $this->escape($productItem['code']); ?>
+                                    </div>
+                                </li>
+                            <?php } ?>
                             <li>
-                                <div class="product-code">
-                                    <strong> <?php _e('Product code'); ?> : </strong>
-                                    <?php if ($productItem['code']) {
-                                        echo $this->escape($productItem['code']);
-                                    } else {
-                                        echo $this->escape($productItem['id']);
-                                    } ?>
+                                <div class="product-input-code">
+                                    <strong> <?php _e('Input product code'); ?> : </strong>
+                                    <?php echo $this->escape($productItem['id']); ?>
                                 </div>
                             </li>
                             <?php if (!empty($productItem['price_title'])) { ?>
@@ -195,14 +203,18 @@ EOT;
                             <span class="text-danger"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
                         </div>
                     </li>
+                    <?php if ($productItem['code']) { ?>
+                        <li>
+                            <div class="product-code">
+                                <strong> <?php _e('Product code'); ?> : </strong>
+                                <?php echo $this->escape($productItem['code']); ?>
+                            </div>
+                        </li>
+                    <?php } ?>
                     <li>
-                        <div class="product-code">
-                            <strong> <?php _e('Product code'); ?> : </strong>
-                            <?php if ($productItem['code']) {
-                                echo $this->escape($productItem['code']);
-                            } else {
-                                echo $this->escape($productItem['id']);
-                            } ?>
+                        <div class="product-input-code">
+                            <strong> <?php _e('Input product code'); ?> : </strong>
+                            <?php echo $this->escape($productItem['id']); ?>
                         </div>
                     </li>
                     <?php if (!empty($productItem['price_title'])) { ?>
@@ -250,14 +262,18 @@ EOT;
                                     <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
                                 </div>
                             </li>
+                            <?php if ($productItem['code']) { ?>
+                                <li>
+                                    <div class="product-code">
+                                        <strong> <?php _e('Product code'); ?> : </strong>
+                                        <?php echo $this->escape($productItem['code']); ?>
+                                    </div>
+                                </li>
+                            <?php } ?>
                             <li>
-                                <div class="product-code">
-                                    <strong> <?php _e('Product code'); ?> : </strong>
-                                    <?php if ($productItem['code']) {
-                                        echo $this->escape($productItem['code']);
-                                    } else {
-                                        echo $this->escape($productItem['id']);
-                                    } ?>
+                                <div class="product-input-code">
+                                    <strong> <?php _e('Input product code'); ?> : </strong>
+                                    <?php echo $this->escape($productItem['id']); ?>
                                 </div>
                             </li>
                             <?php if (!empty($productItem['price_title'])) { ?>
@@ -307,14 +323,18 @@ EOT;
                             <span class="text-danger"><?php _e('Out of stock'); ?></span>
                         </div>
                     </li>
+                    <?php if ($productItem['code']) { ?>
+                        <li>
+                            <div class="product-code">
+                                <strong> <?php _e('Product code'); ?> : </strong>
+                                <?php echo $this->escape($productItem['code']); ?>
+                            </div>
+                        </li>
+                    <?php } ?>
                     <li>
-                        <div class="product-code">
-                            <strong> <?php _e('Product code'); ?> : </strong>
-                            <?php if ($productItem['code']) {
-                                echo $this->escape($productItem['code']);
-                            } else {
-                                echo $this->escape($productItem['id']);
-                            } ?>
+                        <div class="product-input-code">
+                            <strong> <?php _e('Input product code'); ?> : </strong>
+                            <?php echo $this->escape($productItem['id']); ?>
                         </div>
                     </li>
                     <?php if (!empty($productItem['price_title'])) { ?>
@@ -355,14 +375,18 @@ EOT;
                                 </div>
                             </li>
                         <?php } ?>
+                        <?php if ($productItem['code']) { ?>
+                            <li>
+                                <div class="product-code">
+                                    <strong> <?php _e('Product code'); ?> : </strong>
+                                    <?php echo $this->escape($productItem['code']); ?>
+                                </div>
+                            </li>
+                        <?php } ?>
                         <li>
-                            <div class="product-code">
-                                <strong> <?php _e('Product code'); ?> : </strong>
-                                <?php if ($productItem['code']) {
-                                    echo $this->escape($productItem['code']);
-                                } else {
-                                    echo $this->escape($productItem['id']);
-                                } ?>
+                            <div class="product-input-code">
+                                <strong> <?php _e('Input product code'); ?> : </strong>
+                                <?php echo $this->escape($productItem['id']); ?>
                             </div>
                         </li>
                         <li>
