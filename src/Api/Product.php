@@ -269,13 +269,16 @@ class Product extends AbstractApi
         return $file;
     }
 
-    public function favoriteList()
+    public function favoriteList($uid = null)
     {
         // Get user id
-        $uid = Pi::user()->getId();
+        if ($uid == null) {
+            $uid = Pi::user()->getId();
+        }  
+               
         // Check user
         if ($uid > 0) {
-            $favoriteIds = Pi::api('favourite', 'favourite')->userFavourite($uid, $this->getModule(), 10);
+            $favoriteIds = Pi::api('favourite', 'favourite')->userFavourite($uid, $this->getModule());
             // Check list of ides
             if (!empty($favoriteIds)) {
                 // Get config
