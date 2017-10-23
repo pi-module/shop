@@ -275,6 +275,14 @@ return array(
             'filter' => 'number_int',
             'value' => 1
         ),
+        'view_incategory_count' => array(
+            'category' => 'view',
+            'title' => _a('Number of other products from this category'),
+            'description' => '',
+            'edit' => 'text',
+            'filter' => 'number_int',
+            'value' => 20
+        ),
         'product_ribbon' => array(
             'category' => 'view',
             'title' => _a('Product ribbon type'),
