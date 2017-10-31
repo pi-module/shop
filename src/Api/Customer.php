@@ -32,7 +32,7 @@ class Customer extends AbstractApi
             $field = array(
                 'id', 'identity', 'name', 'email', 'first_name', 'last_name', 'phone', 'mobile', 'credit',
                 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat',
-                'time_activated', 'location_country', 'location_city'
+                'time_activated'
             );
         }
 
