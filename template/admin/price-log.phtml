@@ -12,14 +12,17 @@
                 <div class="col-md-9">
                     <h4><?php echo $this->escape($product['title']); ?></h4>
                     <ul class="list-inline">
-                        <li><strong><?php _e('Price'); ?></strong> : <?php echo $this->escape($product['price_view']); ?></li>
-                        <li><a target="_blank" href="<?php echo $this->url('', array(
+                        <li><strong><?php _e('Price'); ?></strong>
+                            : <?php echo $this->escape($product['price_view']); ?></li>
+                        <li><a target="_blank" href="<?php echo $this->url('', [
                                 'controller' => 'product',
-                                'action' => 'update',
-                                'id' => $product['id'],
-                            )); ?>"><?php _e('Edit'); ?></a></li>
+                                'action'     => 'update',
+                                'id'         => $product['id'],
+                            ]); ?>"><?php _e('Edit'); ?></a></li>
                         <?php if ($product['status'] == 1) { ?>
-                            <li><a target="_blank" href="<?php echo $this->escape($product['productUrl']); ?>"><?php _e('View'); ?></a></li>
+                            <li><a target="_blank"
+                                   href="<?php echo $this->escape($product['productUrl']); ?>"><?php _e('View'); ?></a>
+                            </li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -40,7 +43,8 @@
                 <tr>
                     <td><?php echo $this->escape($log['productTitle']); ?></td>
                     <td><?php echo $this->escape($log['type_view']); ?></td>
-                    <td><?php echo $this->escape($log['price_view']); ?> (<?php echo $this->escape($log['price']); ?>)</td>
+                    <td><?php echo $this->escape($log['price_view']); ?> (<?php echo $this->escape($log['price']); ?>)
+                    </td>
                     <td><?php echo $this->escape($log['time_update_view']); ?></td>
                     <td>
                         <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"

@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class PropertyForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
     }
@@ -34,93 +34,93 @@ class PropertyForm extends BaseForm
     public function init()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'id',
+            'attributes' => [
                 'type' => 'hidden',
-            ),
-        ));
+            ],
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
-            'options' => array(
+        $this->add([
+            'name'       => 'title',
+            'options'    => [
                 'label' => __('Title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-                'required' => true,
+                'required'    => true,
 
-            )
-        ));
+            ],
+        ]);
         // order
-        $this->add(array(
-            'name' => 'order',
-            'options' => array(
+        $this->add([
+            'name'       => 'order',
+            'options'    => [
                 'label' => __('Order'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
 
-            )
-        ));
+            ],
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Status'),
-                'value_options' => array(
+        $this->add([
+            'name'    => 'status',
+            'type'    => 'select',
+            'options' => [
+                'label'         => __('Status'),
+                'value_options' => [
                     1 => __('Published'),
                     2 => __('Pending review'),
                     3 => __('Draft'),
                     4 => __('Private'),
                     5 => __('Delete'),
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // influence_stock
-        $this->add(array(
-            'name' => 'influence_stock',
-            'type' => 'checkbox',
-            'options' => array(
+        $this->add([
+            'name'       => 'influence_stock',
+            'type'       => 'checkbox',
+            'options'    => [
                 'label' => __('Influence stock'),
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'description' => '',
-            )
-        ));
+            ],
+        ]);
         // influence_price
-        $this->add(array(
-            'name' => 'influence_price',
-            'type' => 'checkbox',
-            'options' => array(
+        $this->add([
+            'name'       => 'influence_price',
+            'type'       => 'checkbox',
+            'options'    => [
                 'label' => __('Influence price'),
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'description' => '',
-            )
-        ));
+            ],
+        ]);
         // type
-        $this->add(array(
-            'name' => 'type',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Type'),
-                'value_options' => array(
-                    'checkbox' => __('CheckBox'),
+        $this->add([
+            'name'    => 'type',
+            'type'    => 'select',
+            'options' => [
+                'label'         => __('Type'),
+                'value_options' => [
+                    'checkbox'  => __('CheckBox'),
                     'selectbox' => __('SelectBox'),
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

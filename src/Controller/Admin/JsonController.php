@@ -10,12 +10,13 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
+use Module\Guide\Form\RegenerateImageForm;
+use Module\Guide\Form\SitemapForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Guide\Form\SitemapForm;
-use Module\Guide\Form\RegenerateImageForm;
 
 class JsonController extends ActionController
 {
@@ -26,32 +27,32 @@ class JsonController extends ActionController
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get config
-        $links = array();
+        $links = [];
 
-        $links['productAll'] = Pi::url($this->url('shop', array(
-            'module' => $module,
+        $links['productAll'] = Pi::url($this->url('shop', [
+            'module'     => $module,
             'controller' => 'json',
-            'action' => 'productAll',
-            'update' => strtotime("11-12-10"),
-            'password' => (!empty($config['json_password'])) ? $config['json_password'] : '',
-        )));
+            'action'     => 'productAll',
+            'update'     => strtotime("11-12-10"),
+            'password'   => (!empty($config['json_password'])) ? $config['json_password'] : '',
+        ]));
 
-        $links['productCategory'] = Pi::url($this->url('shop', array(
-            'module' => $module,
+        $links['productCategory'] = Pi::url($this->url('shop', [
+            'module'     => $module,
             'controller' => 'json',
-            'action' => 'productCategory',
-            'id' => 1,
-            'update' => strtotime("11-12-10"),
-            'password' => (!empty($config['json_password'])) ? $config['json_password'] : '',
-        )));
+            'action'     => 'productCategory',
+            'id'         => 1,
+            'update'     => strtotime("11-12-10"),
+            'password'   => (!empty($config['json_password'])) ? $config['json_password'] : '',
+        ]));
 
-        $links['productSingle'] = Pi::url($this->url('shop', array(
-            'module' => $module,
+        $links['productSingle'] = Pi::url($this->url('shop', [
+            'module'     => $module,
             'controller' => 'json',
-            'action' => 'productSingle',
-            'id' => 1,
-            'password' => (!empty($config['json_password'])) ? $config['json_password'] : '',
-        )));
+            'action'     => 'productSingle',
+            'id'         => 1,
+            'password'   => (!empty($config['json_password'])) ? $config['json_password'] : '',
+        ]));
 
         // Set template
         $this->view()->setTemplate('json-index');

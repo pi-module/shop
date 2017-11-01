@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Api;
 
 use Pi;
@@ -39,8 +40,8 @@ class Order extends AbstractApi
                 $product = Pi::api('product', 'shop')->getProductLight($single['product']);
                 // Update sold
                 Pi::model('product', $this->getModule())->update(
-                    array('sold' => ($product['sold'] + $single['number'])),
-                    array('id' => $product['id'])
+                    ['sold' => ($product['sold'] + $single['number'])],
+                    ['id' => $product['id']]
                 );
                 // Stock method
                 switch ($config['order_stock']) {
@@ -53,8 +54,8 @@ class Order extends AbstractApi
                     case 'product':
                         // Update stock
                         Pi::model('product', $this->getModule())->update(
-                            array('stock' => ($product['stock'] - $single['number'])),
-                            array('id' => $product['id'])
+                            ['stock' => ($product['stock'] - $single['number'])],
+                            ['id' => $product['id']]
                         );
                         break;
 
@@ -66,8 +67,8 @@ class Order extends AbstractApi
                                 $propertyValue = Pi::api('property', 'shop')->getPropertyValue($property['unique_key']);
                                 // Update stock
                                 Pi::model('property_value', $this->getModule())->update(
-                                    array('stock' => ($propertyValue['stock'] - $single['number'])),
-                                    array('unique_key' => $propertyValue['unique_key'])
+                                    ['stock' => ($propertyValue['stock'] - $single['number'])],
+                                    ['unique_key' => $propertyValue['unique_key']]
                                 );
                             }
                         }
@@ -83,12 +84,12 @@ class Order extends AbstractApi
             'id' => $order['id'],
         ))); */
 
-        $url = Pi::url(Pi::service('url')->assemble('order', array(
-            'module' => 'order',
+        $url = Pi::url(Pi::service('url')->assemble('order', [
+            'module'     => 'order',
             'controller' => 'detail',
-            'action' => 'index',
-            'id' => $order['id'],
-        )));
+            'action'     => 'index',
+            'id'         => $order['id'],
+        ]));
 
         return $url;
     }

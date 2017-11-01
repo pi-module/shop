@@ -65,10 +65,10 @@
         </ul>
     <?php } elseif ($block['type'] == 'slide') { ?>
         <?php
-        $this->jQuery(array(
+        $this->jQuery([
             'extension/owl.carousel.min.js',
             'extension/owl.carousel.css',
-        ));
+        ]);
         $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
         $this->css($this->assetModule('css/block.css', 'shop'));
         ?>
@@ -98,10 +98,10 @@
         </div>
     <?php } elseif ($block['type'] == 'slidehover') { ?>
         <?php
-        $this->jQuery(array(
+        $this->jQuery([
             'extension/owl.carousel.min.js',
             'extension/owl.carousel.css',
-        ));
+        ]);
         $this->js($this->assetModule('js/caption.hover.js', 'shop'));
         $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
         ?>
@@ -112,12 +112,16 @@
                         <div class="hover-caption">
                             <h3><?php echo $this->escape($category['title']); ?></h3>
                             <p>
-                                <a class="u-url hover-caption-more" title="<?php echo $this->escape($category['title']); ?>" href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                <a class="u-url hover-caption-more"
+                                   title="<?php echo $this->escape($category['title']); ?>"
+                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
                                     <?php echo _b('View'); ?>
                                 </a>
                             </p>
                         </div>
-                        <img class="media-object img-responsive u-photo" src="<?php echo $this->escape($category['mediumUrl']); ?>" alt="<?php echo $this->escape($category['title']); ?>">
+                        <img class="media-object img-responsive u-photo"
+                             src="<?php echo $this->escape($category['mediumUrl']); ?>"
+                             alt="<?php echo $this->escape($category['title']); ?>">
                     </div>
                 <?php } ?>
             </div>

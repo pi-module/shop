@@ -81,7 +81,7 @@ angular.module('shop')
                         ceil: data.price.maxValue,
                         step: data.price.step,
                         rightToLeft: data.price.rightToLeft,
-                        translate: function(value, sliderId, label) {
+                        translate: function (value, sliderId, label) {
                             switch (label) {
                                 case 'model':
                                     return '<b>' + config.t.MIN_PRICE + ':</b> ' + config.t.PRICE_SYMBOL + value;
@@ -98,28 +98,30 @@ angular.module('shop')
                     if (newValue === oldValue) {
                         return
                     } else {
-                        $timeout(function() {
+                        $timeout(function () {
                             if (newValue === data.price.minValue) {
                                 $location.search('minPrice', null);
                             } else {
                                 $location.search('minPrice', $scope.slider.minValue);
                             }
                         }, 1500);
-                    };
+                    }
+                    ;
                 });
 
                 $scope.$watch('slider.maxValue', function (newValue, oldValue) {
                     if (newValue === oldValue) {
                         return
                     } else {
-                        $timeout(function() {
+                        $timeout(function () {
                             if (newValue === data.price.maxValue) {
                                 $location.search('maxPrice', null);
                             } else {
                                 $location.search('maxPrice', $scope.slider.maxValue);
                             }
                         }, 1500);
-                    };
+                    }
+                    ;
                 });
             }
 
@@ -138,9 +140,9 @@ angular.module('shop')
             // compare products
             var compareCount = 0;
             var compareList = [];
-            $(document).on("click", ".pi-item-compare-add", function() {
+            $(document).on("click", ".pi-item-compare-add", function () {
                 if (compareCount < 5) {
-                    if(jQuery.inArray($(this).attr("data-slug"), compareList) !== -1) {
+                    if (jQuery.inArray($(this).attr("data-slug"), compareList) !== -1) {
                         $('#compareModal .modal-body').html(config.t.COMPARE_MESSAGE_2);
                         $('#compareModal').modal('show');
                     } else {
@@ -161,7 +163,7 @@ angular.module('shop')
             });
 
             // category list
-            $(function() {
+            $(function () {
                 $('.pi-item-category').treeview({
                     levels: 1,
                     data: config.categoryJson,

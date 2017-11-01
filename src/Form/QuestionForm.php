@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class QuestionForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
     }
@@ -34,57 +34,57 @@ class QuestionForm extends BaseForm
     public function init()
     {
         // product
-        $this->add(array(
-            'name' => 'product',
-            'attributes' => array(
-                'type' => 'hidden',
+        $this->add([
+            'name'       => 'product',
+            'attributes' => [
+                'type'     => 'hidden',
                 'required' => true,
-            ),
-        ));
+            ],
+        ]);
         // name
-        $this->add(array(
-            'name' => 'name',
-            'options' => array(
+        $this->add([
+            'name'       => 'name',
+            'options'    => [
                 'label' => __('Name'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // email
-        $this->add(array(
-            'name' => 'email',
-            'options' => array(
+        $this->add([
+            'name'       => 'email',
+            'options'    => [
                 'label' => __('Email'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // text_ask
-        $this->add(array(
-            'name' => 'text_ask',
-            'options' => array(
+        $this->add([
+            'name'       => 'text_ask',
+            'options'    => [
                 'label' => __('Question'),
-            ),
-            'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '5',
-                'cols' => '40',
+            ],
+            'attributes' => [
+                'type'     => 'textarea',
+                'rows'     => '5',
+                'cols'     => '40',
                 'required' => true,
-            )
-        ));
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

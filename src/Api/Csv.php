@@ -46,7 +46,7 @@ class Csv
     {
         //if $max_lines is set to 0, then get all the data
 
-        $data = array();
+        $data = [];
 
         if ($max_lines > 0)
             $line_count = 0;

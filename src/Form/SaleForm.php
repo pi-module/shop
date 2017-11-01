@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class SaleForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         $this->option = $option;
         parent::__construct($name);
@@ -35,41 +35,41 @@ class SaleForm extends BaseForm
     public function init()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'id',
+            'attributes' => [
                 'type' => 'hidden',
-            ),
-        ));
+            ],
+        ]);
         // product
         if ($this->option['type'] == 'add') {
             switch ($this->option['part']) {
                 case 'product':
-                    $this->add(array(
-                        'name' => 'product',
-                        'options' => array(
+                    $this->add([
+                        'name'       => 'product',
+                        'options'    => [
                             'label' => __('Product id'),
-                        ),
-                        'attributes' => array(
-                            'type' => 'text',
+                        ],
+                        'attributes' => [
+                            'type'        => 'text',
                             'description' => __('Select product for add to sale'),
-                            'required' => true,
-                        )
-                    ));
+                            'required'    => true,
+                        ],
+                    ]);
                     break;
 
                 case 'category':
-                    $this->add(array(
-                        'name' => 'category',
-                        'options' => array(
+                    $this->add([
+                        'name'       => 'category',
+                        'options'    => [
                             'label' => __('Category id'),
-                        ),
-                        'attributes' => array(
-                            'type' => 'text',
+                        ],
+                        'attributes' => [
+                            'type'        => 'text',
                             'description' => __('Select category for add to sale'),
-                            'required' => true,
-                        )
-                    ));
+                            'required'    => true,
+                        ],
+                    ]);
                     break;
             }
         }
@@ -77,78 +77,78 @@ class SaleForm extends BaseForm
         switch ($this->option['part']) {
             case 'product':
                 // price
-                $this->add(array(
-                    'name' => 'price',
-                    'options' => array(
+                $this->add([
+                    'name'       => 'price',
+                    'options'    => [
                         'label' => __('Price'),
-                    ),
-                    'attributes' => array(
-                        'type' => 'text',
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
                         'description' => __('Real price'),
-                    )
-                ));
+                    ],
+                ]);
                 break;
 
             case 'category':
                 // percent
-                $this->add(array(
-                    'name' => 'percent',
-                    'options' => array(
+                $this->add([
+                    'name'       => 'percent',
+                    'options'    => [
                         'label' => __('Percent'),
-                    ),
-                    'attributes' => array(
-                        'type' => 'text',
+                    ],
+                    'attributes' => [
+                        'type'        => 'text',
                         'description' => __('Discount percent'),
-                    )
-                ));
+                    ],
+                ]);
                 break;
         }
         // status
-        $this->add(array(
-            'name' => 'status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Status'),
-                'value_options' => array(
+        $this->add([
+            'name'       => 'status',
+            'type'       => 'select',
+            'options'    => [
+                'label'         => __('Status'),
+                'value_options' => [
                     1 => __('Published'),
                     2 => __('Pending review'),
                     3 => __('Draft'),
                     4 => __('Private'),
-                ),
-            ),
-            'attributes' => array(
+                ],
+            ],
+            'attributes' => [
                 'required' => true,
-            )
-        ));
+            ],
+        ]);
         // time_publish
-        $this->add(array(
-            'name' => 'time_publish',
-            'option' => array(
+        $this->add([
+            'name'       => 'time_publish',
+            'option'     => [
                 'label' => __('Sale publish time'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-            )
-        ));
+            ],
+        ]);
         // time_expire
-        $this->add(array(
-            'name' => 'time_expire',
-            'option' => array(
+        $this->add([
+            'name'       => 'time_expire',
+            'option'     => [
                 'label' => __('Sale expire time'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-            )
-        ));
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

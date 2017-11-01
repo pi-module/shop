@@ -10,24 +10,25 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
+use Module\Shop\Form\PositionFilter;
+use Module\Shop\Form\PositionForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\PositionForm;
-use Module\Shop\Form\PositionFilter;
 
 class PositionController extends ActionController
 {
-    protected $positionColumns = array('id', 'title', 'order', 'status');
+    protected $positionColumns = ['id', 'title', 'order', 'status'];
 
     public function indexAction()
     {
         // Get from url
         $module = $this->params('module');
         // Get info
-        $list = array();
-        $order = array('order ASC', 'id ASC');
+        $list = [];
+        $order = ['order ASC', 'id ASC'];
         $select = $this->getModel('field_position')->select()->order($order);
         $rowset = $this->getModel('field_position')->selectWith($select);
         // Make list
@@ -36,7 +37,7 @@ class PositionController extends ActionController
         }
         // Go to update page if empty
         if (empty($list)) {
-            return $this->redirect()->toRoute('', array('action' => 'update'));
+            return $this->redirect()->toRoute('', ['action' => 'update']);
         }
         // Set view
         $this->view()->setTemplate('position-index');
@@ -75,7 +76,7 @@ class PositionController extends ActionController
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('position', $row->id, $operation);
                 $message = __('Attribute position data saved successfully.');
-                $this->jump(array('action' => 'index'), $message);
+                $this->jump(['action' => 'index'], $message);
             }
         } else {
             if ($id) {

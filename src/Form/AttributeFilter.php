@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Form;
 
 use Pi;
@@ -20,51 +21,51 @@ class AttributeFilter extends InputFilter
     public function __construct($options)
     {
         // id
-        $this->add(array(
-            'name' => 'id',
+        $this->add([
+            'name'     => 'id',
             'required' => false,
-        ));
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
+        $this->add([
+            'name'     => 'title',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // name
-        $this->add(array(
-            'name' => 'name',
-            'required' => true,
-            'filters' => array(
-                array(
+        $this->add([
+            'name'       => 'name',
+            'required'   => true,
+            'filters'    => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-            'validators' => array(
-                new \Module\Shop\Validator\NameDuplicate(array(
+                ],
+            ],
+            'validators' => [
+                new \Module\Shop\Validator\NameDuplicate([
                     'module' => Pi::service('module')->current(),
-                    'table' => 'field',
-                )),
-            ),
-        ));
+                    'table'  => 'field',
+                ]),
+            ],
+        ]);
         // category
-        $this->add(array(
-            'name' => 'category',
+        $this->add([
+            'name'     => 'category',
             'required' => true,
-        ));
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
+        $this->add([
+            'name'     => 'status',
             'required' => true,
-        ));
+        ]);
         // position
-        $this->add(array(
-            'name' => 'position',
+        $this->add([
+            'name'     => 'position',
             'required' => true,
-        ));
+        ]);
         // type
         /* $this->add(array(
             'name' => 'type',
@@ -72,30 +73,30 @@ class AttributeFilter extends InputFilter
         )); */
         if ($options['type'] == 'select') {
             // data
-            $this->add(array(
-                'name' => 'data',
+            $this->add([
+                'name'     => 'data',
                 'required' => false,
-            ));
+            ]);
             // default
-            $this->add(array(
-                'name' => 'default',
+            $this->add([
+                'name'     => 'default',
                 'required' => false,
-            ));
+            ]);
         }
         // information
-        $this->add(array(
-            'name' => 'information',
+        $this->add([
+            'name'     => 'information',
             'required' => false,
-        ));
+        ]);
         // icon
-        $this->add(array(
-            'name' => 'icon',
+        $this->add([
+            'name'     => 'icon',
             'required' => false,
-        ));
+        ]);
         // search
-        $this->add(array(
-            'name' => 'search',
+        $this->add([
+            'name'     => 'search',
             'required' => false,
-        ));
+        ]);
     }
 }

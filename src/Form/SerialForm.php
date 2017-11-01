@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class SerialForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
     }
@@ -34,24 +34,24 @@ class SerialForm extends BaseForm
     public function init()
     {
         // serial_number
-        $this->add(array(
-            'name' => 'serial_number',
-            'options' => array(
+        $this->add([
+            'name'       => 'serial_number',
+            'options'    => [
                 'label' => __('Serial number'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => __('Input serial number here'),
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Check'),
-            )
-        ));
+            ],
+        ]);
     }
 }

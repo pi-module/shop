@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Model;
 
 use Pi\Application\Model\Model;
@@ -19,7 +20,7 @@ class Serial extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'product',
         'status',
@@ -30,5 +31,5 @@ class Serial extends Model
         'check_uid',
         'check_ip',
         'information',
-    );
+    ];
 }

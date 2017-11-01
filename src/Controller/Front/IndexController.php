@@ -55,8 +55,8 @@ class IndexController extends ActionController
     public function productList($where, $limit = '')
     {
         // Set info
-        $product = array();
-        $productId = array();
+        $product = [];
+        $productId = [];
         $page = $this->params('page', 1);
         $module = $this->params('module');
         $sort = $this->params('sort', 'create');
@@ -69,7 +69,7 @@ class IndexController extends ActionController
             $where['stock'] = 1;
         }
         // Set info
-        $columns = array('product' => new Expression('DISTINCT product'));
+        $columns = ['product' => new Expression('DISTINCT product')];
         // Get info from link table
         $select = $this->getModel('link')->select()->where($where)->columns($columns)
             ->order($order)->offset($offset)->limit($limit);
@@ -80,7 +80,7 @@ class IndexController extends ActionController
         }
         // Set info
         if (!empty($productId)) {
-            $where = array('status' => 1, 'id' => $productId);
+            $where = ['status' => 1, 'id' => $productId];
             // Get list of product
             $select = $this->getModel('product')->select()->where($where)->order($order);
             $rowset = $this->getModel('product')->selectWith($select);
@@ -95,14 +95,14 @@ class IndexController extends ActionController
     public function productJsonList($where)
     {
         // Set info
-        $product = array();
+        $product = [];
         $limit = 150;
         $page = $this->params('page', 1);
         $module = $this->params('module');
         $offset = (int)($page - 1) * $limit;
-        $order = array('time_update ASC');
+        $order = ['time_update ASC'];
         // Set info
-        $columns = array('product' => new Expression('DISTINCT product'));
+        $columns = ['product' => new Expression('DISTINCT product')];
         // Get info from link table
         $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('link')->selectWith($select)->toArray();
@@ -114,7 +114,7 @@ class IndexController extends ActionController
             return $product;
         }
         // Set info
-        $where = array('status' => 1, 'id' => $productId);
+        $where = ['status' => 1, 'id' => $productId];
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
@@ -130,20 +130,20 @@ class IndexController extends ActionController
         // Set order
         switch ($sort) {
             case 'stock':
-                $order = array('stock DESC', 'id DESC');
+                $order = ['stock DESC', 'id DESC'];
                 break;
 
             case 'price':
-                $order = array('price DESC', 'id DESC');
+                $order = ['price DESC', 'id DESC'];
                 break;
 
             case 'update':
-                $order = array('time_update DESC', 'id DESC');
+                $order = ['time_update DESC', 'id DESC'];
                 break;
 
             case 'create':
             default:
-                $order = array('time_create DESC', 'id DESC');
+                $order = ['time_create DESC', 'id DESC'];
                 break;
         }
         return $order;

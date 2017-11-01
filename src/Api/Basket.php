@@ -28,7 +28,7 @@ use Pi\Application\Api\AbstractApi;
 
 class Basket extends AbstractApi
 {
-    public function setBasket($id, $number = 1, $properties = array(), $canPay = 1)
+    public function setBasket($id, $number = 1, $properties = [], $canPay = 1)
     {
         // Get uid
         $uid = Pi::user()->getId();
@@ -37,27 +37,27 @@ class Basket extends AbstractApi
         // Get property list
         $propertyList = Pi::api('property', 'shop')->getList();
         // Set product property
-        $productProperty = array();
+        $productProperty = [];
         foreach ($properties as $key => $propertyKey) {
             $property = Pi::api('property', 'shop')->getPropertyValue($propertyKey);
-            $productProperty[$key] = array(
-                'id' => $propertyList[$key]['id'],
-                'title' => $propertyList[$key]['title'],
-                'value' => $property['name'],
+            $productProperty[$key] = [
+                'id'         => $propertyList[$key]['id'],
+                'title'      => $propertyList[$key]['title'],
+                'value'      => $property['name'],
                 'unique_key' => $property['unique_key'],
-            );
+            ];
         }
         // Set product
-        $product = array(
-            'id' => $id,
-            'number' => $number,
+        $product = [
+            'id'       => $id,
+            'number'   => $number,
             'property' => $productProperty,
-            'can_pay' => $canPay,
-        );
+            'can_pay'  => $canPay,
+        ];
         // Check basket
         if (empty($basket)) {
             // Set data
-            $data = array();
+            $data = [];
             $data['time'] = time();
             $data['promotion'] = '';
             $data['product'][$id] = $product;
@@ -81,10 +81,10 @@ class Basket extends AbstractApi
         }
 
         if ($uid == 0) {
-            $_SESSION['session_order'] = array(
+            $_SESSION['session_order'] = [
                 'module' => 'shop',
-                'value' => $basket->value,
-            );
+                'value'  => $basket->value,
+            ];
         }
     }
 
@@ -125,7 +125,7 @@ class Basket extends AbstractApi
             case 'number':
                 $data['product'][$value]['number'] = $number;
                 break;
-            
+
             case 'promotion':
                 $data['promotion'] = $value;
                 break;
@@ -142,11 +142,11 @@ class Basket extends AbstractApi
         // delete
         if ($uid > 0) {
             Pi::model('basket', $this->getModule())->delete(
-                array('uid' => $uid)
+                ['uid' => $uid]
             );
         } elseif (isset($_SESSION['session_order']) && !empty($_SESSION['session_order']) && $_SESSION['session_order']['module'] == 'shop') {
             Pi::model('basket', $this->getModule())->delete(
-                array('value' => $_SESSION['session_order']['value'])
+                ['value' => $_SESSION['session_order']['value']]
             );
         }
     }
@@ -174,7 +174,8 @@ class Basket extends AbstractApi
         $basket->save();
     }
 
-    public function basketBlockNumber() {
+    public function basketBlockNumber()
+    {
         // Get uid
         $uid = Pi::user()->getId();
         // find backet
@@ -196,8 +197,9 @@ class Basket extends AbstractApi
         }
     }
 
-    public function basketBlockInfo() {
-        $list = array();
+    public function basketBlockInfo()
+    {
+        $list = [];
         $number = 0;
         // Get uid
         $uid = Pi::user()->getId();
@@ -223,10 +225,10 @@ class Basket extends AbstractApi
                 $number = $number + $product['number'];
             }
         }
-        return array(
-            'list' => $list,
-            'number' => $number
-        );
+        return [
+            'list'   => $list,
+            'number' => $number,
+        ];
     }
 
     public function canonizeBasket($basket)
@@ -236,16 +238,16 @@ class Basket extends AbstractApi
         // Set data
         $basket['data'] = json_decode($basket['data'], true);
         // Set total empty
-        $total = array(
-            'price' => 0,
-            'discount' => 0,
-            'number' => 0,
-            'shipping' => 0,
+        $total = [
+            'price'       => 0,
+            'discount'    => 0,
+            'number'      => 0,
+            'shipping'    => 0,
             'total_price' => 0,
-            'can_pay' => 1,
-        );
+            'can_pay'     => 1,
+        ];
         // Set products
-        $basket['products'] = array();
+        $basket['products'] = [];
         foreach ($basket['data']['product'] as $product) {
             // Get product info
             $productInfo = Pi::api('product', 'shop')->getProductLight($product['id']);
@@ -294,18 +296,18 @@ class Basket extends AbstractApi
         // Set total price
         $total['total_price'] = $total['total_price'] - $total['discount'];
         // Set total
-        $basket['total'] = array(
-            'price' => $total['price'],
-            'price_view' => Pi::api('api', 'shop')->viewPrice($total['price']),
-            'discount' => $total['discount'],
-            'discount_view' => Pi::api('api', 'shop')->viewPrice($total['discount']),
-            'number' => $total['number'],
-            'number_view' => _number($total['number']),
-            'shipping' => $total['shipping'],
-            'shipping_view' => Pi::api('api', 'shop')->viewPrice($total['shipping']),
-            'total_price' => $total['total_price'],
+        $basket['total'] = [
+            'price'            => $total['price'],
+            'price_view'       => Pi::api('api', 'shop')->viewPrice($total['price']),
+            'discount'         => $total['discount'],
+            'discount_view'    => Pi::api('api', 'shop')->viewPrice($total['discount']),
+            'number'           => $total['number'],
+            'number_view'      => _number($total['number']),
+            'shipping'         => $total['shipping'],
+            'shipping_view'    => Pi::api('api', 'shop')->viewPrice($total['shipping']),
+            'total_price'      => $total['total_price'],
             'total_price_view' => Pi::api('api', 'shop')->viewPrice($total['total_price']),
-        );
+        ];
         // return
         return $basket;
     }

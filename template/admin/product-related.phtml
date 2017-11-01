@@ -1,8 +1,8 @@
 <?php
-$this->css(array(
+$this->css([
     $this->assetModule('css/admin.css'),
     $this->assetModule('script/system-ui.css', 'system'),
-));
+]);
 $this->jQuery();
 $this->js($this->assetModule('script/system-msg.js', 'system'));
 ?>
@@ -10,11 +10,29 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
     <?php if ($nav['type'] == 'edit') { ?>
         <div class="well well-sm">
             <ul class="nav nav-pills">
-                <li<?php if ($nav['page'] == 'update') { echo ' class="active"';} ?>><a href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'update', 'id' => $product['id'])); ?>"><?php _e('Edit basic information'); ?></a></li>
-                <li<?php if ($nav['page'] == 'additional') { echo ' class="active"';} ?>><a href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'additional', 'id' => $product['id'])); ?>"><?php _e('Edit additional information'); ?></a></li>
-                <li<?php if ($nav['page'] == 'attach') { echo ' class="active"';} ?>><a href="<?php echo $this->url('', array('controller' => 'attach', 'action' => 'add', 'id' => $product['id'])); ?>"><?php _e('Attach files'); ?></a></li>
-                <li<?php if ($nav['page'] == 'related') { echo ' class="active"';} ?>><a href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'related', 'id' => $product['id'])); ?>"><?php _e('Related products'); ?></a></li>
-                <li class="active pull-right"><a target="_blank" href="<?php echo $product['productUrl']; ?>"><?php _e('View'); ?></a></li>
+                <li<?php if ($nav['page'] == 'update') {
+                    echo ' class="active"';
+                } ?>>
+                    <a href="<?php echo $this->url('', ['controller' => 'product', 'action' => 'update', 'id' => $product['id']]); ?>"><?php _e('Edit basic information'); ?></a>
+                </li>
+                <li<?php if ($nav['page'] == 'additional') {
+                    echo ' class="active"';
+                } ?>>
+                    <a href="<?php echo $this->url('', ['controller' => 'product', 'action' => 'additional', 'id' => $product['id']]); ?>"><?php _e('Edit additional information'); ?></a>
+                </li>
+                <li<?php if ($nav['page'] == 'attach') {
+                    echo ' class="active"';
+                } ?>>
+                    <a href="<?php echo $this->url('', ['controller' => 'attach', 'action' => 'add', 'id' => $product['id']]); ?>"><?php _e('Attach files'); ?></a>
+                </li>
+                <li<?php if ($nav['page'] == 'related') {
+                    echo ' class="active"';
+                } ?>>
+                    <a href="<?php echo $this->url('', ['controller' => 'product', 'action' => 'related', 'id' => $product['id']]); ?>"><?php _e('Related products'); ?></a>
+                </li>
+                <li class="active pull-right"><a target="_blank"
+                                                 href="<?php echo $product['productUrl']; ?>"><?php _e('View'); ?></a>
+                </li>
             </ul>
         </div>
     <?php } ?>
@@ -35,7 +53,7 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                     <td>
                         <button id="button-<?php echo $list['id']; ?>" type="button" class="btn btn-danger"
                                 data-toggle="button"
-                                data-link="<?php echo $this->url('', array('action' => 'relatedAjax', 'product_id' => $product['id'], 'product_related' => $list['id'], 'related' => '0')); ?>">
+                                data-link="<?php echo $this->url('', ['action' => 'relatedAjax', 'product_id' => $product['id'], 'product_related' => $list['id'], 'related' => '0']); ?>">
                             <i class="fa fa-ok fa fa-white"></i> <?php _e('Remove'); ?></button>
                     </td>
                 </tr>
@@ -57,7 +75,7 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                     <td>
                         <button id="button-<?php echo $list['id']; ?>" type="button" class="btn btn-success"
                                 data-toggle="button"
-                                data-link="<?php echo $this->url('', array('action' => 'relatedAjax', 'product_id' => $product['id'], 'product_related' => $list['id'], 'related' => '1')); ?>">
+                                data-link="<?php echo $this->url('', ['action' => 'relatedAjax', 'product_id' => $product['id'], 'product_related' => $list['id'], 'related' => '1']); ?>">
                             <i class="fa fa-ok fa fa-white"></i> <?php _e('Add'); ?></button>
                     </td>
                 </tr>

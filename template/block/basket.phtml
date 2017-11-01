@@ -1,13 +1,16 @@
 <?php if ($block['type'] == 'link') { ?>
     <span class="shop-block-basket">
-        <a class="btn btn-primary" href="<?php echo $this->escape($block['link']); ?>" title="<?php echo _b('Basket'); ?>">
-            <i class="fa fa-shopping-cart"></i> <?php echo _b('Basket'); ?> <span class="badge"><?php echo $this->escape($block['number_view']); ?></span>
+        <a class="btn btn-primary" href="<?php echo $this->escape($block['link']); ?>"
+           title="<?php echo _b('Basket'); ?>">
+            <i class="fa fa-shopping-cart"></i> <?php echo _b('Basket'); ?> <span
+                    class="badge"><?php echo $this->escape($block['number_view']); ?></span>
         </a>
     </span>
 <?php } elseif ($block['type'] == 'dialog') { ?>
     <div class="shop-block-basket">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basketModal">
-            <i class="fa fa-shopping-cart"></i> <?php echo _b('Basket'); ?> <span class="badge"><?php echo $this->escape($block['number_view']); ?></span>
+            <i class="fa fa-shopping-cart"></i> <?php echo _b('Basket'); ?> <span
+                    class="badge"><?php echo $this->escape($block['number_view']); ?></span>
         </button>
         <div class="modal fade" id="basketModal" tabindex="-1" role="dialog" aria-labelledby="basketModalLabel">
             <div class="modal-dialog" role="document">
@@ -25,16 +28,21 @@
                             <?php foreach ($block['list'] as $product) { ?>
                                 <div class="media">
                                     <div class="media-left col-md-4 col-xs-12">
-                                        <img class="img-responsive media-object" src="<?php echo $this->escape($product['thumbUrl']); ?>" alt="<?php echo $this->escape($product['title']); ?>">
+                                        <img class="img-responsive media-object"
+                                             src="<?php echo $this->escape($product['thumbUrl']); ?>"
+                                             alt="<?php echo $this->escape($product['title']); ?>">
                                     </div>
                                     <div class="media-body col-md-8 col-xs-12">
                                         <h4 class="media-heading">
-                                            <a href="<?php echo $this->escape($product['productUrl']); ?>" title="<?php echo $this->escape($product['title']); ?>">
+                                            <a href="<?php echo $this->escape($product['productUrl']); ?>"
+                                               title="<?php echo $this->escape($product['title']); ?>">
                                                 <?php echo $this->escape($product['title']); ?>
                                             </a>
                                         </h4>
-                                        <p><strong><?php echo _b('Number'); ?></strong> : <span><?php echo $this->escape($product['number_view']); ?></span></p>
-                                        <p><strong><?php echo _b('Total price'); ?></strong> : <span><?php echo $this->escape($product['total_view']); ?></span></p>
+                                        <p><strong><?php echo _b('Number'); ?></strong> :
+                                            <span><?php echo $this->escape($product['number_view']); ?></span></p>
+                                        <p><strong><?php echo _b('Total price'); ?></strong> :
+                                            <span><?php echo $this->escape($product['total_view']); ?></span></p>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -45,7 +53,8 @@
                         <?php } ?>
                     </div>
                     <div class="modal-footer">
-                        <a class="btn btn-primary" href="<?php echo $this->escape($block['link']); ?>" title="<?php echo _b('Go to basket'); ?>">
+                        <a class="btn btn-primary" href="<?php echo $this->escape($block['link']); ?>"
+                           title="<?php echo _b('Go to basket'); ?>">
                             <?php echo _b('Go to basket'); ?>
                         </a>
                     </div>

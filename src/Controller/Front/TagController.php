@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Front;
 
 use Pi;
@@ -45,9 +46,9 @@ class TagController extends IndexController
         $title = sprintf(__('All products by %s tag'), $slug);
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
-        $filter->setOptions(array(
-            'force_replace_space' => true
-        ));
+        $filter->setOptions([
+            'force_replace_space' => true,
+        ]);
         $seoKeywords = $filter($title);
         // Set view
         $this->view()->headTitle($title);
@@ -64,31 +65,31 @@ class TagController extends IndexController
     {
         // Get info from url
         $module = $this->params('module');
-        $tagList = array();
+        $tagList = [];
         // Check tag module install or not
         if (Pi::service('module')->isActive('tag')) {
-            $where = array('module' => $module);
-            $order = array('count DESC', 'id DESC');
+            $where = ['module' => $module];
+            $order = ['count DESC', 'id DESC'];
             $select = Pi::model('stats', 'tag')->select()->where($where)->order($order);
             $rowset = Pi::model('stats', 'tag')->selectWith($select);
             foreach ($rowset as $row) {
                 $tag = Pi::model('tag', 'tag')->find($row->term, 'term');
                 $tagList[$row->id] = $row->toArray();
                 $tagList[$row->id]['term'] = $tag['term'];
-                $tagList[$row->id]['url'] = Pi::url($this->url('', array(
+                $tagList[$row->id]['url'] = Pi::url($this->url('', [
                     'controller' => 'tag',
-                    'action' => 'index',
-                    'slug' => urldecode($tag['term'])
-                )));
+                    'action'     => 'index',
+                    'slug'       => urldecode($tag['term']),
+                ]));
             }
         }
         // Set header and title
         $title = __('List of all used tags on shop');
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
-        $filter->setOptions(array(
-            'force_replace_space' => true
-        ));
+        $filter->setOptions([
+            'force_replace_space' => true,
+        ]);
         $seoKeywords = $filter($title);
         // Set view
         $this->view()->headTitle($title);

@@ -10,13 +10,14 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
-use Pi;
-use Pi\Mvc\Controller\ActionController;
-use Pi\Filter;
-use Module\Shop\Form\AttributeForm;
 use Module\Shop\Form\AttributeFilter;
+use Module\Shop\Form\AttributeForm;
+use Pi;
+use Pi\Filter;
+use Pi\Mvc\Controller\ActionController;
 
 class AttributeController extends ActionController
 {
@@ -25,7 +26,7 @@ class AttributeController extends ActionController
         // Get position list
         $position = Pi::api('attribute', 'shop')->attributePositionForm();
         // Get info
-        $select = $this->getModel('field')->select()->order(array('order ASC'));
+        $select = $this->getModel('field')->select()->order(['order ASC']);
         $rowset = $this->getModel('field')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
@@ -46,11 +47,11 @@ class AttributeController extends ActionController
         // Get id
         $id = $this->params('id');
         $type = $this->params('type');
-        $options = array();
+        $options = [];
         // check type
-        if (!in_array($type, array('text', 'link', 'currency', 'date', 'number', 'select', 'video', 'audio', 'file', 'checkbox'))) {
+        if (!in_array($type, ['text', 'link', 'currency', 'date', 'number', 'select', 'video', 'audio', 'file', 'checkbox'])) {
             $message = __('Attribute field type not set.');
-            $url = array('action' => 'index');
+            $url = ['action' => 'index'];
             $this->jump($url, $message);
         }
         $options['type'] = $type;
@@ -77,18 +78,18 @@ class AttributeController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Set value
-                $value = array(
-                    'data' => (isset($data['data'])) ? $data['data'] : '',
-                    'default' => (isset($data['default'])) ? $data['default'] : '',
+                $value = [
+                    'data'        => (isset($data['data'])) ? $data['data'] : '',
+                    'default'     => (isset($data['default'])) ? $data['default'] : '',
                     'information' => $data['information'],
-                );
+                ];
                 $values['value'] = json_encode($value);
                 // Set type
                 $values['type'] = $type;
                 // Set order
                 if (empty($values['id'])) {
-                    $columns = array('order');
-                    $order = array('order DESC');
+                    $columns = ['order'];
+                    $order = ['order DESC'];
                     $select = $this->getModel('field')->select()->columns($columns)->order($order)->limit(1);
                     $values['order'] = $this->getModel('field')->selectWith($select)->current()->order + 1;
                 }
@@ -107,7 +108,7 @@ class AttributeController extends ActionController
                 Pi::api('log', 'shop')->addLog('attribute', $row->id, $operation);
                 // Check it save or not
                 $message = __('Attribute field data saved successfully.');
-                $url = array('action' => 'index');
+                $url = ['action' => 'index'];
                 $this->jump($url, $message);
             }
         } else {
@@ -147,12 +148,12 @@ class AttributeController extends ActionController
         $row = $this->getModel('field')->find($id);
         if ($row) {
             // Remove all data
-            $this->getModel('field_data')->delete(array('field' => $row->id));
+            $this->getModel('field_data')->delete(['field' => $row->id]);
             // Remove field
             $row->delete();
-            $this->jump(array('action' => 'index'), __('Selected field delete'));
+            $this->jump(['action' => 'index'], __('Selected field delete'));
         } else {
-            $this->jump(array('action' => 'index'), __('Please select field'));
+            $this->jump(['action' => 'index'], __('Please select field'));
         }
     }
 }

@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Form\Element;
 
 use Pi;
@@ -22,9 +23,9 @@ class Property extends ZendButton
      */
     public function getAttributes()
     {
-        $this->Attributes = array(
+        $this->Attributes = [
             'class' => sprintf('add_property_%s btn btn-success', $this->attributes['id']),
-        );
+        ];
         return $this->Attributes;
     }
 } 

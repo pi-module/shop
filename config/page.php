@@ -10,127 +10,127 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-return array(
+return [
     // Admin section
-    'admin' => array(
-        array(
-            'label' => _a('Product'),
+    'admin' => [
+        [
+            'label'      => _a('Product'),
             'controller' => 'product',
             'permission' => 'product',
-        ),
-        array(
-            'label' => _a('Category'),
+        ],
+        [
+            'label'      => _a('Category'),
             'controller' => 'category',
             'permission' => 'category',
-        ),
-        array(
-            'label' => _a('Attribute'),
+        ],
+        [
+            'label'      => _a('Attribute'),
             'controller' => 'attribute',
             'permission' => 'attribute',
-        ),
-        array(
-            'label' => _a('Attribute position'),
+        ],
+        [
+            'label'      => _a('Attribute position'),
             'controller' => 'position',
             'permission' => 'position',
-        ),
-        array(
-            'label' => _a('Order property'),
+        ],
+        [
+            'label'      => _a('Order property'),
             'controller' => 'property',
             'permission' => 'property',
-        ),
-        array(
-            'label' => _a('Attach'),
+        ],
+        [
+            'label'      => _a('Attach'),
             'controller' => 'attach',
             'permission' => 'attach',
-        ),
-        array(
-            'label' => _a('Discount'),
+        ],
+        [
+            'label'      => _a('Discount'),
             'controller' => 'discount',
             'permission' => 'discount',
-        ),
-        array(
-            'label' => _a('Sale'),
+        ],
+        [
+            'label'      => _a('Sale'),
             'controller' => 'sale',
             'permission' => 'sale',
-        ),
-        array(
-            'label' => _a('Promotion'),
+        ],
+        [
+            'label'      => _a('Promotion'),
             'controller' => 'promotion',
             'permission' => 'promotion',
-        ),
-        array(
-            'label' => _a('Logs'),
+        ],
+        [
+            'label'      => _a('Logs'),
             'controller' => 'log',
             'permission' => 'log',
-        ),
-        array(
-            'label' => _a('Tools'),
+        ],
+        [
+            'label'      => _a('Tools'),
             'controller' => 'tools',
             'permission' => 'tools',
-        ),
-        array(
-            'title' => _a('Json output'),
+        ],
+        [
+            'title'      => _a('Json output'),
             'controller' => 'json',
             'permission' => 'json',
-        ),
-        array(
-            'title' => _a('Price systems'),
+        ],
+        [
+            'title'      => _a('Price systems'),
             'controller' => 'price',
             'permission' => 'price',
-        ),
-    ),
+        ],
+    ],
     // Front section
-    'front' => array(
-        array(
-            'title' => _a('Index page'),
+    'front' => [
+        [
+            'title'      => _a('Index page'),
             'controller' => 'index',
             'permission' => 'public',
-            'block' => 1,
-        ),
-        array(
-            'label' => _a('Category'),
+            'block'      => 1,
+        ],
+        [
+            'label'      => _a('Category'),
             'controller' => 'category',
             'permission' => 'public',
-            'block' => 1,
-        ),
-        array(
-            'label' => _a('Product'),
+            'block'      => 1,
+        ],
+        [
+            'label'      => _a('Product'),
             'controller' => 'product',
             'permission' => 'public',
-            'block' => 1,
-        ),
+            'block'      => 1,
+        ],
 
-        array(
-            'label' => _a('Tags'),
+        [
+            'label'      => _a('Tags'),
             'controller' => 'tag',
             'permission' => 'public',
-            'block' => 1,
-        ),
-        array(
-            'label' => _a('Checkout'),
+            'block'      => 1,
+        ],
+        [
+            'label'      => _a('Checkout'),
             'controller' => 'checkout',
             'permission' => 'checkout',
-            'block' => 1,
-        ),
-        array(
-            'label' => _a('Category list'),
+            'block'      => 1,
+        ],
+        [
+            'label'      => _a('Category list'),
             'controller' => 'category',
-            'action' => 'list',
+            'action'     => 'list',
             'permission' => 'public',
-            'block' => 1,
-        ),
-        array(
-            'label' => _a('Tag list'),
+            'block'      => 1,
+        ],
+        [
+            'label'      => _a('Tag list'),
             'controller' => 'tag',
-            'action' => 'list',
+            'action'     => 'list',
             'permission' => 'public',
-            'block' => 1,
-        ),
-        array(
-            'label' => _a('Json output'),
+            'block'      => 1,
+        ],
+        [
+            'label'      => _a('Json output'),
             'controller' => 'json',
             'permission' => 'public',
-            'block' => 0,
-        ),
-    ),
-);
+            'block'      => 0,
+        ],
+    ],
+];

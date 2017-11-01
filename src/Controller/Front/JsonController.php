@@ -67,7 +67,7 @@ class JsonController extends IndexController
         }
 
         // Clean params
-        $paramsClean = array();
+        $paramsClean = [];
         foreach ($_GET as $key => $value) {
             $key = _strip($key);
             $value = _strip($value);
@@ -78,17 +78,17 @@ class JsonController extends IndexController
         $config = Pi::service('registry')->config->read($module);
 
         // Set empty result
-        $result = array(
-            'products' => array(),
-            'categories' => array(),
-            'filterList' => array(),
-            'paginator' => array(),
-            'condition' => array(),
-            'price' => array(),
-        );
+        $result = [
+            'products'   => [],
+            'categories' => [],
+            'filterList' => [],
+            'paginator'  => [],
+            'condition'  => [],
+            'price'      => [],
+        ];
 
         // Set where link
-        $whereLink = array('status' => 1);
+        $whereLink = ['status' => 1];
         if (!empty($recommended) && $recommended == 1) {
             $whereLink['recommended'] = 1;
         }
@@ -102,63 +102,63 @@ class JsonController extends IndexController
         // Set order
         switch ($order) {
             case 'title':
-                $order = array('title DESC', 'id DESC');
+                $order = ['title DESC', 'id DESC'];
                 break;
 
             case 'titleASC':
-                $order = array('title ASC', 'id ASC');
+                $order = ['title ASC', 'id ASC'];
                 break;
 
             case 'hits':
-                $order = array('hits DESC', 'id DESC');
+                $order = ['hits DESC', 'id DESC'];
                 break;
 
             case 'hitsASC':
-                $order = array('hits ASC', 'id ASC');
+                $order = ['hits ASC', 'id ASC'];
                 break;
 
             case 'create':
-                $order = array('time_create DESC', 'id DESC');
+                $order = ['time_create DESC', 'id DESC'];
                 break;
 
             case 'createASC':
-                $order = array('time_create ASC', 'id ASC');
+                $order = ['time_create ASC', 'id ASC'];
                 break;
 
             case 'update':
-                $order = array('time_update DESC', 'id DESC');
+                $order = ['time_update DESC', 'id DESC'];
                 break;
 
             case 'updateASC':
-                $order = array('time_update ASC', 'id ASC');
+                $order = ['time_update ASC', 'id ASC'];
                 break;
 
             case 'recommended':
-                $order = array('recommended DESC', 'time_create DESC', 'id DESC');
+                $order = ['recommended DESC', 'time_create DESC', 'id DESC'];
                 break;
 
             case 'price':
-                $order = array('price DESC', 'id DESC');
+                $order = ['price DESC', 'id DESC'];
                 break;
 
             case 'priceASC':
-                $order = array('price ASC', 'id ASC');
+                $order = ['price ASC', 'id ASC'];
                 break;
 
             case 'stock':
-                $order = array('stock DESC', 'id DESC');
+                $order = ['stock DESC', 'id DESC'];
                 break;
 
             case 'stockASC':
-                $order = array('stock ASC', 'id ASC');
+                $order = ['stock ASC', 'id ASC'];
                 break;
 
             case 'sold':
-                $order = array('sold DESC', 'id DESC');
+                $order = ['sold DESC', 'id DESC'];
                 break;
 
             default:
-                $order = array('time_create DESC', 'id DESC');
+                $order = ['time_create DESC', 'id DESC'];
                 break;
         }
 
@@ -183,7 +183,7 @@ class JsonController extends IndexController
             // category list
             $categories = Pi::api('category', 'shop')->categoryList($category['id']);
             // Get id list
-            $categoryIDList = array();
+            $categoryIDList = [];
             $categoryIDList[] = $category['id'];
             foreach ($categories as $singleCategory) {
                 $categoryIDList[] = $singleCategory['id'];
@@ -194,7 +194,7 @@ class JsonController extends IndexController
 
         // Get tag list
         if (!empty($tag)) {
-            $productIDTag = array();
+            $productIDTag = [];
             // Check favourite
             if (!Pi::service('module')->isActive('tag')) {
                 return $result;
@@ -233,16 +233,16 @@ class JsonController extends IndexController
         // Set product ID list
         $checkTitle = false;
         $checkAttribute = false;
-        $productIDList = array(
-            'title' => array(),
-            'attribute' => array(),
-        );
+        $productIDList = [
+            'title'     => [],
+            'attribute' => [],
+        ];
 
         // Check title from product table
         if (isset($title) && !empty($title)) {
             $checkTitle = true;
-            $titles = is_array($title) ? $title : array($title);
-            $columns = array('id');
+            $titles = is_array($title) ? $title : [$title];
+            $columns = ['id'];
             $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($titles, $recommended, $code) {
                 $whereMain = clone $where;
                 $whereTitleKey = clone $where;
@@ -278,24 +278,24 @@ class JsonController extends IndexController
         // Check attribute
         if (!empty($paramsClean)) {
             // Make attribute list
-            $attributeList = array();
+            $attributeList = [];
             foreach ($filterList as $filterSingle) {
                 if (isset($paramsClean[$filterSingle['name']]) && !empty($paramsClean[$filterSingle['name']])) {
-                    $attributeList[$filterSingle['name']] = array(
+                    $attributeList[$filterSingle['name']] = [
                         'field' => $filterSingle['id'],
-                        'data' => $paramsClean[$filterSingle['name']],
-                    );
+                        'data'  => $paramsClean[$filterSingle['name']],
+                    ];
                 }
             }
             // Search on attribute
             if (!empty($attributeList)) {
                 $checkAttribute = true;
-                $column = array('product');
+                $column = ['product'];
                 foreach ($attributeList as $attributeSingle) {
-                    $where = array(
+                    $where = [
                         'field' => $attributeSingle['field'],
-                        'data' => $attributeSingle['data'],
-                    );
+                        'data'  => $attributeSingle['data'],
+                    ];
                     $select = $this->getModel('field_data')->select()->where($where)->columns($column);
                     $rowset = $this->getModel('field_data')->selectWith($select);
                     foreach ($rowset as $row) {
@@ -306,10 +306,10 @@ class JsonController extends IndexController
         }
 
         // Set info
-        $product = array();
+        $product = [];
         $count = 0;
 
-        $columns = array('product' => new Expression('DISTINCT product'));
+        $columns = ['product' => new Expression('DISTINCT product')];
         $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
         $offset = (int)($page - 1) * $limit;
 
@@ -363,12 +363,12 @@ class JsonController extends IndexController
 
         // Get max price
         if ($config['view_price_filter']) {
-            $columnsPrice = array('id', 'price');
+            $columnsPrice = ['id', 'price'];
             $limitPrice = 1;
             $maxPrice = 1000;
             $minPrice = 0;
 
-            $orderPrice = array('price DESC', 'id DESC');
+            $orderPrice = ['price DESC', 'id DESC'];
             $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
             $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current();
             if ($rowPrice) {
@@ -376,7 +376,7 @@ class JsonController extends IndexController
                 $maxPrice = $rowPrice['price'];
             }
 
-            $orderPrice = array('price ASC', 'id ASC');
+            $orderPrice = ['price ASC', 'id ASC'];
             $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
             $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current();
             if ($rowPrice) {
@@ -419,7 +419,7 @@ class JsonController extends IndexController
 
             // Get list of product
             if (!empty($productIDSelect)) {
-                $where = array('status' => 1, 'id' => $productIDSelect);
+                $where = ['status' => 1, 'id' => $productIDSelect];
                 $select = $this->getModel('product')->select()->where($where)->order($order);
                 $rowset = $this->getModel('product')->selectWith($select);
                 foreach ($rowset as $row) {
@@ -428,17 +428,17 @@ class JsonController extends IndexController
             }
 
             // Get count
-            $columnsCount = array('count' => new Expression('count(DISTINCT `product`)'));
+            $columnsCount = ['count' => new Expression('count(DISTINCT `product`)')];
             $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsCount);
             $count = $this->getModel('link')->selectWith($select)->current()->count;
         }
 
         // Search on category
-        $categoryList = array();
+        $categoryList = [];
         if (!empty($categoryTitle)) {
-            $whereCategory = array('status' => 1);
+            $whereCategory = ['status' => 1];
             $whereCategory['title LIKE ?'] = '%' . $categoryTitle . '%';
-            $orderCategory = array('title DESC', 'id DESC');
+            $orderCategory = ['title DESC', 'id DESC'];
             $select = $this->getModel('category')->select()->where($whereCategory)->order($orderCategory)->offset($offset)->limit($limit);
             $rowset = $this->getModel('category')->selectWith($select);
             foreach ($rowset as $row) {
@@ -474,31 +474,31 @@ class JsonController extends IndexController
         }
 
         // Set result
-        $result = array(
-            'products' => $product,
+        $result = [
+            'products'   => $product,
             'categories' => $categoryList,
             'filterList' => $filterList,
-            'paginator' => array(
+            'paginator'  => [
                 'count' => $count,
                 'limit' => $limit,
-                'page' => $page,
-            ),
-            'condition' => array(
-                'title' => $pageTitle,
-                'urlCompare' => Pi::url($this->url('', array('controller' => 'compare'))),
+                'page'  => $page,
+            ],
+            'condition'  => [
+                'title'       => $pageTitle,
+                'urlCompare'  => Pi::url($this->url('', ['controller' => 'compare'])),
                 'priceFilter' => $config['view_price_filter'],
-                'addToCart' => $config['view_add_to_cart'],
-                'columnSize' => $columnSize,
-            ),
-            'price' => array(
-                'minValue' => intval($minPrice),
-                'maxValue' => intval($maxPrice),
-                'minSelect' => intval($minSelect),
-                'maxSelect' => intval($maxSelect),
-                'step' => intval(($maxPrice - $minPrice) / 10),
+                'addToCart'   => $config['view_add_to_cart'],
+                'columnSize'  => $columnSize,
+            ],
+            'price'      => [
+                'minValue'    => intval($minPrice),
+                'maxValue'    => intval($maxPrice),
+                'minSelect'   => intval($minSelect),
+                'maxSelect'   => intval($maxSelect),
+                'step'        => intval(($maxPrice - $minPrice) / 10),
                 'rightToLeft' => false,
-            ),
-        );
+            ],
+        ];
 
         return $result;
     }
@@ -514,12 +514,12 @@ class JsonController extends IndexController
         // Get config
         $config = Pi::service('registry')->config->read($module);
 
-        $brand = array();
+        $brand = [];
         $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
         $offset = (int)($page - 1) * $limit;
 
-        $where = array('status' => 1, 'type' => 'brand');
-        $order = array('display_order ASC', 'title ASC', 'id DESC');
+        $where = ['status' => 1, 'type' => 'brand'];
+        $order = ['display_order ASC', 'title ASC', 'id DESC'];
 
         if ($form) {
             $where['id'] = Pi::api('form', 'forms')->getAllowIdList($form);
@@ -531,31 +531,31 @@ class JsonController extends IndexController
             $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
             $count = Pi::api('product', 'shop')->getBrandCount($categorySingle['id']);
             $hasNew = Pi::api('product', 'shop')->getBrandHasNew($categorySingle['id']);
-            $brand[] = array(
-                'id' => $categorySingle['id'],
-                'parent' => $categorySingle['parent'],
-                'title' => $categorySingle['title'],
+            $brand[] = [
+                'id'        => $categorySingle['id'],
+                'parent'    => $categorySingle['parent'],
+                'title'     => $categorySingle['title'],
                 'mediumUrl' => $categorySingle['mediumUrl'],
-                'thumbUrl' => $categorySingle['thumbUrl'],
-                'count' => _number($count),
-                'is_new' => $hasNew,
-            );
+                'thumbUrl'  => $categorySingle['thumbUrl'],
+                'count'     => _number($count),
+                'is_new'    => $hasNew,
+            ];
         }
 
         // Get count
-        $columnsCount = array('count' => new Expression('count(*)'));
+        $columnsCount = ['count' => new Expression('count(*)')];
         $select = $this->getModel('category')->select()->where($where)->columns($columnsCount);
         $count = $this->getModel('category')->selectWith($select)->current()->count;
 
-        $result = array(
-            'brands' => $brand,
-            'paginator' => array(
+        $result = [
+            'brands'    => $brand,
+            'paginator' => [
                 'count' => $count,
                 'limit' => $limit,
-                'page' => $page,
-            ),
-            'form' => $form
-        );
+                'page'  => $page,
+            ],
+            'form'      => $form,
+        ];
 
         return $result;
     }
@@ -573,21 +573,21 @@ class JsonController extends IndexController
         // Get config
         $config = Pi::service('registry')->config->read($module);
 
-        $category = array();
-        $products = array();
+        $category = [];
+        $products = [];
         $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
         $offset = (int)($page - 1) * $limit;
 
         // Set where
-        $where = array('status' => 1, 'type' => 'category');
+        $where = ['status' => 1, 'type' => 'category'];
         if (intval($parent) > 0) {
             $where['parent'] = intval($parent);
         }
 
         // Check $brand
         if (intval($brand) > 0) {
-            $whereBrand = array('brand' => intval($brand));
-            $columnsBrand = array('category' => new Expression('DISTINCT `category_main`'));
+            $whereBrand = ['brand' => intval($brand)];
+            $columnsBrand = ['category' => new Expression('DISTINCT `category_main`')];
             $select = $this->getModel('product')->select()->where($whereBrand)->columns($columnsBrand);
             $rowset = $this->getModel('product')->selectWith($select)->toArray();
             foreach ($rowset as $id) {
@@ -597,39 +597,39 @@ class JsonController extends IndexController
         }
 
         // Select
-        $categoryId = array();
-        $order = array('parent ASC', 'id DESC');
+        $categoryId = [];
+        $order = ['parent ASC', 'id DESC'];
         $select = $this->getModel('category')->select()->where($where)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
             $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
             $categoryId[] = $row->id;
-            $category[] = array(
-                'id' => $categorySingle['id'],
-                'parent' => $categorySingle['parent'],
-                'title' => $categorySingle['title'],
+            $category[] = [
+                'id'        => $categorySingle['id'],
+                'parent'    => $categorySingle['parent'],
+                'title'     => $categorySingle['title'],
                 'mediumUrl' => $categorySingle['mediumUrl'],
-                'thumbUrl' => $categorySingle['thumbUrl'],
-            );
+                'thumbUrl'  => $categorySingle['thumbUrl'],
+            ];
         }
 
         if ($product == 1 && !empty($categoryId)) {
-            $products = array();
-            $whereProduct = array('status' => 1, 'category_main' => $categoryId);
-            $orderProduct = array('title DESC', 'id DESC');
+            $products = [];
+            $whereProduct = ['status' => 1, 'category_main' => $categoryId];
+            $orderProduct = ['title DESC', 'id DESC'];
             $select = $this->getModel('product')->select()->where($whereProduct)->order($orderProduct);
             $rowset = $this->getModel('product')->selectWith($select);
             foreach ($rowset as $row) {
                 $productSingle = Pi::api('product', 'shop')->canonizeProductLight($row);
-                $products[] = array(
-                    'id' => $productSingle['id'],
-                    'category' => $productSingle['category_main'],
-                    'brand' => $productSingle['brand'],
-                    'title' => $productSingle['title'],
+                $products[] = [
+                    'id'        => $productSingle['id'],
+                    'category'  => $productSingle['category_main'],
+                    'brand'     => $productSingle['brand'],
+                    'title'     => $productSingle['title'],
                     'mediumUrl' => $productSingle['mediumUrl'],
-                    'thumbUrl' => $productSingle['thumbUrl'],
-                    'is_new' => $productSingle['is_new'],
-                );
+                    'thumbUrl'  => $productSingle['thumbUrl'],
+                    'is_new'    => $productSingle['is_new'],
+                ];
             }
         } elseif ($tree == 1) {
             // Set as tree
@@ -637,20 +637,20 @@ class JsonController extends IndexController
         }
 
         // Get count
-        $columnsCount = array('count' => new Expression('count(*)'));
+        $columnsCount = ['count' => new Expression('count(*)')];
         $select = $this->getModel('category')->select()->where($where)->columns($columnsCount);
         $count = $this->getModel('category')->selectWith($select)->current()->count;
 
         // Set result
-        $result = array(
+        $result = [
             'categories' => $category,
-            'products' => $products,
-            'paginator' => array(
+            'products'   => $products,
+            'paginator'  => [
                 'count' => $count,
                 'limit' => $limit,
-                'page' => $page,
-            ),
-        );
+                'page'  => $page,
+            ],
+        ];
 
         return $result;
     }
@@ -667,10 +667,10 @@ class JsonController extends IndexController
             return;
         }
         // Check
-        $where = array(
-            'status' => 1,
+        $where = [
+            'status'          => 1,
             'time_update > ?' => $update,
-        );
+        ];
         // Get story List
         $productList = $this->productJsonList($where);
         // Set view
@@ -694,14 +694,14 @@ class JsonController extends IndexController
         $categoryMain = Pi::api('category', 'shop')->canonizeCategory($categoryMain);
         // Check category
         if (!$categoryMain || $categoryMain['status'] != 1) {
-            $productList = array();
+            $productList = [];
         } else {
             // Set story info
-            $where = array(
-                'status' => 1,
-                'category' => $categoryMain['id'],
+            $where = [
+                'status'          => 1,
+                'category'        => $categoryMain['id'],
                 'time_update > ?' => $update,
-            );
+            ];
             // Get story List
             $productList = $this->productJsonList($where);
         }
@@ -728,7 +728,7 @@ class JsonController extends IndexController
         $product = Pi::api('product', 'shop')->canonizeProductJson($product);
         // Check item
         if (!$product || $product['status'] != 1) {
-            $productSingle = array();
+            $productSingle = [];
         } else {
             $productSingle = $product;
             if ($product['attribute'] && $config['view_attribute']) {
@@ -761,7 +761,7 @@ class JsonController extends IndexController
             $productSingle['brandImage'] = $brand['thumbUrl'];
         }
 
-        $productSingle = array($productSingle);
+        $productSingle = [$productSingle];
         // Set view
         return $productSingle;
     }
@@ -780,21 +780,22 @@ class JsonController extends IndexController
         // Get category
         $category = Pi::api('category', 'shop')->getCategory($id);
 
-        $categorySingle = array(
-            'id' => $category['id'],
-            'title' => $category['title'],
-            'largeUrl' => $category['largeUrl'],
-            'mediumUrl' => $category['mediumUrl'],
-            'thumbUrl' => $category['thumbUrl'],
+        $categorySingle = [
+            'id'          => $category['id'],
+            'title'       => $category['title'],
+            'largeUrl'    => $category['largeUrl'],
+            'mediumUrl'   => $category['mediumUrl'],
+            'thumbUrl'    => $category['thumbUrl'],
             'description' => $category['text_summery'] . $category['text_description'],
-        );
+        ];
 
-        $categorySingle = array($categorySingle);
+        $categorySingle = [$categorySingle];
         // Set view
         return $categorySingle;
     }
 
-    public function checkPassword() {
+    public function checkPassword()
+    {
         // Get info from url
         $module = $this->params('module');
         $password = $this->params('password');

@@ -72,10 +72,10 @@ $scriptMenu = sprintf(
 // Load header files
 $this->jQuery();
 $this->angular();
-$this->js(array(
+$this->js([
     $this->assetModule('js/dirPagination.js'),
-    $this->assetModule('js/bootstrap-treeview.min.js')
-));
+    $this->assetModule('js/bootstrap-treeview.min.js'),
+]);
 $this->css($this->assetModule('css/front.css'));
 $this->footScript()->appendScript($script);
 $this->footScript()->appendScript($scriptMenu);
@@ -127,15 +127,15 @@ switch ($config['view_column']) {
                         <option value="0"><?php _e('Not marketable'); ?></option>
                     </select>
                 </div>
-                <?php $filterNameArray = array(); ?>
+                <?php $filterNameArray = []; ?>
                 <?php foreach ($filterList as $singleFilter) { ?>
                     <?php if ($singleFilter['type'] == 'select') { ?>
                         <?php
                         $filterName = 'filter' . $singleFilter['name'];
-                        $filterNameArray[] = array(
-                            'fieldName' => $singleFilter['name'],
-                            'filterName' => $filterName
-                        );
+                        $filterNameArray[] = [
+                            'fieldName'  => $singleFilter['name'],
+                            'filterName' => $filterName,
+                        ];
                         ?>
                         <div class="form-group">
                             <label><?php echo $singleFilter['title']; ?></label>
@@ -152,10 +152,10 @@ switch ($config['view_column']) {
                         <div class="form-group">
                             <?php
                             $filterName = 'filter' . $singleFilter['name'];
-                            $filterNameArray[] = array(
-                                'fieldName' => $singleFilter['name'],
-                                'filterName' => $filterName
-                            );
+                            $filterNameArray[] = [
+                                'fieldName'  => $singleFilter['name'],
+                                'filterName' => $filterName,
+                            ];
                             ?>
                             <label><?php echo $singleFilter['title']; ?></label>
                             <input type="text" ng-model="<?php echo $filterName; ?>" class="form-control">
@@ -179,7 +179,8 @@ switch ($config['view_column']) {
             <div class="clearfix">
                 <div class="col-md-2 col-xs-6">
                     <div class="product-compare-button text-center">
-                        <a href="<?php echo Pi::url($this->url('', array('controller' => 'compare'))); ?>" title="<?php _e("Compare products"); ?>" class="btn btn-success btn-xs">
+                        <a href="<?php echo Pi::url($this->url('', ['controller' => 'compare'])); ?>"
+                           title="<?php _e("Compare products"); ?>" class="btn btn-success btn-xs">
                             <?php _e("Compare products"); ?>
                         </a>
                     </div>
@@ -218,18 +219,31 @@ switch ($config['view_column']) {
                 <div class="clearfix product-sort">
                     <ul class="list-inline">
                         <li><?php _e('Sort by'); ?> :</li>
-                        <li class="product-sort-type" ng-click="sort('time_create')"><?php _e('Time'); ?> <i class="fa sort-icon" ng-show="sortKey=='time_create'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
-                        <li class="product-sort-type" ng-click="sort('hits')"><?php _e('Hits'); ?> <i class="fa sort-icon" ng-show="sortKey=='hits'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
-                        <li class="product-sort-type" ng-click="sort('favourite')"><?php _e('Favourite'); ?> <i class="fa sort-icon" ng-show="sortKey=='favourite'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
-                        <li class="product-sort-type" ng-click="sort('sold')"><?php _e('Sold'); ?> <i class="fa sort-icon" ng-show="sortKey=='sold'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
-                        <li class="product-sort-type" ng-click="sort('price')"><?php _e('Price'); ?> <i class="fa sort-icon" ng-show="sortKey=='price'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
-                        <li class="product-sort-type" ng-click="sort('title')"><?php _e('Title'); ?>  <i class="fa sort-icon" ng-show="sortKey=='title'" ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sort('time_create')"><?php _e('Time'); ?> <i
+                                    class="fa sort-icon" ng-show="sortKey=='time_create'"
+                                    ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sort('hits')"><?php _e('Hits'); ?> <i
+                                    class="fa sort-icon" ng-show="sortKey=='hits'"
+                                    ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sort('favourite')"><?php _e('Favourite'); ?> <i
+                                    class="fa sort-icon" ng-show="sortKey=='favourite'"
+                                    ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sort('sold')"><?php _e('Sold'); ?> <i
+                                    class="fa sort-icon" ng-show="sortKey=='sold'"
+                                    ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sort('price')"><?php _e('Price'); ?> <i
+                                    class="fa sort-icon" ng-show="sortKey=='price'"
+                                    ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
+                        <li class="product-sort-type" ng-click="sort('title')"><?php _e('Title'); ?> <i
+                                    class="fa sort-icon" ng-show="sortKey=='title'"
+                                    ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
                         <li class="product-sort-type" ng-click="sortKey=''"><?php _e('Default'); ?></li>
                     </ul>
                 </div>
                 <div class="row">
                     <div dir-paginate="product in products|orderBy:sortKey:reverse|filter: {<?php if (!empty($filterNameArray)) { ?><?php foreach ($filterNameArray as $filterNameSingle) { ?><?php echo $filterNameSingle['fieldName'] ?> : <?php echo $filterNameSingle['filterName'] ?>,<?php } ?><?php } ?> title : filterTitle, marketable : filterMarketable } |itemsPerPage:<?php echo $config['view_perpage']; ?>"
-                         class="<?php echo $shopBoxSize; ?> product-box h-product" itemscope itemtype="https://schema.org/Product">
+                         class="<?php echo $shopBoxSize; ?> product-box h-product" itemscope
+                         itemtype="https://schema.org/Product">
                         <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
                             <div ng-show="hoverCompare"
                                  ng-click="changeClass()"
@@ -240,8 +254,10 @@ switch ($config['view_column']) {
                                  class="product-compare-add">
                                 <i class="fa fa-plus"></i> <?php _e('Compare'); ?>
                             </div>
-                            <a class="u-url {{product.ribbon_class}}" itemprop="url" title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
-                                <img itemprop="image" class="img-responsive u-photo" src="{{product.thumbUrl}}" alt="{{product.title}}"/>
+                            <a class="u-url {{product.ribbon_class}}" itemprop="url" title="{{product.title}}"
+                               href="{{product.productUrl}}" target="_blank">
+                                <img itemprop="image" class="img-responsive u-photo" src="{{product.thumbUrl}}"
+                                     alt="{{product.title}}"/>
                                 <p ng-if="product.ribbon">
                                     <span>{{product.ribbon}}</span>
                                 </p>
@@ -253,12 +269,14 @@ switch ($config['view_column']) {
                                     </a>
                                 </h3>
                                 <?php if ($config['order_active']) { ?>
-                                    <div class="clearfix" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                    <div class="clearfix" itemprop="offers" itemscope
+                                         itemtype="https://schema.org/Offer">
                                         <?php if ($config['order_stock'] == 'never') { ?>
                                             <div class="clearfix">
                                                 <div class="clearfix">
                                                     <strong><?php _e('Stock status'); ?> : </strong>
-                                                    <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                                    <span class="text-success" itemprop="availability"
+                                                          href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
                                                 </div>
                                                 <div ng-if="{{product.price_discount_has}} == 1">
                                                 <span class="text-danger">
@@ -274,15 +292,18 @@ switch ($config['view_column']) {
                                                     <div class="clearfix">
                                                         <div class="clearfix">
                                                             <strong><?php _e('Stock status'); ?> : </strong>
-                                                            <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                                            <span class="text-success" itemprop="availability"
+                                                                  href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
                                                         </div>
                                                         <div ng-if="product.price_discount_has == 1">
                                                     <span class="text-danger">
                                                         <del>{{product.price_discount_view}}</del>
                                                     </span>
                                                         </div>
-                                                        <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
-                                                        <meta itemprop="priceCurrency" content="{{product.price_currency}}">
+                                                        <span class="p-price" itemprop="price"
+                                                              content="{{product.price}}">{{product.price_view}}</span>
+                                                        <meta itemprop="priceCurrency"
+                                                              content="{{product.price_currency}}">
                                                     </div>
                                                 </div>
                                                 <div ng-switch-when="2">
@@ -307,15 +328,18 @@ switch ($config['view_column']) {
                                                     <div class="clearfix">
                                                         <div class="clearfix">
                                                             <strong><?php _e('Stock status'); ?> : </strong>
-                                                            <span class="text-danger" itemprop="availability" href="https://schema.org/InStock">{{product.stock_type_view}}</span>
+                                                            <span class="text-danger" itemprop="availability"
+                                                                  href="https://schema.org/InStock">{{product.stock_type_view}}</span>
                                                         </div>
-                                                    <span ng-if="product.price_discount_has == 1">
+                                                        <span ng-if="product.price_discount_has == 1">
                                                         <span class="text-danger small">
                                                             <del>{{product.price_discount_view}}</del>
                                                         </span>
                                                     </span>
-                                                        <span class="p-price" itemprop="price" content="{{product.price}}">{{product.price_view}}</span>
-                                                        <meta itemprop="priceCurrency" content="{{product.price_currency}}">
+                                                        <span class="p-price" itemprop="price"
+                                                              content="{{product.price}}">{{product.price_view}}</span>
+                                                        <meta itemprop="priceCurrency"
+                                                              content="{{product.price_currency}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -324,7 +348,8 @@ switch ($config['view_column']) {
                                                 <div class="clearfix">
                                                     <div class="clearfix">
                                                         <strong><?php _e('Stock status'); ?> : </strong>
-                                                        <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                                        <span class="text-success" itemprop="availability"
+                                                              href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
                                                     </div>
                                                     <div ng-if="product.price_discount_has == 1">
                                                     <span class="text-danger">
@@ -361,9 +386,9 @@ switch ($config['view_column']) {
             </div>
             <div class="paginator">
                 <dir-pagination-controls
-                    max-size="<?php echo $config['view_perpage']; ?>"
-                    direction-links="true"
-                    boundary-links="true">
+                        max-size="<?php echo $config['view_perpage']; ?>"
+                        direction-links="true"
+                        boundary-links="true">
                 </dir-pagination-controls>
             </div>
         </div>

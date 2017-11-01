@@ -10,17 +10,18 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
+use Module\Shop\Form\CategoryFilter;
+use Module\Shop\Form\CategoryForm;
+use Module\Shop\Form\CategoryMergeFilter;
+use Module\Shop\Form\CategoryMergeForm;
 use Pi;
+use Pi\File\Transfer\Upload;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Pi\File\Transfer\Upload;
-use Module\Shop\Form\CategoryForm;
-use Module\Shop\Form\CategoryFilter;
-use Module\Shop\Form\CategoryMergeForm;
-use Module\Shop\Form\CategoryMergeFilter;
 use Zend\Db\Sql\Predicate\Expression;
 
 class CategoryController extends ActionController
@@ -31,8 +32,8 @@ class CategoryController extends ActionController
     {
         $type = $this->params('type', 'category');
         // Set count
-        $where = array('type' => $type);
-        $count = array('count' => new Expression('count(*)'));
+        $where = ['type' => $type];
+        $count = ['count' => new Expression('count(*)')];
         $select = $this->getModel('category')->select()->columns($count)->where($where);
         $count = $this->getModel('category')->selectWith($select)->current()->count;
         // Set view
@@ -47,17 +48,17 @@ class CategoryController extends ActionController
         $id = $this->params('id');
         $module = $this->params('module');
         $type = $this->params('type', 'category');
-        $option = array(
+        $option = [
             'isNew' => true,
-            'type' => $type,
-        );
+            'type'  => $type,
+        ];
         // Find category
         if ($id) {
             $category = $this->getModel('category')->find($id)->toArray();
             if ($category['image']) {
                 $category['thumbUrl'] = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $category['path'], $category['image']);
                 $option['thumbUrl'] = Pi::url($category['thumbUrl']);
-                $option['removeUrl'] = $this->url('', array('action' => 'remove', 'id' => $category['id']));
+                $option['removeUrl'] = $this->url('', ['action' => 'remove', 'id' => $category['id']]);
             }
             $option['isNew'] = false;
         }
@@ -96,7 +97,7 @@ class CategoryController extends ActionController
                         // process image
                         Pi::api('image', 'shop')->process($values['image'], $values['path']);
                     } else {
-                        $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
+                        $this->jump(['action' => 'update'], __('Problem in upload image. please try again'));
                     }
                 } elseif (!isset($values['image'])) {
                     $values['image'] = '';
@@ -108,9 +109,9 @@ class CategoryController extends ActionController
                 // Set seo_keywords
                 $keywords = ($values['seo_keywords']) ? $values['seo_keywords'] : $values['title'];
                 $filter = new Filter\HeadKeywords;
-                $filter->setOptions(array(
+                $filter->setOptions([
                     'force_replace_space' => (bool)$this->config('force_replace_space'),
-                ));
+                ]);
                 $values['seo_keywords'] = $filter($keywords);
                 // Set seo_description
                 $description = ($values['seo_description']) ? $values['seo_description'] : $values['title'];
@@ -132,17 +133,17 @@ class CategoryController extends ActionController
                 // Add / Edit sitemap
                 if (Pi::service('module')->isActive('sitemap')) {
                     // Set loc
-                    $loc = Pi::url($this->url('shop', array(
-                        'module' => $module,
+                    $loc = Pi::url($this->url('shop', [
+                        'module'     => $module,
                         'controller' => 'category',
-                        'slug' => $values['slug']
-                    )));
+                        'slug'       => $values['slug'],
+                    ]));
                     // Update sitemap
                     Pi::api('sitemap', 'sitemap')->singleLink($loc, $row->status, $module, 'category', $row->id);
                 }
                 // Set sale
                 if (isset($values['sale_percent']) && intval($values['sale_percent']) > 0) {
-                    $sale = array();
+                    $sale = [];
                     $sale['percent'] = intval($values['sale_percent']);
                     $sale['time_publish'] = strtotime($values['sale_time_publish']);
                     $sale['time_expire'] = strtotime($values['sale_time_expire']);
@@ -162,13 +163,13 @@ class CategoryController extends ActionController
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('category', $row->id, $operation);
                 $message = __('Category data saved successfully.');
-                $this->jump(array('action' => 'index', 'type' => $type), $message);
+                $this->jump(['action' => 'index', 'type' => $type], $message);
             }
         } else {
             if ($id) {
                 $form->setData($category);
             } else {
-                $category = array();
+                $category = [];
                 $category['sale_time_publish'] = date("Y-m-d H:i:s", time());
                 $category['sale_time_expire'] = date("Y-m-d H:i:s", strtotime("+1 month"));
                 $form->setData($category);
@@ -212,10 +213,10 @@ class CategoryController extends ActionController
             $message = __('Please select category');
             $status = 0;
         }
-        return array(
-            'status' => $status,
+        return [
+            'status'  => $status,
             'message' => $message,
-        );
+        ];
     }
 
     public function ajaxAction()
@@ -229,34 +230,34 @@ class CategoryController extends ActionController
         $sort = $this->params('sort');
 
         // Get info
-        $rows = array();
-        $where = array('type' => $type);
+        $rows = [];
+        $where = ['type' => $type];
         if (!empty($searchPhrase)) {
             $where['title LIKE ?'] = '%' . $searchPhrase . '%';
         }
-        $columns = array('id', 'title', 'slug', 'status', 'display_order', 'type');
+        $columns = ['id', 'title', 'slug', 'status', 'display_order', 'type'];
 
 
         if (isset($sort['id'])) {
             if ($sort['id'] == 'asc') {
-                $order = array('id ASC');
+                $order = ['id ASC'];
             } else {
-                $order = array('id DESC');
+                $order = ['id DESC'];
             }
         } elseif (isset($sort['title'])) {
             if ($sort['title'] == 'asc') {
-                $order = array('title ASC', 'id ASC');
+                $order = ['title ASC', 'id ASC'];
             } else {
-                $order = array('title DESC', 'id DESC');
+                $order = ['title DESC', 'id DESC'];
             }
         } elseif (isset($sort['display_order'])) {
             if ($sort['display_order'] == 'asc') {
-                $order = array('display_order ASC', 'id ASC');
+                $order = ['display_order ASC', 'id ASC'];
             } else {
-                $order = array('display_order DESC', 'id DESC');
+                $order = ['display_order DESC', 'id DESC'];
             }
         } else {
-            $order = array('id DESC');
+            $order = ['id DESC'];
         }
 
         $offset = (int)($current - 1) * $rowCount;
@@ -265,36 +266,36 @@ class CategoryController extends ActionController
         $rowset = $this->getModel('category')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $rows[] = array(
-                'id' => $row->id,
-                'title' => $row->title,
+            $rows[] = [
+                'id'            => $row->id,
+                'title'         => $row->title,
                 'display_order' => $row->display_order,
-                'status' => $row->status,
-                'view_url' => Pi::url($this->url('shop', array(
-                    'module' => $module,
+                'status'        => $row->status,
+                'view_url'      => Pi::url($this->url('shop', [
+                    'module'     => $module,
                     'controller' => 'category',
-                    'slug' => $row->slug,
-                ))),
-                'edit_url' => Pi::url($this->url('admin', array(
-                    'module' => $module,
+                    'slug'       => $row->slug,
+                ])),
+                'edit_url'      => Pi::url($this->url('admin', [
+                    'module'     => $module,
                     'controller' => 'category',
-                    'action' => 'update',
-                    'type' => $row->type,
-                    'id' => $row->id,
-                ))),
-            );
+                    'action'     => 'update',
+                    'type'       => $row->type,
+                    'id'         => $row->id,
+                ])),
+            ];
         }
         // Set count
-        $count = array('count' => new Expression('count(*)'));
+        $count = ['count' => new Expression('count(*)')];
         $select = $this->getModel('category')->select()->columns($count)->where($where);
         $count = $this->getModel('category')->selectWith($select)->current()->count;
         // Set result
-        $result = array(
-            'current' => $current,
-            'rowCount' =>  $rowCount,
-            'total' => intval($count),
-            'rows' => $rows,
-        );
+        $result = [
+            'current'  => $current,
+            'rowCount' => $rowCount,
+            'total'    => intval($count),
+            'rows'     => $rows,
+        ];
         return $result;
     }
 
@@ -311,10 +312,10 @@ class CategoryController extends ActionController
             // Get category list
             $categoryList = Pi::registry('categoryList', 'shop')->read();
             // Get products and send
-            $where = array(
+            $where = [
                 'id > ?' => $start,
-            );
-            $order = array('id ASC');
+            ];
+            $order = ['id ASC'];
             $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
             $rowset = $this->getModel('product')->selectWith($select);
 
@@ -342,8 +343,8 @@ class CategoryController extends ActionController
 
                 // Update product
                 $this->getModel('product')->update(
-                    array('category' => $category),
-                    array('id' => (int)$product['id'])
+                    ['category' => $category],
+                    ['id' => (int)$product['id']]
                 );
 
                 // Set extra
@@ -352,7 +353,7 @@ class CategoryController extends ActionController
             }
             // Get count
             if (!$count) {
-                $columns = array('count' => new Expression('count(*)'));
+                $columns = ['count' => new Expression('count(*)')];
                 $select = $this->getModel('product')->select()->columns($columns);
                 $count = $this->getModel('product')->selectWith($select)->current()->count;
             }
@@ -362,31 +363,31 @@ class CategoryController extends ActionController
             if ($complete >= $count) {
                 $nextUrl = '';
             } else {
-                $nextUrl = Pi::url($this->url('', array(
-                    'action' => 'sync',
-                    'start' => $lastId,
-                    'count' => $count,
+                $nextUrl = Pi::url($this->url('', [
+                    'action'   => 'sync',
+                    'start'    => $lastId,
+                    'count'    => $count,
                     'complete' => $complete,
-                    'confirm' => $confirm,
-                )));
+                    'confirm'  => $confirm,
+                ]));
             }
 
-            $info = array(
-                'start' => $lastId,
-                'count' => $count,
+            $info = [
+                'start'    => $lastId,
+                'count'    => $count,
                 'complete' => $complete,
-                'percent' => $percent,
-                'nextUrl' => $nextUrl,
-            );
+                'percent'  => $percent,
+                'nextUrl'  => $nextUrl,
+            ];
 
             $percent = ($percent > 99 && $percent < 100) ? (intval($percent) + 1) : intval($percent);
         } else {
-            $info = array();
+            $info = [];
             $percent = 0;
-            $nextUrl = Pi::url($this->url('', array(
-                'action' => 'sync',
+            $nextUrl = Pi::url($this->url('', [
+                'action'  => 'sync',
                 'confirm' => 1,
-            )));
+            ]));
         }
         // Set view
         $this->view()->setTemplate('category-sync');
@@ -405,11 +406,11 @@ class CategoryController extends ActionController
         $categoryFrom2 = $this->params('categoryFrom2', 0);
         $categoryTo = $this->params('categoryTo', 0);
         $whereType = $this->params('whereType', 'and');
-        $info = array();
-        $productsId = array();
+        $info = [];
+        $productsId = [];
         $percent = 0;
         // Set option
-        $option = array();
+        $option = [];
         // Set form
         $form = new CategoryMergeForm('category', $option);
         $form->setAttribute('enctype', 'multipart/form-data');
@@ -423,42 +424,42 @@ class CategoryController extends ActionController
 
 
                 // Set redirect
-                return $this->redirect()->toRoute('', array(
-                    'controller' => 'category',
-                    'action' => 'merge',
+                return $this->redirect()->toRoute('', [
+                    'controller'    => 'category',
+                    'action'        => 'merge',
                     'categoryFrom1' => $values['category_from_1'],
                     'categoryFrom2' => $values['category_from_2'],
-                    'categoryTo' => $values['category_to'],
-                    'whereType' => $values['where_type'],
-                    'start' => 0,
-                    'complete' => 0,
-                    'count' => 0,
-                ));
+                    'categoryTo'    => $values['category_to'],
+                    'whereType'     => $values['where_type'],
+                    'start'         => 0,
+                    'complete'      => 0,
+                    'count'         => 0,
+                ]);
 
             }
-        } elseif ($categoryFrom1 > 0 && $categoryFrom2 > 0 && $categoryTo > 0 && in_array($whereType, array('and', 'or'))) {
+        } elseif ($categoryFrom1 > 0 && $categoryFrom2 > 0 && $categoryTo > 0 && in_array($whereType, ['and', 'or'])) {
 
             // Get list of products
             switch ($whereType) {
                 case 'or':
-                    $whereLink = array(
+                    $whereLink = [
                         'product > ?' => $start,
-                        'category' => array(
+                        'category'    => [
                             $categoryFrom1,
                             $categoryFrom2,
-                        )
-                    );
-                    $order = array('product ASC');
+                        ],
+                    ];
+                    $order = ['product ASC'];
                     $select = $this->getModel('link')->select()->where($whereLink)->order($order)->limit(25);
                     $rowSet = $this->getModel('link')->selectWith($select);
 
                     // Get count
                     if (!$count) {
-                        $where = array('category' => array(
+                        $where = ['category' => [
                             $categoryFrom1,
                             $categoryFrom2,
-                        ));
-                        $columns = array('count' => new Expression('count(*)'));
+                        ]];
+                        $columns = ['count' => new Expression('count(*)')];
                         $select = $this->getModel('link')->select()->columns($columns)->where($where);
                         $count = $this->getModel('link')->selectWith($select)->current()->count;
                     }
@@ -467,21 +468,21 @@ class CategoryController extends ActionController
                 default:
                 case 'and':
                     $linkTable = $this->getModel('link')->getTable();
-                    $where = array(
+                    $where = [
                         'link1.product > ?' => $start,
-                        'link1.category' => $categoryFrom1
-                    );
-                    $order = array('link1.product ASC');
+                        'link1.category'    => $categoryFrom1,
+                    ];
+                    $order = ['link1.product ASC'];
                     $select = Pi::db()->select();
-                    $select->from(array('link1' => $linkTable));
-                    $select->columns(array('product1' => 'product'));
+                    $select->from(['link1' => $linkTable]);
+                    $select->columns(['product1' => 'product']);
                     $select->join(
-                        array('link2' => $linkTable),
+                        ['link2' => $linkTable],
                         new Expression(sprintf(
                             'link1.product = link2.product AND link2.category = %s',
                             $categoryFrom2
                         )),
-                        array('product2' => 'product'),
+                        ['product2' => 'product'],
                         ''
                     );
                     $select->where($where)->order($order)->limit(25);
@@ -489,19 +490,19 @@ class CategoryController extends ActionController
 
                     // Get count
                     if (!$count) {
-                        $whereCount = array(
-                             'link1.category' => $categoryFrom1
-                        );
+                        $whereCount = [
+                            'link1.category' => $categoryFrom1,
+                        ];
                         $selectCount = Pi::db()->select();
-                        $selectCount->from(array('link1' => $linkTable));
-                        $selectCount->columns(array('product1' => 'product'));
+                        $selectCount->from(['link1' => $linkTable]);
+                        $selectCount->columns(['product1' => 'product']);
                         $selectCount->join(
-                            array('link2' => $linkTable),
+                            ['link2' => $linkTable],
                             new Expression(sprintf(
                                 'link1.product = link2.product AND link2.category = %s',
                                 $categoryFrom2
                             )),
-                            array('product2' => 'product'),
+                            ['product2' => 'product'],
                             ''
                         );
                         $selectCount->where($whereCount);
@@ -516,12 +517,12 @@ class CategoryController extends ActionController
             }
 
             // Set form
-            $data = array(
+            $data = [
                 'category_from_1' => $categoryFrom1,
                 'category_from_2' => $categoryFrom2,
-                'category_to' => $categoryTo,
-                'where_type' => $whereType,
-            );
+                'category_to'     => $categoryTo,
+                'where_type'      => $whereType,
+            ];
             $form->setData($data);
 
             // Get list of product ids
@@ -556,8 +557,8 @@ class CategoryController extends ActionController
 
                 // Update product
                 $this->getModel('product')->update(
-                    array('category' => $category),
-                    array('id' => (int)$product['id'])
+                    ['category' => $category],
+                    ['id' => (int)$product['id']]
                 );
 
                 // Set info
@@ -572,30 +573,30 @@ class CategoryController extends ActionController
             if ($complete >= $count) {
                 $nextUrl = '';
             } else {
-                $nextUrl = Pi::url($this->url('', array(
-                    'controller' => 'category',
-                    'action' => 'merge',
+                $nextUrl = Pi::url($this->url('', [
+                    'controller'    => 'category',
+                    'action'        => 'merge',
                     'categoryFrom1' => $categoryFrom1,
                     'categoryFrom2' => $categoryFrom2,
-                    'categoryTo' => $categoryTo,
-                    'whereType' => $whereType,
-                    'start' => $lastId,
-                    'count' => $count,
-                    'complete' => $complete,
-                )));
+                    'categoryTo'    => $categoryTo,
+                    'whereType'     => $whereType,
+                    'start'         => $lastId,
+                    'count'         => $count,
+                    'complete'      => $complete,
+                ]));
             }
 
-            $info = array(
+            $info = [
                 'categoryFrom1' => $categoryFrom1,
                 'categoryFrom2' => $categoryFrom2,
-                'categoryTo' => $categoryTo,
-                'whereType' => $whereType,
-                'start' => $lastId,
-                'count' => $count,
-                'complete' => $complete,
-                'percent' => $percent,
-                'nextUrl' => $nextUrl,
-            );
+                'categoryTo'    => $categoryTo,
+                'whereType'     => $whereType,
+                'start'         => $lastId,
+                'count'         => $count,
+                'complete'      => $complete,
+                'percent'       => $percent,
+                'nextUrl'       => $nextUrl,
+            ];
 
             $percent = ($percent > 99 && $percent < 100) ? (intval($percent) + 1) : intval($percent);
         }

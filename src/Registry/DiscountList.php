@@ -11,6 +11,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Registry;
 
 use Pi;
@@ -27,10 +28,10 @@ class DiscountList extends AbstractRegistry
     /**
      * {@inheritDoc}
      */
-    protected function loadDynamic($options = array())
+    protected function loadDynamic($options = [])
     {
-        $return = array();
-        $where = array('status' => 1);
+        $return = [];
+        $where = ['status' => 1];
         $select = Pi::model('discount', $this->module)->select()->where($where);
         $rowset = Pi::model('discount', $this->module)->selectWith($select);
         foreach ($rowset as $row) {
@@ -45,7 +46,7 @@ class DiscountList extends AbstractRegistry
      */
     public function read()
     {
-        $options = array();
+        $options = [];
         $result = $this->loadData($options);
 
         return $result;

@@ -10,21 +10,22 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
+use Module\Shop\Form\SaleFilter;
+use Module\Shop\Form\SaleForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\SaleForm;
-use Module\Shop\Form\SaleFilter;
 
 class SaleController extends ActionController
 {
     public function indexAction()
     {
         // Set array
-        $saleList = array();
-        $productList = array();
-        $categoryList = array();
+        $saleList = [];
+        $productList = [];
+        $categoryList = [];
         // Get product ides
         $saleId = Pi::api('sale', 'shop')->getInformation('all');
         // Get products
@@ -37,7 +38,7 @@ class SaleController extends ActionController
         }
         if (!empty($productList) || !empty($categoryList)) {
             // Get sale
-            $order = array('id DESC', 'time_publish DESC');
+            $order = ['id DESC', 'time_publish DESC'];
             $select = $this->getModel('sale')->select()->order($order);
             $saleSet = $this->getModel('sale')->selectWith($select);
             // Make sale list
@@ -49,8 +50,8 @@ class SaleController extends ActionController
                     $saleList[$sale->type][$sale->id]['categoryInfo'] = $categoryList[$sale->category];
                 }
                 $saleList[$sale->type][$sale->id]['time'] = sprintf(__('From %s to %s'),
-                    _date($sale->time_publish, array('pattern' => 'yyyy-MM-dd HH:mm')),
-                    _date($sale->time_expire, array('pattern' => 'yyyy-MM-dd HH:mm')));
+                    _date($sale->time_publish, ['pattern' => 'yyyy-MM-dd HH:mm']),
+                    _date($sale->time_expire, ['pattern' => 'yyyy-MM-dd HH:mm']));
                 $saleList[$sale->type][$sale->id]['isExpire'] = (time() > $sale->time_expire) ? 1 : 0;
             }
         }
@@ -65,7 +66,7 @@ class SaleController extends ActionController
         $id = $this->params('id');
         $part = $this->params('part');
         // Set option
-        $option = array();
+        $option = [];
         $option['type'] = $id ? 'edit' : 'add';
         $option['part'] = $part;
         // Set form
@@ -95,7 +96,7 @@ class SaleController extends ActionController
                 Pi::api('log', 'shop')->addLog('sale', $row->id, $operation);
                 // Check it save or not
                 $message = __('Sale data saved successfully.');
-                $this->jump(array('action' => 'index'), $message);
+                $this->jump(['action' => 'index'], $message);
             }
         } else {
             if ($id) {
@@ -103,7 +104,7 @@ class SaleController extends ActionController
                 $values['time_publish'] = date("Y-m-d H:i:s", $values['time_publish']);
                 $values['time_expire'] = date("Y-m-d H:i:s", $values['time_expire']);
             } else {
-                $values = array();
+                $values = [];
                 $values['time_publish'] = date("Y-m-d H:i:s", time());
                 $values['time_expire'] = date("Y-m-d H:i:s", strtotime("+1 week"));
             }
@@ -128,8 +129,8 @@ class SaleController extends ActionController
             // update registry
             Pi::registry('saleInformation', 'shop')->clear();
             // jump
-            $this->jump(array('action' => 'index'), __('Selected sale delete'));
+            $this->jump(['action' => 'index'], __('Selected sale delete'));
         }
-        $this->jump(array('action' => 'index'), __('Please select sale'));
+        $this->jump(['action' => 'index'], __('Please select sale'));
     }
 }

@@ -11,6 +11,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Registry;
 
 use Pi;
@@ -24,11 +25,11 @@ class CategoryRoute extends AbstractRegistry
     /**
      * {@inheritDoc}
      */
-    protected function loadDynamic($options = array())
+    protected function loadDynamic($options = [])
     {
-        $return = array();
-        $where = array('status' => 1);
-        $columns = array('id', 'slug');
+        $return = [];
+        $where = ['status' => 1];
+        $columns = ['id', 'slug'];
         $select = Pi::model('category', $this->module)->select()->columns($columns)->where($where);
         $rowset = Pi::model('category', $this->module)->selectWith($select);
         foreach ($rowset as $row) {
@@ -43,7 +44,7 @@ class CategoryRoute extends AbstractRegistry
      */
     public function read()
     {
-        $options = array();
+        $options = [];
         $result = $this->loadData($options);
         return $result;
     }

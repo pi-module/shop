@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class PromotionCheckForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
     }
@@ -34,27 +34,27 @@ class PromotionCheckForm extends BaseForm
     public function init()
     {
         // code
-        $this->add(array(
-            'name' => 'code',
-            'options' => array(
+        $this->add([
+            'name'       => 'code',
+            'options'    => [
                 'label' => __('Promotion code'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-                'required' => true,
-                'class' => 'input-sm',
+                'required'    => true,
+                'class'       => 'input-sm',
                 'placeholder' => __('Input promotion code'),
-            )
-        ));
+            ],
+        ]);
         // Proceeding
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Proceeding code'),
                 'class' => 'btn btn-primary btn-xs input-sm',
-            )
-        ));
+            ],
+        ]);
     }
 }

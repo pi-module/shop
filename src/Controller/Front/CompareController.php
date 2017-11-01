@@ -23,15 +23,15 @@ class CompareController extends ActionController
     {
         // Get info from url
         $slugList = $this->params('product');
-        $mainProduct = array();
-        $products = array();
+        $mainProduct = [];
+        $products = [];
         // Check product list
         if (!empty($slugList)) {
             $mainProduct = Pi::api('product', 'shop')->getProductLight($slugList[1], 'slug');
             $products = Pi::api('product', 'shop')->getCompareList($slugList, $mainProduct);
         }
         // Set url
-        $url = Pi::url($this->url('', array('controller' => 'compare')));
+        $url = Pi::url($this->url('', ['controller' => 'compare']));
         foreach ($slugList as $slug) {
             $url = sprintf('%s/%s', $url, $slug);
         }
@@ -44,9 +44,9 @@ class CompareController extends ActionController
         }
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
-        $filter->setOptions(array(
-            'force_replace_space' => true
-        ));
+        $filter->setOptions([
+            'force_replace_space' => true,
+        ]);
         $seoKeywords = $filter($title);
         // Set view
         $this->view()->headTitle($title);

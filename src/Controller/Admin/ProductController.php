@@ -10,25 +10,26 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
+use Module\Shop\Form\AdminProductExportFilter;
+use Module\Shop\Form\AdminProductExportForm;
+use Module\Shop\Form\AdminProductSearchFilter;
+use Module\Shop\Form\AdminProductSearchForm;
+use Module\Shop\Form\ProductAdditionalFilter;
+use Module\Shop\Form\ProductAdditionalForm;
+use Module\Shop\Form\ProductFilter;
+use Module\Shop\Form\ProductForm;
+use Module\Shop\Form\ProductPriceFilter;
+use Module\Shop\Form\ProductPriceForm;
+use Module\Shop\Form\RelatedFilter;
+use Module\Shop\Form\RelatedForm;
 use Pi;
+use Pi\File\Transfer\Upload;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Pi\File\Transfer\Upload;
-use Module\Shop\Form\ProductForm;
-use Module\Shop\Form\ProductFilter;
-use Module\Shop\Form\ProductAdditionalForm;
-use Module\Shop\Form\ProductAdditionalFilter;
-use Module\Shop\Form\ProductPriceForm;
-use Module\Shop\Form\ProductPriceFilter;
-use Module\Shop\Form\RelatedForm;
-use Module\Shop\Form\RelatedFilter;
-use Module\Shop\Form\AdminProductSearchForm;
-use Module\Shop\Form\AdminProductSearchFilter;
-use Module\Shop\Form\AdminProductExportForm;
-use Module\Shop\Form\AdminProductExportFilter;
 use Zend\Db\Sql\Predicate\Expression;
 
 class ProductController extends ActionController
@@ -52,71 +53,71 @@ class ProductController extends ActionController
         // Set sort
         switch ($sort) {
             case 'title':
-                $order = array('title DESC', 'id DESC');
+                $order = ['title DESC', 'id DESC'];
                 break;
 
             case 'titleASC':
-                $order = array('title ASC', 'id ASC');
+                $order = ['title ASC', 'id ASC'];
                 break;
 
             case 'hits':
-                $order = array('hits DESC', 'id DESC');
+                $order = ['hits DESC', 'id DESC'];
                 break;
 
             case 'hitsASC':
-                $order = array('hits ASC', 'id ASC');
+                $order = ['hits ASC', 'id ASC'];
                 break;
 
             case 'create':
-                $order = array('time_create DESC', 'id DESC');
+                $order = ['time_create DESC', 'id DESC'];
                 break;
 
             case 'createASC':
-                $order = array('time_create ASC', 'id ASC');
+                $order = ['time_create ASC', 'id ASC'];
                 break;
 
             case 'update':
-                $order = array('time_update DESC', 'id DESC');
+                $order = ['time_update DESC', 'id DESC'];
                 break;
 
             case 'updateASC':
-                $order = array('time_update ASC', 'id ASC');
+                $order = ['time_update ASC', 'id ASC'];
                 break;
 
             case 'recommended':
-                $order = array('recommended DESC', 'time_create DESC', 'id DESC');
+                $order = ['recommended DESC', 'time_create DESC', 'id DESC'];
                 break;
 
             case 'price':
-                $order = array('price DESC', 'id DESC');
+                $order = ['price DESC', 'id DESC'];
                 break;
 
             case 'priceASC':
-                $order = array('price ASC', 'id ASC');
+                $order = ['price ASC', 'id ASC'];
                 break;
 
             case 'stock':
-                $order = array('stock DESC', 'id DESC');
+                $order = ['stock DESC', 'id DESC'];
                 break;
 
             case 'stockASC':
-                $order = array('stock ASC', 'id ASC');
+                $order = ['stock ASC', 'id ASC'];
                 break;
 
             case 'sold':
-                $order = array('sold DESC', 'id DESC');
+                $order = ['sold DESC', 'id DESC'];
                 break;
 
             default:
-                $order = array('time_create DESC', 'id DESC');
+                $order = ['time_create DESC', 'id DESC'];
                 break;
         }
         // Set info
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit = intval($this->config('admin_perpage'));
-        $product = array();
+        $product = [];
         // Set where
-        $whereProduct = array();
+        $whereProduct = [];
         if (!empty($recommended)) {
             $whereProduct['recommended'] = 1;
         }
@@ -124,8 +125,8 @@ class ProductController extends ActionController
             $whereProduct['brand'] = $brand;
         }
         if (!empty($category)) {
-            $productId = array();
-            $whereLink = array('category' => $category);
+            $productId = [];
+            $whereLink = ['category' => $category];
             $selectLink = $this->getModel('link')->select()->where($whereLink);
             $rowLink = $this->getModel('link')->selectWith($selectLink);
             foreach ($rowLink as $link) {
@@ -137,10 +138,10 @@ class ProductController extends ActionController
                 $whereProduct['id'] = 0;
             }
         }
-        if (!empty($status) && in_array($status, array(1, 2, 3, 4, 5))) {
+        if (!empty($status) && in_array($status, [1, 2, 3, 4, 5])) {
             $whereProduct['status'] = $status;
         } else {
-            $whereProduct['status'] = array(1, 2, 3, 4);
+            $whereProduct['status'] = [1, 2, 3, 4];
         }
         if (!empty($code)) {
             $whereProduct['code LIKE ?'] = '%' . $code . '%';
@@ -152,7 +153,7 @@ class ProductController extends ActionController
             } elseif (isset($title) && !empty($title)) {
                 $title = _strip($title);
             }
-            $title = is_array($title) ? $title : array($title);
+            $title = is_array($title) ? $title : [$title];
 
             // Set where
             $titleWhere = function ($where) use ($title) {
@@ -182,7 +183,7 @@ class ProductController extends ActionController
             $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
         }
         // Set count
-        $columnsLink = array('count' => new Expression('count(*)'));
+        $columnsLink = ['count' => new Expression('count(*)')];
         $select = $this->getModel('product')->select();
         if (!empty($title)) {
             $select->where($titleWhere);
@@ -195,34 +196,34 @@ class ProductController extends ActionController
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
-        $paginator->setUrlOptions(array(
+        $paginator->setUrlOptions([
             'router' => $this->getEvent()->getRouter(),
-            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params' => array_filter(array(
-                'module' => $this->getModule(),
-                'controller' => 'product',
-                'action' => 'index',
-                'category' => $category,
-                'brand' => $brand,
-                'status' => $status,
-                'title' => $title,
-                'code' => $code,
+            'route'  => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter([
+                'module'      => $this->getModule(),
+                'controller'  => 'product',
+                'action'      => 'index',
+                'category'    => $category,
+                'brand'       => $brand,
+                'status'      => $status,
+                'title'       => $title,
+                'code'        => $code,
                 'recommended' => $recommended,
-                'sort' => $sort,
-            )),
-        ));
+                'sort'        => $sort,
+            ]),
+        ]);
         // Set form
-        $values = array(
-            'title' => $title,
-            'code' => $code,
-            'category' => $category,
-            'brand' => $brand,
-            'status' => $status,
+        $values = [
+            'title'       => $title,
+            'code'        => $code,
+            'category'    => $category,
+            'brand'       => $brand,
+            'status'      => $status,
             'recommended' => $recommended,
-            'sort' => $sort,
-        );
+            'sort'        => $sort,
+        ];
         $form = new AdminProductSearchForm('search');
-        $form->setAttribute('action', $this->url('', array('action' => 'process')));
+        $form->setAttribute('action', $this->url('', ['action' => 'process']));
         $form->setData($values);
         // Set view
         $this->view()->setTemplate('product-index');
@@ -242,27 +243,27 @@ class ProductController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 $message = __('View filtered products');
-                $url = array(
-                    'action' => 'index',
-                    'title' => $values['title'],
-                    'code' => $values['code'],
-                    'category' => $values['category'],
-                    'brand' => $values['brand'],
-                    'status' => $values['status'],
+                $url = [
+                    'action'      => 'index',
+                    'title'       => $values['title'],
+                    'code'        => $values['code'],
+                    'category'    => $values['category'],
+                    'brand'       => $values['brand'],
+                    'status'      => $values['status'],
                     'recommended' => $values['recommended'],
-                    'sort' => $values['sort']
-                );
+                    'sort'        => $values['sort'],
+                ];
             } else {
                 $message = __('Not valid');
-                $url = array(
+                $url = [
                     'action' => 'index',
-                );
+                ];
             }
         } else {
             $message = __('Not set');
-            $url = array(
+            $url = [
                 'action' => 'index',
-            );
+            ];
         }
         return $this->jump($url, $message);
     }
@@ -272,10 +273,10 @@ class ProductController extends ActionController
         // check category
         $categoryCount = Pi::api('category', 'shop')->categoryCount();
         if (!$categoryCount) {
-            return $this->redirect()->toRoute('', array(
+            return $this->redirect()->toRoute('', [
                 'controller' => 'category',
-                'action' => 'update'
-            ));
+                'action'     => 'update',
+            ]);
         }
         // Get id
         $id = $this->params('id');
@@ -283,7 +284,7 @@ class ProductController extends ActionController
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get config
-        $option = array();
+        $option = [];
         $option['brand_system'] = $config['brand_system'];
         // Find Product
         if ($id) {
@@ -292,7 +293,7 @@ class ProductController extends ActionController
             if ($product['image']) {
                 $thumbUrl = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $product['path'], $product['image']);
                 $option['thumbUrl'] = Pi::url($thumbUrl);
-                $option['removeUrl'] = $this->url('', array('action' => 'remove', 'id' => $product['id']));
+                $option['removeUrl'] = $this->url('', ['action' => 'remove', 'id' => $product['id']]);
             }
         }
         // Set form
@@ -339,7 +340,7 @@ class ProductController extends ActionController
                         // process image
                         Pi::api('image', 'shop')->process($values['image'], $values['path']);
                     } else {
-                        $this->jump(array('action' => 'update'), __('Problem in upload image. please try again'));
+                        $this->jump(['action' => 'update'], __('Problem in upload image. please try again'));
                     }
                 } elseif (!isset($values['image'])) {
                     $values['image'] = '';
@@ -354,9 +355,9 @@ class ProductController extends ActionController
                 // Set seo_keywords
                 $keywords = ($values['seo_keywords']) ? $values['seo_keywords'] : $values['title'];
                 $filter = new Filter\HeadKeywords;
-                $filter->setOptions(array(
+                $filter->setOptions([
                     'force_replace_space' => (bool)$this->config('force_replace_space'),
-                ));
+                ]);
                 $values['seo_keywords'] = $filter($keywords);
                 // Set seo_description
                 $description = ($values['seo_description']) ? $values['seo_description'] : $values['title'];
@@ -403,11 +404,11 @@ class ProductController extends ActionController
                 // Add / Edit sitemap
                 if (Pi::service('module')->isActive('sitemap')) {
                     // Set loc
-                    $loc = Pi::url($this->url('shop', array(
-                        'module' => $module,
+                    $loc = Pi::url($this->url('shop', [
+                        'module'     => $module,
                         'controller' => 'product',
-                        'slug' => $values['slug']
-                    )));
+                        'slug'       => $values['slug'],
+                    ]));
                     // Update sitemap
                     Pi::api('sitemap', 'sitemap')->singleLink($loc, $row->status, $module, 'product', $row->id);
                 }
@@ -416,7 +417,7 @@ class ProductController extends ActionController
                 Pi::api('log', 'shop')->addLog('product', $row->id, $operation);
                 // Check it save or not
                 $message = __('Product data saved successfully.');
-                $this->jump(array('action' => 'additional', 'id' => $row->id), $message);
+                $this->jump(['action' => 'additional', 'id' => $row->id], $message);
             }
         } else {
             if ($id) {
@@ -430,17 +431,17 @@ class ProductController extends ActionController
                 // Set data
                 $form->setData($product);
                 // set nav
-                $nav = array(
+                $nav = [
                     'page' => 'update',
                     'type' => 'edit',
-                );
+                ];
                 // Set view
                 $this->view()->assign('product', $product);
             } else {
-                $nav = array(
+                $nav = [
                     'page' => 'update',
                     'type' => 'add',
-                );
+                ];
             }
         }
         // Set view
@@ -454,7 +455,7 @@ class ProductController extends ActionController
         // Get id
         $id = $this->params('id');
         $module = $this->params('module');
-        $option = array();
+        $option = [];
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Find product
@@ -462,7 +463,7 @@ class ProductController extends ActionController
             //$product = Pi::api('product', 'shop')->getProduct($id);
             $product = $this->getModel('product')->find($id)->toArray();
         } else {
-            $this->jump(array('action' => 'index'), __('Please select product'));
+            $this->jump(['action' => 'index'], __('Please select product'));
         }
         // Get attribute field
         $fields = Pi::api('attribute', 'shop')->Get($product['category_main']);
@@ -493,7 +494,7 @@ class ProductController extends ActionController
                 // Set time
                 $values['time_update'] = time();
                 // Set setting
-                $setting = array();
+                $setting = [];
                 if ($config['order_discount']) {
                     // Get role list
                     $roles = Pi::service('registry')->Role->read('front');
@@ -521,8 +522,8 @@ class ProductController extends ActionController
                 } else {
                     // Update link
                     $this->getModel('link')->update(
-                        array('price' => (int)$values['price']),
-                        array('product' => (int)$values['id'])
+                        ['price' => (int)$values['price']],
+                        ['product' => (int)$values['id']]
                     );
                     // Add price log
                     Pi::api('price', 'shop')->addLog((int)$values['price'], (int)$values['id'], 'product');
@@ -537,7 +538,7 @@ class ProductController extends ActionController
                 // Check it save or not
                 if ($row->id) {
                     $message = __('Product data saved successfully.');
-                    $this->jump(array('controller' => 'attach', 'action' => 'add', 'id' => $row->id), $message);
+                    $this->jump(['controller' => 'attach', 'action' => 'add', 'id' => $row->id], $message);
                 }
             }
         } else {
@@ -564,10 +565,10 @@ class ProductController extends ActionController
             $form->setData($product);
         }
         // set nav
-        $nav = array(
+        $nav = [
             'page' => 'additional',
             'type' => 'edit',
-        );
+        ];
         // Set view
         $this->view()->setTemplate('product-update');
         $this->view()->assign('form', $form);
@@ -581,11 +582,11 @@ class ProductController extends ActionController
         // Get id and recommended
         $id = $this->params('id');
         $recommended = $this->params('recommended');
-        $return = array();
+        $return = [];
         // set product
         $product = $this->getModel('product')->find($id);
         // Check
-        if ($product && in_array($recommended, array(0, 1))) {
+        if ($product && in_array($recommended, [0, 1])) {
             // Accept
             $product->recommended = $recommended;
             // Save
@@ -596,8 +597,8 @@ class ProductController extends ActionController
                 $return['recommended'] = $product->recommended;
                 // Update recommended
                 $this->getModel('link')->update(
-                    array('recommended' => $product->recommended),
-                    array('product' => $product->id)
+                    ['recommended' => $product->recommended],
+                    ['product' => $product->id]
                 );
                 // Add log
                 Pi::api('log', 'shop')->addLog('product', $product->id, 'recommend');
@@ -620,12 +621,12 @@ class ProductController extends ActionController
     {
         // Get id
         $id = $this->params('id');
-        $product_list = array();
+        $product_list = [];
         // Find Product
         if ($id) {
             $product = Pi::api('product', 'shop')->getProduct($id);
         } else {
-            return $this->redirect()->toRoute('', array('action' => 'index'));
+            return $this->redirect()->toRoute('', ['action' => 'index']);
         }
         // Get related list
         $related_list = Pi::api('related', 'shop')->getListAll($product['id']);
@@ -644,10 +645,10 @@ class ProductController extends ActionController
             }
         }
         // set nav
-        $nav = array(
+        $nav = [
             'page' => 'related',
             'type' => 'edit',
-        );
+        ];
         // Set view
         $this->view()->setTemplate('product-related');
         $this->view()->assign('title', __('Add Related'));
@@ -664,9 +665,9 @@ class ProductController extends ActionController
         $product_id = $this->params('product_id');
         $product_related = $this->params('product_related');
         $related = $this->params('related');
-        $row = array();
+        $row = [];
         // Set return
-        $return = array();
+        $return = [];
         $return['message'] = __('Please select product');
         $return['ajaxstatus'] = 0;
         $return['id'] = 0;
@@ -674,12 +675,12 @@ class ProductController extends ActionController
         // set story
         $product = $this->getModel('product')->find($product_id);
         // Check product
-        if ($product && in_array($related, array(0, 1))) {
+        if ($product && in_array($related, [0, 1])) {
             // add / remove related
             if ($related == 1) {
                 if ($product['id'] != $product_related) {
                     // check related
-                    $where = array('product_id' => $product['id'], 'product_related' => $product_related);
+                    $where = ['product_id' => $product['id'], 'product_related' => $product_related];
                     $select = $this->getModel('related')->select()->where($where)->limit(1);
                     $rowset = $this->getModel('related')->selectWith($select);
                     if ($rowset) {
@@ -712,7 +713,7 @@ class ProductController extends ActionController
                     $return['relatedstatus'] = 0;
                 }
             } elseif ($related == 0) {
-                $this->getModel('related')->delete(array('product_id' => $product['id'], 'product_related' => $product_related));
+                $this->getModel('related')->delete(['product_id' => $product['id'], 'product_related' => $product_related]);
                 $return['message'] = __('OK Remove');
                 $return['ajaxstatus'] = 1;
                 $return['id'] = $product['id'];
@@ -727,7 +728,7 @@ class ProductController extends ActionController
     public function priceAction()
     {
         // Set return
-        $return = array();
+        $return = [];
         // Get id
         $id = $this->params('id');
         $module = $this->params('module');
@@ -739,18 +740,18 @@ class ProductController extends ActionController
         $product = Pi::api('product', 'shop')->getProduct($id);
         $product['property'] = Pi::api('property', 'shop')->getValue($product['id']);
         // Set option
-        $option = array(
-            'id' => $product['id'],
-            'price' => $product['price_main'],
+        $option = [
+            'id'             => $product['id'],
+            'price'          => $product['price_main'],
             'price_discount' => $product['price_discount'],
             'price_shipping' => $product['price_shipping'],
-            'stock_type' => $product['stock_type'],
-            'propertyList' => $propertyList,
-            'property' => $product['property'],
-            'type' => empty($product['property']) ? 'product' : 'property',
-            'order_stock' => $config['order_stock'],
-            'stock_type' => $product['stock_type'],
-        );
+            'stock_type'     => $product['stock_type'],
+            'propertyList'   => $propertyList,
+            'property'       => $product['property'],
+            'type'           => empty($product['property']) ? 'product' : 'property',
+            'order_stock'    => $config['order_stock'],
+            'stock_type'     => $product['stock_type'],
+        ];
         // Set form
         $form = new ProductPriceForm('productPrice', $option);
         if ($this->request->isPost()) {
@@ -764,18 +765,18 @@ class ProductController extends ActionController
                 if (isset($values['price']) && !empty($values['price'])) {
                     // Update product
                     $this->getModel('product')->update(
-                        array(
-                            'price' => (int)$values['price'],
+                        [
+                            'price'          => (int)$values['price'],
                             'price_discount' => (int)$values['price_discount'],
                             'price_shipping' => (int)$values['price_shipping'],
-                            'stock_type' => (int)$values['stock_type'],
-                        ),
-                        array('id' => (int)$values['id'])
+                            'stock_type'     => (int)$values['stock_type'],
+                        ],
+                        ['id' => (int)$values['id']]
                     );
                     // Update link
                     $this->getModel('link')->update(
-                        array('price' => (int)$values['price']),
-                        array('product' => (int)$values['id'])
+                        ['price' => (int)$values['price']],
+                        ['product' => (int)$values['id']]
                     );
                     // Add price log
                     Pi::api('price', 'shop')->addLog((int)$values['price'], (int)$values['id'], 'product');
@@ -785,7 +786,7 @@ class ProductController extends ActionController
                     $return['data']['id'] = $values['id'];
                 } else {
                     // Update property
-                    $priceList = array();
+                    $priceList = [];
 
                     // Make property all
                     $propertyValues = $values;
@@ -793,7 +794,7 @@ class ProductController extends ActionController
                     unset($propertyValues['price_shipping']);
                     unset($propertyValues['id']);
                     unset($propertyValues['type']);
-                    $propertyAll = array();
+                    $propertyAll = [];
                     foreach ($propertyValues as $propertyKey => $propertyValue) {
                         $propertySingle = explode('-', $propertyKey);
                         $propertyAll[$propertySingle[1]][$propertySingle[2]] = $propertyValue;
@@ -805,8 +806,8 @@ class ProductController extends ActionController
                             $priceList[] = (int)$property['price'];
                         }
                         $this->getModel('property_value')->update(
-                            array('price' => (int)$property['price']),
-                            array('id' => (int)$property['id'])
+                            ['price' => (int)$property['price']],
+                            ['id' => (int)$property['id']]
                         );
 
                         // Add price log
@@ -823,19 +824,19 @@ class ProductController extends ActionController
 
                     // Update product
                     $this->getModel('product')->update(
-                        array(
-                            'price' => (int)$minPrice,
+                        [
+                            'price'          => (int)$minPrice,
                             'price_discount' => (int)$values['price_discount'],
                             'price_shipping' => (int)$values['price_shipping'],
-                            'stock_type' => (int)$values['stock_type'],
-                        ),
-                        array('id' => (int)$values['id'])
+                            'stock_type'     => (int)$values['stock_type'],
+                        ],
+                        ['id' => (int)$values['id']]
                     );
 
                     // Update link
                     $this->getModel('link')->update(
-                        array('price' => (int)$minPrice),
-                        array('product' => (int)$values['id'])
+                        ['price' => (int)$minPrice],
+                        ['product' => (int)$values['id']]
                     );
 
                     // Add price log
@@ -852,7 +853,7 @@ class ProductController extends ActionController
             }
             return $return;
         } else {
-            $form->setAttribute('action', $this->url('', array('action' => 'price', 'id' => $product['id'])));
+            $form->setAttribute('action', $this->url('', ['action' => 'price', 'id' => $product['id']]));
         }
         // Set view
         $this->view()->setTemplate('system:component/form-popup');
@@ -891,10 +892,10 @@ class ProductController extends ActionController
             $message = __('Please select product');
             $status = 0;
         }
-        return array(
-            'status' => $status,
+        return [
+            'status'  => $status,
             'message' => $message,
-        );
+        ];
     }
 
     public function serialAction()
@@ -908,19 +909,19 @@ class ProductController extends ActionController
         $product = Pi::api('product', 'shop')->getProduct($id);
         // Check
         if (empty($product)) {
-            $this->jump(array('action' => 'index'), __('Please select product'));
+            $this->jump(['action' => 'index'], __('Please select product'));
         }
         // Check post
         if ($this->request->isPost()) {
             Pi::api('serial', 'shop')->createSerial($product['id']);
-            $this->jump(array('action' => 'serial', 'id' => $product['id']), sprintf(__('%s new serial number added'), $config['serial_count']));
+            $this->jump(['action' => 'serial', 'id' => $product['id']], sprintf(__('%s new serial number added'), $config['serial_count']));
         }
         // Get count
-        $count = array();
-        $columns = array('count' => new Expression('count(*)'));
-        $whereAll = array('product' => $product['id']);
-        $whereChecked = array('product' => $product['id'], 'status' => 1);
-        $whereNotChecked = array('product' => $product['id'], 'status' => 0);
+        $count = [];
+        $columns = ['count' => new Expression('count(*)')];
+        $whereAll = ['product' => $product['id']];
+        $whereChecked = ['product' => $product['id'], 'status' => 1];
+        $whereNotChecked = ['product' => $product['id'], 'status' => 0];
         $select = $this->getModel('serial')->select()->where($whereAll)->columns($columns);
         $count['all'] = $this->getModel('serial')->selectWith($select)->current()->count;
         $select = $this->getModel('serial')->select()->where($whereChecked)->columns($columns);
@@ -946,20 +947,20 @@ class ProductController extends ActionController
             $row->status = 5;
             $row->save();
             // update links
-            $this->getModel('link')->update(array('status' => $row->status), array('product' => $row->id));
+            $this->getModel('link')->update(['status' => $row->status], ['product' => $row->id]);
             // Remove sitemap
             if (Pi::service('module')->isActive('sitemap')) {
-                $loc = Pi::url($this->url('shop', array(
-                    'module'      => $module,
-                    'controller'  => 'product',
-                    'slug'        => $row->slug
-                )));
+                $loc = Pi::url($this->url('shop', [
+                    'module'     => $module,
+                    'controller' => 'product',
+                    'slug'       => $row->slug,
+                ]));
                 Pi::api('sitemap', 'sitemap')->remove($loc);
             }
             // Remove page
-            $this->jump(array('action' => 'index'), __('This product deleted'));
+            $this->jump(['action' => 'index'], __('This product deleted'));
         }
-        $this->jump(array('action' => 'index'), __('Please select product'));
+        $this->jump(['action' => 'index'], __('Please select product'));
     }
 
     public function exportAction()
@@ -995,30 +996,30 @@ class ProductController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-                $url = array(
-                    'action' => 'export',
-                    'category' => $values['category'],
-                    'brand' => $values['brand'],
-                    'status' => $values['status'],
+                $url = [
+                    'action'      => 'export',
+                    'category'    => $values['category'],
+                    'brand'       => $values['brand'],
+                    'status'      => $values['status'],
                     'recommended' => $values['recommended'],
-                    'sort' => $values['sort'],
-                    'confirm' => 1,
-                    'file' => sprintf('product-%s-%s', date('Y-m-d-H-i-s'), rand(100, 999)),
-                );
+                    'sort'        => $values['sort'],
+                    'confirm'     => 1,
+                    'file'        => sprintf('product-%s-%s', date('Y-m-d-H-i-s'), rand(100, 999)),
+                ];
                 return $this->jump($url);
             } else {
                 $message = __('Not valid');
-                $url = array(
+                $url = [
                     'action' => 'export',
-                );
+                ];
                 return $this->jump($url, $message);
             }
         } elseif ($confirm == 1) {
             // Get category list
             $categoryList = Pi::registry('categoryList', 'shop')->read();
             // Get products and send
-            $order = array('id ASC');
-            $where = array();
+            $order = ['id ASC'];
+            $where = [];
             $where['id > ?'] = $start;
             if (!empty($recommended)) {
                 $where['recommended'] = 1;
@@ -1027,8 +1028,8 @@ class ProductController extends ActionController
                 $where['brand'] = $brand;
             }
             if (!empty($category)) {
-                $productId = array();
-                $whereLink = array('category' => $category);
+                $productId = [];
+                $whereLink = ['category' => $category];
                 $selectLink = $this->getModel('link')->select()->where($whereLink);
                 $rowLink = $this->getModel('link')->selectWith($selectLink);
                 foreach ($rowLink as $link) {
@@ -1040,20 +1041,20 @@ class ProductController extends ActionController
                     $where['id'] = 0;
                 }
             }
-            if (!empty($status) && in_array($status, array(1, 2, 3, 4, 5))) {
+            if (!empty($status) && in_array($status, [1, 2, 3, 4, 5])) {
                 $where['status'] = $status;
             } else {
-                $where['status'] = array(1, 2, 3, 4);
+                $where['status'] = [1, 2, 3, 4];
             }
 
             $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
             $rowset = $this->getModel('product')->selectWith($select);
 
             // Set file
-            Pi::service('audit')->attach('product-export', array(
+            Pi::service('audit')->attach('product-export', [
                 'file'   => Pi::path(sprintf('upload/shop/csv/%s.csv', $file)),
                 'format' => 'csv',
-            ));
+            ]);
 
             // Make list
             foreach ($rowset as $row) {
@@ -1069,7 +1070,7 @@ class ProductController extends ActionController
 
                 // Set key
                 if ($complete == 0) {
-                    $keys = array();
+                    $keys = [];
 
                     // Set product fields
                     foreach ($product as $key => $value) {
@@ -1077,8 +1078,8 @@ class ProductController extends ActionController
                     }
 
                     // Set attribute fields
-                    $whereField = array('status' => 1);
-                    $orderField = array('order ASC', 'position ASC', 'id DESC');
+                    $whereField = ['status' => 1];
+                    $orderField = ['order ASC', 'position ASC', 'id DESC'];
                     $selectField = $this->getModel('field')->select()->where($whereField)->order($orderField);
                     $rowsetField = $this->getModel('field')->selectWith($selectField);
                     foreach ($rowsetField as $rowField) {
@@ -1097,7 +1098,7 @@ class ProductController extends ActionController
             }
             // Get count
             if (!$count) {
-                $columns = array('count' => new Expression('count(*)'));
+                $columns = ['count' => new Expression('count(*)')];
                 $select = $this->getModel('product')->select()->columns($columns)->where($where);
                 $count = $this->getModel('product')->selectWith($select)->current()->count;
             }
@@ -1108,35 +1109,35 @@ class ProductController extends ActionController
                 $nextUrl = '';
                 $downloadUrl = sprintf('%s?upload/shop/csv/%s.csv', Pi::url('www/script/download.php'), $file);
             } else {
-                $nextUrl = Pi::url($this->url('', array(
-                    'action' => 'export',
-                    'start' => $lastId,
-                    'count' => $count,
-                    'complete' => $complete,
-                    'confirm' => $confirm,
-                    'file' => $file,
-                    'category' => $category,
-                    'brand' => $brand,
-                    'status' => $status,
+                $nextUrl = Pi::url($this->url('', [
+                    'action'      => 'export',
+                    'start'       => $lastId,
+                    'count'       => $count,
+                    'complete'    => $complete,
+                    'confirm'     => $confirm,
+                    'file'        => $file,
+                    'category'    => $category,
+                    'brand'       => $brand,
+                    'status'      => $status,
                     'recommended' => $recommended,
-                )));
+                ]));
                 $downloadUrl = '';
             }
 
-            $info = array(
-                'start' => $lastId,
-                'count' => $count,
-                'complete' => $complete,
-                'percent' => $percent,
-                'nextUrl' => $nextUrl,
+            $info = [
+                'start'       => $lastId,
+                'count'       => $count,
+                'complete'    => $complete,
+                'percent'     => $percent,
+                'nextUrl'     => $nextUrl,
                 'downloadUrl' => $downloadUrl,
-            );
+            ];
 
             $percent = ($percent > 99 && $percent < 100) ? (intval($percent) + 1) : intval($percent);
 
         } else {
             // Set info
-            $info = array();
+            $info = [];
             $percent = 0;
             $nextUrl = '';
             $downloadUrl = '';

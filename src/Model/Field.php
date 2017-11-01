@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Model;
 
 use Pi\Application\Model\Model;
@@ -19,7 +20,7 @@ class Field extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'title',
         'icon',
@@ -29,6 +30,6 @@ class Field extends Model
         'search',
         'value',
         'position',
-        'name'
-    );
+        'name',
+    ];
 }

@@ -20,7 +20,7 @@ class Price extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'price',
         'type',
@@ -29,5 +29,5 @@ class Price extends Model
         'sale',
         'time_update',
         'uid',
-    );
+    ];
 }

@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Form\Element;
 
 use Pi;
@@ -24,10 +25,10 @@ class Category extends Select
     public function getValueOptions()
     {
         if (empty($this->valueOptions)) {
-            $list = array();
-            $columns = array('id', 'parent', 'title');
-            $where = array('status' => 1, 'type' => 'category');
-            $order = array('title ASC', 'id DESC');
+            $list = [];
+            $columns = ['id', 'parent', 'title'];
+            $where = ['status' => 1, 'type' => 'category'];
+            $order = ['title ASC', 'id DESC'];
             $select = Pi::model('category', 'shop')->select()->columns($columns)->where($where)->order($order);
             $rowset = Pi::model('category', 'shop')->selectWith($select);
             foreach ($rowset as $row) {
@@ -43,11 +44,11 @@ class Category extends Select
      */
     public function getAttributes()
     {
-        $this->Attributes = array(
-            'size' => 5,
+        $this->Attributes = [
+            'size'     => 5,
             'multiple' => 1,
-            'class' => 'form-control',
-        );
+            'class'    => 'form-control',
+        ];
         // check form size
         if (isset($this->attributes['size'])) {
             $this->Attributes['size'] = $this->attributes['size'];
@@ -64,7 +65,7 @@ class Category extends Select
      */
     public function getTree($elements, $parentId = 0)
     {
-        $branch = array();
+        $branch = [];
         // Set default category options
         if ($parentId == 0) {
             if (!isset($this->options['category'])) {

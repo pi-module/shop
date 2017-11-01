@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Route;
 
 use Pi;
@@ -21,15 +22,15 @@ class Shop extends Standard
      * Default values.
      * @var array
      */
-    protected $defaults = array(
-        'module' => 'shop',
+    protected $defaults = [
+        'module'     => 'shop',
         'controller' => 'index',
-        'action' => 'index'
-    );
+        'action'     => 'index',
+    ];
 
-    protected $controllerList = array(
+    protected $controllerList = [
         'cart', 'category', 'index', 'json', 'product', 'tag', 'compare', 'question', 'serial', 'result',
-    );
+    ];
 
     /**
      * {@inheritDoc}
@@ -41,7 +42,7 @@ class Shop extends Standard
      */
     protected function parse($path)
     {
-        $matches = array();
+        $matches = [];
         $parts = array_filter(explode($this->structureDelimiter, $path));
 
         // Set controller
@@ -94,10 +95,10 @@ class Shop extends Standard
                             }
                         } elseif (isset($parts[1]) && $parts[1] == 'basket') {
                             $matches['action'] = 'basket';
-                            if (isset($parts[2]) && in_array($parts[2], array('remove', 'number'))) {
+                            if (isset($parts[2]) && in_array($parts[2], ['remove', 'number'])) {
                                 $matches['process'] = $this->decode($parts[2]);
                                 $matches['product'] = intval($parts[3]);
-                                if (isset($parts[4]) && in_array($parts[4], array(1, -1))) {
+                                if (isset($parts[4]) && in_array($parts[4], [1, -1])) {
                                     $matches['number'] = $parts[4];
                                 }
                             }
@@ -153,7 +154,7 @@ class Shop extends Standard
                         } else {
                             $parts = array_unique($parts);
                             $parts = array_values($parts);
-                            $matches['product'] = array();
+                            $matches['product'] = [];
                             if (isset($parts[1]) && !empty($parts[1])) {
                                 $matches['product'][1] = $this->decode($parts[1]);
                             }
@@ -204,8 +205,8 @@ class Shop extends Standard
      * @return string
      */
     public function assemble(
-        array $params = array(),
-        array $options = array()
+        array $params = [],
+        array $options = []
     )
     {
         $mergedParams = array_merge($this->defaults, $params);
@@ -238,7 +239,8 @@ class Shop extends Standard
         // Set category list url
         if ($mergedParams['controller'] == 'category'
             && $mergedParams['action'] == 'index'
-            && empty($mergedParams['slug'])) {
+            && empty($mergedParams['slug'])
+        ) {
             $url['controller'] = 'category';
         }
 

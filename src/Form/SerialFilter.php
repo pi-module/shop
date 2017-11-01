@@ -21,14 +21,14 @@ class SerialFilter extends InputFilter
     public function __construct()
     {
         // serial_number
-        $this->add(array(
-            'name' => 'serial_number',
+        $this->add([
+            'name'     => 'serial_number',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 }

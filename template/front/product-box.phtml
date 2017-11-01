@@ -4,10 +4,11 @@
 <div class="<?php echo $shopListBoxSize; ?> product-box h-product" itemscope itemtype="https://schema.org/Product">
     <div class="thumbnail">
         <?php if ($product['image']) { ?>
-            <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>" title="<?php echo $this->escape($product['title']); ?>"
+            <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>"
+               title="<?php echo $this->escape($product['title']); ?>"
                href="<?php echo $this->escape($product['productUrl']); ?>"><img
-                    itemprop="image" class="img-responsive u-photo" src="<?php echo $product['thumbUrl']; ?>"
-                    alt="<?php echo $this->escape($product['title']); ?>"/>
+                        itemprop="image" class="img-responsive u-photo" src="<?php echo $product['thumbUrl']; ?>"
+                        alt="<?php echo $this->escape($product['title']); ?>"/>
                 <?php if ($product['ribbon']) { ?>
                     <p><span><?php echo $this->escape($product['ribbon']); ?></span></p>
                 <?php } ?>
@@ -32,9 +33,11 @@
                                     <del><?php echo $this->escape($product['price_discount_view']); ?></del>
                                 </span>
                         <?php } ?>
-                        <span class="p-price" itemprop="price" content="<?php echo $this->escape($product['price']); ?>"><?php echo $this->escape($product['price_view']); ?></span>
-                        <?php if(isset($product['price_currency'])) { ?>
-                            <meta itemprop="priceCurrency" content="<?php echo $this->escape($product['price_currency']); ?>">
+                        <span class="p-price" itemprop="price"
+                              content="<?php echo $this->escape($product['price']); ?>"><?php echo $this->escape($product['price_view']); ?></span>
+                        <?php if (isset($product['price_currency'])) { ?>
+                            <meta itemprop="priceCurrency"
+                                  content="<?php echo $this->escape($product['price_currency']); ?>">
                         <?php } ?>
                     </div>
                     <?php /* if ($config['order_stock'] == 'never') { ?>

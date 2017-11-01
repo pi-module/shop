@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Api;
 
 use Pi;
@@ -25,12 +26,12 @@ class Serial extends AbstractApi
 {
     public function checkSerial($serial)
     {
-        $result = array(
-            'status' => 0,
+        $result = [
+            'status'  => 0,
             'message' => '',
-            'product' => array(),
-            'serial' => array(),
-        );
+            'product' => [],
+            'serial'  => [],
+        ];
         $serial = Pi::model('serial', $this->getModule())->find($serial, 'serial_number');
 
         // Check

@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
 use Pi;
@@ -19,9 +20,9 @@ class IndexController extends ActionController
 {
     public function indexAction()
     {
-        return $this->redirect()->toRoute('', array(
+        return $this->redirect()->toRoute('', [
             'controller' => 'product',
-            'action' => 'index',
-        ));
+            'action'     => 'index',
+        ]);
     }
 }

@@ -42,56 +42,56 @@ class AttachForm extends BaseForm
     public function init()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'id',
+            'attributes' => [
                 'type' => 'hidden',
-            ),
-        ));
+            ],
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
-            'options' => array(
+        $this->add([
+            'name'       => 'title',
+            'options'    => [
                 'label' => __('Title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-            )
-        ));
+            ],
+        ]);
         // story
-        $this->add(array(
-            'name' => 'story',
-            'type' => 'Module\Shop\Form\Element\Product',
-            'options' => array(
+        $this->add([
+            'name'       => 'story',
+            'type'       => 'Module\Shop\Form\Element\Product',
+            'options'    => [
                 'label' => __('Product'),
                 'story' => $this->product,
-            ),
-            'attributes' => array(
-                'size' => 1,
+            ],
+            'attributes' => [
+                'size'     => 1,
                 'multiple' => 0,
-            ),
+            ],
 
-        ));
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Status'),
-                'value_options' => array(
+        $this->add([
+            'name'    => 'status',
+            'type'    => 'select',
+            'options' => [
+                'label'         => __('Status'),
+                'value_options' => [
                     1 => __('Online'),
                     0 => __('Offline'),
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

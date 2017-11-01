@@ -10,29 +10,30 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
+use Module\Shop\Form\PromotionFilter;
+use Module\Shop\Form\PromotionForm;
 use Pi;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\PromotionForm;
-use Module\Shop\Form\PromotionFilter;
 
 class PromotionController extends ActionController
 {
     public function indexAction()
     {
         // Get info
-        $list = array();
-        $order = array('id DESC');
+        $list = [];
+        $order = ['id DESC'];
         $select = $this->getModel('promotion')->select()->order($order);
         $rowset = $this->getModel('promotion')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
             $list[$row->id] = $row->toArray();
             $list[$row->id]['time'] = sprintf(__('From %s to %s'),
-                _date($row->time_publish, array('pattern' => 'yyyy-MM-dd HH:mm')),
-                _date($row->time_expire, array('pattern' => 'yyyy-MM-dd HH:mm')));
+                _date($row->time_publish, ['pattern' => 'yyyy-MM-dd HH:mm']),
+                _date($row->time_expire, ['pattern' => 'yyyy-MM-dd HH:mm']));
             $list[$row->id]['isExpire'] = (time() > $row->time_expire) ? 1 : 0;
         }
         // Set view
@@ -72,7 +73,7 @@ class PromotionController extends ActionController
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('promotion', $row->id, $operation);
                 $message = __('Promotion data saved successfully.');
-                $this->jump(array('action' => 'index'), $message);
+                $this->jump(['action' => 'index'], $message);
             }
         } else {
             if ($id) {
@@ -81,7 +82,7 @@ class PromotionController extends ActionController
                 $values['time_expire'] = date("Y-m-d H:i:s", $values['time_expire']);
 
             } else {
-                $values = array();
+                $values = [];
                 $values['time_publish'] = date("Y-m-d H:i:s", time());
                 $values['time_expire'] = date("Y-m-d H:i:s", strtotime("+1 month"));
             }

@@ -13,10 +13,10 @@
 
 namespace Module\Shop\Controller\Front;
 
+use Module\Shop\Form\QuestionFilter;
+use Module\Shop\Form\QuestionForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\QuestionForm;
-use Module\Shop\Form\QuestionFilter;
 
 class QuestionController extends IndexController
 {
@@ -55,17 +55,17 @@ class QuestionController extends IndexController
                 // Check notification module
                 if (Pi::service('module')->isActive('notification')) {
                     // Set mail information
-                    $information = array(
-                        'name' => $question['name'],
-                        'email' => $question['email'],
+                    $information = [
+                        'name'     => $question['name'],
+                        'email'    => $question['email'],
                         'text_ask' => $question['text_ask'],
-                        'product' => $question['product'],
-                        'title' => $product['title'],
-                    );
+                        'product'  => $question['product'],
+                        'title'    => $product['title'],
+                    ];
                     // Set toAdmin
-                    $toAdmin = array(
+                    $toAdmin = [
                         Pi::config('adminmail') => Pi::config('adminname'),
-                    );
+                    ];
                     // Send mail to admin
                     Pi::service('notification')->send(
                         $toAdmin,

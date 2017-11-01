@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Form\Element;
 
 use Pi;
@@ -22,9 +23,9 @@ class PropertyColor extends ZendButton
      */
     public function getAttributes()
     {
-        $this->Attributes = array(
+        $this->Attributes = [
             'class' => 'add_property_color btn btn-success',
-        );
+        ];
         return $this->Attributes;
     }
 } 

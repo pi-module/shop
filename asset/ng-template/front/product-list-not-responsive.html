@@ -7,7 +7,8 @@
             <form id="list-filter" ng-submit="filterAction()">
                 <div class="form-group">
                     <label>{{'TITLE' | translate}}</label>
-                    <input type="text" class="form-control" ng-model="filter.title" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
+                    <input type="text" class="form-control" ng-model="filter.title" ng-change="filterAction()"
+                           ng-model-options="{ debounce: 5000 }">
                 </div>
                 <div class="form-group">
                     <rzslider class="custom-slider"
@@ -30,13 +31,15 @@
                         <div ng-if="filterSingle.type == 'text'">
                             <div class="form-group">
                                 <label>{{filterSingle.title}}</label>
-                                <input type="text" class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
+                                <input type="text" class="form-control" ng-model="filterSingle.filter"
+                                       ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
                             </div>
                         </div>
                         <div ng-if="filterSingle.type == 'select'">
                             <div class="form-group">
                                 <label>{{filterSingle.title}}</label>
-                                <select class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
+                                <select class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()"
+                                        ng-model-options="{ debounce: 5000 }">
                                     <option value="">{{'ALL' | translate}}</option>
                                     <option ng-repeat="filterData in filterSingle.value.data" ng-if="filterData">
                                         {{filterData}}
@@ -69,7 +72,8 @@
             <div class="clearfix">
                 <div class="col-xs-2">
                     <div class="pi-item-compare-button text-center">
-                        <a href="{{condition.urlCompare}}" title="{{'COMPARE_PRODUCTS' | translate}}" class="btn btn-success btn-xs">
+                        <a href="{{condition.urlCompare}}" title="{{'COMPARE_PRODUCTS' | translate}}"
+                           class="btn btn-success btn-xs">
                             {{'COMPARE_PRODUCTS' | translate}}
                         </a>
                     </div>
@@ -79,7 +83,8 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="{{'CLOSE' | translate}}">
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="{{'CLOSE' | translate}}">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h4 class="modal-title" id="compareModalLabel">{{'COMPARE_PRODUCTS' | translate}}</h4>
@@ -97,7 +102,8 @@
                 <div class="row">
                     <div ng-repeat="product in products">
                         <div class="col-xs-4 pi-item-box">
-                            <div class="thumbnail" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
+                            <div class="thumbnail" ng-mouseover="hoverCompare = true"
+                                 ng-mouseleave="hoverCompare = false">
                                 <div ng-show="hoverCompare"
                                      ng-click="changeClass()"
                                      ng-class="class"
@@ -107,8 +113,10 @@
                                      class="pi-item-compare-add">
                                     <i class="fa fa-plus"></i> {{'COMPARE' | translate}}
                                 </div>
-                                <a class="u-url {{product.ribbon_class}}" itemprop="url" title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
-                                    <img itemprop="image" class="img-responsive u-photo" src="{{product.mediumUrl}}" alt="{{product.title}}"/>
+                                <a class="u-url {{product.ribbon_class}}" itemprop="url" title="{{product.title}}"
+                                   href="{{product.productUrl}}" target="_blank">
+                                    <img itemprop="image" class="img-responsive u-photo" src="{{product.mediumUrl}}"
+                                         alt="{{product.title}}"/>
                                     <p ng-if="product.ribbon">
                                         <span>{{product.ribbon}}</span>
                                     </p>
@@ -119,7 +127,8 @@
                                             {{product.title}}
                                         </a>
                                     </h3>
-                                    <div class="clearfix" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                    <div class="clearfix" itemprop="offers" itemscope
+                                         itemtype="https://schema.org/Offer">
                                         <div class="clearfix">
                                             <div ng-if="product.price_discount_has == 1">
                                                 <span class="text-danger">

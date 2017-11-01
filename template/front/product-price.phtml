@@ -5,7 +5,9 @@
             <div class="col-md-12 col-xs-12">
                 <ul class="list-inline bg-info product-countdown clearfix">
                     <li><?php _e('The time remaining until the end of the offer : '); ?></li>
-                    <li class="pull-right"><div id="saleCountdown"></div></li>
+                    <li class="pull-right">
+                        <div id="saleCountdown"></div>
+                    </li>
                 </ul>
                 <?php $script = <<<'EOT'
 $(document).ready(function($) {
@@ -73,7 +75,8 @@ EOT;
                         <li>
                             <div class="product-stock">
                                 <strong><?php _e('Stock status'); ?> : </strong>
-                                <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                <span class="text-success" itemprop="availability"
+                                      href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
                             </div>
                         </li>
                         <?php if ($productItem['code']) { ?>
@@ -106,11 +109,13 @@ EOT;
                                         <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
                                     </span>
                                 <?php } ?>
-                                <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
+                                <span class="p-price product-price" itemprop="price"
+                                      content="<?php echo $this->escape($productItem['price']); ?>"><?php echo $this->escape($productItem['price_view']); ?></span>
                             </div>
                         </li>
                     </ul>
-                    <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                    <meta itemprop="priceCurrency"
+                          content="<?php echo $this->escape($productItem['price_currency']); ?>">
                 </div>
                 <div class="col-md-7 col-xs-12">
                     <?php include $this->template('front/product-order'); ?>
@@ -136,9 +141,11 @@ EOT;
                                 <div class="product-stock">
                                     <strong><?php _e('Stock status'); ?> : </strong>
                                     <?php if ($productItem['stock_type'] == 1) { ?>
-                                        <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                                        <span class="text-success" itemprop="availability"
+                                              href="https://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
                                     <?php } elseif ($productItem['stock_type'] == 5) { ?>
-                                        <span class="text-danger" itemprop="availability" href="https://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
+                                        <span class="text-danger" itemprop="availability"
+                                              href="https://schema.org/InStock"><?php echo $this->escape($productItem['stock_type_view']); ?></span>
                                     <?php } ?>
                                 </div>
                             </li>
@@ -172,13 +179,15 @@ EOT;
                                             <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
                                         </span>
                                     <?php } ?>
-                                    <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>">
+                                    <span class="p-price product-price" itemprop="price"
+                                          content="<?php echo $this->escape($productItem['price']); ?>">
                                         <?php echo $this->escape($productItem['price_view']); ?>
                                     </span>
                                 </div>
                             </li>
                         </ul>
-                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                        <meta itemprop="priceCurrency"
+                              content="<?php echo $this->escape($productItem['price_currency']); ?>">
                     </div>
                     <div class="col-md-7 col-xs-12">
                         <?php include $this->template('front/product-order'); ?>
@@ -233,7 +242,8 @@ EOT;
                                     <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
                                 </span>
                             <?php } ?>
-                            <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>">
+                            <span class="p-price product-price" itemprop="price"
+                                  content="<?php echo $this->escape($productItem['price']); ?>">
                                 <?php echo $this->escape($productItem['price_view']); ?>
                             </span>
                         </div>
@@ -259,7 +269,8 @@ EOT;
                             <li>
                                 <div class="product-stock">
                                     <strong><?php _e('Stock status'); ?> : </strong>
-                                    <span class="text-success" itemprop="availability" href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
+                                    <span class="text-success" itemprop="availability"
+                                          href="https://schema.org/InStock"><?php _e('In stock'); ?></span>
                                 </div>
                             </li>
                             <?php if ($productItem['code']) { ?>
@@ -292,13 +303,15 @@ EOT;
                                             <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
                                         </span>
                                     <?php } ?>
-                                    <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>">
+                                    <span class="p-price product-price" itemprop="price"
+                                          content="<?php echo $this->escape($productItem['price']); ?>">
                                         <?php echo $this->escape($productItem['price_view']); ?>
                                     </span>
                                 </div>
                             </li>
                         </ul>
-                        <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                        <meta itemprop="priceCurrency"
+                              content="<?php echo $this->escape($productItem['price_currency']); ?>">
                     </div>
                     <div class="col-md-7 col-xs-12">
                         <?php include $this->template('front/product-order'); ?>
@@ -353,7 +366,8 @@ EOT;
                                      <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
                                 </span>
                             <?php } ?>
-                            <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>">
+                            <span class="p-price product-price" itemprop="price"
+                                  content="<?php echo $this->escape($productItem['price']); ?>">
                                 <?php echo $this->escape($productItem['price_view']); ?>
                             </span>
                         </div>
@@ -397,13 +411,15 @@ EOT;
                                         <del><?php echo $this->escape($productItem['price_discount_view']); ?></del>
                                     </span>
                                 <?php } ?>
-                                <span class="p-price product-price" itemprop="price" content="<?php echo $this->escape($productItem['price']); ?>">
+                                <span class="p-price product-price" itemprop="price"
+                                      content="<?php echo $this->escape($productItem['price']); ?>">
                                 <?php echo $this->escape($productItem['price_view']); ?>
                             </span>
                             </div>
                         </li>
                     </ul>
-                    <meta itemprop="priceCurrency" content="<?php echo $this->escape($productItem['price_currency']); ?>">
+                    <meta itemprop="priceCurrency"
+                          content="<?php echo $this->escape($productItem['price_currency']); ?>">
                 </div>
                 <div class="col-md-7 col-xs-12">
                     <?php include $this->template('front/product-order'); ?>

@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Form\Element;
 
 use Pi;
@@ -22,9 +23,9 @@ class PropertyWarranty extends ZendButton
      */
     public function getAttributes()
     {
-        $this->Attributes = array(
+        $this->Attributes = [
             'class' => 'add_property_warranty btn btn-success',
-        );
+        ];
         return $this->Attributes;
     }
 } 

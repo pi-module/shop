@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class PriceLogForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
     }
@@ -33,24 +33,24 @@ class PriceLogForm extends BaseForm
 
     public function init()
     {
-        $this->add(array(
-            'name' => 'product',
-            'options' => array(
+        $this->add([
+            'name'       => 'product',
+            'options'    => [
                 'label' => __('Product id'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

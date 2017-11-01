@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Api;
 
 use Pi;
@@ -26,7 +27,7 @@ class Sale extends AbstractApi
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
-        $sale = array();
+        $sale = [];
         // Set options
         if ($limit == 0) {
             $limit = intval($config['sale_view_number']);
@@ -45,17 +46,17 @@ class Sale extends AbstractApi
                     $saleCategoryList = Pi::api('category', 'shop')->getListFromId($saleInformation['idActive']['category'], $limit);
                     foreach ($saleCategoryList as $saleCategory) {
                         $time = $saleInformation['infoAll']['category'][$saleCategory['id']]['time_expire'];
-                        
+
                         $sale[$saleCategory['id']] = $saleCategory;
                         $sale[$saleCategory['id']]['saleInformation'] = $saleInformation['infoAll']['category'][$saleCategory['id']];
-                        $sale[$saleCategory['id']]['saleInformation']['price_time'] = array(
-                            'year' => date("Y", $time),
-                            'month' => date("m", $time),
-                            'day' => date("d", $time),
-                            'hour' => date("H", $time),
+                        $sale[$saleCategory['id']]['saleInformation']['price_time'] = [
+                            'year'   => date("Y", $time),
+                            'month'  => date("m", $time),
+                            'day'    => date("d", $time),
+                            'hour'   => date("H", $time),
                             'minute' => date("i", $time),
                             'second' => date("s", $time),
-                        );
+                        ];
                     }
                 }
                 break;

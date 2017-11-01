@@ -13,10 +13,10 @@
 
 namespace Module\Shop\Controller\Front;
 
+use Module\Shop\Form\PromotionCheckFilter;
+use Module\Shop\Form\PromotionCheckForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\PromotionCheckForm;
-use Module\Shop\Form\PromotionCheckFilter;
 
 class CartController extends ActionController
 {
@@ -34,11 +34,11 @@ class CartController extends ActionController
         // Set promotion form
         $form = new PromotionCheckForm('promotion');
         $form->setAttribute('enctype', 'multipart/form-data');
-        $form->setAttribute('action', $this->url('', array('action' => 'promotion')));
+        $form->setAttribute('action', $this->url('', ['action' => 'promotion']));
         if (isset($basket['data']['promotion']) && !empty($basket['data']['promotion'])) {
-            $data = array(
+            $data = [
                 'code' => $basket['data']['promotion'],
-            );
+            ];
             $form->setData($data);
         }
         // Set title
@@ -64,10 +64,10 @@ class CartController extends ActionController
             $basket = Pi::api('basket', 'shop')->getBasket();
             if (empty($basket)) {
                 $message = __('Your basket is empty');
-                $this->jump(array('action' => 'index'), $message, 'error');
+                $this->jump(['action' => 'index'], $message, 'error');
             } elseif (isset($basket['data']['promotion']) && !empty($basket['data']['promotion'])) {
                 $message = sprintf(__('Your already use %s promotion code'), $basket['data']['promotion']);
-                $this->jump(array('action' => 'index'), $message, 'success');
+                $this->jump(['action' => 'index'], $message, 'success');
             }
             // Set promotion form and action
             $form = new PromotionCheckForm('promotion');
@@ -77,12 +77,12 @@ class CartController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Get promotion
-                $where = array(
-                    'code' => _strip($values['code']),
-                    'status' => 1,
+                $where = [
+                    'code'             => _strip($values['code']),
+                    'status'           => 1,
                     'time_publish < ?' => time(),
-                    'time_expire > ?' => time(),
-                );
+                    'time_expire > ?'  => time(),
+                ];
                 $select = $this->getModel('promotion')->select()->where($where)->limit(1);
                 $promotion = $this->getModel('promotion')->selectWith($select)->current();
                 if (!empty($promotion)) {
@@ -96,18 +96,18 @@ class CartController extends ActionController
                     ); */
                     // jump
                     $message = __('Promotion code add successfully to your basket');
-                    $this->jump(array('action' => 'index'), $message, 'success');
+                    $this->jump(['action' => 'index'], $message, 'success');
                 } else {
                     $message = __('Promotion code is not valid');
-                    $this->jump(array('action' => 'index'), $message, 'error');
+                    $this->jump(['action' => 'index'], $message, 'error');
                 }
             } else {
                 $message = __('Promotion code is not valid');
-                $this->jump(array('action' => 'index'), $message, 'error');
+                $this->jump(['action' => 'index'], $message, 'error');
             }
         } else {
             $message = __('Promotion code is not valid');
-            $this->jump(array('action' => 'index'), $message, 'error');
+            $this->jump(['action' => 'index'], $message, 'error');
         }
     }
 
@@ -131,24 +131,24 @@ class CartController extends ActionController
             // Find product
             $product = Pi::api('product', 'shop')->getProductLight(intval($data['id']));
             // Check product
-            if (!in_array($product['marketable'], array(1, 2))) {
+            if (!in_array($product['marketable'], [1, 2])) {
                 $message = __('The product was not marketable.');
                 $this->jump($product['productUrl'], $message, 'error');
             } else {
                 // Check color
-                $property = array();
+                $property = [];
                 if (isset($data['property']) && !empty($data['property'])) {
                     $property = $data['property'];
                 }
                 // Set basket
                 Pi::api('basket', 'shop')->setBasket($product['id'], 1, $property, $product['marketable']);
                 // Go to cart
-                $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
+                $url = ['', 'module' => $module, 'controller' => 'cart', 'action' => 'index'];
                 return $this->redirect()->toRoute('', $url);
             }
         } else {
             // Go to cart
-            $url = array('', 'module' => $module, 'controller' => 'cart', 'action' => 'index');
+            $url = ['', 'module' => $module, 'controller' => 'cart', 'action' => 'index'];
             return $this->redirect()->toRoute('', $url);
         }
     }
@@ -157,13 +157,13 @@ class CartController extends ActionController
     {
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
-        return array(
-            'status' => 1,
-            'price' => $basket['total']['price_view'],
+        return [
+            'status'   => 1,
+            'price'    => $basket['total']['price_view'],
             'discount' => $basket['total']['discount_view'],
-            'number' => $basket['total']['number_view'],
-            'total' => $basket['total']['total_price_view'],
-        );
+            'number'   => $basket['total']['number_view'],
+            'total'    => $basket['total']['total_price_view'],
+        ];
     }
 
     public function emptyAction()
@@ -172,7 +172,7 @@ class CartController extends ActionController
         Pi::api('basket', 'shop')->emptyBasket();
         // Back
         $module = $this->params('module');
-        $url = array('', 'module' => $module, 'controller' => 'index', 'action' => 'index');
+        $url = ['', 'module' => $module, 'controller' => 'index', 'action' => 'index'];
         $this->jump($url, __('Your cart are empty'), 'success');
     }
 
@@ -185,7 +185,7 @@ class CartController extends ActionController
         $product = $this->params('product', 1);
         $module = $this->params('module');
         // Set return
-        $return = array();
+        $return = [];
         $return['message'] = __('Please select product');
         $return['id'] = $product;
         $return['ajaxStatus'] = 0;
@@ -248,7 +248,7 @@ class CartController extends ActionController
         // Set total product price
         $total = 0.00;
         // Set can pay array
-        $canPay = array();
+        $canPay = [];
         // Get module
         $module = $this->params('module');
         // Get config
@@ -272,7 +272,7 @@ class CartController extends ActionController
             }
         }
         // Set order array
-        $order = array();
+        $order = [];
         $order['module_name'] = $module;
         $order['type_payment'] = $orderType;
         $order['type_commodity'] = 'product';
@@ -296,17 +296,17 @@ class CartController extends ActionController
                 }
             }
             // Set single product
-            $singelProduct = array(
-                'product' => $product['id'],
-                'product_price' => $price,
+            $singelProduct = [
+                'product'        => $product['id'],
+                'product_price'  => $price,
                 'discount_price' => 0,
                 'shipping_price' => $product['price_shipping'],
-                'packing_price' => 0,
-                'vat_price' => 0,
-                'number' => $product['number'],
-                'title' => $product['title'],
-                'extra' => json_encode($product['property']),
-            );
+                'packing_price'  => 0,
+                'vat_price'      => 0,
+                'number'         => $product['number'],
+                'title'          => $product['title'],
+                'extra'          => json_encode($product['property']),
+            ];
             // Set order product
             $order['product'][$product['id']] = $singelProduct;
             // Set can check array
@@ -319,12 +319,12 @@ class CartController extends ActionController
         // Check promotion
         if (isset($basket['data']['promotion']) && !empty($basket['data']['promotion'])) {
             // Get promotion
-            $where = array(
-                'code' => _strip($basket['data']['promotion']),
-                'status' => 1,
+            $where = [
+                'code'             => _strip($basket['data']['promotion']),
+                'status'           => 1,
                 'time_publish < ?' => time(),
-                'time_expire > ?' => time(),
-            );
+                'time_expire > ?'  => time(),
+            ];
             $select = $this->getModel('promotion')->select()->where($where)->limit(1);
             $promotion = $this->getModel('promotion')->selectWith($select)->current();
             // Check promotion
@@ -332,8 +332,8 @@ class CartController extends ActionController
                 $promotion = $promotion->toArray();
                 // Update used number
                 $this->getModel('promotion')->update(
-                    array('used' => $promotion['used'] + 1),
-                    array('id' => $promotion['id'])
+                    ['used' => $promotion['used'] + 1],
+                    ['id' => $promotion['id']]
                 );
                 // Use
                 $order['promotion_type'] = 'shop-promotion';
@@ -359,14 +359,14 @@ class CartController extends ActionController
                             break;
                     }
                     if ($credit > 0) {
-                        $order['credit'] = array(
-                            'uid' => $promotion['partner'],
-                            'amount' => $credit,
+                        $order['credit'] = [
+                            'uid'                => $promotion['partner'],
+                            'amount'             => $credit,
                             'status_fluctuation' => 'increase',
-                            'status_action' => 'automatic',
-                            'message_user' => sprintf(__('Increase credit from shop module by use <strong>%s</strong> code'), _strip($promotion['code'])),
-                            'message_admin' => sprintf(__('Increase credit from shop module by use <strong>%s</strong> code'), _strip($promotion['code'])),
-                        );
+                            'status_action'      => 'automatic',
+                            'message_user'       => sprintf(__('Increase credit from shop module by use <strong>%s</strong> code'), _strip($promotion['code'])),
+                            'message_admin'      => sprintf(__('Increase credit from shop module by use <strong>%s</strong> code'), _strip($promotion['code'])),
+                        ];
                     }
                 }
             }

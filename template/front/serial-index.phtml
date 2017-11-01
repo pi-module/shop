@@ -20,14 +20,18 @@
         <div class="thumbnail">
             <div class="row clearfix ">
                 <div class="col-md-2 col-xs-12">
-                    <img src="<?php echo $this->escape($result['product']['thumbUrl']); ?>" alt="<?php echo $this->escape($result['product']['title']); ?>" class="img-responsive img-rounded">
+                    <img src="<?php echo $this->escape($result['product']['thumbUrl']); ?>"
+                         alt="<?php echo $this->escape($result['product']['title']); ?>"
+                         class="img-responsive img-rounded">
                 </div>
                 <div class="col-md-12 col-xs-12">
                     <h2><?php echo $this->escape($result['product']['title']); ?></h2>
                     <ul>
-                        <li><?php _e('Serial number'); ?> : <?php echo $this->escape($result['serial']['serial_number']); ?></li>
+                        <li><?php _e('Serial number'); ?>
+                            : <?php echo $this->escape($result['serial']['serial_number']); ?></li>
                         <li>
-                            <a href="<?php echo $this->escape($result['product']['productUrl']); ?>" title="<?php echo $this->escape($result['product']['title']); ?>">
+                            <a href="<?php echo $this->escape($result['product']['productUrl']); ?>"
+                               title="<?php echo $this->escape($result['product']['title']); ?>">
                                 <?php _e('Check your product information from here'); ?>
                             </a>
                         </li>

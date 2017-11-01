@@ -10,11 +10,12 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
+use Module\Shop\Form\SitemapForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\SitemapForm;
 use Zend\Db\Sql\Predicate\Expression;
 
 class ToolsController extends ActionController

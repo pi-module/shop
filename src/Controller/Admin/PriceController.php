@@ -10,16 +10,17 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
+use Module\Shop\Api\Csv;
+use Module\Shop\Form\PriceLogFilter;
+use Module\Shop\Form\PriceLogForm;
+use Module\Shop\Form\PriceUpdateFilter;
+use Module\Shop\Form\PriceUpdateForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Module\Shop\Form\PriceUpdateForm;
-use Module\Shop\Form\PriceUpdateFilter;
-use Module\Shop\Form\PriceLogForm;
-use Module\Shop\Form\PriceLogFilter;
-use Module\Shop\Api\Csv;
 use Zend\Db\Sql\Predicate\Expression;
 
 class PriceController extends ActionController
@@ -60,7 +61,7 @@ class PriceController extends ActionController
         $complete = $this->params('complete', 0);
         $selectCategory = $this->params('selectCategory', 0);
         $selectPercent = $this->params('selectPercent', 0);
-        $info = array();
+        $info = [];
         $percent = 0;
 
         // Set path
@@ -82,47 +83,47 @@ class PriceController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Get count
-                $where = array('price > ?' => 0, 'category_main' => $values['category']);
-                $columns = array('count' => new Expression('count(*)'));
+                $where = ['price > ?' => 0, 'category_main' => $values['category']];
+                $columns = ['count' => new Expression('count(*)')];
                 $select = $this->getModel('product')->select()->columns($columns)->where($where);
                 $countProduct = $this->getModel('product')->selectWith($select)->current()->count;
                 // Set jump
                 if ($countProduct > 0) {
                     // Set redirect
-                    return $this->redirect()->toRoute('', array(
-                        'controller' => 'price',
-                        'action' => 'update',
+                    return $this->redirect()->toRoute('', [
+                        'controller'     => 'price',
+                        'action'         => 'update',
                         'selectCategory' => $values['category'],
-                        'selectPercent' => $values['percent'],
-                        'start' => 0,
-                        'complete' => 0,
-                        'count' => $countProduct,
-                    ));
+                        'selectPercent'  => $values['percent'],
+                        'start'          => 0,
+                        'complete'       => 0,
+                        'count'          => $countProduct,
+                    ]);
                 } else {
                     $message = __('Your selected category not set as main category for any product, please select other category');
-                    $this->jump(array(
+                    $this->jump([
                         'action' => 'update',
-                    ), $message);
+                    ], $message);
                 }
             }
         } elseif ($selectCategory > 0 && $selectPercent > 0) {
             // Get category list
             $categoryList = Pi::registry('categoryList', 'shop')->read();
             // Get products and send
-            $where = array(
-                'id > ?' => $start,
-                'price > ?' => 0,
+            $where = [
+                'id > ?'        => $start,
+                'price > ?'     => 0,
                 'category_main' => $selectCategory,
-            );
-            $order = array('id ASC');
+            ];
+            $order = ['id ASC'];
             $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
             $rowset = $this->getModel('product')->selectWith($select);
 
             // Set file
-            Pi::service('audit')->attach('price-update', array(
+            Pi::service('audit')->attach('price-update', [
                 'file'   => Pi::path('upload/shop/csv/price-update.csv'),
                 'format' => 'csv',
-            ));
+            ]);
 
             // Make list
             foreach ($rowset as $row) {
@@ -138,7 +139,7 @@ class PriceController extends ActionController
                 $mainPrice = $product['price_main'];
                 $priceListInfo[$product['id']]['old'] = $mainPrice;
 
-                $priceList = array();
+                $priceList = [];
                 $priceList[] = $mainPrice;
 
                 // Update product property price
@@ -154,8 +155,8 @@ class PriceController extends ActionController
 
                                 // Update property price
                                 $this->getModel('property_value')->update(
-                                    array('price' => $propertyPrice),
-                                    array('id' => (int)$property['id'])
+                                    ['price' => $propertyPrice],
+                                    ['id' => (int)$property['id']]
                                 );
 
                                 // Set price log form property table
@@ -183,25 +184,25 @@ class PriceController extends ActionController
 
                 // Update product price
                 $this->getModel('product')->update(
-                    array('price' => (int)$minPrice,),
-                    array('id' => (int)$product['id'])
+                    ['price' => (int)$minPrice,],
+                    ['id' => (int)$product['id']]
                 );
 
                 // Update link price
                 $this->getModel('link')->update(
-                    array('price' => (int)$minPrice),
-                    array('product' => (int)$product['id'])
+                    ['price' => (int)$minPrice],
+                    ['product' => (int)$product['id']]
                 );
 
                 // Save log to csv file
-                Pi::service('audit')->log('price-update', array(
+                Pi::service('audit')->log('price-update', [
                     $product['id'],
                     $product['title'],
                     $selectCategory,
                     $selectPercent,
                     $mainPrice,
-                    $minPrice
-                ));
+                    $minPrice,
+                ]);
 
                 // Set price log form price table
                 Pi::api('price', 'shop')->addLog($minPrice, $product['id'], 'product');
@@ -213,8 +214,8 @@ class PriceController extends ActionController
             }
             // Get count
             if (!$count) {
-                $where = array('price > ?' => 0, 'category_main' => $selectCategory);
-                $columns = array('count' => new Expression('count(*)'));
+                $where = ['price > ?' => 0, 'category_main' => $selectCategory];
+                $columns = ['count' => new Expression('count(*)')];
                 $select = $this->getModel('product')->select()->columns($columns)->where($where);
                 $count = $this->getModel('product')->selectWith($select)->current()->count;
             }
@@ -224,26 +225,26 @@ class PriceController extends ActionController
             if ($complete >= $count) {
                 $nextUrl = '';
             } else {
-                $nextUrl = Pi::url($this->url('', array(
-                    'action' => 'update',
+                $nextUrl = Pi::url($this->url('', [
+                    'action'         => 'update',
                     'selectCategory' => $selectCategory,
-                    'selectPercent' => $selectPercent,
-                    'start' => $lastId,
-                    'count' => $count,
-                    'complete' => $complete,
-                )));
+                    'selectPercent'  => $selectPercent,
+                    'start'          => $lastId,
+                    'count'          => $count,
+                    'complete'       => $complete,
+                ]));
             }
 
-            $info = array(
+            $info = [
                 'selectCategory' => $selectCategory,
-                'selectPercent' => $selectPercent,
-                'start' => $lastId,
-                'count' => $count,
-                'complete' => $complete,
-                'percent' => $percent,
-                'nextUrl' => $nextUrl,
-                'price' => $priceListInfo,
-            );
+                'selectPercent'  => $selectPercent,
+                'start'          => $lastId,
+                'count'          => $count,
+                'complete'       => $complete,
+                'percent'        => $percent,
+                'nextUrl'        => $nextUrl,
+                'price'          => $priceListInfo,
+            ];
 
             $percent = ($percent > 99 && $percent < 100) ? (intval($percent) + 1) : intval($percent);
         }
@@ -264,7 +265,7 @@ class PriceController extends ActionController
         $count = $this->params('count');
         $complete = $this->params('complete', 0);
         $confirm = $this->params('confirm', 0);
-        $priceListInfo = array();
+        $priceListInfo = [];
 
         // Set path
         $path = Pi::path('upload/shop/csv');
@@ -280,18 +281,18 @@ class PriceController extends ActionController
             // Get category list
             $categoryList = Pi::registry('categoryList', 'shop')->read();
             // Get products and send
-            $where = array(
+            $where = [
                 'id > ?' => $start,
-            );
-            $order = array('id ASC');
+            ];
+            $order = ['id ASC'];
             $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
             $rowset = $this->getModel('product')->selectWith($select);
 
             // Set file
-            Pi::service('audit')->attach('price-sync', array(
+            Pi::service('audit')->attach('price-sync', [
                 'file'   => Pi::path('upload/shop/csv/price-sync.csv'),
                 'format' => 'csv',
-            ));
+            ]);
 
             // Make list
             foreach ($rowset as $row) {
@@ -306,7 +307,7 @@ class PriceController extends ActionController
                 } */
                 $mainPrice = $product['price_main'];
 
-                $priceList = array();
+                $priceList = [];
                 $priceList[] = $mainPrice;
 
                 // Check product property
@@ -325,23 +326,23 @@ class PriceController extends ActionController
 
                 // Update product
                 $this->getModel('product')->update(
-                    array('price' => (int)$minPrice),
-                    array('id' => (int)$product['id'])
+                    ['price' => (int)$minPrice],
+                    ['id' => (int)$product['id']]
                 );
 
                 // Update link
                 $this->getModel('link')->update(
-                    array('price' => (int)$minPrice),
-                    array('product' => (int)$product['id'])
+                    ['price' => (int)$minPrice],
+                    ['product' => (int)$product['id']]
                 );
 
                 // Save log to csv file
-                Pi::service('audit')->log('price-sync', array(
+                Pi::service('audit')->log('price-sync', [
                     $product['id'],
                     $product['title'],
                     $mainPrice,
-                    $minPrice
-                ));
+                    $minPrice,
+                ]);
 
                 // Set price log
                 Pi::api('price', 'shop')->addLog($minPrice, $product['id'], 'product');
@@ -353,7 +354,7 @@ class PriceController extends ActionController
             }
             // Get count
             if (!$count) {
-                $columns = array('count' => new Expression('count(*)'));
+                $columns = ['count' => new Expression('count(*)')];
                 $select = $this->getModel('product')->select()->columns($columns);
                 $count = $this->getModel('product')->selectWith($select)->current()->count;
             }
@@ -363,32 +364,32 @@ class PriceController extends ActionController
             if ($complete >= $count) {
                 $nextUrl = '';
             } else {
-                $nextUrl = Pi::url($this->url('', array(
-                    'action' => 'sync',
-                    'start' => $lastId,
-                    'count' => $count,
+                $nextUrl = Pi::url($this->url('', [
+                    'action'   => 'sync',
+                    'start'    => $lastId,
+                    'count'    => $count,
                     'complete' => $complete,
-                    'confirm' => $confirm,
-                )));
+                    'confirm'  => $confirm,
+                ]));
             }
 
-            $info = array(
-                'start' => $lastId,
-                'count' => $count,
+            $info = [
+                'start'    => $lastId,
+                'count'    => $count,
                 'complete' => $complete,
-                'percent' => $percent,
-                'nextUrl' => $nextUrl,
-                'price' => $priceListInfo,
-            );
+                'percent'  => $percent,
+                'nextUrl'  => $nextUrl,
+                'price'    => $priceListInfo,
+            ];
 
             $percent = ($percent > 99 && $percent < 100) ? (intval($percent) + 1) : intval($percent);
         } else {
-            $info = array();
+            $info = [];
             $percent = 0;
-            $nextUrl = Pi::url($this->url('', array(
-                'action' => 'sync',
+            $nextUrl = Pi::url($this->url('', [
+                'action'  => 'sync',
                 'confirm' => 1,
-            )));
+            ]));
         }
         // Set template
         $this->view()->setTemplate('price-sync');
@@ -413,25 +414,25 @@ class PriceController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Set redirect
-                return $this->redirect()->toRoute('', array(
+                return $this->redirect()->toRoute('', [
                     'controller' => 'price',
-                    'action' => 'log',
-                    'product' => $values['product'],
-                ));
+                    'action'     => 'log',
+                    'product'    => $values['product'],
+                ]);
             }
         } else {
-            $data = array();
+            $data = [];
             $data['product'] = $product;
             $form->setData($data);
         }
 
         // Set product list
-        $productList = array();
+        $productList = [];
 
         // Get log
-        $list = array();
-        $where = array();
-        $order = array('time_update DESC', 'id DESC');
+        $list = [];
+        $where = [];
+        $order = ['time_update DESC', 'id DESC'];
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit = intval($this->config('admin_perpage'));
         if ($product > 0) {
@@ -453,11 +454,11 @@ class PriceController extends ActionController
             $list[$row->id]['productTitle'] = $productList[$row->product]['title'];
             $list[$row->id]['productStatus'] = $productList[$row->product]['status'];
             $list[$row->id]['productUrl'] = $productList[$row->product]['productUrl'];
-            $list[$row->id]['productEditUrl'] = $this->url('', array(
+            $list[$row->id]['productEditUrl'] = $this->url('', [
                 'controller' => 'product',
-                'action' => 'update',
-                'id' => $productList[$row->product]['id'],
-            ));
+                'action'     => 'update',
+                'id'         => $productList[$row->product]['id'],
+            ]);
 
             switch ($row->type) {
                 case 'product':
@@ -475,22 +476,22 @@ class PriceController extends ActionController
         }
 
         // Set paginator
-        $count = array('count' => new Expression('count(*)'));
+        $count = ['count' => new Expression('count(*)')];
         $select = $this->getModel('price')->select()->columns($count)->where($where);
         $count = $this->getModel('price')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
-        $paginator->setUrlOptions(array(
+        $paginator->setUrlOptions([
             'router' => $this->getEvent()->getRouter(),
-            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params' => array_filter(array(
-                'module' => $this->getModule(),
+            'route'  => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter([
+                'module'     => $this->getModule(),
                 'controller' => 'price',
-                'action' => 'log',
-                'product' => $product,
-            )),
-        ));
+                'action'     => 'log',
+                'product'    => $product,
+            ]),
+        ]);
 
         // Set template
         $this->view()->setTemplate('price-log');
@@ -517,15 +518,15 @@ class PriceController extends ActionController
         if (Pi::service('file')->exists($file)) {
             if ($addPrice == 'OK') {
                 // Get list from csv file
-                $importer = new Csv($file,true, ',', 1001);
+                $importer = new Csv($file, true, ',', 1001);
                 $prices = $importer->get(1001);
 
                 // Set cont array
-                $countOfPriceCsv = array(
+                $countOfPriceCsv = [
                     'total'     => 0,
                     'update'    => 0,
                     'notUpdate' => 0,
-                );
+                ];
 
                 // Make
                 foreach ($prices as $priceSingle) {
@@ -540,21 +541,21 @@ class PriceController extends ActionController
                         if ($product) {
                             // Update product
                             $this->getModel('product')->update(
-                                array('price' => (int)$priceSingle['price']),
-                                array('id' => (int)$product['id'])
+                                ['price' => (int)$priceSingle['price']],
+                                ['id' => (int)$product['id']]
                             );
 
                             // Update link
                             $this->getModel('link')->update(
-                                array('price' => (int)$priceSingle['price']),
-                                array('product' => (int)$product['id'])
+                                ['price' => (int)$priceSingle['price']],
+                                ['product' => (int)$product['id']]
                             );
 
                             // Save log to csv file
-                            Pi::service('audit')->attach('price-csv', array(
+                            Pi::service('audit')->attach('price-csv', [
                                 'file'   => Pi::path('upload/shop/csv/price-csv-update.csv'),
                                 'format' => 'csv',
-                            ));
+                            ]);
                             Pi::service('audit')->log('price-csv', $priceSingle);
 
                             // Set price log
@@ -565,20 +566,20 @@ class PriceController extends ActionController
                             $countOfPriceCsv['notUpdate']++;
 
                             // Save log to csv file
-                            Pi::service('audit')->attach('price-csv', array(
+                            Pi::service('audit')->attach('price-csv', [
                                 'file'   => Pi::path('upload/shop/csv/price-csv-not-update.csv'),
                                 'format' => 'csv',
-                            ));
+                            ]);
                             Pi::service('audit')->log('price-csv', $priceSingle);
                         }
                     } else {
                         $countOfPriceCsv['notUpdate']++;
 
                         // Save log to csv file
-                        Pi::service('audit')->attach('price-csv', array(
+                        Pi::service('audit')->attach('price-csv', [
                             'file'   => Pi::path('upload/shop/csv/price-csv-not-update.csv'),
                             'format' => 'csv',
-                        ));
+                        ]);
                         Pi::service('audit')->log('price-csv', $priceSingle);
                     }
                 }
@@ -602,7 +603,6 @@ class PriceController extends ActionController
         $this->view()->assign('file', $file);
         $this->view()->assign('working', $working);
         $this->view()->assign('countOfPriceCsv', $countOfPriceCsv);
-
 
 
     }

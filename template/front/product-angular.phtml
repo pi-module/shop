@@ -1,18 +1,18 @@
 <?php
 // Load header files
 $this->jQuery();
-$this->angular(array(
+$this->angular([
     'angular-route.js',
     'ui-bootstrap-custom-tpls-0.7.0.js',
     'pi.js',
-    'i18n'
-));
+    'i18n',
+]);
 $this->js($this->assetModule('js/bootstrap-treeview.min.js'));
 $this->js($this->assetModule('js/rzslider.min.js'));
-$this->css(array(
+$this->css([
     $this->assetModule('css/front.css'),
     $this->assetModule('css/rzslider.min.css'),
-));
+]);
 ?>
 <div class="row clearfix pi-item-angular">
     <div class="ajax-spinner">
@@ -28,8 +28,8 @@ $this->css(array(
         .module('shop', ['ngRoute', 'ui.bootstrap', 'pi', 'rzModule'])
         .constant('config', {
             pageType: '<?php echo $pageType; ?>',
-            urlRoot: '<?php echo Pi::url($this->url('', array('controller' => 'json', 'action' => 'var'))); ?>'.replace(/var\/?$/, ''),
-            urlCompare: '<?php echo Pi::url($this->url('', array('controller' => 'compare'))); ?>',
+            urlRoot: '<?php echo Pi::url($this->url('', ['controller' => 'json', 'action' => 'var'])); ?>'.replace(/var\/?$/, ''),
+            urlCompare: '<?php echo Pi::url($this->url('', ['controller' => 'compare'])); ?>',
             assetRoot: '<?php echo $this->assetModule('ng-template/front/', '', false); ?>',
             categoryJson: '<?php echo $categoriesJson; ?>',
             categorySlug: '<?php echo isset($category) ? $category['slug'] : '' ?>',
@@ -48,11 +48,11 @@ $this->css(array(
                 COMPARE: '<?php _e('Compare'); ?>',
                 CLOSE: '<?php _e('Close'); ?>',
                 NONE_PRODUCT: '<?php _e('No product'); ?>',
-                MIN_PRICE : '<?php _e('From'); ?>',
-                MAX_PRICE : '<?php _e('To'); ?>',
-                PRICE_SYMBOL : '<?php _e('$'); ?>',
-                ADD_TO_CART : '<?php _e('Add to cart'); ?>',
+                MIN_PRICE: '<?php _e('From'); ?>',
+                MAX_PRICE: '<?php _e('To'); ?>',
+                PRICE_SYMBOL: '<?php _e('$'); ?>',
+                ADD_TO_CART: '<?php _e('Add to cart'); ?>',
             },
-       });
+        });
 </script>
 <script src="<?php echo $this->assetModule('js/product-list.js'); ?>"></script>
