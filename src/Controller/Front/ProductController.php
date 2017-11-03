@@ -60,10 +60,10 @@ class ProductController extends IndexController
         }
         // Get new products in category
         if ($config['view_incategory']) {
-            $where = ['status' => 1, 'category' => $product['category']];
-            if ($product['brand'] > 0) {
-                $where['brand'] = $product['brand'];
-            }
+            $where = ['status' => 1, 'category' => $product['category_main']];
+            //if ($product['brand'] > 0) {
+            //    $where['brand'] = $product['brand'];
+            //}
             $productCategory = $this->productList($where, $config['view_incategory_count']);
             $this->view()->assign('productCategory', $productCategory);
         }
