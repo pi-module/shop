@@ -32,7 +32,7 @@ _b('Recommended');
     <div class="shop-block-tag clearfix">
         <?php if ($block['list-type'] == 'horizontal') { ?>
             <?php foreach ($block['resources'] as $product) { ?>
-                <div class="c<?php echo $shopBlockBoxSize; ?> productBox h-product" itemscope
+                <div class="<?php echo $shopBlockBoxSize; ?> productBox h-product" itemscope
                      itemtype="https://schema.org/Product">
                     <div class="thumbnail">
                         <?php if ($product['image']) { ?>
