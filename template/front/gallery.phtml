@@ -1,7 +1,7 @@
 <?php
 // Get local
 $locale = Pi::service('i18n')->getLocale();
-$rtl = (in_array($locale, array('fa', 'ar'))) ? 'true' : 'false';
+$rtl = (in_array($locale, ['fa', 'ar'])) ? 'true' : 'false';
 
 $iconOwlLeft = '<i class="owl-prev fa fa-angle-left"></i>';
 $iconOwlRight = '<i class="owl-next fa fa-angle-right"></i>';
@@ -37,21 +37,23 @@ $script2 = <<<'EOT'
     });
 EOT;
 $script2 = sprintf($script2, $rtl, $iconOwlLeft, $iconOwlRight);
-$this->jQuery(array(
+$this->jQuery([
     'extension/jquery.magnific-popup.min.js',
     'extension/magnific-popup.css',
     'extension/owl.carousel.min.js',
     'extension/owl.carousel.css',
-));
+]);
 $this->footScript()->appendScript($script1);
 $this->footScript()->appendScript($script2);
 ?>
 <div class="product-image gallery clearfix thumbnail">
     <?php if (isset($productItem['image']) && !empty($productItem['image'])) { ?>
         <div class="product-image-main text-center clearfix u-photo">
-            <a class="u-photo <?php echo $this->escape($productItem['ribbon_class']); ?>" href="<?php echo $this->escape($productItem['largeUrl']); ?>"
+            <a class="u-photo <?php echo $this->escape($productItem['ribbon_class']); ?>"
+               href="<?php echo $this->escape($productItem['largeUrl']); ?>"
                title="<?php echo $this->escape($productItem['title']); ?>">
-                <img class="img-responsive" itemprop="image" src="<?php echo $this->escape($productItem['mediumUrl']); ?>"
+                <img class="img-responsive" itemprop="image"
+                     src="<?php echo $this->escape($productItem['mediumUrl']); ?>"
                      alt="<?php echo $this->escape($productItem['title']); ?>"/>
                 <?php if ($productItem['ribbon']) { ?>
                     <p><span><?php echo $this->escape($productItem['ribbon']); ?></span></p>

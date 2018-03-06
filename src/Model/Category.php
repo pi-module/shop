@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Model;
 
 use Pi\Application\Model\Model;
@@ -19,20 +20,20 @@ class Category extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'parent',
-        'title', 
-        'slug', 
+        'title',
+        'slug',
         'image',
         'image_wide',
         'path',
         'text_summary',
         'text_description',
-        'seo_title', 
-        'seo_keywords', 
-        'seo_description', 
-        'time_create', 
+        'seo_title',
+        'seo_keywords',
+        'seo_description',
+        'time_create',
         'time_update',
         'setting',
         'status',
@@ -40,5 +41,5 @@ class Category extends Model
         'display_type',
         'type',
         'hits',
-    );
+    ];
 }

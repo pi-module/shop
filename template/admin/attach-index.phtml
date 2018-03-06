@@ -37,11 +37,11 @@
                            href="<?php echo $file['link']; ?>"><i class="fa fa-download-alt"></i> <?php _e('Get'); ?>
                         </a>
                         <a class="btn btn-primary btn-xs" title="<?php _e('Edit'); ?>"
-                           href="<?php echo $this->url('', array('action' => 'edit', 'id' => $file['id'])); ?>"><i
-                                class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
+                           href="<?php echo $this->url('', ['action' => 'edit', 'id' => $file['id']]); ?>"><i
+                                    class="fa fa-edit"></i> <?php _e('Edit'); ?></a>
                         <a class="btn btn-primary btn-xs" title="<?php _e('Edit from product'); ?>"
-                           href="<?php echo $this->url('', array('action' => 'add', 'id' => $file['product'])); ?>"><i
-                                class="fa fa-edit"></i> <?php _e('Edit from product'); ?></a>
+                           href="<?php echo $this->url('', ['action' => 'add', 'id' => $file['product']]); ?>"><i
+                                    class="fa fa-edit"></i> <?php _e('Edit from product'); ?></a>
                     </td>
                 </tr>
             <?php } ?>

@@ -35,47 +35,47 @@ class RelatedForm extends BaseForm
     public function init()
     {
         // title
-        $this->add(array(
-            'name' => 'title',
-            'options' => array(
+        $this->add([
+            'name'       => 'title',
+            'options'    => [
                 'label' => __('Title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
 
-            )
-        ));
+            ],
+        ]);
         // status
-        $this->add(array(
-            'name' => 'type',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Title search type'),
-                'value_options' => array(
+        $this->add([
+            'name'    => 'type',
+            'type'    => 'select',
+            'options' => [
+                'label'         => __('Title search type'),
+                'value_options' => [
                     1 => __('Included'),
                     2 => __('Start with'),
                     3 => __('End with'),
                     4 => __('According'),
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // category
-        $this->add(array(
-            'name' => 'category',
-            'type' => 'Module\Shop\Form\Element\Category',
-            'options' => array(
-                'label' => __('Category'),
+        $this->add([
+            'name'    => 'category',
+            'type'    => 'Module\Shop\Form\Element\Category',
+            'options' => [
+                'label'    => __('Category'),
                 'category' => '',
-            ),
-        ));
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

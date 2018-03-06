@@ -23,9 +23,9 @@ class Percent extends AbstractValidator
     /**
      * @var array
      */
-    protected $messageTemplates = array(
+    protected $messageTemplates = [
         self::TAKEN => 'Percent number should be between 1 to 99',
-    );
+    ];
 
     /**
      * Percent validate

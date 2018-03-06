@@ -23,13 +23,13 @@ class NameDuplicate extends AbstractValidator
     /**
      * @var array
      */
-    protected $messageTemplates = array(
+    protected $messageTemplates = [
         self::TAKEN => 'This name already exists',
-    );
+    ];
 
-    protected $options = array(
-        'module', 'table'
-    );
+    protected $options = [
+        'module', 'table',
+    ];
 
     /**
      * Name validate
@@ -42,7 +42,7 @@ class NameDuplicate extends AbstractValidator
     {
         $this->setValue($value);
         if (null !== $value) {
-            $where = array('name' => $value);
+            $where = ['name' => $value];
             if (!empty($context['id'])) {
                 $where['id <> ?'] = $context['id'];
             }

@@ -10,11 +10,11 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-return array(
-    'shop' => array(
-        'title' => _a('Shop comments'),
-        'icon' => 'icon-post',
+return [
+    'shop' => [
+        'title'    => _a('Shop comments'),
+        'icon'     => 'icon-post',
         'callback' => 'Module\Shop\Api\Comment',
-        'locator' => 'Module\Shop\Api\Comment',
-    ),
-);
+        'locator'  => 'Module\Shop\Api\Comment',
+    ],
+];

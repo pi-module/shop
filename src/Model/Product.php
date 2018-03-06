@@ -20,7 +20,7 @@ class Product extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'title',
         'subtitle',
@@ -59,5 +59,5 @@ class Product extends Model
         'price_title',
         'ribbon',
         'setting',
-    );
+    ];
 }

@@ -21,33 +21,33 @@ class CategoryMergeFilter extends InputFilter
     public function __construct($option)
     {
         // category_from_1
-        $this->add(array(
-            'name' => 'category_from_1',
-            'required' => true,
-            'validators' => array(
+        $this->add([
+            'name'       => 'category_from_1',
+            'required'   => true,
+            'validators' => [
                 new \Module\Shop\Validator\Category,
-            ),
-        ));
+            ],
+        ]);
         // category_from_2
-        $this->add(array(
-            'name' => 'category_from_2',
-            'required' => true,
-            'validators' => array(
+        $this->add([
+            'name'       => 'category_from_2',
+            'required'   => true,
+            'validators' => [
                 new \Module\Shop\Validator\Category,
-            ),
-        ));
+            ],
+        ]);
         // where_type
-        $this->add(array(
-            'name' => 'where_type',
+        $this->add([
+            'name'     => 'where_type',
             'required' => true,
-        ));
+        ]);
         // category_to
-        $this->add(array(
-            'name' => 'category_to',
-            'required' => true,
-            'validators' => array(
+        $this->add([
+            'name'       => 'category_to',
+            'required'   => true,
+            'validators' => [
                 new \Module\Shop\Validator\Category,
-            ),
-        ));
+            ],
+        ]);
     }
 }

@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Model;
 
 use Pi\Application\Model\Model;
@@ -19,13 +20,13 @@ class Property extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'title',
         'order',
         'status',
         'influence_stock',
         'influence_price',
-        'type'
-    );
+        'type',
+    ];
 }

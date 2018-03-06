@@ -8,13 +8,13 @@
             </div>
         </div>
         <pre><?php print_r($info); ?></pre>
-        <?php if (!empty($nextUrl)) { ?>
+    <?php if (!empty($nextUrl)) { ?>
         <script>
             window.setTimeout(function () {
                 window.location.href = '<?php echo $nextUrl; ?>';
             }, 1000);
         </script>
-        <?php } ?>
+    <?php } ?>
     <?php } else { ?>
         <div class="well">
             <?php echo $this->form($form); ?>

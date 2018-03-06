@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class DiscountForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
     }
@@ -34,87 +34,87 @@ class DiscountForm extends BaseForm
     public function init()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'id',
+            'attributes' => [
                 'type' => 'hidden',
-            ),
-        ));
+            ],
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
-            'options' => array(
+        $this->add([
+            'name'       => 'title',
+            'options'    => [
                 'label' => __('Title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // role
-        $this->add(array(
-            'name' => 'role',
-            'type' => 'Module\Shop\Form\Element\Role',
-            'options' => array(
-                'label' => __('User role'),
+        $this->add([
+            'name'       => 'role',
+            'type'       => 'Module\Shop\Form\Element\Role',
+            'options'    => [
+                'label'    => __('User role'),
                 'category' => '',
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'required' => true,
-            )
-        ));
+            ],
+        ]);
         // category
-        $this->add(array(
-            'name' => 'category',
-            'type' => 'Module\Shop\Form\Element\Category',
-            'options' => array(
-                'label' => __('Category'),
-                'category' => array(0 => ''),
-            ),
-            'attributes' => array(
-                'size' => 1,
+        $this->add([
+            'name'       => 'category',
+            'type'       => 'Module\Shop\Form\Element\Category',
+            'options'    => [
+                'label'    => __('Category'),
+                'category' => [0 => ''],
+            ],
+            'attributes' => [
+                'size'     => 1,
                 'multiple' => 0,
                 'required' => true,
-            ),
-        ));
+            ],
+        ]);
         // percent
-        $this->add(array(
-            'name' => 'percent',
-            'options' => array(
+        $this->add([
+            'name'       => 'percent',
+            'options'    => [
                 'label' => __('Discount percent'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => __('Number and between 1 to 99'),
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Status'),
-                'value_options' => array(
+        $this->add([
+            'name'       => 'status',
+            'type'       => 'select',
+            'options'    => [
+                'label'         => __('Status'),
+                'value_options' => [
                     1 => __('Published'),
                     2 => __('Pending review'),
                     3 => __('Draft'),
                     4 => __('Private'),
                     5 => __('Delete'),
-                ),
-            ),
-            'attributes' => array(
+                ],
+            ],
+            'attributes' => [
                 'required' => true,
-            )
-        ));
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

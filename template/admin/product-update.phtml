@@ -1,8 +1,8 @@
 <?php
-$this->css(array(
+$this->css([
     $this->assetModule('css/admin.css'),
     $this->assetModule('script/system-ui.css', 'system'),
-));
+]);
 $this->jQuery();
 $this->js($this->assetModule('script/system-msg.js', 'system'));
 // Set property
@@ -42,15 +42,33 @@ EOT;
 ?>
 <div id="product-form" class="clearfix">
     <?php if ($nav['type'] == 'edit') { ?>
-    <div class="well well-sm">
-        <ul class="nav nav-pills">
-            <li<?php if ($nav['page'] == 'update') { echo ' class="active"';} ?>><a href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'update', 'id' => $product['id'])); ?>"><?php _e('Edit basic information'); ?></a></li>
-            <li<?php if ($nav['page'] == 'additional') { echo ' class="active"';} ?>><a href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'additional', 'id' => $product['id'])); ?>"><?php _e('Edit additional information'); ?></a></li>
-            <li<?php if ($nav['page'] == 'attach') { echo ' class="active"';} ?>><a href="<?php echo $this->url('', array('controller' => 'attach', 'action' => 'add', 'id' => $product['id'])); ?>"><?php _e('Attach files'); ?></a></li>
-            <li<?php if ($nav['page'] == '') { echo ' class="active"';} ?>><a href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'related', 'id' => $product['id'])); ?>"><?php _e('Related products'); ?></a></li>
-            <li class="active pull-right"><a target="_blank" href="<?php echo $product['productUrl']; ?>"><?php _e('View'); ?></a></li>
-        </ul>
-    </div>
+        <div class="well well-sm">
+            <ul class="nav nav-pills">
+                <li<?php if ($nav['page'] == 'update') {
+                    echo ' class="active"';
+                } ?>>
+                    <a href="<?php echo $this->url('', ['controller' => 'product', 'action' => 'update', 'id' => $product['id']]); ?>"><?php _e('Edit basic information'); ?></a>
+                </li>
+                <li<?php if ($nav['page'] == 'additional') {
+                    echo ' class="active"';
+                } ?>>
+                    <a href="<?php echo $this->url('', ['controller' => 'product', 'action' => 'additional', 'id' => $product['id']]); ?>"><?php _e('Edit additional information'); ?></a>
+                </li>
+                <li<?php if ($nav['page'] == 'attach') {
+                    echo ' class="active"';
+                } ?>>
+                    <a href="<?php echo $this->url('', ['controller' => 'attach', 'action' => 'add', 'id' => $product['id']]); ?>"><?php _e('Attach files'); ?></a>
+                </li>
+                <li<?php if ($nav['page'] == '') {
+                    echo ' class="active"';
+                } ?>>
+                    <a href="<?php echo $this->url('', ['controller' => 'product', 'action' => 'related', 'id' => $product['id']]); ?>"><?php _e('Related products'); ?></a>
+                </li>
+                <li class="active pull-right"><a target="_blank"
+                                                 href="<?php echo $product['productUrl']; ?>"><?php _e('View'); ?></a>
+                </li>
+            </ul>
+        </div>
     <?php } ?>
     <?php echo $this->form($form); ?>
 </div>

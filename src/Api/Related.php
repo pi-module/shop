@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Api;
 
 use Pi;
@@ -29,7 +30,7 @@ class Related extends AbstractApi
     public function getListAll($product)
     {
         $id = $this->getListId($product);
-        $list = array();
+        $list = [];
         if (!empty($id) && is_array($id)) {
             $list = Pi::api('product', 'shop')->getListFromId($id);
         }
@@ -41,8 +42,8 @@ class Related extends AbstractApi
      */
     public function getListId($product)
     {
-        $list = array();
-        $where = array('product_id' => $product);
+        $list = [];
+        $where = ['product_id' => $product];
         $select = Pi::model('related', $this->getModule())->select()->where($where);
         $rowset = Pi::model('related', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
@@ -57,7 +58,7 @@ class Related extends AbstractApi
      */
     public function getListFind($id)
     {
-        $list = array();
+        $list = [];
         if (!empty($id) && is_array($id)) {
             $list = Pi::api('product', 'shop')->getListFromId($id);
         }
@@ -66,9 +67,9 @@ class Related extends AbstractApi
 
     public function findList($product, $values)
     {
-        $list = array();
-        $from_category = array();
-        $from_title = array();
+        $list = [];
+        $from_category = [];
+        $from_title = [];
         // Find product ids from title
         if (!empty($values['title'])) {
             $from_title = Pi::api('product', 'shop')->searchRelated($values['title'], $values['type']);

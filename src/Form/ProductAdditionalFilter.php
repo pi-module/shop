@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Form;
 
 use Pi;
@@ -17,82 +18,82 @@ use Zend\InputFilter\InputFilter;
 
 class ProductAdditionalFilter extends InputFilter
 {
-    public function __construct($option = array())
+    public function __construct($option = [])
     {
         // Get config
         $config = Pi::service('registry')->config->read('shop');
         // Set attribute position
         $position = Pi::api('attribute', 'shop')->attributePositionForm();
         // id
-        $this->add(array(
-            'name' => 'id',
+        $this->add([
+            'name'     => 'id',
             'required' => false,
-        ));
+        ]);
         // ribbon
-        $this->add(array(
-            'name' => 'ribbon',
+        $this->add([
+            'name'     => 'ribbon',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // stock
-        $this->add(array(
-            'name' => 'stock',
+        $this->add([
+            'name'     => 'stock',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // stock_type
-        $this->add(array(
-            'name' => 'stock_type',
+        $this->add([
+            'name'     => 'stock_type',
             'required' => false,
-        ));
+        ]);
         // price
-        $this->add(array(
-            'name' => 'price',
+        $this->add([
+            'name'     => 'price',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // price_discount
-        $this->add(array(
-            'name' => 'price_discount',
+        $this->add([
+            'name'     => 'price_discount',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // price_shipping
-        $this->add(array(
-            'name' => 'price_shipping',
+        $this->add([
+            'name'     => 'price_shipping',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // price_title
-        $this->add(array(
-            'name' => 'price_title',
+        $this->add([
+            'name'     => 'price_title',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // order_discount
         if ($config['order_discount']) {
             // Get role list
@@ -100,15 +101,15 @@ class ProductAdditionalFilter extends InputFilter
             unset($roles['webmaster']);
             unset($roles['guest']);
             foreach ($roles as $name => $role) {
-                $this->add(array(
-                    'name' => $name,
+                $this->add([
+                    'name'     => $name,
                     'required' => false,
-                    'filters' => array(
-                        array(
+                    'filters'  => [
+                        [
                             'name' => 'StringTrim',
-                        ),
-                    ),
-                ));
+                        ],
+                    ],
+                ]);
             }
         }
         // Set attribute
@@ -116,25 +117,25 @@ class ProductAdditionalFilter extends InputFilter
             foreach ($position as $key => $value) {
                 if (!empty($option['field'][$key])) {
                     foreach ($option['field'][$key] as $field) {
-                        $this->add(array(
-                            'name' => $field['id'],
+                        $this->add([
+                            'name'     => $field['id'],
                             'required' => false,
-                        ));
+                        ]);
                     }
                 }
             }
         }
         // Set video service
         if ($option['video_service'] && Pi::service('module')->isActive('video')) {
-            $this->add(array(
-                'name' => 'video_list',
+            $this->add([
+                'name'     => 'video_list',
                 'required' => false,
-                'filters' => array(
-                    array(
+                'filters'  => [
+                    [
                         'name' => 'StringTrim',
-                    ),
-                ),
-            ));
+                    ],
+                ],
+            ]);
         }
     }
 }

@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class PriceUpdateForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         parent::__construct($name);
     }
@@ -34,39 +34,39 @@ class PriceUpdateForm extends BaseForm
     public function init()
     {
         // category
-        $this->add(array(
-            'name' => 'category',
-            'type' => 'Module\Shop\Form\Element\Category',
-            'options' => array(
-                'label' => __('Main category'),
-                'category' => array('' => __('Select category')),
-            ),
-            'attributes' => array(
-                'size' => 1,
-                'multiple' => 0,
+        $this->add([
+            'name'       => 'category',
+            'type'       => 'Module\Shop\Form\Element\Category',
+            'options'    => [
+                'label'    => __('Main category'),
+                'category' => ['' => __('Select category')],
+            ],
+            'attributes' => [
+                'size'        => 1,
+                'multiple'    => 0,
                 'description' => '',
-                'required' => true,
-            ),
-        ));
+                'required'    => true,
+            ],
+        ]);
         // percent
-        $this->add(array(
-            'name' => 'percent',
-            'options' => array(
+        $this->add([
+            'name'       => 'percent',
+            'options'    => [
                 'label' => __('Percent update price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => __('Number and between 1 to 99'),
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

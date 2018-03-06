@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Form\Element;
 
 use Pi;
@@ -40,11 +41,11 @@ class Role extends Select
      */
     public function getAttributes()
     {
-        $this->Attributes = array(
-            'size' => 1,
+        $this->Attributes = [
+            'size'     => 1,
             'multiple' => 0,
-            'class' => 'form-control',
-        );
+            'class'    => 'form-control',
+        ];
         // check form size
         if (isset($this->attributes['size'])) {
             $this->Attributes['size'] = $this->attributes['size'];

@@ -20,10 +20,10 @@ class ProductForm extends BaseForm
 {
     protected $thumbUrl = '';
 
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         $this->option = $option;
-        $this->category = array(0 => '');
+        $this->category = [0 => ''];
         $this->thumbUrl = (isset($option['thumbUrl'])) ? $option['thumbUrl'] : '';
         $this->removeUrl = (isset($option['removeUrl'])) ? $option['removeUrl'] : '';
 
@@ -41,258 +41,258 @@ class ProductForm extends BaseForm
     public function init()
     {
         // extra_general
-        $this->add(array(
-            'name' => 'extra_general',
-            'type' => 'fieldset',
-            'options' => array(
+        $this->add([
+            'name'    => 'extra_general',
+            'type'    => 'fieldset',
+            'options' => [
                 'label' => __('General options'),
-            ),
-        ));
+            ],
+        ]);
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'id',
+            'attributes' => [
                 'type' => 'hidden',
-            ),
-        ));
+            ],
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
-            'options' => array(
+        $this->add([
+            'name'       => 'title',
+            'options'    => [
                 'label' => __('Title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // subtitle
-        $this->add(array(
-            'name' => 'subtitle',
-            'options' => array(
+        $this->add([
+            'name'       => 'subtitle',
+            'options'    => [
                 'label' => __('Second title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-            )
-        ));
+            ],
+        ]);
         // slug
-        $this->add(array(
-            'name' => 'slug',
-            'options' => array(
+        $this->add([
+            'name'       => 'slug',
+            'options'    => [
                 'label' => __('slug'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-            )
-        ));
+            ],
+        ]);
         // code
-        $this->add(array(
-            'name' => 'code',
-            'options' => array(
+        $this->add([
+            'name'       => 'code',
+            'options'    => [
                 'label' => __('Product code'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => __('Code should be unique or set it empty'),
-            )
-        ));
+            ],
+        ]);
         // text_summary
-        $this->add(array(
-            'name' => 'text_summary',
-            'options' => array(
+        $this->add([
+            'name'       => 'text_summary',
+            'options'    => [
                 'label' => __('Summary'),
-            ),
-            'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '5',
-                'cols' => '40',
+            ],
+            'attributes' => [
+                'type'        => 'textarea',
+                'rows'        => '5',
+                'cols'        => '40',
                 'description' => __('Keep summery short, 2 or 3 lines'),
-            )
-        ));
+            ],
+        ]);
         // text_description
-        $this->add(array(
-            'name' => 'text_description',
-            'options' => array(
-                'label' => __('Description'),
+        $this->add([
+            'name'       => 'text_description',
+            'options'    => [
+                'label'  => __('Description'),
                 'editor' => 'html',
-            ),
-            'attributes' => array(
-                'type' => 'editor',
+            ],
+            'attributes' => [
+                'type'        => 'editor',
                 'description' => '',
-            )
-        ));
+            ],
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Status'),
-                'value_options' => array(
+        $this->add([
+            'name'       => 'status',
+            'type'       => 'select',
+            'options'    => [
+                'label'         => __('Status'),
+                'value_options' => [
                     1 => __('Published'),
                     2 => __('Pending review'),
                     3 => __('Draft'),
                     4 => __('Private'),
                     5 => __('Delete'),
-                ),
-            ),
-            'attributes' => array(
+                ],
+            ],
+            'attributes' => [
                 'required' => true,
-            )
-        ));
+            ],
+        ]);
         // category
-        $this->add(array(
-            'name' => 'category',
-            'type' => 'Module\Shop\Form\Element\Category',
-            'options' => array(
-                'label' => __('Category'),
+        $this->add([
+            'name'       => 'category',
+            'type'       => 'Module\Shop\Form\Element\Category',
+            'options'    => [
+                'label'    => __('Category'),
                 'category' => '',
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'required' => true,
-            )
-        ));
+            ],
+        ]);
         // category_main
-        $this->add(array(
-            'name' => 'category_main',
-            'type' => 'Module\Shop\Form\Element\Category',
-            'options' => array(
-                'label' => __('Main category'),
+        $this->add([
+            'name'       => 'category_main',
+            'type'       => 'Module\Shop\Form\Element\Category',
+            'options'    => [
+                'label'    => __('Main category'),
                 'category' => $this->category,
-            ),
-            'attributes' => array(
-                'size' => 1,
-                'multiple' => 0,
+            ],
+            'attributes' => [
+                'size'        => 1,
+                'multiple'    => 0,
                 'description' => __('Use for breadcrumbs ,mobile app and attribute'),
-                'required' => true,
-            ),
-        ));
+                'required'    => true,
+            ],
+        ]);
         // brand
         if ($this->option['brand_system']) {
-            $this->add(array(
-                'name' => 'brand',
-                'type' => 'Module\Shop\Form\Element\Brand',
-                'options' => array(
-                    'label' => __('Brand'),
+            $this->add([
+                'name'       => 'brand',
+                'type'       => 'Module\Shop\Form\Element\Brand',
+                'options'    => [
+                    'label'    => __('Brand'),
                     'category' => $this->category,
-                ),
-                'attributes' => array(
-                    'size' => 1,
+                ],
+                'attributes' => [
+                    'size'     => 1,
                     'multiple' => 0,
                     'required' => false,
-                ),
-            ));
+                ],
+            ]);
         }
         // Image
         if ($this->thumbUrl) {
-            $this->add(array(
-                'name' => 'imageview',
-                'type' => 'Module\Shop\Form\Element\Image',
-                'options' => array(//'label' => __('Image'),
-                ),
-                'attributes' => array(
+            $this->add([
+                'name'       => 'imageview',
+                'type'       => 'Module\Shop\Form\Element\Image',
+                'options'    => [//'label' => __('Image'),
+                ],
+                'attributes' => [
                     'src' => $this->thumbUrl,
-                ),
-            ));
-            $this->add(array(
-                'name' => 'remove',
-                'type' => 'Module\Shop\Form\Element\Remove',
-                'options' => array(
+                ],
+            ]);
+            $this->add([
+                'name'       => 'remove',
+                'type'       => 'Module\Shop\Form\Element\Remove',
+                'options'    => [
                     'label' => __('Remove image'),
-                ),
-                'attributes' => array(
+                ],
+                'attributes' => [
                     'link' => $this->removeUrl,
-                ),
-            ));
-            $this->add(array(
-                'name' => 'image',
-                'attributes' => array(
+                ],
+            ]);
+            $this->add([
+                'name'       => 'image',
+                'attributes' => [
                     'type' => 'hidden',
-                ),
-            ));
+                ],
+            ]);
         } else {
-            $this->add(array(
-                'name' => 'image',
-                'options' => array(
+            $this->add([
+                'name'       => 'image',
+                'options'    => [
                     'label' => __('Image'),
-                ),
-                'attributes' => array(
-                    'type' => 'file',
+                ],
+                'attributes' => [
+                    'type'        => 'file',
                     'description' => '',
-                )
-            ));
+                ],
+            ]);
         }
         // extra_seo
-        $this->add(array(
-            'name' => 'extra_seo',
-            'type' => 'fieldset',
-            'options' => array(
+        $this->add([
+            'name'    => 'extra_seo',
+            'type'    => 'fieldset',
+            'options' => [
                 'label' => __('SEO options'),
-            ),
-        ));
+            ],
+        ]);
         // seo_title
-        $this->add(array(
-            'name' => 'seo_title',
-            'options' => array(
+        $this->add([
+            'name'       => 'seo_title',
+            'options'    => [
                 'label' => __('SEO Title'),
-            ),
-            'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '2',
-                'cols' => '40',
+            ],
+            'attributes' => [
+                'type'        => 'textarea',
+                'rows'        => '2',
+                'cols'        => '40',
                 'description' => __('Between 10 to 70 character'),
-            )
-        ));
+            ],
+        ]);
         // seo_keywords
-        $this->add(array(
-            'name' => 'seo_keywords',
-            'options' => array(
+        $this->add([
+            'name'       => 'seo_keywords',
+            'options'    => [
                 'label' => __('SEO Keywords'),
-            ),
-            'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '2',
-                'cols' => '40',
+            ],
+            'attributes' => [
+                'type'        => 'textarea',
+                'rows'        => '2',
+                'cols'        => '40',
                 'description' => __('Between 5 to 10 words'),
-            )
-        ));
+            ],
+        ]);
         // seo_description
-        $this->add(array(
-            'name' => 'seo_description',
-            'options' => array(
+        $this->add([
+            'name'       => 'seo_description',
+            'options'    => [
                 'label' => __('SEO Description'),
-            ),
-            'attributes' => array(
-                'type' => 'textarea',
-                'rows' => '3',
-                'cols' => '40',
+            ],
+            'attributes' => [
+                'type'        => 'textarea',
+                'rows'        => '3',
+                'cols'        => '40',
                 'description' => __('Between 80 to 160 character'),
-            )
-        ));
+            ],
+        ]);
         // tag
         if (Pi::service('module')->isActive('tag')) {
-            $this->add(array(
-                'name' => 'tag',
-                'type' => 'tag',
-                'options' => array(
+            $this->add([
+                'name'       => 'tag',
+                'type'       => 'tag',
+                'options'    => [
                     'label' => __('Tags'),
-                ),
-                'attributes' => array(
-                    'id' => 'tag',
+                ],
+                'attributes' => [
+                    'id'          => 'tag',
                     'description' => __('Use `|` as delimiter to separate tag terms'),
-                )
-            ));
+                ],
+            ]);
         }
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

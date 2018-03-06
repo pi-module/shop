@@ -3,7 +3,8 @@
     <h3><?php _e('Import price list from CSV file'); ?></h3>
     <div class="alert alert-success">
         <span><?php _e('Download this example file and put your product information ( id or code and price ) on it upload on server and update price on DB'); ?></span>
-        <a target="_blank" title="<?php _e('Example'); ?>" href="<?php echo $this->assetModule('csv/price.csv'); ?>" class="btn btn-success" >
+        <a target="_blank" title="<?php _e('Example'); ?>" href="<?php echo $this->assetModule('csv/price.csv'); ?>"
+           class="btn btn-success">
             <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php _e('Example'); ?>
         </a>
     </div>
@@ -19,8 +20,8 @@
             </ul>
         </div>
     <?php } ?>
-    <a title="<?php _e('Update price'); ?>" href="<?php echo Pi::url($this->url('', array(
-        'action' => 'csv',
-        'addPrice' =>'OK',
-    ))); ?>" class="btn btn-primary" ><?php _e('Update price'); ?></a>
+    <a title="<?php _e('Update price'); ?>" href="<?php echo Pi::url($this->url('', [
+        'action'   => 'csv',
+        'addPrice' => 'OK',
+    ])); ?>" class="btn btn-primary"><?php _e('Update price'); ?></a>
 </div>

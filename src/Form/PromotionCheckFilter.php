@@ -21,14 +21,14 @@ class PromotionCheckFilter extends InputFilter
     public function __construct()
     {
         // code
-        $this->add(array(
-            'name' => 'code',
+        $this->add([
+            'name'     => 'code',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 }

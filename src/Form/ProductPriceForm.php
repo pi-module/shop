@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class ProductPriceForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         $this->option = $option;
         parent::__construct($name);
@@ -35,21 +35,21 @@ class ProductPriceForm extends BaseForm
     public function init()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
-                'type' => 'hidden',
+        $this->add([
+            'name'       => 'id',
+            'attributes' => [
+                'type'  => 'hidden',
                 'value' => $this->option['id'],
-            ),
-        ));
+            ],
+        ]);
         // type
-        $this->add(array(
-            'name' => 'type',
-            'attributes' => array(
-                'type' => 'hidden',
+        $this->add([
+            'name'       => 'type',
+            'attributes' => [
+                'type'  => 'hidden',
                 'value' => $this->option['type'],
-            ),
-        ));
+            ],
+        ]);
         // Check type
         switch ($this->option['type']) {
             case 'property':
@@ -58,32 +58,32 @@ class ProductPriceForm extends BaseForm
                     if ($this->option['propertyList'][$key]['influence_price']) {
                         foreach ($propertyDetails as $propertySingle) {
                             // id
-                            $this->add(array(
-                                'name' => sprintf('property-%s-id',  $propertySingle['id']),
-                                'attributes' => array(
-                                    'type' => 'hidden',
+                            $this->add([
+                                'name'       => sprintf('property-%s-id', $propertySingle['id']),
+                                'attributes' => [
+                                    'type'  => 'hidden',
                                     'value' => $propertySingle['id'],
-                                ),
-                            ));
+                                ],
+                            ]);
                             // unique_key
-                            $this->add(array(
-                                'name' => sprintf('property-%s-key',  $propertySingle['id']),
-                                'attributes' => array(
-                                    'type' => 'hidden',
+                            $this->add([
+                                'name'       => sprintf('property-%s-key', $propertySingle['id']),
+                                'attributes' => [
+                                    'type'  => 'hidden',
                                     'value' => $propertySingle['unique_key'],
-                                ),
-                            ));
+                                ],
+                            ]);
                             // price
-                            $this->add(array(
-                                'name' => sprintf('property-%s-price',  $propertySingle['id']),
-                                'options' => array(
+                            $this->add([
+                                'name'       => sprintf('property-%s-price', $propertySingle['id']),
+                                'options'    => [
                                     'label' => $propertySingle['name'],
-                                ),
-                                'attributes' => array(
-                                    'type' => 'text',
+                                ],
+                                'attributes' => [
+                                    'type'  => 'text',
                                     'value' => $propertySingle['price'],
-                                )
-                            ));
+                                ],
+                            ]);
                             // Update field count
                             $fieldCount++;
                         }
@@ -92,90 +92,90 @@ class ProductPriceForm extends BaseForm
                 // Check  field count
                 if ($fieldCount == 0) {
                     // price
-                    $this->add(array(
-                        'name' => 'price',
-                        'options' => array(
+                    $this->add([
+                        'name'       => 'price',
+                        'options'    => [
                             'label' => __('Price'),
-                        ),
-                        'attributes' => array(
-                            'type' => 'text',
+                        ],
+                        'attributes' => [
+                            'type'  => 'text',
                             'value' => $this->option['price'],
-                        )
-                    ));
+                        ],
+                    ]);
                 }
                 break;
 
             case 'product':
                 // price
-                $this->add(array(
-                    'name' => 'price',
-                    'options' => array(
+                $this->add([
+                    'name'       => 'price',
+                    'options'    => [
                         'label' => __('Price'),
-                    ),
-                    'attributes' => array(
-                        'type' => 'text',
+                    ],
+                    'attributes' => [
+                        'type'  => 'text',
                         'value' => $this->option['price'],
-                    )
-                ));
+                    ],
+                ]);
                 break;
         }
         // price_discount
-        $this->add(array(
-            'name' => 'price_discount',
-            'options' => array(
+        $this->add([
+            'name'       => 'price_discount',
+            'options'    => [
                 'label' => __('Price Discount'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'  => 'text',
                 'value' => $this->option['price_discount'],
-            )
-        ));
+            ],
+        ]);
         // price_shipping
-        $this->add(array(
-            'name' => 'price_shipping',
-            'options' => array(
+        $this->add([
+            'name'       => 'price_shipping',
+            'options'    => [
                 'label' => __('Extra shipping price'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'  => 'text',
                 'value' => $this->option['price_shipping'],
-            )
-        ));
+            ],
+        ]);
         // stock_type
         if ($this->option['order_stock'] == 'manual') {
-            $this->add(array(
-                'name' => 'stock_type',
-                'type' => 'select',
-                'options' => array(
-                    'label' => __('Stock type'),
-                    'value_options' => array(
+            $this->add([
+                'name'       => 'stock_type',
+                'type'       => 'select',
+                'options'    => [
+                    'label'         => __('Stock type'),
+                    'value_options' => [
                         1 => __('In stock'),
                         2 => __('Out of stock'),
                         3 => __('Coming soon'),
                         4 => __('Contact'),
                         5 => __('Variable stock (make order without active payment)'),
-                    ),
-                ),
-                'attributes' => array(
+                    ],
+                ],
+                'attributes' => [
                     'required' => true,
-                    'value' => $this->option['stock_type'],
-                )
-            ));
+                    'value'    => $this->option['stock_type'],
+                ],
+            ]);
         } else {
-            $this->add(array(
-                'name' => 'stock_type',
-                'attributes' => array(
+            $this->add([
+                'name'       => 'stock_type',
+                'attributes' => [
                     'type' => 'hidden',
-                ),
-            ));
+                ],
+            ]);
         }
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

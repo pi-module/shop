@@ -10,23 +10,24 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
+use Module\Shop\Form\AttachFilter;
+use Module\Shop\Form\AttachForm;
 use Pi;
+use Pi\File\Transfer\Upload;
 use Pi\Mvc\Controller\ActionController;
 use Pi\Paginator\Paginator;
-use Pi\File\Transfer\Upload;
-use Module\Shop\Form\AttachForm;
-use Module\Shop\Form\AttachFilter;
 use Zend\Db\Sql\Predicate\Expression;
 
 class AttachController extends ActionController
 {
     protected $AttachPrefix = 'attach_';
 
-    protected $attachColumns = array(
-        'id', 'title', 'file', 'path', 'product', 'time_create', 'size', 'type', 'status', 'hits'
-    );
+    protected $attachColumns = [
+        'id', 'title', 'file', 'path', 'product', 'time_create', 'size', 'type', 'status', 'hits',
+    ];
 
     public function indexAction()
     {
@@ -35,7 +36,7 @@ class AttachController extends ActionController
         $product = $this->params('product');
         $module = $this->params('module');
         // Set info
-        $order = array('time_create DESC', 'id DESC');
+        $order = ['time_create DESC', 'id DESC'];
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit = intval($this->config('admin_perpage'));
         // Get info
@@ -55,21 +56,21 @@ class AttachController extends ActionController
             }
         }
         // Set paginator
-        $columns = array('count' => new Expression('count(*)'));
+        $columns = ['count' => new Expression('count(*)')];
         $select = $this->getModel('attach')->select()->columns($columns);
         $count = $this->getModel('attach')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
-        $paginator->setUrlOptions(array(
+        $paginator->setUrlOptions([
             'router' => $this->getEvent()->getRouter(),
-            'route' => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params' => array_filter(array(
-                'module' => $this->getModule(),
+            'route'  => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+            'params' => array_filter([
+                'module'     => $this->getModule(),
                 'controller' => 'attach',
-                'action' => 'index',
-            )),
-        ));
+                'action'     => 'index',
+            ]),
+        ]);
         // Set view
         $this->view()->setTemplate('attach-index');
         $this->view()->assign('files', $file);
@@ -81,18 +82,18 @@ class AttachController extends ActionController
         // Get id
         $id = $this->params('id');
         if (empty($id)) {
-            $this->jump(array('controller' => 'product', 'action' => 'index'), __('You must select product'));
+            $this->jump(['controller' => 'product', 'action' => 'index'], __('You must select product'));
         }
         // Get product
         $product = Pi::api('product', 'shop')->getProduct($id);
         if (empty($product)) {
-            $this->jump(array('controller' => 'product', 'action' => 'index'), __('Your selected product not exist'));
+            $this->jump(['controller' => 'product', 'action' => 'index'], __('Your selected product not exist'));
         }
         // Get all attach files
-        $select = $this->getModel('attach')->select()->where(array('product' => $product['id']));
+        $select = $this->getModel('attach')->select()->where(['product' => $product['id']]);
         $rowset = $this->getModel('attach')->selectWith($select);
         // Make list
-        $contents = array();
+        $contents = [];
         foreach ($rowset as $row) {
             $content[$row->id] = $row->toArray();
             $content[$row->id]['time_create'] = _date($content[$row->id]['time_create']);
@@ -100,10 +101,10 @@ class AttachController extends ActionController
             $contents[] = $content[$row->id];
         }
         // set nav
-        $nav = array(
+        $nav = [
             'page' => 'attach',
             'type' => 'edit',
-        );
+        ];
         // Set view
         $this->view()->setTemplate('attach-add');
         $this->view()->assign('content', json_encode($contents));
@@ -118,7 +119,7 @@ class AttachController extends ActionController
         $id = $this->params('id');
         $module = $this->params('module');
         if (empty($id)) {
-            $this->jump(array('action' => 'index'), __('You must select file'));
+            $this->jump(['action' => 'index'], __('You must select file'));
         }
         //Get file and product
         $file = $this->getModel('attach')->find($id)->toArray();
@@ -142,7 +143,7 @@ class AttachController extends ActionController
                 $row->assign($values);
                 $row->save();
                 $message = __('All changes in file saved successfully.');
-                $this->jump(array('action' => 'index'), $message);
+                $this->jump(['action' => 'index'], $message);
             } else {
                 $message = __('Invalid data, please check and re-submit.');
             }
@@ -164,33 +165,33 @@ class AttachController extends ActionController
         // deactive log
         Pi::service('log')->active(false);
         // Set return
-        $return = array(
-            'status' => 1,
-            'message' => '',
-            'id' => '',
-            'title' => '',
+        $return = [
+            'status'      => 1,
+            'message'     => '',
+            'id'          => '',
+            'title'       => '',
             'time_create' => '',
-            'type' => '',
-            'status' => '',
-            'hits' => '',
-            'size' => '',
-            'preview' => '',
-        );
+            'type'        => '',
+            'status'      => '',
+            'hits'        => '',
+            'size'        => '',
+            'preview'     => '',
+        ];
         // Get id
         $id = $this->params('id');
         if (empty($id)) {
-            $return = array(
-                'status' => 0,
+            $return = [
+                'status'  => 0,
                 'message' => __('You must select product'),
-            );
+            ];
         } else {
             // Get product
             $product = $this->getModel('product')->find($id)->toArray();
             if (empty($product)) {
-                $return = array(
-                    'status' => 0,
+                $return = [
+                    'status'  => 0,
                     'message' => __('Your selected product not exist'),
-                );
+                ];
             } else {
                 // start upload
                 $path = sprintf('%s/%s', date('Y'), date('m'));
@@ -241,10 +242,10 @@ class AttachController extends ActionController
                 } else {
                     // Upload error
                     $messages = $uploader->getMessages();
-                    $return = array(
-                        'status' => 0,
+                    $return = [
+                        'status'  => 0,
                         'message' => implode('; ', $messages),
-                    );
+                    ];
                 }
             }
         }
@@ -269,11 +270,11 @@ class AttachController extends ActionController
             $id = 0;
         }
 
-        return array(
-            'status' => $ajaxstatus,
+        return [
+            'status'  => $ajaxstatus,
             'message' => $message,
-            'id' => $id,
-        );
+            'id'      => $id,
+        ];
     }
 
     protected function fileTitle($title, $file)

@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Block;
 
 use Pi;
@@ -17,27 +18,27 @@ use Zend\Db\Sql\Predicate\Expression;
 
 class Block
 {
-    public static function productNew($options = array(), $module = null)
+    public static function productNew($options = [], $module = null)
     {
         // Set options
-        $block = array();
+        $block = [];
         $block = array_merge($block, $options);
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
-        $product = array();
+        $product = [];
         // Set info
-        $order = array('time_create DESC', 'id DESC');
+        $order = ['time_create DESC', 'id DESC'];
         $limit = intval($block['number']);
         if (isset($block['category']) &&
             !empty($block['category']) &&
             !in_array(0, $block['category'])
         ) {
             // Set info
-            $where = array(
-                'status' => 1,
+            $where = [
+                'status'   => 1,
                 'category' => $block['category'],
-            );
+            ];
             // Set info
-            $columns = array('product' => new Expression('DISTINCT product'));
+            $columns = ['product' => new Expression('DISTINCT product')];
             // Get info from link table
             $select = Pi::model('link', $module)->select()->where($where)->columns($columns)->order($order)->limit($limit);
             $rowset = Pi::model('link', $module)->selectWith($select)->toArray();
@@ -46,9 +47,9 @@ class Block
                 $productId[] = $id['product'];
             }
             // Set info
-            $where = array('status' => 1, 'id' => $productId);
+            $where = ['status' => 1, 'id' => $productId];
         } else {
-            $where = array('status' => 1);
+            $where = ['status' => 1];
         }
         if ($block['recommended']) {
             $where['recommended'] = 1;
@@ -63,31 +64,31 @@ class Block
         // Set block array
         $block['resources'] = $product;
         // Load language
-        Pi::service('i18n')->load(array('module/shop', 'default'));
+        Pi::service('i18n')->load(['module/shop', 'default']);
         return $block;
     }
 
-    public static function productRandom($options = array(), $module = null)
+    public static function productRandom($options = [], $module = null)
     {
         // Set options
-        $block = array();
+        $block = [];
         $block = array_merge($block, $options);
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
-        $product = array();
+        $product = [];
         // Set info
-        $order = array(new Expression('RAND()'));
+        $order = [new Expression('RAND()')];
         $limit = intval($block['number']);
         if (isset($block['category']) &&
             !empty($block['category']) &&
             !in_array(0, $block['category'])
         ) {
             // Set info
-            $where = array(
-                'status' => 1,
+            $where = [
+                'status'   => 1,
                 'category' => $block['category'],
-            );
+            ];
             // Set info
-            $columns = array('product' => new Expression('DISTINCT product'));
+            $columns = ['product' => new Expression('DISTINCT product')];
             // Get info from link table
             $select = Pi::model('link', $module)->select()->where($where)->columns($columns)->order($order)->limit($limit);
             $rowset = Pi::model('link', $module)->selectWith($select)->toArray();
@@ -96,9 +97,9 @@ class Block
                 $productId[] = $id['product'];
             }
             // Set info
-            $where = array('status' => 1, 'id' => $productId);
+            $where = ['status' => 1, 'id' => $productId];
         } else {
-            $where = array('status' => 1);
+            $where = ['status' => 1];
         }
         if ($block['recommended']) {
             $where['recommended'] = 1;
@@ -113,17 +114,17 @@ class Block
         // Set block array
         $block['resources'] = $product;
         // Load language
-        Pi::service('i18n')->load(array('module/shop', 'default'));
+        Pi::service('i18n')->load(['module/shop', 'default']);
         return $block;
     }
 
-    public static function productTag($options = array(), $module = null)
+    public static function productTag($options = [], $module = null)
     {
         // Set options
-        $block = array();
+        $block = [];
         $block = array_merge($block, $options);
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
-        $product = array();
+        $product = [];
         // Check tag term
         if (!empty($block['tag-term'])) {
             // Get product ides from tag term
@@ -134,11 +135,11 @@ class Block
             // get products
             if (!empty($tagId)) {
                 // Set info
-                $where = array('status' => 1, 'id' => $tagId);
+                $where = ['status' => 1, 'id' => $tagId];
                 if ($block['recommended']) {
                     $where['recommended'] = 1;
                 }
-                $order = array(new Expression('RAND()'));
+                $order = [new Expression('RAND()')];
                 $limit = intval($block['number']);
                 // Get list of product
                 $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
@@ -152,14 +153,14 @@ class Block
         // Set block array
         $block['resources'] = $product;
         // Load language
-        Pi::service('i18n')->load(array('module/shop', 'default'));
+        Pi::service('i18n')->load(['module/shop', 'default']);
         return $block;
     }
 
-    public function productSale($options = array(), $module = null)
+    public function productSale($options = [], $module = null)
     {
         // Set options
-        $block = array();
+        $block = [];
         $block = array_merge($block, $options);
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
         $limit = intval($block['number']);
@@ -168,10 +169,10 @@ class Block
         return $block;
     }
 
-    public function categorySale($options = array(), $module = null)
+    public function categorySale($options = [], $module = null)
     {
         // Set options
-        $block = array();
+        $block = [];
         $block = array_merge($block, $options);
         $limit = intval($block['number']);
         // Set block array
@@ -179,14 +180,14 @@ class Block
         return $block;
     }
 
-    public static function category($options = array(), $module = null)
+    public static function category($options = [], $module = null)
     {
         // Set options
-        $block = array();
+        $block = [];
         $block = array_merge($block, $options);
         // Set info
-        $order = array('display_order DESC', 'id DESC');
-        $where = array('status' => 1);
+        $order = ['display_order DESC', 'id DESC'];
+        $where = ['status' => 1];
         if (!empty($block['category']) && !in_array(0, $block['category'])) {
             $where['id'] = $block['category'];
         }
@@ -201,19 +202,19 @@ class Block
         return $block;
     }
 
-    public static function basket($options = array(), $module = null)
+    public static function basket($options = [], $module = null)
     {
         // Set options
-        $block = array();
+        $block = [];
         $block = array_merge($block, $options);
         // Set basket link
-        $block['link'] = Pi::url(Pi::service('url')->assemble('shop', array(
-            'module' => $module,
+        $block['link'] = Pi::url(Pi::service('url')->assemble('shop', [
+            'module'     => $module,
             'controller' => 'cart',
-            'action' => 'index',
-        )));
+            'action'     => 'index',
+        ]));
         // Check block type
-        switch($block['type']) {
+        switch ($block['type']) {
             case 'link':
                 // Set number
                 $block['number'] = Pi::api('basket', 'shop')->basketBlockNumber();
@@ -231,17 +232,17 @@ class Block
         return $block;
     }
 
-    public static function search($options = array(), $module = null)
+    public static function search($options = [], $module = null)
     {
         // Set options
-        $block = array();
+        $block = [];
         $block = array_merge($block, $options);
         // Set ajax search link
-        $block['link'] = Pi::url(Pi::service('url')->assemble('shop', array(
-            'module' => $module,
+        $block['link'] = Pi::url(Pi::service('url')->assemble('shop', [
+            'module'     => $module,
             'controller' => 'json',
-            'action' => 'filterSearch',
-        )));
+            'action'     => 'filterSearch',
+        ]));
         // Set block array
         return $block;
     }

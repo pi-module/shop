@@ -10,20 +10,21 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
+use Module\Shop\Form\PropertyFilter;
+use Module\Shop\Form\PropertyForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\PropertyForm;
-use Module\Shop\Form\PropertyFilter;
 
 class PropertyController extends ActionController
 {
     public function indexAction()
     {
         // Get info
-        $list = array();
-        $order = array('order ASC', 'id ASC');
+        $list = [];
+        $order = ['order ASC', 'id ASC'];
         $select = $this->getModel('property')->select()->order($order);
         $rowset = $this->getModel('property')->selectWith($select);
         // Make list
@@ -32,7 +33,7 @@ class PropertyController extends ActionController
         }
         // Go to update page if empty
         if (empty($list)) {
-            return $this->redirect()->toRoute('', array('action' => 'update'));
+            return $this->redirect()->toRoute('', ['action' => 'update']);
         }
         // Set view
         $this->view()->setTemplate('property-index');
@@ -64,7 +65,7 @@ class PropertyController extends ActionController
                 $operation = (empty($values['id'])) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('property', $row->id, $operation);
                 $message = __('Order property data saved successfully.');
-                $this->jump(array('action' => 'index'), $message);
+                $this->jump(['action' => 'index'], $message);
             }
         } else {
             if ($id) {

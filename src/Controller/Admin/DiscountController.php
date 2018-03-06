@@ -10,20 +10,21 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Controller\Admin;
 
+use Module\Shop\Form\DiscountFilter;
+use Module\Shop\Form\DiscountForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\DiscountForm;
-use Module\Shop\Form\DiscountFilter;
 
 class DiscountController extends ActionController
 {
     public function indexAction()
     {
         // Get info
-        $list = array();
-        $order = array('id DESC');
+        $list = [];
+        $order = ['id DESC'];
         $select = $this->getModel('discount')->select()->order($order);
         $rowset = $this->getModel('discount')->selectWith($select);
         // Make list
@@ -63,7 +64,7 @@ class DiscountController extends ActionController
                 Pi::registry('discountList', 'shop')->clear();
                 // Check it save or not
                 $message = __('Discount data saved successfully.');
-                $this->jump(array('action' => 'index'), $message);
+                $this->jump(['action' => 'index'], $message);
             }
         } else {
             if ($id) {

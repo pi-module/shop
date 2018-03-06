@@ -1,8 +1,8 @@
 <?php
-$this->css(array(
+$this->css([
     $this->assetModule('css/admin.css'),
     $this->assetModule('script/system-ui.css', 'system'),
-));
+]);
 $this->jQuery();
 $this->backbone();
 $this->js($this->assetModule('script/system-msg.js', 'system'));
@@ -12,7 +12,8 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingForm">
                 <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
                         <i class="fa fa-plus"></i> <?php _e('Filter products'); ?>
                     </a>
                 </h4>
@@ -30,7 +31,7 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
         </div>
         <div class="col-xs-6 text-right">
             <a class="btn btn-success" title="<?php _e('Add product'); ?>"
-               href="<?php echo $this->url('', array('controller' => 'product', 'action' => 'update')); ?>"><i
+               href="<?php echo $this->url('', ['controller' => 'product', 'action' => 'update']); ?>"><i
                         class="fa fa-folder-open"></i> <?php _e('Add product'); ?></a>
         </div>
     </div>
@@ -51,21 +52,23 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                     $labelIdClass = 'label-warning';
                 } ?>
                 <tr data-id="<?php echo $this->escape($product['id']); ?>"
-                    data-price="<?php echo Pi::url($this->url('', array('action' => 'price', 'id' => $product['id']))); ?>"
+                    data-price="<?php echo Pi::url($this->url('', ['action' => 'price', 'id' => $product['id']])); ?>"
                     <?php if ($product['recommended'] == 1) { ?>
-                        data-recommended="<?php echo Pi::url($this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '0'))); ?>"
+                        data-recommended="<?php echo Pi::url($this->url('', ['action' => 'recommend', 'id' => $product['id'], 'recommended' => '0'])); ?>"
                     <?php } else { ?>
-                        data-recommended="<?php echo Pi::url($this->url('', array('action' => 'recommend', 'id' => $product['id'], 'recommended' => '1'))); ?>"
+                        data-recommended="<?php echo Pi::url($this->url('', ['action' => 'recommend', 'id' => $product['id'], 'recommended' => '1'])); ?>"
                     <?php } ?>
                 >
                     <td class="product-ajax">
                         <span class="label <?php echo $labelIdClass; ?>"><?php echo $this->escape($product['id']); ?></span>
                         <?php if ($product['recommended'] == 1) { ?>
-                            <button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link product-recommend" data-toggle="button">
+                            <button id="button-<?php echo $product['id']; ?>" type="button"
+                                    class="btn btn-link product-recommend" data-toggle="button">
                                 <i class="fa fa-heart"></i>
                             </button>
                         <?php } else { ?>
-                            <button id="button-<?php echo $product['id']; ?>" type="button" class="btn btn-link product-recommend" data-toggle="button">
+                            <button id="button-<?php echo $product['id']; ?>" type="button"
+                                    class="btn btn-link product-recommend" data-toggle="button">
                                 <i class="fa fa-heart-o"></i>
                             </button>
                         <?php } ?>
@@ -81,21 +84,23 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                             </button>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a title="<?php _e('Edit basic information'); ?>"
-                                       href="<?php echo $this->url('', array('action' => 'update', 'id' => $product['id'])); ?>"><i
+                                       href="<?php echo $this->url('', ['action' => 'update', 'id' => $product['id']]); ?>"><i
                                                 class="fa fa-edit"></i> <?php _e('Edit basic information'); ?></a></li>
                                 <li><a title="<?php _e('Edit additional information'); ?>"
-                                       href="<?php echo $this->url('', array('action' => 'additional', 'id' => $product['id'])); ?>"><i
-                                                class="fa fa-edit"></i> <?php _e('Edit additional information'); ?></a></li>
+                                       href="<?php echo $this->url('', ['action' => 'additional', 'id' => $product['id']]); ?>"><i
+                                                class="fa fa-edit"></i> <?php _e('Edit additional information'); ?></a>
+                                </li>
                                 <li><a title="<?php _e('Attach files'); ?>"
-                                       href="<?php echo $this->url('', array('controller' => 'attach', 'action' => 'add', 'id' => $product['id'])); ?>"><i
+                                       href="<?php echo $this->url('', ['controller' => 'attach', 'action' => 'add', 'id' => $product['id']]); ?>"><i
                                                 class="fa fa-edit"></i> <?php _e('Attach files'); ?></a></li>
                                 <li><a title="<?php _e('Related products'); ?>"
-                                       href="<?php echo $this->url('', array('action' => 'related', 'id' => $product['id'])); ?>"><i
+                                       href="<?php echo $this->url('', ['action' => 'related', 'id' => $product['id']]); ?>"><i
                                                 class="fa fa-edit"></i> <?php _e('Related products'); ?></a></li>
                                 <?php if ($config['serial_active']) { ?>
                                     <li><a title="<?php _e('Manage serial number'); ?>"
-                                           href="<?php echo $this->url('', array('action' => 'serial', 'id' => $product['id'])); ?>"><i
-                                                    class="fa fa-edit"></i> <?php _e('Manage serial number'); ?></a></li>
+                                           href="<?php echo $this->url('', ['action' => 'serial', 'id' => $product['id']]); ?>"><i
+                                                    class="fa fa-edit"></i> <?php _e('Manage serial number'); ?></a>
+                                    </li>
                                 <?php } ?>
                             </ul>
                         </div>
@@ -105,8 +110,10 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                                         class="fa fa-eye"></i> <?php _e('View'); ?></a>
                         <?php } ?>
                         <?php if ($product['status'] != 5) { ?>
-                            <a class="btn btn-danger btn-xs" title="<?php _e('Delete'); ?>" href="<?php echo $this->url('', array('action' => 'delete', 'id' => $product['id'])); ?>" onclick="return confirm('<?php echo _a('Are you sure to delete this product?'); ?>')">
-                                <i class="fa fa-trash"></i>  <?php _e('Delete'); ?>
+                            <a class="btn btn-danger btn-xs" title="<?php _e('Delete'); ?>"
+                               href="<?php echo $this->url('', ['action' => 'delete', 'id' => $product['id']]); ?>"
+                               onclick="return confirm('<?php echo _a('Are you sure to delete this product?'); ?>')">
+                                <i class="fa fa-trash"></i> <?php _e('Delete'); ?>
                             </a>
                         <?php } ?>
                     </td>

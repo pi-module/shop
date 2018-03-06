@@ -11,6 +11,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Registry;
 
 use Pi;
@@ -24,32 +25,32 @@ class SaleInformation extends AbstractRegistry
     /**
      * {@inheritDoc}
      */
-    protected function loadDynamic($options = array())
+    protected function loadDynamic($options = [])
     {
         // Set return
-        $return = array(
-            'infoAll' => array(
-                'product' => array(),
-                'category' => array(),
-            ),
-            'idAll' => array(
-                'product' => array(),
-                'category' => array(),
-            ),
-            'idActive' => array(
-                'product' => array(),
-                'category' => array(),
-            ),
-            'idExpire' => array(
-                'product' => array(),
-                'category' => array(),
-            ),
-            'timeCheck' => time(),
+        $return = [
+            'infoAll'    => [
+                'product'  => [],
+                'category' => [],
+            ],
+            'idAll'      => [
+                'product'  => [],
+                'category' => [],
+            ],
+            'idActive'   => [
+                'product'  => [],
+                'category' => [],
+            ],
+            'idExpire'   => [
+                'product'  => [],
+                'category' => [],
+            ],
+            'timeCheck'  => time(),
             'timeExpire' => time(),
-        );
-        $timeExpire = array();
+        ];
+        $timeExpire = [];
         // Get ids
-        $where = array('status' => 1);
+        $where = ['status' => 1];
         $model = Pi::model('sale', $this->module);
         $select = $model->select()->where($where);
         $rowset = $model->selectWith($select);
@@ -95,7 +96,7 @@ class SaleInformation extends AbstractRegistry
      */
     public function read()
     {
-        $options = array();
+        $options = [];
         $result = $this->loadData($options);
         return $result;
     }

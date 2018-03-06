@@ -37,9 +37,9 @@ class Property extends AbstractApi
     public function getList()
     {
         // find
-        $list = array();
-        $where = array('status' => 1);
-        $order = array('order ASC', 'id DESC');
+        $list = [];
+        $where = ['status' => 1];
+        $order = ['order ASC', 'id DESC'];
         $select = Pi::model('property', $this->getModule())->select()->where($where)->order($order);
         $rowset = Pi::model('property', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
@@ -51,19 +51,19 @@ class Property extends AbstractApi
     public function setValue($properties, $product)
     {
         // Set price array
-        $priceList = array();
+        $priceList = [];
         //Remove
-        Pi::model('property_value', $this->getModule())->delete(array('product' => $product));
+        Pi::model('property_value', $this->getModule())->delete(['product' => $product]);
         // Add
         foreach ($properties as $propertyId => $propertyValues) {
             foreach ($propertyValues as $propertyValue) {
                 if (isset($propertyValue['name']) && !empty($propertyValue['name'])) {
                     // Set array
-                    $values = array();
+                    $values = [];
                     $values['product'] = $product;
                     $values['property'] = $propertyId;
                     $values['name'] = $propertyValue['name'];
-                    $values['unique_key'] = isset($propertyValue['unique_key']) ? $propertyValue['unique_key'] : md5(time() + rand(100,999));
+                    $values['unique_key'] = isset($propertyValue['unique_key']) ? $propertyValue['unique_key'] : md5(time() + rand(100, 999));
                     $values['stock'] = isset($propertyValue['stock']) ? (int)$propertyValue['stock'] : '';
                     $values['price'] = isset($propertyValue['price']) ? (int)$propertyValue['price'] : '';
                     // Save
@@ -83,12 +83,12 @@ class Property extends AbstractApi
         if (!empty($priceList)) {
             $minPrice = min($priceList);
             Pi::model('product', $this->getModule())->update(
-                array('price' => $minPrice),
-                array('id' => $product)
+                ['price' => $minPrice],
+                ['id' => $product]
             );
             Pi::model('link', $this->getModule())->update(
-                array('price' => $minPrice),
-                array('product' => $product)
+                ['price' => $minPrice],
+                ['product' => $product]
             );
             // Add price log
             Pi::api('price', 'shop')->addLog($minPrice, $product, 'product');
@@ -97,10 +97,10 @@ class Property extends AbstractApi
 
     public function getValue($product)
     {
-        $prices = array();
-        $values = array();
-        $where = array('product' => $product);
-        $order = array('name ASC');
+        $prices = [];
+        $values = [];
+        $where = ['product' => $product];
+        $order = ['name ASC'];
         $select = Pi::model('property_value', $this->getModule())->select()->where($where)->order($order);
         $rowset = Pi::model('property_value', $this->getModule())->selectWith($select);
         // Make values list

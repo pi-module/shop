@@ -21,166 +21,166 @@ class CategoryFilter extends InputFilter
     public function __construct($option)
     {
         // id
-        $this->add(array(
-            'name' => 'id',
+        $this->add([
+            'name'     => 'id',
             'required' => false,
-        ));
+        ]);
         // parent
         if ($option['type'] == 'category') {
-            $this->add(array(
-                'name' => 'parent',
+            $this->add([
+                'name'     => 'parent',
                 'required' => false,
-            ));
+            ]);
         }
         // title
-        $this->add(array(
-            'name' => 'title',
+        $this->add([
+            'name'     => 'title',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // slug
-        $this->add(array(
-            'name' => 'slug',
-            'required' => false,
-            'filters' => array(
-                array(
+        $this->add([
+            'name'       => 'slug',
+            'required'   => false,
+            'filters'    => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-            'validators' => array(
-                new \Module\Shop\Validator\SlugDuplicate(array(
+                ],
+            ],
+            'validators' => [
+                new \Module\Shop\Validator\SlugDuplicate([
                     'module' => Pi::service('module')->current(),
-                    'table' => 'category',
-                )),
-            ),
-        ));
+                    'table'  => 'category',
+                ]),
+            ],
+        ]);
         // text_summary
-        $this->add(array(
-            'name' => 'text_summary',
+        $this->add([
+            'name'     => 'text_summary',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // text_description
-        $this->add(array(
-            'name' => 'text_description',
+        $this->add([
+            'name'     => 'text_description',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // type
-        $this->add(array(
-            'name' => 'type',
+        $this->add([
+            'name'     => 'type',
             'required' => true,
-        ));
+        ]);
         // display_order
-        $this->add(array(
-            'name' => 'display_order',
+        $this->add([
+            'name'     => 'display_order',
             'required' => false,
-        ));
+        ]);
         // display_type
-        $this->add(array(
-            'name' => 'display_type',
+        $this->add([
+            'name'     => 'display_type',
             'required' => true,
-        ));
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
+        $this->add([
+            'name'     => 'status',
             'required' => true,
-        ));
+        ]);
         // image
-        $this->add(array(
-            'name' => 'image',
+        $this->add([
+            'name'     => 'image',
             'required' => false,
-        ));
+        ]);
         // image_wide
-        $this->add(array(
-            'name' => 'image_wide',
+        $this->add([
+            'name'     => 'image_wide',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // Check is new
         if ($option['isNew']) {
             // percent
-            $this->add(array(
-                'name' => 'sale_percent',
+            $this->add([
+                'name'     => 'sale_percent',
                 'required' => false,
-                'filters' => array(
-                    array(
+                'filters'  => [
+                    [
                         'name' => 'StringTrim',
-                    ),
-                ),
-            ));
+                    ],
+                ],
+            ]);
             // time_publish
-            $this->add(array(
-                'name' => 'sale_time_publish',
-                'required' => false,
-                'filters' => array(
-                    array(
+            $this->add([
+                'name'       => 'sale_time_publish',
+                'required'   => false,
+                'filters'    => [
+                    [
                         'name' => 'StringTrim',
-                    ),
-                ),
-                'validators' => array(
+                    ],
+                ],
+                'validators' => [
                     new \Module\Shop\Validator\TimeSelect,
-                ),
-            ));
+                ],
+            ]);
             // time_expire
-            $this->add(array(
-                'name' => 'sale_time_expire',
-                'required' => false,
-                'filters' => array(
-                    array(
+            $this->add([
+                'name'       => 'sale_time_expire',
+                'required'   => false,
+                'filters'    => [
+                    [
                         'name' => 'StringTrim',
-                    ),
-                ),
-                'validators' => array(
+                    ],
+                ],
+                'validators' => [
                     new \Module\Shop\Validator\TimeSelect,
-                ),
-            ));
+                ],
+            ]);
         }
         // seo_title
-        $this->add(array(
-            'name' => 'seo_title',
+        $this->add([
+            'name'     => 'seo_title',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // seo_keywords
-        $this->add(array(
-            'name' => 'seo_keywords',
+        $this->add([
+            'name'     => 'seo_keywords',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // seo_description
-        $this->add(array(
-            'name' => 'seo_description',
+        $this->add([
+            'name'     => 'seo_description',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 }    	

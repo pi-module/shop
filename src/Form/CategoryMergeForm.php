@@ -18,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class CategoryMergeForm extends BaseForm
 {
-    public function __construct($name = null, $option = array())
+    public function __construct($name = null, $option = [])
     {
         $this->option = $option;
         parent::__construct($name);
@@ -35,69 +35,69 @@ class CategoryMergeForm extends BaseForm
     public function init()
     {
         // category_from_1
-        $this->add(array(
-            'name' => 'category_from_1',
-            'type' => 'Module\Shop\Form\Element\Category',
-            'options' => array(
-                'label' => __('From category'),
-                'category' => array('' => __('Please select category')),
-            ),
-            'attributes' => array(
-                'size' => 1,
+        $this->add([
+            'name'       => 'category_from_1',
+            'type'       => 'Module\Shop\Form\Element\Category',
+            'options'    => [
+                'label'    => __('From category'),
+                'category' => ['' => __('Please select category')],
+            ],
+            'attributes' => [
+                'size'     => 1,
                 'multiple' => 0,
                 'required' => true,
-            ),
-        ));
+            ],
+        ]);
         // category_from_2
-        $this->add(array(
-            'name' => 'category_from_2',
-            'type' => 'Module\Shop\Form\Element\Category',
-            'options' => array(
-                'label' => __('From category'),
-                'category' => array('' => __('Please select category')),
-            ),
-            'attributes' => array(
-                'size' => 1,
+        $this->add([
+            'name'       => 'category_from_2',
+            'type'       => 'Module\Shop\Form\Element\Category',
+            'options'    => [
+                'label'    => __('From category'),
+                'category' => ['' => __('Please select category')],
+            ],
+            'attributes' => [
+                'size'     => 1,
                 'multiple' => 0,
                 'required' => true,
-            ),
-        ));
+            ],
+        ]);
         // where_type
-        $this->add(array(
-            'name' => 'where_type',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Where_type'),
-                'value_options' => array(
+        $this->add([
+            'name'       => 'where_type',
+            'type'       => 'select',
+            'options'    => [
+                'label'         => __('Where_type'),
+                'value_options' => [
                     'and' => 'AND',
-                    'or' => 'OR',
-                ),
-            ),
-            'attributes' => array(
+                    'or'  => 'OR',
+                ],
+            ],
+            'attributes' => [
                 'required' => true,
-            )
-        ));
+            ],
+        ]);
         // category_main
-        $this->add(array(
-            'name' => 'category_to',
-            'type' => 'Module\Shop\Form\Element\Category',
-            'options' => array(
-                'label' => __('To category'),
-                'category' => array('' => __('Please select category')),
-            ),
-            'attributes' => array(
-                'size' => 1,
+        $this->add([
+            'name'       => 'category_to',
+            'type'       => 'Module\Shop\Form\Element\Category',
+            'options'    => [
+                'label'    => __('To category'),
+                'category' => ['' => __('Please select category')],
+            ],
+            'attributes' => [
+                'size'     => 1,
                 'multiple' => 0,
                 'required' => true,
-            ),
-        ));
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }

@@ -21,50 +21,50 @@ class DiscountFilter extends InputFilter
     public function __construct()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
+        $this->add([
+            'name'     => 'id',
             'required' => false,
-        ));
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
+        $this->add([
+            'name'     => 'title',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // role
-        $this->add(array(
-            'name' => 'role',
+        $this->add([
+            'name'     => 'role',
             'required' => true,
-        ));
+        ]);
         // category
-        $this->add(array(
-            'name' => 'category',
-            'required' => true,
-            'validators' => array(
+        $this->add([
+            'name'       => 'category',
+            'required'   => true,
+            'validators' => [
                 new \Module\Shop\Validator\SetValue,
-            ),
-        ));
+            ],
+        ]);
         // percent
-        $this->add(array(
-            'name' => 'percent',
-            'required' => true,
-            'filters' => array(
-                array(
+        $this->add([
+            'name'       => 'percent',
+            'required'   => true,
+            'filters'    => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-            'validators' => array(
+                ],
+            ],
+            'validators' => [
                 new \Module\Shop\Validator\Percent,
-            ),
-        ));
+            ],
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
+        $this->add([
+            'name'     => 'status',
             'required' => true,
-        ));
+        ]);
     }
 }

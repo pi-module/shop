@@ -10,11 +10,12 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Form\Element;
 
 use Pi;
-use Zend\Form\Element\Select;
 use Zend\Db\Sql\Predicate\Expression;
+use Zend\Form\Element\Select;
 
 class Product extends Select
 {
@@ -25,16 +26,16 @@ class Product extends Select
     public function getValueOptions()
     {
         if (empty($this->valueOptions)) {
-            $options = array();
+            $options = [];
             // Add product over the list
             if (isset($this->options['product'])) {
                 $options = $this->options['product'];
             }
             // Set query info
             $limit = (isset($this->options['limit'])) ? $this->options['limit'] : 50;
-            $columns = array('id', 'title');
-            $order = array('title ASC', 'time_create DESC', 'id DESC');
-            $where = array('status' => 1);
+            $columns = ['id', 'title'];
+            $order = ['title ASC', 'time_create DESC', 'id DESC'];
+            $where = ['status' => 1];
             // Check for sale
             if (isset($this->options['type']) && $this->options['type'] == 'sale') {
                 $ids = Pi::api('sale', 'shop')->getInformation('all');
@@ -59,11 +60,11 @@ class Product extends Select
      */
     public function getAttributes()
     {
-        $this->Attributes = array(
-            'size' => 5,
+        $this->Attributes = [
+            'size'     => 5,
             'multiple' => 1,
-            'class' => 'form-control',
-        );
+            'class'    => 'form-control',
+        ];
         // check form size
         if (isset($this->attributes['size'])) {
             $this->Attributes['size'] = $this->attributes['size'];

@@ -21,44 +21,44 @@ class PropertyFilter extends InputFilter
     public function __construct()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
+        $this->add([
+            'name'     => 'id',
             'required' => false,
-        ));
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
+        $this->add([
+            'name'     => 'title',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // order
-        $this->add(array(
-            'name' => 'order',
+        $this->add([
+            'name'     => 'order',
             'required' => false,
-        ));
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
+        $this->add([
+            'name'     => 'status',
             'required' => false,
-        ));
+        ]);
         // influence_stock
-        $this->add(array(
-            'name' => 'influence_stock',
+        $this->add([
+            'name'     => 'influence_stock',
             'required' => false,
-        ));
+        ]);
         // influence_price
-        $this->add(array(
-            'name' => 'influence_price',
+        $this->add([
+            'name'     => 'influence_price',
             'required' => false,
-        ));
+        ]);
         // type
-        $this->add(array(
-            'name' => 'type',
+        $this->add([
+            'name'     => 'type',
             'required' => false,
-        ));
+        ]);
     }
 }

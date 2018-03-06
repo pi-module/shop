@@ -23,13 +23,13 @@ class SaleDuplicate extends AbstractValidator
     /**
      * @var array
      */
-    protected $messageTemplates = array(
+    protected $messageTemplates = [
         self::TAKEN => 'This product added on sale list before',
-    );
+    ];
 
-    protected $options = array(
-        'module', 'table', 'type'
-    );
+    protected $options = [
+        'module', 'table', 'type',
+    ];
 
     /**
      * Name validate
@@ -44,11 +44,11 @@ class SaleDuplicate extends AbstractValidator
         if (null !== $value) {
             switch ($this->options['type']) {
                 case 'product';
-                    $where = array('product' => $value);
+                    $where = ['product' => $value];
                     break;
 
                 case 'category';
-                    $where = array('category' => $value);
+                    $where = ['category' => $value];
                     break;
             }
             if (!empty($context['id'])) {

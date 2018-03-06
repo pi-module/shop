@@ -10,89 +10,89 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-return array(
+return [
     // Front section
-    'front' => array(
-        'public' => array(
-            'title' => _a('Global public resource'),
-            'access' => array(
+    'front' => [
+        'public'   => [
+            'title'  => _a('Global public resource'),
+            'access' => [
                 'guest',
                 'member',
-            ),
-        ),
-        'checkout' => array(
-            'title' => _a('Checkout'),
-            'access' => array(
+            ],
+        ],
+        'checkout' => [
+            'title'  => _a('Checkout'),
+            'access' => [
                 'member',
-            ),
-        ),
-    ),
+            ],
+        ],
+    ],
     // Admin section
-    'admin' => array(
-        'product' => array(
-            'title' => _a('Product'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'category' => array(
-            'title' => _a('Category'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'attribute' => array(
-            'title' => _a('Attribute'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'position' => array(
-            'title' => _a('Attribute position'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'property' => array(
-            'title' => _a('Order property'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'attach' => array(
-            'title' => _a('Attach'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'discount' => array(
-            'title' => _a('Discount'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'sale' => array(
-            'title' => _a('Sale'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'promotion' => array(
-            'title' => _a('Promotion'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'log' => array(
-            'title' => _a('Logs'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'tools' => array(
-            'title' => _a('Tools'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'json' => array(
-            'title' => _a('Json'),
-            'access' => array(//'admin',
-            ),
-        ),
-        'price' => array(
-            'title' => _a('Price systems'),
-            'access' => array(//'admin',
-            ),
-        ),
-    ),
-);
+    'admin' => [
+        'product'   => [
+            'title'  => _a('Product'),
+            'access' => [//'admin',
+            ],
+        ],
+        'category'  => [
+            'title'  => _a('Category'),
+            'access' => [//'admin',
+            ],
+        ],
+        'attribute' => [
+            'title'  => _a('Attribute'),
+            'access' => [//'admin',
+            ],
+        ],
+        'position'  => [
+            'title'  => _a('Attribute position'),
+            'access' => [//'admin',
+            ],
+        ],
+        'property'  => [
+            'title'  => _a('Order property'),
+            'access' => [//'admin',
+            ],
+        ],
+        'attach'    => [
+            'title'  => _a('Attach'),
+            'access' => [//'admin',
+            ],
+        ],
+        'discount'  => [
+            'title'  => _a('Discount'),
+            'access' => [//'admin',
+            ],
+        ],
+        'sale'      => [
+            'title'  => _a('Sale'),
+            'access' => [//'admin',
+            ],
+        ],
+        'promotion' => [
+            'title'  => _a('Promotion'),
+            'access' => [//'admin',
+            ],
+        ],
+        'log'       => [
+            'title'  => _a('Logs'),
+            'access' => [//'admin',
+            ],
+        ],
+        'tools'     => [
+            'title'  => _a('Tools'),
+            'access' => [//'admin',
+            ],
+        ],
+        'json'      => [
+            'title'  => _a('Json'),
+            'access' => [//'admin',
+            ],
+        ],
+        'price'     => [
+            'title'  => _a('Price systems'),
+            'access' => [//'admin',
+            ],
+        ],
+    ],
+];

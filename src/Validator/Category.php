@@ -23,11 +23,11 @@ class Category extends AbstractValidator
     /**
      * @var array
      */
-    protected $messageTemplates = array(
+    protected $messageTemplates = [
         self::TAKEN => 'Please select category',
-    );
+    ];
 
-    protected $options = array();
+    protected $options = [];
 
     /**
      * Slug validate

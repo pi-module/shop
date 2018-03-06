@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Form;
 
 use Pi;
@@ -17,7 +18,7 @@ use Pi\Form\Form as BaseForm;
 
 class AttributeForm extends BaseForm
 {
-    public function __construct($name = null, $options = array())
+    public function __construct($name = null, $options = [])
     {
         $this->options = $options;
         $this->module = Pi::service('module')->current();
@@ -36,77 +37,77 @@ class AttributeForm extends BaseForm
     public function init()
     {
         // id
-        $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'id',
+            'attributes' => [
                 'type' => 'hidden',
-            ),
-        ));
+            ],
+        ]);
         // title
-        $this->add(array(
-            'name' => 'title',
-            'options' => array(
+        $this->add([
+            'name'       => 'title',
+            'options'    => [
                 'label' => __('Title'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => '',
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // name
-        $this->add(array(
-            'name' => 'name',
-            'options' => array(
+        $this->add([
+            'name'       => 'name',
+            'options'    => [
                 'label' => __('Name'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => __('Set name for call anywhere, a-z 0-9 allowed'),
-                'required' => true,
-            )
-        ));
+                'required'    => true,
+            ],
+        ]);
         // category
-        $this->add(array(
-            'name' => 'category',
-            'type' => 'Module\Shop\Form\Element\Category',
-            'options' => array(
-                'label' => __('Category'),
+        $this->add([
+            'name'       => 'category',
+            'type'       => 'Module\Shop\Form\Element\Category',
+            'options'    => [
+                'label'  => __('Category'),
                 'module' => $this->module,
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'required' => true,
-                'size' => 5,
+                'size'     => 5,
                 'multiple' => 1,
-            )
-        ));
+            ],
+        ]);
         // status
-        $this->add(array(
-            'name' => 'status',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Status'),
-                'value_options' => array(
+        $this->add([
+            'name'       => 'status',
+            'type'       => 'select',
+            'options'    => [
+                'label'         => __('Status'),
+                'value_options' => [
                     1 => __('Online'),
                     0 => __('Offline'),
-                ),
-            ),
-            'attributes' => array(
+                ],
+            ],
+            'attributes' => [
                 'required' => true,
-            )
-        ));
+            ],
+        ]);
         // position
-        $this->add(array(
-            'name' => 'position',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Set'),
+        $this->add([
+            'name'       => 'position',
+            'type'       => 'select',
+            'options'    => [
+                'label'         => __('Set'),
                 'value_options' => $this->position,
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'required' => true,
-            )
-        ));
+            ],
+        ]);
         // type
         /* $this->add(array(
             'name' => 'type',
@@ -133,69 +134,69 @@ class AttributeForm extends BaseForm
         // Check
         if ($this->options['type'] == 'select') {
             // data
-            $this->add(array(
-                'name' => 'data',
-                'options' => array(
+            $this->add([
+                'name'       => 'data',
+                'options'    => [
                     'label' => __('General data'),
-                ),
-                'attributes' => array(
-                    'type' => 'textarea',
-                    'rows' => '5',
-                    'cols' => '40',
+                ],
+                'attributes' => [
+                    'type'        => 'textarea',
+                    'rows'        => '5',
+                    'cols'        => '40',
                     'description' => __('Use `|` as delimiter to separate select box elements'),
-                )
-            ));
+                ],
+            ]);
             // default
-            $this->add(array(
-                'name' => 'default',
-                'options' => array(
+            $this->add([
+                'name'       => 'default',
+                'options'    => [
                     'label' => __('Default data'),
-                ),
-                'attributes' => array(
+                ],
+                'attributes' => [
                     'type' => 'text',
-                )
-            ));
+                ],
+            ]);
         }
         // information
-        $this->add(array(
-            'name' => 'information',
-            'options' => array(
+        $this->add([
+            'name'       => 'information',
+            'options'    => [
                 'label' => __('Extra information'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => __('Put URL for click by user'),
-            )
-        ));
+            ],
+        ]);
         // icon
-        $this->add(array(
-            'name' => 'icon',
-            'options' => array(
+        $this->add([
+            'name'       => 'icon',
+            'options'    => [
                 'label' => __('Icon'),
-            ),
-            'attributes' => array(
-                'type' => 'text',
+            ],
+            'attributes' => [
+                'type'        => 'text',
                 'description' => __('Use fontawesome.io icons, and set icon name like fa-home'),
-            )
-        ));
+            ],
+        ]);
         // search
-        $this->add(array(
-            'name' => 'search',
-            'type' => 'checkbox',
-            'options' => array(
+        $this->add([
+            'name'       => 'search',
+            'type'       => 'checkbox',
+            'options'    => [
                 'label' => __('Search'),
-            ),
-            'attributes' => array(
+            ],
+            'attributes' => [
                 'description' => '',
-            )
-        ));
+            ],
+        ]);
         // Save
-        $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
-            'attributes' => array(
+        $this->add([
+            'name'       => 'submit',
+            'type'       => 'submit',
+            'attributes' => [
                 'value' => __('Submit'),
-            )
-        ));
+            ],
+        ]);
     }
 }	

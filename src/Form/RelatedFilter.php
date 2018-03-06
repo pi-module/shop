@@ -21,24 +21,24 @@ class RelatedFilter extends InputFilter
     public function __construct()
     {
         // title
-        $this->add(array(
-            'name' => 'title',
+        $this->add([
+            'name'     => 'title',
             'required' => false,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // type
-        $this->add(array(
-            'name' => 'type',
+        $this->add([
+            'name'     => 'type',
             'required' => false,
-        ));
+        ]);
         // category
-        $this->add(array(
-            'name' => 'category',
+        $this->add([
+            'name'     => 'category',
             'required' => false,
-        ));
+        ]);
     }
 }  

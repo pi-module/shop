@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Api;
 
 use Pi;
@@ -22,26 +23,26 @@ use Pi\Application\Api\AbstractApi;
 
 class Customer extends AbstractApi
 {
-    public function getCustomer($uid = '', $field = array())
+    public function getCustomer($uid = '', $field = [])
     {
         if (empty($uid)) {
-            $uid = Pi::user()->getId(); 
+            $uid = Pi::user()->getId();
         }
 
         if (empty($field)) {
-            $field = array(
+            $field = [
                 'id', 'identity', 'name', 'email', 'first_name', 'last_name', 'phone', 'mobile', 'credit',
                 'address1', 'address2', 'country', 'state', 'city', 'zip_code', 'company', 'company_id', 'company_vat',
-                'time_activated'
-            );
+                'time_activated',
+            ];
         }
 
         // Get user info
         $customer = Pi::user()->get($uid, $field);
-        
+
         return $this->canonizeCustomer($customer);
     }
-    
+
     public function canonizeCustomer($customer)
     {
         // Check
@@ -110,12 +111,12 @@ class Customer extends AbstractApi
         // avatar
         $customer['avatar'] = Pi::service('user')->avatar($customer['id'], 'medium', $customer['display']);
         // profile url
-        $customer['profileUrl'] = Pi::url(Pi::service('user')->getUrl('profile', array(
+        $customer['profileUrl'] = Pi::url(Pi::service('user')->getUrl('profile', [
             'id' => $customer['id'],
-        )));
+        ]));
         // account url
         $customer['accountUrl'] = Pi::url(Pi::service('user')->getUrl(
-            'user', array('controller' => 'account')
+            'user', ['controller' => 'account']
         ));
         // return
         return $customer;

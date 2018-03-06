@@ -58,16 +58,22 @@ $this->footScript()->appendScript($script);
             <div class="col-md-10 col-xs-12">
                 <div class="row">
                     <?php foreach ($products as $product) { ?>
-                        <div class="<?php echo $widthClass ;?>">
+                        <div class="<?php echo $widthClass; ?>">
                             <div class="col-md-12 col-xs-12">
                                 <div class="thumbnail text-center">
-                                    <i class="fa fa-times-circle product-compare-remove" data-slug="<?php echo $this->escape($product['slug']); ?>"></i>
-                                    <a target="_blank" href="<?php echo $this->escape($product['productUrl']); ?>" title="<?php echo $this->escape($product['title']); ?>">
-                                        <img class="img-responsive" src="<?php echo $this->escape($product['thumbUrl']); ?>" alt="<?php echo $this->escape($product['title']); ?>">
+                                    <i class="fa fa-times-circle product-compare-remove"
+                                       data-slug="<?php echo $this->escape($product['slug']); ?>"></i>
+                                    <a target="_blank" href="<?php echo $this->escape($product['productUrl']); ?>"
+                                       title="<?php echo $this->escape($product['title']); ?>">
+                                        <img class="img-responsive"
+                                             src="<?php echo $this->escape($product['thumbUrl']); ?>"
+                                             alt="<?php echo $this->escape($product['title']); ?>">
                                     </a>
                                     <div class="caption">
                                         <h2>
-                                            <a target="_blank" href="<?php echo $this->escape($product['productUrl']); ?>" title="<?php echo $this->escape($product['title']); ?>">
+                                            <a target="_blank"
+                                               href="<?php echo $this->escape($product['productUrl']); ?>"
+                                               title="<?php echo $this->escape($product['title']); ?>">
                                                 <?php echo $this->escape($product['title']); ?>
                                             </a>
                                         </h2>
@@ -97,7 +103,7 @@ $this->footScript()->appendScript($script);
             <div class="col-md-10 col-xs-12 product-compare-box-info">
                 <div class="row">
                     <?php foreach ($products as $product) { ?>
-                        <div class="<?php echo $widthClass ;?>">
+                        <div class="<?php echo $widthClass; ?>">
                             <ul class="list-unstyled row">
                                 <li><?php echo $this->escape($product['stock_type_view']); ?></li>
                                 <li><?php echo $this->escape($product['price_view']); ?></li>

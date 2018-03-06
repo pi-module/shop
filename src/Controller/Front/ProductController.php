@@ -13,9 +13,9 @@
 
 namespace Module\Shop\Controller\Front;
 
+use Module\Shop\Form\QuestionForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\QuestionForm;
 
 class ProductController extends IndexController
 {
@@ -37,7 +37,7 @@ class ProductController extends IndexController
             return;
         }
         // Update Hits
-        $this->getModel('product')->increment('hits', array('id' => $product['id']));
+        $this->getModel('product')->increment('hits', ['id' => $product['id']]);
         // Get user information
         $uid = Pi::user()->getId();
         if ($uid > 0) {
@@ -60,8 +60,11 @@ class ProductController extends IndexController
         }
         // Get new products in category
         if ($config['view_incategory']) {
-            $where = array('status' => 1, 'category' => $product['category']);
-            $productCategory = $this->productList($where, 20);
+            $where = ['status' => 1, 'category' => $product['category_main']];
+            //if ($product['brand'] > 0) {
+            //    $where['brand'] = $product['brand'];
+            //}
+            $productCategory = $this->productList($where, $config['view_incategory_count']);
             $this->view()->assign('productCategory', $productCategory);
         }
         // Set tag
@@ -94,7 +97,7 @@ class ProductController extends IndexController
         }
         // Set question
         if ($config['view_question']) {
-            $question = array();
+            $question = [];
             $question['product'] = $product['id'];
             if ($uid > 0) {
                 $question['uid'] = $user['id'];
@@ -102,11 +105,11 @@ class ProductController extends IndexController
                 $question['name'] = $user['display'];
             }
             // Set action url
-            $url = Pi::url($this->url('', array(
-                'module' => $module,
+            $url = Pi::url($this->url('', [
+                'module'     => $module,
                 'controller' => 'product',
-                'action' => 'question',
-            )));
+                'action'     => 'question',
+            ]));
             // Set form
             $form = new QuestionForm('question');
             $form->setAttribute('enctype', 'multipart/form-data');
@@ -122,7 +125,7 @@ class ProductController extends IndexController
             $this->view()->assign('categorySingle', $categorySingle);
         }
         // Set property
-        $property = array();
+        $property = [];
         $property['list'] = Pi::api('property', 'shop')->getList();
         $property['value'] = Pi::api('property', 'shop')->getValue($product['id']);
         $this->view()->assign('property', $property);

@@ -13,17 +13,17 @@
 
 namespace Module\Shop\Controller\Front;
 
+use Module\Shop\Form\SerialFilter;
+use Module\Shop\Form\SerialForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Module\Shop\Form\SerialForm;
-use Module\Shop\Form\SerialFilter;
 
 class SerialController extends IndexController
 {
     public function indexAction()
     {
         // Set result
-        $result = array();
+        $result = [];
         // Set serial form
         $form = new SerialForm('serial');
         // Check post
@@ -36,9 +36,9 @@ class SerialController extends IndexController
                 // Check
                 $result = Pi::api('serial', 'shop')->checkSerial($values['serial_number']);
                 // Set form empty
-                $form->setData(array(
+                $form->setData([
                     'serial_number' => '',
-                ));
+                ]);
             }
         }
         // Set view

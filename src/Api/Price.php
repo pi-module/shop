@@ -51,12 +51,12 @@ class Price extends AbstractApi
 
     public function lastUpdate($product, $type = '')
     {
-        $price = array();
+        $price = [];
 
         // Set where
-        $order = array('time_update DESC', 'id DESC');
-        $where = array('product' => $product);
-        if (!empty($type) && in_array($type, array('product', 'property', 'sale'))) {
+        $order = ['time_update DESC', 'id DESC'];
+        $where = ['product' => $product];
+        if (!empty($type) && in_array($type, ['product', 'property', 'sale'])) {
             $where['type'] = $type;
         }
 
@@ -71,7 +71,7 @@ class Price extends AbstractApi
 
         return $price;
     }
-    
+
     public function makeUpdatePrice($price, $percent)
     {
         // Make new price
@@ -88,7 +88,7 @@ class Price extends AbstractApi
                 $price = number_format((float)$price, 2, '.', '');
                 break;
         }
-        
+
         return $price;
     }
 }

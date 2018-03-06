@@ -10,375 +10,375 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
-return array(
-    'front' => array(
-        'category' => array(
-            'label' => _a('Category list'),
-            'permission' => array(
+return [
+    'front' => [
+        'category' => [
+            'label'      => _a('Category list'),
+            'permission' => [
                 'resource' => 'public',
-            ),
-            'route' => 'shop',
-            'module' => 'shop',
+            ],
+            'route'      => 'shop',
+            'module'     => 'shop',
             'controller' => 'category',
-        ),
+        ],
 
-        'tag' => array(
-            'label' => _a('Tag list'),
-            'permission' => array(
+        'tag' => [
+            'label'      => _a('Tag list'),
+            'permission' => [
                 'resource' => 'public',
-            ),
-            'route' => 'shop',
-            'module' => 'shop',
+            ],
+            'route'      => 'shop',
+            'module'     => 'shop',
             'controller' => 'tag',
-        ),
-    ),
-    'admin' => array(
-        'product' => array(
-            'label' => _a('Product'),
-            'permission' => array(
+        ],
+    ],
+    'admin' => [
+        'product' => [
+            'label'      => _a('Product'),
+            'permission' => [
                 'resource' => 'product',
-            ),
-            'route' => 'admin',
-            'module' => 'shop',
+            ],
+            'route'      => 'admin',
+            'module'     => 'shop',
             'controller' => 'product',
-            'action' => 'index',
+            'action'     => 'index',
 
-            'pages' => array(
-                'product' => array(
-                    'label' => _a('Product'),
-                    'permission' => array(
+            'pages' => [
+                'product' => [
+                    'label'      => _a('Product'),
+                    'permission' => [
                         'resource' => 'product',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'product',
-                    'action' => 'index',
-                ),
-                'update' => array(
-                    'label' => _a('New product'),
-                    'permission' => array(
+                    'action'     => 'index',
+                ],
+                'update'  => [
+                    'label'      => _a('New product'),
+                    'permission' => [
                         'resource' => 'product',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'product',
-                    'action' => 'update',
-                ),
-                'csv' => array(
-                    'label' => _a('Export products'),
-                    'permission' => array(
+                    'action'     => 'update',
+                ],
+                'csv'     => [
+                    'label'      => _a('Export products'),
+                    'permission' => [
                         'resource' => 'product',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'product',
-                    'action' => 'export',
-                ),
-            ),
-        ),
+                    'action'     => 'export',
+                ],
+            ],
+        ],
 
-        'category' => array(
-            'label' => _a('Category'),
-            'permission' => array(
+        'category' => [
+            'label'      => _a('Category'),
+            'permission' => [
                 'resource' => 'category',
-            ),
-            'route' => 'admin',
-            'module' => 'shop',
+            ],
+            'route'      => 'admin',
+            'module'     => 'shop',
             'controller' => 'category',
-            'action' => 'index',
-            'params'        => array(
-                'type'    => 'category',
-            ),
+            'action'     => 'index',
+            'params'     => [
+                'type' => 'category',
+            ],
 
-            'pages' => array(
-                'category' => array(
-                    'label' => _a('Category'),
-                    'permission' => array(
+            'pages' => [
+                'category'        => [
+                    'label'      => _a('Category'),
+                    'permission' => [
                         'resource' => 'category',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'category',
-                    'action' => 'index',
-                    'params'        => array(
-                        'type'    => 'category',
-                    ),
-                ),
-                'brand' => array(
-                    'label' => _a('Brand'),
-                    'permission' => array(
+                    'action'     => 'index',
+                    'params'     => [
+                        'type' => 'category',
+                    ],
+                ],
+                'brand'           => [
+                    'label'      => _a('Brand'),
+                    'permission' => [
                         'resource' => 'category',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'category',
-                    'action' => 'index',
-                    'params'        => array(
-                        'type'    => 'brand',
-                    ),
-                ),
-                'update-category' => array(
-                    'label' => _a('New category'),
-                    'permission' => array(
+                    'action'     => 'index',
+                    'params'     => [
+                        'type' => 'brand',
+                    ],
+                ],
+                'update-category' => [
+                    'label'      => _a('New category'),
+                    'permission' => [
                         'resource' => 'category',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'category',
-                    'action' => 'update',
-                    'params'        => array(
-                        'type'    => 'category',
-                    ),
-                ),
-                'update-brand' => array(
-                    'label' => _a('New brand'),
-                    'permission' => array(
+                    'action'     => 'update',
+                    'params'     => [
+                        'type' => 'category',
+                    ],
+                ],
+                'update-brand'    => [
+                    'label'      => _a('New brand'),
+                    'permission' => [
                         'resource' => 'category',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'category',
-                    'action' => 'update',
-                    'params'        => array(
-                        'type'    => 'brand',
-                    ),
-                ),
-                'sync' => array(
-                    'label' => _a('Sync category'),
-                    'permission' => array(
+                    'action'     => 'update',
+                    'params'     => [
+                        'type' => 'brand',
+                    ],
+                ],
+                'sync'            => [
+                    'label'      => _a('Sync category'),
+                    'permission' => [
                         'resource' => 'category',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'category',
-                    'action' => 'sync',
-                ),
-                'merge' => array(
-                    'label' => _a('Merge category'),
-                    'permission' => array(
+                    'action'     => 'sync',
+                ],
+                'merge'           => [
+                    'label'      => _a('Merge category'),
+                    'permission' => [
                         'resource' => 'category',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'category',
-                    'action' => 'merge',
-                ),
-            ),
-        ),
+                    'action'     => 'merge',
+                ],
+            ],
+        ],
 
-        'attribute' => array(
-            'label' => _a('Attribute'),
-            'permission' => array(
+        'attribute' => [
+            'label'      => _a('Attribute'),
+            'permission' => [
                 'resource' => 'attribute',
-            ),
-            'route' => 'admin',
-            'module' => 'shop',
+            ],
+            'route'      => 'admin',
+            'module'     => 'shop',
             'controller' => 'attribute',
-            'action' => 'index',
+            'action'     => 'index',
 
-            'pages' => array(
-                'attribute' => array(
-                    'label' => _a('Attribute'),
-                    'permission' => array(
+            'pages' => [
+                'attribute' => [
+                    'label'      => _a('Attribute'),
+                    'permission' => [
                         'resource' => 'attribute',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'attribute',
-                    'action' => 'index',
-                ),
-                'position' => array(
-                    'label' => _a('Attribute position'),
-                    'permission' => array(
+                    'action'     => 'index',
+                ],
+                'position'  => [
+                    'label'      => _a('Attribute position'),
+                    'permission' => [
                         'resource' => 'position',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'position',
-                    'action' => 'index',
-                ),
-            ),
-        ),
+                    'action'     => 'index',
+                ],
+            ],
+        ],
 
-        'property' => array(
-            'label' => _a('Order property'),
-            'permission' => array(
+        'property' => [
+            'label'      => _a('Order property'),
+            'permission' => [
                 'resource' => 'property',
-            ),
-            'route' => 'admin',
-            'module' => 'shop',
+            ],
+            'route'      => 'admin',
+            'module'     => 'shop',
             'controller' => 'property',
-            'action' => 'index',
-        ),
+            'action'     => 'index',
+        ],
 
-        'attach' => array(
-            'label' => _a('Attach'),
-            'permission' => array(
+        'attach' => [
+            'label'      => _a('Attach'),
+            'permission' => [
                 'resource' => 'attach',
-            ),
-            'route' => 'admin',
-            'module' => 'shop',
+            ],
+            'route'      => 'admin',
+            'module'     => 'shop',
             'controller' => 'attach',
-            'action' => 'index',
-        ),
+            'action'     => 'index',
+        ],
 
-        'discount-system' => array(
-            'label' => _a('Discount systems'),
-            'permission' => array(
+        'discount-system' => [
+            'label'      => _a('Discount systems'),
+            'permission' => [
                 'resource' => 'discount',
-            ),
-            'route' => 'admin',
-            'module' => 'shop',
+            ],
+            'route'      => 'admin',
+            'module'     => 'shop',
             'controller' => 'discount',
-            'action' => 'index',
-            'pages' => array(
-                'discount' => array(
-                    'label' => _a('Discount'),
-                    'permission' => array(
+            'action'     => 'index',
+            'pages'      => [
+                'discount'  => [
+                    'label'      => _a('Discount'),
+                    'permission' => [
                         'resource' => 'discount',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'discount',
-                    'action' => 'index',
-                ),
-                'sale' => array(
-                    'label' => _a('Sale'),
-                    'permission' => array(
+                    'action'     => 'index',
+                ],
+                'sale'      => [
+                    'label'      => _a('Sale'),
+                    'permission' => [
                         'resource' => 'sale',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'sale',
-                    'action' => 'index',
-                ),
-                'promotion' => array(
-                    'label' => _a('Promotion'),
-                    'permission' => array(
+                    'action'     => 'index',
+                ],
+                'promotion' => [
+                    'label'      => _a('Promotion'),
+                    'permission' => [
                         'resource' => 'promotion',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'promotion',
-                    'action' => 'index',
-                ),
-            ),
-        ),
+                    'action'     => 'index',
+                ],
+            ],
+        ],
 
-        'price' => array(
-            'label' => _a('Price systems'),
-            'permission' => array(
+        'price' => [
+            'label'      => _a('Price systems'),
+            'permission' => [
                 'resource' => 'price',
-            ),
-            'route' => 'admin',
-            'module' => 'shop',
+            ],
+            'route'      => 'admin',
+            'module'     => 'shop',
             'controller' => 'price',
-            'action' => 'index',
-            'pages' => array(
-                'index' => array(
-                    'label' => _a('Price systems'),
-                    'permission' => array(
+            'action'     => 'index',
+            'pages'      => [
+                'index'  => [
+                    'label'      => _a('Price systems'),
+                    'permission' => [
                         'resource' => 'price',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'price',
-                    'action' => 'index',
-                ),
-                'update' => array(
-                    'label' => _a('Price update'),
-                    'permission' => array(
+                    'action'     => 'index',
+                ],
+                'update' => [
+                    'label'      => _a('Price update'),
+                    'permission' => [
                         'resource' => 'price',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'price',
-                    'action' => 'update',
-                ),
-                'csv' => array(
-                    'label' => _a('Price update from CSV'),
-                    'permission' => array(
+                    'action'     => 'update',
+                ],
+                'csv'    => [
+                    'label'      => _a('Price update from CSV'),
+                    'permission' => [
                         'resource' => 'price',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'price',
-                    'action' => 'csv',
-                ),
-                'sync' => array(
-                    'label' => _a('Price sync'),
-                    'permission' => array(
+                    'action'     => 'csv',
+                ],
+                'sync'   => [
+                    'label'      => _a('Price sync'),
+                    'permission' => [
                         'resource' => 'price',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'price',
-                    'action' => 'sync',
-                ),
-                'log' => array(
-                    'label' => _a('Price log'),
-                    'permission' => array(
+                    'action'     => 'sync',
+                ],
+                'log'    => [
+                    'label'      => _a('Price log'),
+                    'permission' => [
                         'resource' => 'price',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'price',
-                    'action' => 'log',
-                ),
-            ),
-        ),
+                    'action'     => 'log',
+                ],
+            ],
+        ],
 
-        'tools' => array(
-            'label' => _a('Tools'),
-            'permission' => array(
+        'tools' => [
+            'label'      => _a('Tools'),
+            'permission' => [
                 'resource' => 'tools',
-            ),
-            'route' => 'admin',
-            'module' => 'shop',
+            ],
+            'route'      => 'admin',
+            'module'     => 'shop',
             'controller' => 'tools',
-            'action' => 'index',
-            'pages' => array(
-                'tools' => array(
-                    'label' => _a('Tools'),
-                    'permission' => array(
+            'action'     => 'index',
+            'pages'      => [
+                'tools'   => [
+                    'label'      => _a('Tools'),
+                    'permission' => [
                         'resource' => 'tools',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'tools',
-                    'action' => 'index',
-                ),
-                'sitemap' => array(
-                    'label' => _a('Sitemap'),
-                    'permission' => array(
+                    'action'     => 'index',
+                ],
+                'sitemap' => [
+                    'label'      => _a('Sitemap'),
+                    'permission' => [
                         'resource' => 'tools',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'tools',
-                    'action' => 'sitemap',
-                ),
-                'log' => array(
-                    'label' => _a('Logs'),
-                    'permission' => array(
+                    'action'     => 'sitemap',
+                ],
+                'log'     => [
+                    'label'      => _a('Logs'),
+                    'permission' => [
                         'resource' => 'log',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'log',
-                    'action' => 'index',
-                ),
-                'json' => array(
-                    'label' => _a('Json'),
-                    'permission' => array(
+                    'action'     => 'index',
+                ],
+                'json'    => [
+                    'label'      => _a('Json'),
+                    'permission' => [
                         'resource' => 'json',
-                    ),
-                    'route' => 'admin',
-                    'module' => 'shop',
+                    ],
+                    'route'      => 'admin',
+                    'module'     => 'shop',
                     'controller' => 'json',
-                    'action' => 'index',
-                ),
-            ),
-        ),
-    ),
-);
+                    'action'     => 'index',
+                ],
+            ],
+        ],
+    ],
+];

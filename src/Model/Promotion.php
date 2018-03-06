@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Model;
 
 use Pi\Application\Model\Model;
@@ -19,7 +20,7 @@ class Promotion extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'title',
         'code',
@@ -33,5 +34,5 @@ class Promotion extends Model
         'status',
         'used',
         'partner',
-    );
+    ];
 }

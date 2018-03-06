@@ -20,14 +20,14 @@ class PriceLogFilter extends InputFilter
 {
     public function __construct()
     {
-        $this->add(array(
-            'name' => 'product',
+        $this->add([
+            'name'     => 'product',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 }

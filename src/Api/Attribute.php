@@ -39,10 +39,10 @@ class Attribute extends AbstractApi
     public function Get($category = '')
     {
         // Set return
-        $return = array(
+        $return = [
             'attribute' => '',
-            'field' => '',
-        );
+            'field'     => '',
+        ];
         // Get position list
         $position = $this->attributePositionForm();
         // Get field id from business
@@ -51,8 +51,8 @@ class Attribute extends AbstractApi
             return $return;
         }
         // find
-        $whereField = array('status' => 1, 'id' => $id);
-        $orderField = array('order ASC', 'position ASC', 'id DESC');
+        $whereField = ['status' => 1, 'id' => $id];
+        $orderField = ['order ASC', 'position ASC', 'id DESC'];
         $select = Pi::model('field', $this->getModule())->select()->where($whereField)->order($orderField);
         $rowset = Pi::model('field', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
@@ -112,7 +112,7 @@ class Attribute extends AbstractApi
     {
         foreach ($attribute as $field) {
             // Find row
-            $where = array('field' => $field['field'], 'product' => $product);
+            $where = ['field' => $field['field'], 'product' => $product];
             $select = Pi::model('field_data', $this->getModule())->select()->where($where)->limit(1);
             $row = Pi::model('field_data', $this->getModule())->selectWith($select)->current();
             // create new row
@@ -138,7 +138,7 @@ class Attribute extends AbstractApi
       */
     public function Form($values)
     {
-        $where = array('product' => $values['id']);
+        $where = ['product' => $values['id']];
         $select = Pi::model('field_data', $this->getModule())->select()->where($where);
         $rowset = Pi::model('field_data', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
@@ -155,24 +155,24 @@ class Attribute extends AbstractApi
     {
         $position = $this->attributePositionForm();
         // Get data list
-        $whereData = array('product' => $id);
-        $columnData = array('field', 'data');
+        $whereData = ['product' => $id];
+        $columnData = ['field', 'data'];
         $select = Pi::model('field_data', $this->getModule())->select()->where($whereData)->columns($columnData);
         $rowset = Pi::model('field_data', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $data[$row->field] = $row->toArray();
         }
         // Get field list
-        $field = array();
+        $field = [];
         if (!empty($data)) {
             // Get field id from category
             $id = $this->getField($category);
             if (empty($id)) {
-                return array();
+                return [];
             }
             // Select
-            $whereField = array('status' => 1, 'id' => $id);
-            $orderField = array('order ASC', 'id ASC');
+            $whereField = ['status' => 1, 'id' => $id];
+            $orderField = ['order ASC', 'id ASC'];
             $select = Pi::model('field', $this->getModule())->select()->where($whereField)->order($orderField);
             $rowset = Pi::model('field', $this->getModule())->selectWith($select);
             foreach ($rowset as $row) {
@@ -204,7 +204,7 @@ class Attribute extends AbstractApi
       */
     public function SearchForm($form)
     {
-        $attribute = array();
+        $attribute = [];
         // unset other field
         unset($form['type']);
         unset($form['title']);
@@ -214,7 +214,7 @@ class Attribute extends AbstractApi
         // Make list
         foreach ($form as $key => $value) {
             if (is_numeric($key) && !empty($value)) {
-                $item = array();
+                $item = [];
                 $item['field'] = $key;
                 $item['data'] = $value;
                 $attribute[$key] = $item;
@@ -228,13 +228,13 @@ class Attribute extends AbstractApi
       */
     public function findFromAttribute($search)
     {
-        $id = array();
-        $column = array('product');
+        $id = [];
+        $column = ['product'];
         foreach ($search as $attribute) {
-            $where = array(
+            $where = [
                 'field' => $attribute['field'],
-                'data' => $attribute['data'],
-            );
+                'data'  => $attribute['data'],
+            ];
             $select = Pi::model('field_data', $this->getModule())->select()->where($where)->columns($column);
             $rowset = Pi::model('field_data', $this->getModule())->selectWith($select);
             foreach ($rowset as $row) {
@@ -250,11 +250,11 @@ class Attribute extends AbstractApi
     public function attributePositionForm()
     {
         // Get info
-        $list = array(
+        $list = [
             '' => '',
-            0 => __('Hidden'),
-        );
-        $order = array('order ASC', 'id ASC');
+            0  => __('Hidden'),
+        ];
+        $order = ['order ASC', 'id ASC'];
         $select = Pi::model('field_position', $this->getModule())->select()->order($order);
         $rowset = Pi::model('field_position', $this->getModule())->selectWith($select);
         // Make list
@@ -267,7 +267,7 @@ class Attribute extends AbstractApi
     public function setCategory($field, $categoryArr)
     {
         // Remove
-        Pi::model('field_category', $this->getModule())->delete(array('field' => $field));
+        Pi::model('field_category', $this->getModule())->delete(['field' => $field]);
         // Add
         foreach ($categoryArr as $category) {
             // Save
@@ -280,8 +280,8 @@ class Attribute extends AbstractApi
 
     public function getCategory($field)
     {
-        $category = array();
-        $where = array('field' => $field);
+        $category = [];
+        $where = ['field' => $field];
         $select = Pi::model('field_category', $this->getModule())->select()->where($where);
         $rowset = Pi::model('field_category', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
@@ -292,11 +292,11 @@ class Attribute extends AbstractApi
 
     public function getField($category = '')
     {
-        $field = array();
+        $field = [];
         if (!empty($category)) {
-            $where = array('category' => array($category, 0));
+            $where = ['category' => [$category, 0]];
         } else {
-            $where = array('category' => 0);
+            $where = ['category' => 0];
         }
         $select = Pi::model('field_category', $this->getModule())->select()->where($where);
         $rowset = Pi::model('field_category', $this->getModule())->selectWith($select);
@@ -309,7 +309,7 @@ class Attribute extends AbstractApi
     public function filterList($category = '')
     {
         // Set return
-        $return = array();
+        $return = [];
         // Get position list
         $position = $this->attributePositionForm();
         // Get field id from business
@@ -318,8 +318,8 @@ class Attribute extends AbstractApi
             return $return;
         }
         // find
-        $whereField = array('status' => 1, 'search' => 1, 'id' => $id);
-        $orderField = array('order ASC', 'position ASC', 'id DESC');
+        $whereField = ['status' => 1, 'search' => 1, 'id' => $id];
+        $orderField = ['order ASC', 'position ASC', 'id DESC'];
         $select = Pi::model('field', $this->getModule())->select()->where($whereField)->order($orderField);
         $rowset = Pi::model('field', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
@@ -333,21 +333,22 @@ class Attribute extends AbstractApi
         return $return;
     }
 
-    public function filterData($productId, $filterList = array(), $category = '') {
+    public function filterData($productId, $filterList = [], $category = '')
+    {
         // Get filter list
         if (empty($filterList)) {
             $filterList = $this->filterList($category = '');
         }
         // Get data list
-        $where = array('product' => $productId);
-        $column = array('field', 'data');
+        $where = ['product' => $productId];
+        $column = ['field', 'data'];
         $select = Pi::model('field_data', $this->getModule())->select()->where($where)->columns($column);
         $rowset = Pi::model('field_data', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $data[$row->field] = $row->toArray();
         }
 
-        $ret = array();
+        $ret = [];
 
         foreach ($filterList as $filterSingle) {
             if (isset($data[$filterSingle['id']]['data']) && !empty($data[$filterSingle['id']]['data'])) {

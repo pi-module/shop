@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Model;
 
 use Pi\Application\Model\Model;
@@ -19,15 +20,15 @@ class Sale extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
-        'id', 
+    protected $columns = [
+        'id',
         'type',
         'product',
         'category',
         'percent',
-        'price', 
-        'time_publish', 
-        'time_expire', 
-        'status'
-    );
+        'price',
+        'time_publish',
+        'time_expire',
+        'status',
+    ];
 }

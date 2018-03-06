@@ -13,62 +13,62 @@
 
 namespace Module\Shop\Form;
 
+use Module\System\Validator\UserEmail as UserEmailValidator;
 use Pi;
 use Zend\InputFilter\InputFilter;
-use Module\System\Validator\UserEmail as UserEmailValidator;
 
 class QuestionFilter extends InputFilter
 {
     public function __construct()
     {
         // product
-        $this->add(array(
-            'name' => 'product',
+        $this->add([
+            'name'     => 'product',
             'required' => true,
-        ));
+        ]);
         // name
-        $this->add(array(
-            'name' => 'name',
+        $this->add([
+            'name'     => 'name',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
         // email
-        $this->add(array(
-            'name' => 'email',
-            'required' => true,
-            'filters' => array(
-                array(
+        $this->add([
+            'name'       => 'email',
+            'required'   => true,
+            'filters'    => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-            'validators'    => array(
-                array(
-                    'name'      => 'EmailAddress',
-                    'options'   => array(
-                        'useMxCheck'        => false,
-                        'useDeepMxCheck'    => false,
-                        'useDomainCheck'    => false,
-                    ),
-                ),
-                new UserEmailValidator(array(
+                ],
+            ],
+            'validators' => [
+                [
+                    'name'    => 'EmailAddress',
+                    'options' => [
+                        'useMxCheck'     => false,
+                        'useDeepMxCheck' => false,
+                        'useDomainCheck' => false,
+                    ],
+                ],
+                new UserEmailValidator([
                     'blacklist'         => false,
                     'check_duplication' => false,
-                )),
-            ),
-        ));
+                ]),
+            ],
+        ]);
         // text_ask
-        $this->add(array(
-            'name' => 'text_ask',
+        $this->add([
+            'name'     => 'text_ask',
             'required' => true,
-            'filters' => array(
-                array(
+            'filters'  => [
+                [
                     'name' => 'StringTrim',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
     }
 }

@@ -10,6 +10,7 @@
 /**
  * @author Hossein Azizabadi <azizabadi@faragostaresh.com>
  */
+
 namespace Module\Shop\Model;
 
 use Pi\Application\Model\Model;
@@ -19,7 +20,7 @@ class Question extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = array(
+    protected $columns = [
         'id',
         'ip',
         'product',
@@ -32,5 +33,5 @@ class Question extends Model
         'text_answer',
         'time_ask',
         'time_answer',
-    );
+    ];
 }
