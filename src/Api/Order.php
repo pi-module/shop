@@ -102,4 +102,18 @@ class Order extends AbstractApi
 
         return $url;
     }
+
+    public function createExtraDetailForProduct($values) 
+    {
+        return json_encode(
+            array(
+               'item' => $values['module_item'],
+            )
+        );   
+    }
+    public function getExtraFieldsFormForOrder()
+    {
+        return array();
+    }
+    
 }
