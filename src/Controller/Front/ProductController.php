@@ -140,6 +140,12 @@ class ProductController extends IndexController
                 $template = 'product-item';
                 break;
         }
+
+        // Save statistics
+        if (Pi::service('module')->isActive('statistics')) {
+            Pi::api('log', 'statistics')->save('shop', 'product', $product['id']);
+        }
+
         // Set view
         $this->view()->headTitle($product['seo_title']);
         $this->view()->headDescription($product['seo_description'], 'set');

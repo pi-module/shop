@@ -33,6 +33,12 @@ class IndexController extends ActionController
         switch ($config['homepage_type']) {
             default:
             case 'list':
+                // Save statistics
+                if (Pi::service('module')->isActive('statistics')) {
+                    Pi::api('log', 'statistics')->save('shop', 'index');
+                }
+
+                // Set view
                 $this->view()->setTemplate('product-angular');
                 $this->view()->assign('config', $config);
                 $this->view()->assign('categoriesJson', $categoriesJson);
@@ -40,6 +46,11 @@ class IndexController extends ActionController
                 break;
 
             case 'brand':
+                // Save statistics
+                if (Pi::service('module')->isActive('statistics')) {
+                    Pi::api('log', 'statistics')->save('shop', 'brand');
+                }
+
                 // Set title
                 $title = (!empty($config['homepage_title'])) ? $config['homepage_title'] : __('Shop index');
                 // Set view
@@ -55,15 +66,15 @@ class IndexController extends ActionController
     public function productList($where, $limit = '')
     {
         // Set info
-        $product = [];
+        $product   = [];
         $productId = [];
-        $page = $this->params('page', 1);
-        $module = $this->params('module');
-        $sort = $this->params('sort', 'create');
-        $stock = $this->params('stock');
-        $offset = (int)($page - 1) * $this->config('view_perpage');
-        $limit = empty($limit) ? intval($this->config('view_perpage')) : $limit;
-        $order = $this->setOrder($sort);
+        $page      = $this->params('page', 1);
+        $module    = $this->params('module');
+        $sort      = $this->params('sort', 'create');
+        $stock     = $this->params('stock');
+        $offset    = (int)($page - 1) * $this->config('view_perpage');
+        $limit     = empty($limit) ? intval($this->config('view_perpage')) : $limit;
+        $order     = $this->setOrder($sort);
         // Set show just have stock
         if (isset($stock) && $stock == 1) {
             $where['stock'] = 1;
@@ -96,11 +107,11 @@ class IndexController extends ActionController
     {
         // Set info
         $product = [];
-        $limit = 150;
-        $page = $this->params('page', 1);
-        $module = $this->params('module');
-        $offset = (int)($page - 1) * $limit;
-        $order = ['time_update ASC'];
+        $limit   = 150;
+        $page    = $this->params('page', 1);
+        $module  = $this->params('module');
+        $offset  = (int)($page - 1) * $limit;
+        $order   = ['time_update ASC'];
         // Set info
         $columns = ['product' => new Expression('DISTINCT product')];
         // Get info from link table

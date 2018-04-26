@@ -1,5 +1,9 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
     <h3><?php echo $this->escape($title); ?></h3>
+    <h3><?php echo $this->escape($title); ?></h3>
+    <div class="alert alert-warning" role="alert">
+        <i class="fa fa-exclamation-triangle"></i> <?php _e('Attention : make sure input data is true and didnt had any interference between time'); ?>
+    </div>
     <?php echo $this->form($form); ?>
 </div>

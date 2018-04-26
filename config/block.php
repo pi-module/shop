@@ -21,7 +21,7 @@ return [
             'category'    => [
                 'title'       => _a('Category'),
                 'description' => '',
-                'edit'        => 'Module\Shop\Form\Element\Category',
+                'edit'        => 'Module\Shop\Form\Element\Company',
                 'filter'      => 'string',
                 'value'       => 0,
             ],
@@ -123,7 +123,7 @@ return [
             'category'    => [
                 'title'       => _a('Category'),
                 'description' => '',
-                'edit'        => 'Module\Shop\Form\Element\Category',
+                'edit'        => 'Module\Shop\Form\Element\Company',
                 'filter'      => 'string',
                 'value'       => 0,
             ],
@@ -415,7 +415,7 @@ return [
             'category'    => [
                 'title'       => _a('Category'),
                 'description' => '',
-                'edit'        => 'Module\Shop\Form\Element\Category',
+                'edit'        => 'Module\Shop\Form\Element\Company',
                 'filter'      => 'string',
                 'value'       => 0,
             ],

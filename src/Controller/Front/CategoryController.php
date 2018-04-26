@@ -64,6 +64,12 @@ class CategoryController extends IndexController
                 $template = 'category-single';
                 break;
         }
+
+        // Save statistics
+        if (Pi::service('module')->isActive('statistics')) {
+            Pi::api('log', 'statistics')->save('shop', 'category', $category['id']);
+        }
+
         // Set view
         $this->view()->headTitle($category['seo_title']);
         $this->view()->headDescription($category['seo_description'], 'set');
@@ -104,6 +110,12 @@ class CategoryController extends IndexController
             'force_replace_space' => true,
         ]);
         $seoKeywords = $filter($title);
+
+        // Save statistics
+        if (Pi::service('module')->isActive('statistics')) {
+            Pi::api('log', 'statistics')->save('shop', 'categoryList');
+        }
+
         // Set view
         $this->view()->headTitle($title);
         $this->view()->headDescription($title, 'set');

@@ -34,6 +34,12 @@ class QuestionController extends IndexController
                 $this->view()->setLayout('layout-simple');
                 return;
             }
+
+            // Save statistics
+            if (Pi::service('module')->isActive('statistics')) {
+                Pi::api('log', 'statistics')->save('shop', 'question');
+            }
+
             // Set values
             $data = $this->request->getPost();
             $form = new QuestionForm('question');

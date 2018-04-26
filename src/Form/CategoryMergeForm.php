@@ -37,7 +37,7 @@ class CategoryMergeForm extends BaseForm
         // category_from_1
         $this->add([
             'name'       => 'category_from_1',
-            'type'       => 'Module\Shop\Form\Element\Category',
+            'type'       => 'Module\Shop\Form\Element\Company',
             'options'    => [
                 'label'    => __('From category'),
                 'category' => ['' => __('Please select category')],
@@ -51,7 +51,7 @@ class CategoryMergeForm extends BaseForm
         // category_from_2
         $this->add([
             'name'       => 'category_from_2',
-            'type'       => 'Module\Shop\Form\Element\Category',
+            'type'       => 'Module\Shop\Form\Element\Company',
             'options'    => [
                 'label'    => __('From category'),
                 'category' => ['' => __('Please select category')],
@@ -80,7 +80,7 @@ class CategoryMergeForm extends BaseForm
         // category_main
         $this->add([
             'name'       => 'category_to',
-            'type'       => 'Module\Shop\Form\Element\Category',
+            'type'       => 'Module\Shop\Form\Element\Company',
             'options'    => [
                 'label'    => __('To category'),
                 'category' => ['' => __('Please select category')],

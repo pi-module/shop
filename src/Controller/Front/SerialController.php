@@ -24,6 +24,12 @@ class SerialController extends IndexController
     {
         // Set result
         $result = [];
+
+        // Save statistics
+        if (Pi::service('module')->isActive('statistics')) {
+            Pi::api('log', 'statistics')->save('shop', 'serial');
+        }
+
         // Set serial form
         $form = new SerialForm('serial');
         // Check post

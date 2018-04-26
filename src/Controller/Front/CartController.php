@@ -43,6 +43,12 @@ class CartController extends ActionController
         }
         // Set title
         $title = __('Basket');
+
+        // Save statistics
+        if (Pi::service('module')->isActive('statistics')) {
+            Pi::api('log', 'statistics')->save('shop', 'cart');
+        }
+
         // Set view
         $this->view()->headTitle($title);
         $this->view()->headDescription($title, 'prepend');

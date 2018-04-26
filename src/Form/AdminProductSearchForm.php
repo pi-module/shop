@@ -60,7 +60,7 @@ class AdminProductSearchForm extends BaseForm
         // category
         $this->add([
             'name'       => 'category',
-            'type'       => 'Module\Shop\Form\Element\Category',
+            'type'       => 'Module\Shop\Form\Element\Company',
             'options'    => [
                 'label' => __('Category'),
                 //'category' => $this->category,
