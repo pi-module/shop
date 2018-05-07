@@ -4,6 +4,14 @@
             <div class="page-header">
                 <h3>{{'SEARCH' | translate}}</h3>
             </div>
+            <div class="clearfix category-list">
+                <div class="page-header">
+                    <h3>{{'CATEGORY_LIST' | translate}}</h3>
+                </div>
+                <div class="clearfix">
+                    <div class="pi-item-category"></div>
+                </div>
+            </div>
             <form id="list-filter" ng-submit="filterAction()">
                 <div class="form-group">
                     <label>{{'TITLE' | translate}}</label>
@@ -58,14 +66,6 @@
                     </button>
                 </div>
             </form>
-        </div>
-        <div class="clearfix category-list">
-            <div class="page-header">
-                <h3>{{'CATEGORY_LIST' | translate}}</h3>
-            </div>
-            <div class="clearfix">
-                <div class="pi-item-category"></div>
-            </div>
         </div>
     </div>
     <div class="col-md-9 col-xs-12">
