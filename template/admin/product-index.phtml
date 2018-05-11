@@ -31,7 +31,10 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
         </div>
         <div class="col-xs-6 text-right">
             <a class="btn btn-success" title="<?php _e('Add product'); ?>"
-               href="<?php echo $this->url('', ['controller' => 'product', 'action' => 'update']); ?>"><i
+               href="<?php echo Pi::url($this->url('', [
+                   'controller' => 'product',
+                   'action'     => 'update',
+               ])); ?>"><i
                         class="fa fa-folder-open"></i> <?php _e('Add product'); ?></a>
         </div>
     </div>
@@ -52,11 +55,22 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                     $labelIdClass = 'label-warning';
                 } ?>
                 <tr data-id="<?php echo $this->escape($product['id']); ?>"
-                    data-price="<?php echo Pi::url($this->url('', ['action' => 'price', 'id' => $product['id']])); ?>"
+                    data-price="<?php echo Pi::url($this->url('', [
+                        'action' => 'price',
+                        'id'     => $product['id'],
+                    ])); ?>"
                     <?php if ($product['recommended'] == 1) { ?>
-                        data-recommended="<?php echo Pi::url($this->url('', ['action' => 'recommend', 'id' => $product['id'], 'recommended' => '0'])); ?>"
+                        data-recommended="<?php echo Pi::url($this->url('', [
+                            'action'      => 'recommend',
+                            'id'          => $product['id'],
+                            'recommended' => '0',
+                        ])); ?>"
                     <?php } else { ?>
-                        data-recommended="<?php echo Pi::url($this->url('', ['action' => 'recommend', 'id' => $product['id'], 'recommended' => '1'])); ?>"
+                        data-recommended="<?php echo Pi::url($this->url('', [
+                            'action'      => 'recommend',
+                            'id'          => $product['id'],
+                            'recommended' => '1',
+                        ])); ?>"
                     <?php } ?>
                 >
                     <td class="product-ajax">
@@ -84,22 +98,47 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                             </button>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a title="<?php _e('Edit basic information'); ?>"
-                                       href="<?php echo $this->url('', ['action' => 'update', 'id' => $product['id']]); ?>"><i
-                                                class="fa fa-edit"></i> <?php _e('Edit basic information'); ?></a></li>
+                                       href="<?php echo Pi::url($this->url('', [
+                                           'action' => 'update',
+                                           'id'     => $product['id'],
+                                       ])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit basic information'); ?></a>
+                                </li>
                                 <li><a title="<?php _e('Edit additional information'); ?>"
-                                       href="<?php echo $this->url('', ['action' => 'additional', 'id' => $product['id']]); ?>"><i
-                                                class="fa fa-edit"></i> <?php _e('Edit additional information'); ?></a>
+                                       href="<?php echo Pi::url($this->url('', [
+                                           'action' => 'additional',
+                                           'id'     => $product['id'],
+                                       ])); ?>"><i class="fa fa-edit"></i> <?php _e('Edit additional information'); ?>
+                                    </a>
                                 </li>
                                 <li><a title="<?php _e('Attach files'); ?>"
-                                       href="<?php echo $this->url('', ['controller' => 'attach', 'action' => 'add', 'id' => $product['id']]); ?>"><i
-                                                class="fa fa-edit"></i> <?php _e('Attach files'); ?></a></li>
+                                       href="<?php echo Pi::url($this->url('', [
+                                           'controller' => 'attach',
+                                           'action'     => 'add',
+                                           'id'         => $product['id'],
+                                       ])); ?>"><i class="fa fa-edit"></i> <?php _e('Attach files'); ?></a></li>
                                 <li><a title="<?php _e('Related products'); ?>"
-                                       href="<?php echo $this->url('', ['action' => 'related', 'id' => $product['id']]); ?>"><i
-                                                class="fa fa-edit"></i> <?php _e('Related products'); ?></a></li>
+                                       href="<?php echo Pi::url($this->url('', ['
+                                       action'                                       => 'related',
+                                                                                'id' => $product['id'],
+                                       ])); ?>"><i class="fa fa-edit"></i> <?php _e('Related products'); ?></a></li>
                                 <?php if ($config['serial_active']) { ?>
                                     <li><a title="<?php _e('Manage serial number'); ?>"
-                                           href="<?php echo $this->url('', ['action' => 'serial', 'id' => $product['id']]); ?>"><i
-                                                    class="fa fa-edit"></i> <?php _e('Manage serial number'); ?></a>
+                                           href="<?php echo Pi::url($this->url('', [
+                                               'action' => 'serial',
+                                               'id'     => $product['id'],
+                                           ])); ?>"><i class="fa fa-edit"></i> <?php _e('Manage serial number'); ?></a>
+                                    </li>
+                                <?php } ?>
+                                <?php if (Pi::service('module')->isActive('statistics')) { ?>
+                                    <li><a title="<?php _e('Statistics'); ?>" target="_blank"
+                                           href="<?php echo Pi::url($this->url('', [
+                                               'module'             => 'statistics',
+                                               'controller'         => 'detail',
+                                               'action'             => 'index',
+                                               'statisticsModule'   => 'shop',
+                                               'statisticsEntity'   => 'product',
+                                               'statisticsEntityId' => $product['id'],
+                                           ])); ?>"><i class="fa fa-edit"></i> <?php _e('Statistics'); ?></a>
                                     </li>
                                 <?php } ?>
                             </ul>
@@ -111,7 +150,10 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                         <?php } ?>
                         <?php if ($product['status'] != 5) { ?>
                             <a class="btn btn-danger btn-xs" title="<?php _e('Delete'); ?>"
-                               href="<?php echo $this->url('', ['action' => 'delete', 'id' => $product['id']]); ?>"
+                               href="<?php echo Pi::url($this->url('', [
+                                   'action' => 'delete',
+                                   'id'     => $product['id'],
+                               ])); ?>"
                                onclick="return confirm('<?php echo _a('Are you sure to delete this product?'); ?>')">
                                 <i class="fa fa-trash"></i> <?php _e('Delete'); ?>
                             </a>

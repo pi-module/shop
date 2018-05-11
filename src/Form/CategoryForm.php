@@ -50,7 +50,7 @@ class CategoryForm extends BaseForm
         if ($this->option['type'] == 'category') {
             $this->add([
                 'name'       => 'parent',
-                'type'       => 'Module\Shop\Form\Element\Company',
+                'type'       => 'Module\Shop\Form\Element\Category',
                 'options'    => [
                     'label'    => __('Parent Category'),
                     'category' => $this->category,

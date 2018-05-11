@@ -146,7 +146,7 @@ class ProductForm extends BaseForm
         // category
         $this->add([
             'name'       => 'category',
-            'type'       => 'Module\Shop\Form\Element\Company',
+            'type'       => 'Module\Shop\Form\Element\Category',
             'options'    => [
                 'label'    => __('Category'),
                 'category' => '',
@@ -158,7 +158,7 @@ class ProductForm extends BaseForm
         // category_main
         $this->add([
             'name'       => 'category_main',
-            'type'       => 'Module\Shop\Form\Element\Company',
+            'type'       => 'Module\Shop\Form\Element\Category',
             'options'    => [
                 'label'    => __('Main category'),
                 'category' => $this->category,
