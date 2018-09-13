@@ -2,7 +2,7 @@
 $this->css($this->assetModule('css/front.css'));
 // Set Open Graph tags for meta
 $this->doctype('HTML5');
-$this->headMeta($this->escape($productItem['title']), 'og:title', 'property');
+$this->headMeta($productItem['title'], 'og:title', 'property');
 $this->headMeta($this->escape($productItem['productUrl']), 'og:url', 'property');
 if (isset($productItem['text_summary']) && !empty($productItem['text_summary'])) {
     $this->headMeta(_strip($productItem['text_summary']), 'og:description', 'property');
@@ -11,7 +11,7 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
     $this->headMeta($this->escape($productItem['largeUrl']), 'og:image', 'property');
 }
 // Set twitter for meta
-$this->headMeta($this->escape($productItem['title']), 'twitter:title');
+$this->headMeta($productItem['title'], 'twitter:title');
 if (isset($productItem['text_summary']) && !empty($productItem['text_summary'])) {
     $this->headMeta(_strip($productItem['text_summary']), 'twitter:description');
 }

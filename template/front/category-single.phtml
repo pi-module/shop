@@ -2,7 +2,7 @@
 $this->css($this->assetModule('css/front.css'));
 // Set Open Graph tags for meta
 $this->doctype('HTML5');
-$this->headMeta($this->escape($category['title']), 'og:title', 'property');
+$this->headMeta($category['title'], 'og:title', 'property');
 $this->headMeta($this->escape($category['categoryUrl']), 'og:url', 'property');
 if (isset($category['text_summary']) && !empty($category['text_summary'])) {
     $this->headMeta(_strip($category['text_summary']), 'og:description', 'property');
@@ -11,7 +11,7 @@ if (!empty($category['largeUrl'])) {
     $this->headMeta($this->escape($category['largeUrl']), 'og:image', 'property');
 }
 // Set twitter for meta
-$this->headMeta($this->escape($category['title']), 'og:title', 'property');
+$this->headMeta($category['title'], 'og:title', 'property');
 if (isset($category['text_summary']) && !empty($category['text_summary'])) {
     $this->headMeta($this->escape($category['text_summary']), 'twitter:description');
 }
