@@ -6,45 +6,45 @@ $this->jQuery('ui/jquery-ui.min.js');
 <div class="clearfix" id="tree-template">
     <div class="btn-group">
         <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-plus"></i> <?php _e('Add attribute'); ?> <span class="caret"></span>
+            <i class="fa fa-plus"></i> <?php _e('Add attribute'); ?>
         </button>
-        <ul class="dropdown-menu" role="menu">
-            <li><a title="<?php _e('Add text field'); ?>"
+        <div class="dropdown-menu" role="menu">
+            <a class="dropdown-item" title="<?php _e('Add text field'); ?>"
                    href="<?php echo $this->url('', ['action' => 'update', 'type' => 'text']); ?>"><i
-                            class="fa fa-file"></i> <?php _e('Add text field'); ?></a></li>
-            <li><a title="<?php _e('Add link field'); ?>"
+                            class="fa fa-file"></i> <?php _e('Add text field'); ?></a>
+            <a class="dropdown-item" title="<?php _e('Add link field'); ?>"
                    href="<?php echo $this->url('', ['action' => 'update', 'type' => 'link']); ?>"><i
-                            class="fa fa-file"></i> <?php _e('Add link field'); ?></a></li>
-            <li><a title="<?php _e('Add video field'); ?>"
+                            class="fa fa-file"></i> <?php _e('Add link field'); ?></a>
+            <a class="dropdown-item" title="<?php _e('Add video field'); ?>"
                    href="<?php echo $this->url('', ['action' => 'update', 'type' => 'video']); ?>"><i
-                            class="fa fa-file"></i> <?php _e('Add video field'); ?></a></li>
-            <li><a title="<?php _e('Add audio field'); ?>"
+                            class="fa fa-file"></i> <?php _e('Add video field'); ?></a>
+            <a class="dropdown-item" title="<?php _e('Add audio field'); ?>"
                    href="<?php echo $this->url('', ['action' => 'update', 'type' => 'audio']); ?>"><i
-                            class="fa fa-file"></i> <?php _e('Add audio field'); ?></a></li>
-            <li><a title="<?php _e('Add file field'); ?>"
+                            class="fa fa-file"></i> <?php _e('Add audio field'); ?></a>
+            <a class="dropdown-item" title="<?php _e('Add file field'); ?>"
                    href="<?php echo $this->url('', ['action' => 'update', 'type' => 'file']); ?>"><i
-                            class="fa fa-file"></i> <?php _e('Add file field'); ?></a></li>
-            <li><a title="<?php _e('Add currency field'); ?>"
+                            class="fa fa-file"></i> <?php _e('Add file field'); ?></a>
+            <a class="dropdown-item" title="<?php _e('Add currency field'); ?>"
                    href="<?php echo $this->url('', ['action' => 'update', 'type' => 'currency']); ?>"><i
-                            class="fa fa-file"></i> <?php _e('Add currency field'); ?></a></li>
-            <li><a title="<?php _e('Add date field'); ?>"
+                            class="fa fa-file"></i> <?php _e('Add currency field'); ?></a>
+            <a class="dropdown-item" title="<?php _e('Add date field'); ?>"
                    href="<?php echo $this->url('', ['action' => 'update', 'type' => 'date']); ?>"><i
-                            class="fa fa-file"></i> <?php _e('Add date field'); ?></a></li>
-            <li><a title="<?php _e('Add number field'); ?>"
+                            class="fa fa-file"></i> <?php _e('Add date field'); ?></a>
+            <a class="dropdown-item" title="<?php _e('Add number field'); ?>"
                    href="<?php echo $this->url('', ['action' => 'update', 'type' => 'number']); ?>"><i
-                            class="fa fa-file"></i> <?php _e('Add number field'); ?></a></li>
-            <li><a title="<?php _e('Add select field'); ?>"
+                            class="fa fa-file"></i> <?php _e('Add number field'); ?></a>
+            <a class="dropdown-item" title="<?php _e('Add select field'); ?>"
                    href="<?php echo $this->url('', ['action' => 'update', 'type' => 'select']); ?>"><i
-                            class="fa fa-file"></i> <?php _e('Add select field'); ?></a></li>
-            <li><a title="<?php _e('Add checkbox field'); ?>"
+                            class="fa fa-file"></i> <?php _e('Add select field'); ?></a>
+            <a class="dropdown-item" title="<?php _e('Add checkbox field'); ?>"
                    href="<?php echo $this->url('', ['action' => 'update', 'type' => 'checkbox']); ?>"><i
-                            class="fa fa-file"></i> <?php _e('Add checkbox field'); ?></a></li>
-        </ul>
+                            class="fa fa-file"></i> <?php _e('Add checkbox field'); ?></a>
+        </div>
     </div>
 
     <h3><?php _e('List of attributes'); ?></h3>
 
-    <div id="attribute-sort">
+    <div id="attribute-sort" class="clearfix">
         <div class="attribute-field">
             <?php foreach ($positions as $key => $position) { ?>
                 <?php if (isset($fields[$key]) && !empty($fields[$key])) { ?>
@@ -52,7 +52,7 @@ $this->jQuery('ui/jquery-ui.min.js');
                     <?php foreach ($fields[$key] as $field) { ?>
                         <div id="mod_<?php echo $this->escape($field['id']); ?>">
                             <div class="tree-item">
-                                <div class="tree-item-header" style="cursor:move;">
+                                <div class="tree-item-header row" style="cursor:move;">
                                     <div class="col-md-4">
                                         <strong><?php _e('Title'); ?></strong> :
                                         <span> <?php echo $this->escape($field['title']); ?> </span>

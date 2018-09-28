@@ -32,7 +32,7 @@ app.controller('listdata',function($scope, $http){
 
                 $('.product-compare-button a').attr("href", url);
                 $(".product-compare-list").removeClass("hide");
-                $(".product-compare-list .clearfix").append("<div class='col-md-2 col-xs-6'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
+                $(".product-compare-list .clearfix").append("<div class='col-md-2 col-6'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
             }
         } else {
             $('#compareModal .modal-body').html('%s');
@@ -82,23 +82,23 @@ $this->footScript()->appendScript($scriptMenu);
 // Set box site
 switch ($config['view_column']) {
     case 1:
-        $shopBoxSize = 'col-md-12 col-xs-12';
+        $shopBoxSize = 'col-md-12 col-12';
         break;
 
     case 2:
-        $shopBoxSize = 'col-md-6 col-xs-12';
+        $shopBoxSize = 'col-md-6 col-12';
         break;
 
     case 3:
-        $shopBoxSize = 'col-md-4 col-xs-12';
+        $shopBoxSize = 'col-md-4 col-12';
         break;
 
     case 4:
-        $shopBoxSize = 'col-md-3 col-xs-12';
+        $shopBoxSize = 'col-md-3 col-12';
         break;
 
     case 5:
-        $shopBoxSize = 'col-md-2 col-xs-12';
+        $shopBoxSize = 'col-md-2 col-12';
         break;
 }
 ?>
@@ -106,10 +106,10 @@ switch ($config['view_column']) {
     <div class="ajax-spinner">
         <img src="<?php echo $this->assetModule('image/spinner.gif'); ?>" class="ajax-spinner-loader"/>
     </div>
-    <div class="col-md-12 col-xs-12">
+    <div class="col-md-12 col-12">
         <?php include $this->template('front/category'); ?>
     </div>
-    <div class="col-md-3 col-xs-12">
+    <div class="col-md-3 col-12">
         <div class="shop-search-form clearfix">
             <div class="page-header">
                 <h4><?php _e('Search on this group'); ?></h4>
@@ -173,14 +173,14 @@ switch ($config['view_column']) {
             </div>
         </div>
     </div>
-    <div class="col-md-9 col-xs-12" ng-controller="listdata">
+    <div class="col-md-9 col-12" ng-controller="listdata">
         <?php include $this->template('front/product-list-sale'); ?>
         <div class="product-compare-list hide">
             <div class="clearfix">
-                <div class="col-md-2 col-xs-6">
+                <div class="col-md-2 col-6">
                     <div class="product-compare-button text-center">
                         <a href="<?php echo Pi::url($this->url('', ['controller' => 'compare'])); ?>"
-                           title="<?php _e("Compare products"); ?>" class="btn btn-success btn-xs">
+                           title="<?php _e("Compare products"); ?>" class="btn btn-success btn-sm">
                             <?php _e("Compare products"); ?>
                         </a>
                     </div>
@@ -212,32 +212,32 @@ switch ($config['view_column']) {
                     </div>
                 <?php } ?>
                 <?php if (!empty($config['text_description_index']) && isset($showIndexDesc) && $showIndexDesc == 1 && isset($page) && $page == 1) { ?>
-                    <div class="well shopIndexDescription">
+                    <div class="card card-body bg-light mb-3 shopIndexDescription">
                         <?php echo $config['text_description_index']; ?>
                     </div>
                 <?php } ?>
                 <div class="clearfix product-sort">
                     <ul class="list-inline">
-                        <li><?php _e('Sort by'); ?> :</li>
-                        <li class="product-sort-type" ng-click="sort('time_create')"><?php _e('Time'); ?> <i
+                        <li class="list-inline-item"><?php _e('Sort by'); ?> :</li>
+                        <li class="list-inline-item product-sort-type" ng-click="sort('time_create')"><?php _e('Time'); ?> <i
                                     class="fa sort-icon" ng-show="sortKey=='time_create'"
                                     ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
-                        <li class="product-sort-type" ng-click="sort('hits')"><?php _e('Hits'); ?> <i
+                        <li class="list-inline-item product-sort-type" ng-click="sort('hits')"><?php _e('Hits'); ?> <i
                                     class="fa sort-icon" ng-show="sortKey=='hits'"
                                     ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
-                        <li class="product-sort-type" ng-click="sort('favourite')"><?php _e('Favourite'); ?> <i
+                        <li class="list-inline-item product-sort-type" ng-click="sort('favourite')"><?php _e('Favourite'); ?> <i
                                     class="fa sort-icon" ng-show="sortKey=='favourite'"
                                     ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
-                        <li class="product-sort-type" ng-click="sort('sold')"><?php _e('Sold'); ?> <i
+                        <li class="list-inline-item product-sort-type" ng-click="sort('sold')"><?php _e('Sold'); ?> <i
                                     class="fa sort-icon" ng-show="sortKey=='sold'"
                                     ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
-                        <li class="product-sort-type" ng-click="sort('price')"><?php _e('Price'); ?> <i
+                        <li class="list-inline-item product-sort-type" ng-click="sort('price')"><?php _e('Price'); ?> <i
                                     class="fa sort-icon" ng-show="sortKey=='price'"
                                     ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
-                        <li class="product-sort-type" ng-click="sort('title')"><?php _e('Title'); ?> <i
+                        <li class="list-inline-item product-sort-type" ng-click="sort('title')"><?php _e('Title'); ?> <i
                                     class="fa sort-icon" ng-show="sortKey=='title'"
                                     ng-class="{'fa-caret-up':reverse,'fa-caret-down':!reverse}"></i></li>
-                        <li class="product-sort-type" ng-click="sortKey=''"><?php _e('Default'); ?></li>
+                        <li class="list-inline-item product-sort-type" ng-click="sortKey=''"><?php _e('Default'); ?></li>
                     </ul>
                 </div>
                 <div class="row">
@@ -256,7 +256,7 @@ switch ($config['view_column']) {
                             </div>
                             <a class="u-url {{product.ribbon_class}}" itemprop="url" title="{{product.title}}"
                                href="{{product.productUrl}}" target="_blank">
-                                <img itemprop="image" class="img-responsive u-photo" src="{{product.thumbUrl}}"
+                                <img itemprop="image" class="img-fluid u-photo" src="{{product.thumbUrl}}"
                                      alt="{{product.title}}"/>
                                 <p ng-if="product.ribbon">
                                     <span>{{product.ribbon}}</span>

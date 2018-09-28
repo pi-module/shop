@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -80,7 +80,7 @@ class ProductAdditionalForm extends BaseForm
     <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][stock]"/></span>
     <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][price]"/></span>
     <input type="hidden" value="%s" name="property[%s][%s][unique_key]" />
-    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
+    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-sm"><i class="fa fa-trash"></i></a>
 </div>
 EOT;
                             $htmlTemplate = sprintf(
@@ -108,7 +108,7 @@ EOT;
     <span class="col-sm-8">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
     <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][stock]"/></span>
     <input type="hidden" value="%s" name="property[%s][%s][unique_key]" />
-    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
+    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-sm"><i class="fa fa-trash"></i></a>
 </div>
 EOT;
                             $htmlTemplate = sprintf(
@@ -132,7 +132,7 @@ EOT;
     <span class="col-sm-8">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
     <span class="col-sm-3">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][price]"/></span>
     <input type="hidden" value="%s" name="property[%s][%s][unique_key]" />
-    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
+    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-sm"><i class="fa fa-trash"></i></a>
 </div>
 EOT;
                             $htmlTemplate = sprintf(
@@ -155,7 +155,7 @@ EOT;
 <div class="col-sm-12 js-form-element">
     <span class="col-sm-11">%s<input class="form-control" type="text" value="%s" name="property[%s][%s][name]"/></span>
     <input type="hidden" value="%s" name="property[%s][%s][unique_key]" />
-    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-xs"><i class="fa fa-trash"></i></a>
+    <a href="#" class="remove_property_%s col-sm-1 btn btn-link btn-sm"><i class="fa fa-trash"></i></a>
 </div>
 EOT;
                             $htmlTemplate = sprintf(

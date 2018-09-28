@@ -52,7 +52,7 @@ $this->footScript()->appendScript($script2);
             <a class="u-photo <?php echo $this->escape($productItem['ribbon_class']); ?>"
                href="<?php echo $this->escape($productItem['largeUrl']); ?>"
                title="<?php echo $this->escape($productItem['title']); ?>">
-                <img class="img-responsive" itemprop="image"
+                <img class="img-fluid" itemprop="image"
                      src="<?php echo $this->escape($productItem['mediumUrl']); ?>"
                      alt="<?php echo $this->escape($productItem['title']); ?>"/>
                 <?php if ($productItem['ribbon']) { ?>
@@ -64,7 +64,7 @@ $this->footScript()->appendScript($script2);
         <div class="product-image-main text-center clearfix u-photo">
             <a class="u-photo" href="<?php echo $this->escape($category['largeUrl']); ?>"
                title="<?php echo $this->escape($category['title']); ?>">
-                <img class="img-responsive" itemprop="image" src="<?php echo $this->escape($category['mediumUrl']); ?>"
+                <img class="img-fluid" itemprop="image" src="<?php echo $this->escape($category['mediumUrl']); ?>"
                      alt="<?php echo $this->escape($category['title']); ?>"/>
             </a>
         </div>
@@ -74,7 +74,7 @@ $this->footScript()->appendScript($script2);
             <?php foreach ($attach['image'] as $image) { ?>
                 <a class="u-photo" href="<?php echo $this->escape($image['largeUrl']); ?>"
                    title="<?php echo $this->escape($image['title']); ?>">
-                    <img class="img-responsive" itemprop="image" src="<?php echo $this->escape($image['mediumUrl']); ?>"
+                    <img class="img-fluid" itemprop="image" src="<?php echo $this->escape($image['mediumUrl']); ?>"
                          alt="<?php echo $this->escape($image['title']); ?>"/>
                 </a>
             <?php } ?>

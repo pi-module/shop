@@ -12,7 +12,7 @@
         <?php echo $message; ?>
     </div>
     <?php if ($working) { ?>
-        <div class="well well-sm">
+        <div class="card card-body bg-light mb-3">
             <ul>
                 <?php foreach ($countOfPriceCsv as $key => $value) { ?>
                     <li><strong><?php _e($key); ?></strong> : <?php echo _number($value); ?></li>

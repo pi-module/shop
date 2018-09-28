@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -449,27 +449,27 @@ class JsonController extends IndexController
         // Set column class
         switch ($config['view_column']) {
             case 1:
-                $columnSize = 'col-md-12 col-xs-12';
+                $columnSize = 'col-md-12 col-12';
                 break;
 
             case 2:
-                $columnSize = 'col-md-6 col-xs-12';
+                $columnSize = 'col-md-6 col-12';
                 break;
 
             case 3:
-                $columnSize = 'col-md-4 col-xs-12';
+                $columnSize = 'col-md-4 col-12';
                 break;
 
             case 4:
-                $columnSize = 'col-md-3 col-xs-12';
+                $columnSize = 'col-md-3 col-12';
                 break;
 
             case 6:
-                $columnSize = 'col-md-2 col-xs-12';
+                $columnSize = 'col-md-2 col-12';
                 break;
 
             default:
-                $columnSize = 'col-md-3 col-xs-12';
+                $columnSize = 'col-md-3 col-12';
                 break;
         }
 

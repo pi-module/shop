@@ -1,5 +1,5 @@
 <?php if (!isset($shopListBoxSize) || empty($shopListBoxSize)) {
-    $shopListBoxSize = 'col-md-3 col-xs-12';
+    $shopListBoxSize = 'col-md-3 col-12';
 } ?>
 <div class="<?php echo $shopListBoxSize; ?> product-box h-product" itemscope itemtype="https://schema.org/Product">
     <div class="thumbnail">
@@ -7,7 +7,7 @@
             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>"
                title="<?php echo $this->escape($product['title']); ?>"
                href="<?php echo $this->escape($product['productUrl']); ?>"><img
-                        itemprop="image" class="img-responsive u-photo" src="<?php echo $product['thumbUrl']; ?>"
+                        itemprop="image" class="img-fluid u-photo" src="<?php echo $product['thumbUrl']; ?>"
                         alt="<?php echo $this->escape($product['title']); ?>"/>
                 <?php if ($product['ribbon']) { ?>
                     <p><span><?php echo $this->escape($product['ribbon']); ?></span></p>

@@ -1122,9 +1122,9 @@ msgstr "آیا اطمینان دارید که میخواهید این محصول
 #~ msgid "Image width class"
 #~ msgstr "کلاس برای ابعدا تصویر"
 
-#~ msgid "Bootstrap 3 grid options like : col-xs-6 col-sm-6 col-md-3"
+#~ msgid "Bootstrap 3 grid options like : col-6 col-sm-6 col-md-3"
 #~ msgstr ""
-#~ "بر اساس سیستم گرید بوت استرپ ۳ ، به طور مثال : col-xs-6 col-sm-6 col-md-3"
+#~ "بر اساس سیستم گرید بوت استرپ ۳ ، به طور مثال : col-6 col-sm-6 col-md-3"
 
 #~ msgid "News"
 #~ msgstr "اخبار"

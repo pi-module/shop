@@ -19,12 +19,12 @@
     <?php if (isset($result) && !empty($result['product'])) { ?>
         <div class="thumbnail">
             <div class="row clearfix ">
-                <div class="col-md-2 col-xs-12">
+                <div class="col-md-2 col-12">
                     <img src="<?php echo $this->escape($result['product']['thumbUrl']); ?>"
                          alt="<?php echo $this->escape($result['product']['title']); ?>"
-                         class="img-responsive img-rounded">
+                         class="img-fluid rounded">
                 </div>
-                <div class="col-md-12 col-xs-12">
+                <div class="col-md-12 col-12">
                     <h2><?php echo $this->escape($result['product']['title']); ?></h2>
                     <ul>
                         <li><?php _e('Serial number'); ?>
@@ -40,7 +40,7 @@
             </div>
         </div>
     <?php } ?>
-    <div class="well well-sm">
+    <div class="card card-body bg-light mb-3">
         <?php echo $this->form($form, 'inline'); ?>
     </div>
 </div>

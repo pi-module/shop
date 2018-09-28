@@ -17,12 +17,12 @@ $this->footScript()->appendScript($script);
         <?php foreach ($property['list'] as $propertyList) { ?>
             <?php if (!empty($property['value'][$propertyList['id']])) { ?>
                 <div class="form-group clearfix">
-                    <label class="control-label"><?php echo $this->escape($propertyList['title']); ?></label>
+                    <label class="col-form-label"><?php echo $this->escape($propertyList['title']); ?></label>
                     <?php if ($propertyList['type'] == 'checkbox') { ?>
-                        <div class="col-md-9 col-xs-12">
+                        <div class="col-md-9 col-12">
                             <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
                                 <?php if ($config['order_stock'] != 'property') { ?>
-                                    <label class="radio-inline input-sm">
+                                    <label class="form-check form-control-sm">
                                         <input type="radio" class="property-value-radio"
                                             <?php if ($propertyList['influence_price']) { ?>
                                                 data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
@@ -39,7 +39,7 @@ $this->footScript()->appendScript($script);
                                                value="<?php echo $this->escape($propertyValue['unique_key']); ?>"> <?php echo $this->escape($propertyValue['name']); ?>
                                     </label>
                                 <?php } elseif ($config['order_stock'] == 'property' && $propertyValue['stock'] > 0) { ?>
-                                    <label class="radio-inline input-sm">
+                                    <label class="form-check form-control-sm">
                                         <input type="radio" class="property-value-radio"
                                             <?php if ($propertyList['influence_price']) { ?>
                                                 data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
@@ -56,9 +56,9 @@ $this->footScript()->appendScript($script);
                             <?php } ?>
                         </div>
                     <?php } elseif ($propertyList['type'] == 'selectbox') { ?>
-                        <div class="col-md-4 col-xs-12">
+                        <div class="col-md-4 col-12">
                             <select name="property[<?php echo $this->escape($propertyList['id']); ?>]"
-                                    class="form-control input-sm property-value-select">
+                                    class="form-control form-control-sm property-value-select">
                                 <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
                                     <?php if ($config['order_stock'] != 'property') { ?>
                                         <option value="<?php echo $this->escape($propertyValue['unique_key']); ?>"

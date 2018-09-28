@@ -54,18 +54,18 @@ $this->footScript()->appendScript($script);
     <h1><?php _e('Compare products'); ?></h1>
     <?php if (isset($products) && !empty($products)) { ?>
         <div class="product-compare-header clearfix">
-            <div class="col-md-2 col-xs-12"></div>
-            <div class="col-md-10 col-xs-12">
+            <div class="col-md-2 col-12"></div>
+            <div class="col-md-10 col-12">
                 <div class="row">
                     <?php foreach ($products as $product) { ?>
                         <div class="<?php echo $widthClass; ?>">
-                            <div class="col-md-12 col-xs-12">
+                            <div class="col-md-12 col-12">
                                 <div class="thumbnail text-center">
                                     <i class="fa fa-times-circle product-compare-remove"
                                        data-slug="<?php echo $this->escape($product['slug']); ?>"></i>
                                     <a target="_blank" href="<?php echo $this->escape($product['productUrl']); ?>"
                                        title="<?php echo $this->escape($product['title']); ?>">
-                                        <img class="img-responsive"
+                                        <img class="img-fluid"
                                              src="<?php echo $this->escape($product['thumbUrl']); ?>"
                                              alt="<?php echo $this->escape($product['title']); ?>">
                                     </a>
@@ -86,7 +86,7 @@ $this->footScript()->appendScript($script);
             </div>
         </div>
         <div class="product-compare-box clearfix">
-            <div class="col-md-2 col-xs-12 product-compare-box-title">
+            <div class="col-md-2 col-12 product-compare-box-title">
                 <ul class="list-unstyled row">
                     <li><?php _e('Stock'); ?></li>
                     <li><?php _e('Price'); ?></li>
@@ -100,7 +100,7 @@ $this->footScript()->appendScript($script);
                     <?php } ?>
                 </ul>
             </div>
-            <div class="col-md-10 col-xs-12 product-compare-box-info">
+            <div class="col-md-10 col-12 product-compare-box-info">
                 <div class="row">
                     <?php foreach ($products as $product) { ?>
                         <div class="<?php echo $widthClass; ?>">

@@ -11,7 +11,7 @@ if ($block['blockEffect']) {
                     $('.shopsearchresults').html('');
                     var results = jQuery.parseJSON(data);
                     $(results).each(function (key, value) {
-                        $('.shopsearchresults').append('<li' + value.class + '><a title="' + value.title + '" href="' + value.url + '"><img src="' + value.image + '" alt="' + value.title + '">' + value.title + '</a></li>');
+                        $('.shopsearchresults').append('<a class="dropdown-item ' + value.class + '" title="' + value.title + '" href="' + value.url + '"><img src="' + value.image + '" alt="' + value.title + '">' + value.title + '</a>');
                     })
                 });
         } else {
@@ -43,5 +43,5 @@ EOT;
             </div>
         </div>
     </div>
-    <ul class="shopsearchresults dropdown-menu"></ul>
+    <div class="shopsearchresults dropdown-menu"></div>
 </div>
