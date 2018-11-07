@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -83,13 +83,13 @@ class CartController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Get promotion
-                $where = [
+                $where     = [
                     'code'             => _strip($values['code']),
                     'status'           => 1,
                     'time_publish < ?' => time(),
                     'time_expire > ?'  => time(),
                 ];
-                $select = $this->getModel('promotion')->select()->where($where)->limit(1);
+                $select    = $this->getModel('promotion')->select()->where($where)->limit(1);
                 $promotion = $this->getModel('promotion')->selectWith($select)->current();
                 if (!empty($promotion)) {
                     $promotion = $promotion->toArray();
@@ -178,7 +178,7 @@ class CartController extends ActionController
         Pi::api('basket', 'shop')->emptyBasket();
         // Back
         $module = $this->params('module');
-        $url = ['', 'module' => $module, 'controller' => 'index', 'action' => 'index'];
+        $url    = ['', 'module' => $module, 'controller' => 'index', 'action' => 'index'];
         $this->jump($url, __('Your cart are empty'), 'success');
     }
 
@@ -189,20 +189,20 @@ class CartController extends ActionController
         // Get info from url
         $process = $this->params('process', 'number');
         $product = $this->params('product', 1);
-        $module = $this->params('module');
+        $module  = $this->params('module');
         // Set return
-        $return = [];
-        $return['message'] = __('Please select product');
-        $return['id'] = $product;
-        $return['ajaxStatus'] = 0;
+        $return                 = [];
+        $return['message']      = __('Please select product');
+        $return['id']           = $product;
+        $return['ajaxStatus']   = 0;
         $return['actionStatus'] = 0;
-        $return['actionName'] = $process;
+        $return['actionName']   = $process;
         // process
         switch ($process) {
             case 'remove':
                 Pi::api('basket', 'shop')->removeProduct($product);
-                $return['message'] = __('Selected product removed from your cart');
-                $return['ajaxStatus'] = 1;
+                $return['message']      = __('Selected product removed from your cart');
+                $return['ajaxStatus']   = 1;
                 $return['actionStatus'] = 1;
                 break;
 
@@ -228,14 +228,14 @@ class CartController extends ActionController
                         $newTotal = $newNumber * $price;
                         Pi::api('basket', 'shop')->updateBasket('number', $product, $newNumber);
                         // Set return
-                        $return['message'] = __('Update number');
+                        $return['message']      = __('Update number');
                         $return['actionNumber'] = $newNumber;
-                        $return['ajaxStatus'] = 1;
+                        $return['ajaxStatus']   = 1;
                         $return['actionStatus'] = 1;
-                        $return['actionTotal'] = Pi::api('api', 'shop')->viewPrice($newTotal);
+                        $return['actionTotal']  = Pi::api('api', 'shop')->viewPrice($newTotal);
                     } else {
-                        $return['message'] = __('You can not set product number to 0');
-                        $return['ajaxStatus'] = 1;
+                        $return['message']      = __('You can not set product number to 0');
+                        $return['ajaxStatus']   = 1;
                         $return['actionStatus'] = 0;
                     }
                 }
@@ -278,15 +278,15 @@ class CartController extends ActionController
             }
         }
         // Set order array
-        $order = [];
-        $order['module_name'] = $module;
-        $order['type_payment'] = $orderType;
+        $order                   = [];
+        $order['module_name']    = $module;
+        $order['type_payment']   = $orderType;
         $order['type_commodity'] = 'product';
         $order['total_discount'] = $basket['total']['discount'];
         $order['total_shipping'] = $basket['total']['shipping'];
-        $order['total_packing'] = 0;
-        $order['total_setup'] = 0;
-        $order['total_vat'] = 0;
+        $order['total_packing']  = 0;
+        $order['total_setup']    = 0;
+        $order['total_vat']      = 0;
         // Set products to order
         foreach ($basket['products'] as $product) {
             // Set price
@@ -325,13 +325,13 @@ class CartController extends ActionController
         // Check promotion
         if (isset($basket['data']['promotion']) && !empty($basket['data']['promotion'])) {
             // Get promotion
-            $where = [
+            $where     = [
                 'code'             => _strip($basket['data']['promotion']),
                 'status'           => 1,
                 'time_publish < ?' => time(),
                 'time_expire > ?'  => time(),
             ];
-            $select = $this->getModel('promotion')->select()->where($where)->limit(1);
+            $select    = $this->getModel('promotion')->select()->where($where)->limit(1);
             $promotion = $this->getModel('promotion')->selectWith($select)->current();
             // Check promotion
             if (!empty($promotion)) {
@@ -342,7 +342,7 @@ class CartController extends ActionController
                     ['id' => $promotion['id']]
                 );
                 // Use
-                $order['promotion_type'] = 'shop-promotion';
+                $order['promotion_type']  = 'shop-promotion';
                 $order['promotion_value'] = _strip($promotion['code']);
                 // Set credit
                 if ($promotion['partner'] > 0) {

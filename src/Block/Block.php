@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -21,16 +21,16 @@ class Block
     public static function productNew($options = [], $module = null)
     {
         // Set options
-        $block = [];
-        $block = array_merge($block, $options);
+        $block           = [];
+        $block           = array_merge($block, $options);
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
-        $product = [];
+        $product         = [];
         // Set info
         $order = ['time_create DESC', 'id DESC'];
         $limit = intval($block['number']);
-        if (isset($block['category']) &&
-            !empty($block['category']) &&
-            !in_array(0, $block['category'])
+        if (isset($block['category'])
+            && !empty($block['category'])
+            && !in_array(0, $block['category'])
         ) {
             // Set info
             $where = [
@@ -71,16 +71,16 @@ class Block
     public static function productRandom($options = [], $module = null)
     {
         // Set options
-        $block = [];
-        $block = array_merge($block, $options);
+        $block           = [];
+        $block           = array_merge($block, $options);
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
-        $product = [];
+        $product         = [];
         // Set info
         $order = [new Expression('RAND()')];
         $limit = intval($block['number']);
-        if (isset($block['category']) &&
-            !empty($block['category']) &&
-            !in_array(0, $block['category'])
+        if (isset($block['category'])
+            && !empty($block['category'])
+            && !in_array(0, $block['category'])
         ) {
             // Set info
             $where = [
@@ -121,10 +121,10 @@ class Block
     public static function productTag($options = [], $module = null)
     {
         // Set options
-        $block = [];
-        $block = array_merge($block, $options);
+        $block           = [];
+        $block           = array_merge($block, $options);
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
-        $product = [];
+        $product         = [];
         // Check tag term
         if (!empty($block['tag-term'])) {
             // Get product ides from tag term
@@ -160,10 +160,10 @@ class Block
     public function productSale($options = [], $module = null)
     {
         // Set options
-        $block = [];
-        $block = array_merge($block, $options);
+        $block           = [];
+        $block           = array_merge($block, $options);
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
-        $limit = intval($block['number']);
+        $limit           = intval($block['number']);
         // Set block array
         $block['resources'] = Pi::api('sale', 'shop')->getAll($limit, 'product');
         return $block;
@@ -208,23 +208,27 @@ class Block
         $block = [];
         $block = array_merge($block, $options);
         // Set basket link
-        $block['link'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $module,
-            'controller' => 'cart',
-            'action'     => 'index',
-        ]));
+        $block['link'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $module,
+                'controller' => 'cart',
+                'action'     => 'index',
+            ]
+            )
+        );
         // Check block type
         switch ($block['type']) {
             case 'link':
                 // Set number
-                $block['number'] = Pi::api('basket', 'shop')->basketBlockNumber();
+                $block['number']      = Pi::api('basket', 'shop')->basketBlockNumber();
                 $block['number_view'] = _number($block['number']);
                 break;
 
             case 'dialog':
-                $info = Pi::api('basket', 'shop')->basketBlockInfo();
-                $block['list'] = $info['list'];
-                $block['number'] = $info['number'];
+                $info                 = Pi::api('basket', 'shop')->basketBlockInfo();
+                $block['list']        = $info['list'];
+                $block['number']      = $info['number'];
                 $block['number_view'] = _number($block['number']);
                 break;
         }
@@ -238,11 +242,15 @@ class Block
         $block = [];
         $block = array_merge($block, $options);
         // Set ajax search link
-        $block['link'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $module,
-            'controller' => 'json',
-            'action'     => 'filterSearch',
-        ]));
+        $block['link'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $module,
+                'controller' => 'json',
+                'action'     => 'filterSearch',
+            ]
+            )
+        );
         // Set block array
         return $block;
     }

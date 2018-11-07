@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -29,7 +29,7 @@ class Related extends AbstractApi
      */
     public function getListAll($product)
     {
-        $id = $this->getListId($product);
+        $id   = $this->getListId($product);
         $list = [];
         if (!empty($id) && is_array($id)) {
             $list = Pi::api('product', 'shop')->getListFromId($id);
@@ -42,12 +42,12 @@ class Related extends AbstractApi
      */
     public function getListId($product)
     {
-        $list = [];
-        $where = ['product_id' => $product];
+        $list   = [];
+        $where  = ['product_id' => $product];
         $select = Pi::model('related', $this->getModule())->select()->where($where);
         $rowset = Pi::model('related', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
-            $row = $row->toArray();
+            $row    = $row->toArray();
             $list[] = $row['product_related'];
         }
         return $list;
@@ -67,9 +67,9 @@ class Related extends AbstractApi
 
     public function findList($product, $values)
     {
-        $list = [];
+        $list          = [];
         $from_category = [];
-        $from_title = [];
+        $from_title    = [];
         // Find product ids from title
         if (!empty($values['title'])) {
             $from_title = Pi::api('product', 'shop')->searchRelated($values['title'], $values['type']);

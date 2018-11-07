@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -32,10 +32,10 @@ class Product extends Select
                 $options = $this->options['product'];
             }
             // Set query info
-            $limit = (isset($this->options['limit'])) ? $this->options['limit'] : 50;
+            $limit   = (isset($this->options['limit'])) ? $this->options['limit'] : 50;
             $columns = ['id', 'title'];
-            $order = ['title ASC', 'time_create DESC', 'id DESC'];
-            $where = ['status' => 1];
+            $order   = ['title ASC', 'time_create DESC', 'id DESC'];
+            $where   = ['status' => 1];
             // Check for sale
             if (isset($this->options['type']) && $this->options['type'] == 'sale') {
                 $ids = Pi::api('sale', 'shop')->getInformation('all');
@@ -47,7 +47,7 @@ class Product extends Select
             $select = Pi::model('product', 'shop')->select()->columns($columns)->where($where)->order($order)->limit($limit);
             $rowset = Pi::model('product', 'shop')->selectWith($select);
             foreach ($rowset as $row) {
-                $list[$row->id] = $row->toArray();
+                $list[$row->id]    = $row->toArray();
                 $options[$row->id] = $list[$row->id]['title'];
             }
             $this->valueOptions = $options;

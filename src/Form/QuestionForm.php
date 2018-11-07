@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -34,57 +34,67 @@ class QuestionForm extends BaseForm
     public function init()
     {
         // product
-        $this->add([
-            'name'       => 'product',
-            'attributes' => [
-                'type'     => 'hidden',
-                'required' => true,
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'product',
+                'attributes' => [
+                    'type'     => 'hidden',
+                    'required' => true,
+                ],
+            ]
+        );
         // name
-        $this->add([
-            'name'       => 'name',
-            'options'    => [
-                'label' => __('Name'),
-            ],
-            'attributes' => [
-                'type'        => 'text',
-                'description' => '',
-                'required'    => true,
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'name',
+                'options'    => [
+                    'label' => __('Name'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                    'required'    => true,
+                ],
+            ]
+        );
         // email
-        $this->add([
-            'name'       => 'email',
-            'options'    => [
-                'label' => __('Email'),
-            ],
-            'attributes' => [
-                'type'        => 'text',
-                'description' => '',
-                'required'    => true,
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'email',
+                'options'    => [
+                    'label' => __('Email'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                    'required'    => true,
+                ],
+            ]
+        );
         // text_ask
-        $this->add([
-            'name'       => 'text_ask',
-            'options'    => [
-                'label' => __('Question'),
-            ],
-            'attributes' => [
-                'type'     => 'textarea',
-                'rows'     => '5',
-                'cols'     => '40',
-                'required' => true,
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'text_ask',
+                'options'    => [
+                    'label' => __('Question'),
+                ],
+                'attributes' => [
+                    'type'     => 'textarea',
+                    'rows'     => '5',
+                    'cols'     => '40',
+                    'required' => true,
+                ],
+            ]
+        );
         // Save
-        $this->add([
-            'name'       => 'submit',
-            'type'       => 'submit',
-            'attributes' => [
-                'value' => __('Submit'),
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Submit'),
+                ],
+            ]
+        );
     }
 }

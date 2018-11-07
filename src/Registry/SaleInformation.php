@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt BSD 3-Clause License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt BSD 3-Clause License
  * @package         Registry
  */
 
@@ -28,7 +28,7 @@ class SaleInformation extends AbstractRegistry
     protected function loadDynamic($options = [])
     {
         // Set return
-        $return = [
+        $return     = [
             'infoAll'    => [
                 'product'  => [],
                 'category' => [],
@@ -50,18 +50,18 @@ class SaleInformation extends AbstractRegistry
         ];
         $timeExpire = [];
         // Get ids
-        $where = ['status' => 1];
-        $model = Pi::model('sale', $this->module);
+        $where  = ['status' => 1];
+        $model  = Pi::model('sale', $this->module);
         $select = $model->select()->where($where);
         $rowset = $model->selectWith($select);
         foreach ($rowset as $row) {
 
             if ($row->type == 'product') {
                 $return['infoAll']['product'][$row->product] = $row->toArray();
-                $return['idAll']['product'][$row->product] = $row->product;
+                $return['idAll']['product'][$row->product]   = $row->product;
             } elseif ($row->type == 'category') {
                 $return['infoAll']['category'][$row->category] = $row->toArray();
-                $return['idAll']['category'][$row->category] = $row->category;
+                $return['idAll']['category'][$row->category]   = $row->category;
             }
 
             if ($row->time_publish < time() && $row->time_expire > time()) {
@@ -97,7 +97,7 @@ class SaleInformation extends AbstractRegistry
     public function read()
     {
         $options = [];
-        $result = $this->loadData($options);
+        $result  = $this->loadData($options);
         return $result;
     }
 

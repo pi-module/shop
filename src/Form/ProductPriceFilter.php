@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -21,15 +21,19 @@ class ProductPriceFilter extends InputFilter
     public function __construct($option = null)
     {
         // id
-        $this->add([
-            'name'     => 'id',
-            'required' => false,
-        ]);
+        $this->add(
+            [
+                'name'     => 'id',
+                'required' => false,
+            ]
+        );
         // type
-        $this->add([
-            'name'     => 'type',
-            'required' => false,
-        ]);
+        $this->add(
+            [
+                'name'     => 'type',
+                'required' => false,
+            ]
+        );
         // Check type
         switch ($option['type']) {
             case 'property':
@@ -38,24 +42,30 @@ class ProductPriceFilter extends InputFilter
                     if ($option['propertyList'][$key]['influence_price']) {
                         foreach ($propertyDetails as $propertySingle) {
                             // id
-                            $this->add([
-                                'name'     => sprintf('property-%s-id', $propertySingle['id']),
-                                'required' => false,
-                            ]);
+                            $this->add(
+                                [
+                                    'name'     => sprintf('property-%s-id', $propertySingle['id']),
+                                    'required' => false,
+                                ]
+                            );
                             // id
-                            $this->add([
-                                'name'     => sprintf('property-%s-key', $propertySingle['id']),
-                                'required' => false,
-                            ]);
+                            $this->add(
+                                [
+                                    'name'     => sprintf('property-%s-key', $propertySingle['id']),
+                                    'required' => false,
+                                ]
+                            );
                             // price
-                            $this->add([
-                                'name'    => sprintf('property-%s-price', $propertySingle['id']),
-                                'filters' => [
-                                    [
-                                        'name' => 'StringTrim',
+                            $this->add(
+                                [
+                                    'name'    => sprintf('property-%s-price', $propertySingle['id']),
+                                    'filters' => [
+                                        [
+                                            'name' => 'StringTrim',
+                                        ],
                                     ],
-                                ],
-                            ]);
+                                ]
+                            );
                             // Update field count
                             $fieldCount++;
                         }
@@ -64,7 +74,24 @@ class ProductPriceFilter extends InputFilter
                 // Check  field count
                 if ($fieldCount == 0) {
                     // price
-                    $this->add([
+                    $this->add(
+                        [
+                            'name'     => 'price',
+                            'required' => false,
+                            'filters'  => [
+                                [
+                                    'name' => 'StringTrim',
+                                ],
+                            ],
+                        ]
+                    );
+                }
+                break;
+
+            case 'product':
+                // price
+                $this->add(
+                    [
                         'name'     => 'price',
                         'required' => false,
                         'filters'  => [
@@ -72,52 +99,45 @@ class ProductPriceFilter extends InputFilter
                                 'name' => 'StringTrim',
                             ],
                         ],
-                    ]);
-                }
-                break;
-
-            case 'product':
-                // price
-                $this->add([
-                    'name'     => 'price',
-                    'required' => false,
-                    'filters'  => [
-                        [
-                            'name' => 'StringTrim',
-                        ],
-                    ],
-                ]);
+                    ]
+                );
                 break;
         }
         // price_discount
-        $this->add([
-            'name'     => 'price_discount',
-            'required' => false,
-            'filters'  => [
-                [
-                    'name' => 'StringTrim',
+        $this->add(
+            [
+                'name'     => 'price_discount',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
                 ],
-            ],
-        ]);
+            ]
+        );
         // price_shipping
-        $this->add([
-            'name'     => 'price_shipping',
-            'required' => false,
-            'filters'  => [
-                [
-                    'name' => 'StringTrim',
+        $this->add(
+            [
+                'name'     => 'price_shipping',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
                 ],
-            ],
-        ]);
+            ]
+        );
         // stock_type
-        $this->add([
-            'name'     => 'stock_type',
-            'required' => false,
-            'filters'  => [
-                [
-                    'name' => 'StringTrim',
+        $this->add(
+            [
+                'name'     => 'stock_type',
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
                 ],
-            ],
-        ]);
+            ]
+        );
     }
 }

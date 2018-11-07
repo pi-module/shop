@@ -27,29 +27,37 @@ class AttachFilter extends InputFilter
     public function __construct()
     {
         // id
-        $this->add([
-            'name'     => 'id',
-            'required' => true,
-        ]);
+        $this->add(
+            [
+                'name'     => 'id',
+                'required' => true,
+            ]
+        );
         // title
-        $this->add([
-            'name'     => 'title',
-            'required' => true,
-            'filters'  => [
-                [
-                    'name' => 'StringTrim',
+        $this->add(
+            [
+                'name'     => 'title',
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
                 ],
-            ],
-        ]);
+            ]
+        );
         // story
-        $this->add([
-            'name'     => 'story',
-            'required' => true,
-        ]);
+        $this->add(
+            [
+                'name'     => 'story',
+                'required' => true,
+            ]
+        );
         // status
-        $this->add([
-            'name'     => 'status',
-            'required' => true,
-        ]);
+        $this->add(
+            [
+                'name'     => 'status',
+                'required' => true,
+            ]
+        );
     }
 }

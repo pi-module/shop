@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -26,12 +26,12 @@ class Price extends AbstractApi
 {
     public function addLog($price, $product, $type = 'product', $extra = '')
     {
-        $row = Pi::model('price', $this->getModule())->createRow();
-        $row->uid = Pi::user()->getId();
+        $row              = Pi::model('price', $this->getModule())->createRow();
+        $row->uid         = Pi::user()->getId();
         $row->time_update = time();
 
-        $row->price = $price;
-        $row->type = $type;
+        $row->price   = $price;
+        $row->type    = $type;
         $row->product = $product;
 
         if (!empty($extra)) {
@@ -62,7 +62,7 @@ class Price extends AbstractApi
 
         // Select
         $select = Pi::model('price', $this->getModule())->select()->where($where)->order($order)->limit(1);
-        $row = Pi::model('price', $this->getModule())->selectWith($select)->current();
+        $row    = Pi::model('price', $this->getModule())->selectWith($select)->current();
 
         // Get time update
         if (empty($row)) {

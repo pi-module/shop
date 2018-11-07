@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -70,36 +70,36 @@ class Product extends AbstractApi
 
     public function getBrandCount($brand)
     {
-        $where = ['brand' => $brand];
+        $where   = ['brand' => $brand];
         $columns = ['count' => new Expression('count(*)')];
-        $select = Pi::model('product', $this->getModule())->select()->columns($columns)->where($where);
+        $select  = Pi::model('product', $this->getModule())->select()->columns($columns)->where($where);
         return Pi::model('product', $this->getModule())->selectWith($select)->current()->count;
     }
 
     public function getBrandHasNew($brand)
     {
         // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
-        $time = time() - ($config['new_product'] * 86400);
-        $where = ['brand' => $brand, 'time_create > ?' => $time];
+        $config  = Pi::service('registry')->config->read($this->getModule());
+        $time    = time() - ($config['new_product'] * 86400);
+        $where   = ['brand' => $brand, 'time_create > ?' => $time];
         $columns = ['count' => new Expression('count(*)')];
-        $select = Pi::model('product', $this->getModule())->select()->columns($columns)->where($where);
+        $select  = Pi::model('product', $this->getModule())->select()->columns($columns)->where($where);
         return Pi::model('product', $this->getModule())->selectWith($select)->current()->count;
     }
 
     public function getCategoryMainCount($category)
     {
-        $where = ['category_main' => $category];
+        $where   = ['category_main' => $category];
         $columns = ['count' => new Expression('count(*)')];
-        $select = Pi::model('product', $this->getModule())->select()->columns($columns)->where($where);
+        $select  = Pi::model('product', $this->getModule())->select()->columns($columns)->where($where);
         return Pi::model('product', $this->getModule())->selectWith($select)->current()->count;
     }
 
     public function getCategoryLinkCount($category)
     {
-        $where = ['category' => $category];
+        $where   = ['category' => $category];
         $columns = ['count' => new Expression('count(DISTINCT `product`)')];
-        $select = Pi::model('link', $this->getModule())->select()->columns($columns)->where($where);
+        $select  = Pi::model('link', $this->getModule())->select()->columns($columns)->where($where);
         return Pi::model('link', $this->getModule())->selectWith($select)->current()->count;
     }
 
@@ -124,8 +124,8 @@ class Product extends AbstractApi
                 break;
         }
         $columns = ['id'];
-        $select = Pi::model('product', $this->getModule())->select()->where($where)->columns($columns);
-        $rowset = Pi::model('product', $this->getModule())->selectWith($select);
+        $select  = Pi::model('product', $this->getModule())->select()->where($where)->columns($columns);
+        $rowset  = Pi::model('product', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
             $list[] = $row->id;
         }
@@ -134,8 +134,8 @@ class Product extends AbstractApi
 
     public function getListFromId($id, $limit = 0)
     {
-        $list = [];
-        $where = ['id' => $id, 'status' => 1];
+        $list   = [];
+        $where  = ['id' => $id, 'status' => 1];
         $select = Pi::model('product', $this->getModule())->select()->where($where);
         if ($limit > 0) {
             $select->limit($limit);
@@ -149,8 +149,8 @@ class Product extends AbstractApi
 
     public function getListFromIdLight($id, $limit = 0)
     {
-        $list = [];
-        $where = ['id' => $id, 'status' => 1];
+        $list   = [];
+        $where  = ['id' => $id, 'status' => 1];
         $select = Pi::model('product', $this->getModule())->select()->where($where);
         if ($limit > 0) {
             $select->limit($limit);
@@ -164,18 +164,18 @@ class Product extends AbstractApi
 
     public function getCompareList($slugList, $mainProduct)
     {
-        $list = [];
-        $where = ['slug' => $slugList, 'status' => 1, /*'category_main' => $mainProduct['category_main']*/];
+        $list   = [];
+        $where  = ['slug' => $slugList, 'status' => 1, /*'category_main' => $mainProduct['category_main']*/];
         $select = Pi::model('product', $this->getModule())->select()->where($where);
         $rowset = Pi::model('product', $this->getModule())->selectWith($select);
         foreach ($rowset as $key => $row) {
             $product = $this->canonizeProduct($row);
             // Set attribute
             if ($row->attribute) {
-                $attributes = Pi::api('attribute', 'shop')->Product($row->id, $row->category_main);
+                $attributes           = Pi::api('attribute', 'shop')->Product($row->id, $row->category_main);
                 $product['attribute'] = $attributes['all'];
             }
-            $key = array_search($product['slug'], $slugList);
+            $key        = array_search($product['slug'], $slugList);
             $list[$key] = $product;
         }
         return $list;
@@ -185,8 +185,8 @@ class Product extends AbstractApi
     {
         // Get attach count
         $columns = ['count' => new Expression('count(*)')];
-        $select = Pi::model('field_data', $this->getModule())->select()->columns($columns);
-        $count = Pi::model('field_data', $this->getModule())->selectWith($select)->current()->count;
+        $select  = Pi::model('field_data', $this->getModule())->select()->columns($columns);
+        $count   = Pi::model('field_data', $this->getModule())->selectWith($select)->current()->count;
         // Set attach count
         Pi::model('product', $this->getModule())->update(['attribute' => $count], ['id' => $id]);
     }
@@ -194,10 +194,10 @@ class Product extends AbstractApi
     public function attachCount($id)
     {
         // Get attach count
-        $where = ['product' => $id];
+        $where   = ['product' => $id];
         $columns = ['count' => new Expression('count(*)')];
-        $select = Pi::model('attach', $this->getModule())->select()->columns($columns)->where($where);
-        $count = Pi::model('attach', $this->getModule())->selectWith($select)->current()->count;
+        $select  = Pi::model('attach', $this->getModule())->select()->columns($columns)->where($where);
+        $count   = Pi::model('attach', $this->getModule())->selectWith($select)->current()->count;
         // Set attach count
         Pi::model('product', $this->getModule())->update(['attach' => $count], ['id' => $id]);
     }
@@ -205,10 +205,10 @@ class Product extends AbstractApi
     public function relatedCount($id)
     {
         // Get attach count
-        $where = ['product_id' => $id];
+        $where   = ['product_id' => $id];
         $columns = ['count' => new Expression('count(*)')];
-        $select = Pi::model('related', $this->getModule())->select()->columns($columns)->where($where);
-        $count = Pi::model('related', $this->getModule())->selectWith($select)->current()->count;
+        $select  = Pi::model('related', $this->getModule())->select()->columns($columns)->where($where);
+        $count   = Pi::model('related', $this->getModule())->selectWith($select)->current()->count;
         // Set attach count
         Pi::model('product', $this->getModule())->update(['related' => $count], ['id' => $id]);
     }
@@ -218,7 +218,7 @@ class Product extends AbstractApi
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
         // Set info
-        $file = [];
+        $file  = [];
         $where = ['product' => $id, 'status' => 1];
         $order = ['time_create DESC', 'id DESC'];
         // Get all attach files
@@ -226,44 +226,54 @@ class Product extends AbstractApi
         $rowset = Pi::model('attach', $this->getModule())->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $file[$row->type][$row->id] = $row->toArray();
+            $file[$row->type][$row->id]                     = $row->toArray();
             $file[$row->type][$row->id]['time_create_view'] = _date($file[$row->type][$row->id]['time_create']);
             if ($file[$row->type][$row->id]['type'] == 'image') {
                 // Set image original url
                 $file[$row->type][$row->id]['originalUrl'] = Pi::url(
-                    sprintf('upload/%s/original/%s/%s',
+                    sprintf(
+                        'upload/%s/original/%s/%s',
                         $config['image_path'],
                         $file[$row->type][$row->id]['path'],
                         $file[$row->type][$row->id]['file']
-                    ));
+                    )
+                );
                 // Set image large url
                 $file[$row->type][$row->id]['largeUrl'] = Pi::url(
-                    sprintf('upload/%s/large/%s/%s',
+                    sprintf(
+                        'upload/%s/large/%s/%s',
                         $config['image_path'],
                         $file[$row->type][$row->id]['path'],
                         $file[$row->type][$row->id]['file']
-                    ));
+                    )
+                );
                 // Set image medium url
                 $file[$row->type][$row->id]['mediumUrl'] = Pi::url(
-                    sprintf('upload/%s/medium/%s/%s',
+                    sprintf(
+                        'upload/%s/medium/%s/%s',
                         $config['image_path'],
                         $file[$row->type][$row->id]['path'],
                         $file[$row->type][$row->id]['file']
-                    ));
+                    )
+                );
                 // Set image thumb url
                 $file[$row->type][$row->id]['thumbUrl'] = Pi::url(
-                    sprintf('upload/%s/thumb/%s/%s',
+                    sprintf(
+                        'upload/%s/thumb/%s/%s',
                         $config['image_path'],
                         $file[$row->type][$row->id]['path'],
                         $file[$row->type][$row->id]['file']
-                    ));
+                    )
+                );
             } else {
                 $file[$row->type][$row->id]['fileUrl'] = Pi::url(
-                    sprintf('upload/%s/file/%s/%s',
+                    sprintf(
+                        'upload/%s/file/%s/%s',
                         $config['file_path'],
                         $file[$row->type][$row->id]['path'],
                         $file[$row->type][$row->id]['file']
-                    ));
+                    )
+                );
             }
         }
         // return
@@ -285,26 +295,32 @@ class Product extends AbstractApi
                 // Get config
                 $config = Pi::service('registry')->config->read($this->getModule());
                 // Set list
-                $list = [];
-                $where = ['id' => $favoriteIds, 'status' => 1];
+                $list   = [];
+                $where  = ['id' => $favoriteIds, 'status' => 1];
                 $select = Pi::model('product', $this->getModule())->select()->where($where);
                 $rowset = Pi::model('product', $this->getModule())->selectWith($select);
                 foreach ($rowset as $row) {
-                    $story = [];
+                    $story          = [];
                     $story['title'] = $row->title;
-                    $story['url'] = Pi::url(Pi::service('url')->assemble('shop', [
-                        'module'     => $this->getModule(),
-                        'controller' => 'product',
-                        'slug'       => $row->slug,
-                    ]));
+                    $story['url']   = Pi::url(
+                        Pi::service('url')->assemble(
+                            'shop', [
+                            'module'     => $this->getModule(),
+                            'controller' => 'product',
+                            'slug'       => $row->slug,
+                        ]
+                        )
+                    );
                     $story['image'] = '';
                     if ($row->image) {
                         $story['image'] = Pi::url(
-                            sprintf('upload/%s/thumb/%s/%s',
+                            sprintf(
+                                'upload/%s/thumb/%s/%s',
                                 $config['image_path'],
                                 $row->path,
                                 $row->image
-                            ));
+                            )
+                        );
                     }
                     $list[$row->id] = $story;
                 }
@@ -378,11 +394,11 @@ class Product extends AbstractApi
         // Check discount
         if ($config['order_discount']) {
             // Get discount percent
-            $userDiscount = [];
-            $saleDiscount = [];
-            $uid = Pi::user()->getId();
-            $roles = Pi::user()->getRole($uid);
-            $discounts = Pi::registry('discountList', 'shop')->read();
+            $userDiscount    = [];
+            $saleDiscount    = [];
+            $uid             = Pi::user()->getId();
+            $roles           = Pi::user()->getRole($uid);
+            $discounts       = Pi::registry('discountList', 'shop')->read();
             $saleInformation = Pi::registry('saleInformation', 'shop')->read();
 
             // Check product discounts
@@ -405,7 +421,9 @@ class Product extends AbstractApi
 
             // Check sale
             if (!empty($saleInformation) && in_array($product['id'], $saleInformation['idActive']['product'])) {
-                if ($saleInformation['infoAll']['product'][$product['id']]['time_publish'] < time() && $saleInformation['infoAll']['product'][$product['id']]['time_expire'] > time()) {
+                if ($saleInformation['infoAll']['product'][$product['id']]['time_publish'] < time()
+                    && $saleInformation['infoAll']['product'][$product['id']]['time_expire'] > time()
+                ) {
                     $userDiscount = [];
                     $saleDiscount = $saleInformation['infoAll']['product'][$product['id']];
                 }
@@ -416,11 +434,11 @@ class Product extends AbstractApi
 
             // Make discount price
             if (!empty($userDiscount)) {
-                $userDiscount = max($userDiscount);
-                $price = ($product['price'] - ($product['price'] * ($userDiscount / 100)));
-                $price = Pi::api('api', 'order')->makePrice($price);
+                $userDiscount              = max($userDiscount);
+                $price                     = ($product['price'] - ($product['price'] * ($userDiscount / 100)));
+                $price                     = Pi::api('api', 'order')->makePrice($price);
                 $product['price_discount'] = $product['price'];
-                $product['price'] = $price;
+                $product['price']          = $price;
             } elseif (!empty($saleDiscount)) {
                 switch ($saleDiscount['type']) {
                     case 'product':
@@ -433,9 +451,9 @@ class Product extends AbstractApi
                         break;
                 }
                 $product['price_discount'] = $product['price'];
-                $product['price'] = $price;
-                $product['price_sale'] = 1;
-                $product['price_time'] = [
+                $product['price']          = $price;
+                $product['price_sale']     = 1;
+                $product['price_time']     = [
                     'year'   => date("Y", $saleDiscount['time_expire']),
                     'month'  => date("m", $saleDiscount['time_expire']),
                     'day'    => date("d", $saleDiscount['time_expire']),
@@ -447,9 +465,9 @@ class Product extends AbstractApi
         }
 
         // Set price
-        $product['price_view'] = Pi::api('api', 'shop')->viewPrice($product['price']);
+        $product['price_view']          = Pi::api('api', 'shop')->viewPrice($product['price']);
         $product['price_discount_view'] = Pi::api('api', 'shop')->viewPrice($product['price_discount']);
-        $product['price_currency'] = empty($configSystem['number_currency']) ? 'USD' : $configSystem['number_currency'];
+        $product['price_currency']      = empty($configSystem['number_currency']) ? 'USD' : $configSystem['number_currency'];
 
         // Set has discount
         $product['price_discount_has'] = 0;
@@ -482,7 +500,7 @@ class Product extends AbstractApi
         // Make setting
         $product['setting'] = json_decode($product['setting'], true);
         // Set text_summary
-        $product['text_summary'] = Pi::service('markup')->render($product['text_summary'], 'html', 'html');
+        $product['text_summary']      = Pi::service('markup')->render($product['text_summary'], 'html', 'html');
         $product['text_summary_view'] = Pi::service('markup')->render($product['text_summary'], 'html', 'text', ['nl2br' => true]);
         // Set text_description
         $product['text_description'] = Pi::service('markup')->render($product['text_description'], 'html', 'html');
@@ -490,37 +508,53 @@ class Product extends AbstractApi
         $product['time_create_view'] = _date($product['time_create']);
         $product['time_update_view'] = _date($product['time_update']);
         // Set product url
-        $product['productUrl'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $this->getModule(),
-            'controller' => 'product',
-            'slug'       => $product['slug'],
-        ]));
+        $product['productUrl'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $this->getModule(),
+                'controller' => 'product',
+                'slug'       => $product['slug'],
+            ]
+            )
+        );
         // Set cart url
-        $product['cartUrl'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $this->getModule(),
-            'controller' => 'cart',
-            'action'     => 'add',
-            //'slug'          => $product['slug'],
-        ]));
+        $product['cartUrl'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $this->getModule(),
+                'controller' => 'cart',
+                'action'     => 'add',
+                //'slug'          => $product['slug'],
+            ]
+            )
+        );
         // Set category information
         $product['category'] = json_decode($product['category']);
         foreach ($product['category'] as $category) {
-            $product['categories'][$category]['id'] = $categoryList[$category]['id'];
+            $product['categories'][$category]['id']    = $categoryList[$category]['id'];
             $product['categories'][$category]['title'] = $categoryList[$category]['title'];
-            $product['categories'][$category]['url'] = Pi::url(Pi::service('url')->assemble('shop', [
-                'module'     => $this->getModule(),
-                'controller' => 'category',
-                'slug'       => $categoryList[$category]['slug'],
-            ]));
+            $product['categories'][$category]['url']   = Pi::url(
+                Pi::service('url')->assemble(
+                    'shop', [
+                    'module'     => $this->getModule(),
+                    'controller' => 'category',
+                    'slug'       => $categoryList[$category]['slug'],
+                ]
+                )
+            );
         }
         // Set brand information
         if (!empty($product['brand'])) {
             $product['brandTitle'] = $categoryList[$product['brand']]['title'];
-            $product['brandUrl'] = Pi::url(Pi::service('url')->assemble('shop', [
-                'module'     => $this->getModule(),
-                'controller' => 'category',
-                'slug'       => $categoryList[$product['brand']]['slug'],
-            ]));
+            $product['brandUrl']   = Pi::url(
+                Pi::service('url')->assemble(
+                    'shop', [
+                    'module'     => $this->getModule(),
+                    'controller' => 'category',
+                    'slug'       => $categoryList[$product['brand']]['slug'],
+                ]
+                )
+            );
         }
         // Set discount
         $product = $this->canonizePriceAndDiscount($product, $config);
@@ -553,46 +587,54 @@ class Product extends AbstractApi
         if ($product['image']) {
             // Set image original url
             $product['originalUrl'] = Pi::url(
-                sprintf('upload/%s/original/%s/%s',
+                sprintf(
+                    'upload/%s/original/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
             // Set image large url
             $product['largeUrl'] = Pi::url(
-                sprintf('upload/%s/large/%s/%s',
+                sprintf(
+                    'upload/%s/large/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
             // Set image medium url
             $product['mediumUrl'] = Pi::url(
-                sprintf('upload/%s/medium/%s/%s',
+                sprintf(
+                    'upload/%s/medium/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
             // Set image thumb url
             $product['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s',
+                sprintf(
+                    'upload/%s/thumb/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
         }
         // Set ribbon
         $product['ribbon_class'] = '';
-        $saleId = Pi::api('sale', 'shop')->getInformation();
+        $saleId                  = Pi::api('sale', 'shop')->getInformation();
         if (in_array($product['id'], $saleId['product'])) {
-            $product['ribbon'] = __('On sale');
+            $product['ribbon']       = __('On sale');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) {
-            $product['ribbon'] = __('Have discount');
+            $product['ribbon']       = __('Have discount');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif (!empty($product['ribbon'])) {
             $product['ribbon_class'] = 'product-ribbon';
         } elseif ($product['recommended']) {
-            $product['ribbon'] = __('Recommended');
+            $product['ribbon']       = __('Recommended');
             $product['ribbon_class'] = 'product-ribbon';
         }
         if (!empty($product['ribbon']) && $product['price_percent'] > 0) {
@@ -627,18 +669,26 @@ class Product extends AbstractApi
         $product['time_create_view'] = _date($product['time_create']);
         $product['time_update_view'] = _date($product['time_update']);
         // Set product url
-        $product['productUrl'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $this->getModule(),
-            'controller' => 'product',
-            'slug'       => $product['slug'],
-        ]));
+        $product['productUrl'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $this->getModule(),
+                'controller' => 'product',
+                'slug'       => $product['slug'],
+            ]
+            )
+        );
         // Set cart url
-        $product['cartUrl'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $this->getModule(),
-            'controller' => 'checkout',
-            'action'     => 'add',
-            //'slug'          => $product['slug'],
-        ]));
+        $product['cartUrl'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $this->getModule(),
+                'controller' => 'checkout',
+                'action'     => 'add',
+                //'slug'          => $product['slug'],
+            ]
+            )
+        );
         // Set category information
         $product['category'] = json_decode($product['category']);
         // Set discount
@@ -649,25 +699,27 @@ class Product extends AbstractApi
         if ($product['image']) {
             // Set image thumb url
             $product['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s',
+                sprintf(
+                    'upload/%s/thumb/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
         }
         // Set ribbon
         $product['ribbon_class'] = '';
-        $saleId = Pi::api('sale', 'shop')->getInformation();
+        $saleId                  = Pi::api('sale', 'shop')->getInformation();
         if (in_array($product['id'], $saleId['product'])) {
-            $product['ribbon'] = __('On sale');
+            $product['ribbon']       = __('On sale');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) {
-            $product['ribbon'] = __('Have discount');
+            $product['ribbon']       = __('Have discount');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif (!empty($product['ribbon'])) {
             $product['ribbon_class'] = 'product-ribbon';
         } elseif ($product['recommended']) {
-            $product['ribbon'] = __('Recommended');
+            $product['ribbon']       = __('Recommended');
             $product['ribbon_class'] = 'product-ribbon';
         }
         if (!empty($product['ribbon']) && $product['price_percent'] > 0) {
@@ -718,21 +770,27 @@ class Product extends AbstractApi
         // Make setting
         $product['setting'] = json_decode($product['setting'], true);;
         // Set product url
-        $product['productUrl'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $this->getModule(),
-            'controller' => 'product',
-            'slug'       => $product['slug'],
-        ]));
+        $product['productUrl'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $this->getModule(),
+                'controller' => 'product',
+                'slug'       => $product['slug'],
+            ]
+            )
+        );
         // Set image url
         $product['thumbUrl'] = '';
         if ($product['image']) {
             // Set image thumb url
             $product['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s',
+                sprintf(
+                    'upload/%s/thumb/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
         }
         // Set order product
         $productOrder = [
@@ -770,25 +828,37 @@ class Product extends AbstractApi
         $product['time_create_view'] = _date($product['time_create']);
         $product['time_update_view'] = _date($product['time_update']);
         // Set product url
-        $product['productUrl'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $this->getModule(),
-            'controller' => 'product',
-            'slug'       => $product['slug'],
-        ]));
+        $product['productUrl'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $this->getModule(),
+                'controller' => 'product',
+                'slug'       => $product['slug'],
+            ]
+            )
+        );
         // Set cart url
-        $product['cartUrl'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $this->getModule(),
-            'controller' => 'checkout',
-            'action'     => 'add',
-            //'slug'          => $product['slug'],
-        ]));
+        $product['cartUrl'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $this->getModule(),
+                'controller' => 'checkout',
+                'action'     => 'add',
+                //'slug'          => $product['slug'],
+            ]
+            )
+        );
         // Set cart url
-        $product['cartJsonUrl'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $this->getModule(),
-            'controller' => 'json',
-            'action'     => 'add',
-            'id'         => $product['id'],
-        ]));
+        $product['cartJsonUrl'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $this->getModule(),
+                'controller' => 'json',
+                'action'     => 'add',
+                'id'         => $product['id'],
+            ]
+            )
+        );
         // Set category information
         $product['category'] = json_decode($product['category']);
         // Set discount
@@ -822,32 +892,40 @@ class Product extends AbstractApi
         if ($product['image']) {
             // Set image original url
             $product['originalUrl'] = Pi::url(
-                sprintf('upload/%s/original/%s/%s',
+                sprintf(
+                    'upload/%s/original/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
             // Set image large url
             $product['largeUrl'] = Pi::url(
-                sprintf('upload/%s/large/%s/%s',
+                sprintf(
+                    'upload/%s/large/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
             // Set image medium url
             $product['mediumUrl'] = Pi::url(
-                sprintf('upload/%s/medium/%s/%s',
+                sprintf(
+                    'upload/%s/medium/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
             // Set image thumb url
             $product['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s',
+                sprintf(
+                    'upload/%s/thumb/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
         }
         // Set category_main information
         $product['categoryMainTitle'] = $categoryList[$product['category_main']]['title'];
@@ -894,28 +972,40 @@ class Product extends AbstractApi
         //$product['time_create_view'] = _date($product['time_create']);
         //$product['time_update_view'] = _date($product['time_update']);
         // Set product url
-        $product['productUrl'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $this->getModule(),
-            'controller' => 'product',
-            'slug'       => $product['slug'],
-        ]));
+        $product['productUrl'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $this->getModule(),
+                'controller' => 'product',
+                'slug'       => $product['slug'],
+            ]
+            )
+        );
         // Set cart url
-        $product['cartUrl'] = Pi::url(Pi::service('url')->assemble('shop', [
-            'module'     => $this->getModule(),
-            'controller' => 'cart',
-            'action'     => 'add',
-            //'slug'          => $product['slug'],
-        ]));
+        $product['cartUrl'] = Pi::url(
+            Pi::service('url')->assemble(
+                'shop', [
+                'module'     => $this->getModule(),
+                'controller' => 'cart',
+                'action'     => 'add',
+                //'slug'          => $product['slug'],
+            ]
+            )
+        );
         // Set category information
         $product['category'] = json_decode($product['category']);
         foreach ($product['category'] as $category) {
-            $product['categories'][$category]['id'] = $categoryList[$category]['id'];
+            $product['categories'][$category]['id']    = $categoryList[$category]['id'];
             $product['categories'][$category]['title'] = $categoryList[$category]['title'];
-            $product['categories'][$category]['url'] = Pi::url(Pi::service('url')->assemble('shop', [
-                'module'     => $this->getModule(),
-                'controller' => 'category',
-                'slug'       => $categoryList[$category]['slug'],
-            ]));
+            $product['categories'][$category]['url']   = Pi::url(
+                Pi::service('url')->assemble(
+                    'shop', [
+                    'module'     => $this->getModule(),
+                    'controller' => 'category',
+                    'slug'       => $categoryList[$category]['slug'],
+                ]
+                )
+            );
         }
         // Set discount
         $product = $this->canonizePriceAndDiscount($product, $config);
@@ -963,33 +1053,37 @@ class Product extends AbstractApi
                 )); */
             // Set image medium url
             $product['mediumUrl'] = Pi::url(
-                sprintf('upload/%s/medium/%s/%s',
+                sprintf(
+                    'upload/%s/medium/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
             // Set image thumb url
             $product['thumbUrl'] = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s',
+                sprintf(
+                    'upload/%s/thumb/%s/%s',
                     $config['image_path'],
                     $product['path'],
                     $product['image']
-                ));
+                )
+            );
         }
 
         // Set ribbon
         $product['ribbon_class'] = '';
-        $saleId = Pi::api('sale', 'shop')->getInformation();
+        $saleId                  = Pi::api('sale', 'shop')->getInformation();
         if (in_array($product['id'], $saleId['product'])) {
-            $product['ribbon'] = __('On sale');
+            $product['ribbon']       = __('On sale');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif (isset($product['price_discount']) && ($product['price_discount'] > $product['price'])) {
-            $product['ribbon'] = __('Have discount');
+            $product['ribbon']       = __('Have discount');
             $product['ribbon_class'] = 'product-ribbon';
         } elseif (!empty($product['ribbon'])) {
             $product['ribbon_class'] = 'product-ribbon';
         } elseif ($product['recommended']) {
-            $product['ribbon'] = __('Recommended');
+            $product['ribbon']       = __('Recommended');
             $product['ribbon_class'] = 'product-ribbon';
         }
         if (!empty($product['ribbon']) && $product['price_percent'] > 0) {
@@ -998,8 +1092,8 @@ class Product extends AbstractApi
 
         // Set attribute
         $filterList = isset($filterList) ? $filterList : Pi::api('attribute', 'shop')->filterList();
-        $attribute = Pi::api('attribute', 'shop')->filterData($product['id'], $filterList);
-        $product = array_merge($product, $attribute);
+        $attribute  = Pi::api('attribute', 'shop')->filterData($product['id'], $filterList);
+        $product    = array_merge($product, $attribute);
 
         // Set is new product
         $time = time() - ($config['new_product'] * 86400);
@@ -1038,15 +1132,19 @@ class Product extends AbstractApi
             Pi::api('sitemap', 'sitemap')->removeAll($this->getModule(), 'product');
             // find and import
             $columns = ['id', 'slug', 'status'];
-            $select = Pi::model('product', $this->getModule())->select()->columns($columns);
-            $rowset = Pi::model('product', $this->getModule())->selectWith($select);
+            $select  = Pi::model('product', $this->getModule())->select()->columns($columns);
+            $rowset  = Pi::model('product', $this->getModule())->selectWith($select);
             foreach ($rowset as $row) {
                 // Make url
-                $loc = Pi::url(Pi::service('url')->assemble('shop', [
-                    'module'     => $this->getModule(),
-                    'controller' => 'product',
-                    'slug'       => $row->slug,
-                ]));
+                $loc = Pi::url(
+                    Pi::service('url')->assemble(
+                        'shop', [
+                        'module'     => $this->getModule(),
+                        'controller' => 'product',
+                        'slug'       => $row->slug,
+                    ]
+                    )
+                );
                 // Add to sitemap
                 Pi::api('sitemap', 'sitemap')->groupLink($loc, $row->status, $this->getModule(), 'product', $row->id);
             }

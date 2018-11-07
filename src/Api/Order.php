@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -32,7 +32,7 @@ class Order extends AbstractApi
         }
         return true;
     }
-    
+
     public function getProductDetails($id)
     {
         return Pi::api('product', 'shop')->getProductOrder($id);
@@ -93,27 +93,32 @@ class Order extends AbstractApi
             'id' => $order['id'],
         ))); */
 
-        $url = Pi::url(Pi::service('url')->assemble('order', [
-            'module'     => 'order',
-            'controller' => 'detail',
-            'action'     => 'index',
-            'id'         => $order['id'],
-        ]));
+        $url = Pi::url(
+            Pi::service('url')->assemble(
+                'order', [
+                'module'     => 'order',
+                'controller' => 'detail',
+                'action'     => 'index',
+                'id'         => $order['id'],
+            ]
+            )
+        );
 
         return $url;
     }
 
-    public function createExtraDetailForProduct($values) 
+    public function createExtraDetailForProduct($values)
     {
         return json_encode(
-            array(
-               'item' => $values['module_item'],
-            )
-        );   
+            [
+                'item' => $values['module_item'],
+            ]
+        );
     }
+
     public function getExtraFieldsFormForOrder()
     {
-        return array();
+        return [];
     }
-    
+
 }

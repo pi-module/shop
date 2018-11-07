@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -27,7 +27,7 @@ class Sale extends AbstractApi
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
-        $sale = [];
+        $sale   = [];
         // Set options
         if ($limit == 0) {
             $limit = intval($config['sale_view_number']);
@@ -47,8 +47,8 @@ class Sale extends AbstractApi
                     foreach ($saleCategoryList as $saleCategory) {
                         $time = $saleInformation['infoAll']['category'][$saleCategory['id']]['time_expire'];
 
-                        $sale[$saleCategory['id']] = $saleCategory;
-                        $sale[$saleCategory['id']]['saleInformation'] = $saleInformation['infoAll']['category'][$saleCategory['id']];
+                        $sale[$saleCategory['id']]                                  = $saleCategory;
+                        $sale[$saleCategory['id']]['saleInformation']               = $saleInformation['infoAll']['category'][$saleCategory['id']];
                         $sale[$saleCategory['id']]['saleInformation']['price_time'] = [
                             'year'   => date("Y", $time),
                             'month'  => date("m", $time),

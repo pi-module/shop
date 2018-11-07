@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -22,13 +22,13 @@ class CompareController extends ActionController
     public function indexAction()
     {
         // Get info from url
-        $slugList = $this->params('product');
+        $slugList    = $this->params('product');
         $mainProduct = [];
-        $products = [];
+        $products    = [];
         // Check product list
         if (!empty($slugList)) {
             $mainProduct = Pi::api('product', 'shop')->getProductLight($slugList[1], 'slug');
-            $products = Pi::api('product', 'shop')->getCompareList($slugList, $mainProduct);
+            $products    = Pi::api('product', 'shop')->getCompareList($slugList, $mainProduct);
         }
         // Set url
         $url = Pi::url($this->url('', ['controller' => 'compare']));
@@ -44,9 +44,11 @@ class CompareController extends ActionController
         }
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
-        $filter->setOptions([
-            'force_replace_space' => true,
-        ]);
+        $filter->setOptions(
+            [
+                'force_replace_space' => true,
+            ]
+        );
         $seoKeywords = $filter($title);
 
         // Save statistics

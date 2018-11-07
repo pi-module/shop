@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -20,8 +20,8 @@ class AttributeForm extends BaseForm
 {
     public function __construct($name = null, $options = [])
     {
-        $this->options = $options;
-        $this->module = Pi::service('module')->current();
+        $this->options  = $options;
+        $this->module   = Pi::service('module')->current();
         $this->position = Pi::api('attribute', 'shop')->attributePositionForm();
         parent::__construct($name);
     }
@@ -37,77 +37,89 @@ class AttributeForm extends BaseForm
     public function init()
     {
         // id
-        $this->add([
-            'name'       => 'id',
-            'attributes' => [
-                'type' => 'hidden',
-            ],
-        ]);
-        // title
-        $this->add([
-            'name'       => 'title',
-            'options'    => [
-                'label' => __('Title'),
-            ],
-            'attributes' => [
-                'type'        => 'text',
-                'description' => '',
-                'required'    => true,
-            ],
-        ]);
-        // name
-        $this->add([
-            'name'       => 'name',
-            'options'    => [
-                'label' => __('Name'),
-            ],
-            'attributes' => [
-                'type'        => 'text',
-                'description' => __('Set name for call anywhere, a-z 0-9 allowed'),
-                'required'    => true,
-            ],
-        ]);
-        // category
-        $this->add([
-            'name'       => 'category',
-            'type'       => 'Module\Shop\Form\Element\Category',
-            'options'    => [
-                'label'  => __('Category'),
-                'module' => $this->module,
-            ],
-            'attributes' => [
-                'required' => true,
-                'size'     => 5,
-                'multiple' => 1,
-            ],
-        ]);
-        // status
-        $this->add([
-            'name'       => 'status',
-            'type'       => 'select',
-            'options'    => [
-                'label'         => __('Status'),
-                'value_options' => [
-                    1 => __('Online'),
-                    0 => __('Offline'),
+        $this->add(
+            [
+                'name'       => 'id',
+                'attributes' => [
+                    'type' => 'hidden',
                 ],
-            ],
-            'attributes' => [
-                'required' => true,
-            ],
-        ]);
+            ]
+        );
+        // title
+        $this->add(
+            [
+                'name'       => 'title',
+                'options'    => [
+                    'label' => __('Title'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                    'required'    => true,
+                ],
+            ]
+        );
+        // name
+        $this->add(
+            [
+                'name'       => 'name',
+                'options'    => [
+                    'label' => __('Name'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => __('Set name for call anywhere, a-z 0-9 allowed'),
+                    'required'    => true,
+                ],
+            ]
+        );
+        // category
+        $this->add(
+            [
+                'name'       => 'category',
+                'type'       => 'Module\Shop\Form\Element\Category',
+                'options'    => [
+                    'label'  => __('Category'),
+                    'module' => $this->module,
+                ],
+                'attributes' => [
+                    'required' => true,
+                    'size'     => 5,
+                    'multiple' => 1,
+                ],
+            ]
+        );
+        // status
+        $this->add(
+            [
+                'name'       => 'status',
+                'type'       => 'select',
+                'options'    => [
+                    'label'         => __('Status'),
+                    'value_options' => [
+                        1 => __('Online'),
+                        0 => __('Offline'),
+                    ],
+                ],
+                'attributes' => [
+                    'required' => true,
+                ],
+            ]
+        );
         // position
-        $this->add([
-            'name'       => 'position',
-            'type'       => 'select',
-            'options'    => [
-                'label'         => __('Set'),
-                'value_options' => $this->position,
-            ],
-            'attributes' => [
-                'required' => true,
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'position',
+                'type'       => 'select',
+                'options'    => [
+                    'label'         => __('Set'),
+                    'value_options' => $this->position,
+                ],
+                'attributes' => [
+                    'required' => true,
+                ],
+            ]
+        );
         // type
         /* $this->add(array(
             'name' => 'type',
@@ -134,69 +146,81 @@ class AttributeForm extends BaseForm
         // Check
         if ($this->options['type'] == 'select') {
             // data
-            $this->add([
-                'name'       => 'data',
-                'options'    => [
-                    'label' => __('General data'),
-                ],
-                'attributes' => [
-                    'type'        => 'textarea',
-                    'rows'        => '5',
-                    'cols'        => '40',
-                    'description' => __('Use `|` as delimiter to separate select box elements'),
-                ],
-            ]);
+            $this->add(
+                [
+                    'name'       => 'data',
+                    'options'    => [
+                        'label' => __('General data'),
+                    ],
+                    'attributes' => [
+                        'type'        => 'textarea',
+                        'rows'        => '5',
+                        'cols'        => '40',
+                        'description' => __('Use `|` as delimiter to separate select box elements'),
+                    ],
+                ]
+            );
             // default
-            $this->add([
-                'name'       => 'default',
-                'options'    => [
-                    'label' => __('Default data'),
-                ],
-                'attributes' => [
-                    'type' => 'text',
-                ],
-            ]);
+            $this->add(
+                [
+                    'name'       => 'default',
+                    'options'    => [
+                        'label' => __('Default data'),
+                    ],
+                    'attributes' => [
+                        'type' => 'text',
+                    ],
+                ]
+            );
         }
         // information
-        $this->add([
-            'name'       => 'information',
-            'options'    => [
-                'label' => __('Extra information'),
-            ],
-            'attributes' => [
-                'type'        => 'text',
-                'description' => __('Put URL for click by user'),
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'information',
+                'options'    => [
+                    'label' => __('Extra information'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => __('Put URL for click by user'),
+                ],
+            ]
+        );
         // icon
-        $this->add([
-            'name'       => 'icon',
-            'options'    => [
-                'label' => __('Icon'),
-            ],
-            'attributes' => [
-                'type'        => 'text',
-                'description' => __('Use fontawesome.io icons, and set icon name like fa-home'),
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'icon',
+                'options'    => [
+                    'label' => __('Icon'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => __('Use fontawesome.io icons, and set icon name like fa-home'),
+                ],
+            ]
+        );
         // search
-        $this->add([
-            'name'       => 'search',
-            'type'       => 'checkbox',
-            'options'    => [
-                'label' => __('Search'),
-            ],
-            'attributes' => [
-                'description' => '',
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'search',
+                'type'       => 'checkbox',
+                'options'    => [
+                    'label' => __('Search'),
+                ],
+                'attributes' => [
+                    'description' => '',
+                ],
+            ]
+        );
         // Save
-        $this->add([
-            'name'       => 'submit',
-            'type'       => 'submit',
-            'attributes' => [
-                'value' => __('Submit'),
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Submit'),
+                ],
+            ]
+        );
     }
 }	

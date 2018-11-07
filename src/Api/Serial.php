@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -40,23 +40,25 @@ class Serial extends AbstractApi
             $result['product'] = Pi::api('product', 'shop')->getProductLight($serial->product);
             // Check serial check before or not
             if ($serial['status'] == 0) {
-                $result['status'] = 1;
+                $result['status']  = 1;
                 $result['message'] = __('This serial number is true and joined to your product');
                 // Update serial row
-                $serial->status = 1;
+                $serial->status     = 1;
                 $serial->check_time = time();
-                $serial->check_uid = Pi::user()->getId();
-                $serial->check_ip = Pi::user()->getIp();
+                $serial->check_uid  = Pi::user()->getId();
+                $serial->check_ip   = Pi::user()->getIp();
                 $serial->save();
             } else {
-                $result['status'] = 2;
+                $result['status']  = 2;
                 $result['message'] = __('This serial number checked before by another user, please call seller and ask about your product');
             }
             // Set serial
             $result['serial'] = $serial->toArray();
         } else {
-            $result['status'] = 3;
-            $result['message'] = __('This serial number not fount on our system ! please check you input true serial number, if is true please call seller and ask about your product');
+            $result['status']  = 3;
+            $result['message'] = __(
+                'This serial number not fount on our system ! please check you input true serial number, if is true please call seller and ask about your product'
+            );
         }
 
         return $result;
@@ -86,11 +88,11 @@ class Serial extends AbstractApi
         }
         // Save on DB
         for ($count = 1; $count <= $config['serial_count']; $count++) {
-            $row = Pi::model('serial', $this->getModule())->createRow();
-            $row->product = $product;
+            $row                = Pi::model('serial', $this->getModule())->createRow();
+            $row->product       = $product;
             $row->serial_number = sprintf($config['serial_role'], $product, Rand::getString(12, $serial, true));
-            $row->time_create = time();
-            $row->status = 0;
+            $row->time_create   = time();
+            $row->status        = 0;
             $row->save();
         }
     }

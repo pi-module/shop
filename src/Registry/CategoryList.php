@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt BSD 3-Clause License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt BSD 3-Clause License
  * @package         Registry
  */
 
@@ -31,8 +31,8 @@ class CategoryList extends AbstractRegistry
     protected function loadDynamic($options = [])
     {
         $return = [];
-        $where = ['status' => 1];
-        $order = ['title ASC', 'id ASC'];
+        $where  = ['status' => 1];
+        $order  = ['title ASC', 'id ASC'];
         $select = Pi::model('category', $this->module)->select()->where($where)->order($order);
         $rowset = Pi::model('category', $this->module)->selectWith($select);
         foreach ($rowset as $row) {
@@ -48,7 +48,7 @@ class CategoryList extends AbstractRegistry
     public function read()
     {
         $options = [];
-        $result = $this->loadData($options);
+        $result  = $this->loadData($options);
 
         return $result;
     }

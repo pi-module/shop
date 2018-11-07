@@ -1,6 +1,6 @@
 <?php $this->css($this->assetModule('css/admin.css')); ?>
 <div class="clearfix">
-    <div class="well">
+    <div class="card card-body bg-light mb-3">
         <h3><?php _e('How this part work?'); ?></h3>
         <p><?php _e('Price system, help you to manage your product price and kep product price update'); ?></p>
         <ul>
@@ -23,7 +23,8 @@
                     <a href="<?php echo sprintf(
                         '%s?upload/shop/csv/%s',
                         Pi::url('www/script/download.php'),
-                        $file); ?>" class="list-group-item">
+                        $file
+                    ); ?>" class="list-group-item">
                         <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php echo $file; ?>
                     </a>
                 <?php } ?>

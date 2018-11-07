@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -565,7 +565,9 @@ return [
         'order_installment_role'    => [
             'category'    => 'order',
             'title'       => _a('Installment role'),
-            'description' => _a('If your order type is installment, when you set role name here, just users of this role can make installment order, if set it empty all users can make installment order'),
+            'description' => _a(
+                'If your order type is installment, when you set role name here, just users of this role can make installment order, if set it empty all users can make installment order'
+            ),
             'edit'        => 'text',
             'filter'      => 'string',
             'value'       => '',

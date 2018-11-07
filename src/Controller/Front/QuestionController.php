@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -25,7 +25,7 @@ class QuestionController extends IndexController
         // Check post
         if ($this->request->isPost()) {
             // Get user and item
-            $uid = Pi::user()->getId();
+            $uid     = Pi::user()->getId();
             $product = Pi::api('product', 'shop')->getProductLight(_post('product', 'int'));
             // Check item
             if (!$product || $product['status'] != 1) {
@@ -49,10 +49,10 @@ class QuestionController extends IndexController
                 $values = $form->getData();
                 // Set
                 $values['time_ask'] = time();
-                $values['status'] = 0;
-                $values['product'] = $product['id'];
-                $values['uid_ask'] = Pi::user()->getId();
-                $values['ip'] = Pi::user()->getIp();
+                $values['status']   = 0;
+                $values['product']  = $product['id'];
+                $values['uid_ask']  = Pi::user()->getId();
+                $values['ip']       = Pi::user()->getIp();
                 // Save
                 $row = $this->getModel('question')->createRow();
                 $row->assign($values);
@@ -87,7 +87,9 @@ class QuestionController extends IndexController
                 // Set view
                 $this->view()->setTemplate('product-question');
                 $this->view()->assign('questionForm', $form);
-                $this->view()->assign('questionMessage', __('You can any question about this product from us, we read your question and answer you as soon as possible'));
+                $this->view()->assign(
+                    'questionMessage', __('You can any question about this product from us, we read your question and answer you as soon as possible')
+                );
                 $this->view()->assign('questionValid', 'notValid');
             }
         } else {

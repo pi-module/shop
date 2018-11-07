@@ -44,15 +44,15 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
 
 
 ;Array.prototype.indexOf || (Array.prototype.indexOf = function (t) {
-    if (null == this)throw new TypeError;
+    if (null == this) throw new TypeError;
     var e = Object(this), r = e.length >>> 0;
-    if (0 === r)return -1;
+    if (0 === r) return -1;
     var n = 0;
-    if (arguments.length > 1 && (n = Number(arguments[1]), n != n ? n = 0 : 0 != n && n != 1 / 0 && n != -(1 / 0) && (n = (n > 0 || -1) * Math.floor(Math.abs(n)))), n >= r)return -1;
-    for (var i = n >= 0 ? n : Math.max(r - Math.abs(n), 0); i < r; i++)if (i in e && e[i] === t)return i;
+    if (arguments.length > 1 && (n = Number(arguments[1]), n != n ? n = 0 : 0 != n && n != 1 / 0 && n != -(1 / 0) && (n = (n > 0 || -1) * Math.floor(Math.abs(n)))), n >= r) return -1;
+    for (var i = n >= 0 ? n : Math.max(r - Math.abs(n), 0); i < r; i++) if (i in e && e[i] === t) return i;
     return -1
 }), Function.prototype.bind || (Function.prototype.bind = function (t) {
-    if ("function" != typeof this)throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+    if ("function" != typeof this) throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
     var e = Array.prototype.slice.call(arguments, 1), r = this, n = function () {
     }, i = function () {
         return r.apply(this instanceof n && t ? this : t, e.concat(Array.prototype.slice.call(arguments)))
@@ -65,19 +65,19 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
     t.link = function (t, e, r) {
         r = r || {};
         var n = e || "_blank", i = [];
-        for (var o in r)o = o.toLowerCase(), "width" == o || "height" == o || "left" == o ? i.push(o + "=" + r[o]) : "location" != o && "menubar" != o && "resizable" != o && "scrollbars" != o && "status" != o && "titlebar" != o && "toolbar" != o || i.push(o + "=1");
+        for (var o in r) o = o.toLowerCase(), "width" == o || "height" == o || "left" == o ? i.push(o + "=" + r[o]) : "location" != o && "menubar" != o && "resizable" != o && "scrollbars" != o && "status" != o && "titlebar" != o && "toolbar" != o || i.push(o + "=1");
         var a = null;
         i.length > 0 && (a = i.join(",")), window.open(t, n, a)
     }, t.isArray = function (t) {
         return Array.isArray ? Array.isArray(t) : "[object Array]" === e.call(t)
     }, t.isEmpty = function (e) {
         var r = typeof e;
-        if ("undefined" == r)return !0;
-        if (null === e)return !0;
+        if ("undefined" == r) return !0;
+        if (null === e) return !0;
         if ("object" == r) {
-            if (e == {} || e == [])return !0;
+            if (e == {} || e == []) return !0;
             var n = !0;
-            for (var i in e)if (!t.isEmpty(e[i])) {
+            for (var i in e) if (!t.isEmpty(e[i])) {
                 n = !1;
                 break
             }
@@ -93,12 +93,12 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
     }, t.isNull = function (t) {
         return "" === t || null === t || void 0 === t || "undefined" == typeof t || "undefined" == t || "null" == t
     }, t.clone = function (e) {
-        if (null === e || "object" != typeof e)return e;
-        if (e.init)return e;
+        if (null === e || "object" != typeof e) return e;
+        if (e.init) return e;
         var r = e.constructor;
         if (r) {
             var n = new r;
-            for (var i in e)n[i] = t.clone(e[i])
+            for (var i in e) n[i] = t.clone(e[i])
         }
         return n
     }, t.sortOn = function (t, e) {
@@ -107,7 +107,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         }) : t
     }, t.arrayShuffle = function (t) {
         if (t) {
-            for (var e, r, n = t.length; n;)r = Math.floor(Math.random() * n--), e = t[n], t[n] = t[r], t[r] = e;
+            for (var e, r, n = t.length; n;) r = Math.floor(Math.random() * n--), e = t[n], t[n] = t[r], t[r] = e;
             return t
         }
         return []
@@ -122,25 +122,25 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
     }, t.alphanumeric = function (t, e) {
         return e ? t.replace(/[^A-Za-z0-9]/g, "") : t.replace(/[^A-Za-z0-9_\-\.]/g, "")
     }, t.parseJSON = function (t) {
-        if ("string" != typeof t)return null;
+        if ("string" != typeof t) return null;
         try {
             return JSON.parse(t)
         } catch (e) {
             return t || null
         }
     }, t.hexToRgb = function (t) {
-        if (!t)return "";
+        if (!t) return "";
         var e = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(t);
         return e ? [parseInt(e[1], 16), parseInt(e[2], 16), parseInt(e[3], 16)] : [0, 0, 0]
     }, t.makeColor = function (e, r) {
-        if (!e)return "";
+        if (!e) return "";
         var n = t.hexToRgb(e);
         return t.isNumber(r) && jbeeb.Browser.rgba ? (r > 1 && (r /= 100), r = "," + r, "rgba(" + n.join(",") + r + ")") : e
     }, t.getXYWH = function (t) {
         var e = 0, r = 0, n = 0, i = 0;
         if (t) {
             n = t.offsetWidth, i = t.offsetHeight;
-            for (var o = jbeeb.Browser.touch; t && !isNaN(t.offsetLeft) && !isNaN(t.offsetTop);)o ? (e += (t.offsetLeft || 0) - (t.scrollLeft || 0), r += (t.offsetTop || 0) - (t.scrollTop || 0)) : (e += t.offsetLeft || 0, r += t.offsetTop || 0), t = t.offsetParent;
+            for (var o = jbeeb.Browser.touch; t && !isNaN(t.offsetLeft) && !isNaN(t.offsetTop);) o ? (e += (t.offsetLeft || 0) - (t.scrollLeft || 0), r += (t.offsetTop || 0) - (t.scrollTop || 0)) : (e += t.offsetLeft || 0, r += t.offsetTop || 0), t = t.offsetParent;
             if (o) {
                 var a = null != window.scrollX ? window.scrollX : window.pageXOffset,
                     u = null != window.scrollY ? window.scrollY : window.pageYOffset;
@@ -154,7 +154,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
     }, t.contains = function (t, e) {
         var r = {}, n = {x: t.x, y: t.y, w: t.width, h: t.height}, i = {x: e.x, y: e.y, w: e.width, h: e.height};
         n.xMax = n.x + n.w, n.yMax = n.y + n.h, i.xMax = i.x + i.w, i.yMax = i.y + i.h;
-        for (var o in n)r[o] = n[o] >= i[o];
+        for (var o in n) r[o] = n[o] >= i[o];
         var a = !(r.x || r.y || !r.xMax || !r.yMax);
         return a
     }, t.getTimestamp = function () {
@@ -168,7 +168,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         var e = {}, r = t.attributes;
         if (r) {
             for (var n = r.length,
-                     i = 0; i < n; i++)jbeeb.Browser.ie ? r[i].specified && (e[r[i].nodeName] = r[i].nodeValue.toString()) : r[i].value ? e[r[i].nodeName] = r[i].value.toString() : e[r[i].nodeName] = r[i].nodeValue.toString();
+                     i = 0; i < n; i++) jbeeb.Browser.ie ? r[i].specified && (e[r[i].nodeName] = r[i].nodeValue.toString()) : r[i].value ? e[r[i].nodeName] = r[i].value.toString() : e[r[i].nodeName] = r[i].nodeValue.toString();
             return e
         }
         return {}
@@ -191,7 +191,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         var i = this.b;
         if (i) {
             var s = i[e];
-            if (s)for (var r = s.length; r--;) {
+            if (s) for (var r = s.length; r--;) {
                 var v = s[r];
                 v.scope == n && v.fn == t && s.splice(r, 1)
             }
@@ -234,7 +234,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
                     t()
                 }, 50)
             }
-            for (h = 1; e = o.shift();)e()
+            for (h = 1; e = o.shift();) e()
         }, c[u] && (n = function () {
             c.removeEventListener(i, n, a), t()
         }, c[u](i, n, a), e = function (e) {
@@ -278,7 +278,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         this.state || (this.state = 1, this.d = [], this.d.push(this.k = t()), this.c ? this.g(this.p) : this.g(this.m), this.j())
     }, s.getFPS = function () {
         var t = this.d.length - 1;
-        if (t < 2)return this.l;
+        if (t < 2) return this.l;
         var i = (this.d[0] - this.d[t]) / t;
         return 1e3 / i
     }, s.p = function () {
@@ -289,7 +289,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         this.q = null
     }, s.j = function () {
         if (null == this.q) {
-            if (this.c)return i(this.h), void(this.q = !0);
+            if (this.c) return i(this.h), void(this.q = !0);
             this.q && clearTimeout(this.q), this.q = setTimeout(this.h, this.l)
         }
     }, s.g = function (t) {
@@ -299,7 +299,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         for (this.k = i, this.dispatchEvent("tick", {
             delta: e,
             time: i
-        }), this.d.unshift(i); this.d.length > 100;)this.d.pop()
+        }), this.d.unshift(i); this.d.length > 100;) this.d.pop()
     }, s.toString = function () {
         return "[Ticker]"
     }, jbeeb.Ticker || (jbeeb.Ticker = n)
@@ -323,7 +323,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         e.platform = a, e.ios = /iphone/.test(a) || /ipod/.test(a) || /ipad/.test(a), e.win = e.windows = a ? /win/.test(a) : /win/.test(i), e.mac = a ? /mac/.test(a) : /mac/.test(i), e.cssPrefix = "", e.chrome || e.safari ? (e.cssPrefix = "webkit", e.chrome && e.version < 10 ? e.oldWebkit = !0 : e.safari && e.version < 5.1 && (e.oldWebkit = !0)) : e.opera ? e.cssPrefix = "o" : e.moz ? e.cssPrefix = "moz" : e.ie && e.version > 8 && (e.cssPrefix = "ms"), (e.chrome || e.ios || e.android) && (e.flash = 0);
         var n = !1, m = "animation", c = "", d = "Webkit Moz O ms Khtml".split(" "), l = "",
             b = document.createElement("div");
-        if (b.style.animationName && (n = !0), n === !1)for (var v = 0; v < d.length; v++)if (void 0 !== b.style[d[v] + "AnimationName"]) {
+        if (b.style.animationName && (n = !0), n === !1) for (var v = 0; v < d.length; v++) if (void 0 !== b.style[d[v] + "AnimationName"]) {
             l = d[v], m = l + "Animation", c = "-" + l.toLowerCase() + "-", n = !0;
             break
         }
@@ -424,7 +424,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         e.v.push(b), jbeeb.amReady && e.u()
     }, e.u = function () {
         var b = e.v.length;
-        if (b > 0)for (var t = b; t--;) {
+        if (b > 0) for (var t = b; t--;) {
             var a = e.v.splice(t, 1)[0];
             a && a.init && a.init.call(a)
         }
@@ -696,9 +696,9 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         this.parent && this.parent.toBack(this)
     }, e.A = function () {
         var t = this.style, e = this.H(), i = this.K(), s = this.I(), h = this.J(), n = "none";
-        if (e == [] && i == [] && s == [] && h == []); else {
+        if (e == [] && i == [] && s == [] && h == []) ; else {
             for (var o = i.concat(s, h, e), r = o.length, l = [], a = [], u = 0,
-                     c = 0; c < r; c++)0 == u ? 1 == o[c] && a.push("inset") : u < 4 ? a.push(o[c] + "px") : (a.push(jbeeb.Utils.makeColor(o[c], o[c + 1])), l.push(a.join(" ")), a = [], ++c, u = -1), u++;
+                     c = 0; c < r; c++) 0 == u ? 1 == o[c] && a.push("inset") : u < 4 ? a.push(o[c] + "px") : (a.push(jbeeb.Utils.makeColor(o[c], o[c + 1])), l.push(a.join(" ")), a = [], ++c, u = -1), u++;
             l.length > 0 && (n = l.join(","))
         }
         t.boxShadow = t.MozBoxShadow = t.WebkitBoxShadow = t.OBoxShadow = t.msBoxShadow = n, this.O && (this.O.boxShadow = n)
@@ -774,10 +774,10 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         if (this.aa = !0, t.editable) {
             var i = null;
             t.fill && (i = "object" == typeof t.fill ? t.fill.color : t.fill), t.stroke = t.stroke || i || {
-                    weight: 1,
-                    color: "#000000",
-                    alpha: 1
-                }
+                weight: 1,
+                color: "#000000",
+                alpha: 1
+            }
         }
         this.aq(t, e);
         this.style;
@@ -872,7 +872,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
             var t = null, e = null, i = null;
             if (this.textSize) t = this.textSize, e = "1em", i = t + "px"; else {
                 var s = this.width, h = this.height;
-                if (s > 0 && h > 0)if ("wh" == this.textFit) {
+                if (s > 0 && h > 0) if ("wh" == this.textFit) {
                     var n = s < h ? s : h;
                     t = this.textScale > 0 ? n * this.textScale : n
                 } else if ("w" == this.textFit) {
@@ -890,9 +890,9 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         this.aa || (this.ai(), this.ah())
     }, e.X = function () {
         var t = this.ac(), e = this.af(), i = this.ad(), s = this.ae(), h = "none";
-        if (t == [] && e == [] && i == [] && s == []); else {
+        if (t == [] && e == [] && i == [] && s == []) ; else {
             for (var n = e.concat(i, t, s), l = n.length, o = [], a = [], d = 0,
-                     r = 0; r < l; r++)0 == d ? 1 == n[r] && a.push("inset") : d < 4 ? a.push(n[r] + "px") : (a.push(jbeeb.Utils.makeColor(n[r], n[r + 1])), o.push(a.join(" ")), a = [], ++r, d = -1), d++;
+                     r = 0; r < l; r++) 0 == d ? 1 == n[r] && a.push("inset") : d < 4 ? a.push(n[r] + "px") : (a.push(jbeeb.Utils.makeColor(n[r], n[r + 1])), o.push(a.join(" ")), a = [], ++r, d = -1), d++;
             o.length > 0 && (h = o.join(","))
         }
         var u = this.style;
@@ -933,34 +933,34 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         this.init(t)
     }, e = t.prototype = new jbeeb.Box(null);
     e.at = [], e.addChild = function (t) {
-        if (null == t)return t;
+        if (null == t) return t;
         var e = arguments.length;
-        if (e > 0)for (var i = 0; i < e; i++) {
+        if (e > 0) for (var i = 0; i < e; i++) {
             var n = arguments[i];
             n.parent && n.parent.removeChild(n), n.parent = this, n.stage = 1 == this.amStage ? this : this.stage, n.setZ(this.at.length), this.element.appendChild(n.element), n.onAdded && n.onAdded.call(n), this.at.push(n)
         }
     }, e.removeChild = function (t) {
         var e = arguments.length;
         if (e > 1) {
-            for (var i = !0, n = e; n--;)i = i && this.removeChild(arguments[n]);
+            for (var i = !0, n = e; n--;) i = i && this.removeChild(arguments[n]);
             return i
         }
         return this.removeChildAt(this.at.indexOf(t))
     }, e.removeChildAt = function (t) {
         var e = arguments.length;
         if (e > 1) {
-            for (var i = [], n = 0; n < e; n++)i[n] = arguments[n];
+            for (var i = [], n = 0; n < e; n++) i[n] = arguments[n];
             i.sort(function (t, e) {
                 return e - t
             });
-            for (var r = !0, n = 0; n < e; n++)r = r && this.removeChildAt(i[n]);
+            for (var r = !0, n = 0; n < e; n++) r = r && this.removeChildAt(i[n]);
             return r
         }
-        if (t < 0 || t > this.at.length - 1)return !1;
+        if (t < 0 || t > this.at.length - 1) return !1;
         var h = this.at[t];
         return h && (h.element && h.element.parentNode && h.element.parentNode.removeChild(h.element), h.parent = null), this.at.splice(t, 1), this.as(), !0
     }, e.removeAllChildren = function () {
-        for (var t = this.at; t.length;)this.removeChildAt(0)
+        for (var t = this.at; t.length;) this.removeChildAt(0)
     }, e.as = function () {
         for (var t = this.at.length, e = 0; e < t; e++) {
             var i = this.at[e];
@@ -968,7 +968,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         }
     }, e.toFront = function (t) {
         if (t) {
-            for (var e = this.at.length, i = 0, n = e; n--;)if (this.at[n] == t) {
+            for (var e = this.at.length, i = 0, n = e; n--;) if (this.at[n] == t) {
                 i = n;
                 break
             }
@@ -976,7 +976,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         } else this.parent && this.parent.toFront(this)
     }, e.toBack = function (t) {
         if (t) {
-            for (var e = this.at.length, i = 0, n = e; n--;)if (this.at[n] == t) {
+            for (var e = this.at.length, i = 0, n = e; n--;) if (this.at[n] == t) {
                 i = n;
                 break
             }
@@ -993,13 +993,13 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         }
         this.au(t, e)
     }, e.av = e.setFlex, e.setFlex = function (t) {
-        for (var e = this.at.length; e--;)this.at[e].setFlex(t);
+        for (var e = this.at.length; e--;) this.at[e].setFlex(t);
         this.av(t)
     }, e.ax = e.destroy, e.destroy = function () {
-        if (this.at)for (var t = this.at.length; t--;)this.at[t] && (this.at[t].destroy(), this.removeChild(this.at[t]), this.at[t] = null);
+        if (this.at) for (var t = this.at.length; t--;) this.at[t] && (this.at[t].destroy(), this.removeChild(this.at[t]), this.at[t] = null);
         this.at = null, this.ax()
     }, e.destroyChildren = function () {
-        if (this.at)for (var t = this.at.length; t--;)this.at[t] && (this.at[t].destroy(), this.removeChild(this.at[t]), this.at[t] = null);
+        if (this.at) for (var t = this.at.length; t--;) this.at[t] && (this.at[t].destroy(), this.removeChild(this.at[t]), this.at[t] = null);
         this.at.length = 0, this.at = null, this.at = []
     }, e.getChildren = function () {
         return this.at
@@ -1013,7 +1013,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         return this.aA(t), this
     }, e = t.prototype = new jbeeb.Container;
     e.amReady = null, e.ay = null, e.aA = function (t) {
-        if (t)if (this.amReady = 0, t.onReady && (this.ay = [], this.ay.push(t.onReady)), this.id = jbeeb.getUID(), t.stage) this.amStage = 0, this.aB(t), jbeeb.register(this); else {
+        if (t) if (this.amReady = 0, t.onReady && (this.ay = [], this.ay.push(t.onReady)), this.id = jbeeb.getUID(), t.stage) this.amStage = 0, this.aB(t), jbeeb.register(this); else {
             this.amStage = 1, this.parent = this, this.stage = this;
             var e = t.target, i = null, s = 0;
             e && (i = "string" == typeof e ? document.getElementById(e) : e, i && 1 === i.nodeType ? (this.element = document.createElement("div"), this.element.id = this.id, i.appendChild(this.element)) : s = 1), e && !s || (document.write('<div id="' + this.id + '"></div>'), this.element = document.getElementById(this.id)), t.element = this.element, this.aB(t), this.style = this.element.style, this.style.position = "relative", this.style.display = t.inline === !0 || "true" == t.inline || 1 === t.inline ? "inline-block" : "block", this.style.verticalAlign = "top", this.style.clear = "both", this.style.zoom = 1;
@@ -1025,7 +1025,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
         this.x = t.x, this.y = t.y, this.width = t.width, this.height = t.height;
         setTimeout(this.az.bind(this), 50)
     }, e.az = function () {
-        if (this.amReady = 1, this.ay)for (var t = 0; t < this.ay.length; t++)this.ay.pop()()
+        if (this.amReady = 1, this.ay) for (var t = 0; t < this.ay.length; t++) this.ay.pop()()
     }, e.onReady = function (t) {
         this.amReady ? t() : (this.ay || (this.ay = []), this.ay.push(t))
     }, e.toString = function () {
@@ -1082,7 +1082,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
             k < v && (m >= T && (n = u(m == T ? h : h % 1e3)), m >= M && (a = u(m == M ? D : D % 60)), m >= l && (i = u(m == l ? C : C % 60)), m >= p && (r = u(m == p ? H : H % 24)));
             var S = t.getUTCFullYear(), I = t.getUTCMonth(), R = t.getUTCDate(), Y = g.getUTCFullYear(),
                 L = g.getUTCMonth(), b = g.getUTCDate(), E = R, w = b, F = 0;
-            if (m >= v)if (m == v) aZ = u(U); else {
+            if (m >= v) if (m == v) aZ = u(U); else {
                 var j = t.getUTCHours(), O = t.getUTCMinutes(), Z = t.getUTCSeconds(), A = g.getUTCHours(),
                     z = g.getUTCMinutes(), N = g.getUTCSeconds(), P = L == I ? 0 : -1, q = L + P;
                 q < 0 && (q += 12);
@@ -1110,8 +1110,8 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
     }, e.aU = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], e.getMonthDays = function (t, n) {
         return 1 == t ? n % 400 == 0 || n % 4 == 0 && n % 100 != 0 ? 29 : 28 : e.aU[t]
     }, e.pad = function (e, t) {
-        if (t)for (var n in e) {
-            for (var a = String(e[n]), i = "ms" == n ? 3 : t; a.length < i;)a = "0" + a;
+        if (t) for (var n in e) {
+            for (var a = String(e[n]), i = "ms" == n ? 3 : t; a.length < i;) a = "0" + a;
             e[n] = a
         }
     }, Object.defineProperty(t, "rangeHi", {
@@ -1184,7 +1184,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
             var d = l[u];
             d == a && (a = u), d == o && (o = u)
         }
-        for (var u = 0; u < l.length; u++)if (u >= a && u <= o) {
+        for (var u = 0; u < l.length; u++) if (u >= a && u <= o) {
             var m = l[u];
             this.bd[m].use = !0, this.bn = m
         }
@@ -1210,8 +1210,8 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
                 shadow: null
             }, labels: {font: "Arial, _sans", color: "#303030", weight: "bold", textScale: 1, offset: 0}
         };
-        if (e.numbers)for (var L in T.numbers)e.numbers[L] && (T.numbers[L] = e.numbers[L]);
-        if (e.labels)for (var L in T.labels)e.labels[L] && (T.labels[L] = e.labels[L]);
+        if (e.numbers) for (var L in T.numbers) e.numbers[L] && (T.numbers[L] = e.numbers[L]);
+        if (e.labels) for (var L in T.labels) e.labels[L] && (T.labels[L] = e.labels[L]);
         l.reverse(), this.bG = {}, this.bl = [];
         for (var S = 0, R = [], u = 0; u < l.length; u++) {
             var F = l[u];
@@ -1246,16 +1246,16 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
                     }
                     D.time.slot = A, D.addChild(D.time)
                 } else if (D.time = new jbeeb.TextBox({
-                        x: 0,
-                        y: 0,
-                        w: y,
-                        h: v,
-                        text: "00",
-                        textScale: bI,
-                        font: T.numbers.font,
-                        textColor: T.numbers.color,
-                        align: "center"
-                    }), D.addChild(D.time), !this.bx) {
+                    x: 0,
+                    y: 0,
+                    w: y,
+                    h: v,
+                    text: "00",
+                    textScale: bI,
+                    font: T.numbers.font,
+                    textColor: T.numbers.color,
+                    align: "center"
+                }), D.addChild(D.time), !this.bx) {
                     var Y = .03 * g;
                     D.line = new jbeeb.Box({
                         x: 0,
@@ -1339,7 +1339,7 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
             var i = this.bl[e], n = i.store.name, s = i.time.text, l = this.bF(s);
             l >= this.bE && l != this.bj[n] && (i.setWidth(l + this.bA), this.bj[n] = l + this.bA, t = !0)
         }
-        if (t)for (var a = 0, e = 0; e < this.bl.length; e++) {
+        if (t) for (var a = 0, e = 0; e < this.bl.length; e++) {
             var i = this.bl[e], s = i.time.text, l = this.bF(s);
             i.setX(a), i.time.setWidth(i.width), i.time.center(), i.labels && (i.labels.setX(a), i.labels.setWidth(i.width)), i.line && (i.line.setWidth(i.width), i.line.center()), a += i.width + this.bH
         }
@@ -1352,11 +1352,11 @@ var CountdownFadeInMS = 500; // (Only applies to image flipper)
             var n = this.bG[t].time.slot[i], s = this.bd[t], l = String(e).substr(i, 1), a = n.num[l];
             if (a) {
                 if (s.prev[i] != l) {
-                    for (var o = 0; o < 10; o++)n.num[o].hide();
+                    for (var o = 0; o < 10; o++) n.num[o].hide();
                     a.show(), s.ani[i] = !0, s.aniCount[i] = 0
                 }
                 if (s.ani[i]) {
-                    for (var o = 0; o < 3; o++)a.img[o].hide();
+                    for (var o = 0; o < 3; o++) a.img[o].hide();
                     this.bB ? a.img[2].show() : (a.img[s.aniCount[i]].show(), s.aniCount[i]++, s.aniCount[i] > 2 && (s.ani[i] = !1))
                 }
                 s.prev[i] = l

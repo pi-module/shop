@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -25,52 +25,61 @@ class AttachController extends ActionController
 {
     protected $AttachPrefix = 'attach_';
 
-    protected $attachColumns = [
-        'id', 'title', 'file', 'path', 'product', 'time_create', 'size', 'type', 'status', 'hits',
-    ];
+    protected $attachColumns
+        = [
+            'id', 'title', 'file', 'path', 'product', 'time_create', 'size', 'type', 'status', 'hits',
+        ];
 
     public function indexAction()
     {
         // Get page
-        $page = $this->params('page', 1);
+        $page    = $this->params('page', 1);
         $product = $this->params('product');
-        $module = $this->params('module');
+        $module  = $this->params('module');
         // Set info
-        $order = ['time_create DESC', 'id DESC'];
+        $order  = ['time_create DESC', 'id DESC'];
         $offset = (int)($page - 1) * $this->config('admin_perpage');
-        $limit = intval($this->config('admin_perpage'));
+        $limit  = intval($this->config('admin_perpage'));
         // Get info
         $select = $this->getModel('attach')->select()->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('attach')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $file[$row->id] = $row->toArray();
-            $product = $this->getModel('product')->find($file[$row->id]['product'])->toArray();
-            $file[$row->id]['time_create'] = _date($file[$row->id]['time_create']);
+            $file[$row->id]                 = $row->toArray();
+            $product                        = $this->getModel('product')->find($file[$row->id]['product'])->toArray();
+            $file[$row->id]['time_create']  = _date($file[$row->id]['time_create']);
             $file[$row->id]['productTitle'] = $product['title'];
-            $file[$row->id]['preview'] = $this->filePreview($file[$row->id]['type'], $file[$row->id]['path'], $file[$row->id]['file']);
+            $file[$row->id]['preview']      = $this->filePreview($file[$row->id]['type'], $file[$row->id]['path'], $file[$row->id]['file']);
             if ($file[$row->id]['type'] == 'image') {
-                $file[$row->id]['link'] = Pi::url('upload/' . $this->config('image_path') . '/original/' . $file[$row->id]['path'] . '/' . $file[$row->id]['file']);
+                $file[$row->id]['link'] = Pi::url(
+                    'upload/' . $this->config('image_path') . '/original/' . $file[$row->id]['path'] . '/' . $file[$row->id]['file']
+                );
             } else {
-                $file[$row->id]['link'] = Pi::url('upload/' . $this->config('file_path') . '/' . $file[$row->id]['type'] . '/' . $file[$row->id]['path'] . '/' . $file[$row->id]['file']);
+                $file[$row->id]['link'] = Pi::url(
+                    'upload/' . $this->config('file_path') . '/' . $file[$row->id]['type'] . '/' . $file[$row->id]['path'] . '/' . $file[$row->id]['file']
+                );
             }
         }
         // Set paginator
-        $columns = ['count' => new Expression('count(*)')];
-        $select = $this->getModel('attach')->select()->columns($columns);
-        $count = $this->getModel('attach')->selectWith($select)->current()->count;
+        $columns   = ['count' => new Expression('count(*)')];
+        $select    = $this->getModel('attach')->select()->columns($columns);
+        $count     = $this->getModel('attach')->selectWith($select)->current()->count;
         $paginator = Paginator::factory(intval($count));
         $paginator->setItemCountPerPage($this->config('admin_perpage'));
         $paginator->setCurrentPageNumber($page);
-        $paginator->setUrlOptions([
-            'router' => $this->getEvent()->getRouter(),
-            'route'  => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
-            'params' => array_filter([
-                'module'     => $this->getModule(),
-                'controller' => 'attach',
-                'action'     => 'index',
-            ]),
-        ]);
+        $paginator->setUrlOptions(
+            [
+                'router' => $this->getEvent()->getRouter(),
+                'route'  => $this->getEvent()->getRouteMatch()->getMatchedRouteName(),
+                'params' => array_filter(
+                    [
+                        'module'     => $this->getModule(),
+                        'controller' => 'attach',
+                        'action'     => 'index',
+                    ]
+                ),
+            ]
+        );
         // Set view
         $this->view()->setTemplate('attach-index');
         $this->view()->assign('files', $file);
@@ -95,10 +104,10 @@ class AttachController extends ActionController
         // Make list
         $contents = [];
         foreach ($rowset as $row) {
-            $content[$row->id] = $row->toArray();
+            $content[$row->id]                = $row->toArray();
             $content[$row->id]['time_create'] = _date($content[$row->id]['time_create']);
-            $content[$row->id]['preview'] = $this->filePreview($content[$row->id]['type'], $content[$row->id]['path'], $content[$row->id]['file']);
-            $contents[] = $content[$row->id];
+            $content[$row->id]['preview']     = $this->filePreview($content[$row->id]['type'], $content[$row->id]['path'], $content[$row->id]['file']);
+            $contents[]                       = $content[$row->id];
         }
         // set nav
         $nav = [
@@ -116,15 +125,15 @@ class AttachController extends ActionController
     public function editAction()
     {
         // Get id
-        $id = $this->params('id');
+        $id     = $this->params('id');
         $module = $this->params('module');
         if (empty($id)) {
             $this->jump(['action' => 'index'], __('You must select file'));
         }
         //Get file and product
-        $file = $this->getModel('attach')->find($id)->toArray();
+        $file         = $this->getModel('attach')->find($id)->toArray();
         $file['view'] = $this->fileView($file['type'], $file['path'], $file['file']);
-        $product = $this->getModel('product')->find($file['product'])->toArray();
+        $product      = $this->getModel('product')->find($file['product'])->toArray();
         // Set form
         $form = new AttachForm('attach', $product['id']);
         $form->setAttribute('enctype', 'multipart/form-data');
@@ -194,7 +203,7 @@ class AttachController extends ActionController
                 ];
             } else {
                 // start upload
-                $path = sprintf('%s/%s', date('Y'), date('m'));
+                $path        = sprintf('%s/%s', date('Y'), date('m'));
                 $destination = Pi::path(sprintf('upload/%s/file/%s', $this->config('file_path'), $path));
                 // Get file type
                 $file = $this->request->getFiles();
@@ -213,36 +222,36 @@ class AttachController extends ActionController
                 if ($uploader->isValid()) {
                     $uploader->receive();
                     // Set info
-                    $file = $uploader->getUploaded('file');
+                    $file  = $uploader->getUploaded('file');
                     $title = $this->fileTitle($product['title'], $file);
                     $this->filePath($type, $path, $file);
                     // Set save array
-                    $values['file'] = $file;
-                    $values['title'] = $title;
-                    $values['path'] = $path;
-                    $values['product'] = $product['id'];
+                    $values['file']        = $file;
+                    $values['title']       = $title;
+                    $values['path']        = $path;
+                    $values['product']     = $product['id'];
                     $values['time_create'] = time();
-                    $values['type'] = $type;
-                    $values['status'] = 1;
-                    $values['size'] = '';
+                    $values['type']        = $type;
+                    $values['status']      = 1;
+                    $values['size']        = '';
                     // save in DB
                     $row = $this->getModel('attach')->createRow();
                     $row->assign($values);
                     $row->save();
                     // Set erturn array
-                    $return['id'] = $row->id;
-                    $return['title'] = $row->title;
+                    $return['id']          = $row->id;
+                    $return['title']       = $row->title;
                     $return['time_create'] = _date($row->time_create);
-                    $return['type'] = $row->type;
-                    $return['status'] = $row->status;
-                    $return['size'] = $row->size;
-                    $return['preview'] = $this->filePreview($row->type, $row->path, $row->file);
+                    $return['type']        = $row->type;
+                    $return['status']      = $row->status;
+                    $return['size']        = $row->size;
+                    $return['preview']     = $this->filePreview($row->type, $row->path, $row->file);
                     // Set product Attach count
                     Pi::api('product', 'shop')->attachCount($id);
                 } else {
                     // Upload error
                     $messages = $uploader->getMessages();
-                    $return = [
+                    $return   = [
                         'status'  => 0,
                         'message' => implode('; ', $messages),
                     ];
@@ -261,13 +270,13 @@ class AttachController extends ActionController
             $this->removeFile($row->file, $row->type, $row->path);
             $row->delete();
             $ajaxstatus = 1;
-            $message = __('Your attached file remove successfully');
-            $id = $row->id;
+            $message    = __('Your attached file remove successfully');
+            $id         = $row->id;
             Pi::api('product', 'shop')->attachCount($row->product);
         } else {
             $ajaxstatus = 0;
-            $message = __('Please select file');
-            $id = 0;
+            $message    = __('Please select file');
+            $id         = 0;
         }
 
         return [
@@ -362,10 +371,10 @@ class AttachController extends ActionController
     protected function filePreview($type, $path, $file)
     {
         if ($type == 'image') {
-            $image = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $path, $file);
+            $image   = sprintf('upload/%s/thumb/%s/%s', $this->config('image_path'), $path, $file);
             $preview = Pi::url($image);
         } else {
-            $image = sprintf('image/%s.png', $type);
+            $image   = sprintf('image/%s.png', $type);
             $preview = Pi::service('asset')->getModuleAsset($image, $this->getModule());
         }
         return $preview;

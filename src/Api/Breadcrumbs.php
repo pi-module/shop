@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -37,9 +37,13 @@ class Breadcrumbs extends AbstractBreadcrumbs
                 $result = [
                     [
                         'label' => $moduleData['title'],
-                        'href'  => Pi::url(Pi::service('url')->assemble('shop', [
-                            'module' => $this->getModule(),
-                        ])),
+                        'href'  => Pi::url(
+                            Pi::service('url')->assemble(
+                                'shop', [
+                                'module' => $this->getModule(),
+                            ]
+                            )
+                        ),
                     ],
                 ];
                 // Set
@@ -55,14 +59,18 @@ class Breadcrumbs extends AbstractBreadcrumbs
                             case 'index':
                                 $result[] = [
                                     'label' => __('Category list'),
-                                    'href'  => Pi::url(Pi::service('url')->assemble('shop', [
-                                        'module'     => $this->getModule(),
-                                        'controller' => 'category',
-                                    ])),
+                                    'href'  => Pi::url(
+                                        Pi::service('url')->assemble(
+                                            'shop', [
+                                            'module'     => $this->getModule(),
+                                            'controller' => 'category',
+                                        ]
+                                        )
+                                    ),
                                 ];
 
                                 $category = Pi::api('category', 'shop')->getCategory($params['slug'], 'slug');
-                                $result = $this->makeCategoryList($category['parent'], $result);
+                                $result   = $this->makeCategoryList($category['parent'], $result);
                                 $result[] = [
                                     'label' => $category['title'],
                                 ];
@@ -91,15 +99,19 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         // Category list
                         $result[] = [
                             'label' => __('Category list'),
-                            'href'  => Pi::url(Pi::service('url')->assemble('shop', [
-                                'module'     => $this->getModule(),
-                                'controller' => 'category',
-                            ])),
+                            'href'  => Pi::url(
+                                Pi::service('url')->assemble(
+                                    'shop', [
+                                    'module'     => $this->getModule(),
+                                    'controller' => 'category',
+                                ]
+                                )
+                            ),
                         ];
                         // Check have category_main
                         if ($product['category_main'] > 0) {
                             $category = Pi::api('category', 'shop')->getCategory($product['category_main']);
-                            $result = $this->makeCategoryList($category['parent'], $result);
+                            $result   = $this->makeCategoryList($category['parent'], $result);
                             $result[] = [
                                 'label' => $category['title'],
                                 'href'  => $category['categoryUrl'],
@@ -115,10 +127,14 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         if (!empty($params['slug'])) {
                             $result[] = [
                                 'label' => __('Tag list'),
-                                'href'  => Pi::url(Pi::service('url')->assemble('shop', [
-                                    'controller' => 'tag',
-                                    'action'     => 'index',
-                                ])),
+                                'href'  => Pi::url(
+                                    Pi::service('url')->assemble(
+                                        'shop', [
+                                        'controller' => 'tag',
+                                        'action'     => 'index',
+                                    ]
+                                    )
+                                ),
                             ];
                             $result[] = [
                                 'label' => $params['slug'],
@@ -165,7 +181,7 @@ class Breadcrumbs extends AbstractBreadcrumbs
     {
         if ($parent > 0) {
             $category = Pi::api('category', 'shop')->getCategory($parent);
-            $result = $this->makeCategoryList($category['parent'], $result);
+            $result   = $this->makeCategoryList($category['parent'], $result);
             $result[] = [
                 'label' => $category['title'],
                 'href'  => $category['categoryUrl'],

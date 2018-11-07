@@ -1,6 +1,6 @@
 <div class="clearfix pi-item-list">
-    <div class="col-md-3 col-xs-12">
-        <div class="pi-item-search-form clearfix well well-sm">
+    <div class="col-md-3 col-12">
+        <div class="pi-item-search-form clearfix card card-body bg-light mb-3">
             <div class="page-header">
                 <h3>{{'SEARCH' | translate}}</h3>
             </div>
@@ -68,13 +68,13 @@
             </form>
         </div>
     </div>
-    <div class="col-md-9 col-xs-12">
+    <div class="col-md-9 col-12">
         <div class="pi-item-compare-list hide">
             <div class="clearfix">
-                <div class="col-md-2 col-xs-6">
+                <div class="col-md-2 col-6">
                     <div class="pi-item-compare-button text-center">
                         <a href="{{condition.urlCompare}}" title="{{'COMPARE_PRODUCTS' | translate}}"
-                           class="btn btn-success btn-xs">
+                           class="btn btn-success btn-sm">
                             {{'COMPARE_PRODUCTS' | translate}}
                         </a>
                     </div>
@@ -118,7 +118,7 @@
                                         </div>
                                         <a class="u-url {{product.ribbon_class}}" itemprop="url"
                                            title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
-                                            <img itemprop="image" class="img-responsive u-photo"
+                                            <img itemprop="image" class="img-fluid u-photo"
                                                  src="{{product.mediumUrl}}" alt="{{product.title}}"/>
                                             <p ng-if="product.ribbon">
                                                 <span>{{product.ribbon}}</span>
@@ -151,7 +151,7 @@
                                                         <div class="pi-item-box-form">
                                                             <form action="{{product.cartUrl}}" method="post">
                                                                 <input name="id" type="hidden" value="{{product.id}}">
-                                                                <button type="submit" class="btn btn-success btn-xs">
+                                                                <button type="submit" class="btn btn-success btn-sm">
                                                                     <i class="fa fa-shopping-cart"></i> {{'ADD_TO_CART'
                                                                     | translate}}
                                                                 </button>

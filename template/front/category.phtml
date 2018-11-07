@@ -28,7 +28,7 @@
                 <?php } ?>
             </div>
             <div class="category-width-image">
-                <img class="img-responsive" itemprop="image" src="<?php echo $category['image_wide']; ?>"
+                <img class="img-fluid" itemprop="image" src="<?php echo $category['image_wide']; ?>"
                      alt="<?php echo $this->escape($category['title']); ?>">
             </div>
         <?php } elseif (!empty($category['largeUrl'])) { ?>
@@ -39,7 +39,7 @@
                 <?php } ?>
             </div>
             <div class="category-width-image">
-                <img class="img-responsive" itemprop="image" src="<?php echo $category['largeUrl']; ?>"
+                <img class="img-fluid" itemprop="image" src="<?php echo $category['largeUrl']; ?>"
                      alt="<?php echo $this->escape($category['title']); ?>">
             </div>
         <?php } else { ?>
@@ -47,12 +47,12 @@
                 <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
             </div>
             <?php if (!empty($category['text_summary'])) { ?>
-                <div class="e-description clearfix well"
+                <div class="e-description clearfix card card-body bg-light mb-3"
                      itemprop="description"><?php echo $category['text_summary']; ?></div>
             <?php } ?>
         <?php } ?>
         <?php if (!empty($category['text_description']) && $config['view_description_category']) { ?>
-            <div class="e-description clearfix well"
+            <div class="e-description clearfix card card-body bg-light mb-3"
                  itemprop="description"><?php echo $category['text_description']; ?></div>
         <?php } ?>
     </div>
@@ -60,9 +60,9 @@
 <?php if (isset($categoryItem) && !empty($categoryItem)) { ?>
     <div class="clearfix categoryItemList">
         <ul class="list-inline">
-            <li><i class="fa fa-folder"></i> <?php _e('Category'); ?> :</li>
+            <li class="list-inline-item"><i class="fa fa-folder"></i> <?php _e('Category'); ?> :</li>
             <?php foreach ($categoryItem as $category) { ?>
-                <li itemscope itemtype="https://schema.org/Brand">
+                <li class="list-inline-item" itemscope itemtype="https://schema.org/Brand">
                     <a itemprop="url" title="<?php echo $this->escape($category['title']); ?>"
                        href="<?php echo $this->escape($category['url']); ?>">
                         <span class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></span>

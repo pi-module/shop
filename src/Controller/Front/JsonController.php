@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -23,19 +23,19 @@ class JsonController extends IndexController
     public function searchAction()
     {
         // Get info from url
-        $module = $this->params('module');
-        $page = $this->params('page', 1);
-        $title = $this->params('title');
-        $code = $this->params('code');
-        $category = $this->params('category');
+        $module        = $this->params('module');
+        $page          = $this->params('page', 1);
+        $title         = $this->params('title');
+        $code          = $this->params('code');
+        $category      = $this->params('category');
         $categoryTitle = $this->params('categoryTitle');
-        $tag = $this->params('tag');
-        $favourite = $this->params('favourite');
-        $recommended = $this->params('recommended');
-        $related = $this->params('related');
-        $product = $this->params('product');
-        $limit = $this->params('limit');
-        $order = $this->params('order');
+        $tag           = $this->params('tag');
+        $favourite     = $this->params('favourite');
+        $recommended   = $this->params('recommended');
+        $related       = $this->params('related');
+        $product       = $this->params('product');
+        $limit         = $this->params('limit');
+        $order         = $this->params('order');
 
         // Set has search result
         $hasSearchResult = true;
@@ -61,7 +61,7 @@ class JsonController extends IndexController
         // Clean code
         if (isset($code) && !empty($code)) {
             $filter = new Filter\HeadTitle;
-            $code = $filter($code);
+            $code   = $filter($code);
         } else {
             $code = '';
         }
@@ -69,8 +69,8 @@ class JsonController extends IndexController
         // Clean params
         $paramsClean = [];
         foreach ($_GET as $key => $value) {
-            $key = _strip($key);
-            $value = _strip($value);
+            $key               = _strip($key);
+            $value             = _strip($value);
             $paramsClean[$key] = $value;
         }
 
@@ -165,7 +165,7 @@ class JsonController extends IndexController
         // Get related
         if (!empty($related) && $related == 1 && !empty($product) && intval($product) > 0) {
             $productSingle = Pi::api('product', 'shop')->getProductLight(intval($product));
-            $category = $productSingle['category_main'];
+            $category      = $productSingle['category_main'];
         }
 
         // Get category information from model
@@ -183,7 +183,7 @@ class JsonController extends IndexController
             // category list
             $categories = Pi::api('category', 'shop')->categoryList($category['id']);
             // Get id list
-            $categoryIDList = [];
+            $categoryIDList   = [];
             $categoryIDList[] = $category['id'];
             foreach ($categories as $singleCategory) {
                 $categoryIDList[] = $singleCategory['id'];
@@ -227,13 +227,13 @@ class JsonController extends IndexController
         }
 
         // Get search form
-        $filterList = Pi::api('attribute', 'shop')->filterList();
+        $filterList   = Pi::api('attribute', 'shop')->filterList();
         $categoryList = Pi::registry('categoryList', 'shop')->read();
 
         // Set product ID list
-        $checkTitle = false;
+        $checkTitle     = false;
         $checkAttribute = false;
-        $productIDList = [
+        $productIDList  = [
             'title'     => [],
             'attribute' => [],
         ];
@@ -241,35 +241,37 @@ class JsonController extends IndexController
         // Check title from product table
         if (isset($title) && !empty($title)) {
             $checkTitle = true;
-            $titles = is_array($title) ? $title : [$title];
-            $columns = ['id'];
-            $select = $this->getModel('product')->select()->columns($columns)->where(function ($where) use ($titles, $recommended, $code) {
-                $whereMain = clone $where;
-                $whereTitleKey = clone $where;
-                $whereSubTitleKey = clone $where;
+            $titles     = is_array($title) ? $title : [$title];
+            $columns    = ['id'];
+            $select     = $this->getModel('product')->select()->columns($columns)->where(
+                function ($where) use ($titles, $recommended, $code) {
+                    $whereMain        = clone $where;
+                    $whereTitleKey    = clone $where;
+                    $whereSubTitleKey = clone $where;
 
-                // Set where Main
-                $whereMain->equalTo('status', 1);
-                if (!empty($recommended) && $recommended == 1) {
-                    $whereMain->equalTo('recommended', 1);
-                }
-                if (!empty($code)) {
-                    $whereMain->like('code', '%' . $code . '%');
-                }
+                    // Set where Main
+                    $whereMain->equalTo('status', 1);
+                    if (!empty($recommended) && $recommended == 1) {
+                        $whereMain->equalTo('recommended', 1);
+                    }
+                    if (!empty($code)) {
+                        $whereMain->like('code', '%' . $code . '%');
+                    }
 
-                // Set where title
-                foreach ($titles as $term) {
-                    $whereTitleKey->like('title', '%' . $term . '%')->and;
-                }
+                    // Set where title
+                    foreach ($titles as $term) {
+                        $whereTitleKey->like('title', '%' . $term . '%')->and;
+                    }
 
-                // Set where  subtitle
-                foreach ($titles as $term) {
-                    $whereSubTitleKey->like('subtitle', '%' . $term . '%')->and;
-                }
+                    // Set where  subtitle
+                    foreach ($titles as $term) {
+                        $whereSubTitleKey->like('subtitle', '%' . $term . '%')->and;
+                    }
 
-                $where->andPredicate($whereMain)->andPredicate($whereTitleKey)->orPredicate($whereSubTitleKey);
-            })->order($order);
-            $rowset = $this->getModel('product')->selectWith($select);
+                    $where->andPredicate($whereMain)->andPredicate($whereTitleKey)->orPredicate($whereSubTitleKey);
+                }
+            )->order($order);
+            $rowset     = $this->getModel('product')->selectWith($select);
             foreach ($rowset as $row) {
                 $productIDList['title'][$row->id] = $row->id;
             }
@@ -290,9 +292,9 @@ class JsonController extends IndexController
             // Search on attribute
             if (!empty($attributeList)) {
                 $checkAttribute = true;
-                $column = ['product'];
+                $column         = ['product'];
                 foreach ($attributeList as $attributeSingle) {
-                    $where = [
+                    $where  = [
                         'field' => $attributeSingle['field'],
                         'data'  => $attributeSingle['data'],
                     ];
@@ -307,11 +309,11 @@ class JsonController extends IndexController
 
         // Set info
         $product = [];
-        $count = 0;
+        $count   = 0;
 
         $columns = ['product' => new Expression('DISTINCT product')];
-        $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
-        $offset = (int)($page - 1) * $limit;
+        $limit   = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
+        $offset  = (int)($page - 1) * $limit;
 
         // Set category on where link
         if (isset($categoryIDList) && !empty($categoryIDList)) {
@@ -364,21 +366,21 @@ class JsonController extends IndexController
         // Get max price
         if ($config['view_price_filter']) {
             $columnsPrice = ['id', 'price'];
-            $limitPrice = 1;
-            $maxPrice = 1000;
-            $minPrice = 0;
+            $limitPrice   = 1;
+            $maxPrice     = 1000;
+            $minPrice     = 0;
 
-            $orderPrice = ['price DESC', 'id DESC'];
+            $orderPrice  = ['price DESC', 'id DESC'];
             $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
-            $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current();
+            $rowPrice    = $this->getModel('link')->selectWith($selectPrice)->current();
             if ($rowPrice) {
                 $rowPrice = $rowPrice->toArray();
                 $maxPrice = $rowPrice['price'];
             }
 
-            $orderPrice = ['price ASC', 'id ASC'];
+            $orderPrice  = ['price ASC', 'id ASC'];
             $selectPrice = $this->getModel('link')->select()->where($whereLink)->columns($columnsPrice)->order($orderPrice)->limit($limitPrice);
-            $rowPrice = $this->getModel('link')->selectWith($selectPrice)->current();
+            $rowPrice    = $this->getModel('link')->selectWith($selectPrice)->current();
             if ($rowPrice) {
                 $rowPrice = $rowPrice->toArray();
                 $minPrice = $rowPrice['price'];
@@ -402,8 +404,8 @@ class JsonController extends IndexController
                 }
             }
         } else {
-            $minPrice = 0;
-            $maxPrice = 0;
+            $minPrice  = 0;
+            $maxPrice  = 0;
             $minSelect = 0;
             $maxSelect = 0;
         }
@@ -419,7 +421,7 @@ class JsonController extends IndexController
 
             // Get list of product
             if (!empty($productIDSelect)) {
-                $where = ['status' => 1, 'id' => $productIDSelect];
+                $where  = ['status' => 1, 'id' => $productIDSelect];
                 $select = $this->getModel('product')->select()->where($where)->order($order);
                 $rowset = $this->getModel('product')->selectWith($select);
                 foreach ($rowset as $row) {
@@ -429,18 +431,20 @@ class JsonController extends IndexController
 
             // Get count
             $columnsCount = ['count' => new Expression('count(DISTINCT `product`)')];
-            $select = $this->getModel('link')->select()->where($whereLink)->columns($columnsCount);
-            $count = $this->getModel('link')->selectWith($select)->current()->count;
+            $select       = $this->getModel('link')->select()->where($whereLink)->columns($columnsCount);
+            $count        = $this->getModel('link')->selectWith($select)->current()->count;
         }
 
         // Search on category
         $categoryList = [];
         if (!empty($categoryTitle)) {
-            $whereCategory = ['status' => 1];
+            $whereCategory                 = ['status' => 1];
             $whereCategory['title LIKE ?'] = '%' . $categoryTitle . '%';
-            $orderCategory = ['title DESC', 'id DESC'];
-            $select = $this->getModel('category')->select()->where($whereCategory)->order($orderCategory)->offset($offset)->limit($limit);
-            $rowset = $this->getModel('category')->selectWith($select);
+            $orderCategory                 = ['title DESC', 'id DESC'];
+            $select                        = $this->getModel('category')->select()->where($whereCategory)->order($orderCategory)->offset($offset)->limit(
+                $limit
+            );
+            $rowset                        = $this->getModel('category')->selectWith($select);
             foreach ($rowset as $row) {
                 $categoryList[] = Pi::api('category', 'shop')->canonizeCategory($row);
             }
@@ -449,27 +453,27 @@ class JsonController extends IndexController
         // Set column class
         switch ($config['view_column']) {
             case 1:
-                $columnSize = 'col-md-12 col-xs-12';
+                $columnSize = 'col-md-12 col-12';
                 break;
 
             case 2:
-                $columnSize = 'col-md-6 col-xs-12';
+                $columnSize = 'col-md-6 col-12';
                 break;
 
             case 3:
-                $columnSize = 'col-md-4 col-xs-12';
+                $columnSize = 'col-md-4 col-12';
                 break;
 
             case 4:
-                $columnSize = 'col-md-3 col-xs-12';
+                $columnSize = 'col-md-3 col-12';
                 break;
 
             case 6:
-                $columnSize = 'col-md-2 col-xs-12';
+                $columnSize = 'col-md-2 col-12';
                 break;
 
             default:
-                $columnSize = 'col-md-3 col-xs-12';
+                $columnSize = 'col-md-3 col-12';
                 break;
         }
 
@@ -506,16 +510,16 @@ class JsonController extends IndexController
     public function brandAction()
     {
         $module = $this->params('module');
-        $page = $this->params('page', 1);
-        $limit = $this->params('limit');
-        $form = $this->params('form');
+        $page   = $this->params('page', 1);
+        $limit  = $this->params('limit');
+        $form   = $this->params('form');
         //$uid = $this->params('uid');
 
         // Get config
         $config = Pi::service('registry')->config->read($module);
 
-        $brand = [];
-        $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
+        $brand  = [];
+        $limit  = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
         $offset = (int)($page - 1) * $limit;
 
         $where = ['status' => 1, 'type' => 'brand'];
@@ -529,9 +533,9 @@ class JsonController extends IndexController
         $rowset = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
             $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
-            $count = Pi::api('product', 'shop')->getBrandCount($categorySingle['id']);
-            $hasNew = Pi::api('product', 'shop')->getBrandHasNew($categorySingle['id']);
-            $brand[] = [
+            $count          = Pi::api('product', 'shop')->getBrandCount($categorySingle['id']);
+            $hasNew         = Pi::api('product', 'shop')->getBrandHasNew($categorySingle['id']);
+            $brand[]        = [
                 'id'        => $categorySingle['id'],
                 'parent'    => $categorySingle['parent'],
                 'title'     => $categorySingle['title'],
@@ -544,8 +548,8 @@ class JsonController extends IndexController
 
         // Get count
         $columnsCount = ['count' => new Expression('count(*)')];
-        $select = $this->getModel('category')->select()->where($where)->columns($columnsCount);
-        $count = $this->getModel('category')->selectWith($select)->current()->count;
+        $select       = $this->getModel('category')->select()->where($where)->columns($columnsCount);
+        $count        = $this->getModel('category')->selectWith($select)->current()->count;
 
         $result = [
             'brands'    => $brand,
@@ -562,21 +566,21 @@ class JsonController extends IndexController
 
     public function categoryAction()
     {
-        $module = $this->params('module');
-        $page = $this->params('page', 1);
-        $limit = $this->params('limit');
-        $parent = $this->params('parent');
-        $tree = $this->params('tree');
+        $module  = $this->params('module');
+        $page    = $this->params('page', 1);
+        $limit   = $this->params('limit');
+        $parent  = $this->params('parent');
+        $tree    = $this->params('tree');
         $product = $this->params('product');
-        $brand = $this->params('brand');
+        $brand   = $this->params('brand');
 
         // Get config
         $config = Pi::service('registry')->config->read($module);
 
         $category = [];
         $products = [];
-        $limit = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
-        $offset = (int)($page - 1) * $limit;
+        $limit    = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
+        $offset   = (int)($page - 1) * $limit;
 
         // Set where
         $where = ['status' => 1, 'type' => 'category'];
@@ -586,10 +590,10 @@ class JsonController extends IndexController
 
         // Check $brand
         if (intval($brand) > 0) {
-            $whereBrand = ['brand' => intval($brand)];
+            $whereBrand   = ['brand' => intval($brand)];
             $columnsBrand = ['category' => new Expression('DISTINCT `category_main`')];
-            $select = $this->getModel('product')->select()->where($whereBrand)->columns($columnsBrand);
-            $rowset = $this->getModel('product')->selectWith($select)->toArray();
+            $select       = $this->getModel('product')->select()->where($whereBrand)->columns($columnsBrand);
+            $rowset       = $this->getModel('product')->selectWith($select)->toArray();
             foreach ($rowset as $id) {
                 $categoryIDSelect[] = $id['category'];
             }
@@ -598,13 +602,13 @@ class JsonController extends IndexController
 
         // Select
         $categoryId = [];
-        $order = ['parent ASC', 'id DESC'];
-        $select = $this->getModel('category')->select()->where($where)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('category')->selectWith($select);
+        $order      = ['parent ASC', 'id DESC'];
+        $select     = $this->getModel('category')->select()->where($where)->order($order)->offset($offset)->limit($limit);
+        $rowset     = $this->getModel('category')->selectWith($select);
         foreach ($rowset as $row) {
             $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
-            $categoryId[] = $row->id;
-            $category[] = [
+            $categoryId[]   = $row->id;
+            $category[]     = [
                 'id'        => $categorySingle['id'],
                 'parent'    => $categorySingle['parent'],
                 'title'     => $categorySingle['title'],
@@ -614,14 +618,14 @@ class JsonController extends IndexController
         }
 
         if ($product == 1 && !empty($categoryId)) {
-            $products = [];
+            $products     = [];
             $whereProduct = ['status' => 1, 'category_main' => $categoryId];
             $orderProduct = ['title DESC', 'id DESC'];
-            $select = $this->getModel('product')->select()->where($whereProduct)->order($orderProduct);
-            $rowset = $this->getModel('product')->selectWith($select);
+            $select       = $this->getModel('product')->select()->where($whereProduct)->order($orderProduct);
+            $rowset       = $this->getModel('product')->selectWith($select);
             foreach ($rowset as $row) {
                 $productSingle = Pi::api('product', 'shop')->canonizeProductLight($row);
-                $products[] = [
+                $products[]    = [
                     'id'        => $productSingle['id'],
                     'category'  => $productSingle['category_main'],
                     'brand'     => $productSingle['brand'],
@@ -638,8 +642,8 @@ class JsonController extends IndexController
 
         // Get count
         $columnsCount = ['count' => new Expression('count(*)')];
-        $select = $this->getModel('category')->select()->where($where)->columns($columnsCount);
-        $count = $this->getModel('category')->selectWith($select)->current()->count;
+        $select       = $this->getModel('category')->select()->where($where)->columns($columnsCount);
+        $count        = $this->getModel('category')->selectWith($select)->current()->count;
 
         // Set result
         $result = [
@@ -681,7 +685,7 @@ class JsonController extends IndexController
     {
         // Get info from url
         $categoryMain = $this->params('id');
-        $update = $this->params('update', 0);
+        $update       = $this->params('update', 0);
         // Check password
         if (!$this->checkPassword()) {
             $this->getResponse()->setStatusCode(401);
@@ -712,7 +716,7 @@ class JsonController extends IndexController
     public function productSingleAction()
     {
         // Get info from url
-        $id = $this->params('id');
+        $id     = $this->params('id');
         $module = $this->params('module');
         // Check password
         if (!$this->checkPassword()) {
@@ -736,7 +740,7 @@ class JsonController extends IndexController
                 foreach ($attributes['all'] as $attributesAll) {
                     foreach ($attributesAll['info'] as $attribute) {
                         if (!empty($attribute['name'])) {
-                            $productSingle['attribute-' . $attribute['name']] = $attribute['data'];
+                            $productSingle['attribute-' . $attribute['name']]            = $attribute['data'];
                             $productSingle['attribute-' . $attribute['name'] . '-title'] = $attribute['title'];
                         }
                     }
@@ -755,8 +759,8 @@ class JsonController extends IndexController
 
         // Check brand
         if ($product['brand'] > 0) {
-            $brand = Pi::api('category', 'shop')->getCategory($product['brand']);
-            $productSingle['brandId'] = $brand['id'];
+            $brand                       = Pi::api('category', 'shop')->getCategory($product['brand']);
+            $productSingle['brandId']    = $brand['id'];
             $productSingle['brandTitle'] = $brand['title'];
             $productSingle['brandImage'] = $brand['thumbUrl'];
         }
@@ -797,7 +801,7 @@ class JsonController extends IndexController
     public function checkPassword()
     {
         // Get info from url
-        $module = $this->params('module');
+        $module   = $this->params('module');
         $password = $this->params('password');
         // Get config
         $config = Pi::service('registry')->config->read($module);

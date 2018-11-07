@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -39,7 +39,7 @@ class Basket extends AbstractApi
         // Set product property
         $productProperty = [];
         foreach ($properties as $key => $propertyKey) {
-            $property = Pi::api('property', 'shop')->getPropertyValue($propertyKey);
+            $property              = Pi::api('property', 'shop')->getPropertyValue($propertyKey);
             $productProperty[$key] = [
                 'id'         => $propertyList[$key]['id'],
                 'title'      => $propertyList[$key]['title'],
@@ -57,20 +57,20 @@ class Basket extends AbstractApi
         // Check basket
         if (empty($basket)) {
             // Set data
-            $data = [];
-            $data['time'] = time();
-            $data['promotion'] = '';
+            $data                 = [];
+            $data['time']         = time();
+            $data['promotion']    = '';
             $data['product'][$id] = $product;
             // Set basket
-            $basket = Pi::model('basket', $this->getModule())->createRow();
-            $basket->uid = $uid;
+            $basket        = Pi::model('basket', $this->getModule())->createRow();
+            $basket->uid   = $uid;
             $basket->value = uniqid('basket-');
-            $basket->data = json_encode($data);
+            $basket->data  = json_encode($data);
             $basket->save();
         } else {
             // Set data
-            $data = json_decode($basket->data, true);
-            $data['time'] = time();
+            $data                 = json_decode($basket->data, true);
+            $data['time']         = time();
             $data['product'][$id] = $product;
             if (!isset($data['promotion']) || empty($data['promotion'])) {
                 $data['promotion'] = '';
@@ -166,7 +166,7 @@ class Basket extends AbstractApi
             return '';
         }
         // Set data
-        $data = json_decode($basket->data, true);
+        $data         = json_decode($basket->data, true);
         $data['time'] = time();
         unset($data['product'][$id]);
         // Set basket
@@ -189,7 +189,7 @@ class Basket extends AbstractApi
             return 0;
         } else {
             $number = 0;
-            $data = json_decode($basket['data'], true);
+            $data   = json_decode($basket['data'], true);
             foreach ($data['product'] as $product) {
                 $number = $number + $product['number'];
             }
@@ -199,7 +199,7 @@ class Basket extends AbstractApi
 
     public function basketBlockInfo()
     {
-        $list = [];
+        $list   = [];
         $number = 0;
         // Get uid
         $uid = Pi::user()->getId();
@@ -214,13 +214,13 @@ class Basket extends AbstractApi
             $data = json_decode($basket['data'], true);
             foreach ($data['product'] as $product) {
                 // Set list
-                $productInfo = Pi::api('product', 'shop')->getProductLight($product['id']);
-                $productInfo['number'] = $product['number'];
+                $productInfo                = Pi::api('product', 'shop')->getProductLight($product['id']);
+                $productInfo['number']      = $product['number'];
                 $productInfo['number_view'] = _number($product['number']);
-                $productInfo['property'] = $product['property'];
-                $productInfo['total'] = $productInfo['price'] * $product['number'];
-                $productInfo['total_view'] = Pi::api('api', 'shop')->viewPrice($productInfo['total']);
-                $list[$product['id']] = $productInfo;
+                $productInfo['property']    = $product['property'];
+                $productInfo['total']       = $productInfo['price'] * $product['number'];
+                $productInfo['total_view']  = Pi::api('api', 'shop')->viewPrice($productInfo['total']);
+                $list[$product['id']]       = $productInfo;
                 // Set number
                 $number = $number + $product['number'];
             }
@@ -264,17 +264,17 @@ class Basket extends AbstractApi
                 }
             }
             // Set product info
-            $productInfo['can_pay'] = $product['can_pay'];
-            $productInfo['number'] = $product['number'];
-            $productInfo['property'] = $product['property'];
-            $productInfo['price_single'] = $price;
-            $productInfo['price_single_view'] = Pi::api('api', 'shop')->viewPrice($price);
-            $productInfo['total'] = $price * $product['number'];
-            $productInfo['total_view'] = Pi::api('api', 'shop')->viewPrice($productInfo['total']);
+            $productInfo['can_pay']             = $product['can_pay'];
+            $productInfo['number']              = $product['number'];
+            $productInfo['property']            = $product['property'];
+            $productInfo['price_single']        = $price;
+            $productInfo['price_single_view']   = Pi::api('api', 'shop')->viewPrice($price);
+            $productInfo['total']               = $price * $product['number'];
+            $productInfo['total_view']          = Pi::api('api', 'shop')->viewPrice($productInfo['total']);
             $basket['products'][$product['id']] = $productInfo;
             // Set total
-            $total['price'] = $total['price'] + $price;
-            $total['number'] = $total['number'] + $product['number'];
+            $total['price']       = $total['price'] + $price;
+            $total['number']      = $total['number'] + $product['number'];
             $total['total_price'] = $total['total_price'] + $productInfo['total'];
         }
         // Set promotion

@@ -2,7 +2,7 @@
 <div class="clearfix">
     <h3><?php _e('Export product'); ?></h3>
     <?php if (isset($form) && !empty($form) && $confirm == 0) { ?>
-        <div class="well">
+        <div class="card card-body bg-light mb-3">
             <?php echo $this->form($form); ?>
         </div>
     <?php } else { ?>
@@ -34,23 +34,31 @@
                 <?php if (substr($file, 0, 7) === 'product') { ?>
                     <?php $fileName = pathinfo($file, PATHINFO_FILENAME); ?>
                     <ul class="list-group-item list-inline">
-                        <li><?php echo $fileName; ?></li>
-                        <li>
-                            <a href="<?php echo Pi::url($this->url('', [
-                                'action' => 'download',
-                                'type'   => 'csv',
-                                'file'   => $fileName,
-                            ])); ?>">
+                        <li class="list-inline-item"><?php echo $fileName; ?></li>
+                        <li class="list-inline-item">
+                            <a href="<?php echo Pi::url(
+                                $this->url(
+                                    '', [
+                                    'action' => 'download',
+                                    'type'   => 'csv',
+                                    'file'   => $fileName,
+                                ]
+                                )
+                            ); ?>">
                                 <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php _e('CSV version'); ?>
                             </a>
                         </li>
                         <?php if ($checkExcel) { ?>
-                            <li>
-                                <a href="<?php echo Pi::url($this->url('', [
-                                    'action' => 'download',
-                                    'type'   => 'xlsx',
-                                    'file'   => $fileName,
-                                ])); ?>">
+                            <li class="list-inline-item">
+                                <a href="<?php echo Pi::url(
+                                    $this->url(
+                                        '', [
+                                        'action' => 'download',
+                                        'type'   => 'xlsx',
+                                        'file'   => $fileName,
+                                    ]
+                                    )
+                                ); ?>">
                                     <i class="fa fa-cloud-download" aria-hidden="true"></i> <?php _e('Xlsx version'); ?>
                                 </a>
                             </li>
