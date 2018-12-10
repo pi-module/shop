@@ -12,6 +12,7 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
 }
 // Set twitter for meta
 $this->headMeta($productItem['title'], 'twitter:title');
+$this->headMeta($this->escape($productItem['productUrl']), 'twitter:url');
 if (isset($productItem['text_summary']) && !empty($productItem['text_summary'])) {
     $this->headMeta(_strip($productItem['text_summary']), 'twitter:description');
 }
