@@ -11,7 +11,8 @@
         $this->headMeta($this->escape($category['largeUrl']), 'og:image', 'property');
     }
     // Set twitter for meta
-    $this->headMeta($category['title'], 'og:title', 'property');
+    $this->headMeta($category['title'], 'twitter:title', 'property');
+    $this->headMeta($this->escape($category['categoryUrl']), 'twitter:url');
     if (isset($category['text_summary']) && !empty($category['text_summary'])) {
         $this->headMeta($this->escape($category['text_summary']), 'twitter:description');
     }
