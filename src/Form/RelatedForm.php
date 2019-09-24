@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -35,47 +35,55 @@ class RelatedForm extends BaseForm
     public function init()
     {
         // title
-        $this->add([
-            'name'       => 'title',
-            'options'    => [
-                'label' => __('Title'),
-            ],
-            'attributes' => [
-                'type'        => 'text',
-                'description' => '',
-
-            ],
-        ]);
-        // status
-        $this->add([
-            'name'    => 'type',
-            'type'    => 'select',
-            'options' => [
-                'label'         => __('Title search type'),
-                'value_options' => [
-                    1 => __('Included'),
-                    2 => __('Start with'),
-                    3 => __('End with'),
-                    4 => __('According'),
+        $this->add(
+            [
+                'name'       => 'title',
+                'options'    => [
+                    'label' => __('Title'),
                 ],
-            ],
-        ]);
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+
+                ],
+            ]
+        );
+        // status
+        $this->add(
+            [
+                'name'    => 'type',
+                'type'    => 'select',
+                'options' => [
+                    'label'         => __('Title search type'),
+                    'value_options' => [
+                        1 => __('Included'),
+                        2 => __('Start with'),
+                        3 => __('End with'),
+                        4 => __('According'),
+                    ],
+                ],
+            ]
+        );
         // category
-        $this->add([
-            'name'    => 'category',
-            'type'    => 'Module\Shop\Form\Element\Category',
-            'options' => [
-                'label'    => __('Category'),
-                'category' => '',
-            ],
-        ]);
+        $this->add(
+            [
+                'name'    => 'category',
+                'type'    => 'Module\Shop\Form\Element\Category',
+                'options' => [
+                    'label'    => __('Category'),
+                    'category' => '',
+                ],
+            ]
+        );
         // Save
-        $this->add([
-            'name'       => 'submit',
-            'type'       => 'submit',
-            'attributes' => [
-                'value' => __('Submit'),
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Submit'),
+                ],
+            ]
+        );
     }
 }

@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -24,13 +24,13 @@ class Log extends AbstractApi
 {
     public function addLog($section, $item, $operation)
     {
-        $row = Pi::model('log', $this->getModule())->createRow();
-        $row->uid = Pi::user()->getId();
-        $row->ip = Pi::user()->getIp();
+        $row              = Pi::model('log', $this->getModule())->createRow();
+        $row->uid         = Pi::user()->getId();
+        $row->ip          = Pi::user()->getIp();
         $row->time_create = time();
-        $row->section = $section;
-        $row->item = $item;
-        $row->operation = $operation;
+        $row->section     = $section;
+        $row->item        = $item;
+        $row->operation   = $operation;
         $row->save();
     }
 }

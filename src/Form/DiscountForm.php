@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -34,87 +34,101 @@ class DiscountForm extends BaseForm
     public function init()
     {
         // id
-        $this->add([
-            'name'       => 'id',
-            'attributes' => [
-                'type' => 'hidden',
-            ],
-        ]);
-        // title
-        $this->add([
-            'name'       => 'title',
-            'options'    => [
-                'label' => __('Title'),
-            ],
-            'attributes' => [
-                'type'        => 'text',
-                'description' => '',
-                'required'    => true,
-            ],
-        ]);
-        // role
-        $this->add([
-            'name'       => 'role',
-            'type'       => 'Module\Shop\Form\Element\Role',
-            'options'    => [
-                'label'    => __('User role'),
-                'category' => '',
-            ],
-            'attributes' => [
-                'required' => true,
-            ],
-        ]);
-        // category
-        $this->add([
-            'name'       => 'category',
-            'type'       => 'Module\Shop\Form\Element\Category',
-            'options'    => [
-                'label'    => __('Category'),
-                'category' => [0 => ''],
-            ],
-            'attributes' => [
-                'size'     => 1,
-                'multiple' => 0,
-                'required' => true,
-            ],
-        ]);
-        // percent
-        $this->add([
-            'name'       => 'percent',
-            'options'    => [
-                'label' => __('Discount percent'),
-            ],
-            'attributes' => [
-                'type'        => 'text',
-                'description' => __('Number and between 1 to 99'),
-                'required'    => true,
-            ],
-        ]);
-        // status
-        $this->add([
-            'name'       => 'status',
-            'type'       => 'select',
-            'options'    => [
-                'label'         => __('Status'),
-                'value_options' => [
-                    1 => __('Published'),
-                    2 => __('Pending review'),
-                    3 => __('Draft'),
-                    4 => __('Private'),
-                    5 => __('Delete'),
+        $this->add(
+            [
+                'name'       => 'id',
+                'attributes' => [
+                    'type' => 'hidden',
                 ],
-            ],
-            'attributes' => [
-                'required' => true,
-            ],
-        ]);
+            ]
+        );
+        // title
+        $this->add(
+            [
+                'name'       => 'title',
+                'options'    => [
+                    'label' => __('Title'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => '',
+                    'required'    => true,
+                ],
+            ]
+        );
+        // role
+        $this->add(
+            [
+                'name'       => 'role',
+                'type'       => 'Module\Shop\Form\Element\Role',
+                'options'    => [
+                    'label'    => __('User role'),
+                    'category' => '',
+                ],
+                'attributes' => [
+                    'required' => true,
+                ],
+            ]
+        );
+        // category
+        $this->add(
+            [
+                'name'       => 'category',
+                'type'       => 'Module\Shop\Form\Element\Category',
+                'options'    => [
+                    'label'    => __('Category'),
+                    'category' => [0 => ''],
+                ],
+                'attributes' => [
+                    'size'     => 1,
+                    'multiple' => 0,
+                    'required' => true,
+                ],
+            ]
+        );
+        // percent
+        $this->add(
+            [
+                'name'       => 'percent',
+                'options'    => [
+                    'label' => __('Discount percent'),
+                ],
+                'attributes' => [
+                    'type'        => 'text',
+                    'description' => __('Number and between 1 to 99'),
+                    'required'    => true,
+                ],
+            ]
+        );
+        // status
+        $this->add(
+            [
+                'name'       => 'status',
+                'type'       => 'select',
+                'options'    => [
+                    'label'         => __('Status'),
+                    'value_options' => [
+                        1 => __('Published'),
+                        2 => __('Pending review'),
+                        3 => __('Draft'),
+                        4 => __('Private'),
+                        5 => __('Delete'),
+                    ],
+                ],
+                'attributes' => [
+                    'required' => true,
+                ],
+            ]
+        );
         // Save
-        $this->add([
-            'name'       => 'submit',
-            'type'       => 'submit',
-            'attributes' => [
-                'value' => __('Submit'),
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Submit'),
+                ],
+            ]
+        );
     }
 }

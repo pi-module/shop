@@ -4,12 +4,12 @@
         <div class="shop-block-category clearfix row">
             <div class="thumbnails">
                 <?php foreach ($block['resources'] as $category) { ?>
-                    <div class="col-md-2 col-xs-6 h-review" itemprop="itemListElement">
+                    <div class="col-md-2 col-6 h-review" itemprop="itemListElement">
                         <div class="thumbnail p-item h-card">
                             <?php if ($category['image']) { ?>
                                 <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
                                    href="<?php echo $this->escape($category['categoryUrl']); ?>">
-                                    <img itemprop="image" class="img-responsive u-photo"
+                                    <img itemprop="image" class="img-fluid u-photo"
                                          src="<?php echo $this->escape($category['mediumUrl']); ?>"
                                          alt="<?php echo $this->escape($category['title']); ?>"/>
                                 </a>
@@ -30,12 +30,12 @@
         <div class="shop-block-category clearfix row">
             <div class="thumbnails">
                 <?php foreach ($block['resources'] as $category) { ?>
-                    <div class="col-md-12 col-xs-12 h-review" itemprop="itemListElement">
+                    <div class="col-md-12 col-12 h-review" itemprop="itemListElement">
                         <div class="thumbnail p-item h-card">
                             <?php if ($category['image']) { ?>
                                 <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
                                    href="<?php echo $this->escape($category['categoryUrl']); ?>">
-                                    <img itemprop="image" class="img-responsive u-photo"
+                                    <img itemprop="image" class="img-fluid u-photo"
                                          src="<?php echo $this->escape($category['mediumUrl']); ?>"
                                          alt="<?php echo $this->escape($category['title']); ?>"/>
                                 </a>
@@ -65,10 +65,12 @@
         </ul>
     <?php } elseif ($block['type'] == 'slide') { ?>
         <?php
-        $this->jQuery([
-            'extension/owl.carousel.min.js',
-            'extension/owl.carousel.css',
-        ]);
+        $this->jQuery(
+            [
+                'extension/owl.carousel.min.js',
+                'extension/owl.carousel.css',
+            ]
+        );
         $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
         $this->css($this->assetModule('css/block.css', 'shop'));
         ?>
@@ -80,7 +82,7 @@
                             <?php if ($category['image']) { ?>
                                 <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
                                    href="<?php echo $this->escape($category['categoryUrl']); ?>">
-                                    <img itemprop="image" class="img-responsive u-photo"
+                                    <img itemprop="image" class="img-fluid u-photo"
                                          src="<?php echo $this->escape($category['mediumUrl']); ?>"
                                          alt="<?php echo $this->escape($category['title']); ?>"/>
                                 </a>
@@ -98,10 +100,12 @@
         </div>
     <?php } elseif ($block['type'] == 'slidehover') { ?>
         <?php
-        $this->jQuery([
-            'extension/owl.carousel.min.js',
-            'extension/owl.carousel.css',
-        ]);
+        $this->jQuery(
+            [
+                'extension/owl.carousel.min.js',
+                'extension/owl.carousel.css',
+            ]
+        );
         $this->js($this->assetModule('js/caption.hover.js', 'shop'));
         $this->css($this->assetModule('css/owl.carousel.css', 'shop'));
         ?>
@@ -119,7 +123,7 @@
                                 </a>
                             </p>
                         </div>
-                        <img class="media-object img-responsive u-photo"
+                        <img class="media-object img-fluid u-photo"
                              src="<?php echo $this->escape($category['mediumUrl']); ?>"
                              alt="<?php echo $this->escape($category['title']); ?>">
                     </div>

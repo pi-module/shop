@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -24,6 +24,12 @@ class SerialController extends IndexController
     {
         // Set result
         $result = [];
+
+        // Save statistics
+        if (Pi::service('module')->isActive('statistics')) {
+            Pi::api('log', 'statistics')->save('shop', 'serial');
+        }
+
         // Set serial form
         $form = new SerialForm('serial');
         // Check post
@@ -36,9 +42,11 @@ class SerialController extends IndexController
                 // Check
                 $result = Pi::api('serial', 'shop')->checkSerial($values['serial_number']);
                 // Set form empty
-                $form->setData([
-                    'serial_number' => '',
-                ]);
+                $form->setData(
+                    [
+                        'serial_number' => '',
+                    ]
+                );
             }
         }
         // Set view

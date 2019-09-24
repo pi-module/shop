@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -30,7 +30,7 @@ class TagController extends IndexController
         }
         // Get info from url
         $module = $this->params('module');
-        $slug = $this->params('slug');
+        $slug   = $this->params('slug');
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Check slug
@@ -46,10 +46,18 @@ class TagController extends IndexController
         $title = sprintf(__('All products by %s tag'), $slug);
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
-        $filter->setOptions([
-            'force_replace_space' => true,
-        ]);
+        $filter->setOptions(
+            [
+                'force_replace_space' => true,
+            ]
+        );
         $seoKeywords = $filter($title);
+
+        // Save statistics
+        if (Pi::service('module')->isActive('statistics')) {
+            Pi::api('log', 'statistics')->save('shop', 'tag');
+        }
+
         // Set view
         $this->view()->headTitle($title);
         $this->view()->headDescription($title, 'set');
@@ -64,33 +72,45 @@ class TagController extends IndexController
     public function listAction()
     {
         // Get info from url
-        $module = $this->params('module');
+        $module  = $this->params('module');
         $tagList = [];
         // Check tag module install or not
         if (Pi::service('module')->isActive('tag')) {
-            $where = ['module' => $module];
-            $order = ['count DESC', 'id DESC'];
+            $where  = ['module' => $module];
+            $order  = ['count DESC', 'id DESC'];
             $select = Pi::model('stats', 'tag')->select()->where($where)->order($order);
             $rowset = Pi::model('stats', 'tag')->selectWith($select);
             foreach ($rowset as $row) {
-                $tag = Pi::model('tag', 'tag')->find($row->term, 'term');
-                $tagList[$row->id] = $row->toArray();
+                $tag                       = Pi::model('tag', 'tag')->find($row->term, 'term');
+                $tagList[$row->id]         = $row->toArray();
                 $tagList[$row->id]['term'] = $tag['term'];
-                $tagList[$row->id]['url'] = Pi::url($this->url('', [
-                    'controller' => 'tag',
-                    'action'     => 'index',
-                    'slug'       => urldecode($tag['term']),
-                ]));
+                $tagList[$row->id]['url']  = Pi::url(
+                    $this->url(
+                        '', [
+                        'controller' => 'tag',
+                        'action'     => 'index',
+                        'slug'       => urldecode($tag['term']),
+                    ]
+                    )
+                );
             }
         }
         // Set header and title
         $title = __('List of all used tags on shop');
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
-        $filter->setOptions([
-            'force_replace_space' => true,
-        ]);
+        $filter->setOptions(
+            [
+                'force_replace_space' => true,
+            ]
+        );
         $seoKeywords = $filter($title);
+
+        // Save statistics
+        if (Pi::service('module')->isActive('statistics')) {
+            Pi::api('log', 'statistics')->save('shop', 'tagList');
+        }
+
         // Set view
         $this->view()->headTitle($title);
         $this->view()->headDescription($title, 'set');

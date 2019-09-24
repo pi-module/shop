@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -20,17 +20,20 @@ class Shop extends Standard
 {
     /**
      * Default values.
+     *
      * @var array
      */
-    protected $defaults = [
-        'module'     => 'shop',
-        'controller' => 'index',
-        'action'     => 'index',
-    ];
+    protected $defaults
+        = [
+            'module'     => 'shop',
+            'controller' => 'index',
+            'action'     => 'index',
+        ];
 
-    protected $controllerList = [
-        'cart', 'category', 'index', 'json', 'product', 'tag', 'compare', 'question', 'serial', 'result',
-    ];
+    protected $controllerList
+        = [
+            'cart', 'category', 'index', 'json', 'product', 'tag', 'compare', 'question', 'serial', 'result',
+        ];
 
     /**
      * {@inheritDoc}
@@ -43,7 +46,7 @@ class Shop extends Standard
     protected function parse($path)
     {
         $matches = [];
-        $parts = array_filter(explode($this->structureDelimiter, $path));
+        $parts   = array_filter(explode($this->structureDelimiter, $path));
 
         // Set controller
         $matches = array_merge($this->defaults, $matches);
@@ -86,7 +89,7 @@ class Shop extends Standard
                         } elseif (isset($parts[1]) && $parts[1] == 'index') {
                             $matches['action'] = 'index';
                         } elseif (isset($parts[1]) && $parts[1] == 'levelAjax') {
-                            $matches['action'] = 'levelAjax';
+                            $matches['action']  = 'levelAjax';
                             $matches['process'] = $this->decode($parts[2]);
                             if (is_numeric($parts[3])) {
                                 $matches['id'] = intval($parts[3]);
@@ -110,7 +113,7 @@ class Shop extends Standard
                     case 'tag':
                         if (isset($parts[1]) && !empty($parts[1])) {
                             $matches['action'] = 'index';
-                            $matches['slug'] = urldecode($parts[1]);
+                            $matches['slug']   = urldecode($parts[1]);
                         } else {
                             $matches['action'] = 'list';
                         }
@@ -152,8 +155,8 @@ class Shop extends Standard
                         if (isset($parts[1]) && $parts[1] == 'ajax') {
 
                         } else {
-                            $parts = array_unique($parts);
-                            $parts = array_values($parts);
+                            $parts              = array_unique($parts);
+                            $parts              = array_values($parts);
                             $matches['product'] = [];
                             if (isset($parts[1]) && !empty($parts[1])) {
                                 $matches['product'][1] = $this->decode($parts[1]);
@@ -175,16 +178,16 @@ class Shop extends Standard
                 }
             }
         } elseif (isset($parts[0])) {
-            $parts[0] = urldecode($parts[0]);
+            $parts[0]     = urldecode($parts[0]);
             $categorySlug = Pi::registry('categoryRoute', 'shop')->read();
             if (in_array($parts[0], $categorySlug)) {
                 $matches['controller'] = 'category';
-                $matches['action'] = 'index';
-                $matches['slug'] = $this->decode($parts[0]);
+                $matches['action']     = 'index';
+                $matches['slug']       = $this->decode($parts[0]);
             } else {
                 $matches['controller'] = 'product';
-                $matches['action'] = 'index';
-                $matches['slug'] = $this->decode($parts[0]);
+                $matches['action']     = 'index';
+                $matches['slug']       = $this->decode($parts[0]);
             }
         }
 
@@ -200,15 +203,16 @@ class Shop extends Standard
      * assemble(): Defined by Route interface.
      *
      * @see    Route::assemble()
+     *
      * @param  array $params
      * @param  array $options
+     *
      * @return string
      */
     public function assemble(
         array $params = [],
         array $options = []
-    )
-    {
+    ) {
         $mergedParams = array_merge($this->defaults, $params);
         if (!$mergedParams) {
             return $this->prefix;

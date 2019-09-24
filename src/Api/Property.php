@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -28,8 +28,8 @@ class Property extends AbstractApi
     public function getPropertyValue($parameter, $type = 'unique_key')
     {
         // Get product
-        $value = Pi::model('property_value', $this->getModule())->find($parameter, $type);
-        $value = $value->toArray();
+        $value               = Pi::model('property_value', $this->getModule())->find($parameter, $type);
+        $value               = $value->toArray();
         $value['price_view'] = Pi::api('api', 'shop')->viewPrice($value['price']);
         return $value;
     }
@@ -37,9 +37,9 @@ class Property extends AbstractApi
     public function getList()
     {
         // find
-        $list = [];
-        $where = ['status' => 1];
-        $order = ['order ASC', 'id DESC'];
+        $list   = [];
+        $where  = ['status' => 1];
+        $order  = ['order ASC', 'id DESC'];
         $select = Pi::model('property', $this->getModule())->select()->where($where)->order($order);
         $rowset = Pi::model('property', $this->getModule())->selectWith($select);
         foreach ($rowset as $row) {
@@ -59,13 +59,13 @@ class Property extends AbstractApi
             foreach ($propertyValues as $propertyValue) {
                 if (isset($propertyValue['name']) && !empty($propertyValue['name'])) {
                     // Set array
-                    $values = [];
-                    $values['product'] = $product;
-                    $values['property'] = $propertyId;
-                    $values['name'] = $propertyValue['name'];
+                    $values               = [];
+                    $values['product']    = $product;
+                    $values['property']   = $propertyId;
+                    $values['name']       = $propertyValue['name'];
                     $values['unique_key'] = isset($propertyValue['unique_key']) ? $propertyValue['unique_key'] : md5(time() + rand(100, 999));
-                    $values['stock'] = isset($propertyValue['stock']) ? (int)$propertyValue['stock'] : '';
-                    $values['price'] = isset($propertyValue['price']) ? (int)$propertyValue['price'] : '';
+                    $values['stock']      = isset($propertyValue['stock']) ? (int)$propertyValue['stock'] : '';
+                    $values['price']      = isset($propertyValue['price']) ? (int)$propertyValue['price'] : '';
                     // Save
                     $row = Pi::model('property_value', $this->getModule())->createRow();
                     $row->assign($values);
@@ -99,8 +99,8 @@ class Property extends AbstractApi
     {
         $prices = [];
         $values = [];
-        $where = ['product' => $product];
-        $order = ['name ASC'];
+        $where  = ['product' => $product];
+        $order  = ['name ASC'];
         $select = Pi::model('property_value', $this->getModule())->select()->where($where)->order($order);
         $rowset = Pi::model('property_value', $this->getModule())->selectWith($select);
         // Make values list
@@ -108,9 +108,9 @@ class Property extends AbstractApi
             if ($row->price > 0) {
                 $prices[$row->property][$row->id] = $row->price;
             }
-            $values[$row->property][$row->id] = $row->toArray();
+            $values[$row->property][$row->id]               = $row->toArray();
             $values[$row->property][$row->id]['price_view'] = Pi::api('api', 'shop')->viewPrice($row->price);
-            $values[$row->property][$row->id]['select'] = 0;
+            $values[$row->property][$row->id]['select']     = 0;
         }
         // Set checked for min price
         foreach ($prices as $property => $priceList) {

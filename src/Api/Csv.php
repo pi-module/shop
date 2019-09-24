@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -23,10 +23,10 @@ class Csv
 
     function __construct($file_name, $parse_header = false, $delimiter = ',', $length = 8000)
     {
-        $this->fp = fopen($file_name, "r");
+        $this->fp           = fopen($file_name, "r");
         $this->parse_header = $parse_header;
-        $this->delimiter = $delimiter;
-        $this->length = $length;
+        $this->delimiter    = $delimiter;
+        $this->length       = $length;
         //$this->lines = $lines;
 
         if ($this->parse_header) {
@@ -48,12 +48,13 @@ class Csv
 
         $data = [];
 
-        if ($max_lines > 0)
+        if ($max_lines > 0) {
             $line_count = 0;
-        else
-            $line_count = -1; // so loop limit is ignored
+        } else {
+            $line_count = -1;
+        } // so loop limit is ignored
 
-        while ($line_count < $max_lines && ($row = fgetcsv($this->fp, $this->length, $this->delimiter)) !== FALSE) {
+        while ($line_count < $max_lines && ($row = fgetcsv($this->fp, $this->length, $this->delimiter)) !== false) {
             if ($this->parse_header) {
                 foreach ($this->header as $i => $heading_i) {
                     $row_new[$heading_i] = $row[$i];
@@ -63,8 +64,9 @@ class Csv
                 $data[] = $row;
             }
 
-            if ($max_lines > 0)
+            if ($max_lines > 0) {
                 $line_count++;
+            }
         }
         return $data;
     }

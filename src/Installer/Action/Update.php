@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -40,43 +40,43 @@ class Update extends BasicUpdate
         $moduleVersion = $e->getParam('version');
 
         // Set product model
-        $productModel = Pi::model('product', $this->module);
-        $productTable = $productModel->getTable();
+        $productModel   = Pi::model('product', $this->module);
+        $productTable   = $productModel->getTable();
         $productAdapter = $productModel->getAdapter();
 
         // Set category model
-        $categoryModel = Pi::model('category', $this->module);
-        $categoryTable = $categoryModel->getTable();
+        $categoryModel   = Pi::model('category', $this->module);
+        $categoryTable   = $categoryModel->getTable();
         $categoryAdapter = $categoryModel->getAdapter();
 
         // Set field model
-        $fieldModel = Pi::model('field', $this->module);
-        $fieldTable = $fieldModel->getTable();
+        $fieldModel   = Pi::model('field', $this->module);
+        $fieldTable   = $fieldModel->getTable();
         $fieldAdapter = $fieldModel->getAdapter();
 
         // Set property model
-        $propertyValueModel = Pi::model('property_value', $this->module);
-        $propertyValueTable = $propertyValueModel->getTable();
+        $propertyValueModel   = Pi::model('property_value', $this->module);
+        $propertyValueTable   = $propertyValueModel->getTable();
         $propertyValueAdapter = $propertyValueModel->getAdapter();
 
         // Set property model
-        $discountModel = Pi::model('discount', $this->module);
-        $discountTable = $discountModel->getTable();
+        $discountModel   = Pi::model('discount', $this->module);
+        $discountTable   = $discountModel->getTable();
         $discountAdapter = $discountModel->getAdapter();
 
         // Set sale model
-        $saleModel = Pi::model('sale', $this->module);
-        $saleTable = $saleModel->getTable();
+        $saleModel   = Pi::model('sale', $this->module);
+        $saleTable   = $saleModel->getTable();
         $saleAdapter = $saleModel->getAdapter();
 
         // Set promotion model
-        $promotionModel = Pi::model('promotion', $this->module);
-        $promotionTable = $promotionModel->getTable();
+        $promotionModel   = Pi::model('promotion', $this->module);
+        $promotionTable   = $promotionModel->getTable();
         $promotionAdapter = $promotionModel->getAdapter();
 
         // Set link model
-        $linkModel = Pi::model('link', $this->module);
-        $linkTable = $linkModel->getTable();
+        $linkModel   = Pi::model('link', $this->module);
+        $linkTable   = $linkModel->getTable();
         $linkAdapter = $linkModel->getAdapter();
 
         // Update to version 0.3.0
@@ -86,11 +86,13 @@ class Update extends BasicUpdate
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -102,11 +104,13 @@ class Update extends BasicUpdate
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -118,11 +122,13 @@ class Update extends BasicUpdate
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -135,11 +141,13 @@ class Update extends BasicUpdate
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
 
@@ -148,11 +156,13 @@ class Update extends BasicUpdate
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
 
@@ -161,11 +171,13 @@ class Update extends BasicUpdate
             try {
                 $categoryAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -174,7 +186,8 @@ class Update extends BasicUpdate
         if (version_compare($moduleVersion, '1.0.5', '<')) {
 
             // Add table of field_category
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{field_category}` (
     `id` int (10) unsigned NOT NULL auto_increment,
     `field` int(10) unsigned NOT NULL default '0',
@@ -190,11 +203,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
 
                 return false;
             }
@@ -204,11 +219,13 @@ EOD;
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
 
@@ -217,11 +234,13 @@ EOD;
             try {
                 $fieldAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
 
@@ -230,24 +249,31 @@ EOD;
             try {
                 $fieldAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
 
             // Alter table field `type`
-            $sql = sprintf("ALTER TABLE %s CHANGE `type` `type` enum('text','link','currency','date','number','select','video','audio','file', 'checkbox') NOT NULL default 'text'", $fieldTable);
+            $sql = sprintf(
+                "ALTER TABLE %s CHANGE `type` `type` enum('text','link','currency','date','number','select','video','audio','file', 'checkbox') NOT NULL default 'text'",
+                $fieldTable
+            );
             try {
                 $fieldAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -255,7 +281,8 @@ EOD;
         // Update to version 1.0.8
         if (version_compare($moduleVersion, '1.0.8', '<')) {
             // Add table of field_position
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{field_position}` (
     `id` int (10) unsigned NOT NULL auto_increment,
     `title` varchar(255) NOT NULL default '',
@@ -273,11 +300,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
 
                 return false;
             }
@@ -286,11 +315,13 @@ EOD;
             try {
                 $fieldAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -298,7 +329,8 @@ EOD;
         // Update to version 1.0.9
         if (version_compare($moduleVersion, '1.0.9', '<')) {
             // Add table of basket
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{basket}` (
     `id` int(10) unsigned NOT NULL auto_increment,
     `uid` int(10) unsigned NOT NULL default '0',
@@ -313,11 +345,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
 
                 return false;
             }
@@ -327,11 +361,13 @@ EOD;
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -357,11 +393,13 @@ EOD;
             try {
                 $fieldAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -369,7 +407,8 @@ EOD;
         // Update to version 1.1.1
         if (version_compare($moduleVersion, '1.1.1', '<')) {
             // Add table of property
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{property}` (
   `id`              INT(10) UNSIGNED              NOT NULL AUTO_INCREMENT,
   `title`           VARCHAR(255)                  NOT NULL DEFAULT '',
@@ -390,17 +429,20 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
 
                 return false;
             }
 
             // Add table of property_value
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{property_value}` (
   `id`       INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `property` INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -420,11 +462,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
 
                 return false;
             }
@@ -437,11 +481,13 @@ EOD;
             try {
                 $categoryAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -449,7 +495,8 @@ EOD;
         // Update to version 1.1.8
         if (version_compare($moduleVersion, '1.1.8', '<')) {
             // Add table of discount
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{discount}` (
   `id`      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title`   VARCHAR(255)        NOT NULL DEFAULT '',
@@ -466,11 +513,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
 
                 return false;
             }
@@ -483,11 +532,13 @@ EOD;
             try {
                 $propertyValueAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
             // Update value
@@ -508,11 +559,13 @@ EOD;
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -520,7 +573,8 @@ EOD;
         // Update to version 1.3.7
         if (version_compare($moduleVersion, '1.3.7', '<')) {
             // Add table of discount
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{question}` (
   `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `ip`          CHAR(15)            NOT NULL DEFAULT '',
@@ -546,11 +600,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
 
                 return false;
             }
@@ -564,11 +620,13 @@ EOD;
             try {
                 $discountAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
 
@@ -577,11 +635,13 @@ EOD;
             try {
                 $discountAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -593,11 +653,13 @@ EOD;
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -609,11 +671,13 @@ EOD;
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -625,11 +689,13 @@ EOD;
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
 
@@ -640,11 +706,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
 
                 return false;
             }
@@ -653,7 +721,8 @@ EOD;
         // Update to version 1.4.2
         if (version_compare($moduleVersion, '1.4.2', '<')) {
             // Add table of discount
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{promotion}` (
   `id`           INT(10) UNSIGNED          NOT NULL AUTO_INCREMENT,
   `title`        VARCHAR(255)              NOT NULL DEFAULT '',
@@ -677,11 +746,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
 
                 return false;
             }
@@ -694,11 +765,13 @@ EOD;
             try {
                 $categoryAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -710,11 +783,13 @@ EOD;
             try {
                 $categoryAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -726,11 +801,13 @@ EOD;
             try {
                 $saleAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
 
@@ -739,11 +816,13 @@ EOD;
             try {
                 $saleAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
 
@@ -752,11 +831,13 @@ EOD;
             try {
                 $saleAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -768,11 +849,13 @@ EOD;
             try {
                 $promotionAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
             // Alter table field `price_partner`
@@ -780,11 +863,13 @@ EOD;
             try {
                 $promotionAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
             // Alter table field `partner`
@@ -792,11 +877,13 @@ EOD;
             try {
                 $promotionAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -804,7 +891,8 @@ EOD;
         // Update to version 1.5.6
         if (version_compare($moduleVersion, '1.5.6', '<')) {
             // Add table of discount
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{serial}` (
   `id`            INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
   `product`       INT(10) UNSIGNED    NOT NULL DEFAULT '0',
@@ -827,11 +915,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
 
                 return false;
             }
@@ -844,11 +934,13 @@ EOD;
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
             // Alter table add index
@@ -856,11 +948,13 @@ EOD;
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
             // Alter table field `position`
@@ -868,11 +962,13 @@ EOD;
             try {
                 $linkAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
             // Alter table add index
@@ -880,18 +976,20 @@ EOD;
             try {
                 $linkAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
             // Update recommended value
             $columns = ['id'];
-            $where = ['recommended' => 1];
-            $select = $productModel->select()->columns($columns)->where($where);
-            $rowset = $productModel->selectWith($select);
+            $where   = ['recommended' => 1];
+            $select  = $productModel->select()->columns($columns)->where($where);
+            $rowset  = $productModel->selectWith($select);
             foreach ($rowset as $row) {
                 $linkModel->update(
                     ['recommended' => 1],
@@ -907,11 +1005,13 @@ EOD;
             try {
                 $categoryAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -923,11 +1023,13 @@ EOD;
             try {
                 $categoryAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
             // Alter table field `hits`
@@ -935,11 +1037,13 @@ EOD;
             try {
                 $categoryAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -951,11 +1055,13 @@ EOD;
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -963,7 +1069,8 @@ EOD;
         // Update to version 1.7.9
         if (version_compare($moduleVersion, '1.7.9', '<')) {
             // Add table of price
-            $sql = <<<'EOD'
+            $sql
+                = <<<'EOD'
 CREATE TABLE `{price}` (
   `id`          INT(10) UNSIGNED                     NOT NULL AUTO_INCREMENT,
   `price`       DECIMAL(16, 2)                       NOT NULL DEFAULT '0.00',
@@ -984,11 +1091,13 @@ EOD;
             try {
                 $sqlHandler->queryContent($sql);
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'SQL schema query for author table failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
 
                 return false;
             }
@@ -1001,11 +1110,13 @@ EOD;
             try {
                 $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }
@@ -1017,11 +1128,13 @@ EOD;
             try {
                 $linkAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
-                $this->setResult('db', [
+                $this->setResult(
+                    'db', [
                     'status'  => false,
                     'message' => 'Table alter query failed: '
                         . $exception->getMessage(),
-                ]);
+                ]
+                );
                 return false;
             }
         }

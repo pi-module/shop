@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -26,28 +26,32 @@ class SitemapForm extends BaseForm
     public function init()
     {
         // type
-        $this->add([
-            'name'       => 'type',
-            'type'       => 'select',
-            'options'    => [
-                'label'         => __('Select for rebuild'),
-                'value_options' => [
-                    1 => __('All of tables'),
-                    2 => __('Just product table'),
-                    3 => __('Just category table'),
+        $this->add(
+            [
+                'name'       => 'type',
+                'type'       => 'select',
+                'options'    => [
+                    'label'         => __('Select for rebuild'),
+                    'value_options' => [
+                        1 => __('All of tables'),
+                        2 => __('Just product table'),
+                        3 => __('Just category table'),
+                    ],
                 ],
-            ],
-            'attributes' => [
-                'required' => true,
-            ],
-        ]);
+                'attributes' => [
+                    'required' => true,
+                ],
+            ]
+        );
         // Save
-        $this->add([
-            'name'       => 'submit',
-            'type'       => 'submit',
-            'attributes' => [
-                'value' => __('Submit'),
-            ],
-        ]);
+        $this->add(
+            [
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' => [
+                    'value' => __('Submit'),
+                ],
+            ]
+        );
     }
 }	

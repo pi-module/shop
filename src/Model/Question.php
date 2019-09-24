@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -20,18 +20,19 @@ class Question extends Model
     /**
      * {@inheritDoc}
      */
-    protected $columns = [
-        'id',
-        'ip',
-        'product',
-        'name',
-        'email',
-        'status',
-        'uid_ask',
-        'uid_answer',
-        'text_ask',
-        'text_answer',
-        'time_ask',
-        'time_answer',
-    ];
+    protected $columns
+        = [
+            'id',
+            'ip',
+            'product',
+            'name',
+            'email',
+            'status',
+            'uid_ask',
+            'uid_answer',
+            'text_ask',
+            'text_answer',
+            'time_ask',
+            'time_answer',
+        ];
 }

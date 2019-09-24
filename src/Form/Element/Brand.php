@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -25,12 +25,12 @@ class Brand extends Select
     public function getValueOptions()
     {
         if (empty($this->valueOptions)) {
-            $list = [];
+            $list    = [];
             $columns = ['id', 'parent', 'title'];
-            $where = ['status' => 1, 'type' => 'brand'];
-            $order = ['title ASC', 'id DESC'];
-            $select = Pi::model('category', 'shop')->select()->columns($columns)->where($where)->order($order);
-            $rowset = Pi::model('category', 'shop')->selectWith($select);
+            $where   = ['status' => 1, 'type' => 'brand'];
+            $order   = ['title ASC', 'id DESC'];
+            $select  = Pi::model('category', 'shop')->select()->columns($columns)->where($where)->order($order);
+            $rowset  = Pi::model('category', 'shop')->selectWith($select);
             foreach ($rowset as $row) {
                 $list[$row->id] = $row->toArray();
             }
@@ -77,9 +77,9 @@ class Brand extends Select
         // Set category list as tree
         foreach ($elements as $element) {
             if ($element['parent'] == $parentId) {
-                $depth = 0;
+                $depth                  = 0;
                 $branch[$element['id']] = $element['title'];
-                $children = $this->getTree($elements, $element['id']);
+                $children               = $this->getTree($elements, $element['id']);
                 if ($children) {
                     $depth++;
                     foreach ($children as $key => $value) {

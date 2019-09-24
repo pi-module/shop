@@ -27,12 +27,12 @@
                         <?php if ($block['number'] > 0) { ?>
                             <?php foreach ($block['list'] as $product) { ?>
                                 <div class="media">
-                                    <div class="media-left col-md-4 col-xs-12">
-                                        <img class="img-responsive media-object"
+                                    <div class="media-left col-md-4 col-12">
+                                        <img class="img-fluid media-object"
                                              src="<?php echo $this->escape($product['thumbUrl']); ?>"
                                              alt="<?php echo $this->escape($product['title']); ?>">
                                     </div>
-                                    <div class="media-body col-md-8 col-xs-12">
+                                    <div class="media-body col-md-8 col-12">
                                         <h4 class="media-heading">
                                             <a href="<?php echo $this->escape($product['productUrl']); ?>"
                                                title="<?php echo $this->escape($product['title']); ?>">

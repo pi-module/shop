@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -24,7 +24,7 @@ class CategoryController extends IndexController
     {
         // Get info from url
         $module = $this->params('module');
-        $slug = $this->params('slug');
+        $slug   = $this->params('slug');
         // Get config
         $config = Pi::service('registry')->config->read($module);
         // Get category information from model
@@ -49,9 +49,9 @@ class CategoryController extends IndexController
 
             case 'subcategory':
                 // Get info
-                $list = [];
-                $where = ['status' => 1, 'parent' => $category['id']];
-                $order = ['display_order ASC', 'time_create DESC', 'title ASC'];
+                $list   = [];
+                $where  = ['status' => 1, 'parent' => $category['id']];
+                $order  = ['display_order ASC', 'time_create DESC', 'title ASC'];
                 $select = $this->getModel('category')->select()->where($where)->order($order);
                 $rowset = $this->getModel('category')->selectWith($select);
                 // Make list
@@ -64,6 +64,12 @@ class CategoryController extends IndexController
                 $template = 'category-single';
                 break;
         }
+
+        // Save statistics
+        if (Pi::service('module')->isActive('statistics')) {
+            Pi::api('log', 'statistics')->save('shop', 'category', $category['id']);
+        }
+
         // Set view
         $this->view()->headTitle($category['seo_title']);
         $this->view()->headDescription($category['seo_description'], 'set');
@@ -83,10 +89,10 @@ class CategoryController extends IndexController
         $config = Pi::service('registry')->config->read($module);
         // Set info
         $categories = [];
-        $where = ['status' => 1];
-        $order = ['display_order DESC', 'title ASC', 'id DESC'];
-        $select = $this->getModel('category')->select()->where($where)->order($order);
-        $rowset = $this->getModel('category')->selectWith($select);
+        $where      = ['status' => 1];
+        $order      = ['display_order DESC', 'title ASC', 'id DESC'];
+        $select     = $this->getModel('category')->select()->where($where)->order($order);
+        $rowset     = $this->getModel('category')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
             $categories[$row->id] = Pi::api('category', 'shop')->canonizeCategory($row);
@@ -100,10 +106,18 @@ class CategoryController extends IndexController
         $title = __('Category list');
         // Set seo_keywords
         $filter = new Filter\HeadKeywords;
-        $filter->setOptions([
-            'force_replace_space' => true,
-        ]);
+        $filter->setOptions(
+            [
+                'force_replace_space' => true,
+            ]
+        );
         $seoKeywords = $filter($title);
+
+        // Save statistics
+        if (Pi::service('module')->isActive('statistics')) {
+            Pi::api('log', 'statistics')->save('shop', 'categoryList');
+        }
+
         // Set view
         $this->view()->headTitle($title);
         $this->view()->headDescription($title, 'set');

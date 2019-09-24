@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -23,9 +23,10 @@ class SetValue extends AbstractValidator
     /**
      * @var array
      */
-    protected $messageTemplates = [
-        self::TAKEN => 'Please select element',
-    ];
+    protected $messageTemplates
+        = [
+            self::TAKEN => 'Please select element',
+        ];
 
     protected $options = [];
 
@@ -34,6 +35,7 @@ class SetValue extends AbstractValidator
      *
      * @param  mixed $value
      * @param  array $context
+     *
      * @return boolean
      */
     public function isValid($value, $context = null)

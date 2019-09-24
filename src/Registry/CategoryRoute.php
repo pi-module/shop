@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt BSD 3-Clause License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt BSD 3-Clause License
  * @package         Registry
  */
 
@@ -27,11 +27,11 @@ class CategoryRoute extends AbstractRegistry
      */
     protected function loadDynamic($options = [])
     {
-        $return = [];
-        $where = ['status' => 1];
+        $return  = [];
+        $where   = ['status' => 1];
         $columns = ['id', 'slug'];
-        $select = Pi::model('category', $this->module)->select()->columns($columns)->where($where);
-        $rowset = Pi::model('category', $this->module)->selectWith($select);
+        $select  = Pi::model('category', $this->module)->select()->columns($columns)->where($where);
+        $rowset  = Pi::model('category', $this->module)->selectWith($select);
         foreach ($rowset as $row) {
             $return[$row->id] = $row->slug;
         }
@@ -45,7 +45,7 @@ class CategoryRoute extends AbstractRegistry
     public function read()
     {
         $options = [];
-        $result = $this->loadData($options);
+        $result  = $this->loadData($options);
         return $result;
     }
 

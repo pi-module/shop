@@ -22,10 +22,10 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
 ?>
 <div class="clearfix">
     <div class="product-page h-product clearfix" itemscope itemtype="https://schema.org/Product">
-        <div class="col-md-4 col-xs-12">
+        <div class="col-md-4 col-12">
             <?php include $this->template('front/gallery'); ?>
         </div>
-        <div class="col-md-8 col-xs-12">
+        <div class="col-md-8 col-12">
             <div class="product-title clearfix">
                 <h1 class="p-name pull-left" itemprop="name">
                     <?php echo $this->escape($productItem['title']); ?>
@@ -48,22 +48,22 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
             <div class="clearfix product-info-list">
                 <ul class="list-inline row">
                     <?php if (!empty($vote)) { ?>
-                        <li class="col-md-2 col-xs-4">
+                        <li class="list-inline-item col-md-2 col-4">
                             <?php include $this->template('votebar.phtml', 'front', 'vote'); ?>
                         </li>
                     <?php } ?>
                     <?php if (!empty($favourite)) { ?>
-                        <li class="col-md-2 col-xs-4">
+                        <li class="list-inline-item col-md-2 col-4">
                             <?php include $this->template('favouritebar.phtml', 'front', 'favourite'); ?>
                         </li>
                     <?php } ?>
                     <?php if ($config['view_question']) { ?>
-                        <li class="col-md-3 col-xs-4">
+                        <li class="list-inline-item col-md-3 col-4">
                             <?php include $this->template('front/product-question'); ?>
                         </li>
                     <?php } ?>
                     <?php if ($config['social_sharing']) { ?>
-                        <li class="col-md-5 col-xs-12">
+                        <li class="list-inline-item col-md-5 col-12">
                             <div class="socialSharing">
                                 <?php echo $this->socialSharing(
                                     $config['social_sharing'],
@@ -77,7 +77,7 @@ if (isset($productItem['largeUrl']) && !empty($productItem['largeUrl'])) {
                 </ul>
             </div>
         </div>
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-12 col-12">
             <div class="product-info-box productDescription p-review clearfix" itemprop="description">
                 <?php echo $productItem['text_description']; ?>
             </div>

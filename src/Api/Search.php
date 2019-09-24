@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -21,47 +21,52 @@ class Search extends AbstractSearch
     /**
      * {@inheritDoc}
      */
-    protected $table = [
-        'product',
-        'category',
-    ];
+    protected $table
+        = [
+            'product',
+            'category',
+        ];
 
     /**
      * {@inheritDoc}
      */
-    protected $searchIn = [
-        'title',
-        //'text_summary',
-        //'text_description',
-    ];
+    protected $searchIn
+        = [
+            'title',
+            //'text_summary',
+            //'text_description',
+        ];
 
     /**
      * {@inheritDoc}
      */
-    protected $meta = [
-        'id'           => 'id',
-        'title'        => 'title',
-        'text_summary' => 'content',
-        'time_create'  => 'time',
-        'slug'         => 'slug',
-        'image'        => 'image',
-        'path'         => 'path',
-    ];
+    protected $meta
+        = [
+            'id'           => 'id',
+            'title'        => 'title',
+            'text_summary' => 'content',
+            'time_create'  => 'time',
+            'slug'         => 'slug',
+            'image'        => 'image',
+            'path'         => 'path',
+        ];
 
     /**
      * {@inheritDoc}
      */
-    protected $condition = [
-        'status' => 1,
-    ];
+    protected $condition
+        = [
+            'status' => 1,
+        ];
 
     /**
      * {@inheritDoc}
      */
-    protected $order = [
-        'time_create DESC',
-        'id DESC',
-    ];
+    protected $order
+        = [
+            'time_create DESC',
+            'id DESC',
+        ];
 
     /**
      * {@inheritDoc}
@@ -70,19 +75,27 @@ class Search extends AbstractSearch
     {
         switch ($table) {
             case 'category':
-                $link = Pi::url(Pi::service('url')->assemble('shop', [
-                    'module'     => $this->getModule(),
-                    'controller' => 'category',
-                    'slug'       => $item['slug'],
-                ]));
+                $link = Pi::url(
+                    Pi::service('url')->assemble(
+                        'shop', [
+                        'module'     => $this->getModule(),
+                        'controller' => 'category',
+                        'slug'       => $item['slug'],
+                    ]
+                    )
+                );
                 break;
 
             case 'product':
-                $link = Pi::url(Pi::service('url')->assemble('shop', [
-                    'module'     => $this->getModule(),
-                    'controller' => 'product',
-                    'slug'       => $item['slug'],
-                ]));
+                $link = Pi::url(
+                    Pi::service('url')->assemble(
+                        'shop', [
+                        'module'     => $this->getModule(),
+                        'controller' => 'product',
+                        'slug'       => $item['slug'],
+                    ]
+                    )
+                );
                 break;
         }
 
@@ -100,11 +113,13 @@ class Search extends AbstractSearch
         $image = '';
         if (isset($item['image']) && !empty($item['image'])) {
             $image = Pi::url(
-                sprintf('upload/%s/thumb/%s/%s',
+                sprintf(
+                    'upload/%s/thumb/%s/%s',
                     $config['image_path'],
                     $item['path'],
                     $item['image']
-                ));
+                )
+            );
         }
 
         return $image;

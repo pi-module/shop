@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -24,16 +24,18 @@ class PromotionController extends ActionController
     public function indexAction()
     {
         // Get info
-        $list = [];
-        $order = ['id DESC'];
+        $list   = [];
+        $order  = ['id DESC'];
         $select = $this->getModel('promotion')->select()->order($order);
         $rowset = $this->getModel('promotion')->selectWith($select);
         // Make list
         foreach ($rowset as $row) {
-            $list[$row->id] = $row->toArray();
-            $list[$row->id]['time'] = sprintf(__('From %s to %s'),
+            $list[$row->id]             = $row->toArray();
+            $list[$row->id]['time']     = sprintf(
+                __('From %s to %s'),
                 _date($row->time_publish, ['pattern' => 'yyyy-MM-dd HH:mm']),
-                _date($row->time_expire, ['pattern' => 'yyyy-MM-dd HH:mm']));
+                _date($row->time_expire, ['pattern' => 'yyyy-MM-dd HH:mm'])
+            );
             $list[$row->id]['isExpire'] = (time() > $row->time_expire) ? 1 : 0;
         }
         // Set view
@@ -51,7 +53,7 @@ class PromotionController extends ActionController
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
             // Set slug
-            $filter = new Filter\Slug;
+            $filter       = new Filter\Slug;
             $data['code'] = $filter($data['code']);
             // Form filter
             $form->setInputFilter(new PromotionFilter);
@@ -60,7 +62,7 @@ class PromotionController extends ActionController
                 $values = $form->getData();
                 // Set time
                 $values['time_publish'] = strtotime($values['time_publish']);
-                $values['time_expire'] = strtotime($values['time_expire']);
+                $values['time_expire']  = strtotime($values['time_expire']);
                 // Save values
                 if (!empty($values['id'])) {
                     $row = $this->getModel('promotion')->find($values['id']);
@@ -77,14 +79,14 @@ class PromotionController extends ActionController
             }
         } else {
             if ($id) {
-                $values = $this->getModel('promotion')->find($id)->toArray();
+                $values                 = $this->getModel('promotion')->find($id)->toArray();
                 $values['time_publish'] = date("Y-m-d H:i:s", $values['time_publish']);
-                $values['time_expire'] = date("Y-m-d H:i:s", $values['time_expire']);
+                $values['time_expire']  = date("Y-m-d H:i:s", $values['time_expire']);
 
             } else {
-                $values = [];
+                $values                 = [];
                 $values['time_publish'] = date("Y-m-d H:i:s", time());
-                $values['time_expire'] = date("Y-m-d H:i:s", strtotime("+1 month"));
+                $values['time_expire']  = date("Y-m-d H:i:s", strtotime("+1 month"));
             }
             $form->setData($values);
         }

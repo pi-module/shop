@@ -1,24 +1,28 @@
 <?php
 // Load header files
 $this->jQuery();
-$this->angular([
-    'angular-route.js',
-    'ui-bootstrap-custom-tpls-0.7.0.js',
-    'pi.js',
-    'i18n',
-]);
+$this->angular(
+    [
+        'angular-route.js',
+        'ui-bootstrap-custom-tpls-0.7.0.js',
+        'pi.js',
+        'i18n',
+    ]
+);
 $this->js($this->assetModule('js/bootstrap-treeview.min.js'));
 $this->js($this->assetModule('js/rzslider.min.js'));
-$this->css([
-    $this->assetModule('css/front.css'),
-    $this->assetModule('css/rzslider.min.css'),
-]);
+$this->css(
+    [
+        $this->assetModule('css/front.css'),
+        $this->assetModule('css/rzslider.min.css'),
+    ]
+);
 ?>
 <div class="row clearfix pi-item-angular">
     <div class="ajax-spinner">
         <img src="<?php echo $this->assetModule('image/spinner.gif'); ?>" class="ajax-spinner-loader"/>
     </div>
-    <div class="col-md-12 col-xs-12">
+    <div class="col-md-12 col-12">
         <?php include $this->template('front/category'); ?>
     </div>
     <div ng-view></div>

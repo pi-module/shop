@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -23,8 +23,8 @@ class SaleController extends ActionController
     public function indexAction()
     {
         // Set array
-        $saleList = [];
-        $productList = [];
+        $saleList     = [];
+        $productList  = [];
         $categoryList = [];
         // Get product ides
         $saleId = Pi::api('sale', 'shop')->getInformation('all');
@@ -38,8 +38,8 @@ class SaleController extends ActionController
         }
         if (!empty($productList) || !empty($categoryList)) {
             // Get sale
-            $order = ['id DESC', 'time_publish DESC'];
-            $select = $this->getModel('sale')->select()->order($order);
+            $order   = ['id DESC', 'time_publish DESC'];
+            $select  = $this->getModel('sale')->select()->order($order);
             $saleSet = $this->getModel('sale')->selectWith($select);
             // Make sale list
             foreach ($saleSet as $sale) {
@@ -49,9 +49,11 @@ class SaleController extends ActionController
                 } elseif ($sale->type == 'category') {
                     $saleList[$sale->type][$sale->id]['categoryInfo'] = $categoryList[$sale->category];
                 }
-                $saleList[$sale->type][$sale->id]['time'] = sprintf(__('From %s to %s'),
+                $saleList[$sale->type][$sale->id]['time']     = sprintf(
+                    __('From %s to %s'),
                     _date($sale->time_publish, ['pattern' => 'yyyy-MM-dd HH:mm']),
-                    _date($sale->time_expire, ['pattern' => 'yyyy-MM-dd HH:mm']));
+                    _date($sale->time_expire, ['pattern' => 'yyyy-MM-dd HH:mm'])
+                );
                 $saleList[$sale->type][$sale->id]['isExpire'] = (time() > $sale->time_expire) ? 1 : 0;
             }
         }
@@ -63,10 +65,10 @@ class SaleController extends ActionController
     public function updateAction()
     {
         // Get id
-        $id = $this->params('id');
+        $id   = $this->params('id');
         $part = $this->params('part');
         // Set option
-        $option = [];
+        $option         = [];
         $option['type'] = $id ? 'edit' : 'add';
         $option['part'] = $part;
         // Set form
@@ -79,13 +81,13 @@ class SaleController extends ActionController
                 $values = $form->getData();
                 // Set time
                 $values['time_publish'] = strtotime($values['time_publish']);
-                $values['time_expire'] = strtotime($values['time_expire']);
+                $values['time_expire']  = strtotime($values['time_expire']);
                 // Save values
                 if (!empty($values['id'])) {
                     $row = $this->getModel('sale')->find($values['id']);
                 } else {
                     $values['type'] = $part;
-                    $row = $this->getModel('sale')->createRow();
+                    $row            = $this->getModel('sale')->createRow();
                 }
                 $row->assign($values);
                 $row->save();
@@ -100,13 +102,13 @@ class SaleController extends ActionController
             }
         } else {
             if ($id) {
-                $values = $this->getModel('sale')->find($id)->toArray();
+                $values                 = $this->getModel('sale')->find($id)->toArray();
                 $values['time_publish'] = date("Y-m-d H:i:s", $values['time_publish']);
-                $values['time_expire'] = date("Y-m-d H:i:s", $values['time_expire']);
+                $values['time_expire']  = date("Y-m-d H:i:s", $values['time_expire']);
             } else {
-                $values = [];
+                $values                 = [];
                 $values['time_publish'] = date("Y-m-d H:i:s", time());
-                $values['time_expire'] = date("Y-m-d H:i:s", strtotime("+1 week"));
+                $values['time_expire']  = date("Y-m-d H:i:s", strtotime("+1 week"));
             }
             $form->setData($values);
         }
@@ -122,7 +124,7 @@ class SaleController extends ActionController
     {
         // Get information
         $this->view()->setTemplate(false);
-        $id = $this->params('id');
+        $id  = $this->params('id');
         $row = $this->getModel('sale')->find($id);
         if ($row) {
             $row->delete();

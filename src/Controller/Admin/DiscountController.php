@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -23,8 +23,8 @@ class DiscountController extends ActionController
     public function indexAction()
     {
         // Get info
-        $list = [];
-        $order = ['id DESC'];
+        $list   = [];
+        $order  = ['id DESC'];
         $select = $this->getModel('discount')->select()->order($order);
         $rowset = $this->getModel('discount')->selectWith($select);
         // Make list

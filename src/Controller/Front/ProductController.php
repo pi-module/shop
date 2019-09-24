@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -22,7 +22,7 @@ class ProductController extends IndexController
     public function indexAction()
     {
         // Get info from url
-        $slug = $this->params('slug');
+        $slug   = $this->params('slug');
         $module = $this->params('module');
         // Get config
         $config = Pi::service('registry')->config->read($module);
@@ -74,19 +74,19 @@ class ProductController extends IndexController
         }
         // Set vote
         if ($config['vote_bar'] && Pi::service('module')->isActive('vote')) {
-            $vote['point'] = $product['point'];
-            $vote['count'] = $product['count'];
-            $vote['item'] = $product['id'];
-            $vote['table'] = 'product';
+            $vote['point']  = $product['point'];
+            $vote['count']  = $product['count'];
+            $vote['item']   = $product['id'];
+            $vote['table']  = 'product';
             $vote['module'] = $module;
-            $vote['type'] = 'star';
+            $vote['type']   = 'star';
             $this->view()->assign('vote', $vote);
         }
         // Set favourite
         if ($config['favourite_bar'] && Pi::service('module')->isActive('favourite')) {
-            $favourite['is'] = Pi::api('favourite', 'favourite')->loadFavourite($module, 'product', $product['id']);
-            $favourite['item'] = $product['id'];
-            $favourite['table'] = 'product';
+            $favourite['is']     = Pi::api('favourite', 'favourite')->loadFavourite($module, 'product', $product['id']);
+            $favourite['item']   = $product['id'];
+            $favourite['table']  = 'product';
             $favourite['module'] = $module;
             $this->view()->assign('favourite', $favourite);
         }
@@ -97,19 +97,23 @@ class ProductController extends IndexController
         }
         // Set question
         if ($config['view_question']) {
-            $question = [];
+            $question            = [];
             $question['product'] = $product['id'];
             if ($uid > 0) {
-                $question['uid'] = $user['id'];
+                $question['uid']   = $user['id'];
                 $question['email'] = $user['email'];
-                $question['name'] = $user['display'];
+                $question['name']  = $user['display'];
             }
             // Set action url
-            $url = Pi::url($this->url('', [
-                'module'     => $module,
-                'controller' => 'product',
-                'action'     => 'question',
-            ]));
+            $url = Pi::url(
+                $this->url(
+                    '', [
+                    'module'     => $module,
+                    'controller' => 'product',
+                    'action'     => 'question',
+                ]
+                )
+            );
             // Set form
             $form = new QuestionForm('question');
             $form->setAttribute('enctype', 'multipart/form-data');
@@ -117,7 +121,9 @@ class ProductController extends IndexController
             $form->setData($question);
             // Set view
             $this->view()->assign('questionForm', $form);
-            $this->view()->assign('questionMessage', __('You can any question about this product from us, we read your question and answer you as soon as possible'));
+            $this->view()->assign(
+                'questionMessage', __('You can any question about this product from us, we read your question and answer you as soon as possible')
+            );
         }
         // Set main category info
         if ($config['view_description_product']) {
@@ -125,8 +131,8 @@ class ProductController extends IndexController
             $this->view()->assign('categorySingle', $categorySingle);
         }
         // Set property
-        $property = [];
-        $property['list'] = Pi::api('property', 'shop')->getList();
+        $property          = [];
+        $property['list']  = Pi::api('property', 'shop')->getList();
         $property['value'] = Pi::api('property', 'shop')->getValue($product['id']);
         $this->view()->assign('property', $property);
         // Set template
@@ -140,6 +146,12 @@ class ProductController extends IndexController
                 $template = 'product-item';
                 break;
         }
+
+        // Save statistics
+        if (Pi::service('module')->isActive('statistics')) {
+            Pi::api('log', 'statistics')->save('shop', 'product', $product['id']);
+        }
+
         // Set view
         $this->view()->headTitle($product['seo_title']);
         $this->view()->headDescription($product['seo_description'], 'set');

@@ -1,10 +1,10 @@
 <?php
 /**
- * Pi Engine (http://pialog.org)
+ * Pi Engine (http://piengine.org)
  *
- * @link            http://code.pialog.org for the Pi Engine source repository
- * @copyright       Copyright (c) Pi Engine http://pialog.org
- * @license         http://pialog.org/license.txt New BSD License
+ * @link            http://code.piengine.org for the Pi Engine source repository
+ * @copyright       Copyright (c) Pi Engine http://piengine.org
+ * @license         http://piengine.org/license.txt New BSD License
  */
 
 /**
@@ -32,7 +32,7 @@ class Image extends AbstractApi
             return $prefix . '%random%';
         }
         // Separating image name and extension
-        $name = pathinfo($image, PATHINFO_FILENAME);
+        $name      = pathinfo($image, PATHINFO_FILENAME);
         $extension = pathinfo($image, PATHINFO_EXTENSION);
         $extension = strtolower($extension);
         // strip name
@@ -133,7 +133,7 @@ class Image extends AbstractApi
             // Set watermark image
             $watermarkImage = (empty($config['image_watermark_source'])) ? '' : Pi::path($config['image_watermark_source']);
             if (empty($watermarkImage) || !file_exists($watermarkImage)) {
-                $logoFile = Pi::service('asset')->logo();
+                $logoFile       = Pi::service('asset')->logo();
                 $watermarkImage = Pi::path($logoFile);
             }
 
