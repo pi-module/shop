@@ -70,8 +70,8 @@ class Brand extends Select
         if ($parentId == 0) {
             if (!isset($this->options['category'])) {
                 $branch[0] = __('All brands');
-            } else {
-                $branch = $this->options['category'];
+            } elseif (empty($this->options['category']) && $this->attributes['size'] == 1) {
+                $branch[0] = '';
             }
         }
         // Set category list as tree
