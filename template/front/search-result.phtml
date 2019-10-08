@@ -1,11 +1,11 @@
-<div class="search-result-item col-md-3 col-12">
-    <div class="thumbnail">
+<div class="search-result-item col-lg-3 col-md-3 col-12">
+    <div class="card">
         <a title="<?php echo $item['title']; ?>" href="<?php echo $item['url']; ?>">
-            <img class="img-fluid" src="<?php echo _escape($item['image']); ?>"
+            <img class="img-fluid card-img-top" src="<?php echo _escape($item['image']); ?>"
                  alt="<?php echo _escape($item['title']); ?>">
         </a>
-        <div class="caption">
-            <h3>
+        <div class="card-body">
+            <h3 class="card-title">
                 <a title="<?php echo $item['title']; ?>" href="<?php echo $item['url']; ?>">
                     <?php echo _escape($item['title']); ?>
                 </a>

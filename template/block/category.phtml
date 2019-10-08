@@ -2,19 +2,19 @@
     <?php if ($block['type'] == 'horizontal') { ?>
         <?php $this->css($this->assetModule('css/block.css', 'shop')); ?>
         <div class="shop-block-category clearfix row">
-            <div class="thumbnails">
-                <?php foreach ($block['resources'] as $category) { ?>
-                    <div class="col-md-2 col-6 h-review" itemprop="itemListElement">
-                        <div class="thumbnail p-item h-card">
-                            <?php if ($category['image']) { ?>
-                                <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
-                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
-                                    <img itemprop="image" class="img-fluid u-photo"
-                                         src="<?php echo $this->escape($category['mediumUrl']); ?>"
-                                         alt="<?php echo $this->escape($category['title']); ?>"/>
-                                </a>
-                            <?php } ?>
-                            <h3 class="p-name" itemprop="name">
+            <?php foreach ($block['resources'] as $category) { ?>
+                <div class="col-lg-2 col-md-2 col-6 h-review" itemprop="itemListElement">
+                    <div class="card p-item h-card">
+                        <?php if ($category['image']) { ?>
+                            <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
+                               href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                <img itemprop="image" class="img-fluid u-photo card-img-top"
+                                     src="<?php echo $this->escape($category['mediumUrl']); ?>"
+                                     alt="<?php echo $this->escape($category['title']); ?>"/>
+                            </a>
+                        <?php } ?>
+                        <div class="card-body">
+                            <h3 class="p-name card-title" itemprop="name">
                                 <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
                                    href="<?php echo $this->escape($category['categoryUrl']); ?>">
                                     <?php echo $this->escape($category['title']); ?>
@@ -22,25 +22,25 @@
                             </h3>
                         </div>
                     </div>
-                <?php } ?>
-            </div>
+                </div>
+            <?php } ?>
         </div>
     <?php } elseif ($block['type'] == 'vertical') { ?>
         <?php $this->css($this->assetModule('css/block.css', 'shop')); ?>
         <div class="shop-block-category clearfix row">
-            <div class="thumbnails">
-                <?php foreach ($block['resources'] as $category) { ?>
-                    <div class="col-md-12 col-12 h-review" itemprop="itemListElement">
-                        <div class="thumbnail p-item h-card">
-                            <?php if ($category['image']) { ?>
-                                <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
-                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
-                                    <img itemprop="image" class="img-fluid u-photo"
-                                         src="<?php echo $this->escape($category['mediumUrl']); ?>"
-                                         alt="<?php echo $this->escape($category['title']); ?>"/>
-                                </a>
-                            <?php } ?>
-                            <h3 class="p-name" itemprop="name">
+            <?php foreach ($block['resources'] as $category) { ?>
+                <div class="col-lg-12 col-md-12 col-12 h-review" itemprop="itemListElement">
+                    <div class="card p-item h-card">
+                        <?php if ($category['image']) { ?>
+                            <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
+                               href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                <img itemprop="image" class="img-fluid u-photo card-img-top"
+                                     src="<?php echo $this->escape($category['mediumUrl']); ?>"
+                                     alt="<?php echo $this->escape($category['title']); ?>"/>
+                            </a>
+                        <?php } ?>
+                        <div class="card-body">
+                            <h3 class="p-name card-title" itemprop="name">
                                 <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
                                    href="<?php echo $this->escape($category['categoryUrl']); ?>">
                                     <?php echo $this->escape($category['title']); ?>
@@ -48,8 +48,8 @@
                             </h3>
                         </div>
                     </div>
-                <?php } ?>
-            </div>
+                </div>
+            <?php } ?>
         </div>
     <?php } elseif ($block['type'] == 'list') { ?>
         <ul class="list-group">
@@ -78,21 +78,23 @@
             <div class="owl-carousel text-center clearfix hover-captions-container">
                 <?php foreach ($block['resources'] as $category) { ?>
                     <div class="item h-review" itemprop="itemListElement">
-                        <div class="thumbnail p-item h-card">
+                        <div class="card p-item h-card">
                             <?php if ($category['image']) { ?>
                                 <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
                                    href="<?php echo $this->escape($category['categoryUrl']); ?>">
-                                    <img itemprop="image" class="img-fluid u-photo"
+                                    <img itemprop="image" class="img-fluid u-photo card-img-top"
                                          src="<?php echo $this->escape($category['mediumUrl']); ?>"
                                          alt="<?php echo $this->escape($category['title']); ?>"/>
                                 </a>
                             <?php } ?>
-                            <h3 itemprop="name" class="p-name">
-                                <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
-                                   href="<?php echo $this->escape($category['categoryUrl']); ?>">
-                                    <?php echo $this->escape($category['title']); ?>
-                                </a>
-                            </h3>
+                            <div class="card-body">
+                                <h3 itemprop="name" class="p-name card-title">
+                                    <a itemprop="url" class="u-url" title="<?php echo $this->escape($category['title']); ?>"
+                                       href="<?php echo $this->escape($category['categoryUrl']); ?>">
+                                        <?php echo $this->escape($category['title']); ?>
+                                    </a>
+                                </h3>
+                            </div>
                         </div>
                     </div>
                 <?php } ?>

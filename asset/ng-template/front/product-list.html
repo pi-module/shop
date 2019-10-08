@@ -1,5 +1,5 @@
-<div class="clearfix pi-item-list">
-    <div class="col-md-3 col-12">
+<div class="pi-item-list row clearfix">
+    <div class="col-lg-3 col-md-3 col-12">
         <div class="pi-item-search-form clearfix card card-body bg-light mb-3">
             <div class="page-header">
                 <h3>{{'SEARCH' | translate}}</h3>
@@ -68,10 +68,11 @@
             </form>
         </div>
     </div>
-    <div class="col-md-9 col-12">
-        <div class="pi-item-compare-list hide">
+    <div class="col-lg-9 col-md-9 col-12">
+
+        <div class="pi-item-compare-list invisible">
             <div class="clearfix">
-                <div class="col-md-2 col-6">
+                <div class="col-lg-2 col-md-2 col-6">
                     <div class="pi-item-compare-button text-center">
                         <a href="{{condition.urlCompare}}" title="{{'COMPARE_PRODUCTS' | translate}}"
                            class="btn btn-success btn-sm">
@@ -95,72 +96,70 @@
                 </div>
             </div>
         </div>
+
         <div class="clearfix">
             <div class="page-header">
                 <h1>{{condition.title}}</h1>
             </div>
             <div ng-show="products.length">
-                <div class="row">
-                    <div ng-repeat="product in products">
-                        <div class="{{condition.columnSize}}">
-                            <div class="pi-item-box pi-item-box-size-{{condition.addToCart}}">
-                                <div class="thumbnail" ng-mouseover="hoverCompare = true"
-                                     ng-mouseleave="hoverCompare = false">
-                                    <div class="pi-item-box-image">
-                                        <div ng-show="hoverCompare"
-                                             ng-click="changeClass()"
-                                             ng-class="class"
-                                             data-title="{{product.title}}"
-                                             data-slug="{{product.slug}}"
-                                             data-image="{{product.mediumUrl}}"
-                                             class="pi-item-compare-add">
-                                            <i class="fa fa-plus"></i> {{'COMPARE' | translate}}
-                                        </div>
-                                        <a class="u-url {{product.ribbon_class}}" itemprop="url"
-                                           title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
-                                            <img itemprop="image" class="img-fluid u-photo"
-                                                 src="{{product.mediumUrl}}" alt="{{product.title}}"/>
-                                            <p ng-if="product.ribbon">
-                                                <span>{{product.ribbon}}</span>
-                                            </p>
-                                        </a>
+                <div ng-repeat="product in products" class="row">
+                    <div class="{{condition.columnSize}}">
+                        <div class="pi-item-box pi-item-box-size-{{condition.addToCart}}">
+                            <div class="card" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
+                                <div class="pi-item-box-image">
+                                    <div ng-show="hoverCompare"
+                                         ng-click="changeClass()"
+                                         ng-class="class"
+                                         data-title="{{product.title}}"
+                                         data-slug="{{product.slug}}"
+                                         data-image="{{product.mediumUrl}}"
+                                         class="pi-item-compare-add">
+                                        <i class="fa fa-plus"></i> {{'COMPARE' | translate}}
                                     </div>
-                                    <div class="caption">
-                                        <div class="pi-item-box-title">
-                                            <h3 class="p-name" itemprop="name">
-                                                <a title="{{product.title}}" href="{{product.productUrl}}"
-                                                   target="_blank">
-                                                    {{product.title}}
-                                                </a>
-                                            </h3>
-                                        </div>
-                                        <div class="pi-item-box-extra clearfix" itemprop="offers" itemscope
-                                             itemtype="https://schema.org/Offer">
-                                            <div class="clearfix">
-                                                <div ng-if="product.price_discount_has == 1">
-                                                    <div class="pi-item-box-discount text-danger">
-                                                        <del>{{product.price_discount_view}}</del>
-                                                    </div>
+                                    <a class="u-url {{product.ribbon_class}}" itemprop="url"
+                                       title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
+                                        <img itemprop="image" class="card-img-top img-fluid u-photo"
+                                             src="{{product.mediumUrl}}" alt="{{product.title}}"/>
+                                        <p ng-if="product.ribbon">
+                                            <span>{{product.ribbon}}</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="pi-item-box-title card-title">
+                                        <h3 class="p-name" itemprop="name">
+                                            <a title="{{product.title}}" href="{{product.productUrl}}"
+                                               target="_blank">
+                                                {{product.title}}
+                                            </a>
+                                        </h3>
+                                    </div>
+                                    <div class="pi-item-box-extra clearfix card-text" itemprop="offers" itemscope
+                                         itemtype="https://schema.org/Offer">
+                                        <div class="clearfix">
+                                            <div ng-if="product.price_discount_has == 1">
+                                                <div class="pi-item-box-discount text-danger">
+                                                    <del>{{product.price_discount_view}}</del>
                                                 </div>
-                                                <div class="pi-item-box-price p-price" itemprop="price"
-                                                     content="{{product.price}}">
-                                                    {{product.price_view}}
-                                                </div>
-                                                <div ng-if="condition.addToCart == 1">
-                                                    <div ng-if="product.marketable == 1">
-                                                        <div class="pi-item-box-form">
-                                                            <form action="{{product.cartUrl}}" method="post">
-                                                                <input name="id" type="hidden" value="{{product.id}}">
-                                                                <button type="submit" class="btn btn-success btn-sm">
-                                                                    <i class="fa fa-shopping-cart"></i> {{'ADD_TO_CART'
-                                                                    | translate}}
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <meta itemprop="priceCurrency" content="{{product.price_currency}}">
                                             </div>
+                                            <div class="pi-item-box-price p-price" itemprop="price"
+                                                 content="{{product.price}}">
+                                                {{product.price_view}}
+                                            </div>
+                                            <div ng-if="condition.addToCart == 1">
+                                                <div ng-if="product.marketable == 1">
+                                                    <div class="pi-item-box-form">
+                                                        <form action="{{product.cartUrl}}" method="post">
+                                                            <input name="id" type="hidden" value="{{product.id}}">
+                                                            <button type="submit" class="btn btn-success btn-sm">
+                                                                <i class="fa fa-shopping-cart"></i> {{'ADD_TO_CART'
+                                                                | translate}}
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <meta itemprop="priceCurrency" content="{{product.price_currency}}">
                                         </div>
                                     </div>
                                 </div>

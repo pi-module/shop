@@ -311,7 +311,7 @@ class JsonController extends IndexController
         $product = [];
         $count   = 0;
 
-        $columns = ['product' => new Expression('DISTINCT product')];
+        $columns = ['product' => new Expression('DISTINCT product'), '*'];
         $limit   = (intval($limit) > 0) ? intval($limit) : intval($config['view_perpage']);
         $offset  = (int)($page - 1) * $limit;
 
@@ -453,27 +453,27 @@ class JsonController extends IndexController
         // Set column class
         switch ($config['view_column']) {
             case 1:
-                $columnSize = 'col-md-12 col-12';
+                $columnSize = 'col-lg-12 col-md-12 col-12';
                 break;
 
             case 2:
-                $columnSize = 'col-md-6 col-12';
+                $columnSize = 'col-lg-6 col-md-6 col-12';
                 break;
 
             case 3:
-                $columnSize = 'col-md-4 col-12';
+                $columnSize = 'col-lg-4 col-md-4 col-12';
                 break;
 
             case 4:
-                $columnSize = 'col-md-3 col-12';
+                $columnSize = 'col-lg-3 col-md-3 col-12';
                 break;
 
             case 6:
-                $columnSize = 'col-md-2 col-12';
+                $columnSize = 'col-lg-2 col-md-2 col-12';
                 break;
 
             default:
-                $columnSize = 'col-md-3 col-12';
+                $columnSize = 'col-lg-3 col-md-3 col-12';
                 break;
         }
 

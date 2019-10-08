@@ -1,26 +1,26 @@
 <?php switch ($block['column']) {
     case 1:
-        $shopBlockBoxSize = 'col-md-12 col-12';
+        $shopBlockBoxSize = 'col-lg-12 col-md-12 col-12';
         break;
 
     case 2:
-        $shopBlockBoxSize = 'col-md-6 col-12';
+        $shopBlockBoxSize = 'col-lg-6 col-md-6 col-12';
         break;
 
     case 3:
-        $shopBlockBoxSize = 'col-md-4 col-12';
+        $shopBlockBoxSize = 'col-lg-4 col-md-4 col-12';
         break;
 
     case 4:
-        $shopBlockBoxSize = 'col-md-3 col-12';
+        $shopBlockBoxSize = 'col-lg-3 col-md-3 col-12';
         break;
 
     case 6:
-        $shopBlockBoxSize = 'col-md-2 col-12';
+        $shopBlockBoxSize = 'col-lg-2 col-md-2 col-12';
         break;
 
     default:
-        $shopBlockBoxSize = 'col-md-3 col-12';
+        $shopBlockBoxSize = 'col-lg-3 col-md-3 col-12';
         break;
 }
 // language
@@ -34,12 +34,12 @@ _b('Recommended');
             <?php foreach ($block['resources'] as $product) { ?>
                 <div class="<?php echo $shopBlockBoxSize; ?> productBox h-product" itemscope
                      itemtype="https://schema.org/Product">
-                    <div class="thumbnail">
+                    <div class="card">
                         <?php if ($product['image']) { ?>
                             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>"
                                title="<?php echo $this->escape($product['title']); ?>"
                                href="<?php echo $this->escape($product['productUrl']); ?>">
-                                <img itemprop="image" class="img-fluid u-photo"
+                                <img itemprop="image" class="card-img-top img-fluid u-photo"
                                      src="<?php echo $product['thumbUrl']; ?>"
                                      alt="<?php echo $this->escape($product['title']); ?>"/>
                                 <?php if ($block['show-ribbon'] && $product['ribbon']) { ?>
@@ -47,8 +47,8 @@ _b('Recommended');
                                 <?php } ?>
                             </a>
                         <?php } ?>
-                        <div class="caption">
-                            <h4 itemprop="name" class="p-name">
+                        <div class="card-body">
+                            <h4 itemprop="name" class="p-name card-title">
                                 <a itemprop="url" title="<?php echo $this->escape($product['title']); ?>"
                                    href="<?php echo $this->escape($product['productUrl']); ?>">
                                     <?php echo $this->escape($product['title']); ?>
@@ -56,7 +56,7 @@ _b('Recommended');
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
                                 <?php if ($product['stock_type'] == 1 || $product['stock_type'] == 5) { ?>
-                                    <div class="clearfix" itemprop="offers" itemscope
+                                    <div class="clearfix card-text" itemprop="offers" itemscope
                                          itemtype="https://schema.org/Offer">
                                         <div class="productPrice p-price" itemprop="price"
                                              content="<?php echo $this->escape($product['price']); ?>">
@@ -69,7 +69,7 @@ _b('Recommended');
                                         </div>
                                     </div>
                                 <?php } else { ?>
-                                    <span class="text-danger"><?php echo $this->escape($product['stock_type_view']); ?></span>
+                                    <span class="text-danger card-text"><?php echo $this->escape($product['stock_type_view']); ?></span>
                                 <?php } ?>
                             <?php } ?>
                         </div>
@@ -78,13 +78,13 @@ _b('Recommended');
             <?php } ?>
         <?php } elseif ($block['list-type'] == 'vertical') { ?>
             <?php foreach ($block['resources'] as $product) { ?>
-                <div class="col-md-12 col-12 productBox h-product" itemscope itemtype="https://schema.org/Product">
-                    <div class="thumbnail">
+                <div class="col-lg-12 col-md-12 col-12 productBox h-product" itemscope itemtype="https://schema.org/Product">
+                    <div class="card">
                         <?php if ($product['image']) { ?>
                             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>"
                                title="<?php echo $this->escape($product['title']); ?>"
                                href="<?php echo $this->escape($product['productUrl']); ?>">
-                                <img itemprop="image" class="img-fluid u-photo"
+                                <img itemprop="image" class="card-img-top img-fluid u-photo"
                                      src="<?php echo $product['thumbUrl']; ?>"
                                      alt="<?php echo $this->escape($product['title']); ?>"/>
                                 <?php if ($block['show-ribbon'] && $product['ribbon']) { ?>
@@ -92,8 +92,8 @@ _b('Recommended');
                                 <?php } ?>
                             </a>
                         <?php } ?>
-                        <div class="caption">
-                            <h4 itemprop="name" class="p-name">
+                        <div class="card-body">
+                            <h4 itemprop="name" class="p-name card-title">
                                 <a itemprop="url" title="<?php echo $this->escape($product['title']); ?>"
                                    href="<?php echo $this->escape($product['productUrl']); ?>">
                                     <?php echo $this->escape($product['title']); ?>
@@ -101,7 +101,7 @@ _b('Recommended');
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
                                 <?php if ($product['stock_type'] == 1 || $product['stock_type'] == 5) { ?>
-                                    <div class="clearfix" itemprop="offers" itemscope
+                                    <div class="clearfix card-text" itemprop="offers" itemscope
                                          itemtype="https://schema.org/Offer">
                                         <div class="productPrice p-price" itemprop="price"
                                              content="<?php echo $this->escape($product['price']); ?>">
@@ -114,7 +114,7 @@ _b('Recommended');
                                         </div>
                                     </div>
                                 <?php } else { ?>
-                                    <span class="text-danger"><?php echo $this->escape($product['stock_type_view']); ?></span>
+                                    <span class="text-danger card-text"><?php echo $this->escape($product['stock_type_view']); ?></span>
                                 <?php } ?>
                             <?php } ?>
                         </div>
@@ -125,36 +125,36 @@ _b('Recommended');
             <?php $i = 1; ?>
             <?php foreach ($block['resources'] as $product) { ?>
                 <?php if (in_array($i, [1, 11, 21, 31, 41, 51, 61])) {
-                    $class = 'col-md-6 col-12 productBoxBig pull-left';
+                    $class = 'col-lg-6 col-md-6 col-12 productBoxBig pull-left';
                     $img   = $product['largeUrl'];
                 } elseif (in_array($i, [6, 16, 26, 36, 46, 56, 66])) {
-                    $class = 'col-md-6 col-12 productBoxBig pull-right';
+                    $class = 'col-lg-6 col-md-6 col-12 productBoxBig pull-right';
                     $img   = $product['largeUrl'];
                 } else {
-                    $class = 'col-md-3 col-12';
+                    $class = 'col-lg-3 col-md-3 col-12';
                     $img   = $product['thumbUrl'];
                 } ?>
                 <div class="<?php echo $class; ?> productBox h-product" itemscope itemtype="https://schema.org/Product">
-                    <div class="thumbnail">
+                    <div class="card">
                         <?php if ($product['image']) { ?>
                             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>"
                                title="<?php echo $this->escape($product['title']); ?>"
                                href="<?php echo $this->escape($product['productUrl']); ?>">
-                                <img itemprop="image" class="img-fluid u-photo" src="<?php echo $img; ?>"
+                                <img itemprop="image" class="card-img-top img-fluid u-photo" src="<?php echo $img; ?>"
                                      alt="<?php echo $this->escape($product['title']); ?>"/>
                                 <?php if ($block['show-ribbon'] && $product['ribbon']) { ?>
                                     <p><span><?php echo $this->escape($product['ribbon']); ?></span></p>
                                 <?php } ?>
                             </a>
                         <?php } ?>
-                        <div class="caption">
-                            <h4 itemprop="name" class="p-name">
+                        <div class="card-body">
+                            <h4 itemprop="name" class="p-name card-title">
                                 <a itemprop="url" title="<?php echo $this->escape($product['title']); ?>"
                                    href="<?php echo $this->escape($product['productUrl']); ?>"><?php echo $this->escape($product['title']); ?></a>
                             </h4>
                             <?php if (isset($product['price']) && $block['show-price'] && $block['config']['order_active'] == 1) { ?>
                                 <?php if ($product['stock_type'] == 1 || $product['stock_type'] == 5) { ?>
-                                    <div class="clearfix" itemprop="offers" itemscope
+                                    <div class="clearfix card-text" itemprop="offers" itemscope
                                          itemtype="https://schema.org/Offer">
                                         <div class="productPrice p-price" itemprop="price"
                                              content="<?php echo $this->escape($product['price']); ?>">
@@ -167,7 +167,7 @@ _b('Recommended');
                                         </div>
                                     </div>
                                 <?php } else { ?>
-                                    <span class="text-danger"><?php echo $this->escape($product['stock_type_view']); ?></span>
+                                    <span class="text-danger card-text"><?php echo $this->escape($product['stock_type_view']); ?></span>
                                 <?php } ?>
                             <?php } ?>
                         </div>
@@ -203,12 +203,12 @@ _b('Recommended');
             <div class="owl-carousel itemImageAttach text-center clearfix hover-captions-container">
                 <?php foreach ($block['resources'] as $product) { ?>
                     <div class="item h-review" itemscope itemtype="https://schema.org/Product">
-                        <div class="thumbnail p-item h-card">
+                        <div class="card p-item h-card">
                             <?php if ($product['image']) { ?>
                                 <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>"
                                    title="<?php echo $this->escape($product['title']); ?>"
                                    href="<?php echo $this->escape($product['productUrl']); ?>">
-                                    <img itemprop="image" class="img-fluid u-photo"
+                                    <img itemprop="image" class="card-img-top img-fluid u-photo"
                                          src="<?php echo $this->escape($product['mediumUrl']); ?>"
                                          alt="<?php echo $this->escape($product['title']); ?>"/>
                                     <?php if ($block['show-ribbon'] && $product['ribbon']) { ?>

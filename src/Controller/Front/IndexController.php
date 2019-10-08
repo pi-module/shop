@@ -69,29 +69,36 @@ class IndexController extends ActionController
         $product   = [];
         $productId = [];
         $page      = $this->params('page', 1);
-        $module    = $this->params('module');
         $sort      = $this->params('sort', 'create');
         $stock     = $this->params('stock');
         $offset    = (int)($page - 1) * $this->config('view_perpage');
         $limit     = empty($limit) ? intval($this->config('view_perpage')) : $limit;
         $order     = $this->setOrder($sort);
+
         // Set show just have stock
         if (isset($stock) && $stock == 1) {
             $where['stock'] = 1;
         }
+
         // Set info
-        $columns = ['product' => new Expression('DISTINCT product')];
+        $columns = ['product' => new Expression('DISTINCT product'), '*'];
+
         // Get info from link table
-        $select = $this->getModel('link')->select()->where($where)->columns($columns)
-            ->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('link')->selectWith($select)->toArray();
+        $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order)->offset($offset)->limit($limit);
+        $rowset = $this->getModel('link')->selectWith($select);
+
         // Make list
-        foreach ($rowset as $id) {
-            $productId[] = $id['product'];
+        if (!empty($rowset)) {
+            $rowset->toArray();
+            foreach ($rowset as $id) {
+                $productId[] = $id['product'];
+            }
         }
+
         // Set info
         if (!empty($productId)) {
             $where = ['status' => 1, 'id' => $productId];
+
             // Get list of product
             $select = $this->getModel('product')->select()->where($where)->order($order);
             $rowset = $this->getModel('product')->selectWith($select);
@@ -99,6 +106,7 @@ class IndexController extends ActionController
                 $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
             }
         }
+
         // return product
         return $product;
     }
@@ -109,14 +117,16 @@ class IndexController extends ActionController
         $product = [];
         $limit   = 150;
         $page    = $this->params('page', 1);
-        $module  = $this->params('module');
         $offset  = (int)($page - 1) * $limit;
         $order   = ['time_update ASC'];
+
         // Set info
-        $columns = ['product' => new Expression('DISTINCT product')];
+        $columns = ['product' => new Expression('DISTINCT product'), '*'];
+
         // Get info from link table
         $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order)->offset($offset)->limit($limit);
         $rowset = $this->getModel('link')->selectWith($select)->toArray();
+
         // Make list
         foreach ($rowset as $id) {
             $productId[] = $id['product'];
@@ -124,14 +134,18 @@ class IndexController extends ActionController
         if (empty($productId)) {
             return $product;
         }
+
         // Set info
         $where = ['status' => 1, 'id' => $productId];
+
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)->order($order);
         $rowset = $this->getModel('product')->selectWith($select);
+
         foreach ($rowset as $row) {
             $product[] = Pi::api('product', 'shop')->canonizeProductJson($row);
         }
+
         // return product
         return $product;
     }

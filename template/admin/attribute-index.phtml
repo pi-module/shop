@@ -53,19 +53,19 @@ $this->jQuery('ui/jquery-ui.min.js');
                         <div id="mod_<?php echo $this->escape($field['id']); ?>">
                             <div class="tree-item">
                                 <div class="tree-item-header row" style="cursor:move;">
-                                    <div class="col-md-4">
+                                    <div class="col-lg-4 col-md-4">
                                         <strong><?php _e('Title'); ?></strong> :
                                         <span> <?php echo $this->escape($field['title']); ?> </span>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-lg-2 col-md-2">
                                         <strong><?php _e('Type'); ?></strong> :
                                         <span> <?php echo $this->escape($field['type']); ?> </span>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-lg-3 col-md-3">
                                         <strong><?php _e('Set'); ?></strong> :
                                         <span> <?php echo $this->escape($field['position_view']); ?> </span>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-lg-2 col-md-2">
                                         <a class="btn btn-link" title="<?php _e('Edit'); ?>"
                                            href="<?php echo $this->url('', ['action' => 'update', 'type' => $field['type'], 'id' => $field['id']]); ?>"><i
                                                     class="fa fa-edit"></i></a>

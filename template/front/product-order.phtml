@@ -20,7 +20,7 @@ $this->footScript()->appendScript($script);
                 <div class="form-group clearfix">
                     <label class="col-form-label"><?php echo $this->escape($propertyList['title']); ?></label>
                     <?php if ($propertyList['type'] == 'checkbox') { ?>
-                        <div class="col-md-9 col-12">
+                        <div class="col-lg-9 col-md-9 col-12">
                             <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
                                 <?php if ($config['order_stock'] != 'property') { ?>
                                     <label class="form-check form-control-sm">
@@ -61,7 +61,7 @@ $this->footScript()->appendScript($script);
                             <?php } ?>
                         </div>
                     <?php } elseif ($propertyList['type'] == 'selectbox') { ?>
-                        <div class="col-md-4 col-12">
+                        <div class="col-lg-4 col-md-4 col-12">
                             <select name="property[<?php echo $this->escape($propertyList['id']); ?>]"
                                     class="form-control form-control-sm property-value-select">
                                 <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>

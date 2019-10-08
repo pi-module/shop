@@ -76,14 +76,14 @@ $this->footScript()->appendScript($script);
 <div id="shop-cart-page" class="product-cart-box clearfix">
     <?php if (!empty($basket)) { ?>
         <div class="row">
-            <div class="col-md-8 col-12 cart-product">
+            <div class="col-lg-8 col-md-8 col-12 cart-product">
                 <div class="card card-body bg-light mb-3">
                     <div class="card-heading"><?php _e('List of products on cart'); ?></div>
                     <?php foreach ($basket['products'] as $product) { ?>
                         <div data-id="<?php echo $product['id']; ?>"
                              id="cart-product-<?php echo $this->escape($product['id']); ?>"
                              class="clearfix cart-product-single">
-                            <div class="col-md-4 col-12 cart-product-image">
+                            <div class="col-lg-4 col-md-4 col-12 cart-product-image">
                                 <?php if (!empty($product['image'])) { ?>
                                     <a title="<?php echo $this->escape($product['title']); ?>"
                                        href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank">
@@ -93,7 +93,7 @@ $this->footScript()->appendScript($script);
                                     </a>
                                 <?php } ?>
                             </div>
-                            <div class="col-md-8 col-12 cart-product-info">
+                            <div class="col-lg-8 col-md-8 col-12 cart-product-info">
                                 <div class="cart-product-title">
                                     <h4>
                                         <a title="<?php echo $this->escape($product['title']); ?>"
@@ -183,7 +183,7 @@ $this->footScript()->appendScript($script);
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-12">
+            <div class="col-lg-4 col-md-4 col-12">
                 <div class="clearfix">
                     <div class="card card-body bg-light mb-3">
                         <div class="card-heading"><?php _e('Pre Invoice'); ?></div>

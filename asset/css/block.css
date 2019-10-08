@@ -1,5 +1,5 @@
 /* Category */
-.shop-block-category .thumbnail h3 {
+.shop-block-category .card h3 {
     top: 60px;
     position: absolute;
     font-size: 1em;
@@ -10,11 +10,11 @@
     margin-left: 5px;*/
 }
 
-.shop-block-category .thumbnail h3 a {
+.shop-block-category .card h3 a {
     color: #fff;
 }
 
-.shop-block-category .thumbnail h3 a:hover {
+.shop-block-category .card h3 a:hover {
     text-decoration: none;
 }
 

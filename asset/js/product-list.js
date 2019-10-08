@@ -153,8 +153,8 @@ angular.module('shop')
                         url = url + '/' + $(this).attr("data-slug");
 
                         $('.pi-item-compare-button a').attr("href", url);
-                        $(".pi-item-compare-list").removeClass("hide");
-                        $(".pi-item-compare-list .clearfix").append("<div class='col-md-2'><div class='thumbnail'><img src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='caption'><h4>" + $(this).attr("data-title") + "</h4></div></div></div>");
+                        $(".pi-item-compare-list").removeClass("invisible");
+                        $(".pi-item-compare-list .clearfix").append("<div class='col-lg-2 col-md-2'><div class='card'><img class='card-img-top' src='" + $(this).attr("data-image") + "' alt='" + $(this).attr("data-title") + "'><div class='card-body'><h4 class='card-title'>" + $(this).attr("data-title") + "</h4></div></div></div>");
                     }
                 } else {
                     $('#compareModal .modal-body').html(config.t.COMPARE_MESSAGE_1);

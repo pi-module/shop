@@ -9,7 +9,7 @@
     <h3><?php echo $this->escape($title); ?></h3>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-6 col-md-6">
             <div class="card card-body bg-light mb-3">
                 <div class="view-file">
                     <?php if ($file['type'] == 'video') { ?>
@@ -29,8 +29,8 @@
                             </script>
                         </div>
                     <?php } elseif ($file['type'] == 'audio') { ?>
-                        <div class="attach-audio-file text-center col-md-12">
-                            <object class="col-md-11" type="application/x-shockwave-flash"
+                        <div class="attach-audio-file text-center col-lg-12 col-md-12">
+                            <object class="col-lg-11 col-md-11" type="application/x-shockwave-flash"
                                     data="<?php echo $this->assetModule('player/audio/audio-player.swf'); ?>"
                                     id="audioplayer1" height="35">
                                 <param name="movie"
@@ -43,15 +43,15 @@
                             </object>
                         </div>
                     <?php } elseif ($file['type'] == 'image') { ?>
-                        <div class="attach-image text-center"><img class="img-thumbnail"
-                                                                   src="<?php echo $this->escape($file['view']); ?>"
-                                                                   alt="<?php echo $this->escape($file['title']); ?>"/>
+                        <div class="attach-image text-center">
+                            <img class="img-thumbnail" src="<?php echo $this->escape($file['view']); ?>" alt="<?php echo $this->escape($file['title']); ?>"/>
                         </div>
                     <?php } else { ?>
-                        <div class="attach-image text-center"><a class="btn btn-primary" rel="external"
-                                                                 title="<?php echo $this->escape($file['title']); ?>"
-                                                                 href="<?php echo $this->escape($file['view']); ?>"><i
-                                        class="fa fa-download-alt"></i> <?php _e('Get it'); ?></a></div>
+                        <div class="attach-image text-center">
+                            <a class="btn btn-primary" rel="external" title="<?php echo $this->escape($file['title']); ?>" href="<?php echo $this->escape($file['view']); ?>">
+                                <i class="fa fa-download-alt"></i> <?php _e('Get it'); ?>
+                            </a>
+                        </div>
                     <?php } ?>
                 </div>
                 <p><strong><?php _e('File title'); ?></strong> <?php echo $this->escape($file['title']); ?></p>
@@ -59,6 +59,6 @@
                 <p><strong><?php _e('Product title'); ?></strong> <?php echo $this->escape($product['title']); ?></p>
             </div>
         </div>
-        <div class="col-md-6"><?php echo $this->form($form); ?></div>
+        <div class="col-lg-6 col-md-6"><?php echo $this->form($form); ?></div>
     </div>
 </div>

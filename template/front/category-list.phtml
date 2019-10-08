@@ -6,23 +6,20 @@
     <?php if (isset($categories) && !empty($categories)) { ?>
         <div class="category-list clearfix">
             <?php foreach ($categoryTree as $category) { ?>
-                <div class="col-md-3 col-12" itemscope itemtype="https://schema.org/Brand">
-                    <div class="thumbnail">
+                <div class="col-lg-3 col-md-3 col-12" itemscope itemtype="https://schema.org/Brand">
+                    <div class="card">
                         <?php if ($category['image']) { ?>
-                            <a itemprop="url" href="<?php echo $this->escape($category['categoryUrl']); ?>"
-                               title="<?php echo $this->escape($category['title']); ?>">
-                                <img itemprop="image" src="<?php echo $this->escape($category['mediumUrl']); ?>"
-                                     alt="<?php echo $this->escape($category['title']); ?>">
+                            <a itemprop="url" href="<?php echo $this->escape($category['categoryUrl']); ?>" title="<?php echo $this->escape($category['title']); ?>">
+                                <img itemprop="image" src="<?php echo $this->escape($category['mediumUrl']); ?>"  alt="<?php echo $this->escape($category['title']); ?>" class="card-img-top">
                             </a>
                         <?php } else { ?>
-                            <div class="thumbnail-bg">
+                            <div class="card-body">
                                 <?php echo $this->escape($category['title']); ?>
                             </div>
                         <?php } ?>
-                        <div class="caption">
-                            <a href="<?php echo $this->escape($category['categoryUrl']); ?>"
-                               title="<?php echo $this->escape($category['title']); ?>">
-                                <h3 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h3>
+                        <div class="card-body">
+                            <a href="<?php echo $this->escape($category['categoryUrl']); ?>" title="<?php echo $this->escape($category['title']); ?>">
+                                <h3 class="p-name card-title" itemprop="name"><?php echo $this->escape($category['title']); ?></h3>
                             </a>
                         </div>
                     </div>
