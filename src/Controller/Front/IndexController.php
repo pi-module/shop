@@ -89,7 +89,7 @@ class IndexController extends ActionController
 
         // Make list
         if (!empty($rowset)) {
-            $rowset->toArray();
+            $rowset = $rowset->toArray();
             foreach ($rowset as $id) {
                 $productId[] = $id['product'];
             }
@@ -125,12 +125,18 @@ class IndexController extends ActionController
 
         // Get info from link table
         $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('link')->selectWith($select)->toArray();
+        $rowset = $this->getModel('link')->selectWith($select);
+
+
 
         // Make list
-        foreach ($rowset as $id) {
-            $productId[] = $id['product'];
+        if (!empty($rowset)) {
+            $rowset = $rowset->toArray();
+            foreach ($rowset as $id) {
+                $productId[] = $id['product'];
+            }
         }
+
         if (empty($productId)) {
             return $product;
         }
