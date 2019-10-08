@@ -58,7 +58,7 @@ EOT;
             </div>
         <?php } ?>
         <?php if ($config['order_stock'] == 'never') { ?>
-            <div class="clearfix">
+            <div class="clearfix row">
                 <div class="col-lg-5 col-md-5 col-12">
                     <ul class="list-unstyled">
                         </li>
@@ -126,7 +126,7 @@ EOT;
             </div>
         <?php } elseif ($config['order_stock'] == 'manual') { ?>
             <?php if ($productItem['stock_type'] == 1 || $productItem['stock_type'] == 5) { ?>
-                <div class="clearfix">
+                <div class="clearfix row">
                     <div class="col-lg-5 col-md-5 col-12">
                         <ul class="list-unstyled">
                             <?php if (!empty($productItem['brand'])) { ?>
@@ -255,7 +255,7 @@ EOT;
             <?php } ?>
         <?php } elseif ($config['order_stock'] == 'product') { ?>
             <?php if ($productItem['stock'] > 0) { ?>
-                <div class="clearfix">
+                <div class="clearfix row">
                     <div class="col-lg-5 col-md-5 col-12">
                         <ul class="list-unstyled">
                             <?php if (!empty($productItem['brand'])) { ?>
@@ -378,7 +378,7 @@ EOT;
                 </ul>
             <?php } ?>
         <?php } elseif ($config['order_stock'] == 'property') { ?>
-            <div class="clearfix">
+            <div class="clearfix row">
                 <div class="col-lg-5 col-md-5 col-12">
                     <ul class="list-unstyled">
                         <?php if (!empty($productItem['brand'])) { ?>
