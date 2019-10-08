@@ -49,6 +49,7 @@ class SitemapForm extends BaseForm
                 'name'       => 'submit',
                 'type'       => 'submit',
                 'attributes' => [
+                    'class' => 'btn btn-primary',
                     'value' => __('Submit'),
                 ],
             ]

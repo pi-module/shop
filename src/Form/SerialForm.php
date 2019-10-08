@@ -53,6 +53,7 @@ class SerialForm extends BaseForm
                 'name'       => 'submit',
                 'type'       => 'submit',
                 'attributes' => [
+                    'class' => 'btn btn-primary',
                     'value' => __('Check'),
                 ],
             ]

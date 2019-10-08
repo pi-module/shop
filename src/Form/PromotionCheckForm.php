@@ -55,8 +55,8 @@ class PromotionCheckForm extends BaseForm
                 'name'       => 'submit',
                 'type'       => 'submit',
                 'attributes' => [
-                    'value' => __('Proceeding code'),
                     'class' => 'btn btn-primary btn-sm form-control-sm',
+                    'value' => __('Proceeding code'),
                 ],
             ]
         );
