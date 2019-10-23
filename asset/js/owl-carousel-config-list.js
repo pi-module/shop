@@ -8,7 +8,7 @@ $(document).ready(function ($) {
         dots: false,
         autoplayTimeout: 6000,
         autoplayHoverPause: true,
-        navText: ['<i class="owl-prev fa fa-angle-left"></i>', '<i class="owl-next fa fa-angle-right"></i>'],
+        navText: ['<i class="owl-prev fas fa-angle-left"></i>', '<i class="owl-next fas fa-angle-right"></i>'],
         responsive: {
             0: {items: 2},
             600: {items: 3},

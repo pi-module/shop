@@ -168,11 +168,11 @@ angular.module('shop')
                     levels: 1,
                     data: config.categoryJson,
                     enableLinks: true,
-                    expandIcon: 'fa fa-plus',
-                    collapseIcon: 'fa fa-minus',
-                    emptyIcon: 'fa',
-                    checkedIcon: 'fa fa-check-square-o',
-                    uncheckedIcon: 'fa fa-square-o',
+                    expandIcon: 'fas fa-plus',
+                    collapseIcon: 'fas fa-minus',
+                    emptyIcon: 'fas',
+                    checkedIcon: 'far fa-check-square',
+                    uncheckedIcon: 'far fa-square',
                 });
             });
 

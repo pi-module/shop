@@ -3,8 +3,8 @@
 $locale = Pi::service('i18n')->getLocale();
 $rtl    = (in_array($locale, ['fa', 'ar'])) ? 'true' : 'false';
 
-$iconOwlLeft  = '<i class="owl-prev fa fa-angle-left"></i>';
-$iconOwlRight = '<i class="owl-next fa fa-angle-right"></i>';
+$iconOwlLeft  = '<i class="owl-prev fas fa-angle-left"></i>';
+$iconOwlRight = '<i class="owl-next fas fa-angle-right"></i>';
 $script1
               = <<<'EOT'
     $('.gallery').each(function() {

@@ -126,7 +126,7 @@ $this->footScript()->appendScript($script);
                                                                 '', ['action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => 1]
                                                             )
                                                         ); ?>">
-                                                    <i class="fa fa-plus"></i></button>
+                                                    <i class="fas fa-plus"></i></button>
                                             </li>
                                             <li class="list-inline-item"
                                                 id="cart-product-<?php echo $this->escape($product['id']); ?>-number"><?php echo $this->escape(
@@ -141,7 +141,7 @@ $this->footScript()->appendScript($script);
                                                                 '', ['action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => -1]
                                                             )
                                                         ); ?>">
-                                                    <i class="fa fa-minus"></i></button>
+                                                    <i class="fas fa-minus"></i></button>
                                             </li>
                                         </ul>
                                     </li>
@@ -162,7 +162,7 @@ $this->footScript()->appendScript($script);
                                                 data-remove-link="<?php echo Pi::url(
                                                     $this->url('', ['action' => 'basket', 'process' => 'remove', 'product' => $product['id']])
                                                 ); ?>">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                            <i class="fas fa-trash" aria-hidden="true"></i>
                                             <?php _e('Remove'); ?>
                                         </button>
                                     </li>
@@ -215,7 +215,7 @@ $this->footScript()->appendScript($script);
         </div>
     <?php } else { ?>
         <div class="alert alert-danger text-center" role="alert">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
             <?php _e('Your basket is empty'); ?>
         </div>
     <?php } ?>

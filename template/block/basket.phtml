@@ -2,14 +2,14 @@
     <span class="shop-block-basket">
         <a class="btn btn-primary" href="<?php echo $this->escape($block['link']); ?>"
            title="<?php echo _b('Basket'); ?>">
-            <i class="fa fa-shopping-cart"></i> <?php echo _b('Basket'); ?> <span
+            <i class="fas fa-shopping-cart"></i> <?php echo _b('Basket'); ?> <span
                     class="badge"><?php echo $this->escape($block['number_view']); ?></span>
         </a>
     </span>
 <?php } elseif ($block['type'] == 'dialog') { ?>
     <div class="shop-block-basket">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basketModal">
-            <i class="fa fa-shopping-cart"></i> <?php echo _b('Basket'); ?> <span
+            <i class="fas fa-shopping-cart"></i> <?php echo _b('Basket'); ?> <span
                     class="badge"><?php echo $this->escape($block['number_view']); ?></span>
         </button>
         <div class="modal fade" id="basketModal" tabindex="-1" role="dialog" aria-labelledby="basketModalLabel">
