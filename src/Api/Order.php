@@ -33,6 +33,11 @@ class Order extends AbstractApi
         return true;
     }
 
+    public function getInstallmentComposition($extra = [])
+    {
+        return [100];
+    }
+
     public function getProductDetails($id)
     {
         return Pi::api('product', 'shop')->getProductOrder($id);
