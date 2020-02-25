@@ -33,6 +33,11 @@ class Order extends AbstractApi
         return true;
     }
 
+    public function getInstallmentDueDate($cart = [], $composition = [100])
+    {
+        return null;
+    }
+
     public function getInstallmentComposition($extra = [])
     {
         return [100];
