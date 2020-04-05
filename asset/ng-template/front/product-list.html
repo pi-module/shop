@@ -70,114 +70,121 @@
     </div>
     <div class="col-lg-9 col-md-9 col-12">
 
-        <div class="pi-item-compare-list invisible">
-            <div class="clearfix">
-                <div class="col-lg-2 col-md-2 col-6">
-                    <div class="pi-item-compare-button text-center">
-                        <a href="{{condition.urlCompare}}" title="{{'COMPARE_PRODUCTS' | translate}}"
-                           class="btn btn-success btn-sm">
-                            {{'COMPARE_PRODUCTS' | translate}}
-                        </a>
-                    </div>
-                </div>
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-12">
+                <h1>{{condition.title}}</h1>
             </div>
-            <div class="modal fade" id="compareModal" tabindex="-1" role="dialog" aria-labelledby="compareModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"
-                                    aria-label="{{'CLOSE' | translate}}">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <h4 class="modal-title" id="compareModalLabel">{{'COMPARE_PRODUCTS' | translate}}</h4>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-12">
+                <div class="pi-item-compare-list invisible">
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-6">
+                            <div class="pi-item-compare-button text-center">
+                                <a href="{{condition.urlCompare}}" title="{{'COMPARE_PRODUCTS' | translate}}"
+                                   class="btn btn-success btn-sm">
+                                    {{'COMPARE_PRODUCTS' | translate}}
+                                </a>
+                            </div>
                         </div>
-                        <div class="modal-body"></div>
+                    </div>
+                    <div class="modal fade" id="compareModal" tabindex="-1" role="dialog" aria-labelledby="compareModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="{{'CLOSE' | translate}}">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="compareModalLabel">{{'COMPARE_PRODUCTS' | translate}}</h4>
+                                </div>
+                                <div class="modal-body"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="clearfix">
-            <div class="page-header">
-                <h1>{{condition.title}}</h1>
-            </div>
-            <div ng-show="products.length">
-                <div ng-repeat="product in products" class="row">
-                    <div class="{{condition.columnSize}}">
-                        <div class="pi-item-box pi-item-box-size-{{condition.addToCart}}">
-                            <div class="card" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
-                                <div class="pi-item-box-image">
-                                    <div ng-show="hoverCompare"
-                                         ng-click="changeClass()"
-                                         ng-class="class"
-                                         data-title="{{product.title}}"
-                                         data-slug="{{product.slug}}"
-                                         data-image="{{product.mediumUrl}}"
-                                         class="pi-item-compare-add">
-                                        <i class="fas fa-plus"></i> {{'COMPARE' | translate}}
-                                    </div>
-                                    <a class="u-url {{product.ribbon_class}}" itemprop="url"
-                                       title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
-                                        <img itemprop="image" class="card-img-top img-fluid u-photo"
-                                             src="{{product.mediumUrl}}" alt="{{product.title}}"/>
-                                        <p ng-if="product.ribbon">
-                                            <span>{{product.ribbon}}</span>
-                                        </p>
+        <div ng-show="products.length">
+            <div class="row">
+                <div class="{{condition.columnSize}}" ng-repeat="product in products">
+                    <div class="card mb-3 pi-item-box pi-item-box-size-{{condition.addToCart}}" ng-mouseover="hoverCompare = true" ng-mouseleave="hoverCompare = false">
+                        <div class="pi-item-box-image">
+                            <div ng-show="hoverCompare"
+                                 ng-click="changeClass()"
+                                 ng-class="class"
+                                 data-title="{{product.title}}"
+                                 data-slug="{{product.slug}}"
+                                 data-image="{{product.mediumUrl}}"
+                                 class="pi-item-compare-add">
+                                <i class="fas fa-plus"></i> {{'COMPARE' | translate}}
+                            </div>
+                            <a class="u-url {{product.ribbon_class}}" itemprop="url"
+                               title="{{product.title}}" href="{{product.productUrl}}" target="_blank">
+                                <img itemprop="image" class="card-img-top img-fluid u-photo"
+                                     src="{{product.mediumUrl}}" alt="{{product.title}}"/>
+                                <p ng-if="product.ribbon">
+                                    <span>{{product.ribbon}}</span>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="pi-item-box-title card-title">
+                                <h3 class="p-name" itemprop="name">
+                                    <a title="{{product.title}}" href="{{product.productUrl}}"
+                                       target="_blank">
+                                        {{product.title}}
                                     </a>
-                                </div>
-                                <div class="card-body">
-                                    <div class="pi-item-box-title card-title">
-                                        <h3 class="p-name" itemprop="name">
-                                            <a title="{{product.title}}" href="{{product.productUrl}}"
-                                               target="_blank">
-                                                {{product.title}}
-                                            </a>
-                                        </h3>
-                                    </div>
-                                    <div class="pi-item-box-extra clearfix card-text" itemprop="offers" itemscope
-                                         itemtype="https://schema.org/Offer">
-                                        <div class="clearfix">
-                                            <div ng-if="product.price_discount_has == 1">
-                                                <div class="pi-item-box-discount text-danger">
-                                                    <del>{{product.price_discount_view}}</del>
-                                                </div>
-                                            </div>
-                                            <div class="pi-item-box-price p-price" itemprop="price"
-                                                 content="{{product.price}}">
-                                                {{product.price_view}}
-                                            </div>
-                                            <div ng-if="condition.addToCart == 1">
-                                                <div ng-if="product.marketable == 1">
-                                                    <div class="pi-item-box-form">
-                                                        <form action="{{product.cartUrl}}" method="post">
-                                                            <input name="id" type="hidden" value="{{product.id}}">
-                                                            <button type="submit" class="btn btn-success btn-sm">
-                                                                <i class="fas fa-shopping-cart"></i> {{'ADD_TO_CART'
-                                                                | translate}}
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <meta itemprop="priceCurrency" content="{{product.price_currency}}">
+                                </h3>
+                            </div>
+                            <div class="pi-item-box-extra clearfix card-text" itemprop="offers" itemscope
+                                 itemtype="https://schema.org/Offer">
+                                <div class="clearfix">
+                                    <div ng-if="product.price_discount_has == 1">
+                                        <div class="pi-item-box-discount text-danger">
+                                            <del>{{product.price_discount_view}}</del>
                                         </div>
                                     </div>
+                                    <div class="pi-item-box-price p-price" itemprop="price"
+                                         content="{{product.price}}">
+                                        {{product.price_view}}
+                                    </div>
+                                    <div ng-if="condition.addToCart == 1">
+                                        <div ng-if="product.marketable == 1">
+                                            <div class="pi-item-box-form">
+                                                <form action="{{product.cartUrl}}" method="post">
+                                                    <input name="id" type="hidden" value="{{product.id}}">
+                                                    <button type="submit" class="btn btn-success btn-sm">
+                                                        <i class="fas fa-shopping-cart"></i> {{'ADD_TO_CART'
+                                                        | translate}}
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <meta itemprop="priceCurrency" content="{{product.price_currency}}">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="pi-paginator">
-                    <pagination ng-if="paginator.count > paginator.limit"
-                                total-items="paginator.count" page="paginator.page" max-size="10"
-                                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-                                boundary-links="true" items-per-page="paginator.limit">
-                    </pagination>
-                </div>
             </div>
-            <div class="alert alert-info" ng-if="!products.length">
-                {{'NONE_PRODUCT' | translate}}
+
+            <div class="pi-paginator">
+                <pagination ng-if="paginator.count > paginator.limit"
+                            total-items="paginator.count" page="paginator.page" max-size="10"
+                            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+                            boundary-links="true" items-per-page="paginator.limit">
+                </pagination>
             </div>
         </div>
+        <div ng-if="!products.length" class="alert alert-info" >
+            {{'NONE_PRODUCT' | translate}}
+        </div>
+
+
+
     </div>
 </div>

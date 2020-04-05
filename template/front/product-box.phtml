@@ -14,12 +14,12 @@
             </a>
         <?php } ?>
         <div class="card-body">
-            <h3 class="p-name card-title" itemprop="name">
+            <h4 class="p-name card-title" itemprop="name">
                 <a title="<?php echo $this->escape($product['title']); ?>"
                    href="<?php echo $this->escape($product['productUrl']); ?>">
                     <?php echo $this->escape($product['title']); ?>
                 </a>
-            </h3>
+            </h4>
             <?php if (isset($product['price']) && $config['order_active']) { ?>
                 <div class="clearfix card-text" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <div class="clearfix">
