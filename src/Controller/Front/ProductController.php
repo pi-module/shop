@@ -153,7 +153,7 @@ class ProductController extends IndexController
         $property['list']  = Pi::api('property', 'shop')->getList();
         $property['value'] = Pi::api('property', 'shop')->getValue($product['id']);
         $this->view()->assign('property', $property);
-        
+
         // Set template
         switch ($config['product_template']) {
             case 'tab':

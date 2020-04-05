@@ -96,11 +96,11 @@ class Order extends AbstractApi
         $url = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
-                'module'     => 'order',
-                'controller' => 'detail',
-                'action'     => 'index',
-                'id'         => $order['id'],
-            ]
+                    'module'     => 'order',
+                    'controller' => 'detail',
+                    'action'     => 'index',
+                    'id'         => $order['id'],
+                ]
             )
         );
 

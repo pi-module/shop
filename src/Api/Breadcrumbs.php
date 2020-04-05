@@ -40,8 +40,8 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         'href'  => Pi::url(
                             Pi::service('url')->assemble(
                                 'shop', [
-                                'module' => $this->getModule(),
-                            ]
+                                    'module' => $this->getModule(),
+                                ]
                             )
                         ),
                     ],
@@ -62,9 +62,9 @@ class Breadcrumbs extends AbstractBreadcrumbs
                                     'href'  => Pi::url(
                                         Pi::service('url')->assemble(
                                             'shop', [
-                                            'module'     => $this->getModule(),
-                                            'controller' => 'category',
-                                        ]
+                                                'module'     => $this->getModule(),
+                                                'controller' => 'category',
+                                            ]
                                         )
                                     ),
                                 ];
@@ -102,9 +102,9 @@ class Breadcrumbs extends AbstractBreadcrumbs
                             'href'  => Pi::url(
                                 Pi::service('url')->assemble(
                                     'shop', [
-                                    'module'     => $this->getModule(),
-                                    'controller' => 'category',
-                                ]
+                                        'module'     => $this->getModule(),
+                                        'controller' => 'category',
+                                    ]
                                 )
                             ),
                         ];
@@ -130,9 +130,9 @@ class Breadcrumbs extends AbstractBreadcrumbs
                                 'href'  => Pi::url(
                                     Pi::service('url')->assemble(
                                         'shop', [
-                                        'controller' => 'tag',
-                                        'action'     => 'index',
-                                    ]
+                                            'controller' => 'tag',
+                                            'action'     => 'index',
+                                        ]
                                     )
                                 ),
                             ];

@@ -202,12 +202,12 @@ class Shop extends Standard
     /**
      * assemble(): Defined by Route interface.
      *
-     * @see    Route::assemble()
-     *
-     * @param  array $params
-     * @param  array $options
+     * @param array $params
+     * @param array $options
      *
      * @return string
+     * @see    Route::assemble()
+     *
      */
     public function assemble(
         array $params = [],

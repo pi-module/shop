@@ -92,14 +92,14 @@ class PriceController extends ActionController
                     // Set redirect
                     return $this->redirect()->toRoute(
                         '', [
-                        'controller'     => 'price',
-                        'action'         => 'update',
-                        'selectCategory' => $values['category'],
-                        'selectPercent'  => $values['percent'],
-                        'start'          => 0,
-                        'complete'       => 0,
-                        'count'          => $countProduct,
-                    ]
+                            'controller'     => 'price',
+                            'action'         => 'update',
+                            'selectCategory' => $values['category'],
+                            'selectPercent'  => $values['percent'],
+                            'start'          => 0,
+                            'complete'       => 0,
+                            'count'          => $countProduct,
+                        ]
                     );
                 } else {
                     $message = __('Your selected category not set as main category for any product, please select other category');
@@ -126,9 +126,9 @@ class PriceController extends ActionController
             // Set file
             Pi::service('audit')->attach(
                 'price-update', [
-                'file'   => Pi::path('upload/shop/csv/price-update.csv'),
-                'format' => 'csv',
-            ]
+                    'file'   => Pi::path('upload/shop/csv/price-update.csv'),
+                    'format' => 'csv',
+                ]
             );
 
             // Make list
@@ -203,13 +203,13 @@ class PriceController extends ActionController
                 // Save log to csv file
                 Pi::service('audit')->log(
                     'price-update', [
-                    $product['id'],
-                    $product['title'],
-                    $selectCategory,
-                    $selectPercent,
-                    $mainPrice,
-                    $minPrice,
-                ]
+                        $product['id'],
+                        $product['title'],
+                        $selectCategory,
+                        $selectPercent,
+                        $mainPrice,
+                        $minPrice,
+                    ]
                 );
 
                 // Set price log form price table
@@ -236,13 +236,13 @@ class PriceController extends ActionController
                 $nextUrl = Pi::url(
                     $this->url(
                         '', [
-                        'action'         => 'update',
-                        'selectCategory' => $selectCategory,
-                        'selectPercent'  => $selectPercent,
-                        'start'          => $lastId,
-                        'count'          => $count,
-                        'complete'       => $complete,
-                    ]
+                            'action'         => 'update',
+                            'selectCategory' => $selectCategory,
+                            'selectPercent'  => $selectPercent,
+                            'start'          => $lastId,
+                            'count'          => $count,
+                            'complete'       => $complete,
+                        ]
                     )
                 );
             }
@@ -303,9 +303,9 @@ class PriceController extends ActionController
             // Set file
             Pi::service('audit')->attach(
                 'price-sync', [
-                'file'   => Pi::path('upload/shop/csv/price-sync.csv'),
-                'format' => 'csv',
-            ]
+                    'file'   => Pi::path('upload/shop/csv/price-sync.csv'),
+                    'format' => 'csv',
+                ]
             );
 
             // Make list
@@ -353,11 +353,11 @@ class PriceController extends ActionController
                 // Save log to csv file
                 Pi::service('audit')->log(
                     'price-sync', [
-                    $product['id'],
-                    $product['title'],
-                    $mainPrice,
-                    $minPrice,
-                ]
+                        $product['id'],
+                        $product['title'],
+                        $mainPrice,
+                        $minPrice,
+                    ]
                 );
 
                 // Set price log
@@ -383,12 +383,12 @@ class PriceController extends ActionController
                 $nextUrl = Pi::url(
                     $this->url(
                         '', [
-                        'action'   => 'sync',
-                        'start'    => $lastId,
-                        'count'    => $count,
-                        'complete' => $complete,
-                        'confirm'  => $confirm,
-                    ]
+                            'action'   => 'sync',
+                            'start'    => $lastId,
+                            'count'    => $count,
+                            'complete' => $complete,
+                            'confirm'  => $confirm,
+                        ]
                     )
                 );
             }
@@ -409,9 +409,9 @@ class PriceController extends ActionController
             $nextUrl = Pi::url(
                 $this->url(
                     '', [
-                    'action'  => 'sync',
-                    'confirm' => 1,
-                ]
+                        'action'  => 'sync',
+                        'confirm' => 1,
+                    ]
                 )
             );
         }
@@ -440,10 +440,10 @@ class PriceController extends ActionController
                 // Set redirect
                 return $this->redirect()->toRoute(
                     '', [
-                    'controller' => 'price',
-                    'action'     => 'log',
-                    'product'    => $values['product'],
-                ]
+                        'controller' => 'price',
+                        'action'     => 'log',
+                        'product'    => $values['product'],
+                    ]
                 );
             }
         } else {
@@ -482,10 +482,10 @@ class PriceController extends ActionController
             $list[$row->id]['productUrl']       = $productList[$row->product]['productUrl'];
             $list[$row->id]['productEditUrl']   = $this->url(
                 '', [
-                'controller' => 'product',
-                'action'     => 'update',
-                'id'         => $productList[$row->product]['id'],
-            ]
+                    'controller' => 'product',
+                    'action'     => 'update',
+                    'id'         => $productList[$row->product]['id'],
+                ]
             );
 
             switch ($row->type) {
@@ -586,9 +586,9 @@ class PriceController extends ActionController
                             // Save log to csv file
                             Pi::service('audit')->attach(
                                 'price-csv', [
-                                'file'   => Pi::path('upload/shop/csv/price-csv-update.csv'),
-                                'format' => 'csv',
-                            ]
+                                    'file'   => Pi::path('upload/shop/csv/price-csv-update.csv'),
+                                    'format' => 'csv',
+                                ]
                             );
                             Pi::service('audit')->log('price-csv', $priceSingle);
 
@@ -602,9 +602,9 @@ class PriceController extends ActionController
                             // Save log to csv file
                             Pi::service('audit')->attach(
                                 'price-csv', [
-                                'file'   => Pi::path('upload/shop/csv/price-csv-not-update.csv'),
-                                'format' => 'csv',
-                            ]
+                                    'file'   => Pi::path('upload/shop/csv/price-csv-not-update.csv'),
+                                    'format' => 'csv',
+                                ]
                             );
                             Pi::service('audit')->log('price-csv', $priceSingle);
                         }
@@ -614,9 +614,9 @@ class PriceController extends ActionController
                         // Save log to csv file
                         Pi::service('audit')->attach(
                             'price-csv', [
-                            'file'   => Pi::path('upload/shop/csv/price-csv-not-update.csv'),
-                            'format' => 'csv',
-                        ]
+                                'file'   => Pi::path('upload/shop/csv/price-csv-not-update.csv'),
+                                'format' => 'csv',
+                            ]
                         );
                         Pi::service('audit')->log('price-csv', $priceSingle);
                     }

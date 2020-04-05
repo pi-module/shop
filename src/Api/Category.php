@@ -179,11 +179,11 @@ class Category extends AbstractApi
             }
 
             $return[] = [
-                'id'     => $row->id,
-                'parent' => $row->parent,
-                'text'   => $row->title,
+                'id'       => $row->id,
+                'parent'   => $row->parent,
+                'text'     => $row->title,
                 'thumbUrl' => $thumbUrl,
-                'href'   => Pi::url(
+                'href'     => Pi::url(
                     Pi::service('url')->assemble(
                         'shop', [
                             'module'     => $this->getModule(),
@@ -214,10 +214,10 @@ class Category extends AbstractApi
                 'href'   => Pi::url(
                     Pi::service('url')->assemble(
                         'shop', [
-                        'module'     => $this->getModule(),
-                        'controller' => 'category',
-                        'slug'       => $row->slug,
-                    ]
+                            'module'     => $this->getModule(),
+                            'controller' => 'category',
+                            'slug'       => $row->slug,
+                        ]
                     )
                 ),
             ];
@@ -254,10 +254,10 @@ class Category extends AbstractApi
         $category['categoryUrl'] = Pi::url(
             Pi::service('url')->assemble(
                 'shop', [
-                'module'     => $this->getModule(),
-                'controller' => 'category',
-                'slug'       => $category['slug'],
-            ]
+                    'module'     => $this->getModule(),
+                    'controller' => 'category',
+                    'slug'       => $category['slug'],
+                ]
             )
         );
         // Set image url
@@ -317,10 +317,10 @@ class Category extends AbstractApi
                 $loc = Pi::url(
                     Pi::service('url')->assemble(
                         'shop', [
-                        'module'     => $this->getModule(),
-                        'controller' => 'category',
-                        'slug'       => $row->slug,
-                    ]
+                            'module'     => $this->getModule(),
+                            'controller' => 'category',
+                            'slug'       => $row->slug,
+                        ]
                     )
                 );
                 // Add to sitemap

@@ -32,37 +32,37 @@ class JsonController extends ActionController
         $links['productAll'] = Pi::url(
             $this->url(
                 'shop', [
-                'module'     => $module,
-                'controller' => 'json',
-                'action'     => 'productAll',
-                'update'     => strtotime("11-12-10"),
-                'password'   => (!empty($config['json_password'])) ? $config['json_password'] : '',
-            ]
+                    'module'     => $module,
+                    'controller' => 'json',
+                    'action'     => 'productAll',
+                    'update'     => strtotime("11-12-10"),
+                    'password'   => (!empty($config['json_password'])) ? $config['json_password'] : '',
+                ]
             )
         );
 
         $links['productCategory'] = Pi::url(
             $this->url(
                 'shop', [
-                'module'     => $module,
-                'controller' => 'json',
-                'action'     => 'productCategory',
-                'id'         => 1,
-                'update'     => strtotime("11-12-10"),
-                'password'   => (!empty($config['json_password'])) ? $config['json_password'] : '',
-            ]
+                    'module'     => $module,
+                    'controller' => 'json',
+                    'action'     => 'productCategory',
+                    'id'         => 1,
+                    'update'     => strtotime("11-12-10"),
+                    'password'   => (!empty($config['json_password'])) ? $config['json_password'] : '',
+                ]
             )
         );
 
         $links['productSingle'] = Pi::url(
             $this->url(
                 'shop', [
-                'module'     => $module,
-                'controller' => 'json',
-                'action'     => 'productSingle',
-                'id'         => 1,
-                'password'   => (!empty($config['json_password'])) ? $config['json_password'] : '',
-            ]
+                    'module'     => $module,
+                    'controller' => 'json',
+                    'action'     => 'productSingle',
+                    'id'         => 1,
+                    'password'   => (!empty($config['json_password'])) ? $config['json_password'] : '',
+                ]
             )
         );
 

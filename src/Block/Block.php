@@ -211,10 +211,10 @@ class Block
         $block['link'] = Pi::url(
             Pi::service('url')->assemble(
                 'shop', [
-                'module'     => $module,
-                'controller' => 'cart',
-                'action'     => 'index',
-            ]
+                    'module'     => $module,
+                    'controller' => 'cart',
+                    'action'     => 'index',
+                ]
             )
         );
         // Check block type
@@ -245,10 +245,10 @@ class Block
         $block['link'] = Pi::url(
             Pi::service('url')->assemble(
                 'shop', [
-                'module'     => $module,
-                'controller' => 'json',
-                'action'     => 'filterSearch',
-            ]
+                    'module'     => $module,
+                    'controller' => 'json',
+                    'action'     => 'filterSearch',
+                ]
             )
         );
         // Set block array

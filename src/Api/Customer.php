@@ -114,8 +114,8 @@ class Customer extends AbstractApi
         $customer['profileUrl'] = Pi::url(
             Pi::service('user')->getUrl(
                 'profile', [
-                'id' => $customer['id'],
-            ]
+                    'id' => $customer['id'],
+                ]
             )
         );
         // account url

@@ -36,8 +36,8 @@ class CodeDuplicate extends AbstractValidator
     /**
      * code validate
      *
-     * @param  mixed $value
-     * @param  array $context
+     * @param mixed $value
+     * @param array $context
      *
      * @return boolean
      */

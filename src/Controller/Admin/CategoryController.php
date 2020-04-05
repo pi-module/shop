@@ -138,10 +138,10 @@ class CategoryController extends ActionController
                     $loc = Pi::url(
                         $this->url(
                             'shop', [
-                            'module'     => $module,
-                            'controller' => 'category',
-                            'slug'       => $values['slug'],
-                        ]
+                                'module'     => $module,
+                                'controller' => 'category',
+                                'slug'       => $values['slug'],
+                            ]
                         )
                     );
                     // Update sitemap
@@ -280,21 +280,21 @@ class CategoryController extends ActionController
                 'view_url'      => Pi::url(
                     $this->url(
                         'shop', [
-                        'module'     => $module,
-                        'controller' => 'category',
-                        'slug'       => $row->slug,
-                    ]
+                            'module'     => $module,
+                            'controller' => 'category',
+                            'slug'       => $row->slug,
+                        ]
                     )
                 ),
                 'edit_url'      => Pi::url(
                     $this->url(
                         'admin', [
-                        'module'     => $module,
-                        'controller' => 'category',
-                        'action'     => 'update',
-                        'type'       => $row->type,
-                        'id'         => $row->id,
-                    ]
+                            'module'     => $module,
+                            'controller' => 'category',
+                            'action'     => 'update',
+                            'type'       => $row->type,
+                            'id'         => $row->id,
+                        ]
                     )
                 ),
             ];
@@ -380,12 +380,12 @@ class CategoryController extends ActionController
                 $nextUrl = Pi::url(
                     $this->url(
                         '', [
-                        'action'   => 'sync',
-                        'start'    => $lastId,
-                        'count'    => $count,
-                        'complete' => $complete,
-                        'confirm'  => $confirm,
-                    ]
+                            'action'   => 'sync',
+                            'start'    => $lastId,
+                            'count'    => $count,
+                            'complete' => $complete,
+                            'confirm'  => $confirm,
+                        ]
                     )
                 );
             }
@@ -405,9 +405,9 @@ class CategoryController extends ActionController
             $nextUrl = Pi::url(
                 $this->url(
                     '', [
-                    'action'  => 'sync',
-                    'confirm' => 1,
-                ]
+                        'action'  => 'sync',
+                        'confirm' => 1,
+                    ]
                 )
             );
         }
@@ -448,16 +448,16 @@ class CategoryController extends ActionController
                 // Set redirect
                 return $this->redirect()->toRoute(
                     '', [
-                    'controller'    => 'category',
-                    'action'        => 'merge',
-                    'categoryFrom1' => $values['category_from_1'],
-                    'categoryFrom2' => $values['category_from_2'],
-                    'categoryTo'    => $values['category_to'],
-                    'whereType'     => $values['where_type'],
-                    'start'         => 0,
-                    'complete'      => 0,
-                    'count'         => 0,
-                ]
+                        'controller'    => 'category',
+                        'action'        => 'merge',
+                        'categoryFrom1' => $values['category_from_1'],
+                        'categoryFrom2' => $values['category_from_2'],
+                        'categoryTo'    => $values['category_to'],
+                        'whereType'     => $values['where_type'],
+                        'start'         => 0,
+                        'complete'      => 0,
+                        'count'         => 0,
+                    ]
                 );
 
             }
@@ -604,16 +604,16 @@ class CategoryController extends ActionController
                 $nextUrl = Pi::url(
                     $this->url(
                         '', [
-                        'controller'    => 'category',
-                        'action'        => 'merge',
-                        'categoryFrom1' => $categoryFrom1,
-                        'categoryFrom2' => $categoryFrom2,
-                        'categoryTo'    => $categoryTo,
-                        'whereType'     => $whereType,
-                        'start'         => $lastId,
-                        'count'         => $count,
-                        'complete'      => $complete,
-                    ]
+                            'controller'    => 'category',
+                            'action'        => 'merge',
+                            'categoryFrom1' => $categoryFrom1,
+                            'categoryFrom2' => $categoryFrom2,
+                            'categoryTo'    => $categoryTo,
+                            'whereType'     => $whereType,
+                            'start'         => $lastId,
+                            'count'         => $count,
+                            'complete'      => $complete,
+                        ]
                     )
                 );
             }

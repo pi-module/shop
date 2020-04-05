@@ -31,7 +31,7 @@ class Percent extends AbstractValidator
     /**
      * Percent validate
      *
-     * @param  mixed $value
+     * @param mixed $value
      *
      * @return boolean
      */

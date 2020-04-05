@@ -279,9 +279,9 @@ class ProductController extends ActionController
         if (!$categoryCount) {
             return $this->redirect()->toRoute(
                 '', [
-                'controller' => 'category',
-                'action'     => 'update',
-            ]
+                    'controller' => 'category',
+                    'action'     => 'update',
+                ]
             );
         }
         // Get id
@@ -415,10 +415,10 @@ class ProductController extends ActionController
                     $loc = Pi::url(
                         $this->url(
                             'shop', [
-                            'module'     => $module,
-                            'controller' => 'product',
-                            'slug'       => $values['slug'],
-                        ]
+                                'module'     => $module,
+                                'controller' => 'product',
+                                'slug'       => $values['slug'],
+                            ]
                         )
                     );
                     // Update sitemap
@@ -965,10 +965,10 @@ class ProductController extends ActionController
                 $loc = Pi::url(
                     $this->url(
                         'shop', [
-                        'module'     => $module,
-                        'controller' => 'product',
-                        'slug'       => $row->slug,
-                    ]
+                            'module'     => $module,
+                            'controller' => 'product',
+                            'slug'       => $row->slug,
+                        ]
                     )
                 );
                 Pi::api('sitemap', 'sitemap')->remove($loc);
@@ -1069,9 +1069,9 @@ class ProductController extends ActionController
             // Set file
             Pi::service('audit')->attach(
                 'product-export', [
-                'file'   => Pi::path(sprintf('upload/shop/csv/%s.csv', $file)),
-                'format' => 'csv',
-            ]
+                    'file'   => Pi::path(sprintf('upload/shop/csv/%s.csv', $file)),
+                    'format' => 'csv',
+                ]
             );
 
             // Make list
@@ -1130,17 +1130,17 @@ class ProductController extends ActionController
                 $nextUrl     = Pi::url(
                     $this->url(
                         '', [
-                        'action'      => 'export',
-                        'start'       => $lastId,
-                        'count'       => $count,
-                        'complete'    => $complete,
-                        'confirm'     => $confirm,
-                        'file'        => $file,
-                        'category'    => $category,
-                        'brand'       => $brand,
-                        'status'      => $status,
-                        'recommended' => $recommended,
-                    ]
+                            'action'      => 'export',
+                            'start'       => $lastId,
+                            'count'       => $count,
+                            'complete'    => $complete,
+                            'confirm'     => $confirm,
+                            'file'        => $file,
+                            'category'    => $category,
+                            'brand'       => $brand,
+                            'status'      => $status,
+                            'recommended' => $recommended,
+                        ]
                     )
                 );
                 $downloadUrl = '';

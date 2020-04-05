@@ -128,7 +128,6 @@ class IndexController extends ActionController
         $rowset = $this->getModel('link')->selectWith($select);
 
 
-
         // Make list
         if (!empty($rowset)) {
             $rowset = $rowset->toArray();
