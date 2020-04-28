@@ -34,16 +34,6 @@ class ProductPriceForm extends BaseForm
 
     public function init()
     {
-        // id
-        $this->add(
-            [
-                'name'       => 'id',
-                'attributes' => [
-                    'type'  => 'hidden',
-                    'value' => $this->option['id'],
-                ],
-            ]
-        );
         // type
         $this->add(
             [

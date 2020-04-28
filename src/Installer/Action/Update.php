@@ -376,8 +376,8 @@ EOD;
         if (version_compare($moduleVersion, '1.1.0', '<')) {
             // Update value
             $select = $fieldModel->select();
-            $rowset = $fieldModel->selectWith($select);
-            foreach ($rowset as $row) {
+            $rowSet = $fieldModel->selectWith($select);
+            foreach ($rowSet as $row) {
                 // Set value
                 $value = [
                     'data'    => $row->value,
@@ -543,8 +543,8 @@ EOD;
             }
             // Update value
             $select = $propertyValueModel->select();
-            $rowset = $propertyValueModel->selectWith($select);
-            foreach ($rowset as $row) {
+            $rowSet = $propertyValueModel->selectWith($select);
+            foreach ($rowSet as $row) {
                 $key = md5($row->id);
                 // Save value
                 $row->unique_key = $key;
@@ -989,8 +989,8 @@ EOD;
             $columns = ['id'];
             $where   = ['recommended' => 1];
             $select  = $productModel->select()->columns($columns)->where($where);
-            $rowset  = $productModel->selectWith($select);
-            foreach ($rowset as $row) {
+            $rowSet  = $productModel->selectWith($select);
+            foreach ($rowSet as $row) {
                 $linkModel->update(
                     ['recommended' => 1],
                     ['id' => $row->id]
@@ -1127,6 +1127,39 @@ EOD;
             $sql = sprintf("ALTER TABLE %s ADD `code` VARCHAR(255) DEFAULT NULL, ADD INDEX `code` (`code`)", $linkTable);
             try {
                 $linkAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+        }
+
+        // Update to version 1.9.9
+        if (version_compare($moduleVersion, '1.9.9', '<')) {
+            // Alter table : ADD main_image
+            $sql = sprintf("ALTER TABLE %s ADD `main_image` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+
+            // Alter table : ADD additional_images
+            $sql = sprintf("ALTER TABLE %s ADD `additional_images` TEXT", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
             } catch (\Exception $exception) {
                 $this->setResult(
                     'db', [

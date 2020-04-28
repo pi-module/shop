@@ -3,10 +3,10 @@
 $locale = Pi::service('i18n')->getLocale();
 $rtl    = (in_array($locale, ['fa', 'ar'])) ? 'true' : 'false';
 
-$iconOwlLeft  = '<i class="owl-prev fas fa-angle-left"></i>';
+$iconOwlLeft = '<i class="owl-prev fas fa-angle-left"></i>';
 $iconOwlRight = '<i class="owl-next fas fa-angle-right"></i>';
 $script1
-              = <<<'EOT'
+    = <<<'EOT'
     $('.gallery').each(function() {
     	$(this).magnificPopup({
        		delegate: 'a',
@@ -18,7 +18,7 @@ $script1
 	});
 EOT;
 $script2
-              = <<<'EOT'
+    = <<<'EOT'
     $(document).ready(function($) {
 		$('.owl-carousel').owlCarousel({
     		loop:false,
@@ -38,7 +38,7 @@ $script2
 		})
     });
 EOT;
-$script2      = sprintf($script2, $rtl, $iconOwlLeft, $iconOwlRight);
+$script2 = sprintf($script2, $rtl, $iconOwlLeft, $iconOwlRight);
 $this->jQuery(
     [
         'extension/jquery.magnific-popup.min.js',
@@ -51,7 +51,7 @@ $this->footScript()->appendScript($script1);
 $this->footScript()->appendScript($script2);
 ?>
 <div class="product-image gallery clearfix card">
-    <?php if (isset($productItem['image']) && !empty($productItem['image'])) { ?>
+    <?php if (isset($productItem['main_image']) && !empty($productItem['main_image'])) { ?>
         <div class="product-image-main text-center clearfix u-photo">
             <a class="u-photo <?php echo $this->escape($productItem['ribbon_class']); ?>"
                href="<?php echo $this->escape($productItem['largeUrl']); ?>"
@@ -73,15 +73,16 @@ $this->footScript()->appendScript($script2);
             </a>
         </div>
     <?php } ?>
-    <?php if (isset($attach['image']) && !empty($attach['image'])) { ?>
+    <?php if (isset($productItem['additional_images']) && !empty($productItem['additional_images'])) { ?>
+        <?php $galleryImages = Pi::api('doc', 'media')->getGalleryLinkData($productItem['additional_images'], [intval($config['image_itemh']), intval($config['image_thumbh'])], null, null, false, [], 'shop') ?>
+        <?php if ($galleryImages) { ?>
         <div class="owl-carousel product-image-attach text-center clearfix">
-            <?php foreach ($attach['image'] as $image) { ?>
-                <a class="u-photo" href="<?php echo $this->escape($image['largeUrl']); ?>"
-                   title="<?php echo $this->escape($image['title']); ?>">
-                    <img class="card-img-top img-fluid" itemprop="image" src="<?php echo $this->escape($image['mediumUrl']); ?>"
-                         alt="<?php echo $this->escape($image['title']); ?>"/>
+            <?php foreach ($galleryImages as $key => $galleryImage) { ?>
+                <a class="u-photo" href="<?php echo $galleryImage['resized_url'][intval($config['image_itemh'])]; ?>" title="<?php echo $this->escape($galleryImage['title']); ?><?php if ($galleryImage['copyright']) echo ' - ' . $galleryImage['copyright'] ?>">
+                    <img class="card-img-top img-fluid" itemprop="image" src="<?php echo $galleryImage['resized_url'][intval($config['image_thumbh'])]; ?>" alt="<?php echo $this->escape($galleryImage['title']); ?>"/>
                 </a>
             <?php } ?>
         </div>
+    <?php } ?>
     <?php } ?>
 </div>

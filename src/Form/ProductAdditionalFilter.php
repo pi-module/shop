@@ -24,13 +24,7 @@ class ProductAdditionalFilter extends InputFilter
         $config = Pi::service('registry')->config->read('shop');
         // Set attribute position
         $position = Pi::api('attribute', 'shop')->attributePositionForm();
-        // id
-        $this->add(
-            [
-                'name'     => 'id',
-                'required' => false,
-            ]
-        );
+
         // ribbon
         $this->add(
             [

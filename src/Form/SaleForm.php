@@ -34,15 +34,6 @@ class SaleForm extends BaseForm
 
     public function init()
     {
-        // id
-        $this->add(
-            [
-                'name'       => 'id',
-                'attributes' => [
-                    'type' => 'hidden',
-                ],
-            ]
-        );
         // product
         if ($this->option['type'] == 'add') {
             switch ($this->option['part']) {

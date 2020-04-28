@@ -41,9 +41,9 @@ class Block
             $columns = ['product' => new Expression('DISTINCT product')];
             // Get info from link table
             $select = Pi::model('link', $module)->select()->where($where)->columns($columns)->order($order)->limit($limit);
-            $rowset = Pi::model('link', $module)->selectWith($select)->toArray();
+            $rowSet = Pi::model('link', $module)->selectWith($select)->toArray();
             // Make list
-            foreach ($rowset as $id) {
+            foreach ($rowSet as $id) {
                 $productId[] = $id['product'];
             }
             // Set info
@@ -56,9 +56,9 @@ class Block
         }
         // Get list of product
         $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
-        $rowset = Pi::model('product', $module)->selectWith($select);
+        $rowSet = Pi::model('product', $module)->selectWith($select);
         // Make list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
         }
         // Set block array
@@ -91,9 +91,9 @@ class Block
             $columns = ['product' => new Expression('DISTINCT product')];
             // Get info from link table
             $select = Pi::model('link', $module)->select()->where($where)->columns($columns)->order($order)->limit($limit);
-            $rowset = Pi::model('link', $module)->selectWith($select)->toArray();
+            $rowSet = Pi::model('link', $module)->selectWith($select)->toArray();
             // Make list
-            foreach ($rowset as $id) {
+            foreach ($rowSet as $id) {
                 $productId[] = $id['product'];
             }
             // Set info
@@ -106,9 +106,9 @@ class Block
         }
         // Get list of product
         $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
-        $rowset = Pi::model('product', $module)->selectWith($select);
+        $rowSet = Pi::model('product', $module)->selectWith($select);
         // Make list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
         }
         // Set block array
@@ -143,9 +143,9 @@ class Block
                 $limit = intval($block['number']);
                 // Get list of product
                 $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
-                $rowset = Pi::model('product', $module)->selectWith($select);
+                $rowSet = Pi::model('product', $module)->selectWith($select);
                 // Make list
-                foreach ($rowset as $row) {
+                foreach ($rowSet as $row) {
                     $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
                 }
             }
@@ -193,8 +193,8 @@ class Block
         }
         // Select
         $select = Pi::model('category', $module)->select()->where($where)->order($order);
-        $rowset = Pi::model('category', $module)->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = Pi::model('category', $module)->selectWith($select);
+        foreach ($rowSet as $row) {
             $category[$row->id] = Pi::api('category', 'shop')->canonizeCategory($row);
         }
         // Set block array

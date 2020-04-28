@@ -49,8 +49,8 @@ class SlugDuplicate extends AbstractValidator
             if (!empty($context['id'])) {
                 $where['id <> ?'] = $context['id'];
             }
-            $rowset = Pi::model($this->options['table'], $this->options['module'])->select($where);
-            if ($rowset->count()) {
+            $rowSet = Pi::model($this->options['table'], $this->options['module'])->select($where);
+            if ($rowSet->count()) {
                 $this->error(static::TAKEN);
                 return false;
             }

@@ -26,13 +26,6 @@ class AttachFilter extends InputFilter
 {
     public function __construct()
     {
-        // id
-        $this->add(
-            [
-                'name'     => 'id',
-                'required' => true,
-            ]
-        );
         // title
         $this->add(
             [

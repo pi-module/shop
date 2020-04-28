@@ -26,9 +26,9 @@ class DiscountController extends ActionController
         $list   = [];
         $order  = ['id DESC'];
         $select = $this->getModel('discount')->select()->order($order);
-        $rowset = $this->getModel('discount')->selectWith($select);
+        $rowSet = $this->getModel('discount')->selectWith($select);
         // Make list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $list[$row->id] = $row->toArray();
         }
         // Set view
@@ -50,15 +50,15 @@ class DiscountController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('discount')->find($values['id']);
+                if (!empty($id)) {
+                    $row = $this->getModel('discount')->find($id);
                 } else {
                     $row = $this->getModel('discount')->createRow();
                 }
                 $row->assign($values);
                 $row->save();
                 // Add log
-                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                $operation = (empty($id)) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('discount', $row->id, $operation);
                 // Clear registry
                 Pi::registry('discountList', 'shop')->clear();

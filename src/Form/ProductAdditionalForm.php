@@ -42,15 +42,6 @@ class ProductAdditionalForm extends BaseForm
 
     public function init()
     {
-        // id
-        $this->add(
-            [
-                'name'       => 'id',
-                'attributes' => [
-                    'type' => 'hidden',
-                ],
-            ]
-        );
         // Set fieldset
         $this->add(
             [

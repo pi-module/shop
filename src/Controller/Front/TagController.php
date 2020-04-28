@@ -79,8 +79,8 @@ class TagController extends IndexController
             $where  = ['module' => $module];
             $order  = ['count DESC', 'id DESC'];
             $select = Pi::model('stats', 'tag')->select()->where($where)->order($order);
-            $rowset = Pi::model('stats', 'tag')->selectWith($select);
-            foreach ($rowset as $row) {
+            $rowSet = Pi::model('stats', 'tag')->selectWith($select);
+            foreach ($rowSet as $row) {
                 $tag                       = Pi::model('tag', 'tag')->find($row->term, 'term');
                 $tagList[$row->id]         = $row->toArray();
                 $tagList[$row->id]['term'] = $tag['term'];

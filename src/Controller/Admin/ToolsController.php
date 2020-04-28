@@ -56,6 +56,16 @@ class ToolsController extends ActionController
         $this->view()->assign('message', $message);
     }
 
+    public function migrateAction()
+    {
+        $message = Pi::api('product', 'shop')->migrateMedia();
+
+        if (empty($message)) {
+            $message = __('Media have migrate successfully');
+        }
+        $this->jump(['action' => 'index'], $message);
+    }
+
     /* public function importAction()
     {
         $file = '/var/www/html/local/test/shobadebaz/product.csv';
@@ -134,8 +144,8 @@ class ToolsController extends ActionController
         $catList = array();
         $where = array('parent' => 88);
         $select = $this->getModel('category')->select()->where($where);
-        $rowset = $this->getModel('category')->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = $this->getModel('category')->selectWith($select);
+        foreach ($rowSet as $row) {
             $catList[$row->id] = array(
                 'id' => $row->id,
                 'title' => $row->title,
@@ -179,12 +189,12 @@ class ToolsController extends ActionController
             $order = array('id ASC');
 
             $select = $this->getModel('field_data')->select()->where($where)->order($order)->limit(100);
-            $rowset = $this->getModel('field_data')->selectWith($select);
+            $rowSet = $this->getModel('field_data')->selectWith($select);
 
             $ddd = array();
 
             // Make list
-            foreach ($rowset as $row) {
+            foreach ($rowSet as $row) {
 
                 $whereProduct = array('code' => $row->data);
                 $columnsProduct = array('count' => new Expression('count(*)'));

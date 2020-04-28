@@ -83,8 +83,8 @@ class SaleController extends ActionController
                 $values['time_publish'] = strtotime($values['time_publish']);
                 $values['time_expire']  = strtotime($values['time_expire']);
                 // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('sale')->find($values['id']);
+                if (!empty($id)) {
+                    $row = $this->getModel('sale')->find($id);
                 } else {
                     $values['type'] = $part;
                     $row            = $this->getModel('sale')->createRow();
@@ -94,7 +94,7 @@ class SaleController extends ActionController
                 // Clear registry
                 Pi::registry('saleInformation', 'shop')->clear();
                 // Add log
-                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                $operation = (empty($id)) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('sale', $row->id, $operation);
                 // Check it save or not
                 $message = __('Sale data saved successfully.');

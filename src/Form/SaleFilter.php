@@ -20,13 +20,6 @@ class SaleFilter extends InputFilter
 {
     public function __construct($option)
     {
-        // id
-        $this->add(
-            [
-                'name'     => 'id',
-                'required' => false,
-            ]
-        );
         // product
         if ($option['type'] == 'add') {
             switch ($option['part']) {

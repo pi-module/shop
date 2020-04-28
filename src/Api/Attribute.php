@@ -54,8 +54,8 @@ class Attribute extends AbstractApi
         $whereField = ['status' => 1, 'id' => $id];
         $orderField = ['order ASC', 'position ASC', 'id DESC'];
         $select     = Pi::model('field', $this->getModule())->select()->where($whereField)->order($orderField);
-        $rowset     = Pi::model('field', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet     = Pi::model('field', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
             $return['attribute'][$row->position][$row->id] = $row->toArray();
             switch ($row->type) {
                 case 'text':
@@ -140,8 +140,8 @@ class Attribute extends AbstractApi
     {
         $where  = ['product' => $values['id']];
         $select = Pi::model('field_data', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('field_data', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = Pi::model('field_data', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
             $field[$row->field]                   = $row->toArray();
             $values[$field[$row->field]['field']] = $field[$row->field]['data'];
         }
@@ -158,8 +158,8 @@ class Attribute extends AbstractApi
         $whereData  = ['product' => $id];
         $columnData = ['field', 'data'];
         $select     = Pi::model('field_data', $this->getModule())->select()->where($whereData)->columns($columnData);
-        $rowset     = Pi::model('field_data', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet     = Pi::model('field_data', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
             $data[$row->field] = $row->toArray();
         }
         // Get field list
@@ -174,8 +174,8 @@ class Attribute extends AbstractApi
             $whereField = ['status' => 1, 'id' => $id];
             $orderField = ['order ASC', 'id ASC'];
             $select     = Pi::model('field', $this->getModule())->select()->where($whereField)->order($orderField);
-            $rowset     = Pi::model('field', $this->getModule())->selectWith($select);
-            foreach ($rowset as $row) {
+            $rowSet     = Pi::model('field', $this->getModule())->selectWith($select);
+            foreach ($rowSet as $row) {
                 switch ($row->type) {
                     case 'audio':
                         $field['audio'][$row->id]         = $row->toArray();
@@ -236,8 +236,8 @@ class Attribute extends AbstractApi
                 'data'  => $attribute['data'],
             ];
             $select = Pi::model('field_data', $this->getModule())->select()->where($where)->columns($column);
-            $rowset = Pi::model('field_data', $this->getModule())->selectWith($select);
-            foreach ($rowset as $row) {
+            $rowSet = Pi::model('field_data', $this->getModule())->selectWith($select);
+            foreach ($rowSet as $row) {
                 if (isset($row->product) && !empty($row->product)) {
                     $id[] = $row->product;
                 }
@@ -256,9 +256,9 @@ class Attribute extends AbstractApi
         ];
         $order  = ['order ASC', 'id ASC'];
         $select = Pi::model('field_position', $this->getModule())->select()->order($order);
-        $rowset = Pi::model('field_position', $this->getModule())->selectWith($select);
+        $rowSet = Pi::model('field_position', $this->getModule())->selectWith($select);
         // Make list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $list[$row->id] = $row->title;
         }
         return $list;
@@ -283,8 +283,8 @@ class Attribute extends AbstractApi
         $category = [];
         $where    = ['field' => $field];
         $select   = Pi::model('field_category', $this->getModule())->select()->where($where);
-        $rowset   = Pi::model('field_category', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet   = Pi::model('field_category', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
             $category[] = $row->category;
         }
         return array_unique($category);
@@ -299,8 +299,8 @@ class Attribute extends AbstractApi
             $where = ['category' => 0];
         }
         $select = Pi::model('field_category', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('field_category', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = Pi::model('field_category', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
             $field[] = $row->field;
         }
         return array_unique($field);
@@ -321,8 +321,8 @@ class Attribute extends AbstractApi
         $whereField = ['status' => 1, 'search' => 1, 'id' => $id];
         $orderField = ['order ASC', 'position ASC', 'id DESC'];
         $select     = Pi::model('field', $this->getModule())->select()->where($whereField)->order($orderField);
-        $rowset     = Pi::model('field', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet     = Pi::model('field', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
             $filter                  = $row->toArray();
             $filter['position_vew']  = $position[$row->position];
             $filter['value']         = json_decode($row->value, true);
@@ -343,8 +343,8 @@ class Attribute extends AbstractApi
         $where  = ['product' => $productId];
         $column = ['field', 'data'];
         $select = Pi::model('field_data', $this->getModule())->select()->where($where)->columns($column);
-        $rowset = Pi::model('field_data', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = Pi::model('field_data', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
             $data[$row->field] = $row->toArray();
         }
 

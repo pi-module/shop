@@ -26,13 +26,6 @@ $this->js($this->assetModule('script/system-msg.js', 'system'));
                     ); ?></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($nav['page'] == 'attach') {
-                    echo 'active';
-                } ?>" href="<?php echo $this->url('', ['controller' => 'attach', 'action' => 'add', 'id' => $product['id']]); ?>"><?php _e(
-                        'Attach files'
-                    ); ?></a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link <?php if ($nav['page'] == '') {
                     echo 'active';
                 } ?>" href="<?php echo $this->url('', ['controller' => 'product', 'action' => 'related', 'id' => $product['id']]); ?>"><?php _e(

@@ -271,8 +271,8 @@ class JsonController extends IndexController
                     $where->andPredicate($whereMain)->andPredicate($whereTitleKey)->orPredicate($whereSubTitleKey);
                 }
             )->order($order);
-            $rowset     = $this->getModel('product')->selectWith($select);
-            foreach ($rowset as $row) {
+            $rowSet     = $this->getModel('product')->selectWith($select);
+            foreach ($rowSet as $row) {
                 $productIDList['title'][$row->id] = $row->id;
             }
         }
@@ -299,8 +299,8 @@ class JsonController extends IndexController
                         'data'  => $attributeSingle['data'],
                     ];
                     $select = $this->getModel('field_data')->select()->where($where)->columns($column);
-                    $rowset = $this->getModel('field_data')->selectWith($select);
-                    foreach ($rowset as $row) {
+                    $rowSet = $this->getModel('field_data')->selectWith($select);
+                    foreach ($rowSet as $row) {
                         $productIDList['attribute'][$row->product] = $row->product;
                     }
                 }
@@ -414,8 +414,8 @@ class JsonController extends IndexController
         if ($hasSearchResult) {
             // Get info from link table
             $select = $this->getModel('link')->select()->where($whereLink)->columns($columns)->order($order)->offset($offset)->limit($limit);
-            $rowset = $this->getModel('link')->selectWith($select)->toArray();
-            foreach ($rowset as $id) {
+            $rowSet = $this->getModel('link')->selectWith($select)->toArray();
+            foreach ($rowSet as $id) {
                 $productIDSelect[] = $id['product'];
             }
 
@@ -423,8 +423,8 @@ class JsonController extends IndexController
             if (!empty($productIDSelect)) {
                 $where  = ['status' => 1, 'id' => $productIDSelect];
                 $select = $this->getModel('product')->select()->where($where)->order($order);
-                $rowset = $this->getModel('product')->selectWith($select);
-                foreach ($rowset as $row) {
+                $rowSet = $this->getModel('product')->selectWith($select);
+                foreach ($rowSet as $row) {
                     $product[] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
                 }
             }
@@ -444,8 +444,8 @@ class JsonController extends IndexController
             $select                        = $this->getModel('category')->select()->where($whereCategory)->order($orderCategory)->offset($offset)->limit(
                 $limit
             );
-            $rowset                        = $this->getModel('category')->selectWith($select);
-            foreach ($rowset as $row) {
+            $rowSet                        = $this->getModel('category')->selectWith($select);
+            foreach ($rowSet as $row) {
                 $categoryList[] = Pi::api('category', 'shop')->canonizeCategory($row);
             }
         }
@@ -530,8 +530,8 @@ class JsonController extends IndexController
         }
 
         $select = $this->getModel('category')->select()->where($where)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('category')->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = $this->getModel('category')->selectWith($select);
+        foreach ($rowSet as $row) {
             $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
             $count          = Pi::api('product', 'shop')->getBrandCount($categorySingle['id']);
             $hasNew         = Pi::api('product', 'shop')->getBrandHasNew($categorySingle['id']);
@@ -593,8 +593,8 @@ class JsonController extends IndexController
             $whereBrand   = ['brand' => intval($brand)];
             $columnsBrand = ['category' => new Expression('DISTINCT `category_main`')];
             $select       = $this->getModel('product')->select()->where($whereBrand)->columns($columnsBrand);
-            $rowset       = $this->getModel('product')->selectWith($select)->toArray();
-            foreach ($rowset as $id) {
+            $rowSet       = $this->getModel('product')->selectWith($select)->toArray();
+            foreach ($rowSet as $id) {
                 $categoryIDSelect[] = $id['category'];
             }
             $where['id'] = $categoryIDSelect;
@@ -604,8 +604,8 @@ class JsonController extends IndexController
         $categoryId = [];
         $order      = ['parent ASC', 'id DESC'];
         $select     = $this->getModel('category')->select()->where($where)->order($order)->offset($offset)->limit($limit);
-        $rowset     = $this->getModel('category')->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet     = $this->getModel('category')->selectWith($select);
+        foreach ($rowSet as $row) {
             $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
             $categoryId[]   = $row->id;
             $category[]     = [
@@ -622,8 +622,8 @@ class JsonController extends IndexController
             $whereProduct = ['status' => 1, 'category_main' => $categoryId];
             $orderProduct = ['title DESC', 'id DESC'];
             $select       = $this->getModel('product')->select()->where($whereProduct)->order($orderProduct);
-            $rowset       = $this->getModel('product')->selectWith($select);
-            foreach ($rowset as $row) {
+            $rowSet       = $this->getModel('product')->selectWith($select);
+            foreach ($rowSet as $row) {
                 $productSingle = Pi::api('product', 'shop')->canonizeProductLight($row);
                 $products[]    = [
                     'id'        => $productSingle['id'],
@@ -746,15 +746,16 @@ class JsonController extends IndexController
                     }
                 }
             }
-            // Get attach file
+            /* // Get attach file
             $attach = Pi::api('product', 'shop')->AttachList($product['id']);
+
             // Set output array
             $i = 1;
             // generate images
             foreach ($attach['image'] as $image) {
                 $i++;
                 $productSingle['extra-image-' . $i] = $image['largeUrl'];
-            }
+            } */
         }
 
         // Check brand
@@ -823,8 +824,8 @@ class JsonController extends IndexController
         $where = array('status' => 1, 'type' => 'brand');
         $order = array('display_order ASC', 'title ASC', 'id DESC');
         $select = $this->getModel('category')->select()->where($where)->order($order)->limit(15);
-        $rowset = $this->getModel('category')->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = $this->getModel('category')->selectWith($select);
+        foreach ($rowSet as $row) {
             $categorySingle = Pi::api('category', 'shop')->canonizeCategory($row);
             $brand[] = array(
                 'id' => $categorySingle['id'],

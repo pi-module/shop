@@ -20,13 +20,6 @@ class CategoryFilter extends InputFilter
 {
     public function __construct($option)
     {
-        // id
-        $this->add(
-            [
-                'name'     => 'id',
-                'required' => false,
-            ]
-        );
         // parent
         if ($option['type'] == 'category') {
             $this->add(

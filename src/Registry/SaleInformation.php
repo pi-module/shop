@@ -53,8 +53,8 @@ class SaleInformation extends AbstractRegistry
         $where  = ['status' => 1];
         $model  = Pi::model('sale', $this->module);
         $select = $model->select()->where($where);
-        $rowset = $model->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = $model->selectWith($select);
+        foreach ($rowSet as $row) {
 
             if ($row->type == 'product') {
                 $return['infoAll']['product'][$row->product] = $row->toArray();

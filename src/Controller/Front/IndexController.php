@@ -25,10 +25,13 @@ class IndexController extends ActionController
     {
         // Get info from url
         $module = $this->params('module');
+
         // Get config
         $config = Pi::service('registry')->config->read($module);
+
         // category list
         $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
+
         // Check homepage type
         switch ($config['homepage_type']) {
             default:
@@ -85,12 +88,12 @@ class IndexController extends ActionController
 
         // Get info from link table
         $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('link')->selectWith($select);
+        $rowSet = $this->getModel('link')->selectWith($select);
 
         // Make list
-        if (!empty($rowset)) {
-            $rowset = $rowset->toArray();
-            foreach ($rowset as $id) {
+        if (!empty($rowSet)) {
+            $rowSet = $rowSet->toArray();
+            foreach ($rowSet as $id) {
                 $productId[] = $id['product'];
             }
         }
@@ -101,9 +104,9 @@ class IndexController extends ActionController
 
             // Get list of product
             $select = $this->getModel('product')->select()->where($where)->order($order);
-            $rowset = $this->getModel('product')->selectWith($select);
-            foreach ($rowset as $row) {
-                $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
+            $rowSet = $this->getModel('product')->selectWith($select);
+            foreach ($rowSet as $row) {
+                $product[$row->id] = Pi::api('product', 'shop')->canonizeProductLight($row);
             }
         }
 
@@ -125,13 +128,13 @@ class IndexController extends ActionController
 
         // Get info from link table
         $select = $this->getModel('link')->select()->where($where)->columns($columns)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('link')->selectWith($select);
+        $rowSet = $this->getModel('link')->selectWith($select);
 
 
         // Make list
-        if (!empty($rowset)) {
-            $rowset = $rowset->toArray();
-            foreach ($rowset as $id) {
+        if (!empty($rowSet)) {
+            $rowSet = $rowSet->toArray();
+            foreach ($rowSet as $id) {
                 $productId[] = $id['product'];
             }
         }
@@ -145,9 +148,9 @@ class IndexController extends ActionController
 
         // Get list of product
         $select = $this->getModel('product')->select()->where($where)->order($order);
-        $rowset = $this->getModel('product')->selectWith($select);
+        $rowSet = $this->getModel('product')->selectWith($select);
 
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $product[] = Pi::api('product', 'shop')->canonizeProductJson($row);
         }
 

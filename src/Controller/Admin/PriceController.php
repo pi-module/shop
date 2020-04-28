@@ -121,7 +121,7 @@ class PriceController extends ActionController
             ];
             $order  = ['id ASC'];
             $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
-            $rowset = $this->getModel('product')->selectWith($select);
+            $rowSet = $this->getModel('product')->selectWith($select);
 
             // Set file
             Pi::service('audit')->attach(
@@ -132,7 +132,7 @@ class PriceController extends ActionController
             );
 
             // Make list
-            foreach ($rowset as $row) {
+            foreach ($rowSet as $row) {
                 $product             = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
                 $product['property'] = Pi::api('property', 'shop')->getValue($product['id']);
 
@@ -298,7 +298,7 @@ class PriceController extends ActionController
             ];
             $order  = ['id ASC'];
             $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
-            $rowset = $this->getModel('product')->selectWith($select);
+            $rowSet = $this->getModel('product')->selectWith($select);
 
             // Set file
             Pi::service('audit')->attach(
@@ -309,7 +309,7 @@ class PriceController extends ActionController
             );
 
             // Make list
-            foreach ($rowset as $row) {
+            foreach ($rowSet as $row) {
                 $product             = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
                 $product['property'] = Pi::api('property', 'shop')->getValue($product['id']);
 
@@ -467,8 +467,8 @@ class PriceController extends ActionController
 
         // Select
         $select = $this->getModel('price')->select()->where($where)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('price')->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = $this->getModel('price')->selectWith($select);
+        foreach ($rowSet as $row) {
             if (!isset($productList[$row->product])) {
                 $productList[$row->product] = Pi::api('product', 'shop')->getProductLight($row->product);
             }

@@ -27,9 +27,9 @@ class PromotionController extends ActionController
         $list   = [];
         $order  = ['id DESC'];
         $select = $this->getModel('promotion')->select()->order($order);
-        $rowset = $this->getModel('promotion')->selectWith($select);
+        $rowSet = $this->getModel('promotion')->selectWith($select);
         // Make list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $list[$row->id]             = $row->toArray();
             $list[$row->id]['time']     = sprintf(
                 __('From %s to %s'),
@@ -64,15 +64,15 @@ class PromotionController extends ActionController
                 $values['time_publish'] = strtotime($values['time_publish']);
                 $values['time_expire']  = strtotime($values['time_expire']);
                 // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('promotion')->find($values['id']);
+                if (!empty($id)) {
+                    $row = $this->getModel('promotion')->find($id);
                 } else {
                     $row = $this->getModel('promotion')->createRow();
                 }
                 $row->assign($values);
                 $row->save();
                 // Add log
-                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                $operation = (empty($id)) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('promotion', $row->id, $operation);
                 $message = __('Promotion data saved successfully.');
                 $this->jump(['action' => 'index'], $message);

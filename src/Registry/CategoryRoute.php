@@ -31,8 +31,8 @@ class CategoryRoute extends AbstractRegistry
         $where   = ['status' => 1];
         $columns = ['id', 'slug'];
         $select  = Pi::model('category', $this->module)->select()->columns($columns)->where($where);
-        $rowset  = Pi::model('category', $this->module)->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet  = Pi::model('category', $this->module)->selectWith($select);
+        foreach ($rowSet as $row) {
             $return[$row->id] = $row->slug;
         }
         return $return;

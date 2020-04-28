@@ -30,9 +30,9 @@ class PositionController extends ActionController
         $list   = [];
         $order  = ['order ASC', 'id ASC'];
         $select = $this->getModel('field_position')->select()->order($order);
-        $rowset = $this->getModel('field_position')->selectWith($select);
+        $rowSet = $this->getModel('field_position')->selectWith($select);
         // Make list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $list[$row->id] = $row->toArray();
         }
         // Go to update page if empty
@@ -65,15 +65,15 @@ class PositionController extends ActionController
                     }
                 }
                 // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('field_position')->find($values['id']);
+                if (!empty($id)) {
+                    $row = $this->getModel('field_position')->find($id);
                 } else {
                     $row = $this->getModel('field_position')->createRow();
                 }
                 $row->assign($values);
                 $row->save();
                 // Add log
-                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                $operation = (empty($id)) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('position', $row->id, $operation);
                 $message = __('Attribute position data saved successfully.');
                 $this->jump(['action' => 'index'], $message);

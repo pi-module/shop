@@ -29,8 +29,7 @@ class ProductController extends IndexController
         $config = Pi::service('registry')->config->read($module);
 
         // Find product
-        $product = $this->getModel('product')->find($slug, 'slug');
-        $product = Pi::api('product', 'shop')->canonizeProduct($product);
+        $product = Pi::api('product', 'shop')->getProduct($slug, 'slug');
 
         // Check product
         if (!$product || $product['status'] != 1) {
@@ -62,17 +61,14 @@ class ProductController extends IndexController
         }
 
         // Get attached files
-        if ($product['attach'] && $config['view_attach']) {
+        /* if ($product['attach'] && $config['view_attach']) {
             $attach = Pi::api('product', 'shop')->AttachList($product['id']);
             $this->view()->assign('attach', $attach);
-        }
+        } */
 
         // Get new products in category
         if ($config['view_incategory']) {
-            $where = ['status' => 1, 'category' => $product['category_main']];
-            //if ($product['brand'] > 0) {
-            //    $where['brand'] = $product['brand'];
-            //}
+            $where           = ['status' => 1, 'category' => $product['category_main']];
             $productCategory = $this->productList($where, $config['view_incategory_count']);
             $this->view()->assign('productCategory', $productCategory);
         }
@@ -135,6 +131,7 @@ class ProductController extends IndexController
             $form->setAttribute('enctype', 'multipart/form-data');
             $form->setAttribute('action', $url);
             $form->setData($question);
+
             // Set view
             $this->view()->assign('questionForm', $form);
             $this->view()->assign(

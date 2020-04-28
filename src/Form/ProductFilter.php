@@ -20,13 +20,6 @@ class ProductFilter extends InputFilter
 {
     public function __construct($option = [])
     {
-        // id
-        $this->add(
-            [
-                'name'     => 'id',
-                'required' => false,
-            ]
-        );
         // title
         $this->add(
             [
@@ -39,6 +32,7 @@ class ProductFilter extends InputFilter
                 ],
             ]
         );
+
         // subtitle
         $this->add(
             [
@@ -51,6 +45,7 @@ class ProductFilter extends InputFilter
                 ],
             ]
         );
+
         // slug
         $this->add(
             [
@@ -71,6 +66,7 @@ class ProductFilter extends InputFilter
                 ],
             ]
         );
+
         // code
         $this->add(
             [
@@ -91,6 +87,7 @@ class ProductFilter extends InputFilter
                 ],
             ]
         );
+
         // text_summary
         $this->add(
             [
@@ -103,6 +100,7 @@ class ProductFilter extends InputFilter
                 ],
             ]
         );
+
         // text_description
         $this->add(
             [
@@ -115,6 +113,7 @@ class ProductFilter extends InputFilter
                 ],
             ]
         );
+
         // status
         $this->add(
             [
@@ -122,6 +121,7 @@ class ProductFilter extends InputFilter
                 'required' => true,
             ]
         );
+
         // category
         $this->add(
             [
@@ -129,6 +129,7 @@ class ProductFilter extends InputFilter
                 'required' => true,
             ]
         );
+
         // category_main
         $this->add(
             [
@@ -139,6 +140,7 @@ class ProductFilter extends InputFilter
                 ],
             ]
         );
+
         // brand
         if ($option['brand_system']) {
             $this->add(
@@ -148,13 +150,23 @@ class ProductFilter extends InputFilter
                 ]
             );
         }
-        // image
+
+        // main_image
         $this->add(
             [
-                'name'     => 'image',
+                'name'     => 'main_image',
                 'required' => false,
             ]
         );
+
+        // additional_images
+        $this->add(
+            [
+                'name'     => 'additional_images',
+                'required' => false,
+            ]
+        );
+
         // seo_title
         $this->add(
             [
@@ -167,6 +179,7 @@ class ProductFilter extends InputFilter
                 ],
             ]
         );
+
         // seo_keywords
         $this->add(
             [
@@ -179,6 +192,7 @@ class ProductFilter extends InputFilter
                 ],
             ]
         );
+
         // seo_description
         $this->add(
             [
@@ -191,6 +205,7 @@ class ProductFilter extends InputFilter
                 ],
             ]
         );
+
         // tag
         if (Pi::service('module')->isActive('tag')) {
             $this->add(

@@ -42,9 +42,9 @@ class AttachController extends ActionController
         $limit  = intval($this->config('admin_perpage'));
         // Get info
         $select = $this->getModel('attach')->select()->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('attach')->selectWith($select);
+        $rowSet = $this->getModel('attach')->selectWith($select);
         // Make list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $file[$row->id]                 = $row->toArray();
             $product                        = $this->getModel('product')->find($file[$row->id]['product'])->toArray();
             $file[$row->id]['time_create']  = _date($file[$row->id]['time_create']);
@@ -100,10 +100,10 @@ class AttachController extends ActionController
         }
         // Get all attach files
         $select = $this->getModel('attach')->select()->where(['product' => $product['id']]);
-        $rowset = $this->getModel('attach')->selectWith($select);
+        $rowSet = $this->getModel('attach')->selectWith($select);
         // Make list
         $contents = [];
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $content[$row->id]                = $row->toArray();
             $content[$row->id]['time_create'] = _date($content[$row->id]['time_create']);
             $content[$row->id]['preview']     = $this->filePreview($content[$row->id]['type'], $content[$row->id]['path'], $content[$row->id]['file']);
@@ -148,7 +148,7 @@ class AttachController extends ActionController
                         unset($values[$key]);
                     }
                 }
-                $row = $this->getModel('attach')->find($values['id']);
+                $row = $this->getModel('attach')->find($id);
                 $row->assign($values);
                 $row->save();
                 $message = __('All changes in file saved successfully.');

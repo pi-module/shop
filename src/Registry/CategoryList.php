@@ -34,8 +34,8 @@ class CategoryList extends AbstractRegistry
         $where  = ['status' => 1];
         $order  = ['title ASC', 'id ASC'];
         $select = Pi::model('category', $this->module)->select()->where($where)->order($order);
-        $rowset = Pi::model('category', $this->module)->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = Pi::model('category', $this->module)->selectWith($select);
+        foreach ($rowSet as $row) {
             $return[$row->id] = Pi::api('category', 'shop')->canonizeCategory($row);
         }
         return $return;

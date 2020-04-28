@@ -43,6 +43,8 @@ class Product extends Model
             'sold',
             'image',
             'path',
+            'main_image',
+            'additional_images',
             'comment',
             'point',
             'count',

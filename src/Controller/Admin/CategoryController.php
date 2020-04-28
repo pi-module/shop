@@ -31,11 +31,13 @@ class CategoryController extends ActionController
     public function indexAction()
     {
         $type = $this->params('type', 'category');
+
         // Set count
         $where  = ['type' => $type];
         $count  = ['count' => new Expression('count(*)')];
         $select = $this->getModel('category')->select()->columns($count)->where($where);
         $count  = $this->getModel('category')->selectWith($select)->current()->count;
+
         // Set view
         $this->view()->setTemplate('category-index');
         $this->view()->assign('count', $count);
@@ -52,6 +54,7 @@ class CategoryController extends ActionController
             'isNew' => true,
             'type'  => $type,
         ];
+
         // Find category
         if ($id) {
             $category = $this->getModel('category')->find($id)->toArray();
@@ -62,21 +65,25 @@ class CategoryController extends ActionController
             }
             $option['isNew'] = false;
         }
+
         // Set form
         $form = new CategoryForm('category', $option);
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
             $data = $this->request->getPost();
             $file = $this->request->getFiles();
+
             // Set slug
             $slug         = ($data['slug']) ? $data['slug'] : $data['title'];
             $filter       = new Filter\Slug;
             $data['slug'] = $filter($slug);
+
             // Form filter
             $form->setInputFilter(new CategoryFilter($option));
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+
                 // upload image
                 if (!empty($file['image']['name'])) {
                     // Set upload path
@@ -102,10 +109,12 @@ class CategoryController extends ActionController
                 } elseif (!isset($values['image'])) {
                     $values['image'] = '';
                 }
+
                 // Set seo_title
                 $title               = ($values['seo_title']) ? $values['seo_title'] : $values['title'];
                 $filter              = new Filter\HeadTitle;
                 $values['seo_title'] = $filter($title);
+
                 // Set seo_keywords
                 $keywords = ($values['seo_keywords']) ? $values['seo_keywords'] : $values['title'];
                 $filter   = new Filter\HeadKeywords;
@@ -115,23 +124,27 @@ class CategoryController extends ActionController
                     ]
                 );
                 $values['seo_keywords'] = $filter($keywords);
+
                 // Set seo_description
                 $description               = ($values['seo_description']) ? $values['seo_description'] : $values['title'];
                 $filter                    = new Filter\HeadDescription;
                 $values['seo_description'] = $filter($description);
+
                 // Set time
-                if (empty($values['id'])) {
+                if (empty($id)) {
                     $values['time_create'] = time();
                 }
                 $values['time_update'] = time();
+
                 // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('category')->find($values['id']);
+                if (!empty($id)) {
+                    $row = $this->getModel('category')->find($id);
                 } else {
                     $row = $this->getModel('category')->createRow();
                 }
                 $row->assign($values);
                 $row->save();
+
                 // Add / Edit sitemap
                 if (Pi::service('module')->isActive('sitemap')) {
                     // Set loc
@@ -147,6 +160,7 @@ class CategoryController extends ActionController
                     // Update sitemap
                     Pi::api('sitemap', 'sitemap')->singleLink($loc, $row->status, $module, 'category', $row->id);
                 }
+
                 // Set sale
                 if (isset($values['sale_percent']) && intval($values['sale_percent']) > 0) {
                     $sale                 = [];
@@ -162,11 +176,13 @@ class CategoryController extends ActionController
                     // Clear registry
                     Pi::registry('saleInformation', 'shop')->clear();
                 }
+
                 // Clear registry
                 Pi::registry('categoryList', 'shop')->clear();
                 Pi::registry('categoryRoute', 'shop')->clear();
+
                 // Add log
-                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                $operation = (empty($id)) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('category', $row->id, $operation);
                 $message = __('Category data saved successfully.');
                 $this->jump(['action' => 'index', 'type' => $type], $message);
@@ -269,9 +285,9 @@ class CategoryController extends ActionController
         $offset = (int)($current - 1) * $rowCount;
         $limit  = intval($rowCount);
         $select = $this->getModel('category')->select()->columns($columns)->where($where)->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('category')->selectWith($select);
+        $rowSet = $this->getModel('category')->selectWith($select);
         // Make list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $rows[] = [
                 'id'            => $row->id,
                 'title'         => $row->title,
@@ -331,10 +347,10 @@ class CategoryController extends ActionController
             ];
             $order  = ['id ASC'];
             $select = $this->getModel('product')->select()->where($where)->order($order)->limit(50);
-            $rowset = $this->getModel('product')->selectWith($select);
+            $rowSet = $this->getModel('product')->selectWith($select);
 
             // Make list
-            foreach ($rowset as $row) {
+            foreach ($rowSet as $row) {
                 $product = Pi::api('product', 'shop')->canonizeProduct($row, $categoryList);
 
                 // Make category list as json
@@ -431,19 +447,22 @@ class CategoryController extends ActionController
         $info          = [];
         $productsId    = [];
         $percent       = 0;
+        $nextUrl       = '';
+
         // Set option
         $option = [];
+
         // Set form
         $form = new CategoryMergeForm('category', $option);
         $form->setAttribute('enctype', 'multipart/form-data');
         if ($this->request->isPost()) {
+
             // Get information
             $data = $this->request->getPost();
             $form->setInputFilter(new CategoryMergeFilter);
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
-
 
                 // Set redirect
                 return $this->redirect()->toRoute(
@@ -558,11 +577,9 @@ class CategoryController extends ActionController
                 $productsId[] = $row['product1'];
             }
 
-
             // Work on products
             foreach ($productsId as $productId) {
                 $product = Pi::api('product', 'shop')->getProductLight($productId);
-
 
                 // Make category list as json
                 $category   = $product['category'];

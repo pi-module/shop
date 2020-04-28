@@ -20,13 +20,6 @@ class ProductPriceFilter extends InputFilter
 {
     public function __construct($option = null)
     {
-        // id
-        $this->add(
-            [
-                'name'     => 'id',
-                'required' => false,
-            ]
-        );
         // type
         $this->add(
             [

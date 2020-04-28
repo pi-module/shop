@@ -34,7 +34,7 @@ _b('Recommended');
             <?php foreach ($block['resources'] as $product) { ?>
                 <div class="<?php echo $shopBlockBoxSize; ?> productBox h-product" itemscope itemtype="https://schema.org/Product">
                     <div class="card">
-                        <?php if ($product['image']) { ?>
+                        <?php if ($product['main_image']) { ?>
                             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>"
                                title="<?php echo $this->escape($product['title']); ?>"
                                href="<?php echo $this->escape($product['productUrl']); ?>">
@@ -79,7 +79,7 @@ _b('Recommended');
             <?php foreach ($block['resources'] as $product) { ?>
                 <div class="col-lg-12 col-md-12 col-12 productBox h-product" itemscope itemtype="https://schema.org/Product">
                     <div class="card">
-                        <?php if ($product['image']) { ?>
+                        <?php if ($product['main_image']) { ?>
                             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>"
                                title="<?php echo $this->escape($product['title']); ?>"
                                href="<?php echo $this->escape($product['productUrl']); ?>">
@@ -135,7 +135,7 @@ _b('Recommended');
                 } ?>
                 <div class="<?php echo $class; ?> productBox h-product" itemscope itemtype="https://schema.org/Product">
                     <div class="card">
-                        <?php if ($product['image']) { ?>
+                        <?php if ($product['main_image']) { ?>
                             <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>"
                                title="<?php echo $this->escape($product['title']); ?>"
                                href="<?php echo $this->escape($product['productUrl']); ?>">
@@ -203,7 +203,7 @@ _b('Recommended');
                 <?php foreach ($block['resources'] as $product) { ?>
                     <div class="item h-review" itemscope itemtype="https://schema.org/Product">
                         <div class="card p-item h-card">
-                            <?php if ($product['image']) { ?>
+                            <?php if ($product['main_image']) { ?>
                                 <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>"
                                    title="<?php echo $this->escape($product['title']); ?>"
                                    href="<?php echo $this->escape($product['productUrl']); ?>">

@@ -45,8 +45,8 @@ class Related extends AbstractApi
         $list   = [];
         $where  = ['product_id' => $product];
         $select = Pi::model('related', $this->getModule())->select()->where($where);
-        $rowset = Pi::model('related', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = Pi::model('related', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
             $row    = $row->toArray();
             $list[] = $row['product_related'];
         }
@@ -70,22 +70,27 @@ class Related extends AbstractApi
         $list          = [];
         $from_category = [];
         $from_title    = [];
+
         // Find product ids from title
         if (!empty($values['title'])) {
             $from_title = Pi::api('product', 'shop')->searchRelated($values['title'], $values['type']);
         }
+
         // Find product ids from selected cats
         if (is_array($values['category']) && !empty($values['category'])) {
             $from_category = Pi::api('category', 'shop')->findFromCategory($values['category']);
         }
+
         // Set array
         $id = array_merge($from_title, $from_category);
         $id = array_unique($id);
+
         //unset($id[$product]);
         // Get product list
         if (!empty($id)) {
             $list = $this->getListFind($id);
         }
+
         return $list;
     }
 }	

@@ -53,9 +53,9 @@ class CategoryController extends IndexController
                 $where  = ['status' => 1, 'parent' => $category['id']];
                 $order  = ['display_order ASC', 'time_create DESC', 'title ASC'];
                 $select = $this->getModel('category')->select()->where($where)->order($order);
-                $rowset = $this->getModel('category')->selectWith($select);
+                $rowSet = $this->getModel('category')->selectWith($select);
                 // Make list
-                foreach ($rowset as $row) {
+                foreach ($rowSet as $row) {
                     $list[$row->id] = Pi::api('category', 'shop')->canonizeCategory($row);
                 }
                 // Set view
@@ -92,9 +92,9 @@ class CategoryController extends IndexController
         $where      = ['status' => 1];
         $order      = ['display_order DESC', 'title ASC', 'id DESC'];
         $select     = $this->getModel('category')->select()->where($where)->order($order);
-        $rowset     = $this->getModel('category')->selectWith($select);
+        $rowSet     = $this->getModel('category')->selectWith($select);
         // Make list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $categories[$row->id] = Pi::api('category', 'shop')->canonizeCategory($row);
         }
         // Set category tree

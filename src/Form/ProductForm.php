@@ -24,8 +24,6 @@ class ProductForm extends BaseForm
     {
         $this->option    = $option;
         $this->category  = [0 => ''];
-        $this->thumbUrl  = (isset($option['thumbUrl'])) ? $option['thumbUrl'] : '';
-        $this->removeUrl = (isset($option['removeUrl'])) ? $option['removeUrl'] : '';
 
         parent::__construct($name);
     }
@@ -50,15 +48,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
-        // id
-        $this->add(
-            [
-                'name'       => 'id',
-                'attributes' => [
-                    'type' => 'hidden',
-                ],
-            ]
-        );
+
         // title
         $this->add(
             [
@@ -73,6 +63,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // subtitle
         $this->add(
             [
@@ -86,6 +77,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // slug
         $this->add(
             [
@@ -99,6 +91,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // code
         $this->add(
             [
@@ -112,6 +105,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // text_summary
         $this->add(
             [
@@ -127,6 +121,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // text_description
         $this->add(
             [
@@ -141,6 +136,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // status
         $this->add(
             [
@@ -161,6 +157,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // category
         $this->add(
             [
@@ -175,6 +172,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // category_main
         $this->add(
             [
@@ -192,6 +190,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // brand
         if ($this->option['brand_system']) {
             $this->add(
@@ -210,53 +209,32 @@ class ProductForm extends BaseForm
                 ]
             );
         }
-        // Image
-        if ($this->thumbUrl) {
-            $this->add(
-                [
-                    'name'       => 'imageview',
-                    'type'       => 'Module\Shop\Form\Element\Image',
-                    'options'    => [//'label' => __('Image'),
-                    ],
-                    'attributes' => [
-                        'src' => $this->thumbUrl,
-                    ],
-                ]
-            );
-            $this->add(
-                [
-                    'name'       => 'remove',
-                    'type'       => 'Module\Shop\Form\Element\Remove',
-                    'options'    => [
-                        'label' => __('Remove image'),
-                    ],
-                    'attributes' => [
-                        'link' => $this->removeUrl,
-                    ],
-                ]
-            );
-            $this->add(
-                [
-                    'name'       => 'image',
-                    'attributes' => [
-                        'type' => 'hidden',
-                    ],
-                ]
-            );
-        } else {
-            $this->add(
-                [
-                    'name'       => 'image',
-                    'options'    => [
-                        'label' => __('Image'),
-                    ],
-                    'attributes' => [
-                        'type'        => 'file',
-                        'description' => '',
-                    ],
-                ]
-            );
-        }
+
+        // main_image
+        $this->add(
+            [
+                'name'    => 'main_image',
+                'type'    => 'Module\Media\Form\Element\Media',
+                'options' => [
+                    'label'  => __('Main image'),
+                    'module' => 'shop',
+                ],
+            ]
+        );
+
+        // additional_images
+        $this->add(
+            [
+                'name'    => 'additional_images',
+                'type'    => 'Module\Media\Form\Element\Media',
+                'options' => [
+                    'label'         => __('Additional images'),
+                    'media_gallery' => true,
+                    'module'        => 'shop',
+                ],
+            ]
+        );
+
         // extra_seo
         $this->add(
             [
@@ -267,6 +245,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // seo_title
         $this->add(
             [
@@ -282,6 +261,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // seo_keywords
         $this->add(
             [
@@ -297,6 +277,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // seo_description
         $this->add(
             [
@@ -312,6 +293,7 @@ class ProductForm extends BaseForm
                 ],
             ]
         );
+
         // tag
         if (Pi::service('module')->isActive('tag')) {
             $this->add(
@@ -328,6 +310,7 @@ class ProductForm extends BaseForm
                 ]
             );
         }
+
         // Save
         $this->add(
             [

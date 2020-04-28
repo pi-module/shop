@@ -39,15 +39,6 @@ class CategoryForm extends BaseForm
 
     public function init()
     {
-        // id
-        $this->add(
-            [
-                'name'       => 'id',
-                'attributes' => [
-                    'type' => 'hidden',
-                ],
-            ]
-        );
         // parent
         if ($this->option['type'] == 'category') {
             $this->add(

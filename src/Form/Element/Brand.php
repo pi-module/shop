@@ -30,8 +30,8 @@ class Brand extends Select
             $where   = ['status' => 1, 'type' => 'brand'];
             $order   = ['title ASC', 'id DESC'];
             $select  = Pi::model('category', 'shop')->select()->columns($columns)->where($where)->order($order);
-            $rowset  = Pi::model('category', 'shop')->selectWith($select);
-            foreach ($rowset as $row) {
+            $rowSet  = Pi::model('category', 'shop')->selectWith($select);
+            foreach ($rowSet as $row) {
                 $list[$row->id] = $row->toArray();
             }
             $this->valueOptions = $this->getTree($list);

@@ -26,9 +26,9 @@ class PropertyController extends ActionController
         $list   = [];
         $order  = ['order ASC', 'id ASC'];
         $select = $this->getModel('property')->select()->order($order);
-        $rowset = $this->getModel('property')->selectWith($select);
+        $rowSet = $this->getModel('property')->selectWith($select);
         // Make list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $list[$row->id] = $row->toArray();
         }
         // Go to update page if empty
@@ -54,15 +54,15 @@ class PropertyController extends ActionController
             if ($form->isValid()) {
                 $values = $form->getData();
                 // Save values
-                if (!empty($values['id'])) {
-                    $row = $this->getModel('property')->find($values['id']);
+                if (!empty($id)) {
+                    $row = $this->getModel('property')->find($id);
                 } else {
                     $row = $this->getModel('property')->createRow();
                 }
                 $row->assign($values);
                 $row->save();
                 // Add log
-                $operation = (empty($values['id'])) ? 'add' : 'edit';
+                $operation = (empty($id)) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('property', $row->id, $operation);
                 $message = __('Order property data saved successfully.');
                 $this->jump(['action' => 'index'], $message);

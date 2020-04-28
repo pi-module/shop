@@ -12,7 +12,7 @@ _b('Recommended');
         <?php foreach ($block['resources'] as $product) { ?>
             <div class="productBox h-product row col-lg-6 col-md-6 col-12" itemscope itemtype="https://schema.org/Product">
                 <div class="col-lg-3 col-md-3 col-12">
-                    <?php if ($product['image']) { ?>
+                    <?php if ($product['main_image']) { ?>
                         <a itemprop="url" class="u-url <?php echo $this->escape($product['ribbon_class']); ?>"
                            title="<?php echo $this->escape($product['title']); ?>"
                            href="<?php echo $this->escape($product['productUrl']); ?>">

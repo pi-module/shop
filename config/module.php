@@ -15,7 +15,7 @@ return [
     'meta'     => [
         'title'       => _a('Shop'),
         'description' => _a('Shop system.'),
-        'version'     => '1.9.8',
+        'version'     => '2.0.0',
         'license'     => 'New BSD',
         'logo'        => 'image/logo.png',
         'readme'      => 'docs/readme.txt',

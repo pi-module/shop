@@ -45,8 +45,8 @@ class Product extends Select
             }
             // Select
             $select = Pi::model('product', 'shop')->select()->columns($columns)->where($where)->order($order)->limit($limit);
-            $rowset = Pi::model('product', 'shop')->selectWith($select);
-            foreach ($rowset as $row) {
+            $rowSet = Pi::model('product', 'shop')->selectWith($select);
+            foreach ($rowSet as $row) {
                 $list[$row->id]    = $row->toArray();
                 $options[$row->id] = $list[$row->id]['title'];
             }

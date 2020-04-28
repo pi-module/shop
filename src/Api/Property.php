@@ -41,8 +41,8 @@ class Property extends AbstractApi
         $where  = ['status' => 1];
         $order  = ['order ASC', 'id DESC'];
         $select = Pi::model('property', $this->getModule())->select()->where($where)->order($order);
-        $rowset = Pi::model('property', $this->getModule())->selectWith($select);
-        foreach ($rowset as $row) {
+        $rowSet = Pi::model('property', $this->getModule())->selectWith($select);
+        foreach ($rowSet as $row) {
             $list[$row->id] = $row->toArray();
         }
         return $list;
@@ -102,9 +102,9 @@ class Property extends AbstractApi
         $where  = ['product' => $product];
         $order  = ['name ASC'];
         $select = Pi::model('property_value', $this->getModule())->select()->where($where)->order($order);
-        $rowset = Pi::model('property_value', $this->getModule())->selectWith($select);
+        $rowSet = Pi::model('property_value', $this->getModule())->selectWith($select);
         // Make values list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             if ($row->price > 0) {
                 $prices[$row->property][$row->id] = $row->price;
             }

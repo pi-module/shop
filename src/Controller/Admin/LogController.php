@@ -31,9 +31,9 @@ class LogController extends ActionController
         $offset = (int)($page - 1) * $this->config('admin_perpage');
         $limit  = intval($this->config('admin_perpage'));
         $select = $this->getModel('log')->select()->order($order)->offset($offset)->limit($limit);
-        $rowset = $this->getModel('log')->selectWith($select);
+        $rowSet = $this->getModel('log')->selectWith($select);
         // Make list
-        foreach ($rowset as $row) {
+        foreach ($rowSet as $row) {
             $list[$row->id]                = $row->toArray();
             $list[$row->id]['time_create'] = _date($list[$row->id]['time_create']);
         }
