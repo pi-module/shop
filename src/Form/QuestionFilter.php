@@ -15,7 +15,7 @@ namespace Module\Shop\Form;
 
 use Module\System\Validator\UserEmail as UserEmailValidator;
 use Pi;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class QuestionFilter extends InputFilter
 {

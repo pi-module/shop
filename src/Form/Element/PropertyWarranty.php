@@ -14,9 +14,9 @@
 namespace Module\Shop\Form\Element;
 
 use Pi;
-use Zend\Form\Element\Button as ZendButton;
+use Laminas\Form\Element\Button as LaminasButton;
 
-class PropertyWarranty extends ZendButton
+class PropertyWarranty extends LaminasButton
 {
     /**
      * @return array

@@ -14,8 +14,8 @@
 namespace Module\Shop\Form\Element;
 
 use Pi;
-use Zend\Db\Sql\Predicate\Expression;
-use Zend\Form\Element\Select;
+use Laminas\Db\Sql\Predicate\Expression;
+use Laminas\Form\Element\Select;
 
 class Product extends Select
 {

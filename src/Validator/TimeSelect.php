@@ -15,7 +15,7 @@ namespace Module\Shop\Validator;
 
 use DateTime;
 use Pi;
-use Zend\Validator\AbstractValidator;
+use Laminas\Validator\AbstractValidator;
 
 class TimeSelect extends AbstractValidator
 {

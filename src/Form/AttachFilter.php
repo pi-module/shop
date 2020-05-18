@@ -20,7 +20,7 @@
 namespace Module\Shop\Form;
 
 use Pi;
-use Zend\InputFilter\InputFilter;
+use Laminas\InputFilter\InputFilter;
 
 class AttachFilter extends InputFilter
 {

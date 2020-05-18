@@ -14,7 +14,7 @@
 namespace Module\Shop\Form\Element;
 
 use Pi;
-use Zend\Form\Element\Select;
+use Laminas\Form\Element\Select;
 
 class Role extends Select
 {

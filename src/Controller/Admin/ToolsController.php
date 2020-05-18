@@ -16,7 +16,7 @@ namespace Module\Shop\Controller\Admin;
 use Module\Shop\Form\SitemapForm;
 use Pi;
 use Pi\Mvc\Controller\ActionController;
-use Zend\Db\Sql\Predicate\Expression;
+use Laminas\Db\Sql\Predicate\Expression;
 
 class ToolsController extends ActionController
 {
@@ -107,7 +107,7 @@ class ToolsController extends ActionController
 
             if (!empty($product[33])) {
                 // Set
-                $key = \Zend\Math\Rand::getString(16, 'abcdefghijklmnopqrstuvwxyz123456789', true);
+                $key = \Laminas\Math\Rand::getString(16, 'abcdefghijklmnopqrstuvwxyz123456789', true);
                 $image = sprintf('%s.jpg', $key);
                 $originalImage = sprintf('%s/%s', $originalPath, $image);
                 // download image

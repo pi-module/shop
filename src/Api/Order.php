@@ -15,7 +15,7 @@ namespace Module\Shop\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
-use Zend\Math\Rand;
+use Laminas\Math\Rand;
 
 /*
  * Pi::api('order', 'shop')->getProductDetails($id);
