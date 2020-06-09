@@ -15,7 +15,7 @@ namespace Module\Shop\Controller\Api;
 
 use Pi;
 use Pi\Mvc\Controller\ApiController;
-use Zend\Db\Sql\Predicate\Expression;
+use Laminas\Db\Sql\Predicate\Expression;
 
 class ProductController extends ApiController
 {

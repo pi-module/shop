@@ -15,7 +15,7 @@ namespace Module\Shop\Api;
 
 use Pi;
 use Pi\Application\Api\AbstractApi;
-use Zend\Json\Json;
+use Laminas\Json\Json;
 
 /*
  * Pi::api('serial', 'shop')->checkSerial($serial);

@@ -16,7 +16,7 @@ namespace Module\Shop\Controller\Front;
 use Pi;
 use Pi\Filter;
 use Pi\Mvc\Controller\ActionController;
-use Zend\Db\Sql\Predicate\Expression;
+use Laminas\Db\Sql\Predicate\Expression;
 
 class CategoryController extends IndexController
 {
