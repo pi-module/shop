@@ -33,6 +33,16 @@ class Order extends AbstractApi
         return true;
     }
 
+    public function getInstallmentDueDate($cart = [], $composition = [100])
+    {
+        return null;
+    }
+
+    public function getInstallmentComposition($extra = [])
+    {
+        return [100];
+    }
+
     public function getProductDetails($id)
     {
         return Pi::api('product', 'shop')->getProductOrder($id);
@@ -119,6 +129,17 @@ class Order extends AbstractApi
     public function getExtraFieldsFormForOrder()
     {
         return [];
+    }
+    public function isAlwaysAvailable($order)
+    {
+        return array(
+            'status' => 1
+        );
+    }
+
+    public function showInInvoice($order, $product)
+    {
+        return true;
     }
 
 }
