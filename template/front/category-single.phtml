@@ -21,7 +21,7 @@ if (isset($category['largeUrl']) && !empty($category['largeUrl'])) {
 }
 ?>
 <div class="clearfix">
-    <div itemscope itemtype="https://schema.org/Brand">
+    <div class="mb-5" itemscope itemtype="https://schema.org/Brand">
         <?php if (!empty($category['image_wide'])) { ?>
             <div class="category-width-description">
                 <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
@@ -55,24 +55,22 @@ if (isset($category['largeUrl']) && !empty($category['largeUrl'])) {
         <?php } ?>
     </div>
     <div class="clearfix">
-        <h2><?php _e('List of sub categories'); ?></h2>
+        <h2 class="mb-5"><?php _e('List of sub categories'); ?></h2>
         <div class="category-list row">
             <?php foreach ($list as $categorySingle) { ?>
-                <div class="category-single" itemscope itemtype="https://schema.org/Brand">
-                    <div class="col-lg-4 col-md-4 col-12">
-                        <div class="card">
-                            <a itemprop="url" title="<?php echo $this->escape($categorySingle['title']); ?>" href="<?php echo $this->escape($categorySingle['categoryUrl']); ?>">
-                                <img class="card-img-top img-fluid" itemprop="image"
-                                     src="<?php echo $categorySingle['mediumUrl']; ?>"
-                                     alt="<?php echo $this->escape($categorySingle['title']); ?>">
-                            </a>
-                            <div class="card-body">
-                                <h3 class="p-name card-title" itemprop="name">
-                                    <a itemprop="url" title="<?php echo $this->escape($categorySingle['title']); ?>" href="<?php echo $this->escape($categorySingle['categoryUrl']); ?>">
-                                        <?php echo $this->escape($categorySingle['title']); ?>
-                                    </a>
-                                </h3>
-                            </div>
+                <div class="col-lg-4 col-md-4 col-12 category-single mb-3" itemscope itemtype="https://schema.org/Brand">
+                    <div class="card">
+                        <a itemprop="url" title="<?php echo $this->escape($categorySingle['title']); ?>" href="<?php echo $this->escape($categorySingle['categoryUrl']); ?>">
+                            <img class="card-img-top img-fluid" itemprop="image"
+                                 src="<?php echo $categorySingle['mediumUrl']; ?>"
+                                 alt="<?php echo $this->escape($categorySingle['title']); ?>">
+                        </a>
+                        <div class="card-body">
+                            <h3 class="p-name card-title" itemprop="name">
+                                <a itemprop="url" title="<?php echo $this->escape($categorySingle['title']); ?>" href="<?php echo $this->escape($categorySingle['categoryUrl']); ?>">
+                                    <?php echo $this->escape($categorySingle['title']); ?>
+                                </a>
+                            </h3>
                         </div>
                     </div>
                 </div>
