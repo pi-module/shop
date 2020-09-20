@@ -19,7 +19,7 @@ use Laminas\InputFilter\InputFilter;
 
 class QuestionFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option = [])
     {
         // product
         $this->add(

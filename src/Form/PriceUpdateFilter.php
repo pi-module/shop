@@ -18,7 +18,7 @@ use Laminas\InputFilter\InputFilter;
 
 class PriceUpdateFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option = [])
     {
         // category
         $this->add(

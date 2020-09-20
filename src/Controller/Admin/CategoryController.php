@@ -53,6 +53,7 @@ class CategoryController extends ActionController
         $option = [
             'isNew' => true,
             'type'  => $type,
+            'id'    => (intval($id) > 0) ? intval($id) : null
         ];
 
         // Find category
@@ -201,7 +202,6 @@ class CategoryController extends ActionController
         $this->view()->setTemplate('category-update');
         $this->view()->assign('form', $form);
         $this->view()->assign('title', __('Add a category'));
-        $this->view()->assign('message', $message);
     }
 
     public function removeAction()

@@ -61,6 +61,7 @@ class ProductFilter extends InputFilter
                         [
                             'module' => Pi::service('module')->current(),
                             'table'  => 'product',
+                            'id' => $option['id']
                         ]
                     ),
                 ],

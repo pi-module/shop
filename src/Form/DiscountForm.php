@@ -68,7 +68,7 @@ class DiscountForm extends BaseForm
                 'type'       => 'Module\Shop\Form\Element\Category',
                 'options'    => [
                     'label'    => __('Category'),
-                    'category' => [0 => ''],
+                    'category' => [],
                 ],
                 'attributes' => [
                     'size'     => 1,

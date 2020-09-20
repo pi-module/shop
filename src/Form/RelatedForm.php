@@ -71,7 +71,7 @@ class RelatedForm extends BaseForm
                 'type'    => 'Module\Shop\Form\Element\Category',
                 'options' => [
                     'label'    => __('Category'),
-                    'category' => '',
+                    'category' => [],
                 ],
             ]
         );

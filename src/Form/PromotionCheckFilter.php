@@ -18,7 +18,7 @@ use Laminas\InputFilter\InputFilter;
 
 class PromotionCheckFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option = [])
     {
         // code
         $this->add(

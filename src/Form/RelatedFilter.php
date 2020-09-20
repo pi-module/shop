@@ -18,7 +18,7 @@ use Laminas\InputFilter\InputFilter;
 
 class RelatedFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option = [])
     {
         // title
         $this->add(
@@ -47,4 +47,4 @@ class RelatedFilter extends InputFilter
             ]
         );
     }
-}  
+}

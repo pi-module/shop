@@ -18,7 +18,7 @@ use Laminas\InputFilter\InputFilter;
 
 class PriceLogFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option = [])
     {
         $this->add(
             [

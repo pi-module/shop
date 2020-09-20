@@ -18,7 +18,7 @@ use Laminas\InputFilter\InputFilter;
 
 class SerialFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option = [])
     {
         // serial_number
         $this->add(

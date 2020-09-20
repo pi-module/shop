@@ -24,7 +24,7 @@ use Laminas\InputFilter\InputFilter;
 
 class AttachFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option = [])
     {
         // title
         $this->add(

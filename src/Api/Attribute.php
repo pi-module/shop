@@ -22,7 +22,7 @@ use Pi\Application\Api\AbstractApi;
  * Pi::api('attribute', 'shop')->Form($values);
  * Pi::api('attribute', 'shop')->Product($id, $category);
  * Pi::api('attribute', 'shop')->SearchForm($form);
- * Pi::api('attribute', 'shop')->findFromattribute($search);
+ * Pi::api('attribute', 'shop')->findFromAttribute($search);
  * Pi::api('attribute', 'shop')->setCategory($field, $categoryArr);
  * Pi::api('attribute', 'shop')->getCategory($field);
  * Pi::api('attribute', 'shop')->getField($business);
@@ -40,8 +40,8 @@ class Attribute extends AbstractApi
     {
         // Set return
         $return = [
-            'attribute' => '',
-            'field'     => '',
+            'attribute' => [],
+            'field'     => [],
         ];
         // Get position list
         $position = $this->attributePositionForm();

@@ -18,7 +18,7 @@ use Laminas\InputFilter\InputFilter;
 
 class SaleFilter extends InputFilter
 {
-    public function __construct($option)
+    public function __construct($option= [])
     {
         // product
         if ($option['type'] == 'add') {

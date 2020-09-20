@@ -66,14 +66,20 @@ class Category extends Select
     public function getTree($elements, $parentId = 0)
     {
         $branch = [];
+
         // Set default category options
         if ($parentId == 0) {
-            if (!isset($this->options['category'])) {
-                $branch[0] = __('All Category');
-            } elseif (empty($this->options['category']) && $this->attributes['size'] == 1) {
+            if (isset($this->options['category']) && !empty($this->options['category'])) {
+                foreach ($this->options['category'] as $key => $value) {
+                    $branch[$key] = $value;
+                }
+            } elseif (isset($this->options['category']) && empty($this->options['category']) && $this->attributes['size'] == 1) {
                 $branch[0] = '';
+            } else {
+                $branch[0] = __('All Category');
             }
         }
+
         // Set category list as tree
         foreach ($elements as $element) {
             if ($element['parent'] == $parentId) {
@@ -90,6 +96,7 @@ class Category extends Select
                 unset($depth);
             }
         }
+
         return $branch;
     }
 }

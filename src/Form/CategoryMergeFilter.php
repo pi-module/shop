@@ -18,7 +18,7 @@ use Laminas\InputFilter\InputFilter;
 
 class CategoryMergeFilter extends InputFilter
 {
-    public function __construct($option)
+    public function __construct($option= [])
     {
         // category_from_1
         $this->add(

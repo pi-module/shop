@@ -23,8 +23,6 @@ class ProductForm extends BaseForm
     public function __construct($name = null, $option = [])
     {
         $this->option    = $option;
-        $this->category  = [0 => ''];
-
         parent::__construct($name);
     }
 
@@ -165,7 +163,7 @@ class ProductForm extends BaseForm
                 'type'       => 'Module\Shop\Form\Element\Category',
                 'options'    => [
                     'label'    => __('Category'),
-                    'category' => '',
+                    'category' => [],
                 ],
                 'attributes' => [
                     'required' => true,
@@ -180,7 +178,7 @@ class ProductForm extends BaseForm
                 'type'       => 'Module\Shop\Form\Element\Category',
                 'options'    => [
                     'label'    => __('Main category'),
-                    'category' => $this->category,
+                    'category' => [],
                 ],
                 'attributes' => [
                     'size'        => 1,

@@ -18,7 +18,7 @@ use Laminas\InputFilter\InputFilter;
 
 class CategoryFilter extends InputFilter
 {
-    public function __construct($option)
+    public function __construct($option= [])
     {
         // parent
         if ($option['type'] == 'category') {
@@ -56,6 +56,7 @@ class CategoryFilter extends InputFilter
                         [
                             'module' => Pi::service('module')->current(),
                             'table'  => 'category',
+                            'id' => $option['id']
                         ]
                     ),
                 ],
@@ -133,7 +134,7 @@ class CategoryFilter extends InputFilter
             ]
         );
         // Check is new
-        if ($option['isNew']) {
+        /* if ($option['isNew']) {
             // percent
             $this->add(
                 [
@@ -176,7 +177,7 @@ class CategoryFilter extends InputFilter
                     ],
                 ]
             );
-        }
+        } */
         // seo_title
         $this->add(
             [
@@ -214,4 +215,4 @@ class CategoryFilter extends InputFilter
             ]
         );
     }
-}    	
+}

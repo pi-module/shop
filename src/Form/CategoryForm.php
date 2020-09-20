@@ -23,9 +23,8 @@ class CategoryForm extends BaseForm
     public function __construct($name = null, $option = [])
     {
         $this->option    = $option;
-        $this->category  = [0 => ''];
-        $this->thumbUrl  = $option['thumbUrl'];
-        $this->removeUrl = empty($option['removeUrl']) ? '' : $option['removeUrl'];
+        $this->thumbUrl  = isset($option['thumbUrl']) ? $option['thumbUrl'] : '';
+        $this->removeUrl = isset($option['removeUrl']) ? $option['removeUrl'] : '';
         parent::__construct($name);
     }
 
@@ -47,7 +46,7 @@ class CategoryForm extends BaseForm
                     'type'       => 'Module\Shop\Form\Element\Category',
                     'options'    => [
                         'label'    => __('Parent Category'),
-                        'category' => $this->category,
+                        'category' => [],
                     ],
                     'attributes' => [
                         'size'     => 1,
@@ -243,7 +242,7 @@ class CategoryForm extends BaseForm
             ]
         );
         // Check is new
-        if ($this->option['isNew']) {
+        /* if ($this->option['isNew']) {
             // extra
             $this->add(
                 [
@@ -293,7 +292,7 @@ class CategoryForm extends BaseForm
                     ],
                 ]
             );
-        }
+        } */
         // extra
         $this->add(
             [

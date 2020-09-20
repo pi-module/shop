@@ -18,7 +18,7 @@ use Laminas\InputFilter\InputFilter;
 
 class AdminProductExportFilter extends InputFilter
 {
-    public function __construct()
+    public function __construct($option = [])
     {
         // category
         $this->add(
