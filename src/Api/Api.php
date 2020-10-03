@@ -301,10 +301,10 @@ class Api extends AbstractApi
         }
 
         // Set info
-        $product = [];
-        $count   = 0;
+        $productList = [];
+        $count       = 0;
 
-        $columns = ['product' => new Expression('DISTINCT product'), '*'];
+        $columns = ['product' => new Expression('DISTINCT product')];
         $limit   = (isset($params['limit']) && intval($params['limit']) > 0) ? intval($params['limit']) : intval($config['view_perpage']);
         $page    = (isset($params['page']) && intval($params['page']) > 0) ? intval($params['page']) : 1;
         $offset  = (int)($page - 1) * $limit;
@@ -316,7 +316,9 @@ class Api extends AbstractApi
 
         // Set product on where link from title and attribute
         if ($checkTitle && $checkAttribute) {
-            if (isset($productIDList['title']) && !empty($productIDList['title']) && isset($productIDList['attribute']) && !empty($productIDList['attribute'])) {
+            if (isset($productIDList['title']) && !empty($productIDList['title']) && isset($productIDList['attribute'])
+                && !empty($productIDList['attribute'])
+            ) {
                 $whereLink['product'] = array_intersect($productIDList['title'], $productIDList['attribute']);
             } else {
                 $hasSearchResult = false;
@@ -419,7 +421,7 @@ class Api extends AbstractApi
                 $select = Pi::model('product', $this->getModule())->select()->where($where)->order($order);
                 $rowSet = Pi::model('product', $this->getModule())->selectWith($select);
                 foreach ($rowSet as $row) {
-                    $product[] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
+                    $productList[$row->id] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
                 }
             }
 
@@ -430,23 +432,24 @@ class Api extends AbstractApi
         }
 
         // Search on category
-        $categoryList = [];
-        if (isset($categoryTitle) && !empty($categoryTitle)) {
-            $whereCategory                 = ['status' => 1];
-            $whereCategory['title LIKE ?'] = '%' . $categoryTitle . '%';
-            $orderCategory                 = ['title DESC', 'id DESC'];
-            $select                        = $this->getModel('category')->select()->where($whereCategory)->order($orderCategory)->offset($offset)->limit(
-                $limit
-            );
-            $rowSet                        = $this->getModel('category')->selectWith($select);
+        /* if (isset($categoryTitle) && !empty($categoryTitle)) {
+            $categoryList  = [];
+            $whereCategory = [
+                'status'       => 1,
+                'type'         => 'category',
+                'title LIKE ?' => '%' . $categoryTitle . '%',
+            ];
+            $orderCategory = ['title DESC', 'id DESC'];
+            $select        = $this->getModel('category')->select()->where($whereCategory)->order($orderCategory);
+            $rowSet        = $this->getModel('category')->selectWith($select);
             foreach ($rowSet as $row) {
                 $categoryList[] = Pi::api('category', 'shop')->canonizeCategory($row);
             }
-        }
+        } */
 
         // Set result
         $result = [
-            'products'   => $product,
+            'products'   => array_values($productList),
             'categories' => $categoryList,
             'filterList' => $filterList,
             'paginator'  => [
@@ -467,7 +470,7 @@ class Api extends AbstractApi
                 'maxSelect'   => intval($maxSelect),
                 'step'        => intval(($maxPrice - $minPrice) / 10),
                 'rightToLeft' => false,
-            ]
+            ],
         ];
 
         return $result;

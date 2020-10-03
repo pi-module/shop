@@ -157,7 +157,7 @@ class Block
         return $block;
     }
 
-    public function productSale($options = [], $module = null)
+    public static function productSale($options = [], $module = null)
     {
         // Set options
         $block           = [];
@@ -169,7 +169,7 @@ class Block
         return $block;
     }
 
-    public function categorySale($options = [], $module = null)
+    public static function categorySale($options = [], $module = null)
     {
         // Set options
         $block = [];
@@ -187,7 +187,7 @@ class Block
         $block = array_merge($block, $options);
         // Set info
         $order = ['display_order DESC', 'id DESC'];
-        $where = ['status' => 1];
+        $where = ['status' => 1, 'type' => 'category'];
         if (!empty($block['category']) && !in_array(0, $block['category'])) {
             $where['id'] = $block['category'];
         }

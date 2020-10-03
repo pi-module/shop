@@ -31,7 +31,7 @@ class CategoryList extends AbstractRegistry
     protected function loadDynamic($options = [])
     {
         $return = [];
-        $where  = ['status' => 1];
+        $where  = ['status' => 1, 'type' => 'category'];
         $order  = ['title ASC', 'id ASC'];
         $select = Pi::model('category', $this->module)->select()->where($where)->order($order);
         $rowSet = Pi::model('category', $this->module)->selectWith($select);
