@@ -578,33 +578,6 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
-        'order_type'                => [
-            'category'    => 'order',
-            'title'       => _a('Order type'),
-            'description' => '',
-            'edit'        => [
-                'type'    => 'select',
-                'options' => [
-                    'options' => [
-                        'onetime'     => _a('One time'),
-                        'recurring'   => _a('Recurring'),
-                        'installment' => _a('Installment'),
-                    ],
-                ],
-            ],
-            'filter'      => 'text',
-            'value'       => 'onetime',
-        ],
-        'order_installment_role'    => [
-            'category'    => 'order',
-            'title'       => _a('Installment role'),
-            'description' => _a(
-                'If your order type is installment, when you set role name here, just users of this role can make installment order, if set it empty all users can make installment order'
-            ),
-            'edit'        => 'text',
-            'filter'      => 'string',
-            'value'       => '',
-        ],
         'order_stock'               => [
             'category'    => 'order',
             'title'       => _a('Order stock'),

@@ -20,11 +20,15 @@ class Block
 {
     public static function productNew($options = [], $module = null)
     {
+        // Load language
+        Pi::service('i18n')->load(['module/shop', 'default']);
+
         // Set options
         $block           = [];
         $block           = array_merge($block, $options);
         $block['config'] = Pi::service('registry')->config->read('shop', 'order');
         $product         = [];
+
         // Set info
         $order = ['time_create DESC', 'id DESC'];
         $limit = intval($block['number']);
@@ -57,14 +61,15 @@ class Block
         // Get list of product
         $select = Pi::model('product', $module)->select()->where($where)->order($order)->limit($limit);
         $rowSet = Pi::model('product', $module)->selectWith($select);
+
         // Make list
         foreach ($rowSet as $row) {
             $product[$row->id] = Pi::api('product', 'shop')->canonizeProduct($row);
         }
+
         // Set block array
         $block['resources'] = $product;
-        // Load language
-        Pi::service('i18n')->load(['module/shop', 'default']);
+
         return $block;
     }
 

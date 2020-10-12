@@ -15,11 +15,11 @@ return [
     'meta'     => [
         'title'       => _a('Shop'),
         'description' => _a('Shop system.'),
-        'version'     => '2.0.0',
+        'version'     => '2.0.1',
         'license'     => 'New BSD',
         'logo'        => 'image/logo.png',
         'readme'      => 'docs/readme.txt',
-        'demo'        => 'http://pialog',
+        'demo'        => 'http://piengine.org',
         'icon'        => 'fa-shopping-cart',
     ],
     // Author information

@@ -259,28 +259,11 @@ class CartController extends ActionController
         $module = $this->params('module');
         // Get config
         $config = Pi::service('registry')->config->read($module);
-        // Check order type
-        $orderType = $config['order_type'];
-        if ($config['order_type'] == 'installment' && !empty($config['order_installment_role'])) {
-            // Get uid
-            $uid = Pi::user()->getId();
-            // Get role list
-            $roles = Pi::service('registry')->role->read('front');
-            $roles = array_keys($roles);
-            // Check role
-            if (in_array($config['order_installment_role'], $roles) && $uid > 0) {
-                $userRoles = Pi::user()->getRole($uid, 'front');
-                if (!in_array($config['order_installment_role'], $userRoles)) {
-                    $orderType = 'onetime';
-                }
-            } else {
-                $orderType = 'onetime';
-            }
-        }
+
         // Set order array
         $order                   = [];
         $order['module_name']    = $module;
-        $order['type_payment']   = $orderType;
+        $order['type_payment']   = 'onetime';
         $order['type_commodity'] = 'product';
         $order['total_discount'] = $basket['total']['discount'];
         $order['total_shipping'] = $basket['total']['shipping'];
@@ -377,8 +360,10 @@ class CartController extends ActionController
                 }
             }
         }
+
         // Unset shop session
         Pi::api('basket', 'shop')->emptyBasket();
+
         // Set and go to order
         $url = Pi::api('order', 'order')->setOrderInfo($order);
         Pi::service('url')->redirect($url);
@@ -453,7 +438,7 @@ class CartController extends ActionController
     } */
 
     /* protected function setInvoice()
-    {    
+    {
     	// Get cart
         $cart = $_SESSION['shop']['cart'];
         // Set invoice
@@ -509,11 +494,11 @@ class CartController extends ActionController
     {
         $cart = $_SESSION['shop']['cart'];
         // Set number
-        if (isset($cart['product'][$product['id']]) 
-            && !empty($cart['product'][$product['id']])) 
+        if (isset($cart['product'][$product['id']])
+            && !empty($cart['product'][$product['id']]))
         {
-            if (isset($cart['product'][$product['id']]['number']) 
-                && !empty($cart['product'][$product['id']]['number'])) 
+            if (isset($cart['product'][$product['id']]['number'])
+                && !empty($cart['product'][$product['id']]['number']))
             {
                 $product['number'] = $cart['product'][$product['id']]['number'] + 1;
             } else {

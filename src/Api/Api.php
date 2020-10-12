@@ -161,7 +161,7 @@ class Api extends AbstractApi
         }
 
         // Get category information from model
-        if (isset($params['category']) && !empty($category)) {
+        if (isset($params['category']) && !empty($params['category'])) {
             // Get category
             if (is_numeric($params['category']) && intval($params['category']) > 0) {
                 $category = Pi::api('category', 'shop')->getCategory(intval($params['category']));
