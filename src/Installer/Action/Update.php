@@ -1172,6 +1172,40 @@ EOD;
             }
         }
 
+        // Update to version 2.0.2
+        if (version_compare($moduleVersion, '2.0.2', '<')) {
+            // Add table of price
+            $sql
+                = <<<'EOD'
+CREATE TABLE `{user}`
+(
+    `id`              INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `uid`             INT(10) UNSIGNED          DEFAULT NULL,
+    `order_active`    INT(10) UNSIGNED NOT NULL DEFAULT '1',
+    `product_count`   INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    `product_fee`     INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    `time_last_order` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uid` (`uid`)
+);
+EOD;
+            SqlSchema::setType($this->module);
+            $sqlHandler = new SqlSchema;
+            try {
+                $sqlHandler->queryContent($sql);
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'SQL schema query for author table failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+
+                return false;
+            }
+        }
+
         return true;
     }
 }

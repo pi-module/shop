@@ -375,3 +375,15 @@ CREATE TABLE `{price}`
     KEY `type` (`type`),
     KEY `time_update` (`time_update`)
 );
+
+CREATE TABLE `{user}`
+(
+    `id`              INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `uid`             INT(10) UNSIGNED          DEFAULT NULL,
+    `order_active`    INT(10) UNSIGNED NOT NULL DEFAULT '1',
+    `product_count`   INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    `product_fee`     INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    `time_last_order` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `uid` (`uid`)
+);

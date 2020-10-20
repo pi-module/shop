@@ -18,10 +18,6 @@ return [
             'name'  => 'admin',
         ],
         [
-            'title' => _a('Json output'),
-            'name'  => 'json',
-        ],
-        [
             'title' => _a('View'),
             'name'  => 'view',
         ],
@@ -80,31 +76,15 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        // Json
-        'json_perpage'              => [
-            'category'    => 'json',
-            'title'       => _a('Perpage on json output'),
-            'description' => '',
-            'edit'        => 'text',
-            'filter'      => 'number_int',
-            'value'       => 100,
-        ],
-        'json_check_password'       => [
-            'category'    => 'json',
-            'title'       => _a('Check password for json output'),
-            'description' => '',
+        'processing_user'        => [
+            'category'    => 'admin',
+            'title'       => _a('Processing User'),
+            'description' => _a('Active and check user table on shop module and do some actions like update count of products or total payment or disable/enable order product by user'),
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'json_password'             => [
-            'category'    => 'json',
-            'title'       => _a('Password for json output'),
-            'description' => _a('After use on mobile device , do not change it'),
-            'edit'        => 'text',
-            'filter'      => 'string',
-            'value'       => md5(rand(1, 99999)),
-        ],
+
         // View
         'homepage_type'             => [
             'title'       => _a('Homepage type'),
@@ -315,8 +295,9 @@ return [
             'filter'      => 'number_int',
             'value'       => 7,
         ],
+
         // Image
-        'image_minw'               => [
+        'image_minw'                => [
             'category'    => 'image',
             'title'       => _t('Min Image width (upload)'),
             'description' => _t('This config can override media module value'),
@@ -324,7 +305,7 @@ return [
             'filter'      => 'string',
             'value'       => '',
         ],
-        'image_minh'               => [
+        'image_minh'                => [
             'category'    => 'image',
             'title'       => _t('Min Image height (upload)'),
             'description' => _t('This config can override media module value'),
@@ -332,7 +313,7 @@ return [
             'filter'      => 'string',
             'value'       => '',
         ],
-        'image_largeh'             => [
+        'image_largeh'              => [
             'category'    => 'image',
             'title'       => _a('Large Image height'),
             'description' => '',
@@ -340,7 +321,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 1200,
         ],
-        'image_largew'             => [
+        'image_largew'              => [
             'category'    => 'image',
             'title'       => _a('Large Image width'),
             'description' => '',
@@ -348,7 +329,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 1200,
         ],
-        'image_itemh'              => [
+        'image_itemh'               => [
             'category'    => 'image',
             'title'       => _a('Item Image height'),
             'description' => '',
@@ -356,7 +337,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 800,
         ],
-        'image_itemw'              => [
+        'image_itemw'               => [
             'category'    => 'image',
             'title'       => _a('Item Image width'),
             'description' => '',
@@ -364,7 +345,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 800,
         ],
-        'image_mediumh'            => [
+        'image_mediumh'             => [
             'category'    => 'image',
             'title'       => _a('Medium Image height'),
             'description' => '',
@@ -372,7 +353,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 500,
         ],
-        'image_mediumw'            => [
+        'image_mediumw'             => [
             'category'    => 'image',
             'title'       => _a('Medium Image width'),
             'description' => '',
@@ -380,7 +361,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 500,
         ],
-        'image_thumbh'             => [
+        'image_thumbh'              => [
             'category'    => 'image',
             'title'       => _a('Thumb Image height'),
             'description' => '',
@@ -388,7 +369,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 250,
         ],
-        'image_thumbw'             => [
+        'image_thumbw'              => [
             'category'    => 'image',
             'title'       => _a('Thumb Image width'),
             'description' => '',
@@ -396,8 +377,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 250,
         ],
-
-        'image_quality'            => [
+        'image_quality'             => [
             'category'    => 'image',
             'title'       => _a('Image quality'),
             'description' => _a('Between 0 to 100 and support both of JPG and PNG, default is 75. This config can override media module value'),
@@ -471,6 +451,7 @@ return [
             'value'       => 'bottom-right',
             'category'    => 'image',
         ],
+
         // Social
         'social_sharing'            => [
             'title'       => _t('Social sharing items'),
@@ -484,6 +465,7 @@ return [
             'filter'      => 'array',
             'category'    => 'social',
         ],
+
         // File
         'file_size'                 => [
             'category'    => 'file',
@@ -509,6 +491,7 @@ return [
             'filter'      => 'string',
             'value'       => 'jpg,jpeg,png,gif,avi,flv,mp3,mp4,pdf,docs,xdocs,zip,rar',
         ],
+
         // Vote
         'vote_bar'                  => [
             'category'    => 'vote',
@@ -518,6 +501,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
+
         // favourite
         'favourite_bar'             => [
             'category'    => 'favourite',
@@ -527,6 +511,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
+
         // video
         'video_service'             => [
             'category'    => 'video',
@@ -536,6 +521,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
+
         // Sale
         'sale_view'                 => [
             'category'    => 'sale',
@@ -569,6 +555,7 @@ return [
             'value'       => 'marketable',
             'category'    => 'sale',
         ],
+
         // Order
         'order_active'              => [
             'category'    => 'order',
@@ -604,6 +591,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
+
         // Serial
         'serial_active'             => [
             'category'    => 'serial',
@@ -647,6 +635,7 @@ return [
             'filter'      => 'text',
             'value'       => 2,
         ],
+
         // Texts
         'text_description_index'    => [
             'category'    => 'head_meta',
