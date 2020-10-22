@@ -18,7 +18,7 @@ use Laminas\InputFilter\InputFilter;
 
 class AttributeFilter extends InputFilter
 {
-    public function __construct($options= [])
+    public function __construct($options = [])
     {
         // title
         $this->add(
@@ -47,6 +47,7 @@ class AttributeFilter extends InputFilter
                         [
                             'module' => Pi::service('module')->current(),
                             'table'  => 'field',
+                            'id'     => $options['id'],
                         ]
                     ),
                 ],
@@ -74,26 +75,28 @@ class AttributeFilter extends InputFilter
             ]
         );
         // type
-        /* $this->add(array(
-            'name' => 'type',
-            'required' => true,
-        )); */
-        if ($options['type'] == 'select') {
-            // data
-            $this->add(
-                [
-                    'name'     => 'data',
-                    'required' => false,
-                ]
-            );
-            // default
-            $this->add(
-                [
-                    'name'     => 'default',
-                    'required' => false,
-                ]
-            );
-        }
+        $this->add(
+            [
+                'name'     => 'type',
+                'required' => true,
+            ]
+        );
+
+        // data
+        $this->add(
+            [
+                'name'     => 'data',
+                'required' => false,
+            ]
+        );
+        // default
+        $this->add(
+            [
+                'name'     => 'default',
+                'required' => false,
+            ]
+        );
+
         // information
         $this->add(
             [

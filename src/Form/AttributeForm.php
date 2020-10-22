@@ -112,58 +112,60 @@ class AttributeForm extends BaseForm
             ]
         );
         // type
-        /* $this->add(array(
-            'name' => 'type',
-            'type' => 'select',
-            'options' => array(
-                'label' => __('Type'),
-                'value_options' => array(
-                    'text' => __('Text : type text content'),
-                    'link' => __('Link : add url for click'),
-                    'video' => __('Video : add flv or mp4 url for play on video player'),
-                    'audio' => __('Audio : add mp3 url for play on audio player'),
-                    'file' => __('File : add file link for download'),
-                    'currency' => __('Currency : add view price for anything'),
-                    'date' => __('Date : add date for view'),
-                    'number' => __('Number : add number'),
-                    'select' => __('Select : add select box for choose'),
-                    'checkbox' => __('Checkbox : add check box for 0 or 1'),
-                ),
-            ),
-            'attributes' => array(
-                'required' => true,
-            )
-        )); */
+        $this->add(
+            [
+                'name'       => 'type',
+                'type'       => 'select',
+                'options'    => [
+                    'label'         => __('Type'),
+                    'value_options' => [
+                        'text'     => __('Text : type text content'),
+                        'link'     => __('Link : add url for click'),
+                        'video'    => __('Video : add flv or mp4 url for play on video player'),
+                        'audio'    => __('Audio : add mp3 url for play on audio player'),
+                        'file'     => __('File : add file link for download'),
+                        'currency' => __('Currency : add view price for anything'),
+                        'date'     => __('Date : add date for view'),
+                        'number'   => __('Number : add number'),
+                        'select'   => __('Select : add select box for choose'),
+                        'checkbox' => __('Checkbox : add check box for 0 or 1'),
+                    ],
+                ],
+                'attributes' => [
+                    'required' => true,
+                ],
+            ]
+        );
         // Check
-        if ($this->options['type'] == 'select') {
-            // data
-            $this->add(
-                [
-                    'name'       => 'data',
-                    'options'    => [
-                        'label' => __('General data'),
-                    ],
-                    'attributes' => [
-                        'type'        => 'textarea',
-                        'rows'        => '5',
-                        'cols'        => '40',
-                        'description' => __('Use `|` as delimiter to separate select box elements'),
-                    ],
-                ]
-            );
-            // default
-            $this->add(
-                [
-                    'name'       => 'default',
-                    'options'    => [
-                        'label' => __('Default data'),
-                    ],
-                    'attributes' => [
-                        'type' => 'text',
-                    ],
-                ]
-            );
-        }
+        // data
+        $this->add(
+            [
+                'name'       => 'data',
+                'options'    => [
+                    'label' => __('General data'),
+                ],
+                'attributes' => [
+                    'type'        => 'textarea',
+                    'rows'        => '5',
+                    'cols'        => '40',
+                    'description' => __('Use `|` as delimiter to separate select box elements'),
+                ],
+            ]
+        );
+
+        // default
+        $this->add(
+            [
+                'name'       => 'default',
+                'options'    => [
+                    'label' => __('Default data'),
+                ],
+                'attributes' => [
+                    'type' => 'text',
+                ],
+            ]
+        );
+
         // information
         $this->add(
             [
@@ -215,4 +217,4 @@ class AttributeForm extends BaseForm
             ]
         );
     }
-}	
+}

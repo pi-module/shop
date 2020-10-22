@@ -45,25 +45,33 @@ class AttributeController extends ActionController
     public function updateAction()
     {
         // Get id
-        $id      = $this->params('id');
-        $type    = $this->params('type');
-        $options = [];
+        $id   = $this->params('id');
+        $type = $this->params('type');
+
         // check type
         if (!in_array($type, ['text', 'link', 'currency', 'date', 'number', 'select', 'video', 'audio', 'file', 'checkbox'])) {
             $message = __('Attribute field type not set.');
             $url     = ['action' => 'index'];
             $this->jump($url, $message);
         }
-        $options['type'] = $type;
+
         if ($id) {
             $attribute             = $this->getModel('field')->find($id)->toArray();
             $attribute['category'] = Pi::api('attribute', 'shop')->getCategory($attribute['id']);
+
             // Set value
             $value                    = json_decode($attribute['value'], true);
             $attribute['data']        = $value['data'];
             $attribute['default']     = $value['default'];
             $attribute['information'] = $value['information'];
         }
+
+        // Set option
+        $options = [
+            'type' => $type,
+            'id'   => $id,
+        ];
+
         // Set form
         $form = new AttributeForm('attribute', $options);
         $form->setAttribute('enctype', 'multipart/form-data');
@@ -77,6 +85,7 @@ class AttributeController extends ActionController
             $form->setData($data);
             if ($form->isValid()) {
                 $values = $form->getData();
+
                 // Set value
                 $value           = [
                     'data'        => (isset($data['data'])) ? $data['data'] : '',
@@ -84,8 +93,10 @@ class AttributeController extends ActionController
                     'information' => $data['information'],
                 ];
                 $values['value'] = json_encode($value);
+
                 // Set type
-                $values['type'] = $type;
+                $values['type'] = (!isset($values['type']) || empty($values['type'])) ? $type : $values['type'];
+
                 // Set order
                 if (empty($id)) {
                     $columns         = ['order'];
@@ -93,6 +104,7 @@ class AttributeController extends ActionController
                     $select          = $this->getModel('field')->select()->columns($columns)->order($order)->limit(1);
                     $values['order'] = $this->getModel('field')->selectWith($select)->current()->order + 1;
                 }
+
                 // Save values
                 if (!empty($id)) {
                     $row = $this->getModel('field')->find($id);
@@ -101,11 +113,14 @@ class AttributeController extends ActionController
                 }
                 $row->assign($values);
                 $row->save();
+
                 //
                 Pi::api('attribute', 'shop')->setCategory($row->id, $data['category']);
+
                 // Add log
                 $operation = (empty($id)) ? 'add' : 'edit';
                 Pi::api('log', 'shop')->addLog('attribute', $row->id, $operation);
+
                 // Check it save or not
                 $message = __('Attribute field data saved successfully.');
                 $url     = ['action' => 'index'];
