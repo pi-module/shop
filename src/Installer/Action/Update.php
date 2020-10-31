@@ -79,6 +79,11 @@ class Update extends BasicUpdate
         $linkTable   = $linkModel->getTable();
         $linkAdapter = $linkModel->getAdapter();
 
+        // Set user model
+        $userModel   = Pi::model('user', $this->module);
+        $userTable   = $userModel->getTable();
+        $userAdapter = $userModel->getAdapter();
+
         // Update to version 0.3.0
         if (version_compare($moduleVersion, '0.3.0', '<')) {
             // Alter table field `type`
@@ -1202,6 +1207,24 @@ EOD;
                     ]
                 );
 
+                return false;
+            }
+        }
+
+        // Update to version 2.0.5
+        if (version_compare($moduleVersion, '2.0.5', '<')) {
+            // Alter table field `products`
+            $sql = sprintf("ALTER TABLE %s ADD `products` JSON", $userTable);
+            try {
+                $userAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db', [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
                 return false;
             }
         }

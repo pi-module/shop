@@ -384,6 +384,7 @@ CREATE TABLE `{user}`
     `product_count`   INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `product_fee`     INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `time_last_order` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+    `products`        JSON,
     PRIMARY KEY (`id`),
     UNIQUE KEY `uid` (`uid`)
 );

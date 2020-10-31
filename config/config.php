@@ -18,6 +18,10 @@ return [
             'name'  => 'admin',
         ],
         [
+            'title' => _a('User'),
+            'name'  => 'user',
+        ],
+        [
             'title' => _a('View'),
             'name'  => 'view',
         ],
@@ -76,10 +80,20 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
+
+        // User
         'processing_user'        => [
-            'category'    => 'admin',
+            'category'    => 'user',
             'title'       => _a('Processing User'),
             'description' => _a('Active and check user table on shop module and do some actions like update count of products or total payment or disable/enable order product by user'),
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'product_order_limit'        => [
+            'category'    => 'user',
+            'title'       => _a('Each user can order each product one time'),
+            'description' => _a('Processing User should be active !'),
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
             'value'       => 0,

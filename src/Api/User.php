@@ -29,7 +29,8 @@ class User extends AbstractApi
         if (!$user || empty($user)) {
             $user = Pi::api('user', 'shop')->add(['uid' => $parameter]);
         } else {
-            $user = $user->toArray();
+            $user             = $user->toArray();
+            $user['products'] = (empty($user['products'])) ? [] : json_decode($user['products'], true);
         }
         return $user;
     }
@@ -41,5 +42,39 @@ class User extends AbstractApi
         $row->save();
 
         return $row->toArray();
+    }
+
+    public function checkProducts($products, $user = [])
+    {
+        // Set result
+        $result = [
+            'allow'  => [],
+            'denied' => [],
+        ];
+
+        // Check user
+        if (empty($user)) {
+            $uid  = Pi::user()->getId();
+            $user = $this->get($uid);
+        }
+
+        // Check list is array
+        $products = is_array($products) ? $products : [$products => $products];
+
+        // Set products to allow/denied list
+        foreach ($products as $product) {
+
+            if (empty($user['products'])) {
+                $result['allow'][$product] = $product;
+            } else {
+                if (in_array($product, $user['products'])) {
+                    $result['denied'][$product] = $product;
+                } else {
+                    $result['allow'][$product] = $product;
+                }
+            }
+        }
+
+        return $result;
     }
 }

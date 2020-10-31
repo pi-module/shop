@@ -28,5 +28,6 @@ class User extends Model
             'product_count',
             'product_fee',
             'time_last_order',
+            'products',
         ];
 }
