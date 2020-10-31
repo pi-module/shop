@@ -33,7 +33,7 @@ if (isset($category['largeUrl']) && !empty($category['largeUrl'])) {
                 <img class="img-fluid" itemprop="image" src="<?php echo $category['image_wide']; ?>"
                      alt="<?php echo $this->escape($category['title']); ?>">
             </div>
-        <?php } elseif (!empty($category['largeUrl'])) { ?>
+        <?php /*} elseif (!empty($category['largeUrl'])) { ?>
             <div class="category-width-description">
                 <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
                 <?php if (!empty($category['text_summary'])) { ?>
@@ -44,14 +44,13 @@ if (isset($category['largeUrl']) && !empty($category['largeUrl'])) {
                 <img class="img-fluid" itemprop="image" src="<?php echo $this->escape($category['largeUrl']); ?>"
                      alt="<?php echo $this->escape($category['title']); ?>">
             </div>
-        <?php } else { ?>
+        <?php */} else { ?>
             <div class="page-header">
                 <h1 class="p-name" itemprop="name"><?php echo $this->escape($category['title']); ?></h1>
             </div>
         <?php } ?>
         <?php if (!empty($category['text_summary'])) { ?>
-            <div class="e-description clearfix card card-body bg-light mb-3"
-                 itemprop="description"><?php echo $category['text_summary']; ?></div>
+            <div class="e-description clearfix card card-body bg-light mb-3" itemprop="description"><?php echo $category['text_summary']; ?></div>
         <?php } ?>
     </div>
     <div class="clearfix">
