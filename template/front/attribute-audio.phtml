@@ -4,7 +4,7 @@
             <?php foreach ($attribute['audio'] as $audio) { ?>
                 <?php if (!empty($audio['data'])) { ?>
                     <div class="pi-player clearfix">
-                        <?php echo $this->videojs($audio['data'], $this->escape($productItem['largeUrl'])); ?>
+                        <?php echo $this->videojs($audio['data'], $this->escape($productSingle['largeUrl'])); ?>
                     </div>
                 <?php } ?>
             <?php } ?>

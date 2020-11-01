@@ -13,97 +13,107 @@ EOT;
 $this->footScript()->appendScript($script);
 ?>
 <div class="product-order-form clearfix">
-    <form action="<?php echo $this->escape($productItem['cartUrl']); ?>" method="post">
-        <input name="id" type="hidden" value="<?php echo $this->escape($productItem['id']); ?>">
-        <?php foreach ($property['list'] as $propertyList) { ?>
-            <?php if (!empty($property['value'][$propertyList['id']])) { ?>
-                <div class="form-group clearfix">
-                    <label class="col-form-label"><?php echo $this->escape($propertyList['title']); ?></label>
-                    <?php if ($propertyList['type'] == 'checkbox') { ?>
-                        <div class="col-lg-9 col-md-9 col-12">
-                            <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
-                                <?php if ($config['order_stock'] != 'property') { ?>
-                                    <label class="form-check form-control-sm">
-                                        <input type="radio" class="property-value-radio"
-                                            <?php if ($propertyList['influence_price']) { ?>
-                                                data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
-                                                data-price="<?php echo $this->escape($propertyValue['price']); ?>"
-                                                data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
-                                                <?php if ($propertyValue['price'] == 0) { ?>
-                                                    disabled="disabled"
-                                                <?php } ?>
+    <?php if (isset($allowOrder) && $allowOrder) { ?>
+        <form action="<?php echo $this->escape($productSingle['cartUrl']); ?>" method="post">
+            <input name="id" type="hidden" value="<?php echo $this->escape($productSingle['id']); ?>">
+            <?php if(isset($property['list']) && !empty($property['list'])) { ?>
+                <?php foreach ($property['list'] as $propertyList) { ?>
+                    <?php if (!empty($property['value'][$propertyList['id']])) { ?>
+                        <div class="form-group clearfix">
+                            <label class="col-form-label"><?php echo $this->escape($propertyList['title']); ?></label>
+                            <?php if ($propertyList['type'] == 'checkbox') { ?>
+                                <div class="col-lg-9 col-md-9 col-12">
+                                    <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
+                                        <?php if ($config['order_stock'] != 'property') { ?>
+                                            <label class="form-check form-control-sm">
+                                                <input type="radio" class="property-value-radio"
+                                                    <?php if ($propertyList['influence_price']) { ?>
+                                                        data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
+                                                        data-price="<?php echo $this->escape($propertyValue['price']); ?>"
+                                                        data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                                        <?php if ($propertyValue['price'] == 0) { ?>
+                                                            disabled="disabled"
+                                                        <?php } ?>
+                                                    <?php } ?>
+                                                    <?php if ($propertyValue['select']) { ?>
+                                                        checked="checked"
+                                                    <?php } ?>
+                                                       name="property[<?php echo $this->escape($propertyList['id']); ?>]"
+                                                       value="<?php echo $this->escape($propertyValue['unique_key']); ?>"> <?php echo $this->escape(
+                                                    $propertyValue['name']
+                                                ); ?>
+                                            </label>
+                                        <?php } elseif ($config['order_stock'] == 'property' && $propertyValue['stock'] > 0) { ?>
+                                            <label class="form-check form-control-sm">
+                                                <input type="radio" class="property-value-radio"
+                                                    <?php if ($propertyList['influence_price']) { ?>
+                                                        data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
+                                                        data-price="<?php echo $this->escape($propertyValue['price']); ?>"
+                                                        data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                                    <?php } ?>
+                                                    <?php if ($propertyValue['select']) { ?>
+                                                        checked="checked"
+                                                    <?php } ?>
+                                                       name="property[<?php echo $this->escape($propertyList['id']); ?>]"
+                                                       value="<?php echo $this->escape($propertyValue['unique_key']); ?>"> <?php echo $this->escape(
+                                                    $propertyValue['name']
+                                                ); ?>
+                                            </label>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </div>
+                            <?php } elseif ($propertyList['type'] == 'selectbox') { ?>
+                                <div class="col-lg-4 col-md-4 col-12">
+                                    <select name="property[<?php echo $this->escape($propertyList['id']); ?>]"
+                                            class="form-control form-control-sm property-value-select">
+                                        <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
+                                            <?php if ($config['order_stock'] != 'property') { ?>
+                                                <option value="<?php echo $this->escape($propertyValue['unique_key']); ?>"
+                                                    <?php if ($propertyList['influence_price']) { ?>
+                                                        data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
+                                                        data-price="<?php echo $this->escape($propertyValue['price']); ?>"
+                                                        data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                                        <?php if ($propertyValue['price'] == 0) { ?>
+                                                            disabled="disabled"
+                                                        <?php } ?>
+                                                    <?php } ?>
+                                                    <?php if ($propertyValue['select']) { ?>
+                                                        selected="selected"
+                                                    <?php } ?>>
+                                                    <?php echo $this->escape($propertyValue['name']); ?>
+                                                </option>
+                                            <?php } elseif ($config['order_stock'] == 'property' && $propertyValue['stock'] > 0) { ?>
+                                                <option value="<?php echo $this->escape($propertyValue['unique_key']); ?>"
+                                                    <?php if ($propertyList['influence_price']) { ?>
+                                                        data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
+                                                        data-price="<?php echo $this->escape($propertyValue['price']); ?>"
+                                                        data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
+                                                    <?php } ?>
+                                                    <?php if ($propertyValue['select']) { ?>
+                                                        selected="selected"
+                                                    <?php } ?>>
+                                                    <?php echo $this->escape($propertyValue['name']); ?>
+                                                </option>
                                             <?php } ?>
-                                            <?php if ($propertyValue['select']) { ?>
-                                                checked="checked"
-                                            <?php } ?>
-                                               name="property[<?php echo $this->escape($propertyList['id']); ?>]"
-                                               value="<?php echo $this->escape($propertyValue['unique_key']); ?>"> <?php echo $this->escape(
-                                            $propertyValue['name']
-                                        ); ?>
-                                    </label>
-                                <?php } elseif ($config['order_stock'] == 'property' && $propertyValue['stock'] > 0) { ?>
-                                    <label class="form-check form-control-sm">
-                                        <input type="radio" class="property-value-radio"
-                                            <?php if ($propertyList['influence_price']) { ?>
-                                                data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
-                                                data-price="<?php echo $this->escape($propertyValue['price']); ?>"
-                                                data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
-                                            <?php } ?>
-                                            <?php if ($propertyValue['select']) { ?>
-                                                checked="checked"
-                                            <?php } ?>
-                                               name="property[<?php echo $this->escape($propertyList['id']); ?>]"
-                                               value="<?php echo $this->escape($propertyValue['unique_key']); ?>"> <?php echo $this->escape(
-                                            $propertyValue['name']
-                                        ); ?>
-                                    </label>
-                                <?php } ?>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             <?php } ?>
                         </div>
-                    <?php } elseif ($propertyList['type'] == 'selectbox') { ?>
-                        <div class="col-lg-4 col-md-4 col-12">
-                            <select name="property[<?php echo $this->escape($propertyList['id']); ?>]"
-                                    class="form-control form-control-sm property-value-select">
-                                <?php foreach ($property['value'][$propertyList['id']] as $key => $propertyValue) { ?>
-                                    <?php if ($config['order_stock'] != 'property') { ?>
-                                        <option value="<?php echo $this->escape($propertyValue['unique_key']); ?>"
-                                            <?php if ($propertyList['influence_price']) { ?>
-                                                data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
-                                                data-price="<?php echo $this->escape($propertyValue['price']); ?>"
-                                                data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
-                                                <?php if ($propertyValue['price'] == 0) { ?>
-                                                    disabled="disabled"
-                                                <?php } ?>
-                                            <?php } ?>
-                                            <?php if ($propertyValue['select']) { ?>
-                                                selected="selected"
-                                            <?php } ?>>
-                                            <?php echo $this->escape($propertyValue['name']); ?>
-                                        </option>
-                                    <?php } elseif ($config['order_stock'] == 'property' && $propertyValue['stock'] > 0) { ?>
-                                        <option value="<?php echo $this->escape($propertyValue['unique_key']); ?>"
-                                            <?php if ($propertyList['influence_price']) { ?>
-                                                data-key="<?php echo $this->escape($propertyValue['unique_key']); ?>"
-                                                data-price="<?php echo $this->escape($propertyValue['price']); ?>"
-                                                data-price-view="<?php echo $this->escape($propertyValue['price_view']); ?>"
-                                            <?php } ?>
-                                            <?php if ($propertyValue['select']) { ?>
-                                                selected="selected"
-                                            <?php } ?>>
-                                            <?php echo $this->escape($propertyValue['name']); ?>
-                                        </option>
-                                    <?php } ?>
-                                <?php } ?>
-                            </select>
-                        </div>
                     <?php } ?>
-                </div>
+                <?php } ?>
             <?php } ?>
-        <?php } ?>
+            <div class="text-right">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-shopping-cart"></i> <?php _e('Add to cart'); ?>
+                </button>
+            </div>
+        </form>
+    <?php } else { ?>
         <div class="text-right">
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="btn btn-warning" disabled>
                 <i class="fas fa-shopping-cart"></i> <?php _e('Add to cart'); ?>
             </button>
         </div>
-    </form>
+    <?php } ?>
 </div>

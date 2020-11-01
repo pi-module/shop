@@ -22,15 +22,23 @@ class CartController extends ActionController
 {
     public function indexAction()
     {
+        // Get module
+        $module = $this->params('module');
+
+        // Get config
+        $config = Pi::service('registry')->config->read($module);
+
         // Check order is active or inactive
-        if (!$this->config('order_active')) {
+        if (!$config['order_active']) {
             $this->getResponse()->setStatusCode(401);
             $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-404');
             $this->view()->setLayout('layout-simple');
             return;
         }
+
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
+
         // Set promotion form
         $form = new PromotionCheckForm('promotion');
         $form->setAttribute('enctype', 'multipart/form-data');
@@ -41,12 +49,33 @@ class CartController extends ActionController
             ];
             $form->setData($data);
         }
+
         // Set title
         $title = __('Basket');
 
         // Save statistics
         if (Pi::service('module')->isActive('statistics')) {
             Pi::api('log', 'statistics')->save('shop', 'cart');
+        }
+
+        // Update user processing
+        $allowOrder = true;
+        if ($config['processing_user']) {
+
+            // Get user
+            $userProcessing = Pi::api('user', 'shop')->get(Pi::user()->getId());
+
+            // Check user can make order
+            if ($config['processing_disable_order'] && intval($userProcessing['processing_disable_order']) == 0) {
+                $allowOrder = false;
+            }
+
+            // Check user order this product before
+            foreach ($basket['products'] as $productSingle) {
+                if ($config['processing_order_limit'] && in_array($productSingle['id'], $userProcessing['products'])) {
+                    $allowOrder = false;
+                }
+            }
         }
 
         // Set view
@@ -56,6 +85,7 @@ class CartController extends ActionController
         $this->view()->setTemplate('checkout-cart');
         $this->view()->assign('basket', $basket);
         $this->view()->assign('form', $form);
+        $this->view()->assign('allowOrder', $allowOrder);
     }
 
     public function promotionAction()
@@ -186,10 +216,12 @@ class CartController extends ActionController
     {
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
+
         // Get info from url
         $process = $this->params('process', 'number');
         $product = $this->params('product', 1);
         $module  = $this->params('module');
+
         // Set return
         $return                 = [];
         $return['message']      = __('Please select product');
@@ -197,6 +229,7 @@ class CartController extends ActionController
         $return['ajaxStatus']   = 0;
         $return['actionStatus'] = 0;
         $return['actionName']   = $process;
+
         // process
         switch ($process) {
             case 'remove':
@@ -212,8 +245,10 @@ class CartController extends ActionController
                     $getNumber = $this->params('number');
                     $newNumber = $number + $getNumber;
                     if ($newNumber > 0) {
+
                         // Set price
                         $price = $basket['products'][$product]['price'];
+
                         // Get property info
                         if (isset($basket['products'][$product]['property']) && !empty($basket['products'][$product]['property'])) {
                             $propertyList = Pi::api('property', 'shop')->getList();
@@ -224,9 +259,11 @@ class CartController extends ActionController
                                 }
                             }
                         }
+
                         // Update number
                         $newTotal = $newNumber * $price;
                         Pi::api('basket', 'shop')->updateBasket('number', $product, $newNumber);
+
                         // Set return
                         $return['message']      = __('Update number');
                         $return['actionNumber'] = $newNumber;
@@ -241,6 +278,7 @@ class CartController extends ActionController
                 }
                 break;
         }
+
         // return
         return $return;
     }
@@ -249,16 +287,29 @@ class CartController extends ActionController
     {
         // Set template
         $this->view()->setTemplate(false);
+
         // Get basket
         $basket = Pi::api('basket', 'shop')->getBasket();
+
         // Set total product price
         $total = 0.00;
+
         // Set can pay array
         $canPay = [];
+
         // Get module
         $module = $this->params('module');
+
         // Get config
         $config = Pi::service('registry')->config->read($module);
+
+        // Check order is active or inactive
+        if (!$config['order_active']) {
+            $this->getResponse()->setStatusCode(401);
+            $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-404');
+            $this->view()->setLayout('layout-simple');
+            return;
+        }
 
         // Set order array
         $order                   = [];
@@ -270,10 +321,13 @@ class CartController extends ActionController
         $order['total_packing']  = 0;
         $order['total_setup']    = 0;
         $order['total_vat']      = 0;
+
         // Set products to order
         foreach ($basket['products'] as $product) {
+
             // Set price
             $price = $product['price'];
+
             // Get property info
             if (isset($product['property']) && !empty($product['property'])) {
                 $propertyList = Pi::api('property', 'shop')->getList();
@@ -284,6 +338,7 @@ class CartController extends ActionController
                     }
                 }
             }
+
             // Set single product
             $singelProduct = [
                 'product'        => $product['id'],
@@ -296,17 +351,23 @@ class CartController extends ActionController
                 'title'          => $product['title'],
                 'extra'          => json_encode($product['property']),
             ];
+
             // Set order product
             $order['product'][$product['id']] = $singelProduct;
+
             // Set can check array
             $canPay[$product['id']] = $product['can_pay'];
+
             // Update total price
             $total = $price + $total;
         }
+
         // Check can pay or not
         $order['can_pay'] = (in_array(2, $canPay)) ? 2 : 1;
+
         // Check promotion
         if (isset($basket['data']['promotion']) && !empty($basket['data']['promotion'])) {
+
             // Get promotion
             $where     = [
                 'code'             => _strip($basket['data']['promotion']),
@@ -316,17 +377,21 @@ class CartController extends ActionController
             ];
             $select    = $this->getModel('promotion')->select()->where($where)->limit(1);
             $promotion = $this->getModel('promotion')->selectWith($select)->current();
+
             // Check promotion
             if (!empty($promotion)) {
                 $promotion = $promotion->toArray();
+
                 // Update used number
                 $this->getModel('promotion')->update(
                     ['used' => $promotion['used'] + 1],
                     ['id' => $promotion['id']]
                 );
+
                 // Use
                 $order['promotion_type']  = 'shop-promotion';
                 $order['promotion_value'] = _strip($promotion['code']);
+
                 // Set credit
                 if ($promotion['partner'] > 0) {
                     $credit = 0;
@@ -347,6 +412,7 @@ class CartController extends ActionController
                             }
                             break;
                     }
+
                     if ($credit > 0) {
                         $order['credit'] = [
                             'uid'                => $promotion['partner'],
@@ -364,9 +430,58 @@ class CartController extends ActionController
         // Unset shop session
         Pi::api('basket', 'shop')->emptyBasket();
 
-        // Set and go to order
-        $url = Pi::api('order', 'order')->setOrderInfo($order);
-        Pi::service('url')->redirect($url);
+        // Update user processing
+        $allowOrder = true;
+        if ($config['processing_user']) {
+
+            // Set products
+            $productList = [];
+
+            // Get user
+            $userProcessing = Pi::api('user', 'shop')->get(Pi::user()->getId());
+
+            // Check user can make order
+            if ($config['processing_disable_order'] && intval($userProcessing['processing_disable_order']) == 0) {
+                $allowOrder = false;
+            }
+
+            // Check user order this product before
+            foreach ($basket['products'] as $productSingle) {
+                if ($config['processing_order_limit'] && in_array($productSingle['id'], $userProcessing['products'])) {
+                    $allowOrder = false;
+                } else {
+                    $productList[$productSingle['id']] = $productSingle['id'];
+                }
+            }
+        }
+
+        // Update user
+        if ($allowOrder) {
+            $productList = array_unique(array_merge($userProcessing['products'], $productList));
+            $params      = [
+                'uid'             => $userProcessing['uid'],
+                'products'        => $productList,
+                'order_active'    => ($config['processing_disable_order']) ? 0 : 1,
+                'time_last_order' => time(),
+                'product_count'   => count($productList),
+                'product_fee'     => $userProcessing['product_fee'] + $total,
+            ];
+
+            // Update
+            Pi::api('user', 'shop')->update($params);
+        }
+
+        // Check order is active or inactive
+        if ($allowOrder) {
+            // Set and go to order
+            $url = Pi::api('order', 'order')->setOrderInfo($order);
+            Pi::service('url')->redirect($url);
+        } else {
+            $this->getResponse()->setStatusCode(401);
+            $this->terminate(__('You ar not allowed to make new order'), '', 'error-404');
+            $this->view()->setLayout('layout-simple');
+            return;
+        }
     }
 
     /* public function finishAction()

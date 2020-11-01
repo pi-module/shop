@@ -90,9 +90,17 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'product_order_limit'        => [
+        'processing_order_limit'        => [
             'category'    => 'user',
             'title'       => _a('Each user can order each product one time'),
+            'description' => _a('Processing User should be active !'),
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
+        'processing_disable_order'        => [
+            'category'    => 'user',
+            'title'       => _a('Next order disable for each user until finish payment'),
             'description' => _a('Processing User should be active !'),
             'edit'        => 'checkbox',
             'filter'      => 'number_int',

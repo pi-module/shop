@@ -24,19 +24,11 @@ class Forms extends AbstractApi
 {
     public function postReview($params)
     {
-        // Get user
-        $user = Pi::api('user', 'shop')->get($params['uid']);
-
-        // Update
-        if ($user['order_active'] != 1) {
-            Pi::model('user', $this->getModule())->update(
-                [
-                    'order_active' => 1,
-                ],
-                [
-                    'uid' => $user['uid'],
-                ]
-            );
-        }
+        Pi::api('user', 'shop')->update(
+            [
+                'uid'          => $params['uid'],
+                'order_active' => 1,
+            ]
+        );
     }
 }

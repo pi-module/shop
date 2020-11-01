@@ -129,16 +129,18 @@ CREATE TABLE `{related}`
 
 CREATE TABLE `{attach}`
 (
-    `id`          INT(10) UNSIGNED                                                   NOT NULL AUTO_INCREMENT,
-    `title`       VARCHAR(255)                                                       NOT NULL DEFAULT '',
-    `file`        VARCHAR(255)                                                       NOT NULL DEFAULT '',
-    `path`        VARCHAR(16)                                                        NOT NULL DEFAULT '',
-    `product`     INT(10) UNSIGNED                                                   NOT NULL DEFAULT '0',
-    `time_create` INT(10) UNSIGNED                                                   NOT NULL DEFAULT '0',
-    `size`        INT(10) UNSIGNED                                                   NOT NULL DEFAULT '0',
-    `type`        ENUM ('archive', 'image', 'video', 'audio', 'pdf', 'doc', 'other') NOT NULL DEFAULT 'image',
-    `status`      TINYINT(1) UNSIGNED                                                NOT NULL DEFAULT '1',
-    `hits`        INT(10) UNSIGNED                                                   NOT NULL DEFAULT '0',
+    `id`          INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
+    `title`       VARCHAR(255)        NOT NULL DEFAULT '',
+    `file`        VARCHAR(255)        NOT NULL DEFAULT '',
+    `path`        VARCHAR(16)         NOT NULL DEFAULT '',
+    `product`     INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `time_create` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `size`        INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `type`        ENUM (
+        'archive', 'image', 'video', 'audio', 'pdf', 'doc', 'other'
+        )                             NOT NULL DEFAULT 'image',
+    `status`      TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
+    `hits`        INT(10) UNSIGNED    NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`),
     KEY `title` (`title`),
     KEY `product` (`product`),
@@ -149,16 +151,18 @@ CREATE TABLE `{attach}`
 
 CREATE TABLE `{field}`
 (
-    `id`       INT(10) UNSIGNED                                                                                    NOT NULL AUTO_INCREMENT,
-    `title`    VARCHAR(255)                                                                                        NOT NULL DEFAULT '',
-    `icon`     VARCHAR(32)                                                                                         NOT NULL DEFAULT '',
-    `type`     ENUM ('text', 'link', 'currency', 'date', 'number', 'select', 'video', 'audio', 'file', 'checkbox') NOT NULL DEFAULT 'text',
-    `order`    INT(10) UNSIGNED                                                                                    NOT NULL DEFAULT '0',
-    `status`   TINYINT(1) UNSIGNED                                                                                 NOT NULL DEFAULT '0' DEFAULT '1',
-    `search`   TINYINT(1) UNSIGNED                                                                                 NOT NULL DEFAULT '0' DEFAULT '1',
-    `position` INT(10) UNSIGNED                                                                                    NOT NULL DEFAULT '0',
+    `id`       INT(10) UNSIGNED    NOT NULL AUTO_INCREMENT,
+    `title`    VARCHAR(255)        NOT NULL DEFAULT '',
+    `icon`     VARCHAR(32)         NOT NULL DEFAULT '',
+    `type`     ENUM (
+        'text', 'link', 'currency', 'date', 'number', 'select', 'video', 'audio', 'file', 'checkbox'
+        )                          NOT NULL DEFAULT 'text',
+    `order`    INT(10) UNSIGNED    NOT NULL DEFAULT '0',
+    `status`   TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' DEFAULT '1',
+    `search`   TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' DEFAULT '1',
+    `position` INT(10) UNSIGNED    NOT NULL DEFAULT '0',
     `value`    TEXT,
-    `name`     VARCHAR(64)                                                                                                  DEFAULT NULL,
+    `name`     VARCHAR(64)                  DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `name` (`name`),
     KEY `title` (`title`),

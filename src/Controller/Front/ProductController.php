@@ -29,10 +29,10 @@ class ProductController extends IndexController
         $config = Pi::service('registry')->config->read($module);
 
         // Find product
-        $product = Pi::api('product', 'shop')->getProduct($slug, 'slug');
+        $productSingle = Pi::api('product', 'shop')->getProduct($slug, 'slug');
 
         // Check product
-        if (!$product || $product['status'] != 1) {
+        if (!$productSingle || $productSingle['status'] != 1) {
             $this->getResponse()->setStatusCode(404);
             $this->terminate(__('The product not found.'), '', 'error-404');
             $this->view()->setLayout('layout-simple');
@@ -40,7 +40,7 @@ class ProductController extends IndexController
         }
 
         // Update Hits
-        $this->getModel('product')->increment('hits', ['id' => $product['id']]);
+        $this->getModel('product')->increment('hits', ['id' => $productSingle['id']]);
 
         // Get user information
         $uid = Pi::user()->getId();
@@ -49,41 +49,41 @@ class ProductController extends IndexController
         }
 
         // Get attribute
-        if ($product['attribute'] && $config['view_attribute']) {
-            $attribute = Pi::api('attribute', 'shop')->Product($product['id'], $product['category_main']);
+        if ($productSingle['attribute'] && $config['view_attribute']) {
+            $attribute = Pi::api('attribute', 'shop')->Product($productSingle['id'], $productSingle['category_main']);
             $this->view()->assign('attribute', $attribute);
         }
 
         // Get related
-        if ($product['related'] && $config['view_related']) {
-            $productRelated = Pi::api('related', 'shop')->getListAll($product['id']);
+        if ($productSingle['related'] && $config['view_related']) {
+            $productRelated = Pi::api('related', 'shop')->getListAll($productSingle['id']);
             $this->view()->assign('productRelated', $productRelated);
         }
 
         // Get attached files
-        /* if ($product['attach'] && $config['view_attach']) {
-            $attach = Pi::api('product', 'shop')->AttachList($product['id']);
+        /* if ($productSingle['attach'] && $config['view_attach']) {
+            $attach = Pi::api('product', 'shop')->AttachList($productSingle['id']);
             $this->view()->assign('attach', $attach);
         } */
 
         // Get new products in category
         if ($config['view_incategory']) {
-            $where           = ['status' => 1, 'category' => $product['category_main']];
+            $where           = ['status' => 1, 'category' => $productSingle['category_main']];
             $productCategory = $this->productList($where, $config['view_incategory_count']);
             $this->view()->assign('productCategory', $productCategory);
         }
 
         // Set tag
         if ($config['view_tag']) {
-            $tag = Pi::service('tag')->get($module, $product['id'], '');
+            $tag = Pi::service('tag')->get($module, $productSingle['id'], '');
             $this->view()->assign('tag', $tag);
         }
 
         // Set vote
         if ($config['vote_bar'] && Pi::service('module')->isActive('vote')) {
-            $vote['point']  = $product['point'];
-            $vote['count']  = $product['count'];
-            $vote['item']   = $product['id'];
+            $vote['point']  = $productSingle['point'];
+            $vote['count']  = $productSingle['count'];
+            $vote['item']   = $productSingle['id'];
             $vote['table']  = 'product';
             $vote['module'] = $module;
             $vote['type']   = 'star';
@@ -92,8 +92,8 @@ class ProductController extends IndexController
 
         // Set favourite
         if ($config['favourite_bar'] && Pi::service('module')->isActive('favourite')) {
-            $favourite['is']     = Pi::api('favourite', 'favourite')->loadFavourite($module, 'product', $product['id']);
-            $favourite['item']   = $product['id'];
+            $favourite['is']     = Pi::api('favourite', 'favourite')->loadFavourite($module, 'product', $productSingle['id']);
+            $favourite['item']   = $productSingle['id'];
             $favourite['table']  = 'product';
             $favourite['module'] = $module;
             $this->view()->assign('favourite', $favourite);
@@ -101,14 +101,14 @@ class ProductController extends IndexController
 
         // Set video service
         if ($config['video_service'] && Pi::service('module')->isActive('video')) {
-            $videoServiceList = Pi::api('service', 'video')->getVideo($module, 'product', $product['id']);
+            $videoServiceList = Pi::api('service', 'video')->getVideo($module, 'product', $productSingle['id']);
             $this->view()->assign('videoServiceList', $videoServiceList);
         }
 
         // Set question
         if ($config['view_question']) {
             $question            = [];
-            $question['product'] = $product['id'];
+            $question['product'] = $productSingle['id'];
             if ($uid > 0) {
                 $question['uid']   = $user['id'];
                 $question['email'] = $user['email'];
@@ -141,15 +141,38 @@ class ProductController extends IndexController
 
         // Set main category info
         if ($config['view_description_product']) {
-            $categorySingle = Pi::api('category', 'shop')->getCategory($product['category_main']);
+            $categorySingle = Pi::api('category', 'shop')->getCategory($productSingle['category_main']);
             $this->view()->assign('categorySingle', $categorySingle);
         }
 
         // Set property
         $property          = [];
         $property['list']  = Pi::api('property', 'shop')->getList();
-        $property['value'] = Pi::api('property', 'shop')->getValue($product['id']);
+        $property['value'] = Pi::api('property', 'shop')->getValue($productSingle['id']);
         $this->view()->assign('property', $property);
+
+        // Update user processing
+        $allowOrder = true;
+        if ($config['processing_user']) {
+
+            // Get user
+            $userProcessing = Pi::api('user', 'shop')->get(Pi::user()->getId());
+
+            // Check user can make order
+            if ($config['processing_disable_order'] && intval($userProcessing['processing_disable_order']) == 0) {
+                $allowOrder = false;
+            }
+
+            // Check user order this product before
+            if ($config['processing_order_limit'] && in_array($productSingle['id'], $userProcessing['products'])) {
+                $allowOrder = false;
+            }
+        }
+
+        // Check order is active
+        if (!$config['order_active']) {
+            $allowOrder = false;
+        }
 
         // Set template
         switch ($config['product_template']) {
@@ -165,16 +188,17 @@ class ProductController extends IndexController
 
         // Save statistics
         if (Pi::service('module')->isActive('statistics')) {
-            Pi::api('log', 'statistics')->save('shop', 'product', $product['id']);
+            Pi::api('log', 'statistics')->save('shop', 'product', $productSingle['id']);
         }
 
         // Set view
-        $this->view()->headTitle($product['seo_title']);
-        $this->view()->headDescription($product['seo_description'], 'set');
-        $this->view()->headKeywords($product['seo_keywords'], 'set');
+        $this->view()->headTitle($productSingle['seo_title']);
+        $this->view()->headDescription($productSingle['seo_description'], 'set');
+        $this->view()->headKeywords($productSingle['seo_keywords'], 'set');
         $this->view()->setTemplate($template);
-        $this->view()->assign('productItem', $product);
-        $this->view()->assign('categoryItem', $product['categories']);
+        $this->view()->assign('productSingle', $productSingle);
+        $this->view()->assign('categoryItem', $productSingle['categories']);
         $this->view()->assign('config', $config);
+        $this->view()->assign('allowOrder', $allowOrder);
     }
 }

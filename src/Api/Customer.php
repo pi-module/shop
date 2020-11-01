@@ -110,6 +110,7 @@ class Customer extends AbstractApi
 
         // avatar
         $customer['avatar'] = Pi::service('user')->avatar($customer['id'], 'medium', $customer['display']);
+
         // profile url
         $customer['profileUrl'] = Pi::url(
             Pi::service('user')->getUrl(
@@ -118,12 +119,14 @@ class Customer extends AbstractApi
                 ]
             )
         );
+
         // account url
         $customer['accountUrl'] = Pi::url(
             Pi::service('user')->getUrl(
                 'user', ['controller' => 'account']
             )
         );
+
         // return
         return $customer;
     }

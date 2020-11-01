@@ -19,6 +19,7 @@ use Pi\Application\Api\AbstractApi;
 /*
  * Pi::api('user', 'shop')->get($parameter, $type);
  * Pi::api('user', 'shop')->add($params);
+ * Pi::api('user', 'shop')->update($params);
  */
 
 class User extends AbstractApi
@@ -44,37 +45,40 @@ class User extends AbstractApi
         return $row->toArray();
     }
 
-    public function checkProducts($products, $user = [])
+    public function update($params)
     {
-        // Set result
-        $result = [
-            'allow'  => [],
-            'denied' => [],
-        ];
+        $update = [];
 
-        // Check user
-        if (empty($user)) {
-            $uid  = Pi::user()->getId();
-            $user = $this->get($uid);
+        if (isset($params['order_active']) && !empty($params['order_active'])) {
+            $update['order_active'] = $params['order_active'];
         }
 
-        // Check list is array
-        $products = is_array($products) ? $products : [$products => $products];
-
-        // Set products to allow/denied list
-        foreach ($products as $product) {
-
-            if (empty($user['products'])) {
-                $result['allow'][$product] = $product;
-            } else {
-                if (in_array($product, $user['products'])) {
-                    $result['denied'][$product] = $product;
-                } else {
-                    $result['allow'][$product] = $product;
-                }
-            }
+        if (isset($params['product_count']) && !empty($params['product_count'])) {
+            $update['product_count'] = $params['product_count'];
         }
 
-        return $result;
+        if (isset($params['product_fee']) && !empty($params['product_fee'])) {
+            $update['product_fee'] = $params['product_fee'];
+        }
+
+        if (isset($params['time_last_order']) && !empty($params['time_last_order'])) {
+            $update['time_last_order'] = $params['time_last_order'];
+        }
+
+        if (isset($params['products']) && !empty($params['products'])) {
+            $update['products'] = json_encode($params['products']);
+        }
+
+        // Update sold
+        if (isset($params['uid']) && intval($params['uid']) > 0 && !empty($update)) {
+            Pi::model('user', $this->getModule())->update(
+                [
+                    $update
+                ],
+                [
+                    'uid' => intval($params['uid'])
+                ]
+            );
+        }
     }
 }

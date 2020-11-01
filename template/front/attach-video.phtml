@@ -3,7 +3,7 @@
         <div class="attach-video">
             <?php foreach ($attach['video'] as $video) { ?>
                 <div class="pi-player clearfix">
-                    <?php echo $this->videojs($video['fileUrl'], $this->escape($productItem['largeUrl'])); ?>
+                    <?php echo $this->videojs($video['fileUrl'], $this->escape($productSingle['largeUrl'])); ?>
                 </div>
             <?php } ?>
         </div>
