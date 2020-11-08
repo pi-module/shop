@@ -106,6 +106,14 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
+        'processing_login'        => [
+            'category'    => 'user',
+            'title'       => _a('User should be login before add products to cart'),
+            'description' => _a('Processing User should be active !'),
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
+        ],
 
         // View
         'homepage_type'             => [
@@ -612,6 +620,14 @@ return [
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
             'value'       => 1,
+        ],
+        'order_cart_simple'            => [
+            'category'    => 'order',
+            'title'       => _a('Make cart simple'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 0,
         ],
 
         // Serial

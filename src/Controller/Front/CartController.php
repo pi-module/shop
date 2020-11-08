@@ -83,6 +83,7 @@ class CartController extends ActionController
         $this->view()->headDescription($title, 'prepend');
         $this->view()->headKeywords($title, 'prepend');
         $this->view()->setTemplate('checkout-cart');
+        $this->view()->assign('config', $config);
         $this->view()->assign('basket', $basket);
         $this->view()->assign('form', $form);
         $this->view()->assign('allowOrder', $allowOrder);
