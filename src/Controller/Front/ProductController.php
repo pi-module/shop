@@ -157,20 +157,24 @@ class ProductController extends IndexController
 
             // Get user
             $userProcessing = Pi::api('user', 'shop')->get($uid);
+            d($userProcessing);
 
             // Check user can make order
-            if ($config['processing_disable_order'] && intval($userProcessing['processing_disable_order']) == 0) {
+            if ($config['processing_disable_order'] && intval($userProcessing['order_active']) == 0) {
                 $allowOrder = false;
+                d(1);
             }
 
             // Check user order this product before
             if ($config['processing_order_limit'] && in_array($productSingle['id'], $userProcessing['products'])) {
                 $allowOrder = false;
+                d(2);
             }
 
             // Check user login
             if ($config['processing_login'] && !Pi::service('user')->hasIdentity()) {
                 $allowOrder = false;
+                d(3);
             }
         }
 

@@ -9,7 +9,7 @@ $this->jQuery();
 $this->backbone();
 
 $script
-    = <<<'EOT'
+        = <<<'EOT'
 (function($){
     var page = {
         el: $('#shop-cart-page'),
@@ -78,100 +78,93 @@ $this->footScript()->appendScript($script);
         <div class="row">
             <div class="col-lg-8 col-md-8 col-12 cart-product">
                 <div class="card card-body bg-light mb-3">
-                    <div class="card-heading"><?php _e('List of products on cart'); ?></div>
+                    <h1 class="card-heading"><?php _e('List of products on cart'); ?></h1>
                     <?php foreach ($basket['products'] as $product) { ?>
-                        <div data-id="<?php echo $product['id']; ?>"
-                             id="cart-product-<?php echo $this->escape($product['id']); ?>"
-                             class="clearfix cart-product-single">
-                            <div class="col-lg-4 col-md-4 col-12 cart-product-image">
-                                <?php if (!empty($product['image'])) { ?>
-                                    <a title="<?php echo $this->escape($product['title']); ?>"
-                                       href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank">
-                                        <img src="<?php echo $product['thumbUrl']; ?>"
-                                             alt="<?php echo $this->escape($product['title']); ?>"
-                                             class="img-fluid rounded"/>
-                                    </a>
-                                <?php } ?>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-12 cart-product-info">
-                                <div class="cart-product-title">
-                                    <h4>
-                                        <a title="<?php echo $this->escape($product['title']); ?>"
-                                           href="<?php echo $this->escape($product['productUrl']); ?>"
-                                           target="_blank"><?php echo $this->escape($product['title']); ?>
+                            <div data-id="<?php echo $product['id']; ?>" id="cart-product-<?php echo $this->escape($product['id']); ?>" class="row clearfix cart-product-single">
+                                <div class="col-lg-4 col-md-4 col-12 cart-product-image">
+                                    <?php if (!empty($product['main_image'])) { ?>
+                                        <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank">
+                                            <img src="<?php echo $product['thumbUrl']; ?>" alt="<?php echo $this->escape($product['title']); ?>" class="img-fluid rounded"/>
                                         </a>
-                                    </h4>
+                                    <?php } ?>
                                 </div>
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <strong><?php _e('Price'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['price_single_view']); ?></span>
-                                    </li>
-                                    <?php if (!empty($product['property'])) { ?>
-                                        <?php foreach ($product['property'] as $property) { ?>
+                                <div class="col-lg-8 col-md-8 col-12 cart-product-info">
+                                    <div class="cart-product-title">
+                                        <h4>
+                                            <a title="<?php echo $this->escape($product['title']); ?>" href="<?php echo $this->escape($product['productUrl']); ?>" target="_blank"><?php echo $this->escape($product['title']); ?>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <strong><?php _e('Price'); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($product['price_single_view']); ?></span>
+                                        </li>
+                                        <?php if (!empty($product['property'])) { ?>
+                                            <?php foreach ($product['property'] as $property) { ?>
+                                                <li>
+                                                    <strong><?php echo $this->escape($property['title']); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($property['value']); ?></span>
+                                                </li>
+                                            <?php } ?>
+                                        <?php } ?>
+                                        <!-- <li><strong><?php _e('Discount'); ?></strong> : <span class="cart-product-discount">0</span></li> -->
+                                        <?php if (!$config['order_cart_simple']) { ?>
                                             <li>
-                                                <strong><?php echo $this->escape($property['title']); ?></strong> : <span class="cart-product-price"><?php echo $this->escape($property['value']); ?></span>
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><strong><?php _e('Number'); ?></strong> :</li>
+                                                    <li class="list-inline-item">
+                                                        <button id="button-numberplus-<?php echo $this->escape($product['id']); ?>"
+                                                                type="button" class="btn btn-secondary btn-sm js-number"
+                                                                data-id="<?php echo $product['id']; ?>" data-toggle="button"
+                                                                data-link="<?php echo Pi::url(
+                                                                    $this->url(
+                                                                        '', ['action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => 1]
+                                                                    )
+                                                                ); ?>">
+                                                            <i class="fas fa-plus"></i>
+                                                        </button>
+                                                    </li>
+                                                    <li class="list-inline-item" id="cart-product-<?php echo $this->escape($product['id']); ?>-number">
+                                                        <?php echo $this->escape($product['number']); ?>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <button id="button-numberminus-<?php echo $this->escape($product['id']); ?>"
+                                                                type="button" class="btn btn-secondary btn-sm js-number"
+                                                                data-id="<?php echo $product['id']; ?>" data-toggle="button"
+                                                                data-link="<?php echo Pi::url(
+                                                                    $this->url(
+                                                                        '', ['action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => -1]
+                                                                    )
+                                                                ); ?>">
+                                                            <i class="fas fa-minus"></i>
+                                                        </button>
+                                                    </li>
+                                                </ul>
                                             </li>
                                         <?php } ?>
-                                    <?php } ?>
-                                    <!-- <li><strong><?php _e('Discount'); ?></strong> : <span class="cart-product-discount">0</span></li> -->
-                                    <?php if (!$config['order_cart_simple']) { ?>
                                         <li>
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><strong><?php _e('Number'); ?></strong> :</li>
-                                                <li class="list-inline-item">
-                                                    <button id="button-numberplus-<?php echo $this->escape($product['id']); ?>"
-                                                            type="button" class="btn btn-secondary btn-sm js-number"
-                                                            data-id="<?php echo $product['id']; ?>" data-toggle="button"
-                                                            data-link="<?php echo Pi::url(
-                                                                $this->url(
-                                                                    '', ['action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => 1]
-                                                                )
-                                                            ); ?>">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
-                                                </li>
-                                                <li class="list-inline-item" id="cart-product-<?php echo $this->escape($product['id']); ?>-number">
-                                                    <?php echo $this->escape($product['number']); ?>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <button id="button-numberminus-<?php echo $this->escape($product['id']); ?>"
-                                                            type="button" class="btn btn-secondary btn-sm js-number"
-                                                            data-id="<?php echo $product['id']; ?>" data-toggle="button"
-                                                            data-link="<?php echo Pi::url(
-                                                                $this->url(
-                                                                    '', ['action' => 'basket', 'process' => 'number', 'product' => $product['id'], 'number' => -1]
-                                                                )
-                                                            ); ?>">
-                                                        <i class="fas fa-minus"></i>
-                                                    </button>
-                                                </li>
-                                            </ul>
+                                            <?php if ($product['can_pay'] == 2) { ?>
+                                                <strong><?php _e('Total'); ?></strong> : <span
+                                                        id="cart-product-<?php echo $this->escape($product['id']); ?>-total"
+                                                        class="badge badge-danger"><?php echo $this->escape($product['total_view']); ?></span> <?php _e(
+                                                    'Payment after admin validation'
+                                                ); ?>
+                                            <?php } else { ?>
+                                                <strong><?php _e('Total'); ?></strong> : <span
+                                                        id="cart-product-<?php echo $this->escape($product['id']); ?>-total"
+                                                        class="badge badge-success"><?php echo $this->escape($product['total_view']); ?></span>
+                                            <?php } ?>
+                                            <button id="button-remove-<?php echo $this->escape($product['id']); ?>"
+                                                    type="button" class="btn btn-danger btn-sm js-remove" data-toggle="button"
+                                                    data-remove-link="<?php echo Pi::url(
+                                                        $this->url('', ['action' => 'basket', 'process' => 'remove', 'product' => $product['id']])
+                                                    ); ?>">
+                                                <i class="fas fa-trash" aria-hidden="true"></i>
+                                                <?php _e('Remove'); ?>
+                                            </button>
                                         </li>
-                                    <?php } ?>
-                                    <li>
-                                        <?php if ($product['can_pay'] == 2) { ?>
-                                            <strong><?php _e('Total'); ?></strong> : <span
-                                                    id="cart-product-<?php echo $this->escape($product['id']); ?>-total"
-                                                    class="badge badge-danger"><?php echo $this->escape($product['total_view']); ?></span> <?php _e(
-                                                'Payment after admin validation'
-                                            ); ?>
-                                        <?php } else { ?>
-                                            <strong><?php _e('Total'); ?></strong> : <span
-                                                    id="cart-product-<?php echo $this->escape($product['id']); ?>-total"
-                                                    class="badge badge-success"><?php echo $this->escape($product['total_view']); ?></span>
-                                        <?php } ?>
-                                        <button id="button-remove-<?php echo $this->escape($product['id']); ?>"
-                                                type="button" class="btn btn-danger btn-sm js-remove" data-toggle="button"
-                                                data-remove-link="<?php echo Pi::url(
-                                                    $this->url('', ['action' => 'basket', 'process' => 'remove', 'product' => $product['id']])
-                                                ); ?>">
-                                            <i class="fas fa-trash" aria-hidden="true"></i>
-                                            <?php _e('Remove'); ?>
-                                        </button>
-                                    </li>
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
                     <?php } ?>
                     <?php if (!$config['order_cart_simple']) { ?>
                         <div class="card-footer clearfix">
@@ -191,17 +184,21 @@ $this->footScript()->appendScript($script);
             <div class="col-lg-4 col-md-4 col-12">
                 <div class="clearfix">
                     <div class="card card-body bg-light mb-3">
-                        <div class="card-heading"><?php _e('Pre Invoice'); ?></div>
+                        <h2 class="card-heading"><?php _e('Pre Invoice'); ?></h2>
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <strong><?php _e('Total Price'); ?></strong> : <span id="cart-total-price"><?php echo $this->escape($basket['total']['price_view']); ?></span>
                             </li>
-                            <li class="list-group-item">
-                                <strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php echo $this->escape($basket['total']['discount_view']); ?></span>
-                            </li>
-                            <li class="list-group-item">
-                                <strong><?php _e('Total Number'); ?></strong> : <span id="cart-total-number"><?php echo $this->escape($basket['total']['number_view']); ?></span>
-                            </li>
+                            <?php if (!$config['order_cart_simple']) { ?>
+                                <li class="list-group-item">
+                                    <strong><?php _e('Total Discount'); ?></strong> : <span id="cart-total-discount"><?php echo $this->escape($basket['total']['discount_view']); ?></span>
+                                </li>
+                            <?php } ?>
+                            <?php if (!$config['order_cart_simple']) { ?>
+                                <li class="list-group-item">
+                                    <strong><?php _e('Total Number'); ?></strong> : <span id="cart-total-number"><?php echo $this->escape($basket['total']['number_view']); ?></span>
+                                </li>
+                            <?php } ?>
                             <li class="list-group-item">
                                 <strong><?php _e('Total Shipping'); ?></strong> : <span id="cart-total-shipping"><?php echo $this->escape($basket['total']['shipping_view']); ?></span>
                             </li>
@@ -211,8 +208,8 @@ $this->footScript()->appendScript($script);
                         </ul>
                     </div>
                     <div class="clearfix text-center">
-                        <a class="btn btn-success btn-lg" title="<?php _e('Next'); ?>"  href="<?php echo Pi::url($this->url('', ['action' => 'complete'])); ?>">
-                            <?php _e('Next'); ?>
+                        <a class="btn btn-success btn-lg btn-block" title="<?php _e('Next'); ?>" href="<?php echo Pi::url($this->url('', ['action' => 'complete'])); ?>">
+                            <i class="fas fa-shopping-cart"></i> <?php _e('Next'); ?>
                         </a>
                     </div>
                 </div>

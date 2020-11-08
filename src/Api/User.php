@@ -72,9 +72,7 @@ class User extends AbstractApi
         // Update sold
         if (isset($params['uid']) && intval($params['uid']) > 0 && !empty($update)) {
             Pi::model('user', $this->getModule())->update(
-                [
-                    $update
-                ],
+                $update,
                 [
                     'uid' => intval($params['uid'])
                 ]

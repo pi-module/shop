@@ -30,8 +30,8 @@ class CartController extends ActionController
 
         // Check order is active or inactive
         if (!$config['order_active']) {
-            $this->getResponse()->setStatusCode(401);
-            $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-404');
+            $this->getResponse()->setStatusCode(403);
+            $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-denied');
             $this->view()->setLayout('layout-simple');
             return;
         }
@@ -66,7 +66,7 @@ class CartController extends ActionController
             $userProcessing = Pi::api('user', 'shop')->get(Pi::user()->getId());
 
             // Check user can make order
-            if ($config['processing_disable_order'] && intval($userProcessing['processing_disable_order']) == 0) {
+            if ($config['processing_disable_order'] && intval($userProcessing['order_active']) == 0) {
                 $allowOrder = false;
             }
 
@@ -156,8 +156,8 @@ class CartController extends ActionController
         $config = Pi::service('registry')->config->read($module);
         // Check order is active or inactive
         if (!$config['order_active']) {
-            $this->getResponse()->setStatusCode(401);
-            $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-404');
+            $this->getResponse()->setStatusCode(403);
+            $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-denied');
             $this->view()->setLayout('layout-simple');
             return;
         }
@@ -306,8 +306,8 @@ class CartController extends ActionController
 
         // Check order is active or inactive
         if (!$config['order_active']) {
-            $this->getResponse()->setStatusCode(401);
-            $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-404');
+            $this->getResponse()->setStatusCode(403);
+            $this->terminate(__('So sorry, At this moment order is inactive'), '', 'error-denied');
             $this->view()->setLayout('layout-simple');
             return;
         }
@@ -442,7 +442,7 @@ class CartController extends ActionController
             $userProcessing = Pi::api('user', 'shop')->get(Pi::user()->getId());
 
             // Check user can make order
-            if ($config['processing_disable_order'] && intval($userProcessing['processing_disable_order']) == 0) {
+            if ($config['processing_disable_order'] && intval($userProcessing['order_active']) == 0) {
                 $allowOrder = false;
             }
 
@@ -454,22 +454,32 @@ class CartController extends ActionController
                     $productList[$productSingle['id']] = $productSingle['id'];
                 }
             }
-        }
 
-        // Update user
-        if ($allowOrder) {
-            $productList = array_unique(array_merge($userProcessing['products'], $productList));
-            $params      = [
-                'uid'             => $userProcessing['uid'],
-                'products'        => $productList,
-                'order_active'    => ($config['processing_disable_order']) ? 0 : 1,
-                'time_last_order' => time(),
-                'product_count'   => count($productList),
-                'product_fee'     => $userProcessing['product_fee'] + $total,
-            ];
+            // Update user
+            if ($allowOrder) {
+                $userProductList = [];
+                $productList = array_unique(array_merge($userProcessing['products'], $productList));
+                foreach ($productList as $productSingle) {
+                    $userProductList[$productSingle] = $productSingle;
+                }
 
-            // Update
-            Pi::api('user', 'shop')->update($params);
+                $orderActive = 1;
+                if ($config['processing_disable_order']) {
+                    $orderActive = 0;
+                }
+
+                $params      = [
+                    'uid'             => $userProcessing['uid'],
+                    'products'        => $userProductList,
+                    'order_active'    => $orderActive,
+                    'time_last_order' => time(),
+                    'product_count'   => count($productList),
+                    'product_fee'     => $userProcessing['product_fee'] + $total,
+                ];
+
+                // Update
+                Pi::api('user', 'shop')->update($params);
+            }
         }
 
         // Check order is active or inactive
@@ -478,8 +488,8 @@ class CartController extends ActionController
             $url = Pi::api('order', 'order')->setOrderInfo($order);
             Pi::service('url')->redirect($url);
         } else {
-            $this->getResponse()->setStatusCode(401);
-            $this->terminate(__('You ar not allowed to make new order'), '', 'error-404');
+            $this->getResponse()->setStatusCode(403);
+            $this->terminate(__('You ar not allowed to make new order'), '', 'error-denied');
             $this->view()->setLayout('layout-simple');
             return;
         }
