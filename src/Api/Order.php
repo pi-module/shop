@@ -164,8 +164,8 @@ class Order extends AbstractApi
                 }
 
                 //
-                $params =                     [
-                    'uid' => $order['uid'],
+                $params = [
+                    'uid'           => $order['uid'],
                     'order_active'  => 1,
                     'product_count' => intval($user['product_count'] - 1) > 0 ? ($user['product_count'] - 1) : 0,
                     'product_fee'   => ($user['product_fee'] - $product['price']) > 0 ? $user['product_fee'] - $product['price'] : 0,
