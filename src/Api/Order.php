@@ -48,25 +48,27 @@ class Order extends AbstractApi
         return Pi::api('product', 'shop')->getProductOrder($id);
     }
 
-    public function postPaymentUpdate($order, $basket)
+    public function postPaymentUpdate($order, $detail)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+
         // Update products
-        if (!empty($basket)) {
-            foreach ($basket as $single) {
+        if (!empty($detail)) {
+            foreach ($detail as $single) {
+
                 // Get product
-                $product = Pi::api('product', 'shop')->getProductLight($single['product']);
+                $product = Pi::api('product', 'shop')->getProductLight(intval($single['product']));
+
                 // Update sold
                 Pi::model('product', $this->getModule())->update(
                     ['sold' => ($product['sold'] + $single['number'])],
                     ['id' => $product['id']]
                 );
+
                 // Stock method
                 switch ($config['order_stock']) {
                     case 'never':
-                        break;
-
                     case 'manual':
                         break;
 
@@ -82,8 +84,10 @@ class Order extends AbstractApi
                         // Check order extra
                         if (isset($single['extra']['product']) && !empty($single['extra']['product'])) {
                             foreach ($single['extra']['product'] as $property) {
+
                                 // Get property value
                                 $propertyValue = Pi::api('property', 'shop')->getPropertyValue($property['unique_key']);
+
                                 // Update stock
                                 Pi::model('property_value', $this->getModule())->update(
                                     ['stock' => ($propertyValue['stock'] - $single['number'])],
@@ -96,13 +100,6 @@ class Order extends AbstractApi
             }
         }
         // Set back url
-        /* $url = Pi::url(Pi::service('url')->assemble('shop', array(
-            'module' => $this->getModule(),
-            'controller' => 'cart',
-            'action' => 'finish',
-            'id' => $order['id'],
-        ))); */
-
         $url = Pi::url(
             Pi::service('url')->assemble(
                 'order', [
@@ -130,11 +127,12 @@ class Order extends AbstractApi
     {
         return [];
     }
+
     public function isAlwaysAvailable($order)
     {
-        return array(
-            'status' => 1
-        );
+        return [
+            'status' => 1,
+        ];
     }
 
     public function showInInvoice($order, $product)
@@ -142,4 +140,43 @@ class Order extends AbstractApi
         return true;
     }
 
+    public function postCancelUpdate($order, $detail)
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+
+        // Update products
+        if (!empty($detail)) {
+            foreach ($detail as $single) {
+
+                // Get product
+                $product = Pi::api('product', 'shop')->getProductLight(intval($single['product']));
+
+                // Get user
+                $user = Pi::api('user', 'shop')->get($order['uid']);
+
+                // CLean up product
+                $productList = [];
+                foreach ($user['products'] as $productSingle) {
+                    if (intval($productSingle) != $product['id']) {
+                        $productList[$productSingle] = $productSingle;
+                    }
+                }
+
+                //
+                $params =                     [
+                    'uid' => $order['uid'],
+                    'order_active'  => 1,
+                    'product_count' => intval($user['product_count'] - 1) > 0 ? ($user['product_count'] - 1) : 0,
+                    'product_fee'   => ($user['product_fee'] - $product['price']) > 0 ? $user['product_fee'] - $product['price'] : 0,
+                    'products'      => $productList,
+                ];
+
+                // Update user
+                Pi::api('user', 'shop')->update($params);
+
+                return true;
+            }
+        }
+    }
 }

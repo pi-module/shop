@@ -464,7 +464,7 @@ class CartController extends ActionController
                 }
 
                 $orderActive = 1;
-                if ($config['processing_disable_order']) {
+                if (intval($config['processing_disable_order']) == 1) {
                     $orderActive = 0;
                 }
 

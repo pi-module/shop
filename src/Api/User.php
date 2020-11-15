@@ -49,24 +49,26 @@ class User extends AbstractApi
     {
         $update = [];
 
-        if (isset($params['order_active']) && !empty($params['order_active'])) {
+        if (isset($params['order_active']) && is_numeric($params['order_active'])) {
             $update['order_active'] = $params['order_active'];
         }
 
-        if (isset($params['product_count']) && !empty($params['product_count'])) {
+        if (isset($params['product_count']) && is_numeric($params['product_count'])) {
             $update['product_count'] = $params['product_count'];
         }
 
-        if (isset($params['product_fee']) && !empty($params['product_fee'])) {
+        if (isset($params['product_fee']) && is_numeric($params['product_fee'])) {
             $update['product_fee'] = $params['product_fee'];
         }
 
-        if (isset($params['time_last_order']) && !empty($params['time_last_order'])) {
+        if (isset($params['time_last_order']) && is_numeric($params['time_last_order'])) {
             $update['time_last_order'] = $params['time_last_order'];
         }
 
         if (isset($params['products']) && !empty($params['products'])) {
             $update['products'] = json_encode($params['products']);
+        } elseif (isset($params['products']) && empty($params['products'])) {
+            $update['products'] = json_encode([]);
         }
 
         // Update sold
