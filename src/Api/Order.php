@@ -24,6 +24,9 @@ use Laminas\Math\Rand;
 
 class Order extends AbstractApi
 {
+    /*
+     * Start Order module needed functions
+     */
     public function checkProduct($id, $type = null)
     {
         $product = Pi::model('product', 'shop')->find($id, 'id');

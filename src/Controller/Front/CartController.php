@@ -341,7 +341,7 @@ class CartController extends ActionController
             }
 
             // Set single product
-            $singelProduct = [
+            $singleProduct = [
                 'product'        => $product['id'],
                 'product_price'  => $price,
                 'discount_price' => 0,
@@ -354,7 +354,7 @@ class CartController extends ActionController
             ];
 
             // Set order product
-            $order['product'][$product['id']] = $singelProduct;
+            $order['product'][$product['id']] = $singleProduct;
 
             // Set can check array
             $canPay[$product['id']] = $product['can_pay'];
