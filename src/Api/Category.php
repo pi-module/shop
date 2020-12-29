@@ -22,8 +22,9 @@ use Laminas\Db\Sql\Predicate\Expression;
  * Pi::api('category', 'shop')->getChildCount($parent);
  * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status, $recommended, $code);
  * Pi::api('category', 'shop')->findFromCategory($category);
- * Pi::api('category', 'shop')->categoryList($parent);
+ * Pi::api('category', 'shop')->categoryListByParent($parent);
  * Pi::api('category', 'shop')->categoryListJson();
+ * Pi::api('category', 'shop')->categoryList($params);
  * Pi::api('category', 'shop')->categoryCount();
  * Pi::api('category', 'shop')->canonizeCategory($category);
  * Pi::api('category', 'shop')->sitemap();
@@ -111,49 +112,7 @@ class Category extends AbstractApi
         return $list;
     }
 
-    /* public function categoryList($parent = null)
-    {
-        // Get config
-        $config = Pi::service('registry')->config->read($this->getModule());
-
-        // Check type
-        if (is_null($parent)) {
-            $where = ['status' => 1];
-        } else {
-            $where = ['status' => 1, 'parent' => $parent];
-        }
-        $return = [];
-        $order  = ['display_order ASC'];
-        // Make list
-        $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
-        $rowSet = Pi::model('category', $this->getModule())->selectWith($select);
-        foreach ($rowSet as $row) {
-            $return[$row->id]        = $row->toArray();
-            $return[$row->id]['url'] = Pi::url(
-                Pi::service('url')->assemble(
-                    'shop', [
-                        'module'     => $this->getModule(),
-                        'controller' => 'category',
-                        'slug'       => $return[$row->id]['slug'],
-                    ]
-                )
-            );
-            if ($row->image) {
-                $return[$row->id]['thumbUrl'] = Pi::url(
-                    sprintf(
-                        'upload/%s/thumb/%s/%s',
-                        $config['image_path'],
-                        $return[$row->id]['path'],
-                        $return[$row->id]['image']
-                    )
-                );
-            }
-
-        }
-        return $return;
-    } */
-
-    public function categoryList($parent = 0)
+    public function categoryListByParent($parent = 0)
     {
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
@@ -161,9 +120,12 @@ class Category extends AbstractApi
         $return = [];
         $where  = ['status' => 1];
         $order  = ['display_order ASC'];
-        // Make list
+
+        // Make select
         $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
         $rowSet = Pi::model('category', $this->getModule())->selectWith($select);
+
+        // Set list
         foreach ($rowSet as $row) {
 
             $thumbUrl = '';
@@ -227,6 +189,38 @@ class Category extends AbstractApi
         return $return;
     }
 
+    public function categoryList($params)
+    {
+        // Get config
+        $config = Pi::service('registry')->config->read($this->getModule());
+
+        // Set info
+        $list  = [];
+        $where = ['status' => 1];
+        $order = ['display_order DESC', 'title ASC', 'id DESC'];
+
+        // Check type
+        if (isset($params['type']) && in_array($params['type'], ['category', 'brand'])) {
+            $where['type'] = $params['type'];
+        }
+
+        // Check parent
+        if (isset($params['parent']) && is_numeric($params['parent'])) {
+            $where['parent'] = $params['parent'];
+        }
+
+        // Select
+        $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);
+        $rowSet = Pi::model('category', $this->getModule())->selectWith($select);
+
+        // Make list
+        foreach ($rowSet as $row) {
+            $list[$row->id] = Pi::api('category', 'shop')->canonizeCategory($row);
+        }
+
+        return $list;
+    }
+
     public function categoryCount()
     {
         $columns = ['count' => new Expression('count(*)')];
@@ -241,15 +235,20 @@ class Category extends AbstractApi
         if (empty($category)) {
             return '';
         }
+
         // Get config
         $config = Pi::service('registry')->config->read($this->getModule());
+
         // boject to array
         $category = $category->toArray();
+
         // Set text_description
         $category['text_description'] = Pi::service('markup')->render($category['text_description'], 'html', 'html');
+
         // Set times
         $category['time_create_view'] = _date($category['time_create']);
         $category['time_update_view'] = _date($category['time_update']);
+
         // Set item url
         $category['categoryUrl'] = Pi::url(
             Pi::service('url')->assemble(
@@ -260,8 +259,10 @@ class Category extends AbstractApi
                 ]
             )
         );
+
         // Set image url
         if ($category['image']) {
+
             // Set image original url
             $category['originalUrl'] = Pi::url(
                 sprintf(
@@ -271,6 +272,7 @@ class Category extends AbstractApi
                     $category['image']
                 )
             );
+
             // Set image large url
             $category['largeUrl'] = Pi::url(
                 sprintf(
@@ -280,6 +282,7 @@ class Category extends AbstractApi
                     $category['image']
                 )
             );
+
             // Set image medium url
             $category['mediumUrl'] = Pi::url(
                 sprintf(
@@ -289,6 +292,7 @@ class Category extends AbstractApi
                     $category['image']
                 )
             );
+
             // Set image thumb url
             $category['thumbUrl'] = Pi::url(
                 sprintf(
@@ -299,6 +303,7 @@ class Category extends AbstractApi
                 )
             );
         }
+
         // return category
         return $category;
     }

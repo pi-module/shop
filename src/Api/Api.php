@@ -168,18 +168,22 @@ class Api extends AbstractApi
             } else {
                 $category = Pi::api('category', 'shop')->getCategory($params['category'], 'slug');
             }
+
             // Check category
             if (!$category || $category['status'] != 1) {
                 return $result;
             }
+
             // category list
-            $categories = Pi::api('category', 'shop')->categoryList($category['id']);
+            $categories = Pi::api('category', 'shop')->categoryListByParent($category['id']);
+
             // Get id list
             $categoryIDList   = [];
             $categoryIDList[] = $category['id'];
             foreach ($categories as $singleCategory) {
                 $categoryIDList[] = $singleCategory['id'];
             }
+
             // Set page title
             $pageTitle = sprintf(__('List of products on %s category'), $category['title']);
         }

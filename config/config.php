@@ -82,15 +82,17 @@ return [
         ],
 
         // User
-        'processing_user'        => [
+        'processing_user'           => [
             'category'    => 'user',
             'title'       => _a('Processing User'),
-            'description' => _a('Active and check user table on shop module and do some actions like update count of products or total payment or disable/enable order product by user'),
+            'description' => _a(
+                'Active and check user table on shop module and do some actions like update count of products or total payment or disable/enable order product by user'
+            ),
             'edit'        => 'checkbox',
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'processing_order_limit'        => [
+        'processing_order_limit'    => [
             'category'    => 'user',
             'title'       => _a('Each user can order each product one time'),
             'description' => _a('Processing User should be active !'),
@@ -98,7 +100,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'processing_disable_order'        => [
+        'processing_disable_order'  => [
             'category'    => 'user',
             'title'       => _a('Next order disable for each user until finish payment'),
             'description' => _a('Processing User should be active !'),
@@ -106,7 +108,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 0,
         ],
-        'processing_login'        => [
+        'processing_login'          => [
             'category'    => 'user',
             'title'       => _a('User should be login before add products to cart'),
             'description' => _a('Processing User should be active !'),
@@ -123,8 +125,10 @@ return [
                 'type'    => 'select',
                 'options' => [
                     'options' => [
-                        'list'  => _a('List of all products'),
-                        'brand' => _a('List of brands and widgets'),
+                        'list'     => _a('List of all products'),
+                        'widget'   => _a('List of selected widgets'),
+                        'brand'    => _a('List of brands'),
+                        'category' => _a('List of categories'),
                     ],
                 ],
             ],
@@ -621,7 +625,7 @@ return [
             'filter'      => 'number_int',
             'value'       => 1,
         ],
-        'order_cart_simple'            => [
+        'order_cart_simple'         => [
             'category'    => 'order',
             'title'       => _a('Make cart simple'),
             'description' => '',

@@ -1,11 +1,11 @@
 <?php $this->css($this->assetModule('css/front.css')); ?>
-<div class="clearfix">
+<div class="clearfix shop-homepage-category">
     <div class="mb-3">
-        <h1><?php _e('Category list'); ?></h1>
+        <h1><?php echo $productTitleH1; ?></h1>
     </div>
-    <?php if (isset($categories) && !empty($categories)) { ?>
+    <?php if (isset($brandList) && !empty($brandList)) { ?>
         <div class="category-list clearfix">
-            <?php foreach ($categoryTree as $category) { ?>
+            <?php foreach ($brandList as $category) { ?>
                 <div class="col-lg-3 col-md-3 col-12" itemscope itemtype="https://schema.org/Brand">
                     <div class="card">
                         <?php if ($category['image']) { ?>
@@ -23,10 +23,6 @@
                     </div>
                 </div>
             <?php } ?>
-        </div>
-    <?php } else { ?>
-        <div class="alert alert-warning" role="alert">
-            <?php _e('No category has been made on this part yet. please check this page later'); ?>
         </div>
     <?php } ?>
 </div>

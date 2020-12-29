@@ -115,7 +115,7 @@ switch ($config['view_column']) {
     </div>
     <div class="col-lg-3 col-md-3 col-12">
         <div class="shop-search-form clearfix">
-            <div class="page-header">
+            <div class="mb-3">
                 <h4><?php _e('Search on this group'); ?></h4>
             </div>
             <form>
@@ -169,7 +169,7 @@ switch ($config['view_column']) {
             </form>
         </div>
         <div class="clearfix category-list">
-            <div class="page-header">
+            <div class="mb-3">
                 <h4><?php _e('Category list'); ?></h4>
             </div>
             <div class="clearfix">
@@ -207,11 +207,11 @@ switch ($config['view_column']) {
         <div class="clearfix">
             <div class="product-list clearfix">
                 <?php if (isset($productTitleH1) && !empty($productTitleH1)) { ?>
-                    <div class="page-header">
+                    <div class="mb-3">
                         <h1><?php echo $productTitleH1; ?></h1>
                     </div>
                 <?php } elseif (isset($productTitleH2) && !empty($productTitleH2)) { ?>
-                    <div class="page-header">
+                    <div class="mb-3">
                         <h2><?php echo $productTitleH2; ?></h2>
                     </div>
                 <?php } ?>

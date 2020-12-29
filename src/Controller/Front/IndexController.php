@@ -29,8 +29,6 @@ class IndexController extends ActionController
         // Get config
         $config = Pi::service('registry')->config->read($module);
 
-        // category list
-        $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
 
         // Check homepage type
         switch ($config['homepage_type']) {
@@ -38,8 +36,11 @@ class IndexController extends ActionController
             case 'list':
                 // Save statistics
                 if (Pi::service('module')->isActive('statistics')) {
-                    Pi::api('log', 'statistics')->save('shop', 'index');
+                    Pi::api('log', 'statistics')->save('shop', 'home-product');
                 }
+
+                // category list
+                $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
 
                 // Set view
                 $this->view()->setTemplate('product-angular');
@@ -48,18 +49,74 @@ class IndexController extends ActionController
                 $this->view()->assign('pageType', 'all');
                 break;
 
-            case 'brand':
+            case 'widget':
                 // Save statistics
                 if (Pi::service('module')->isActive('statistics')) {
-                    Pi::api('log', 'statistics')->save('shop', 'brand');
+                    Pi::api('log', 'statistics')->save('shop', 'home-widget');
                 }
 
                 // Set title
                 $title = (!empty($config['homepage_title'])) ? $config['homepage_title'] : __('Shop index');
+
+                // category list
+                $categoriesJson = Pi::api('category', 'shop')->categoryListJson();
+
                 // Set view
-                $this->view()->setTemplate('homepage');
+                $this->view()->setTemplate('homepage-widget');
                 $this->view()->assign('config', $config);
                 $this->view()->assign('categoriesJson', $categoriesJson);
+                $this->view()->assign('productTitleH1', $title);
+                $this->view()->assign('isHomepage', 1);
+                break;
+
+            case 'brand':
+                // Save statistics
+                if (Pi::service('module')->isActive('statistics')) {
+                    Pi::api('log', 'statistics')->save('shop', 'home-brand');
+                }
+
+                // Set params
+                $params = [
+                    'type'   => 'brand',
+                    'parent' => 0,
+                ];
+
+                // Get brands
+                $brandList = Pi::api('category', 'shop')->categoryList($params);
+
+                // Set title
+                $title = (!empty($config['homepage_title'])) ? $config['homepage_title'] : __('Our brands');
+
+                // Set view
+                $this->view()->setTemplate('homepage-brand');
+                $this->view()->assign('config', $config);
+                $this->view()->assign('brandList', $brandList);
+                $this->view()->assign('productTitleH1', $title);
+                $this->view()->assign('isHomepage', 1);
+                break;
+
+            case 'category':
+                // Save statistics
+                if (Pi::service('module')->isActive('statistics')) {
+                    Pi::api('log', 'statistics')->save('shop', 'home-category');
+                }
+
+                // Set params
+                $params = [
+                    'type'   => 'category',
+                    'parent' => 0,
+                ];
+
+                // Get brands
+                $categoryList = Pi::api('category', 'shop')->categoryList($params);
+
+                // Set title
+                $title = (!empty($config['homepage_title'])) ? $config['homepage_title'] : __('Our categories');
+
+                // Set view
+                $this->view()->setTemplate('homepage-category');
+                $this->view()->assign('config', $config);
+                $this->view()->assign('categoryList', $categoryList);
                 $this->view()->assign('productTitleH1', $title);
                 $this->view()->assign('isHomepage', 1);
                 break;
