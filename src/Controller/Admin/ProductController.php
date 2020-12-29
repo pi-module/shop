@@ -289,7 +289,8 @@ class ProductController extends ActionController
         $categoryCount = Pi::api('category', 'shop')->categoryCount();
         if (!$categoryCount) {
             return $this->redirect()->toRoute(
-                '', [
+                '',
+                [
                     'controller' => 'category',
                     'action'     => 'update',
                 ]
@@ -415,7 +416,8 @@ class ProductController extends ActionController
                     // Set loc
                     $loc = Pi::url(
                         $this->url(
-                            'shop', [
+                            'shop',
+                            [
                                 'module'     => $module,
                                 'controller' => 'product',
                                 'slug'       => $values['slug'],
@@ -988,7 +990,8 @@ class ProductController extends ActionController
             if (Pi::service('module')->isActive('sitemap')) {
                 $loc = Pi::url(
                     $this->url(
-                        'shop', [
+                        'shop',
+                        [
                             'module'     => $module,
                             'controller' => 'product',
                             'slug'       => $row->slug,
@@ -1095,7 +1098,8 @@ class ProductController extends ActionController
 
             // Set file
             Pi::service('audit')->attach(
-                'product-export', [
+                'product-export',
+                [
                     'file'   => Pi::path(sprintf('upload/shop/csv/%s.csv', $file)),
                     'format' => 'csv',
                 ]
@@ -1159,7 +1163,8 @@ class ProductController extends ActionController
             } else {
                 $nextUrl     = Pi::url(
                     $this->url(
-                        '', [
+                        '',
+                        [
                             'action'      => 'export',
                             'start'       => $lastId,
                             'count'       => $count,
@@ -1186,7 +1191,6 @@ class ProductController extends ActionController
             ];
 
             $percent = ($percent > 99 && $percent < 100) ? (intval($percent) + 1) : intval($percent);
-
         } else {
             // Set info
             $info        = [];

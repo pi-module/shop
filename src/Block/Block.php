@@ -215,7 +215,8 @@ class Block
         // Set basket link
         $block['link'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $module,
                     'controller' => 'cart',
                     'action'     => 'index',
@@ -249,7 +250,8 @@ class Block
         // Set ajax search link
         $block['link'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $module,
                     'controller' => 'json',
                     'action'     => 'filterSearch',

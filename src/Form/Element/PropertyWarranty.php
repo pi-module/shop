@@ -28,4 +28,4 @@ class PropertyWarranty extends LaminasButton
         ];
         return $this->Attributes;
     }
-} 
+}

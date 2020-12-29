@@ -93,4 +93,4 @@ class Related extends AbstractApi
 
         return $list;
     }
-}	
+}

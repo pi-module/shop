@@ -42,7 +42,10 @@ class CategoryController extends ApiController
             // Save statistics
             if (Pi::service('module')->isActive('statistics')) {
                 Pi::api('log', 'statistics')->save(
-                    'shop', 'categoryList', 0, [
+                    'shop',
+                    'categoryList',
+                    0,
+                    [
                         'source'  => $this->params('platform'),
                         'section' => 'api',
                     ]

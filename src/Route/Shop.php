@@ -153,7 +153,6 @@ class Shop extends Standard
 
                     case 'compare':
                         if (isset($parts[1]) && $parts[1] == 'ajax') {
-
                         } else {
                             $parts              = array_unique($parts);
                             $parts              = array_values($parts);

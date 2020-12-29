@@ -171,7 +171,6 @@ EOT;
                         }
                         $html = sprintf('%s %s', $htmlTemplate, $html);
                         $i++;
-
                     }
                 }
                 // Set property list

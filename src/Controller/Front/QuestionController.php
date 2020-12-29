@@ -88,7 +88,8 @@ class QuestionController extends IndexController
                 $this->view()->setTemplate('product-question');
                 $this->view()->assign('questionForm', $form);
                 $this->view()->assign(
-                    'questionMessage', __('You can any question about this product from us, we read your question and answer you as soon as possible')
+                    'questionMessage',
+                    __('You can any question about this product from us, we read your question and answer you as soon as possible')
                 );
                 $this->view()->assign('questionValid', 'notValid');
             }

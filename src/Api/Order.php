@@ -105,7 +105,8 @@ class Order extends AbstractApi
         // Set back url
         $url = Pi::url(
             Pi::service('url')->assemble(
-                'order', [
+                'order',
+                [
                     'module'     => 'order',
                     'controller' => 'detail',
                     'action'     => 'index',

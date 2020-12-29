@@ -21,7 +21,7 @@ class Csv
     private $delimiter;
     private $length;
 
-    function __construct($file_name, $parse_header = false, $delimiter = ',', $length = 8000)
+    public function __construct($file_name, $parse_header = false, $delimiter = ',', $length = 8000)
     {
         $this->fp           = fopen($file_name, "r");
         $this->parse_header = $parse_header;
@@ -32,17 +32,16 @@ class Csv
         if ($this->parse_header) {
             $this->header = fgetcsv($this->fp, $this->length, $this->delimiter);
         }
-
     }
 
-    function __destruct()
+    public function __destruct()
     {
         if ($this->fp) {
             fclose($this->fp);
         }
     }
 
-    function get($max_lines = 0)
+    public function get($max_lines = 0)
     {
         //if $max_lines is set to 0, then get all the data
 

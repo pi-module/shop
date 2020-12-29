@@ -153,7 +153,8 @@ class CategoryController extends ActionController
                     // Set loc
                     $loc = Pi::url(
                         $this->url(
-                            'shop', [
+                            'shop',
+                            [
                                 'module'     => $module,
                                 'controller' => 'category',
                                 'slug'       => $values['slug'],
@@ -297,7 +298,8 @@ class CategoryController extends ActionController
                 'status'        => $row->status,
                 'view_url'      => Pi::url(
                     $this->url(
-                        'shop', [
+                        'shop',
+                        [
                             'module'     => $module,
                             'controller' => 'category',
                             'slug'       => $row->slug,
@@ -306,7 +308,8 @@ class CategoryController extends ActionController
                 ),
                 'edit_url'      => Pi::url(
                     $this->url(
-                        'admin', [
+                        'admin',
+                        [
                             'module'     => $module,
                             'controller' => 'category',
                             'action'     => 'update',
@@ -397,7 +400,8 @@ class CategoryController extends ActionController
             } else {
                 $nextUrl = Pi::url(
                     $this->url(
-                        '', [
+                        '',
+                        [
                             'action'   => 'sync',
                             'start'    => $lastId,
                             'count'    => $count,
@@ -422,7 +426,8 @@ class CategoryController extends ActionController
             $percent = 0;
             $nextUrl = Pi::url(
                 $this->url(
-                    '', [
+                    '',
+                    [
                         'action'  => 'sync',
                         'confirm' => 1,
                     ]
@@ -468,7 +473,8 @@ class CategoryController extends ActionController
 
                 // Set redirect
                 return $this->redirect()->toRoute(
-                    '', [
+                    '',
+                    [
                         'controller'    => 'category',
                         'action'        => 'merge',
                         'categoryFrom1' => $values['category_from_1'],
@@ -480,7 +486,6 @@ class CategoryController extends ActionController
                         'count'         => 0,
                     ]
                 );
-
             }
         } elseif ($categoryFrom1 > 0 && $categoryFrom2 > 0 && $categoryTo > 0 && in_array($whereType, ['and', 'or'])) {
 
@@ -622,7 +627,8 @@ class CategoryController extends ActionController
             } else {
                 $nextUrl = Pi::url(
                     $this->url(
-                        '', [
+                        '',
+                        [
                             'controller'    => 'category',
                             'action'        => 'merge',
                             'categoryFrom1' => $categoryFrom1,

@@ -24,7 +24,6 @@ use Pi\Form\Form as BaseForm;
 
 class AttachForm extends BaseForm
 {
-
     public function __construct($name = null, $product= [])
     {
         $this->product = $product;

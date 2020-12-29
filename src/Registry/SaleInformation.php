@@ -55,7 +55,6 @@ class SaleInformation extends AbstractRegistry
         $select = $model->select()->where($where);
         $rowSet = $model->selectWith($select);
         foreach ($rowSet as $row) {
-
             if ($row->type == 'product') {
                 $return['infoAll']['product'][$row->product] = $row->toArray();
                 $return['idAll']['product'][$row->product]   = $row->product;
@@ -80,7 +79,6 @@ class SaleInformation extends AbstractRegistry
                     $return['idExpire']['category'][$row->category] = $row->category;
                 }
             }
-
         }
         // Set time expire
         if (!empty($timeExpire)) {

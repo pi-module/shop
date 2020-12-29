@@ -76,4 +76,3 @@ class Product extends Select
         return $this->Attributes;
     }
 }
-

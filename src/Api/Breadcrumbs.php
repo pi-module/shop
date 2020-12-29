@@ -39,7 +39,8 @@ class Breadcrumbs extends AbstractBreadcrumbs
                         'label' => $moduleData['title'],
                         'href'  => Pi::url(
                             Pi::service('url')->assemble(
-                                'shop', [
+                                'shop',
+                                [
                                     'module' => $this->getModule(),
                                 ]
                             )
@@ -131,7 +132,8 @@ class Breadcrumbs extends AbstractBreadcrumbs
                                 'label' => __('Tag list'),
                                 'href'  => Pi::url(
                                     Pi::service('url')->assemble(
-                                        'shop', [
+                                        'shop',
+                                        [
                                             'controller' => 'tag',
                                             'action'     => 'index',
                                         ]
@@ -188,7 +190,6 @@ class Breadcrumbs extends AbstractBreadcrumbs
                 'label' => $category['title'],
                 'href'  => $category['categoryUrl'],
             ];
-
         }
         return $result;
     }

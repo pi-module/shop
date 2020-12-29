@@ -46,11 +46,11 @@ class SaleDuplicate extends AbstractValidator
         $this->setValue($value);
         if (null !== $value) {
             switch ($this->options['type']) {
-                case 'product';
+                case 'product':
                     $where = ['product' => $value];
                     break;
 
-                case 'category';
+                case 'category':
                     $where = ['category' => $value];
                     break;
             }

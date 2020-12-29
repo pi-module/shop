@@ -310,7 +310,8 @@ class Product extends AbstractApi
                     $story['title'] = $row->title;
                     $story['url']   = Pi::url(
                         Pi::service('url')->assemble(
-                            'shop', [
+                            'shop',
+                            [
                                 'module'     => $this->getModule(),
                                 'controller' => 'product',
                                 'slug'       => $row->slug,
@@ -523,7 +524,8 @@ class Product extends AbstractApi
         // Set product url
         $product['productUrl'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'product',
                     'slug'       => $product['slug'],
@@ -534,7 +536,8 @@ class Product extends AbstractApi
         // Set cart url
         $product['cartUrl'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'cart',
                     'action'     => 'add',
@@ -550,7 +553,8 @@ class Product extends AbstractApi
             $product['categories'][$category]['title'] = $categoryList[$category]['title'];
             $product['categories'][$category]['url']   = Pi::url(
                 Pi::service('url')->assemble(
-                    'shop', [
+                    'shop',
+                    [
                         'module'     => $this->getModule(),
                         'controller' => 'category',
                         'slug'       => $categoryList[$category]['slug'],
@@ -564,7 +568,8 @@ class Product extends AbstractApi
             $product['brandTitle'] = $categoryList[$product['brand']]['title'];
             $product['brandUrl']   = Pi::url(
                 Pi::service('url')->assemble(
-                    'shop', [
+                    'shop',
+                    [
                         'module'     => $this->getModule(),
                         'controller' => 'category',
                         'slug'       => $categoryList[$product['brand']]['slug'],
@@ -665,7 +670,8 @@ class Product extends AbstractApi
         $product = $product->toArray();
 
         // Make setting
-        $product['setting'] = json_decode($product['setting'], true);;
+        $product['setting'] = json_decode($product['setting'], true);
+        ;
 
         // Set times
         $product['time_create_view'] = _date($product['time_create']);
@@ -674,7 +680,8 @@ class Product extends AbstractApi
         // Set product url
         $product['productUrl'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'product',
                     'slug'       => $product['slug'],
@@ -685,7 +692,8 @@ class Product extends AbstractApi
         // Set cart url
         $product['cartUrl'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'checkout',
                     'action'     => 'add',
@@ -776,12 +784,14 @@ class Product extends AbstractApi
         $product = $product->toArray();
 
         // Make setting
-        $product['setting'] = json_decode($product['setting'], true);;
+        $product['setting'] = json_decode($product['setting'], true);
+        ;
 
         // Set product url
         $product['productUrl'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'product',
                     'slug'       => $product['slug'],
@@ -842,7 +852,8 @@ class Product extends AbstractApi
         // Set product url
         $product['productUrl'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'product',
                     'slug'       => $product['slug'],
@@ -853,7 +864,8 @@ class Product extends AbstractApi
         // Set cart url
         $product['cartUrl'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'checkout',
                     'action'     => 'add',
@@ -865,7 +877,8 @@ class Product extends AbstractApi
         // Set cart url
         $product['cartJsonUrl'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'json',
                     'action'     => 'add',
@@ -974,7 +987,8 @@ class Product extends AbstractApi
         // Set product url
         $product['productUrl'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'product',
                     'slug'       => $product['slug'],
@@ -985,7 +999,8 @@ class Product extends AbstractApi
         // Set cart url
         $product['cartUrl'] = Pi::url(
             Pi::service('url')->assemble(
-                'shop', [
+                'shop',
+                [
                     'module'     => $this->getModule(),
                     'controller' => 'cart',
                     'action'     => 'add',
@@ -1001,7 +1016,8 @@ class Product extends AbstractApi
             $product['categories'][$category]['title'] = $categoryList[$category]['title'];
             $product['categories'][$category]['url']   = Pi::url(
                 Pi::service('url')->assemble(
-                    'shop', [
+                    'shop',
+                    [
                         'module'     => $this->getModule(),
                         'controller' => 'category',
                         'slug'       => $categoryList[$category]['slug'],
@@ -1119,7 +1135,8 @@ class Product extends AbstractApi
                 // Make url
                 $loc = Pi::url(
                     Pi::service('url')->assemble(
-                        'shop', [
+                        'shop',
+                        [
                             'module'     => $this->getModule(),
                             'controller' => 'product',
                             'slug'       => $row->slug,
@@ -1135,7 +1152,6 @@ class Product extends AbstractApi
     public function migrateMedia()
     {
         if (Pi::service("module")->isActive("media")) {
-
             $msg = '';
 
             // Get config
@@ -1147,7 +1163,6 @@ class Product extends AbstractApi
             $productCollection = $productModel->selectWith($select);
 
             foreach ($productCollection as $product) {
-
                 $toSave = false;
 
                 $mediaData = [
@@ -1166,7 +1181,6 @@ class Product extends AbstractApi
                      * Check if media item exists
                      */
                     if (empty($product['image']) || empty($product['path'])) {
-
                         $draft = $product->status == 3 ? ' (' . __('Draft') . ')' : '';
 
                         $msg .= __("Missing image or path value from db for product ID") . " " . $product->id . $draft . "<br>";
@@ -1188,17 +1202,18 @@ class Product extends AbstractApi
                     }
                 }
 
-                if(!$product->additional_images){
+                if (!$product->additional_images) {
                     $additionalImagesArray = array();
 
                     $attachList = Pi::api('product', 'shop')->attachList($product->id);
 
-                    foreach($attachList as $type => $list){
-                        foreach($list as $file){
-                            if(empty($file["file"]) || empty($file["path"])){
+                    foreach ($attachList as $type => $list) {
+                        foreach ($list as $file) {
+                            if (empty($file["file"]) || empty($file["path"])) {
                                 $msg .= __("Missing file or path value from db for attachment ID") . " " .  $file->id . "<br>";
                             } else {
-                                $attachPath = sprintf('upload/%s/original/%s/%s',
+                                $attachPath = sprintf(
+                                    'upload/%s/original/%s/%s',
                                     $config['image_path'],
                                     $file['path'],
                                     $file['file']
@@ -1209,14 +1224,14 @@ class Product extends AbstractApi
 
                                 $mediaId = Pi::api('doc', 'media')->insertMedia($mediaData, $attachPath);
 
-                                if($mediaId){
+                                if ($mediaId) {
                                     $additionalImagesArray[] = $mediaId;
                                 }
                             }
                         }
                     }
 
-                    if($additionalImagesArray){
+                    if ($additionalImagesArray) {
                         $product->additional_images = implode(',', $additionalImagesArray);
                         $toSave = true;
                     }

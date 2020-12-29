@@ -28,4 +28,4 @@ class Property extends LaminasButton
         ];
         return $this->Attributes;
     }
-} 
+}

@@ -28,4 +28,4 @@ class PropertyColor extends LaminasButton
         ];
         return $this->Attributes;
     }
-} 
+}

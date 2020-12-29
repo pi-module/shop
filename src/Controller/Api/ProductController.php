@@ -41,7 +41,10 @@ class ProductController extends ApiController
             // Save statistics
             if (Pi::service('module')->isActive('statistics')) {
                 Pi::api('log', 'statistics')->save(
-                    'shop', 'productList', 0, [
+                    'shop',
+                    'productList',
+                    0,
+                    [
                         'source'  => $this->params('platform'),
                         'section' => 'api',
                     ]
@@ -73,7 +76,6 @@ class ProductController extends ApiController
                 'data'   => $productList,
                 'error'  => [],
             ];
-
         } else {
             // Set error
             $result['error'] = [
@@ -109,7 +111,10 @@ class ProductController extends ApiController
             // Save statistics
             if (Pi::service('module')->isActive('statistics')) {
                 Pi::api('log', 'statistics')->save(
-                    'shop', 'productSingle', $this->params('id'), [
+                    'shop',
+                    'productSingle',
+                    $this->params('id'),
+                    [
                         'source'  => $this->params('platform'),
                         'section' => 'api',
                     ]

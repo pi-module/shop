@@ -77,7 +77,8 @@ class Search extends AbstractSearch
             case 'category':
                 $link = Pi::url(
                     Pi::service('url')->assemble(
-                        'shop', [
+                        'shop',
+                        [
                             'module'     => $this->getModule(),
                             'controller' => 'category',
                             'slug'       => $item['slug'],
@@ -89,7 +90,8 @@ class Search extends AbstractSearch
             case 'product':
                 $link = Pi::url(
                     Pi::service('url')->assemble(
-                        'shop', [
+                        'shop',
+                        [
                             'module'     => $this->getModule(),
                             'controller' => 'product',
                             'slug'       => $item['slug'],

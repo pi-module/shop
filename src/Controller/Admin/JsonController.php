@@ -31,7 +31,8 @@ class JsonController extends ActionController
 
         $links['productAll'] = Pi::url(
             $this->url(
-                'shop', [
+                'shop',
+                [
                     'module'     => $module,
                     'controller' => 'json',
                     'action'     => 'productAll',
@@ -43,7 +44,8 @@ class JsonController extends ActionController
 
         $links['productCategory'] = Pi::url(
             $this->url(
-                'shop', [
+                'shop',
+                [
                     'module'     => $module,
                     'controller' => 'json',
                     'action'     => 'productCategory',
@@ -56,7 +58,8 @@ class JsonController extends ActionController
 
         $links['productSingle'] = Pi::url(
             $this->url(
-                'shop', [
+                'shop',
+                [
                     'module'     => $module,
                     'controller' => 'json',
                     'action'     => 'productSingle',

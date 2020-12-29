@@ -118,7 +118,8 @@ class ProductController extends IndexController
             // Set action url
             $url = Pi::url(
                 $this->url(
-                    '', [
+                    '',
+                    [
                         'module'     => $module,
                         'controller' => 'product',
                         'action'     => 'question',
@@ -135,7 +136,8 @@ class ProductController extends IndexController
             // Set view
             $this->view()->assign('questionForm', $form);
             $this->view()->assign(
-                'questionMessage', __('You can any question about this product from us, we read your question and answer you as soon as possible')
+                'questionMessage',
+                __('You can any question about this product from us, we read your question and answer you as soon as possible')
             );
         }
 

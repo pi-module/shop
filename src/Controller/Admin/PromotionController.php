@@ -82,7 +82,6 @@ class PromotionController extends ActionController
                 $values                 = $this->getModel('promotion')->find($id)->toArray();
                 $values['time_publish'] = date("Y-m-d H:i:s", $values['time_publish']);
                 $values['time_expire']  = date("Y-m-d H:i:s", $values['time_expire']);
-
             } else {
                 $values                 = [];
                 $values['time_publish'] = date("Y-m-d H:i:s", time());

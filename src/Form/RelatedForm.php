@@ -18,7 +18,6 @@ use Pi\Form\Form as BaseForm;
 
 class RelatedForm extends BaseForm
 {
-
     public function __construct($name = null)
     {
         parent::__construct($name);
