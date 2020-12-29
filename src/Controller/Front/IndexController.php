@@ -29,7 +29,6 @@ class IndexController extends ActionController
         // Get config
         $config = Pi::service('registry')->config->read($module);
 
-
         // Check homepage type
         switch ($config['homepage_type']) {
             default:
