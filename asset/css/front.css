@@ -22,7 +22,7 @@
     font-size: 1.1em;
 }
 
-.pi-item-list .col-lg-12 .pi-item-box .pi-item-box-image,
+/* .pi-item-list .col-lg-12 .pi-item-box .pi-item-box-image,
 .pi-item-list .col-lg-6 .pi-item-box .pi-item-box-image,
 .pi-item-list .col-md-12 .pi-item-box .pi-item-box-image,
 .pi-item-list .col-md-6 .pi-item-box .pi-item-box-image {
@@ -42,7 +42,7 @@
 .pi-item-list .col-md-2 .pi-item-box .pi-item-box-image,
 .pi-item-list .col-lg-2 .pi-item-box .pi-item-box-image{
     height: 140px;
-}
+}  */
 
 .pi-item-list .pi-item-box-size-0 .caption {
     min-height: 85px;

@@ -1,80 +1,68 @@
 <div class="pi-item-list row clearfix">
     <div class="col-lg-3 col-md-3 col-12">
-        <div class="pi-item-search-form clearfix card card-body bg-light mb-3">
-            <div class="page-header">
-                <h3>{{'SEARCH' | translate}}</h3>
+        <div class="pi-item-search-form clearfix card bg-light mb-3">
+            <div class="card-body">
+                <h3 class="card-title mb-3">{{'CATEGORY_LIST' | translate}}</h3>
             </div>
-            <div class="clearfix category-list mb-3">
-                <div class="page-header">
-                    <h3>{{'CATEGORY_LIST' | translate}}</h3>
-                </div>
-                <div class="clearfix">
-                    <div class="pi-item-category"></div>
-                </div>
+            <div class="clearfix mb-3">
+                <div class="pi-item-category"></div>
             </div>
-            <form id="list-filter" ng-submit="filterAction()">
-                <div class="form-group">
-                    <label>{{'TITLE' | translate}}</label>
-                    <input type="text" class="form-control" ng-model="filter.title" ng-change="filterAction()"
-                           ng-model-options="{ debounce: 5000 }">
-                </div>
-                <div class="form-group">
-                    <label>{{'CODE' | translate}}</label>
-                    <input type="text" class="form-control" ng-model="filter.code" ng-change="filterAction()"
-                           ng-model-options="{ debounce: 5000 }">
-                </div>
-                <div ng-if="condition.priceFilter == 1">
+            <div class="card-body">
+                <form id="list-filter" ng-submit="filterAction()">
                     <div class="form-group">
-                        <rzslider class="custom-slider"
-                                  rz-slider-model="slider.minValue"
-                                  rz-slider-high="slider.maxValue"
-                                  rz-slider-options="slider.options"></rzslider>
+                        <label>{{'TITLE' | translate}}</label>
+                        <input type="text" class="form-control" ng-model="filter.title" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
                     </div>
-                </div>
-                <!-- <div class="form-group">
-                    <label>{{'MARKETABLE' | translate}}</label>
-                    <select ng-model="filter.marketable" class="form-control">
-                        <option value="">{{'ALL' | translate}}</option>
-                        <option value="1">{{'MARKETABLE' | translate}}</option>
-                        <option value="0">{{'NOT_MARKETABLE' | translate}}</option>
-                    </select>
-                </div> -->
-                <!-- <div ng-if="filterList">
-                    <div ng-repeat="filterSingle in filterList">
-                        <div ng-if="filterSingle.type == 'text'">
-                            <div class="form-group">
-                                <label>{{filterSingle.title}}</label>
-                                <input type="text" class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
-                            </div>
-                        </div>
-                        <div ng-if="filterSingle.type == 'select'">
-                            <div class="form-group">
-                                <label>{{filterSingle.title}}</label>
-                                <select class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
-                                    <option value="">{{'ALL' | translate}}</option>
-                                    <option ng-repeat="filterData in filterSingle.value.data" ng-if="filterData">
-                                        {{filterData}}
-                                    </option>
-                                </select>
-                            </div>
+                    <div class="form-group">
+                        <label>{{'CODE' | translate}}</label>
+                        <input type="text" class="form-control" ng-model="filter.code" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
+                    </div>
+                    <div ng-if="condition.priceFilter == 1">
+                        <div class="form-group">
+                            <rzslider class="custom-slider" rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue" rz-slider-options="slider.options"></rzslider>
                         </div>
                     </div>
-                </div> -->
-                <div class="text-center">
-                    <button class="btn btn-info" ng-click="filterAction()">
-                        <i class="fas fa-search"></i> {{'SEARCH' | translate}}
-                    </button>
-                </div>
-            </form>
+                    <!-- <div class="form-group">
+                        <label>{{'MARKETABLE' | translate}}</label>
+                        <select ng-model="filter.marketable" class="form-control">
+                            <option value="">{{'ALL' | translate}}</option>
+                            <option value="1">{{'MARKETABLE' | translate}}</option>
+                            <option value="0">{{'NOT_MARKETABLE' | translate}}</option>
+                        </select>
+                    </div> -->
+                    <!-- <div ng-if="filterList">
+                        <div ng-repeat="filterSingle in filterList">
+                            <div ng-if="filterSingle.type == 'text'">
+                                <div class="form-group">
+                                    <label>{{filterSingle.title}}</label>
+                                    <input type="text" class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
+                                </div>
+                            </div>
+                            <div ng-if="filterSingle.type == 'select'">
+                                <div class="form-group">
+                                    <label>{{filterSingle.title}}</label>
+                                    <select class="form-control" ng-model="filterSingle.filter" ng-change="filterAction()" ng-model-options="{ debounce: 5000 }">
+                                        <option value="">{{'ALL' | translate}}</option>
+                                        <option ng-repeat="filterData in filterSingle.value.data" ng-if="filterData">
+                                            {{filterData}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="text-center">
+                        <button class="btn btn-info" ng-click="filterAction()">
+                            <i class="fas fa-search"></i> {{'SEARCH' | translate}}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <div class="col-lg-9 col-md-9 col-12">
 
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12 col-12">
-                <h1>{{condition.title}}</h1>
-            </div>
-        </div>
+        <h1>{{condition.title}}</h1>
 
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-12">
@@ -183,8 +171,6 @@
         <div ng-if="!products.length" class="alert alert-info" >
             {{'NONE_PRODUCT' | translate}}
         </div>
-
-
 
     </div>
 </div>
