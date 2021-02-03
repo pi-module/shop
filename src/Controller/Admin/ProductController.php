@@ -240,12 +240,19 @@ class ProductController extends ActionController
         $form->setAttribute('action', $this->url('', ['action' => 'process']));
         $form->setData($values);
 
+        // Get company
+        $companyList = [];
+        if ($config['dashboard_active'] && Pi::service('module')->isActive('company')) {
+            $companyList = Pi::registry('inventoryList', 'company')->read();
+        }
+
         // Set view
         $this->view()->setTemplate('product-index');
         $this->view()->assign('list', $product);
         $this->view()->assign('paginator', $paginator);
         $this->view()->assign('form', $form);
         $this->view()->assign('config', $config);
+        $this->view()->assign('companyList', $companyList);
     }
 
     public function processAction()
@@ -306,8 +313,9 @@ class ProductController extends ActionController
 
         // Get config
         $option = [
-            'brand_system' => $config['brand_system'],
-            'id'           => $id,
+            'id'               => $id,
+            'brand_system'     => $config['brand_system'],
+            'dashboard_active' => $config['dashboard_active'],
         ];
 
         // Find Product
@@ -398,8 +406,11 @@ class ProductController extends ActionController
                     $row->price,
                     $row->stock,
                     $row->status,
+                    $row->uid,
+                    $row->hits,
                     $row->recommended,
-                    $row->code
+                    $row->code,
+                    $row->company_id
                 );
 
                 // Tag

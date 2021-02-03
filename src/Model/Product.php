@@ -30,6 +30,7 @@ class Product extends Model
             'category',
             'category_main',
             'brand',
+            'company_id',
             'text_summary',
             'text_description',
             'seo_title',

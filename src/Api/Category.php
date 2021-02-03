@@ -20,7 +20,7 @@ use Laminas\Db\Sql\Predicate\Expression;
 /*
  * Pi::api('category', 'shop')->getCategory($parameter, $type = 'id');
  * Pi::api('category', 'shop')->getChildCount($parent);
- * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status, $recommended, $code);
+ * Pi::api('category', 'shop')->setLink($product, $category, $create, $update, $price, $stock, $status, $uid, $hits, $recommended, $code, $company);
  * Pi::api('category', 'shop')->findFromCategory($category);
  * Pi::api('category', 'shop')->categoryListByParent($parent);
  * Pi::api('category', 'shop')->categoryListJson();
@@ -58,24 +58,33 @@ class Category extends AbstractApi
         $price,
         $stock,
         $status,
+        $uid,
+        $hits,
         $recommended = 0,
-        $code = null
+        $code = null,
+        $company = 0,
     ) {
         //Remove
         Pi::model('link', $this->getModule())->delete(['product' => $product]);
         // Add
         $allCategory = json_decode($category, true);
         foreach ($allCategory as $category) {
-            // Set array
-            $values['product']     = $product;
-            $values['category']    = $category;
-            $values['time_create'] = $create;
-            $values['time_update'] = $update;
-            $values['price']       = $price;
-            $values['stock']       = ($stock > 0) ? 1 : 0;
-            $values['status']      = $status;
-            $values['recommended'] = $recommended;
-            $values['code']        = $code;
+
+            $values = [
+                'product'     => $product,
+                'category'    => $category,
+                'time_create' => $create,
+                'time_update' => $update,
+                'price'       => $price,
+                'stock'       => ($stock > 0) ? 1 : 0,
+                'status'      => $status,
+                'uid'         => $uid,
+                'hits'        => $hits,
+                'recommended' => $recommended,
+                'code'        => $code,
+                'company'     => $company,
+            ];
+
             // Save
             $row = Pi::model('link', $this->getModule())->createRow();
             $row->assign($values);

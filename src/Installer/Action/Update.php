@@ -1283,6 +1283,74 @@ EOD;
             }
         }
 
+        // Update to version 2.0.8
+        if (version_compare($moduleVersion, '2.0.8', '<')) {
+
+            // Alter table : ADD company_id
+            $sql = sprintf("ALTER TABLE %s ADD `company_id` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $productTable);
+            try {
+                $productAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db',
+                    [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+
+            // Alter table : ADD company_id
+            $sql = sprintf("ALTER TABLE %s ADD `company_id` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $linkTable);
+            try {
+                $linkAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db',
+                    [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+
+            // Alter table : ADD uid
+            $sql = sprintf("ALTER TABLE %s ADD `uid` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $linkTable);
+            try {
+                $linkAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db',
+                    [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+
+            // Alter table : ADD hits
+            $sql = sprintf("ALTER TABLE %s ADD `hits` INT(10) UNSIGNED NOT NULL DEFAULT '0'", $linkTable);
+            try {
+                $linkAdapter->query($sql, 'execute');
+            } catch (\Exception $exception) {
+                $this->setResult(
+                    'db',
+                    [
+                        'status'  => false,
+                        'message' => 'Table alter query failed: '
+                            . $exception->getMessage(),
+                    ]
+                );
+                return false;
+            }
+        }
+
         return true;
     }
 }

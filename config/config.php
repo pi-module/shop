@@ -61,6 +61,10 @@ return [
             'title' => _a('Serial'),
             'name'  => 'serial',
         ],
+        [
+            'title' => _a('Company dashboard'),
+            'name'  => 'dashboard',
+        ],
     ],
     'item'     => [
         // Admin
@@ -676,6 +680,16 @@ return [
             ],
             'filter'      => 'text',
             'value'       => 2,
+        ],
+
+        // dashboard
+        'dashboard_active'               => [
+            'category'    => 'dashboard',
+            'title'       => _a('Active dashboard for companies and users'),
+            'description' => '',
+            'edit'        => 'checkbox',
+            'filter'      => 'number_int',
+            'value'       => 1,
         ],
 
         // Texts

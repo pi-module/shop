@@ -1,0 +1,11 @@
+<?php $this->css($this->assetModule('css/front.css')); ?>
+<div class="clearfix row">
+    <div class="col-md-3 col-12">
+        <?php $sideActive = 'shopDashboard'; ?>
+        <?php include $this->templateModule('front/user-profile-sidebar.phtml', 'user'); ?>
+    </div>
+    <div class="col-md-9 col-12">
+        <h1 class="mb-3"><?php echo $this->escape($title); ?></h1>
+        <?php echo $this->form($form); ?>
+    </div>
+</div>

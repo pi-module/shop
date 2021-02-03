@@ -153,6 +153,16 @@ class ProductFilter extends InputFilter
             );
         }
 
+        // company_id
+        if ($option['dashboard_active'] && Pi::service('module')->isActive('company')) {
+            $this->add(
+                [
+                    'name'     => 'company_id',
+                    'required' => false,
+                ]
+            );
+        }
+
         // main_image
         $this->add(
             [

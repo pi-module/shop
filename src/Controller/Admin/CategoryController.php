@@ -372,8 +372,11 @@ class CategoryController extends ActionController
                     $product['price'],
                     $product['stock'],
                     $product['status'],
+                    $product['uid'],
+                    $product['hits'],
                     $product['recommended'],
-                    $product['code']
+                    $product['code'],
+                    $product['company_id']
                 );
 
                 // Update product
@@ -603,8 +606,11 @@ class CategoryController extends ActionController
                     $product['price'],
                     $product['stock'],
                     $product['status'],
+                    $product['uid'],
+                    $product['hits'],
                     $product['recommended'],
-                    $product['code']
+                    $product['code'],
+                    $product['company_id']
                 );
 
                 // Update product

@@ -32,7 +32,7 @@ class Shop extends Standard
 
     protected $controllerList
         = [
-            'cart', 'category', 'index', 'json', 'product', 'tag', 'compare', 'question', 'serial', 'result',
+            'cart', 'category', 'index', 'json', 'product', 'tag', 'compare', 'question', 'serial', 'result', 'dashboard'
         ];
 
     /**
@@ -171,6 +171,17 @@ class Shop extends Standard
                             }
                             if (isset($parts[5]) && !empty($parts[5])) {
                                 $matches['product'][5] = $this->decode($parts[5]);
+                            }
+                        }
+                        break;
+
+                    case 'dashboard':
+                        if (in_array($parts[1], ['index', 'list', 'manage', 'add', 'attribute', 'sale'])) {
+                            $matches['action'] = $parts[1];
+                            if (isset($parts[2]) && is_numeric($parts[2])) {
+                                $matches['id'] = intval($parts[2]);
+                            } elseif (isset($parts[2])) {
+                                $matches['slug']   = urldecode($parts[2]);
                             }
                         }
                         break;
