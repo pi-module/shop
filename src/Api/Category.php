@@ -62,7 +62,7 @@ class Category extends AbstractApi
         $hits,
         $recommended = 0,
         $code = null,
-        $company = 0,
+        $company = 0
     ) {
         //Remove
         Pi::model('link', $this->getModule())->delete(['product' => $product]);
@@ -82,7 +82,7 @@ class Category extends AbstractApi
                 'hits'        => $hits,
                 'recommended' => $recommended,
                 'code'        => $code,
-                'company'     => $company,
+                'company_id'  => $company,
             ];
 
             // Save

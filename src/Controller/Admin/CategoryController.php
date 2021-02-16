@@ -53,7 +53,7 @@ class CategoryController extends ActionController
         $option = [
             'isNew' => true,
             'type'  => $type,
-            'id'    => (intval($id) > 0) ? intval($id) : null
+            'id'    => (intval($id) > 0) ? intval($id) : null,
         ];
 
         // Find category
@@ -90,10 +90,10 @@ class CategoryController extends ActionController
                     // Set upload path
                     $values['path'] = sprintf('%s/%s', date('Y'), date('m'));
                     $originalPath   = Pi::path(sprintf('upload/%s/original/%s', $this->config('image_path'), $values['path']));
-                    
+
                     // Image name
                     $imageName = Pi::api('image', 'shop')->rename($file['image']['name'], $this->ImageCategoryPrefix, $values['path']);
-                    
+
                     // Upload
                     $uploader = new Upload;
                     $uploader->setDestination($originalPath);
@@ -138,6 +138,8 @@ class CategoryController extends ActionController
                     $values['time_create'] = time();
                 }
                 $values['time_update'] = time();
+
+                $values['display_order'] = is_numeric($values['display_order']) ? $values['display_order'] : 0;
 
                 // Save values
                 if (!empty($id)) {
