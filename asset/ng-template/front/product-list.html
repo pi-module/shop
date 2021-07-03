@@ -62,7 +62,17 @@
     </div>
     <div class="col-lg-9 col-md-9 col-12">
 
-        <h1>{{condition.title}}</h1>
+        <div ng-if="condition.image_wide">
+            <div class="category-width-description">
+                <h1 >{{condition.title}}</h1>
+            </div>
+            <div class="category-width-image">
+                <img class="img-fluid" src="{{condition.image_wide}}" alt="{{condition.title}}">
+            </div>
+        </div>
+        <div ng-if="!condition.image_wide">
+            <h1 >{{condition.title}}</h1>
+        </div>
 
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12 col-12">

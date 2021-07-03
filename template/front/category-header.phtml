@@ -1,0 +1,36 @@
+<?php if (isset($category) && !empty($category)) { ?>
+    <?php
+    // Set summery
+    if (isset($category['text_summary']) && !empty($category['text_summary'])) {
+        $summary = _strip($category['text_summary']);
+    } else {
+        $summary = _strip($category['seo_description']);
+    }
+
+    // Set image
+    $image = '';
+    if (isset($category['largeUrl']) && !empty($category['largeUrl'])) {
+        $image = $category['largeUrl'];
+    } elseif (isset($category['image_wide']) && !empty($category['image_wide'])) {
+        $image = $category['image_wide'];
+    }
+
+    // Set Open Graph tags for meta
+    $this->doctype('HTML5');
+    $this->headMeta($category['title'], 'og:title', 'property');
+    $this->headMeta($this->escape($category['categoryUrl']), 'og:url', 'property');
+    $this->headMeta($summary, 'og:description', 'property');
+    $this->headMeta($image, 'og:image', 'property');
+
+    // Set twitter for meta
+    $this->headMeta($category['title'], 'twitter:title', 'property');
+    $this->headMeta($this->escape($category['categoryUrl']), 'twitter:url');
+    $this->headMeta($summary, 'twitter:description');
+    $this->headMeta($image, 'twitter:image');
+    ?>
+    <div itemscope itemtype="https://schema.org/Brand">
+        <meta itemprop="name" content="<?php echo $this->escape($category['title']); ?>">
+        <meta itemprop="description" content="<?php echo $this->escape($summary); ?>">
+        <meta itemprop="image" content=""<?php echo $this->escape($image); ?>">
+    </div>
+<?php } ?>

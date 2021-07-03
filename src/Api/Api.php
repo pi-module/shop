@@ -69,6 +69,9 @@ class Api extends AbstractApi
         // Get config
         $config = Pi::service('registry')->config->read($module);
 
+        // Set wide image
+        $imageWide = $config['image_wide'];
+
         // Set empty result
         $result = [
             'products'   => [],
@@ -185,7 +188,13 @@ class Api extends AbstractApi
             }
 
             // Set page title
-            $pageTitle = sprintf(__('List of products on %s category'), $category['title']);
+            //$pageTitle = sprintf(__('List of products on %s category'), $category['title']);
+            $pageTitle = $category['title'];
+
+            // Set wide image
+            if (isset($category['image_wide']) && !empty($category['image_wide'])) {
+                $imageWide = $category['image_wide'];
+            }
         }
 
         // Get tag list
@@ -463,6 +472,7 @@ class Api extends AbstractApi
             ],
             'condition'  => [
                 'title'       => $pageTitle,
+                'image_wide'  => $imageWide,
                 'urlCompare'  => Pi::url(Pi::service('url')->assemble('', ['controller' => 'compare'])),
                 'priceFilter' => $config['view_price_filter'],
                 'addToCart'   => $config['view_add_to_cart'],
