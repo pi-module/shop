@@ -15,7 +15,7 @@
         <p><strong>Product name</strong> : <span>%title%</span></p>
         <p><strong>Product id</strong> : <span>%product%</span></p>
 	</div>
-	<div style="padding: 3px; margin: 2px;">Dont reply to this email</div>
+	<div style="padding: 3px; margin: 2px;">Please do not reply to this email</div>
 	<div style="margin-top: 10px">
         <a href="%site_url%" title="%site_name%">%site_name%</a>
     </divp>
