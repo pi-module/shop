@@ -172,7 +172,7 @@ class Category extends AbstractApi
     public function categoryListJson()
     {
         $return = [];
-        $where  = ['status' => 1];
+        $where  = ['status' => 1, 'type' => 'category'];
         $order  = ['display_order ASC'];
         // Make list
         $select = Pi::model('category', $this->getModule())->select()->where($where)->order($order);

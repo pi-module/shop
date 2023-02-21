@@ -177,24 +177,30 @@ class Api extends AbstractApi
                 return $result;
             }
 
-            // category list
-            $categories = Pi::api('category', 'shop')->categoryListByParent($category['id']);
+            if ($category['type'] == 'brand') {
+                $bandIDList[] = $category['id'];
+            } else {
+                // category list
+                $categories = Pi::api('category', 'shop')->categoryListByParent($category['id']);
 
-            // Get id list
-            $categoryIDList   = [];
-            $categoryIDList[] = $category['id'];
-            foreach ($categories as $singleCategory) {
-                $categoryIDList[] = $singleCategory['id'];
+                // Get id list
+                $categoryIDList   = [];
+                $categoryIDList[] = $category['id'];
+                foreach ($categories as $singleCategory) {
+                    $categoryIDList[] = $singleCategory['id'];
+                }
+
+                // Set page title
+                //$pageTitle = sprintf(__('List of products on %s category'), $category['title']);
+                $pageTitle = $category['title'];
+
+                // Set wide image
+                if (isset($category['image_wide']) && !empty($category['image_wide'])) {
+                    $imageWide = $category['image_wide'];
+                }
             }
 
-            // Set page title
-            //$pageTitle = sprintf(__('List of products on %s category'), $category['title']);
-            $pageTitle = $category['title'];
 
-            // Set wide image
-            if (isset($category['image_wide']) && !empty($category['image_wide'])) {
-                $imageWide = $category['image_wide'];
-            }
         }
 
         // Get tag list
@@ -421,27 +427,44 @@ class Api extends AbstractApi
 
         // Check has Search Result
         if ($hasSearchResult) {
-            // Get info from link table
-            $select = Pi::model('link', $this->getModule())->select()->where($whereLink)->columns($columns)->order($order)->offset($offset)->limit($limit);
-            $rowSet = Pi::model('link', $this->getModule())->selectWith($select)->toArray();
-            foreach ($rowSet as $id) {
-                $productIDSelect[] = $id['product'];
-            }
 
-            // Get list of product
-            if (isset($productIDSelect) && !empty($productIDSelect)) {
-                $where  = ['status' => 1, 'id' => $productIDSelect];
-                $select = Pi::model('product', $this->getModule())->select()->where($where)->order($order);
+            if (isset($bandIDList) && !empty($bandIDList)) {
+
+                $where  = ['status' => 1, 'brand' => $bandIDList];
+                $select = Pi::model('product', $this->getModule())->select()->where($where)->order($order)->offset($offset)->limit($limit);
                 $rowSet = Pi::model('product', $this->getModule())->selectWith($select);
                 foreach ($rowSet as $row) {
                     $productList[$row->id] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
                 }
-            }
 
-            // Get count
-            $columnsCount = ['count' => new Expression('count(DISTINCT `product`)')];
-            $select       = Pi::model('link', $this->getModule())->select()->where($whereLink)->columns($columnsCount);
-            $count        = Pi::model('link', $this->getModule())->selectWith($select)->current()->count;
+                // Get count
+                $columnsCount = ['count' => new Expression('count(*)')];
+                $select       = Pi::model('product', $this->getModule())->select()->where($where)->columns($columnsCount);
+                $count        = Pi::model('product', $this->getModule())->selectWith($select)->current()->count;
+
+            } else {
+                // Get info from link table
+                $select = Pi::model('link', $this->getModule())->select()->where($whereLink)->columns($columns)->order($order)->offset($offset)->limit($limit);
+                $rowSet = Pi::model('link', $this->getModule())->selectWith($select)->toArray();
+                foreach ($rowSet as $id) {
+                    $productIDSelect[] = $id['product'];
+                }
+
+                // Get list of product
+                if (isset($productIDSelect) && !empty($productIDSelect)) {
+                    $where  = ['status' => 1, 'id' => $productIDSelect];
+                    $select = Pi::model('product', $this->getModule())->select()->where($where)->order($order);
+                    $rowSet = Pi::model('product', $this->getModule())->selectWith($select);
+                    foreach ($rowSet as $row) {
+                        $productList[$row->id] = Pi::api('product', 'shop')->canonizeProductFilter($row, $categoryList, $filterList);
+                    }
+                }
+
+                // Get count
+                $columnsCount = ['count' => new Expression('count(DISTINCT `product`)')];
+                $select       = Pi::model('link', $this->getModule())->select()->where($whereLink)->columns($columnsCount);
+                $count        = Pi::model('link', $this->getModule())->selectWith($select)->current()->count;
+            }
         }
 
         // Search on category

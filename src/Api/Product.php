@@ -1100,7 +1100,6 @@ class Product extends AbstractApi
         }
 
         // unset
-        unset($product['text_summary']);
         unset($product['text_description']);
         unset($product['seo_title']);
         unset($product['seo_keywords']);

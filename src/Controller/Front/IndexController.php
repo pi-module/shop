@@ -122,13 +122,13 @@ class IndexController extends ActionController
         }
     }
 
-    public function productList($where, $limit = '')
+    public function productList($where, $limit = '', $sort = 'create')
     {
         // Set info
         $product   = [];
         $productId = [];
         $page      = $this->params('page', 1);
-        $sort      = $this->params('sort', 'create');
+        $sort      = $this->params('sort', $sort);
         $stock     = $this->params('stock');
         $offset    = (int)($page - 1) * $this->config('view_perpage');
         $limit     = empty($limit) ? intval($this->config('view_perpage')) : $limit;
@@ -218,6 +218,10 @@ class IndexController extends ActionController
     {
         // Set order
         switch ($sort) {
+            case 'random':
+                $order = [new Expression('RAND()')];
+                break;
+
             case 'stock':
                 $order = ['stock DESC', 'id DESC'];
                 break;
